@@ -2,19 +2,25 @@
 //  ApertureApp.swift
 //  Aperture
 //
-//  Created by Ronald Hernandez on 1/9/26.
+//  Created by Ronald Hernandez on 1/7/26.
 //
-
 import SwiftUI
+import FirebaseCore
 
 @main
 struct ApertureApp: App {
-    let persistenceController = PersistenceController.shared
+
+    @StateObject private var session = SessionStore()
+
+    init() {
+        _ = AppContainer.shared
+        FirebaseApp.configure()
+    }
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            AppRootView()
+                .environmentObject(session)
         }
     }
 }

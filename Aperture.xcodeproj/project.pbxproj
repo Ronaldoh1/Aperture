@@ -37,9 +37,22 @@
 		E4A432B12F11D1BA0083DD4F /* ApertureUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ApertureUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		E4A91E092F1429A100FF58A2 /* Exceptions for "Aperture" folder in "Aperture" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = E4A432942F11D1B80083DD4F /* Aperture */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		E4A432972F11D1B80083DD4F /* Aperture */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				E4A91E092F1429A100FF58A2 /* Exceptions for "Aperture" folder in "Aperture" target */,
+			);
 			path = Aperture;
 			sourceTree = "<group>";
 		};

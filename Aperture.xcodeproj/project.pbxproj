@@ -6,6 +6,14 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		E4A91DE92F14215000FF58A2 /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = E4A91DE82F14215000FF58A2 /* Swinject */; };
+		E4A91DEC2F14220E00FF58A2 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = E4A91DEB2F14220E00FF58A2 /* FirebaseAuth */; };
+		E4A91DEE2F14220E00FF58A2 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = E4A91DED2F14220E00FF58A2 /* FirebaseCrashlytics */; };
+		E4A91DF02F14220E00FF58A2 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = E4A91DEF2F14220E00FF58A2 /* FirebaseFirestore */; };
+		E4A91DF32F14229A00FF58A2 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = E4A91DF22F14229A00FF58A2 /* SwiftyBeaver */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		E4A432A82F11D1BA0083DD4F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +60,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4A91DEE2F14220E00FF58A2 /* FirebaseCrashlytics in Frameworks */,
+				E4A91DF02F14220E00FF58A2 /* FirebaseFirestore in Frameworks */,
+				E4A91DF32F14229A00FF58A2 /* SwiftyBeaver in Frameworks */,
+				E4A91DE92F14215000FF58A2 /* Swinject in Frameworks */,
+				E4A91DEC2F14220E00FF58A2 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +125,11 @@
 			);
 			name = Aperture;
 			packageProductDependencies = (
+				E4A91DE82F14215000FF58A2 /* Swinject */,
+				E4A91DEB2F14220E00FF58A2 /* FirebaseAuth */,
+				E4A91DED2F14220E00FF58A2 /* FirebaseCrashlytics */,
+				E4A91DEF2F14220E00FF58A2 /* FirebaseFirestore */,
+				E4A91DF22F14229A00FF58A2 /* SwiftyBeaver */,
 			);
 			productName = Aperture;
 			productReference = E4A432952F11D1B80083DD4F /* Aperture.app */;
@@ -195,6 +213,11 @@
 			);
 			mainGroup = E4A4328C2F11D1B80083DD4F;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				E4A91DE72F14215000FF58A2 /* XCRemoteSwiftPackageReference "Swinject" */,
+				E4A91DEA2F14220E00FF58A2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				E4A91DF12F14229A00FF58A2 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = E4A432962F11D1B80083DD4F /* Products */;
 			projectDirPath = "";
@@ -558,6 +581,61 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E4A91DE72F14215000FF58A2 /* XCRemoteSwiftPackageReference "Swinject" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Swinject/Swinject.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.10.0;
+			};
+		};
+		E4A91DEA2F14220E00FF58A2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.7.0;
+			};
+		};
+		E4A91DF12F14229A00FF58A2 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyBeaver/SwiftyBeaver.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.1.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E4A91DE82F14215000FF58A2 /* Swinject */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E4A91DE72F14215000FF58A2 /* XCRemoteSwiftPackageReference "Swinject" */;
+			productName = Swinject;
+		};
+		E4A91DEB2F14220E00FF58A2 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E4A91DEA2F14220E00FF58A2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		E4A91DED2F14220E00FF58A2 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E4A91DEA2F14220E00FF58A2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		E4A91DEF2F14220E00FF58A2 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E4A91DEA2F14220E00FF58A2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		E4A91DF22F14229A00FF58A2 /* SwiftyBeaver */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E4A91DF12F14229A00FF58A2 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */;
+			productName = SwiftyBeaver;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E4A4328D2F11D1B80083DD4F /* Project object */;
 }

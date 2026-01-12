@@ -1,6 +1,39 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "Already have an account?" : {
+
+    },
+    "Back to Sign In" : {
+
+    },
+    "Begin your journey" : {
+
+    },
+    "Begin Your Journey" : {
+
+    },
+    "Check your email" : {
+
+    },
+    "Check your inbox for reset instructions" : {
+
+    },
+    "Continue your path" : {
+
+    },
+    "Create Account" : {
+
+    },
+    "Don't have an account?" : {
+
+    },
+    "Enter your email to reset" : {
+
+    },
+    "Error" : {
+
+    },
     "landing.primaryAction" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -51,6 +84,36 @@
           }
         }
       }
+    },
+    "OK" : {
+
+    },
+    "or" : {
+
+    },
+    "Password must be at least 6 characters" : {
+
+    },
+    "Password reset email sent!" : {
+
+    },
+    "Reset Password" : {
+
+    },
+    "Send Reset Link" : {
+
+    },
+    "Sign In" : {
+
+    },
+    "Sign Up" : {
+
+    },
+    "Sign Up with Google" : {
+
+    },
+    "Welcome Back" : {
+
     }
   },
   "version" : "1.0"

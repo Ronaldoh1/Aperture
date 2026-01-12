@@ -8,17 +8,16 @@
 import SwiftUI
 
 struct AppRootView: View {
+    @EnvironmentObject private var session: SessionStore
 
     var body: some View {
-
-        RootTabView()
-
+        if session.isBootstrapping {
+          LoadingOverlay(message: "Opening the aperture…")
+        } else if session.isAuthenticated {
+            RootTabView()
+        } else {
+            AuthEntryView(container: AppContainer.shared.container)
+        }
     }
-
-}
-
-#Preview {
-
-    AppRootView()
-
+    
 }

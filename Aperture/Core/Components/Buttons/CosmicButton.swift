@@ -3,20 +3,20 @@
 import SwiftUI
 
 enum CosmicButtonStyle {
-    
+
     case primary
     case secondary
-    
+
 }
 
 struct CosmicButton: View {
-    
+
     let title: String
     let style: CosmicButtonStyle
     let systemImage: String?
     let isDisabled: Bool
     let action: () -> Void
-    
+
     init(
         title: String,
         style: CosmicButtonStyle = .primary,
@@ -24,80 +24,98 @@ struct CosmicButton: View {
         isDisabled: Bool = false,
         action: @escaping () -> Void
     ) {
-        
         self.title = title
         self.style = style
         self.systemImage = systemImage
         self.isDisabled = isDisabled
         self.action = action
-        
     }
-    
+
     var body: some View {
-        
+
         Button(action: action) {
-            
+
             ZStack {
-                
+
                 background
                 geometryOverlay
-                
-                HStack(spacing: 12) {
-                    
+
+                HStack(spacing: 10) {
+
                     Text(title)
-                        .font(.system(size: 18, weight: .semibold, design: .rounded))
-                    
+                        .font(.system(size: 17, weight: .semibold, design: .rounded))
+
                     if let systemImage {
-                        
                         Image(systemName: systemImage)
-                            .font(.system(size: 16, weight: .bold))
-                        
+                            .font(.system(size: 15, weight: .bold))
                     }
-                    
+
                 }
                 .foregroundColor(foregroundColor)
-                .padding(.horizontal, 22)
-                
+                .padding(.horizontal, 20)
+
             }
-            .frame(height: 56)
-            .cosmicFormWidth()
-            
+            .frame(height: height)
+            .cosmicFormWidth(maxWidth: maxWidth, horizontalPadding: 28)
+
         }
         .buttonStyle(.plain)
         .disabled(isDisabled)
         .opacity(isDisabled ? 0.55 : 1.0)
-        
+
     }
-    
+
+    private var height: CGFloat {
+
+        switch style {
+        case .primary:
+            return 52
+        case .secondary:
+            return 50
+        }
+
+    }
+
+    private var maxWidth: CGFloat {
+
+        switch style {
+        case .primary:
+            return 380
+        case .secondary:
+            return 360
+        }
+
+    }
+
     private var foregroundColor: Color {
-        
+
         switch style {
         case .primary:
             return .black
         case .secondary:
-            return .white
+            return Palette.text.primary
         }
-        
+
     }
-    
+
     private var background: some View {
-        
-        RoundedRectangle(cornerRadius: 18, style: .continuous)
+
+        Capsule(style: .continuous)
             .fill(backgroundGradient)
             .overlay(border)
-            .shadow(color: shadowColor, radius: 18, x: 0, y: 10)
-            .overlay(glassSheen.mask(RoundedRectangle(cornerRadius: 18, style: .continuous)))
-        
+            .shadow(color: shadowColor, radius: 16, x: 0, y: 9)
+            .overlay(glassSheen.mask(Capsule(style: .continuous)))
+
     }
-    
+
     private var backgroundGradient: LinearGradient {
-        
+
         switch style {
         case .primary:
             return LinearGradient(
                 colors: [
-                    Color(red: 0.98, green: 0.82, blue: 0.25),
-                    Color(red: 0.20, green: 0.85, blue: 0.95)
+                    Palette.primary.gold,
+                    Palette.primary.cyan
                 ],
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
@@ -105,125 +123,114 @@ struct CosmicButton: View {
         case .secondary:
             return LinearGradient(
                 colors: [
-                    Color.white.opacity(0.12),
-                    Color.white.opacity(0.06)
+                    Palette.surface.buttonSecondaryFill,
+                    Palette.surface.buttonSecondaryFill.opacity(0.65)
                 ],
                 startPoint: .top,
                 endPoint: .bottom
             )
         }
-        
+
     }
-    
+
     private var glassSheen: some View {
-        
+
         LinearGradient(
             colors: [
                 Color.white.opacity(0.18),
-                Color.white.opacity(0.02),
+                Color.white.opacity(0.03),
                 Color.clear
             ],
             startPoint: .topLeading,
             endPoint: .bottomTrailing
         )
-        
+
     }
-    
+
     private var border: some View {
-        
-        RoundedRectangle(cornerRadius: 18, style: .continuous)
+
+        Capsule(style: .continuous)
             .stroke(
                 LinearGradient(
                     colors: [
-                        Color.white.opacity(0.18),
-                        Color.cyan.opacity(0.22),
-                        Color.purple.opacity(0.18)
+                        Palette.surface.buttonPrimaryStroke.opacity(style == .primary ? 1.0 : 0.0),
+                        Palette.surface.buttonSecondaryStroke.opacity(style == .secondary ? 1.0 : 0.0),
+                        Palette.accent.cyan.opacity(0.16),
+                        Palette.accent.violet.opacity(0.12)
                     ],
                     startPoint: .topLeading,
                     endPoint: .bottomTrailing
                 ),
                 lineWidth: 1
             )
-        
+
     }
-    
+
     private var shadowColor: Color {
-        
+
         switch style {
         case .primary:
-            return Color.cyan.opacity(0.18)
+            return Palette.accent.cyan.opacity(0.16)
         case .secondary:
-            return Color.black.opacity(0.35)
+            return Color.black.opacity(0.30)
         }
-        
+
     }
-    
+
     private var geometryOverlay: some View {
-        
+
         GeometryReader { proxy in
-            
+
             let size = min(proxy.size.width, proxy.size.height)
-            
+
             ZStack {
-                
+
                 if style == .primary {
-                    
+
                     StarTetrahedron()
                         .stroke(
                             LinearGradient(
                                 colors: [
                                     Color.white.opacity(0.22),
-                                    Color.cyan.opacity(0.20),
-                                    Color.purple.opacity(0.18)
+                                    Palette.accent.cyan.opacity(0.18),
+                                    Palette.accent.violet.opacity(0.14)
                                 ],
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
                             ),
                             lineWidth: 1
                         )
-                        .frame(width: size * 0.92, height: size * 0.92)
-                        .opacity(0.18)
+                        .frame(width: size * 0.88, height: size * 0.88)
+                        .opacity(0.14)
                         .blendMode(.screen)
-                    
-                    VesicaPiscis()
-                        .stroke(Color.white.opacity(0.10), lineWidth: 1)
-                        .frame(width: size * 0.78, height: size * 0.78)
-                        .opacity(0.12)
-                        .blendMode(.screen)
-                    
+
                 } else {
-                    
+
                     FlowerOfLife()
                         .stroke(
                             LinearGradient(
                                 colors: [
-                                    Color.white.opacity(0.14),
-                                    Color.cyan.opacity(0.12),
-                                    Color.purple.opacity(0.10)
+                                    Color.white.opacity(0.12),
+                                    Palette.accent.cyan.opacity(0.10),
+                                    Palette.accent.violet.opacity(0.08)
                                 ],
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
                             ),
                             lineWidth: 1
                         )
-                        .frame(width: size * 0.92, height: size * 0.92)
-                        .opacity(0.14)
-                        .blendMode(.screen)
-                    
-                    SeedOfLife()
-                        .stroke(Color.white.opacity(0.10), lineWidth: 1)
-                        .frame(width: size * 0.72, height: size * 0.72)
+                        .frame(width: size * 0.86, height: size * 0.86)
                         .opacity(0.10)
                         .blendMode(.screen)
-                    
+
                 }
-                
+
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            
+
         }
         .allowsHitTesting(false)
-        
+
     }
-    
+
 }

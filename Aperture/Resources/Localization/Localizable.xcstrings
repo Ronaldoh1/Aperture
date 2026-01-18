@@ -4,37 +4,25 @@
     "Awaken your consciousness" : {
 
     },
-    "Back to Sign In" : {
-
-    },
-    "Begin your journey" : {
-
-    },
     "Begin Your Journey" : {
 
     },
     "Check your email" : {
 
     },
-    "Check your inbox for reset instructions." : {
-
-    },
-    "Continue with Google" : {
-
-    },
     "Continue your path" : {
-
-    },
-    "Create Account" : {
 
     },
     "Don't have an account?" : {
 
     },
-    "Enter your email to reset" : {
+    "Error" : {
 
     },
-    "Error" : {
+    "Forgot password?" : {
+
+    },
+    "If an account exists for that email, you will get reset instructions." : {
 
     },
     "landing.primaryAction" : {
@@ -91,7 +79,10 @@
     "OK" : {
 
     },
-    "Password reset email sent!" : {
+    "Password must be at least 8 characters" : {
+
+    },
+    "Recover access in seconds" : {
 
     },
     "Reset Password" : {

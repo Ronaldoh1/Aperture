@@ -3,166 +3,114 @@
 import SwiftUI
 
 struct SignUpView: View {
-
     @Binding var email: String
     @Binding var password: String
     @Binding var confirmPassword: String
     @Binding var displayName: String
 
-    let onSignUp: () -> Void
-    let onSignIn: () -> Void
-    let onGoogleSignIn: () -> Void
     let isLoading: Bool
+    let onSignUp: () -> Void
+    let onBackToSignIn: () -> Void
 
     @State private var showPassword = false
     @State private var showConfirmPassword = false
     @FocusState private var focusedField: Field?
 
-    enum Field {
-
+    private enum Field {
         case name
         case email
         case password
         case confirmPassword
+    }
 
+    private var isValid: Bool {
+        let emailValid = email.contains("@") && email.contains(".")
+        let passwordValid = password.count >= 8
+        return emailValid && passwordValid && (password == confirmPassword) && !displayName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
     }
 
     var body: some View {
+        VStack(spacing: 16) {
+            CosmicTextField(
+                text: $displayName,
+                placeholder: "Full Name",
+                iconName: "person.fill",
+                keyboardType: .default,
+                textContentType: .name
+            )
+            .focused($focusedField, equals: .name)
+            .textInputAutocapitalization(.words)
+            .submitLabel(.next)
+            .onSubmit { focusedField = .email }
 
-        ZStack {
+            CosmicTextField(
+                text: $email,
+                placeholder: "Email",
+                iconName: "envelope.fill",
+                keyboardType: .emailAddress,
+                textContentType: .emailAddress
+            )
+            .focused($focusedField, equals: .email)
+            .textInputAutocapitalization(.never)
+            .submitLabel(.next)
+            .onSubmit { focusedField = .password }
 
-            PaletteGradients.cosmicBackground
-                .ignoresSafeArea()
+            CosmicSecureField(
+                text: $password,
+                placeholder: "Password",
+                iconName: "lock.fill",
+                showPassword: $showPassword,
+                textContentType: .newPassword
+            )
+            .focused($focusedField, equals: .password)
+            .submitLabel(.next)
+            .onSubmit { focusedField = .confirmPassword }
 
-            SeedOfLife()
-                .stroke(Palette.accent.cyan.opacity(0.10), lineWidth: 2)
-                .blur(radius: 2)
-                .frame(width: 520, height: 520)
-                .blendMode(.screen)
+            CosmicSecureField(
+                text: $confirmPassword,
+                placeholder: "Confirm Password",
+                iconName: "lock.fill",
+                showPassword: $showConfirmPassword,
+                textContentType: .newPassword
+            )
+            .focused($focusedField, equals: .confirmPassword)
+            .submitLabel(.go)
+            .onSubmit { onSignUp() }
 
-            ScrollView {
+            HStack(spacing: 8) {
+                Image(systemName: "info.circle.fill")
+                    .font(.system(size: 12))
+                    .foregroundColor(Palette.accent.cyan.opacity(0.65))
 
-                VStack(spacing: 26) {
+                Text("Password must be at least 8 characters")
+                    .font(.system(size: 12, design: .rounded))
+                    .foregroundColor(Palette.text.muted)
 
-                    Spacer(minLength: 40)
-
-                    VStack(spacing: 10) {
-
-                        Text("Create Account")
-                            .font(.system(size: 34, weight: .bold, design: .rounded))
-                            .foregroundStyle(
-                                LinearGradient(
-                                    colors: [
-                                        Palette.text.primary,
-                                        Palette.accent.cyan.opacity(0.75)
-                                    ],
-                                    startPoint: .top,
-                                    endPoint: .bottom
-                                )
-                            )
-                            .multilineTextAlignment(.center)
-                            .cosmicFormWidth(maxWidth: 520)
-
-                        Text("Begin your journey")
-                            .font(.system(size: 16, weight: .medium, design: .rounded))
-                            .foregroundColor(Palette.text.secondary)
-                            .multilineTextAlignment(.center)
-                            .cosmicFormWidth(maxWidth: 520)
-
-                    }
-
-                    VStack(spacing: 16) {
-
-                        CosmicTextField(
-                            text: $displayName,
-                            placeholder: "Full Name",
-                            iconName: "person.fill"
-                        )
-                        .focused($focusedField, equals: .name)
-                        .textInputAutocapitalization(.words)
-
-                        CosmicTextField(
-                            text: $email,
-                            placeholder: "Email",
-                            iconName: "envelope.fill",
-                            keyboardType: .emailAddress,
-                            textContentType: .emailAddress
-                        )
-                        .focused($focusedField, equals: .email)
-                        .textInputAutocapitalization(.never)
-
-                        CosmicSecureField(
-                            text: $password,
-                            placeholder: "Password",
-                            iconName: "lock.fill",
-                            showPassword: $showPassword,
-                            textContentType: .newPassword
-                        )
-                        .focused($focusedField, equals: .password)
-
-                        CosmicSecureField(
-                            text: $confirmPassword,
-                            placeholder: "Confirm Password",
-                            iconName: "lock.fill",
-                            showPassword: $showConfirmPassword,
-                            textContentType: .newPassword
-                        )
-                        .focused($focusedField, equals: .confirmPassword)
-
-                        CosmicButton(
-                            title: "Create Account",
-                            style: .primary,
-                            systemImage: "arrow.right",
-                            isDisabled: isLoading || password != confirmPassword || password.count < 8
-                        ) {
-                            onSignUp()
-                        }
-
-                        CosmicButton(
-                            title: "Sign In",
-                            style: .secondary,
-                            systemImage: nil,
-                            isDisabled: isLoading
-                        ) {
-                            onSignIn()
-                        }
-
-                    }
-
-                    Button(action: onGoogleSignIn) {
-
-                        HStack(spacing: 12) {
-
-                            Image(systemName: "globe")
-                                .font(.system(size: 18, weight: .semibold))
-
-                            Text("Continue with Google")
-                                .font(.system(size: 16, weight: .medium, design: .rounded))
-
-                        }
-                        .foregroundColor(Palette.text.primary)
-                        .frame(height: 52)
-                        .background(Palette.surface.buttonSecondaryFill)
-                        .clipShape(Capsule(style: .continuous))
-                        .overlay(
-                            Capsule(style: .continuous)
-                                .stroke(Palette.surface.buttonSecondaryStroke, lineWidth: 1)
-                        )
-                        .cosmicFormWidth(maxWidth: 420)
-
-                    }
-                    .buttonStyle(.plain)
-                    .disabled(isLoading)
-
-                    Spacer(minLength: 60)
-
-                }
-
+                Spacer()
             }
-            .dismissKeyboard()
+            .cosmicFormWidth()
+            .padding(.horizontal, 4)
+            .padding(.top, 4)
 
+            CosmicButton(
+                title: "Create Account",
+                style: .primary,
+                systemImage: "arrow.right",
+                isDisabled: !isValid || isLoading
+            ) {
+                focusedField = nil
+                onSignUp()
+            }
+
+            CosmicButton(
+                title: "Back to Sign In",
+                style: .secondary,
+                systemImage: nil,
+                isDisabled: isLoading
+            ) {
+                focusedField = nil
+                onBackToSignIn()
+            }
         }
-
     }
-
 }

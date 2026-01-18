@@ -3,8 +3,10 @@
 import SwiftUI
 
 struct SignInView: View {
+
     @Binding var email: String
     @Binding var password: String
+    @Binding var showPassword: Bool
 
     let isLoading: Bool
     let isFormValid: Bool
@@ -13,7 +15,6 @@ struct SignInView: View {
     let onForgotPassword: () -> Void
     let onGoToSignUp: () -> Void
 
-    @State private var showPassword = false
     @FocusState private var focusedField: Field?
 
     private enum Field {
@@ -22,7 +23,9 @@ struct SignInView: View {
     }
 
     var body: some View {
+
         VStack(spacing: 16) {
+
             CosmicTextField(
                 text: $email,
                 placeholder: "Email",
@@ -32,7 +35,9 @@ struct SignInView: View {
             )
             .focused($focusedField, equals: .email)
             .submitLabel(.next)
-            .onSubmit { focusedField = .password }
+            .onSubmit {
+                focusedField = .password
+            }
 
             CosmicSecureField(
                 text: $password,
@@ -43,59 +48,31 @@ struct SignInView: View {
             )
             .focused($focusedField, equals: .password)
             .submitLabel(.go)
-            .onSubmit { onSignIn() }
-
-            HStack {
-                Button("Forgot password?") {
-                    focusedField = nil
-                    onForgotPassword()
-                }
-                .font(.system(size: 14, weight: .semibold, design: .rounded))
-                .foregroundColor(Palette.accent.cyan.opacity(0.95))
-                .buttonStyle(.plain)
-
-                Spacer()
-            }
-            .cosmicFormWidth()
-            .padding(.top, 4)
-
-            CosmicButton(
-                title: "Sign In",
-                style: .primary,
-                systemImage: "arrow.right",
-                isDisabled: !isFormValid || isLoading
-            ) {
-                focusedField = nil
+            .onSubmit {
                 onSignIn()
             }
 
-            CosmicButton(
-                title: "Sign Up",
-                style: .secondary,
-                systemImage: nil,
-                isDisabled: isLoading
-            ) {
-                focusedField = nil
-                onGoToSignUp()
+            HStack {
+                Spacer()
+                Button {
+                    onForgotPassword()
+                } label: {
+                    Text("Forgot password?")
+                        .font(.system(size: 13, weight: .semibold, design: .rounded))
+                        .foregroundColor(Palette.primary.cyan.opacity(0.9))
+                }
+                .buttonStyle(.plain)
             }
+            .cosmicFormWidth()
+            .padding(.top, 2)
 
             Button {
-                focusedField = nil
                 onGoToSignUp()
             } label: {
-                HStack(spacing: 8) {
-                    Text("Don't have an account?")
-                        .foregroundColor(Palette.text.secondary)
-
-                    Text("Sign Up")
-                        .foregroundColor(Palette.accent.cyan.opacity(0.9))
-                        .fontWeight(.bold)
-                }
-                .font(.system(size: 15, design: .rounded))
-                .cosmicFormWidth()
+                EmptyView()
             }
-            .buttonStyle(.plain)
-            .padding(.top, 6)
+            .hidden()
         }
     }
+
 }

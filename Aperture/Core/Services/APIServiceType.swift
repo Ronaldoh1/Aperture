@@ -2,17 +2,18 @@ import Foundation
 import Combine
 
 // MARK: - Protocol
-protocol APIService {
+protocol APIServiceType {
     
     func get<T: Decodable>(endpoint: String) -> AnyPublisher<T, Error>
     func post<T: Decodable>(endpoint: String, body: [String: Any]) -> AnyPublisher<T, Error>
     func put<T: Decodable>(endpoint: String, body: [String: Any]) -> AnyPublisher<T, Error>
     func delete(endpoint: String) -> AnyPublisher<Void, Error>
+    
 }
 
 
 // MARK: - Implementation
-class APIServiceImpl: APIService {
+class APIService: APIServiceType {
     
     
     // MARK: - Properties
@@ -99,7 +100,7 @@ class APIServiceImpl: APIService {
                 .eraseToAnyPublisher()
         }
         
-        return performRequest(request)
+        return self.performRequest(request)
     }
     
     
@@ -113,7 +114,7 @@ class APIServiceImpl: APIService {
         
         var request = URLRequest(url: url)
         request.httpMethod = "DELETE"
-        addHeaders(to: &request)
+        self.addHeaders(to: &request)
         
         return session.dataTaskPublisher(for: request)
             .tryMap { data, response in
@@ -150,7 +151,7 @@ class APIServiceImpl: APIService {
     
     private func performRequest<T: Decodable>(_ request: URLRequest) -> AnyPublisher<T, Error> {
         
-        session.dataTaskPublisher(for: request)
+        self.session.dataTaskPublisher(for: request)
             .tryMap { data, response in
                 
                 guard let httpResponse = response as? HTTPURLResponse else {

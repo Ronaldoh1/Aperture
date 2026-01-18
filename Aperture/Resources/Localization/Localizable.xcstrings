@@ -1,16 +1,10 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "Awaken your consciousness" : {
+    "Back to Sign In" : {
 
     },
-    "Begin Your Journey" : {
-
-    },
-    "Check your email" : {
-
-    },
-    "Continue your path" : {
+    "Check your inbox for next steps." : {
 
     },
     "Don't have an account?" : {
@@ -20,9 +14,6 @@
 
     },
     "Forgot password?" : {
-
-    },
-    "If an account exists for that email, you will get reset instructions." : {
 
     },
     "landing.primaryAction" : {
@@ -79,19 +70,13 @@
     "OK" : {
 
     },
-    "Password must be at least 8 characters" : {
-
-    },
-    "Recover access in seconds" : {
-
-    },
-    "Reset Password" : {
+    "Reset email sent" : {
 
     },
     "Sign Up" : {
 
     },
-    "Welcome Back" : {
+    "Skip" : {
 
     }
   },

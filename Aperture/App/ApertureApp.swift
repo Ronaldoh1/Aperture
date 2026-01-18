@@ -1,9 +1,5 @@
-//
-//  ApertureApp.swift
-//  Aperture
-//
-//  Created by Ronald Hernandez on 1/7/26.
-//
+// ApertureApp.swift
+
 import SwiftUI
 import FirebaseCore
 
@@ -11,6 +7,7 @@ import FirebaseCore
 struct ApertureApp: App {
 
     @StateObject private var session = SessionStore()
+    @StateObject private var tutorialState = TutorialStateStore()
 
     init() {
         _ = AppContainer.shared
@@ -21,6 +18,8 @@ struct ApertureApp: App {
         WindowGroup {
             AppRootView()
                 .environmentObject(session)
+                .environmentObject(tutorialState)
         }
     }
+
 }

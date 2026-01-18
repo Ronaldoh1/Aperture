@@ -42,6 +42,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
+				"Modules/Tutorial /Assembly/TutorialContract.swift",
 			);
 			target = E4A432942F11D1B80083DD4F /* Aperture */;
 		};

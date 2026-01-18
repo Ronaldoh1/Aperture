@@ -1,12 +1,4 @@
-//
-//  AuthEntryView.swift
-//  Aperture
-//
-//  Created by Ronald Hernandez on 1/11/26.
-//
-
-import SwiftUI
-import Swinject
+// AuthEntryView.swift
 
 import SwiftUI
 import Swinject
@@ -14,12 +6,17 @@ import Swinject
 struct AuthEntryView: View {
 
     let container: Container
+    let startInSignUp: Bool
+
+    init(container: Container, startInSignUp: Bool = false) {
+        self.container = container
+        self.startInSignUp = startInSignUp
+    }
 
     var body: some View {
-        guard let view = container.resolve(AuthView.self) else {
-            fatalError("AuthView not resolved. Check AuthAssembly registration and assembly order.")
-        }
-        return view
+
+        let presenter = container.resolve(AuthPresenterType.self) ?? AuthPresenter(router: AuthRouter())
+        AuthView(presenter: presenter, startInSignUp: startInSignUp)
     }
-    
+
 }

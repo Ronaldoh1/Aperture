@@ -3,41 +3,62 @@
 import SwiftUI
 
 struct AuthView: View {
+
     @StateObject private var presenterBox: AuthPresenterBox
 
     private var presenter: AuthPresenterType {
         presenterBox.presenter
     }
 
-    @State private var email = ""
-    @State private var password = ""
-    @State private var confirmPassword = ""
-    @State private var displayName = ""
-    @State private var isSignUp = false
-    @State private var showingForgotPassword = false
+    private enum Screen {
+        case signIn
+        case signUp
+        case forgotPassword
+    }
+
+    @State private var screen: Screen
+
+    @State private var email: String = ""
+    @State private var password: String = ""
+    @State private var confirmPassword: String = ""
+
+    @State private var showPassword: Bool = false
+    @State private var showConfirmPassword: Bool = false
 
     @State private var geometryRotation: Double = 0
     @State private var particleOpacity: Double = 0.25
 
-    init(presenter: AuthPresenterType) {
+    init(
+        presenter: AuthPresenterType,
+        startInSignUp: Bool = false
+    ) {
         _presenterBox = StateObject(wrappedValue: AuthPresenterBox(presenter: presenter))
+        _screen = State(initialValue: startInSignUp ? .signUp : .signIn)
     }
 
     var body: some View {
+
         ZStack {
+
             cosmicBackground
 
             ScrollView {
-                VStack(spacing: 28) {
+
+                VStack(spacing: 24) {
+
                     Spacer(minLength: 64)
 
                     headerSection
 
                     formSection
 
+                    actionButtons
+
+                    footerSection
+
                     Spacer(minLength: 60)
                 }
-                .padding(.horizontal, 24)
+                .padding(.horizontal, 28)
             }
 
             sessionBadge
@@ -55,55 +76,89 @@ struct AuthView: View {
         }
     }
 
-    private var formSection: some View {
-        Group {
-            if showingForgotPassword {
-                ForgotPasswordView(
-                    email: $email,
-                    onResetPassword: {
-                        // Contract exposes a .forgotPassword route. Use router until reset service exists.
-                        presenter.router?.navigate(to: .forgotPassword)
-                    },
-                    onBackToSignIn: {
-                        withAnimation(.spring(response: 0.4, dampingFraction: 0.75)) {
-                            showingForgotPassword = false
-                        }
-                    },
-                    isLoading: presenterBox.isLoading
+    private var headerSection: some View {
+
+        VStack(spacing: 10) {
+
+            Text(titleText)
+                .font(.system(size: 40, weight: .bold, design: .rounded))
+                .foregroundStyle(
+                    LinearGradient(
+                        colors: [
+                            Palette.text.primary,
+                            Palette.primary.cyan.opacity(0.75)
+                        ],
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
                 )
-            } else if isSignUp {
-                SignUpView(
+                .multilineTextAlignment(.center)
+                .cosmicFormWidth()
+
+            Text(subtitleText)
+                .font(.system(size: 16, weight: .medium, design: .rounded))
+                .foregroundColor(Palette.text.secondary)
+                .multilineTextAlignment(.center)
+                .cosmicFormWidth()
+        }
+    }
+
+    private var formSection: some View {
+
+        Group {
+            switch screen {
+            case .signIn:
+                SignInView(
                     email: $email,
                     password: $password,
-                    confirmPassword: $confirmPassword,
-                    displayName: $displayName,
+                    showPassword: $showPassword,
                     isLoading: presenterBox.isLoading,
-                    onSignUp: { handleSignUp() },
-                    onBackToSignIn: {
+                    isFormValid: isSignInValid,
+                    onSignIn: handleSignIn,
+                    onForgotPassword: {
                         withAnimation(.spring(response: 0.4, dampingFraction: 0.75)) {
-                            isSignUp = false
+                            screen = .forgotPassword
+                        }
+                    },
+                    onGoToSignUp: {
+                        withAnimation(.spring(response: 0.4, dampingFraction: 0.75)) {
+                            screen = .signUp
                             presenter.didTapToggleMode()
                             clearFields()
                         }
                     }
                 )
-            } else {
-                SignInView(
+
+            case .signUp:
+                SignUpView(
                     email: $email,
                     password: $password,
+                    confirmPassword: $confirmPassword,
+                    showPassword: $showPassword,
+                    showConfirmPassword: $showConfirmPassword,
                     isLoading: presenterBox.isLoading,
-                    isFormValid: isFormValid,
-                    onSignIn: { handleSignIn() },
-                    onForgotPassword: {
+                    isFormValid: isSignUpValid,
+                    onSignUp: handleSignUp,
+                    onBackToSignIn: {
                         withAnimation(.spring(response: 0.4, dampingFraction: 0.75)) {
-                            showingForgotPassword = true
-                        }
-                    },
-                    onGoToSignUp: {
-                        withAnimation(.spring(response: 0.4, dampingFraction: 0.75)) {
-                            isSignUp = true
+                            screen = .signIn
                             presenter.didTapToggleMode()
                             clearFields()
+                        }
+                    }
+                )
+
+            case .forgotPassword:
+                ForgotPasswordView(
+                    email: $email,
+                    isLoading: presenterBox.isLoading,
+                    onResetPassword: {
+                        focusedClear()
+                        presenter.router?.navigate(to: .forgotPassword)
+                    },
+                    onBackToSignIn: {
+                        withAnimation(.spring(response: 0.4, dampingFraction: 0.75)) {
+                            screen = .signIn
                         }
                     }
                 )
@@ -111,7 +166,92 @@ struct AuthView: View {
         }
     }
 
+    private var actionButtons: some View {
+
+        Group {
+            switch screen {
+            case .signIn:
+                CosmicButton(
+                    title: "Sign In",
+                    style: .primary,
+                    systemImage: "arrow.right",
+                    isDisabled: presenterBox.isLoading || isSignInValid == false
+                ) {
+                    handleSignIn()
+                }
+
+                CosmicButton(
+                    title: "Sign Up",
+                    style: .secondary,
+                    systemImage: nil,
+                    isDisabled: presenterBox.isLoading
+                ) {
+                    withAnimation(.spring(response: 0.4, dampingFraction: 0.75)) {
+                        screen = .signUp
+                        presenter.didTapToggleMode()
+                        clearFields()
+                    }
+                }
+
+            case .signUp:
+                CosmicButton(
+                    title: "Create Account",
+                    style: .primary,
+                    systemImage: "arrow.right",
+                    isDisabled: presenterBox.isLoading || isSignUpValid == false
+                ) {
+                    handleSignUp()
+                }
+
+                CosmicButton(
+                    title: "Back to Sign In",
+                    style: .secondary,
+                    systemImage: nil,
+                    isDisabled: presenterBox.isLoading
+                ) {
+                    withAnimation(.spring(response: 0.4, dampingFraction: 0.75)) {
+                        screen = .signIn
+                        presenter.didTapToggleMode()
+                        clearFields()
+                    }
+                }
+
+            case .forgotPassword:
+                EmptyView()
+            }
+        }
+    }
+
+    private var footerSection: some View {
+
+        Group {
+            if screen == .signIn {
+                Button {
+                    withAnimation(.spring(response: 0.4, dampingFraction: 0.75)) {
+                        screen = .signUp
+                        presenter.didTapToggleMode()
+                        clearFields()
+                    }
+                } label: {
+                    HStack(spacing: 8) {
+                        Text("Don't have an account?")
+                            .foregroundColor(Palette.text.secondary)
+
+                        Text("Sign Up")
+                            .foregroundColor(Palette.primary.cyan.opacity(0.9))
+                            .fontWeight(.bold)
+                    }
+                    .font(.system(size: 15, design: .rounded))
+                    .cosmicFormWidth()
+                }
+                .buttonStyle(.plain)
+                .padding(.top, 6)
+            }
+        }
+    }
+
     private var sessionBadge: some View {
+
         Group {
             if presenterBox.isLoading {
                 VStack {
@@ -127,7 +267,7 @@ struct AuthView: View {
                     .padding(.vertical, 10)
                     .background(
                         RoundedRectangle(cornerRadius: 16, style: .continuous)
-                            .fill(Palette.background.opacity(0.35))
+                            .fill(Color.black.opacity(0.35))
                             .overlay(
                                 RoundedRectangle(cornerRadius: 16, style: .continuous)
                                     .stroke(Palette.text.primary.opacity(0.12), lineWidth: 1)
@@ -144,11 +284,14 @@ struct AuthView: View {
     }
 
     private var cosmicBackground: some View {
+
         ZStack {
+
             PaletteGradients.cosmicBackground
                 .ignoresSafeArea()
 
             ZStack {
+
                 FlowerOfLife()
                     .stroke(Palette.text.primary.opacity(0.08), lineWidth: 1)
                     .frame(width: 780, height: 780)
@@ -157,14 +300,14 @@ struct AuthView: View {
                     .blur(radius: 0.8)
 
                 StarTetrahedron()
-                    .stroke(Palette.accent.cyan.opacity(0.10), lineWidth: 1)
+                    .stroke(Palette.primary.cyan.opacity(0.10), lineWidth: 1)
                     .frame(width: 640, height: 640)
                     .rotationEffect(.degrees(-geometryRotation * 0.18))
                     .blendMode(.screen)
                     .blur(radius: 0.6)
 
                 VesicaPiscis()
-                    .stroke(Palette.accent.violet.opacity(0.10), lineWidth: 1)
+                    .stroke(Palette.primary.violet.opacity(0.10), lineWidth: 1)
                     .frame(width: 560, height: 560)
                     .rotationEffect(.degrees(geometryRotation * 0.08))
                     .blendMode(.screen)
@@ -185,47 +328,49 @@ struct AuthView: View {
         }
     }
 
-    private var headerSection: some View {
-        VStack(spacing: 10) {
-            Text(isSignUp ? "Begin Your Journey" : (showingForgotPassword ? "Reset Password" : "Welcome Back"))
-                .font(.system(size: 40, weight: .bold, design: .rounded))
-                .foregroundStyle(
-                    LinearGradient(
-                        colors: [
-                            Palette.text.primary,
-                            Palette.accent.cyan.opacity(0.75)
-                        ],
-                        startPoint: .top,
-                        endPoint: .bottom
-                    )
-                )
-                .multilineTextAlignment(.center)
-                .cosmicFormWidth()
-
-            Text(isSignUp ? "Awaken your consciousness" : (showingForgotPassword ? "Recover access in seconds" : "Continue your path"))
-                .font(.system(size: 16, weight: .medium, design: .rounded))
-                .foregroundColor(Palette.text.secondary)
-                .multilineTextAlignment(.center)
-                .cosmicFormWidth()
+    private var titleText: String {
+        switch screen {
+        case .signIn:
+            return "Welcome Back"
+        case .signUp:
+            return "Begin Your Journey"
+        case .forgotPassword:
+            return "Reset Password"
         }
     }
 
-    private var isFormValid: Bool {
+    private var subtitleText: String {
+        switch screen {
+        case .signIn:
+            return "Continue your path"
+        case .signUp:
+            return "Awaken your consciousness"
+        case .forgotPassword:
+            return "Recover your access"
+        }
+    }
+
+    private var isSignInValid: Bool {
+
         let emailValid = email.contains("@") && email.contains(".")
         let passwordValid = password.count >= 8
-
-        if isSignUp {
-            return emailValid && passwordValid && password == confirmPassword
-        }
-
         return emailValid && passwordValid
     }
 
+    private var isSignUpValid: Bool {
+
+        let emailValid = email.contains("@") && email.contains(".")
+        let passwordValid = password.count >= 8
+        return emailValid && passwordValid && password == confirmPassword
+    }
+
     private func handleSignIn() {
+        focusedClear()
         presenter.didTapSignIn(email: email, password: password)
     }
 
     private func handleSignUp() {
+        focusedClear()
         presenter.didTapSignUp(email: email, password: password)
     }
 
@@ -233,10 +378,14 @@ struct AuthView: View {
         email = ""
         password = ""
         confirmPassword = ""
-        displayName = ""
+    }
+
+    private func focusedClear() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 
     private func startAnimations() {
+
         withAnimation(.linear(duration: 70).repeatForever(autoreverses: false)) {
             geometryRotation = 360
         }
@@ -245,4 +394,5 @@ struct AuthView: View {
             particleOpacity = 0.65
         }
     }
+
 }

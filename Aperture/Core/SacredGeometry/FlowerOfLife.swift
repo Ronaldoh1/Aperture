@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct SeedOfLife: Shape {
+struct FlowerOfLife: Shape {
 
     func path(in rect: CGRect) -> Path {
 
@@ -23,6 +23,15 @@ struct SeedOfLife: Shape {
                 y: center.y + CGFloat(sin(angle)) * r
             )
             addCircle(c)
+        }
+
+        for i in 0..<6 {
+            let angle = Double(i) * (Double.pi / 3)
+            let base = CGPoint(
+                x: center.x + CGFloat(cos(angle)) * r * 2,
+                y: center.y + CGFloat(sin(angle)) * r * 2
+            )
+            addCircle(base)
         }
 
         return path

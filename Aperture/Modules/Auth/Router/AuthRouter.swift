@@ -1,26 +1,19 @@
-import SwiftUI
+// AuthRouter.swift
 
-class AuthRouter: AuthRouterType, ObservableObject {
-    
-    
-    @Published var shouldNavigateToMain = false
-    @Published var shouldNavigateToTutorial = false
-    @Published var shouldNavigateToForgotPassword = false
-    
-    
-    // MARK: - AuthRouterType Methods
+import Foundation
+
+final class AuthRouter: AuthRouterType {
+
     func navigate(to route: AuthRoute) {
-        
+
         switch route {
-            
         case .main:
-            shouldNavigateToMain = true
-            
-        case .tutorial:
-            shouldNavigateToTutorial = true
-            
+            break
         case .forgotPassword:
-            shouldNavigateToForgotPassword = true
+            break
+        case .tutorial:
+            break
         }
     }
+
 }

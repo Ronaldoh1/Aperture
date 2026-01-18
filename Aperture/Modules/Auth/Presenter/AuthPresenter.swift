@@ -1,78 +1,111 @@
+// AuthPresenter.swift
+
 import Foundation
 
-class AuthPresenter: AuthPresenterType {
-    
+final class AuthPresenter: AuthPresenterType, AuthInteractorOutputType {
     
     weak var view: AuthViewType?
+    
     var interactor: AuthInteractorType?
     var router: AuthRouterType?
     
+    @Published var isLoading: Bool = false
+    @Published var loadingMessage: String = ""
+    @Published var error: PresenterError?
     
-    // MARK: - AuthPresenterType Methods
-    func viewDidLoad() {
+    private var didResolveSessionCheck = false
+    
+    init(router: AuthRouterType?) {
         
-        interactor?.checkAuthStatus()
+        self.router = router
+        
     }
     
+    func viewDidLoad() {
+        
+        didResolveSessionCheck = false
+        setLoading(true, message: "Checking session")
+        
+        // If getCurrentUser() never emits, we refuse to brick the UI forever.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
+            
+            guard let self else { return }
+            guard self.didResolveSessionCheck == false else { return }
+            
+            self.setLoading(false)
+            
+        }
+        
+        interactor?.checkAuthStatus()
+        
+    }
     
     func didTapSignIn(email: String, password: String) {
         
-        view?.displayLoading("Signing in...")
+        setLoading(true, message: "Signing in")
         interactor?.signIn(email: email, password: password)
+        
     }
-    
     
     func didTapSignUp(email: String, password: String) {
         
-        view?.displayLoading("Creating account...")
+        setLoading(true, message: "Creating account")
         interactor?.signUp(email: email, password: password)
+        
     }
-    
     
     func didTapToggleMode() {
         
-        // View handles the toggle
     }
-}
-
-
-// MARK: - AuthInteractorOutputType Conformance
-extension AuthPresenter: AuthInteractorOutputType {
-    
     
     func didSignIn(user: User) {
         
-        view?.hideLoading()
+        setLoading(false)
         router?.navigate(to: .main)
+        
     }
-    
     
     func didSignUp(user: User) {
         
-        view?.hideLoading()
-        router?.navigate(to: .main)
+        setLoading(false)
+        router?.navigate(to: .tutorial)
+        
     }
-    
     
     func didCheckAuth(user: User?) {
         
-        if let _ = user {
-            
+        didResolveSessionCheck = true
+        setLoading(false)
+        
+        if user != nil {
             router?.navigate(to: .main)
         }
+        
     }
-    
     
     func didFail(error: Error) {
         
-        view?.hideLoading()
+        didResolveSessionCheck = true
+        setLoading(false)
         
-        if let appError = error as? AppError {
-            
-            view?.displayError(appError.localizedDescription)
-        } else {
-            
-            view?.displayError(error.localizedDescription)
-        }
+        let wrapped = PresenterError(error)
+        self.error = wrapped
+        view?.displayError(error.localizedDescription)
+        
     }
+    
+    private func setLoading(_ loading: Bool, message: String = "") {
+        
+        isLoading = loading
+        loadingMessage = loading ? message : ""
+        
+        if loading {
+            view?.displayLoading(message)
+        } else {
+            view?.hideLoading()
+        }
+        
+    }
+    
 }
+

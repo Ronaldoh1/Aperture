@@ -1,66 +1,66 @@
-import Swinject
+// AuthAssembly.swift
 
-class AuthAssembly: Assembly {
-    
-    
+import Swinject
+import SwiftUI
+
+final class AuthAssembly: Assembly {
+
     func assemble(container: Container) {
-        
-        // MARK: - Router
-        container.register(AuthRouter.self) { _ in
-            
+
+        container.register(AuthRouterType.self) { _ in
+
             AuthRouter()
+
         }
         .inObjectScope(.container)
-        
-        
-        // MARK: - Presenter
-        container.register(AuthPresenter.self) { _ in
-            
-            AuthPresenter()
+
+        container.register(AuthPresenterType.self) { resolver in
+
+            guard let router = resolver.resolve(AuthRouterType.self) else {
+
+                fatalError("AuthRouterType dependency not resolved")
+
+            }
+
+            return AuthPresenter(router: router)
+
         }
         .inObjectScope(.transient)
-        
-        
-        // MARK: - Interactor
-        container.register(AuthInteractor.self) { (resolver, presenter: AuthPresenter) in
-            
-            guard let authService = resolver.resolve(AuthService.self),
-                let currentUser = resolver.resolve(CurrentUser.self) else {
-                
+
+        container.register(AuthInteractor.self) { resolver in
+
+            guard
+                let authService = resolver.resolve(AuthServiceType.self),
+                let currentUser = resolver.resolve(CurrentUserType.self),
+                let presenter = resolver.resolve(AuthPresenterType.self)
+            else {
+
                 fatalError("AuthInteractor dependencies not resolved")
+
             }
-            
+
             let interactor = AuthInteractor(authService: authService, currentUser: currentUser)
-            
-            interactor.output = presenter
-            
-            return interactor
-        }
-        .inObjectScope(.transient)
-        
-        
-        // MARK: - View
-        container.register(AuthView.self) { resolver in
-            
-            guard let presenter = resolver.resolve(AuthPresenter.self),
-                  let router = resolver.resolve(AuthRouter.self) else {
-                
-                fatalError("AuthView dependencies not resolved")
-            }
-            
-            // Wire presenter
-            presenter.router = router
-            
-            // Create interactor with presenter
-            guard let interactor = resolver.resolve(AuthInteractor.self, argument: presenter) else {
-                
-                fatalError("AuthInteractor not resolved")
-            }
-            
+            interactor.output = presenter as? AuthInteractorOutputType
             presenter.interactor = interactor
-            
-            return AuthView(presenter: presenter)
+
+            return interactor
+
         }
         .inObjectScope(.transient)
+
+        container.register(AuthView.self) { resolver in
+
+            guard let presenter = resolver.resolve(AuthPresenterType.self) else {
+
+                fatalError("AuthPresenterType dependency not resolved")
+
+            }
+
+            return AuthView(presenter: presenter)
+
+        }
+        .inObjectScope(.transient)
+
     }
+
 }

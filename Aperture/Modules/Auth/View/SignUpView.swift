@@ -35,9 +35,10 @@ struct SignUpView: View {
             Color.black.ignoresSafeArea()
             
             // Sacred Geometry Background - Seed of Life (New Beginning)
-            SeedOfLife(size: 400, animated: true)
-                .opacity(0.12)
+            SeedOfLife()
+                .stroke(Color(hex: "00FF88").opacity(0.12), lineWidth: 2)
                 .blur(radius: 2)
+                .frame(width: 460, height: 460)
             
             // Content
             ScrollView {
@@ -49,8 +50,10 @@ struct SignUpView: View {
                     // Logo / Title
                     VStack(spacing: 16) {
                         
-                        SeedOfLife(size: 100, animated: true)
-                            .shadow(color: Color(hex: "00FF88").opacity(0.5), radius: 20)
+                        SeedOfLife()
+                            .stroke(Color(hex: "00FF88").opacity(0.12), lineWidth: 2)
+                            .blur(radius: 2)
+                            .frame(width: 460, height: 460)
                         
                         Text("Create Account")
                             .font(.system(size: 32, weight: .bold, design: .rounded))

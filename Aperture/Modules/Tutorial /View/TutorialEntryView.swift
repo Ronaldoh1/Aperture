@@ -1,10 +1,10 @@
-// TutorialEntryView.swift
+// Aperture/Modules/Tutorial/View/TutorialEntryView.swift
 
 import SwiftUI
 
 struct TutorialEntryView: View {
 
-    @StateObject private var store: TutorialStateStore
+    @ObservedObject private var store: TutorialStateStore
     private let onRoute: (TutorialRoute) -> Void
 
     @State private var errorMessage: String?
@@ -13,8 +13,7 @@ struct TutorialEntryView: View {
         store: TutorialStateStore,
         onRoute: @escaping (TutorialRoute) -> Void
     ) {
-
-        _store = StateObject(wrappedValue: store)
+        self.store = store
         self.onRoute = onRoute
     }
 
@@ -30,14 +29,16 @@ struct TutorialEntryView: View {
                             errorMessage = nil
                         }
                     }
-                )
-            ) {
-                Button("OK") {
-                    errorMessage = nil
+                ),
+                actions: {
+                    Button("OK") {
+                        errorMessage = nil
+                    }
+                },
+                message: {
+                    Text(errorMessage ?? "")
                 }
-            } message: {
-                Text(errorMessage ?? "")
-            }
+            )
 
     }
 
@@ -45,26 +46,31 @@ struct TutorialEntryView: View {
     private var content: some View {
 
         if store.hasSeenTutorial {
+
             Color.clear
                 .onAppear {
                     onRoute(.main)
                 }
+
         } else {
-            TutorialView(onFinish: handleFinish)
+
+            TutorialView(
+                onFinish: handleFinish,
+                onSkip: handleSkip
+            )
+
         }
 
     }
 
     private func handleFinish() {
+        store.markSeen()
+        onRoute(.authStartSignUp)
+    }
 
-        do {
-            try store.markSeen()
-            store.resetForDebug()
-            onRoute(.authStartSignUp)
-        } catch {
-            errorMessage = error.localizedDescription
-        }
-
+    private func handleSkip() {
+        store.markSeen()
+        onRoute(.authStartSignUp)
     }
 
 }

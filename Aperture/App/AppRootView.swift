@@ -1,4 +1,4 @@
-// AppRootView.swift
+// Aperture/App/AppRootView.swift
 
 import SwiftUI
 
@@ -17,10 +17,8 @@ struct AppRootView: View {
 
         } else if tutorialState.hasSeenTutorial == false {
 
-            TutorialEntryView(store: tutorialState) { route in
-
+            TutorialAssembly.makeEntryView(store: tutorialState) { route in
                 switch route {
-
                 case .authStartSignUp:
                     authStartInSignUp = true
 
@@ -42,7 +40,9 @@ struct AppRootView: View {
                 container: AppContainer.shared.container,
                 startInSignUp: authStartInSignUp
             )
+
         }
+
     }
 
 }

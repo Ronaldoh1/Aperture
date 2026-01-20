@@ -1,34 +1,32 @@
 // TutorialStateStore.swift
 
 import Foundation
-import Combine
 
+@MainActor
 final class TutorialStateStore: ObservableObject {
 
     @Published private(set) var isBootstrapping: Bool = true
     @Published private(set) var hasSeenTutorial: Bool = false
 
-    private let defaults: UserDefaults
-    private let hasSeenKey = "hasSeenTutorial"
+    private let key = "aperture.hasSeenTutorial.v1"
 
-    init(defaults: UserDefaults = .standard) {
-        self.defaults = defaults
-        bootstrap()
+    init() {
+        load()
     }
 
-    func markSeen() throws {
-        defaults.set(true, forKey: hasSeenKey)
+    func load() {
+        hasSeenTutorial = UserDefaults.standard.bool(forKey: key)
+        isBootstrapping = false
+    }
+
+    func markSeen() {
         hasSeenTutorial = true
+        UserDefaults.standard.set(true, forKey: key)
     }
 
     func resetForDebug() {
-        defaults.removeObject(forKey: hasSeenKey)
         hasSeenTutorial = false
-    }
-
-    private func bootstrap() {
-        hasSeenTutorial = defaults.bool(forKey: hasSeenKey)
-        isBootstrapping = false
+        UserDefaults.standard.set(false, forKey: key)
     }
 
 }

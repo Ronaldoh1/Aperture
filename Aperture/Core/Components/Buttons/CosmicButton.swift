@@ -1,5 +1,3 @@
-// CosmicButton.swift
-
 import SwiftUI
 
 enum CosmicButtonStyle {
@@ -44,6 +42,9 @@ struct CosmicButton: View {
 
                     Text(title)
                         .font(.system(size: 17, weight: .semibold, design: .rounded))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.85)
+                        .truncationMode(.tail)
 
                     if let systemImage {
                         Image(systemName: systemImage)
@@ -56,7 +57,8 @@ struct CosmicButton: View {
 
             }
             .frame(height: height)
-            .cosmicFormWidth(maxWidth: maxWidth, horizontalPadding: 28)
+            .cosmicFormWidth()
+            .padding(.horizontal, CosmicFormMetrics.screenHorizontalPadding)
 
         }
         .buttonStyle(.plain)
@@ -72,17 +74,6 @@ struct CosmicButton: View {
             return 52
         case .secondary:
             return 50
-        }
-
-    }
-
-    private var maxWidth: CGFloat {
-
-        switch style {
-        case .primary:
-            return 380
-        case .secondary:
-            return 360
         }
 
     }

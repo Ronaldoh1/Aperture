@@ -1,8 +1,12 @@
-// TutorialInteractor.swift
+//
+//  TutorialInteractor.swift
+//  Aperture
+//
 
 import Foundation
 
-final class TutorialInteractor: TutorialInteractorType {
+@MainActor
+final class TutorialInteractor: @preconcurrency TutorialInteractorType {
 
     weak var output: TutorialInteractorOutputType?
 
@@ -17,12 +21,8 @@ final class TutorialInteractor: TutorialInteractorType {
     }
 
     func markSeen() {
-        do {
-            try store.markSeen()
-            output?.didMarkSeen()
-        } catch {
-            output?.didFail(message: "Could not save tutorial completion. Please try again.")
-        }
+        store.markSeen()
+        output?.didMarkSeen()
     }
 
 }

@@ -1,4 +1,4 @@
-// SignInView.swift
+// Aperture/Modules/Auth/View/SignInView.swift
 
 import SwiftUI
 
@@ -8,12 +8,7 @@ struct SignInView: View {
     @Binding var password: String
     @Binding var showPassword: Bool
 
-    let isLoading: Bool
-    let isFormValid: Bool
-
-    let onSignIn: () -> Void
     let onForgotPassword: () -> Void
-    let onGoToSignUp: () -> Void
 
     @FocusState private var focusedField: Field?
 
@@ -24,7 +19,7 @@ struct SignInView: View {
 
     var body: some View {
 
-        VStack(spacing: 16) {
+        VStack(spacing: 14) {
 
             CosmicTextField(
                 text: $email,
@@ -48,31 +43,27 @@ struct SignInView: View {
             )
             .focused($focusedField, equals: .password)
             .submitLabel(.go)
-            .onSubmit {
-                onSignIn()
-            }
 
             HStack {
+
                 Spacer()
+
                 Button {
                     onForgotPassword()
                 } label: {
                     Text("Forgot password?")
-                        .font(.system(size: 13, weight: .semibold, design: .rounded))
-                        .foregroundColor(Palette.primary.cyan.opacity(0.9))
+                        .font(.system(size: 14, weight: .semibold, design: .rounded))
+                        .foregroundColor(Palette.primary.cyan.opacity(0.95))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.85)
                 }
                 .buttonStyle(.plain)
+
             }
             .cosmicFormWidth()
-            .padding(.top, 2)
 
-            Button {
-                onGoToSignUp()
-            } label: {
-                EmptyView()
-            }
-            .hidden()
         }
+
     }
 
 }

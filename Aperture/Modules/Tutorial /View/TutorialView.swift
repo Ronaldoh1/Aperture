@@ -1,177 +1,78 @@
-// TutorialView.swift
+// Aperture/Modules/Tutorial/View/TutorialView.swift
 
 import SwiftUI
 
 struct TutorialView: View {
 
-    struct Page: Identifiable {
-
-        let id = UUID()
-        let title: String
-        let subtitle: String
-        let systemImage: String
-
-    }
-
-    let onFinish: () -> Void
+    private let onFinish: () -> Void
+    private let onSkip: () -> Void
 
     @State private var index: Int = 0
 
-    private let pages: [Page] = [
-        Page(
-            title: "Welcome to Aperture",
-            subtitle: "This is your portal. We start with the basics, then you create your account.",
-            systemImage: "sparkles"
-        ),
-        Page(
-            title: "Track Your Path",
-            subtitle: "Capture your state, your patterns, and your progress with clarity.",
-            systemImage: "waveform.path.ecg"
-        ),
-        Page(
-            title: "Sacred Geometry",
-            subtitle: "The UI is not decoration. It is orientation. You are meant to feel centered.",
-            systemImage: "hexagon"
-        ),
-        Page(
-            title: "Stay Grounded",
-            subtitle: "When something fails, you will see the reason. No silent errors.",
-            systemImage: "checkmark.shield"
-        ),
-        Page(
-            title: "Ready",
-            subtitle: "You can create an account next. You can always revisit the tutorial later.",
-            systemImage: "arrow.right.circle.fill"
-        )
-    ]
-
-    var body: some View {
-
-        ZStack {
-
-            background
-
-            VStack(spacing: 0) {
-
-                header
-
-                TabView(selection: $index) {
-
-                    ForEach(Array(pages.enumerated()), id: \.offset) { item in
-
-                        pageView(page: item.element)
-                            .tag(item.offset)
-
-                    }
-
-                }
-                .tabViewStyle(.page(indexDisplayMode: .always))
-
-                footer
-
-            }
-
-        }
-
+    init(
+        onFinish: @escaping () -> Void,
+        onSkip: @escaping () -> Void
+    ) {
+        self.onFinish = onFinish
+        self.onSkip = onSkip
     }
 
-    private var background: some View {
+    var body: some View {
 
         ZStack {
 
             PaletteGradients.cosmicBackground
                 .ignoresSafeArea()
 
-            FlowerOfLife()
-                .stroke(Palette.text.primary.opacity(0.06), lineWidth: 1)
-                .frame(width: 820, height: 820)
-                .blendMode(.screen)
-                .opacity(0.9)
+            VStack(spacing: 18) {
 
-            StarTetrahedron()
-                .stroke(Palette.primary.cyan.opacity(0.08), lineWidth: 1)
-                .frame(width: 640, height: 640)
-                .blendMode(.screen)
-                .opacity(0.9)
+                headerBar
+
+                TabView(selection: $index) {
+                    ForEach(Array(pages.enumerated()), id: \.offset) { item in
+                        TutorialPageView(page: item.element)
+                            .tag(item.offset)
+                    }
+                }
+                .tabViewStyle(.page(indexDisplayMode: .always))
+
+                footerControls
+
+            }
+            .padding(.horizontal, 24)
+            .padding(.vertical, 18)
 
         }
 
     }
 
-    private var header: some View {
+    private var headerBar: some View {
 
         HStack {
+
+            Text("Aperture Tutorial")
+                .font(.system(size: 18, weight: .semibold, design: .rounded))
+                .foregroundColor(Palette.text.primary)
+                .lineLimit(1)
+                .minimumScaleFactor(0.85)
 
             Spacer()
 
             Button {
-
-                onFinish()
-
+                onSkip()
             } label: {
-
                 Text("Skip")
                     .font(.system(size: 15, weight: .semibold, design: .rounded))
-                    .foregroundColor(Palette.text.primary.opacity(0.85))
-                    .padding(.horizontal, 14)
-                    .padding(.vertical, 10)
-                    .background(
-                        Capsule(style: .continuous)
-                            .fill(Palette.surface.pillFill)
-                            .overlay(
-                                Capsule(style: .continuous)
-                                    .stroke(Palette.surface.pillStroke, lineWidth: 1)
-                            )
-                    )
-
+                    .foregroundColor(Palette.primary.cyan.opacity(0.95))
             }
             .buttonStyle(.plain)
 
         }
-        .padding(.top, 18)
-        .padding(.horizontal, 18)
+        .cosmicFormWidth(maxWidth: 520)
 
     }
 
-    private func pageView(page: Page) -> some View {
-
-        VStack(spacing: 18) {
-
-            Spacer(minLength: 24)
-
-            Image(systemName: page.systemImage)
-                .font(.system(size: 56, weight: .semibold))
-                .foregroundStyle(
-                    LinearGradient(
-                        colors: [
-                            Palette.text.primary,
-                            Palette.primary.cyan.opacity(0.85)
-                        ],
-                        startPoint: .top,
-                        endPoint: .bottom
-                    )
-                )
-                .padding(.bottom, 6)
-
-            Text(page.title)
-                .font(.system(size: 34, weight: .bold, design: .rounded))
-                .foregroundColor(Palette.text.primary)
-                .multilineTextAlignment(.center)
-                .padding(.horizontal, 28)
-
-            Text(page.subtitle)
-                .font(.system(size: 16, weight: .medium, design: .rounded))
-                .foregroundColor(Palette.text.secondary)
-                .multilineTextAlignment(.center)
-                .padding(.horizontal, 34)
-
-            Spacer()
-
-        }
-
-    }
-
-    private var footer: some View {
+    private var footerControls: some View {
 
         VStack(spacing: 12) {
 
@@ -181,42 +82,62 @@ struct TutorialView: View {
                 systemImage: "arrow.right",
                 isDisabled: false
             ) {
-
-                if index < pages.count - 1 {
-                    withAnimation(.spring(response: 0.35, dampingFraction: 0.8)) {
+                if index == pages.count - 1 {
+                    onFinish()
+                } else {
+                    withAnimation(.spring(response: 0.35, dampingFraction: 0.85)) {
                         index += 1
                     }
-                } else {
-                    onFinish()
                 }
-
             }
 
-            CosmicButton(
-                title: "Back",
-                style: .secondary,
-                systemImage: nil,
-                isDisabled: index == 0
-            ) {
-
-                guard index > 0 else { return }
-                withAnimation(.spring(response: 0.35, dampingFraction: 0.8)) {
-                    index -= 1
+            if index > 0 {
+                Button {
+                    withAnimation(.spring(response: 0.35, dampingFraction: 0.85)) {
+                        index -= 1
+                    }
+                } label: {
+                    Text("Back")
+                        .font(.system(size: 15, weight: .semibold, design: .rounded))
+                        .foregroundColor(Palette.text.secondary)
+                        .padding(.vertical, 8)
                 }
-
+                .buttonStyle(.plain)
             }
 
         }
-        .padding(.bottom, 24)
+        .cosmicFormWidth(maxWidth: 520)
 
     }
 
-}
-
-#Preview {
-
-    TutorialView {
-        print("finish")
+    private var pages: [TutorialPage] {
+        [
+            TutorialPage(
+                title: "Welcome to Aperture",
+                subtitle: "A cosmic space to build clarity, habits, and momentum.",
+                symbol: "sparkles"
+            ),
+            TutorialPage(
+                title: "Sacred Geometry",
+                subtitle: "Patterns that calm the mind and train attention.",
+                symbol: "circle.grid.3x3.fill"
+            ),
+            TutorialPage(
+                title: "Track your path",
+                subtitle: "Log small wins and watch patterns become progress.",
+                symbol: "chart.line.uptrend.xyaxis"
+            ),
+            TutorialPage(
+                title: "Stay consistent",
+                subtitle: "Micro actions, repeated, become your new operating system.",
+                symbol: "flame.fill"
+            ),
+            TutorialPage(
+                title: "Ready to begin?",
+                subtitle: "Continue to create your account and enter the app.",
+                symbol: "arrow.right.circle.fill"
+            )
+        ]
     }
 
 }

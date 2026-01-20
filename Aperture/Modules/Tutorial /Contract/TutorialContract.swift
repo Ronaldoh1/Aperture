@@ -44,10 +44,3 @@ protocol TutorialRouterType {
 
 }
 
-enum TutorialRoute {
-
-    case authStartSignUp
-    case authStartSignIn
-    case main
-
-}

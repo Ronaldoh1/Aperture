@@ -1,4 +1,4 @@
-// AuthView.swift
+// Aperture/Modules/Auth/View/AuthView.swift
 
 import SwiftUI
 
@@ -10,17 +10,10 @@ struct AuthView: View {
         presenterBox.presenter
     }
 
-    private enum Screen {
-        case signIn
-        case signUp
-        case forgotPassword
-    }
-
-    @State private var screen: Screen
-
-    @State private var email: String = ""
-    @State private var password: String = ""
-    @State private var confirmPassword: String = ""
+    @State private var email: String
+    @State private var password: String
+    @State private var confirmPassword: String
+    @State private var isSignUp: Bool
 
     @State private var showPassword: Bool = false
     @State private var showConfirmPassword: Bool = false
@@ -28,12 +21,17 @@ struct AuthView: View {
     @State private var geometryRotation: Double = 0
     @State private var particleOpacity: Double = 0.25
 
+    @State private var showingForgotPassword: Bool = false
+
     init(
         presenter: AuthPresenterType,
         startInSignUp: Bool = false
     ) {
         _presenterBox = StateObject(wrappedValue: AuthPresenterBox(presenter: presenter))
-        _screen = State(initialValue: startInSignUp ? .signUp : .signIn)
+        _email = State(initialValue: "")
+        _password = State(initialValue: "")
+        _confirmPassword = State(initialValue: "")
+        _isSignUp = State(initialValue: startInSignUp)
     }
 
     var body: some View {
@@ -44,7 +42,7 @@ struct AuthView: View {
 
             ScrollView {
 
-                VStack(spacing: 24) {
+                VStack(spacing: 28) {
 
                     Spacer(minLength: 64)
 
@@ -54,14 +52,17 @@ struct AuthView: View {
 
                     actionButtons
 
-                    footerSection
+                    toggleModeButton
 
                     Spacer(minLength: 60)
+
                 }
-                .padding(.horizontal, 28)
+                .padding(.horizontal, 24)
+
             }
 
             sessionBadge
+
         }
         .onAppear {
             startAnimations()
@@ -74,6 +75,52 @@ struct AuthView: View {
                 dismissButton: .default(Text("OK"))
             )
         }
+
+    }
+
+    @ViewBuilder
+    private var formSection: some View {
+
+        if showingForgotPassword {
+
+            ForgotPasswordView(
+                email: $email,
+                isLoading: presenterBox.isLoading,
+                onResetPassword: {
+                    presenter.router?.navigate(to: .forgotPassword)
+                },
+                onBackToSignIn: {
+                    withAnimation(.spring(response: 0.4, dampingFraction: 0.75)) {
+                        showingForgotPassword = false
+                    }
+                }
+            )
+
+        } else if isSignUp {
+
+            SignUpView(
+                email: $email,
+                password: $password,
+                confirmPassword: $confirmPassword,
+                showPassword: $showPassword,
+                showConfirmPassword: $showConfirmPassword
+            )
+
+        } else {
+
+            SignInView(
+                email: $email,
+                password: $password,
+                showPassword: $showPassword,
+                onForgotPassword: {
+                    withAnimation(.spring(response: 0.4, dampingFraction: 0.75)) {
+                        showingForgotPassword = true
+                    }
+                }
+            )
+
+        }
+
     }
 
     private var headerSection: some View {
@@ -93,175 +140,162 @@ struct AuthView: View {
                     )
                 )
                 .multilineTextAlignment(.center)
+                .lineLimit(2)
+                .minimumScaleFactor(0.85)
                 .cosmicFormWidth()
 
             Text(subtitleText)
                 .font(.system(size: 16, weight: .medium, design: .rounded))
                 .foregroundColor(Palette.text.secondary)
                 .multilineTextAlignment(.center)
+                .lineLimit(2)
+                .minimumScaleFactor(0.90)
                 .cosmicFormWidth()
+
         }
+
     }
 
-    private var formSection: some View {
+    private var titleText: String {
+        if showingForgotPassword { return "Reset Password" }
+        return isSignUp ? "Begin Your Journey" : "Welcome Back"
+    }
 
-        Group {
-            switch screen {
-            case .signIn:
-                SignInView(
-                    email: $email,
-                    password: $password,
-                    showPassword: $showPassword,
-                    isLoading: presenterBox.isLoading,
-                    isFormValid: isSignInValid,
-                    onSignIn: handleSignIn,
-                    onForgotPassword: {
-                        withAnimation(.spring(response: 0.4, dampingFraction: 0.75)) {
-                            screen = .forgotPassword
-                        }
-                    },
-                    onGoToSignUp: {
-                        withAnimation(.spring(response: 0.4, dampingFraction: 0.75)) {
-                            screen = .signUp
-                            presenter.didTapToggleMode()
-                            clearFields()
-                        }
-                    }
-                )
-
-            case .signUp:
-                SignUpView(
-                    email: $email,
-                    password: $password,
-                    confirmPassword: $confirmPassword,
-                    showPassword: $showPassword,
-                    showConfirmPassword: $showConfirmPassword,
-                    isLoading: presenterBox.isLoading,
-                    isFormValid: isSignUpValid,
-                    onSignUp: handleSignUp,
-                    onBackToSignIn: {
-                        withAnimation(.spring(response: 0.4, dampingFraction: 0.75)) {
-                            screen = .signIn
-                            presenter.didTapToggleMode()
-                            clearFields()
-                        }
-                    }
-                )
-
-            case .forgotPassword:
-                ForgotPasswordView(
-                    email: $email,
-                    isLoading: presenterBox.isLoading,
-                    onResetPassword: {
-                        focusedClear()
-                        presenter.router?.navigate(to: .forgotPassword)
-                    },
-                    onBackToSignIn: {
-                        withAnimation(.spring(response: 0.4, dampingFraction: 0.75)) {
-                            screen = .signIn
-                        }
-                    }
-                )
-            }
-        }
+    private var subtitleText: String {
+        if showingForgotPassword { return "We will send you a reset link." }
+        return isSignUp ? "Awaken your consciousness" : "Continue your path"
     }
 
     private var actionButtons: some View {
 
-        Group {
-            switch screen {
-            case .signIn:
+        VStack(spacing: 12) {
+
+            if showingForgotPassword {
+
                 CosmicButton(
-                    title: "Sign In",
+                    title: "Send Reset Link",
+                    style: .primary,
+                    systemImage: "paperplane.fill",
+                    isDisabled: presenterBox.isLoading || email.contains("@") == false
+                ) {
+                    presenter.router?.navigate(to: .forgotPassword)
+                }
+
+            } else {
+
+                CosmicButton(
+                    title: isSignUp ? "Create Account" : "Sign In",
                     style: .primary,
                     systemImage: "arrow.right",
-                    isDisabled: presenterBox.isLoading || isSignInValid == false
+                    isDisabled: presenterBox.isLoading || isFormValid == false
                 ) {
-                    handleSignIn()
+                    if isSignUp {
+                        handleSignUp()
+                    } else {
+                        handleSignIn()
+                    }
                 }
 
                 CosmicButton(
-                    title: "Sign Up",
+                    title: isSignUp ? "Back to Sign In" : "Sign Up",
                     style: .secondary,
                     systemImage: nil,
                     isDisabled: presenterBox.isLoading
                 ) {
                     withAnimation(.spring(response: 0.4, dampingFraction: 0.75)) {
-                        screen = .signUp
+                        isSignUp.toggle()
+                        showingForgotPassword = false
                         presenter.didTapToggleMode()
                         clearFields()
                     }
                 }
 
-            case .signUp:
-                CosmicButton(
-                    title: "Create Account",
-                    style: .primary,
-                    systemImage: "arrow.right",
-                    isDisabled: presenterBox.isLoading || isSignUpValid == false
-                ) {
-                    handleSignUp()
-                }
-
-                CosmicButton(
-                    title: "Back to Sign In",
-                    style: .secondary,
-                    systemImage: nil,
-                    isDisabled: presenterBox.isLoading
-                ) {
-                    withAnimation(.spring(response: 0.4, dampingFraction: 0.75)) {
-                        screen = .signIn
-                        presenter.didTapToggleMode()
-                        clearFields()
-                    }
-                }
-
-            case .forgotPassword:
-                EmptyView()
             }
+
         }
+
     }
 
-    private var footerSection: some View {
+    private var toggleModeButton: some View {
 
-        Group {
-            if screen == .signIn {
-                Button {
-                    withAnimation(.spring(response: 0.4, dampingFraction: 0.75)) {
-                        screen = .signUp
-                        presenter.didTapToggleMode()
-                        clearFields()
-                    }
-                } label: {
-                    HStack(spacing: 8) {
-                        Text("Don't have an account?")
-                            .foregroundColor(Palette.text.secondary)
-
-                        Text("Sign Up")
-                            .foregroundColor(Palette.primary.cyan.opacity(0.9))
-                            .fontWeight(.bold)
-                    }
-                    .font(.system(size: 15, design: .rounded))
-                    .cosmicFormWidth()
-                }
-                .buttonStyle(.plain)
-                .padding(.top, 6)
+        Button {
+            withAnimation(.spring(response: 0.4, dampingFraction: 0.75)) {
+                isSignUp.toggle()
+                showingForgotPassword = false
+                presenter.didTapToggleMode()
+                clearFields()
             }
+        } label: {
+
+            HStack(spacing: 8) {
+
+                Text(isSignUp ? "Already have an account?" : "Don't have an account?")
+                    .foregroundColor(Palette.text.secondary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.85)
+
+                Text(isSignUp ? "Sign In" : "Sign Up")
+                    .foregroundColor(Palette.primary.cyan.opacity(0.9))
+                    .fontWeight(.bold)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.85)
+
+            }
+            .font(.system(size: 15, design: .rounded))
+            .cosmicFormWidth()
+
         }
+        .buttonStyle(.plain)
+        .padding(.top, 6)
+
+    }
+
+    private var isFormValid: Bool {
+
+        let emailValid = email.contains("@") && email.contains(".")
+        let passwordValid = password.count >= 8
+
+        if isSignUp {
+            return emailValid && passwordValid && password == confirmPassword
+        }
+
+        return emailValid && passwordValid
+
+    }
+
+    private func handleSignIn() {
+        presenter.didTapSignIn(email: email, password: password)
+    }
+
+    private func handleSignUp() {
+        presenter.didTapSignUp(email: email, password: password)
+    }
+
+    private func clearFields() {
+        email = ""
+        password = ""
+        confirmPassword = ""
     }
 
     private var sessionBadge: some View {
 
         Group {
+
             if presenterBox.isLoading {
+
                 VStack {
+
                     HStack(spacing: 10) {
+
                         ProgressView()
                             .tint(Palette.text.primary.opacity(0.9))
 
                         Text(presenterBox.loadingMessage.isEmpty ? "Loading" : presenterBox.loadingMessage)
                             .font(.system(size: 14, weight: .semibold, design: .rounded))
                             .foregroundColor(Palette.text.primary)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.85)
+
                     }
                     .padding(.horizontal, 14)
                     .padding(.vertical, 10)
@@ -277,10 +311,14 @@ struct AuthView: View {
                     .padding(.top, 18)
 
                     Spacer()
+
                 }
                 .allowsHitTesting(false)
+
             }
+
         }
+
     }
 
     private var cosmicBackground: some View {
@@ -312,6 +350,7 @@ struct AuthView: View {
                     .rotationEffect(.degrees(geometryRotation * 0.08))
                     .blendMode(.screen)
                     .blur(radius: 0.6)
+
             }
             .opacity(0.9)
 
@@ -325,63 +364,9 @@ struct AuthView: View {
                     )
                     .opacity(particleOpacity * Double.random(in: 0.2...1.0))
             }
+
         }
-    }
 
-    private var titleText: String {
-        switch screen {
-        case .signIn:
-            return "Welcome Back"
-        case .signUp:
-            return "Begin Your Journey"
-        case .forgotPassword:
-            return "Reset Password"
-        }
-    }
-
-    private var subtitleText: String {
-        switch screen {
-        case .signIn:
-            return "Continue your path"
-        case .signUp:
-            return "Awaken your consciousness"
-        case .forgotPassword:
-            return "Recover your access"
-        }
-    }
-
-    private var isSignInValid: Bool {
-
-        let emailValid = email.contains("@") && email.contains(".")
-        let passwordValid = password.count >= 8
-        return emailValid && passwordValid
-    }
-
-    private var isSignUpValid: Bool {
-
-        let emailValid = email.contains("@") && email.contains(".")
-        let passwordValid = password.count >= 8
-        return emailValid && passwordValid && password == confirmPassword
-    }
-
-    private func handleSignIn() {
-        focusedClear()
-        presenter.didTapSignIn(email: email, password: password)
-    }
-
-    private func handleSignUp() {
-        focusedClear()
-        presenter.didTapSignUp(email: email, password: password)
-    }
-
-    private func clearFields() {
-        email = ""
-        password = ""
-        confirmPassword = ""
-    }
-
-    private func focusedClear() {
-        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 
     private func startAnimations() {
@@ -393,6 +378,7 @@ struct AuthView: View {
         withAnimation(.easeInOut(duration: 4).repeatForever(autoreverses: true)) {
             particleOpacity = 0.65
         }
+
     }
 
 }

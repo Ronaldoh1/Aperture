@@ -2,6 +2,8 @@
 
 import SwiftUI
 
+import SwiftUI
+
 struct CosmicTextField: View {
 
     @Binding var text: String
@@ -30,55 +32,34 @@ struct CosmicTextField: View {
         HStack(spacing: 12) {
 
             Image(systemName: iconName)
-                .foregroundColor(Palette.accent.cyan.opacity(0.90))
+                .font(.system(size: 16, weight: .semibold))
+                .foregroundColor(Palette.primary.cyan.opacity(0.85))
                 .frame(width: 22)
 
             TextField(placeholder, text: $text)
-                .textInputAutocapitalization(.never)
-                .autocorrectionDisabled(true)
                 .keyboardType(keyboardType)
                 .textContentType(textContentType)
+                .autocapitalization(.none)
+                .disableAutocorrection(true)
+                .font(.system(size: 16, weight: .medium, design: .rounded))
                 .foregroundColor(Palette.text.primary)
-                .tint(Palette.accent.cyan)
+                .accentColor(Palette.primary.cyan)
 
         }
         .padding(.horizontal, 16)
-        .frame(height: 58)
-        .background(fieldBackground)
-        .overlay(fieldBorder)
-        .cosmicFormWidth(maxWidth: 410, horizontalPadding: 28)
+        .frame(height: 52)
+        .background(background)
+        .cosmicFormWidth()
 
     }
 
-    private var fieldBackground: some View {
+    private var background: some View {
 
         RoundedRectangle(cornerRadius: 16, style: .continuous)
             .fill(Palette.surface.fieldFill)
-            .background(
-                FlowerOfLife()
-                    .stroke(Palette.surface.fieldStroke.opacity(0.55), lineWidth: 1)
-                    .padding(10)
-                    .blur(radius: 0.6)
-                    .opacity(0.65)
-            )
-            .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-
-    }
-
-    private var fieldBorder: some View {
-
-        RoundedRectangle(cornerRadius: 16, style: .continuous)
-            .stroke(
-                LinearGradient(
-                    colors: [
-                        Palette.surface.fieldStroke.opacity(0.95),
-                        Palette.accent.cyan.opacity(0.18),
-                        Palette.accent.violet.opacity(0.14)
-                    ],
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                ),
-                lineWidth: 1
+            .overlay(
+                RoundedRectangle(cornerRadius: 16, style: .continuous)
+                    .stroke(Palette.surface.fieldStroke, lineWidth: 1)
             )
 
     }

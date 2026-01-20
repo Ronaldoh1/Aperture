@@ -1,69 +1,52 @@
-//
-//  TutorialPageView.swift
-//  Aperture
-//
-//  Created by Ronald Hernandez on 1/18/26.
-//
-
-// TutorialPageView.swift
+// Aperture/Modules/Tutorial/View/TutorialPageView.swift
 
 import SwiftUI
 
 struct TutorialPageView: View {
 
-    let page: TutorialPageModel
+    let page: TutorialPage
 
     var body: some View {
 
         VStack(spacing: 18) {
 
-            Spacer(minLength: 30)
+            Spacer(minLength: 8)
 
-            ZStack {
-
-                StarTetrahedron()
-                    .stroke(Palette.primary.cyan.opacity(0.10), lineWidth: 1)
-                    .frame(width: 260, height: 260)
-                    .blendMode(.screen)
-                    .blur(radius: 0.6)
-
-                FlowerOfLife()
-                    .stroke(Palette.primary.violet.opacity(0.10), lineWidth: 1)
-                    .frame(width: 220, height: 220)
-                    .blendMode(.screen)
-                    .blur(radius: 0.6)
-
-                Image(systemName: page.systemImage)
-                    .font(.system(size: 44, weight: .semibold))
-                    .foregroundStyle(
-                        LinearGradient(
-                            colors: [
-                                Palette.primary.cyan.opacity(0.95),
-                                Palette.primary.violet.opacity(0.85),
-                                Palette.primary.gold.opacity(0.70)
-                            ],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        )
+            Image(systemName: page.symbol)
+                .font(.system(size: 52, weight: .semibold))
+                .foregroundStyle(
+                    LinearGradient(
+                        colors: [
+                            Palette.primary.cyan,
+                            Palette.primary.violet.opacity(0.85)
+                        ],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
                     )
-            }
+                )
+                .padding(.top, 12)
 
             Text(page.title)
                 .font(.system(size: 34, weight: .bold, design: .rounded))
                 .foregroundColor(Palette.text.primary)
                 .multilineTextAlignment(.center)
+                .lineLimit(2)
+                .minimumScaleFactor(0.80)
                 .cosmicFormWidth(maxWidth: 520)
 
             Text(page.subtitle)
                 .font(.system(size: 16, weight: .medium, design: .rounded))
                 .foregroundColor(Palette.text.secondary)
                 .multilineTextAlignment(.center)
+                .lineLimit(3)
+                .minimumScaleFactor(0.85)
+                .padding(.horizontal, 8)
                 .cosmicFormWidth(maxWidth: 520)
 
-            Spacer(minLength: 30)
+            Spacer(minLength: 8)
 
         }
-        .padding(.horizontal, 24)
+
     }
 
 }

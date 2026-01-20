@@ -1,4 +1,4 @@
-// SignUpView.swift
+// Aperture/Modules/Auth/View/SignUpView.swift
 
 import SwiftUI
 
@@ -10,12 +10,6 @@ struct SignUpView: View {
 
     @Binding var showPassword: Bool
     @Binding var showConfirmPassword: Bool
-
-    let isLoading: Bool
-    let isFormValid: Bool
-
-    let onSignUp: () -> Void
-    let onBackToSignIn: () -> Void
 
     @FocusState private var focusedField: Field?
 
@@ -64,17 +58,9 @@ struct SignUpView: View {
             )
             .focused($focusedField, equals: .confirmPassword)
             .submitLabel(.go)
-            .onSubmit {
-                onSignUp()
-            }
 
-            Button {
-                onBackToSignIn()
-            } label: {
-                EmptyView()
-            }
-            .hidden()
         }
+
     }
 
 }

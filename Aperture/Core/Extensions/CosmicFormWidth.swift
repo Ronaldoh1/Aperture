@@ -1,39 +1,41 @@
-//
-//  CosmicFormWidth.swift
-//  Aperture
-//
-//  Created by Ronald Hernandez on 1/17/26.
-//
+// Aperture/DesignSystem/CosmicFormWidth.swift
 
 import SwiftUI
+
+enum CosmicFormMetrics {
+
+    static let fieldMaxWidth: CGFloat = 400
+    static let screenHorizontalPadding: CGFloat = 20
+
+}
 
 struct CosmicFormWidthModifier: ViewModifier {
 
     let maxWidth: CGFloat
-    let horizontalPadding: CGFloat
 
     func body(content: Content) -> some View {
 
         content
             .frame(maxWidth: maxWidth)
             .frame(maxWidth: .infinity, alignment: .center)
-            .padding(.horizontal, horizontalPadding)
+            .padding(.horizontal, CosmicFormMetrics.screenHorizontalPadding)
 
     }
 
 }
 
-
 extension View {
 
     func cosmicFormWidth(
-        maxWidth: CGFloat = 410,
-        horizontalPadding: CGFloat = 24
+        maxWidth: CGFloat = CosmicFormMetrics.fieldMaxWidth
     ) -> some View {
-        self
-            .frame(maxWidth: maxWidth)
-            .frame(maxWidth: .infinity, alignment: .center)
-            .padding(.horizontal, horizontalPadding)
+
+        modifier(
+            CosmicFormWidthModifier(
+                maxWidth: maxWidth
+            )
+        )
+
     }
 
 }

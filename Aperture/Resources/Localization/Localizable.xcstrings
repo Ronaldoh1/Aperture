@@ -1,10 +1,13 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "Back to Sign In" : {
+    "Already have an account?" : {
 
     },
-    "Check your inbox for next steps." : {
+    "Aperture Tutorial" : {
+
+    },
+    "Back" : {
 
     },
     "Don't have an account?" : {
@@ -70,7 +73,13 @@
     "OK" : {
 
     },
-    "Reset email sent" : {
+    "Send" : {
+
+    },
+    "Sending…" : {
+
+    },
+    "Sign In" : {
 
     },
     "Sign Up" : {

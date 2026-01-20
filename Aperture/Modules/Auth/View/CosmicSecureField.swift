@@ -16,7 +16,7 @@ struct CosmicSecureField: View {
         placeholder: String,
         iconName: String,
         showPassword: Binding<Bool>,
-        textContentType: UITextContentType? = nil
+        textContentType: UITextContentType? = .password
     ) {
         self._text = text
         self.placeholder = placeholder
@@ -30,70 +30,76 @@ struct CosmicSecureField: View {
         HStack(spacing: 12) {
 
             Image(systemName: iconName)
-                .foregroundColor(Palette.accent.cyan.opacity(0.90))
+                .font(.system(size: 16, weight: .semibold))
+                .foregroundColor(Palette.primary.cyan.opacity(0.85))
                 .frame(width: 22)
 
             Group {
-
                 if showPassword {
                     TextField(placeholder, text: $text)
                 } else {
                     SecureField(placeholder, text: $text)
                 }
-
             }
-            .textInputAutocapitalization(.never)
-            .autocorrectionDisabled(true)
             .textContentType(textContentType)
+            .textInputAutocapitalization(.never)
+            .disableAutocorrection(true)
+            .font(.system(size: 16, weight: .medium, design: .rounded))
             .foregroundColor(Palette.text.primary)
-            .tint(Palette.accent.cyan)
+            .accentColor(Palette.primary.cyan)
 
             Button {
                 showPassword.toggle()
             } label: {
                 Image(systemName: showPassword ? "eye.slash.fill" : "eye.fill")
-                    .foregroundColor(Palette.text.muted.opacity(0.85))
+                    .font(.system(size: 15, weight: .semibold))
+                    .foregroundColor(Palette.text.secondary.opacity(0.85))
+                    .frame(width: 28, height: 28)
+                    .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
 
         }
         .padding(.horizontal, 16)
-        .frame(height: 58)
-        .background(fieldBackground)
-        .overlay(fieldBorder)
-        .cosmicFormWidth(maxWidth: 410, horizontalPadding: 28)
+        .frame(height: 52)
+        .background(background)
+        .cosmicFormWidth()
 
     }
 
-    private var fieldBackground: some View {
+    private var background: some View {
 
         RoundedRectangle(cornerRadius: 16, style: .continuous)
-            .fill(Palette.surface.fieldFill)
-            .background(
-                VesicaPiscis()
-                    .stroke(Palette.surface.fieldStroke.opacity(0.55), lineWidth: 1)
-                    .padding(12)
-                    .blur(radius: 0.6)
-                    .opacity(0.60)
-            )
-            .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-
-    }
-
-    private var fieldBorder: some View {
-
-        RoundedRectangle(cornerRadius: 16, style: .continuous)
-            .stroke(
+            .fill(
                 LinearGradient(
                     colors: [
-                        Palette.surface.fieldStroke.opacity(0.95),
-                        Palette.accent.cyan.opacity(0.18),
-                        Palette.accent.violet.opacity(0.14)
+                        Palette.surface.fieldFill,
+                        Palette.surface.fieldFill.opacity(0.92)
                     ],
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                ),
-                lineWidth: 1
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 16, style: .continuous)
+                    .stroke(
+                        LinearGradient(
+                            colors: [
+                                Palette.surface.fieldStroke,
+                                Palette.accent.cyan.opacity(0.25),
+                                Palette.accent.violet.opacity(0.20)
+                            ],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        ),
+                        lineWidth: 1
+                    )
+            )
+            .shadow(
+                color: Color.black.opacity(0.35),
+                radius: 10,
+                x: 0,
+                y: 6
             )
 
     }

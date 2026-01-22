@@ -34,19 +34,27 @@ struct CosmicSecureField: View {
                 .foregroundColor(Palette.primary.cyan.opacity(0.85))
                 .frame(width: 22)
 
-            Group {
-                if showPassword {
-                    TextField(placeholder, text: $text)
-                } else {
-                    SecureField(placeholder, text: $text)
+            ZStack(alignment: .leading) {
+                if text.isEmpty {
+                    Text(placeholder)
+                        .font(.system(size: 16, weight: .medium, design: .rounded))
+                        .foregroundColor(Palette.text.secondary.opacity(0.35))
                 }
+                
+                Group {
+                    if showPassword {
+                        TextField("", text: $text)
+                    } else {
+                        SecureField("", text: $text)
+                    }
+                }
+                .textContentType(textContentType)
+                .textInputAutocapitalization(.never)
+                .disableAutocorrection(true)
+                .font(.system(size: 16, weight: .medium, design: .rounded))
+                .foregroundColor(Palette.text.primary)
+                .accentColor(Palette.primary.cyan)
             }
-            .textContentType(textContentType)
-            .textInputAutocapitalization(.never)
-            .disableAutocorrection(true)
-            .font(.system(size: 16, weight: .medium, design: .rounded))
-            .foregroundColor(Palette.text.primary)
-            .accentColor(Palette.primary.cyan)
 
             Button {
                 showPassword.toggle()

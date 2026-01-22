@@ -36,13 +36,19 @@ final class AuthService: AuthServiceType {
     }
 
     func signUp(email: String, password: String) -> AnyPublisher<User, Error> {
-        Future<User, Error> { promise in
+        print("🟣 AuthService: Calling Firebase createUser")
+        return Future<User, Error> { promise in
             Auth.auth().createUser(withEmail: email, password: password) { result, error in
-                if let error { return promise(.failure(error)) }
+                if let error { 
+                    print("🔴 AuthService: Firebase createUser failed - \(error.localizedDescription)")
+                    return promise(.failure(error)) 
+                }
                 guard let firebaseUser = result?.user else {
+                    print("🔴 AuthService: No user in result")
                     return promise(.failure(NSError(domain: "Auth", code: -1)))
                 }
 
+                print("🟣 AuthService: Firebase createUser succeeded - \(firebaseUser.uid)")
                 let user = User(
                     id: firebaseUser.uid,
                     email: firebaseUser.email ?? email,

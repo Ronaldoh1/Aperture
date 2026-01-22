@@ -5,18 +5,18 @@ import Foundation
 struct PresenterError: LocalizedError, Identifiable {
     
     let id = UUID()
-    let underlying: Error
+    let message: String
+    
+    init(message: String) {
+        self.message = message
+    }
     
     init(_ underlying: Error) {
-        
-        self.underlying = underlying
-        
+        self.message = underlying.localizedDescription
     }
     
     var errorDescription: String? {
-        
-        underlying.localizedDescription
-        
+        message
     }
     
 }

@@ -23,5 +23,9 @@ final class AppAssembly: Assembly {
         .inObjectScope(.container)
 
         AuthAssembly().assemble(container: container)
+        LandingAssembly().assemble(container: container)
+        CosmosAssembly().assemble(container: container)
+        AlexandriaAssembly().assemble(container: container)
+        ProfileAssembly().assemble(container: container)
     }
 }

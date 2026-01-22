@@ -1,111 +1,76 @@
-// AuthPresenter.swift
-
 import Foundation
+import Combine
 
 final class AuthPresenter: AuthPresenterType, AuthInteractorOutputType {
-    
+
     weak var view: AuthViewType?
-    
     var interactor: AuthInteractorType?
     var router: AuthRouterType?
     
     @Published var isLoading: Bool = false
     @Published var loadingMessage: String = ""
     @Published var error: PresenterError?
-    
-    private var didResolveSessionCheck = false
-    
-    init(router: AuthRouterType?) {
-        
+
+    init(router: AuthRouterType) {
         self.router = router
-        
     }
-    
+
     func viewDidLoad() {
-        
-        didResolveSessionCheck = false
-        setLoading(true, message: "Checking session")
-        
-        // If getCurrentUser() never emits, we refuse to brick the UI forever.
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
-            
-            guard let self else { return }
-            guard self.didResolveSessionCheck == false else { return }
-            
-            self.setLoading(false)
-            
-        }
-        
         interactor?.checkAuthStatus()
-        
     }
-    
+
     func didTapSignIn(email: String, password: String) {
-        
-        setLoading(true, message: "Signing in")
+        isLoading = true
+        loadingMessage = "Signing in"
+        error = nil
         interactor?.signIn(email: email, password: password)
-        
     }
-    
+
     func didTapSignUp(email: String, password: String) {
-        
-        setLoading(true, message: "Creating account")
+        print("🔵 AuthPresenter: Starting sign up for \(email)")
+        print("🔵 AuthPresenter: Interactor is \(interactor == nil ? "NIL ❌" : "set ✓")")
+        isLoading = true
+        loadingMessage = "Creating account"
+        error = nil
         interactor?.signUp(email: email, password: password)
-        
     }
-    
-    func didTapToggleMode() {
-        
+
+    func didTapResetPassword(email: String) {
+        isLoading = true
+        loadingMessage = "Sending reset email"
+        error = nil
+        interactor?.resetPassword(email: email)
     }
-    
+
     func didSignIn(user: User) {
-        
-        setLoading(false)
+        isLoading = false
+        loadingMessage = ""
         router?.navigate(to: .landing)
-        
     }
-    
+
     func didSignUp(user: User) {
-        
-        setLoading(false)
+        print("🟢 AuthPresenter: Sign up succeeded for user \(user.id)")
+        isLoading = false
+        loadingMessage = ""
         router?.navigate(to: .landing)
-        
+        print("🟢 AuthPresenter: Navigated to landing")
     }
-    
+
+    func didSendPasswordReset() {
+        isLoading = false
+        loadingMessage = ""
+    }
+
     func didCheckAuth(user: User?) {
-        
-        didResolveSessionCheck = true
-        setLoading(false)
-        
         if user != nil {
             router?.navigate(to: .landing)
         }
-        
     }
-    
-    func didFail(error: Error) {
-        
-        didResolveSessionCheck = true
-        setLoading(false)
-        
-        let wrapped = PresenterError(error)
-        self.error = wrapped
-        view?.displayError(error.localizedDescription)
-        
-    }
-    
-    private func setLoading(_ loading: Bool, message: String = "") {
-        
-        isLoading = loading
-        loadingMessage = loading ? message : ""
-        
-        if loading {
-            view?.displayLoading(message)
-        } else {
-            view?.hideLoading()
-        }
-        
-    }
-    
-}
 
+    func didFail(error: Error) {
+        print("🔴 AuthPresenter: Error - \(error.localizedDescription)")
+        isLoading = false
+        loadingMessage = ""
+        self.error = PresenterError(error)
+    }
+}

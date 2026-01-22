@@ -2,8 +2,6 @@
 
 import SwiftUI
 
-import SwiftUI
-
 struct CosmicTextField: View {
 
     @Binding var text: String
@@ -36,14 +34,22 @@ struct CosmicTextField: View {
                 .foregroundColor(Palette.primary.cyan.opacity(0.85))
                 .frame(width: 22)
 
-            TextField(placeholder, text: $text)
-                .keyboardType(keyboardType)
-                .textContentType(textContentType)
-                .autocapitalization(.none)
-                .disableAutocorrection(true)
-                .font(.system(size: 16, weight: .medium, design: .rounded))
-                .foregroundColor(Palette.text.primary)
-                .accentColor(Palette.primary.cyan)
+            ZStack(alignment: .leading) {
+                if text.isEmpty {
+                    Text(placeholder)
+                        .font(.system(size: 16, weight: .medium, design: .rounded))
+                        .foregroundColor(Palette.text.secondary.opacity(0.35))
+                }
+                
+                TextField("", text: $text)
+                    .keyboardType(keyboardType)
+                    .textContentType(textContentType)
+                    .autocapitalization(.none)
+                    .disableAutocorrection(true)
+                    .font(.system(size: 16, weight: .medium, design: .rounded))
+                    .foregroundColor(Palette.text.primary)
+                    .accentColor(Palette.primary.cyan)
+            }
 
         }
         .padding(.horizontal, 16)

@@ -37,7 +37,7 @@ struct SignUpView: View {
 
             CosmicSecureField(
                 text: $password,
-                placeholder: "Password",
+                placeholder: "Password (min 8 characters)",
                 iconName: "lock.fill",
                 showPassword: $showPassword,
                 textContentType: .newPassword

@@ -1,7 +1,19 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "" : {
+
+    },
+    "Alexandria" : {
+
+    },
     "Already have an account?" : {
+
+    },
+    "Ancient wisdom meets modern awakening" : {
+
+    },
+    "Aperture" : {
 
     },
     "Aperture Tutorial" : {
@@ -10,13 +22,25 @@
     "Back" : {
 
     },
+    "Consciousness Explorer" : {
+
+    },
+    "Cosmos" : {
+
+    },
     "Don't have an account?" : {
 
     },
     "Error" : {
 
     },
+    "Explore the infinite expanse" : {
+
+    },
     "Forgot password?" : {
+
+    },
+    "Home" : {
 
     },
     "landing.primaryAction" : {
@@ -73,6 +97,9 @@
     "OK" : {
 
     },
+    "Profile" : {
+
+    },
     "Send" : {
 
     },
@@ -86,6 +113,24 @@
 
     },
     "Skip" : {
+
+    },
+    "The Cosmos" : {
+
+    },
+    "The Library" : {
+
+    },
+    "Version 1.0.0" : {
+
+    },
+    "Welcome to Aperture" : {
+
+    },
+    "Your consciousness journey begins" : {
+
+    },
+    "Your journey continues" : {
 
     }
   },

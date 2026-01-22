@@ -12,11 +12,9 @@ struct AuthView: View {
 
     @State private var email: String
     @State private var password: String
-    @State private var confirmPassword: String
     @State private var isSignUp: Bool
 
     @State private var showPassword: Bool = false
-    @State private var showConfirmPassword: Bool = false
 
     @State private var geometryRotation: Double = 0
     @State private var particleOpacity: Double = 0.25
@@ -30,7 +28,6 @@ struct AuthView: View {
         _presenterBox = StateObject(wrappedValue: AuthPresenterBox(presenter: presenter))
         _email = State(initialValue: "")
         _password = State(initialValue: "")
-        _confirmPassword = State(initialValue: "")
         _isSignUp = State(initialValue: startInSignUp)
     }
 
@@ -87,7 +84,7 @@ struct AuthView: View {
                 email: $email,
                 isLoading: presenterBox.isLoading,
                 onResetPassword: {
-                    presenter.router?.navigate(to: .forgotPassword)
+                    presenter.didTapResetPassword(email: email)
                 },
                 onBackToSignIn: {
                     withAnimation(.spring(response: 0.4, dampingFraction: 0.75)) {
@@ -179,7 +176,7 @@ struct AuthView: View {
                     systemImage: "paperplane.fill",
                     isDisabled: presenterBox.isLoading || email.contains("@") == false
                 ) {
-                    presenter.router?.navigate(to: .forgotPassword)
+                    presenter.didTapResetPassword(email: email)
                 }
 
             } else {
@@ -197,20 +194,6 @@ struct AuthView: View {
                     }
                 }
 
-                CosmicButton(
-                    title: isSignUp ? "Back to Sign In" : "Sign Up",
-                    style: .secondary,
-                    systemImage: nil,
-                    isDisabled: presenterBox.isLoading
-                ) {
-                    withAnimation(.spring(response: 0.4, dampingFraction: 0.75)) {
-                        isSignUp.toggle()
-                        showingForgotPassword = false
-                        presenter.didTapToggleMode()
-                        clearFields()
-                    }
-                }
-
             }
 
         }
@@ -223,7 +206,6 @@ struct AuthView: View {
             withAnimation(.spring(response: 0.4, dampingFraction: 0.75)) {
                 isSignUp.toggle()
                 showingForgotPassword = false
-                presenter.didTapToggleMode()
                 clearFields()
             }
         } label: {
@@ -256,10 +238,6 @@ struct AuthView: View {
         let emailValid = email.contains("@") && email.contains(".")
         let passwordValid = password.count >= 8
 
-        if isSignUp {
-            return emailValid && passwordValid && password == confirmPassword
-        }
-
         return emailValid && passwordValid
 
     }
@@ -275,7 +253,6 @@ struct AuthView: View {
     private func clearFields() {
         email = ""
         password = ""
-        confirmPassword = ""
     }
 
     private var sessionBadge: some View {

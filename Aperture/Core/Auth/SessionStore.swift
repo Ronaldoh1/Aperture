@@ -9,10 +9,15 @@ final class SessionStore: ObservableObject {
     private var handle: AuthStateDidChangeListenerHandle?
 
     init() {
+        print("🟣 SessionStore: Initializing")
         handle = Auth.auth().addStateDidChangeListener { [weak self] _, user in
-            guard let self else { return }
-            self.isAuthenticated = (user != nil)
-            self.isBootstrapping = false
+            Task { @MainActor in
+                guard let self else { return }
+                print("🟣 SessionStore: Auth state changed - user exists: \(user != nil)")
+                self.isAuthenticated = (user != nil)
+                self.isBootstrapping = false
+                print("🟣 SessionStore: isAuthenticated = \(self.isAuthenticated)")
+            }
         }
     }
 

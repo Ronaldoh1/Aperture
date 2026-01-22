@@ -5,38 +5,30 @@ import Swinject
 
 struct AuthEntryView: View {
 
-    let container: Container
     let startInSignUp: Bool
-    let onRoute: (AuthRoute) -> Void
-
-    init(
-        container: Container,
-        startInSignUp: Bool = false,
-        onRoute: @escaping (AuthRoute) -> Void
-    ) {
-        self.container = container
+    private let presenter: AuthPresenterType
+    
+    init(container: Container, startInSignUp: Bool, onRoute: @escaping (AuthRoute) -> Void) {
         self.startInSignUp = startInSignUp
-        self.onRoute = onRoute
+        
+        print("🟡 AuthEntryView: Starting initialization")
+        
+        // Register the router with the actual onRoute closure
+        let router = AuthRouter(onRoute: onRoute)
+        container.register(AuthRouterType.self) { _ in router }
+        print("🟡 AuthEntryView: Router registered")
+        
+        // Resolve the presenter
+        self.presenter = container.resolve(AuthPresenterType.self)!
+        print("🟡 AuthEntryView: Presenter resolved, interactor before: \(presenter.interactor != nil)")
+        
+        // CRITICAL: Resolve the interactor to trigger the assembly wiring
+        _ = container.resolve(AuthInteractorType.self)!
+        print("🟡 AuthEntryView: Interactor resolved, interactor after: \(presenter.interactor != nil)")
     }
 
     var body: some View {
-
-        let router = AuthRouter(onRoute: onRoute)
-
-        let presenter: AuthPresenterType = {
-            if let resolved = container.resolve(AuthPresenterType.self) {
-                resolved.router = router
-                return resolved
-            } else {
-                return AuthPresenter(router: router)
-            }
-        }()
-
-        // Force interactor resolution so presenter.interactor is assigned.
-        _ = container.resolve(AuthInteractor.self)
-
-        return AuthView(presenter: presenter, startInSignUp: startInSignUp)
-
+        AuthView(presenter: presenter, startInSignUp: startInSignUp)
     }
-
+    
 }

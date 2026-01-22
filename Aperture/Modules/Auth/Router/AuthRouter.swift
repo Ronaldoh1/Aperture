@@ -5,11 +5,8 @@ import Foundation
 enum AuthRoute {
     
     case landing
-    case forgotPassword
     case tutorial
-    
 }
-
 
 final class AuthRouter: AuthRouterType {
 

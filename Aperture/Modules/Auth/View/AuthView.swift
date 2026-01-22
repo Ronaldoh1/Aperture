@@ -101,11 +101,12 @@ struct AuthView: View {
             SignUpView(
                 email: $email,
                 password: $password,
-                confirmPassword: $confirmPassword,
                 showPassword: $showPassword,
-                showConfirmPassword: $showConfirmPassword
+                isLoading: presenterBox.isLoading,
+                onSignUp: {
+                    presenter.didTapSignUp(email: email, password: password)
+                }
             )
-
         } else {
 
             SignInView(

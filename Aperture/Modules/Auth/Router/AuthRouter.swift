@@ -2,18 +2,24 @@
 
 import Foundation
 
+enum AuthRoute {
+    
+    case landing
+    case forgotPassword
+    case tutorial
+    
+}
+
+
 final class AuthRouter: AuthRouterType {
 
-    func navigate(to route: AuthRoute) {
+    private let onRoute: (AuthRoute) -> Void
 
-        switch route {
-        case .main:
-            break
-        case .forgotPassword:
-            break
-        case .tutorial:
-            break
-        }
+    init(onRoute: @escaping (AuthRoute) -> Void) {
+        self.onRoute = onRoute
     }
 
+    func navigate(to route: AuthRoute) {
+        onRoute(route)
+    }
 }

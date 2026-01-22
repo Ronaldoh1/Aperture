@@ -49,7 +49,7 @@ struct TutorialEntryView: View {
 
             Color.clear
                 .onAppear {
-                    onRoute(.main)
+                    onRoute(.landing)
                 }
 
         } else {

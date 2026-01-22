@@ -61,14 +61,14 @@ final class AuthPresenter: AuthPresenterType, AuthInteractorOutputType {
     func didSignIn(user: User) {
         
         setLoading(false)
-        router?.navigate(to: .main)
+        router?.navigate(to: .landing)
         
     }
     
     func didSignUp(user: User) {
         
         setLoading(false)
-        router?.navigate(to: .tutorial)
+        router?.navigate(to: .landing)
         
     }
     
@@ -78,7 +78,7 @@ final class AuthPresenter: AuthPresenterType, AuthInteractorOutputType {
         setLoading(false)
         
         if user != nil {
-            router?.navigate(to: .main)
+            router?.navigate(to: .landing)
         }
         
     }

@@ -47,13 +47,6 @@ protocol AuthRouterType {
 
 }
 
-enum AuthRoute {
-
-    case main
-    case forgotPassword
-    case tutorial
-
-}
 
 struct AuthViewModel: Equatable {
 

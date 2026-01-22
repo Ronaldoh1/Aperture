@@ -25,7 +25,7 @@ struct AppRootView: View {
                 case .authStartSignIn:
                     authStartInSignUp = false
 
-                case .main:
+                case .landing:
                     break
                 }
             }
@@ -38,9 +38,18 @@ struct AppRootView: View {
 
             AuthEntryView(
                 container: AppContainer.shared.container,
-                startInSignUp: authStartInSignUp
+                startInSignUp: authStartInSignUp,
+                onRoute: { route in
+                    switch route {
+                    case .landing:
+                        break
+                    case .forgotPassword:
+                        break
+                    case .tutorial:
+                        break
+                    }
+                }
             )
-
         }
 
     }

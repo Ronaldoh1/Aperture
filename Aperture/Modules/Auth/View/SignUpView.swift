@@ -6,17 +6,16 @@ struct SignUpView: View {
 
     @Binding var email: String
     @Binding var password: String
-    @Binding var confirmPassword: String
-
     @Binding var showPassword: Bool
-    @Binding var showConfirmPassword: Bool
+
+    let isLoading: Bool
+    let onSignUp: () -> Void
 
     @FocusState private var focusedField: Field?
 
     private enum Field {
         case email
         case password
-        case confirmPassword
     }
 
     var body: some View {
@@ -44,23 +43,13 @@ struct SignUpView: View {
                 textContentType: .newPassword
             )
             .focused($focusedField, equals: .password)
-            .submitLabel(.next)
+            .submitLabel(.go)
             .onSubmit {
-                focusedField = .confirmPassword
+                onSignUp()
             }
 
-            CosmicSecureField(
-                text: $confirmPassword,
-                placeholder: "Confirm Password",
-                iconName: "lock.fill",
-                showPassword: $showConfirmPassword,
-                textContentType: .newPassword
-            )
-            .focused($focusedField, equals: .confirmPassword)
-            .submitLabel(.go)
-
         }
-
+        .disabled(isLoading)
     }
 
 }

@@ -15,6 +15,13 @@ struct RootTabView: View {
                 Label("Home", systemImage: "sparkles")
             }
             
+            TimelineEntryView(container: AppContainer.shared.container) { route in
+                print("🟠 RootTabView: Timeline route - \(route)")
+            }
+            .tabItem {
+                Label("Timeline", systemImage: "clock.arrow.circlepath")
+            }
+            
             CosmosEntryView(container: AppContainer.shared.container) { route in
                 print("🟠 RootTabView: Cosmos route - \(route)")
             }
@@ -27,6 +34,12 @@ struct RootTabView: View {
             }
             .tabItem {
                 Label("Alexandria", systemImage: "books.vertical.fill")
+            }
+            
+            // Awakening Tab - NPC → GOD MODE
+            AwakeningEntryView(presenter: AppContainer.shared.container.resolve(AwakeningPresenterType.self)!)
+            .tabItem {
+                Label("Awakening", systemImage: "sun.max.fill")
             }
             
             ProfileEntryView(container: AppContainer.shared.container) { route in

@@ -24,8 +24,10 @@ final class AppAssembly: Assembly {
 
         AuthAssembly().assemble(container: container)
         LandingAssembly().assemble(container: container)
+        TimelineAssembly().assemble(container: container)
         CosmosAssembly().assemble(container: container)
         AlexandriaAssembly().assemble(container: container)
+        AwakeningAssembly().assemble(container: container)
         ProfileAssembly().assemble(container: container)
     }
 }

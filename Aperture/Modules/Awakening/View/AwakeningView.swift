@@ -9,8 +9,15 @@ struct AwakeningView: View {
     @State private var showDissonanceLog = false
     @State private var showRealityAudit = false
     @State private var showQuestionBank = false
+    @State private var showMatrixEducation = false
+    @State private var showEmotionalProcessing = false
+    @State private var showConsciousnessCourse = false
+    @State private var showCourseHub = false
+    @State private var showAwakeningLanding = false
     @State private var showLevelUpAlert = false
     @State private var levelUpData: AwakeningLevel?
+    @State private var matrixProgress: MatrixEducationProgress = .default
+    @State private var courseProgress: CourseProgress = .default
     
     private var presenter: AwakeningPresenterType { presenterBox.presenter }
     
@@ -27,6 +34,9 @@ struct AwakeningView: View {
                     VStack(spacing: 24) {
                         Spacer(minLength: 20)
                         levelCard
+                        matrixEducationCard
+                        courseHubCard
+                        consciousnessCourseCard
                         dailyCheckInCard
                         featureCardsSection
                         dragonMessageCard
@@ -57,6 +67,21 @@ struct AwakeningView: View {
                 QuestionBankSheet(entries: presenterBox.profile.questionHistory) { entry in
                     presenter.saveQuestionEntry(entry)
                 } onDismiss: { showQuestionBank = false }
+            }
+            .sheet(isPresented: $showMatrixEducation) {
+                MatrixEducationView()
+            }
+            .sheet(isPresented: $showEmotionalProcessing) {
+                EmotionalProcessingSheet { showEmotionalProcessing = false }
+            }
+            .sheet(isPresented: $showConsciousnessCourse) {
+                ConsciousnessCourseView()
+            }
+            .sheet(isPresented: $showCourseHub) {
+                CourseHubView()
+            }
+            .sheet(isPresented: $showAwakeningLanding) {
+                AwakeningLandingView()
             }
             .alert("🎉 LEVEL UP!", isPresented: $showLevelUpAlert) {
                 Button("Hell Yes!") { showLevelUpAlert = false }
@@ -139,6 +164,167 @@ struct AwakeningView: View {
         )
     }
     
+    private var matrixEducationCard: some View {
+        Button { showMatrixEducation = true } label: {
+            VStack(alignment: .leading, spacing: 12) {
+                HStack {
+                    Text("🔴").font(.system(size: 22))
+                    Text("THE MATRIX DECODED").font(.system(size: 13, weight: .bold, design: .rounded)).tracking(2).foregroundColor(Palette.primary.red)
+                    Spacer()
+                    Text("\(matrixProgress.layersCompleted.count)/10").font(.system(size: 14, weight: .bold, design: .rounded)).foregroundColor(matrixProgress.hasCompletedAllLayers ? Color.green : Palette.primary.red)
+                }
+                
+                Text("Understand the 10 layers of programming")
+                    .font(.system(size: 16, weight: .semibold, design: .rounded))
+                    .foregroundColor(Palette.text.primary)
+                
+                // Mini progress bar
+                GeometryReader { geo in
+                    ZStack(alignment: .leading) {
+                        RoundedRectangle(cornerRadius: 4).fill(Color.white.opacity(0.1)).frame(height: 6)
+                        RoundedRectangle(cornerRadius: 4)
+                            .fill(LinearGradient(colors: [Palette.primary.red, Palette.primary.orange, Palette.accent.gold], startPoint: .leading, endPoint: .trailing))
+                            .frame(width: geo.size.width * matrixProgress.completionPercentage, height: 6)
+                    }
+                }
+                .frame(height: 6)
+                
+                HStack {
+                    Image(systemName: matrixProgress.hasCompletedAllLayers ? "checkmark.circle.fill" : "book.fill")
+                        .foregroundColor(matrixProgress.hasCompletedAllLayers ? Color.green : Palette.primary.red)
+                    Text(matrixProgress.hasCompletedAllLayers ? "All layers understood" : "Foundation required")
+                        .font(.system(size: 12, weight: .medium, design: .rounded))
+                        .foregroundColor(matrixProgress.hasCompletedAllLayers ? Color.green : Palette.text.muted)
+                    Spacer()
+                    Image(systemName: "chevron.right.circle.fill").font(.system(size: 16)).foregroundColor(Palette.primary.red.opacity(0.7))
+                }
+            }
+            .padding(16)
+            .background(
+                RoundedRectangle(cornerRadius: 16, style: .continuous)
+                    .fill(Palette.primary.red.opacity(0.1))
+                    .overlay(RoundedRectangle(cornerRadius: 16, style: .continuous).stroke(Palette.primary.red.opacity(0.3), lineWidth: 1))
+            )
+        }
+        .buttonStyle(PlainButtonStyle())
+        .onAppear { loadMatrixProgress() }
+    }
+    
+    private func loadMatrixProgress() {
+        if let data = UserDefaults.standard.data(forKey: "matrix_education_progress"),
+           let saved = try? JSONDecoder().decode(MatrixEducationProgress.self, from: data) {
+            matrixProgress = saved
+        }
+    }
+    
+    private var consciousnessCourseCard: some View {
+        let db = ConsciousnessCourseDatabase.shared
+        let completedLessons = courseProgress.completedLessons.count
+        let totalLessons = db.totalLessons
+        let progressPercent = totalLessons > 0 ? Double(completedLessons) / Double(totalLessons) : 0
+        
+        return Button { showConsciousnessCourse = true } label: {
+            VStack(alignment: .leading, spacing: 12) {
+                HStack {
+                    Image(systemName: "brain.head.profile")
+                        .font(.system(size: 20, weight: .semibold))
+                        .foregroundStyle(LinearGradient(colors: [Palette.primary.cyan, Palette.primary.violet], startPoint: .topLeading, endPoint: .bottomTrailing))
+                    Text("PHD CONSCIOUSNESS").font(.system(size: 13, weight: .bold, design: .rounded)).tracking(2).foregroundColor(Palette.primary.cyan)
+                    Spacer()
+                    Text("\(completedLessons)/\(totalLessons)").font(.system(size: 14, weight: .bold, design: .rounded)).foregroundColor(completedLessons == totalLessons ? Color.green : Palette.primary.cyan)
+                }
+                
+                Text("The Science & Philosophy of Consciousness")
+                    .font(.system(size: 16, weight: .semibold, design: .rounded))
+                    .foregroundColor(Palette.text.primary)
+                
+                // Mini progress bar
+                GeometryReader { geo in
+                    ZStack(alignment: .leading) {
+                        RoundedRectangle(cornerRadius: 4).fill(Color.white.opacity(0.1)).frame(height: 6)
+                        RoundedRectangle(cornerRadius: 4)
+                            .fill(LinearGradient(colors: [Palette.primary.cyan, Palette.primary.violet], startPoint: .leading, endPoint: .trailing))
+                            .frame(width: geo.size.width * progressPercent, height: 6)
+                    }
+                }
+                .frame(height: 6)
+                
+                HStack {
+                    Image(systemName: "graduationcap.fill").foregroundColor(Palette.primary.cyan)
+                    Text("\(db.modules.count) modules • \(db.totalMinutes / 60)+ hours")
+                        .font(.system(size: 12, weight: .medium, design: .rounded))
+                        .foregroundColor(Palette.text.muted)
+                    Spacer()
+                    Image(systemName: "chevron.right.circle.fill").font(.system(size: 16)).foregroundColor(Palette.primary.cyan.opacity(0.7))
+                }
+            }
+            .padding(16)
+            .background(
+                RoundedRectangle(cornerRadius: 16, style: .continuous)
+                    .fill(LinearGradient(colors: [Palette.primary.cyan.opacity(0.1), Palette.primary.violet.opacity(0.1)], startPoint: .topLeading, endPoint: .bottomTrailing))
+                    .overlay(RoundedRectangle(cornerRadius: 16, style: .continuous).stroke(Palette.primary.cyan.opacity(0.3), lineWidth: 1))
+            )
+        }
+        .buttonStyle(PlainButtonStyle())
+        .onAppear { loadCourseProgress() }
+    }
+    
+    private var courseHubCard: some View {
+        Button {
+            showAwakeningLanding = true
+        } label: {
+            HStack(spacing: 16) {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(LinearGradient(colors: [Palette.accent.gold.opacity(0.3), Palette.primary.violet.opacity(0.3)], startPoint: .topLeading, endPoint: .bottomTrailing))
+                        .frame(width: 60, height: 60)
+                    
+                    Image(systemName: "sparkles")
+                        .font(.system(size: 28, weight: .bold))
+                        .foregroundColor(Palette.accent.gold)
+                }
+                
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("AWAKENING ACADEMY")
+                        .font(.system(size: 10, weight: .bold, design: .rounded))
+                        .foregroundColor(Palette.accent.gold)
+                        .tracking(2)
+                    
+                    Text("Truth Courses & Documentaries")
+                        .font(.system(size: 16, weight: .bold, design: .rounded))
+                        .foregroundColor(.white)
+                    
+                    Text("13+ courses • 8 documentaries")
+                        .font(.system(size: 12, weight: .medium))
+                        .foregroundColor(Palette.text.secondary)
+                }
+                
+                Spacer()
+                
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundColor(Palette.text.muted)
+            }
+            .padding(16)
+            .background(
+                RoundedRectangle(cornerRadius: 16, style: .continuous)
+                    .fill(Color.white.opacity(0.05))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 16, style: .continuous)
+                            .stroke(Palette.accent.gold.opacity(0.3), lineWidth: 1)
+                    )
+            )
+        }
+        .buttonStyle(PlainButtonStyle())
+    }
+    
+    private func loadCourseProgress() {
+        if let data = UserDefaults.standard.data(forKey: "consciousness_course_progress"),
+           let saved = try? JSONDecoder().decode(CourseProgress.self, from: data) {
+            courseProgress = saved
+        }
+    }
+    
     private var dailyCheckInCard: some View {
         Button { showDailyCheckIn = true } label: {
             VStack(alignment: .leading, spacing: 12) {
@@ -174,6 +360,7 @@ struct AwakeningView: View {
             featureCard(icon: "brain.head.profile", title: "Cognitive Dissonance", subtitle: "Log when reality ≠ what you were taught", stat: "\(presenterBox.profile.totalDissonanceEntries) entries", color: Palette.primary.violet) { showDissonanceLog = true }
             featureCard(icon: "checklist", title: "Reality Audit", subtitle: "Inventory and examine your beliefs", stat: "\(presenterBox.profile.examinedBeliefs)/\(presenterBox.profile.totalBeliefs) examined", color: Palette.primary.cyan) { showRealityAudit = true }
             featureCard(icon: "questionmark.circle.fill", title: "Question Bank", subtitle: "Socratic questions to challenge assumptions", stat: "\(presenterBox.profile.answeredQuestions) answered", color: Palette.primary.orange) { showQuestionBank = true }
+            featureCard(icon: "heart.circle.fill", title: "Emotional Processing", subtitle: "Guides for grief, anger, and betrayal", stat: "Dark Night Tools", color: Color.pink) { showEmotionalProcessing = true }
         }
     }
     

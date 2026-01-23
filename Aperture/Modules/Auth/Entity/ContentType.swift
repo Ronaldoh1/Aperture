@@ -52,4 +52,5 @@ enum ContentType: String, Codable, CaseIterable {
             return 60
         }
     }
+    
 }

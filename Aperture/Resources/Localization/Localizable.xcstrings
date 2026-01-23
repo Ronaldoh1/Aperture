@@ -4,13 +4,37 @@
     "" : {
 
     },
+    "— %@" : {
+
+    },
+    "— Gloria Steinem" : {
+
+    },
+    "?" : {
+
+    },
     "\"Biblical angels: wheels covered in eyes, six-winged beings on fire, four-faced creatures. 'Be not afraid' because people were TERRIFIED. Then someone drew a cute baby with wings and called it a day. 👼\"" : {
 
     },
     "\"Hell isn't a place you go when you die. It's a state you're in when you don't know who you are. You might already be there. Gnosis is the way out. The fire isn't punishment - it's the burning of ignorance.\"" : {
 
     },
+    "\"Push beyond your limits. That's what makes a Saiyan a Saiyan.\"" : {
+
+    },
+    "\"The most important subject never taught in school\"" : {
+
+    },
+    "\"The only prison is the one you don't know you're in.\"" : {
+
+    },
     "\"The quality of your questions determines the quality of your life. Sit with this. Don't rush to an answer.\"" : {
+
+    },
+    "\"The truth will set you free—but first it will piss you off.\"" : {
+
+    },
+    "\"The wound is where the light enters you.\" You're not broken—you're breaking open. Let the old self grieve so the new self can emerge." : {
 
     },
     "\"They burned the Library of Alexandria. They buried the Nag Hammadi texts. They killed the Gnostics. The truth kept coming back. Now it's in your pocket.\"" : {
@@ -22,7 +46,16 @@
     "\"They wrote the book. They edited the book. They translated the book. They taught you to never question the book. Maybe start there.\"" : {
 
     },
+    "\"This course won't give you answers—it will show you that you ARE the answer. The one who questions consciousness is consciousness questioning itself.\"" : {
+
+    },
     "\"You didn't fall INTO this world. You came from ABOVE it. The journey isn't up - it's remembering.\"" : {
+
+    },
+    "%@ hours" : {
+
+    },
+    "%@h" : {
 
     },
     "%lld" : {
@@ -31,7 +64,44 @@
     "%lld available" : {
 
     },
+    "%lld Courses" : {
+
+    },
+    "%lld docs" : {
+
+    },
     "%lld hidden moments" : {
+
+    },
+    "%lld items" : {
+
+    },
+    "%lld key insights" : {
+
+    },
+    "%lld lessons" : {
+
+    },
+    "%lld min" : {
+
+    },
+    "%lld modules" : {
+
+    },
+    "%lld modules • %lld+ hours" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld modules • %2$lld+ hours"
+          }
+        }
+      }
+    },
+    "%lld practices" : {
+
+    },
+    "%lld prompts" : {
 
     },
     "%lld total" : {
@@ -40,7 +110,53 @@
     "%lld traditions" : {
 
     },
+    "%lld/%lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld/%2$lld"
+          }
+        }
+      }
+    },
+    "%lld/%lld lessons" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld/%2$lld lessons"
+          }
+        }
+      }
+    },
+    "%lld/%lld lessons • %lldmin" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld/%2$lld lessons • %3$lldmin"
+          }
+        }
+      }
+    },
+    "%lld/%lld lies exposed" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld/%2$lld lies exposed"
+          }
+        }
+      }
+    },
     "%lld/10" : {
+
+    },
+    "%lld%%" : {
+
+    },
+    "•" : {
 
     },
     "• YOU ARE HERE" : {
@@ -61,10 +177,19 @@
     "⚙️" : {
 
     },
+    "⚠️ WARNING: This content will change how you see the world" : {
+
+    },
+    "✦" : {
+
+    },
     "✨ SIGNIFICANCE" : {
 
     },
     "🌅 WHERE DID I GO UNCONSCIOUS TODAY?" : {
+
+    },
+    "🌑" : {
 
     },
     "🌑 Control / Erasure" : {
@@ -73,7 +198,19 @@
     "🎉 LEVEL UP!" : {
 
     },
+    "🎬 KEY MOMENTS" : {
+
+    },
+    "🎯" : {
+
+    },
+    "🎯 WHO BENEFITS" : {
+
+    },
     "🐉" : {
+
+    },
+    "🐉 DRAGON'S WISDOM" : {
 
     },
     "🐉☀️" : {
@@ -91,10 +228,43 @@
     "📖🔥" : {
 
     },
+    "📚 EVIDENCE" : {
+
+    },
     "📚 TEXTS" : {
 
     },
+    "📝 SUMMARY" : {
+
+    },
+    "📺 DOCUMENTARIES" : {
+
+    },
+    "🔍" : {
+
+    },
+    "🔑 KEY INSIGHTS" : {
+
+    },
+    "🔑 KEY POINTS" : {
+
+    },
+    "🔥" : {
+
+    },
     "🔥 THE DEMONIZED ONES" : {
+
+    },
+    "🔴" : {
+
+    },
+    "8+ documentaries • Embedded videos" : {
+
+    },
+    "10 Layers of Control" : {
+
+    },
+    "13+ courses • 8 documentaries" : {
 
     },
     "15 doctrines exposed. Tap to see what\nthey don't want you to know." : {
@@ -106,10 +276,16 @@
     "Add Belief" : {
 
     },
+    "AFFIRMATIONS" : {
+
+    },
     "Alexandria" : {
 
     },
     "All" : {
+
+    },
+    "All layers understood" : {
 
     },
     "Already have an account?" : {
@@ -127,13 +303,34 @@
     "Any thoughts or evidence..." : {
 
     },
-    "Aperture" : {
+    "APERTURE" : {
 
     },
     "Aperture Tutorial" : {
 
     },
+    "Aperture v1.0" : {
+
+    },
+    "APPLY WHAT YOU LEARNED" : {
+
+    },
     "Awakening" : {
+
+    },
+    "Awakening Academy" : {
+
+    },
+    "AWAKENING ACADEMY" : {
+
+    },
+    "Awakening Documentaries" : {
+
+    },
+    "AWAKENING ISN'T ALL LIGHT" : {
+
+    },
+    "AWAKENING LEVEL" : {
 
     },
     "Back" : {
@@ -142,13 +339,40 @@
     "BEINGS IN THIS REALM" : {
 
     },
+    "Built with" : {
+
+    },
+    "by %@" : {
+
+    },
+    "by Ron" : {
+
+    },
+    "CATEGORIES" : {
+
+    },
     "CATEGORY" : {
 
     },
     "Cognitive Dissonance" : {
 
     },
+    "Complete all 10 layers to unlock full tools" : {
+
+    },
+    "Completed" : {
+
+    },
+    "Consciousness" : {
+
+    },
     "Consciousness Explorer" : {
+
+    },
+    "Continue Learning" : {
+
+    },
+    "Continue your journey" : {
 
     },
     "Control through manufactured terror" : {
@@ -157,10 +381,25 @@
     "Cosmos" : {
 
     },
+    "Course" : {
+
+    },
+    "COURSE" : {
+
+    },
+    "Course Progress" : {
+
+    },
     "CURRENT STATUS" : {
 
     },
+    "CURRICULUM" : {
+
+    },
     "Daily Check-In" : {
+
+    },
+    "Daily Check-In • Cognitive Dissonance Log\nReality Audit • Question Bank" : {
 
     },
     "Describe a moment when you lost awareness and reacted automatically." : {
@@ -172,6 +411,9 @@
     "Don't have an account?" : {
 
     },
+    "DRAGON'S WISDOM" : {
+
+    },
     "e.g., I got triggered by a comment and snapped..." : {
 
     },
@@ -181,10 +423,19 @@
     "EMOTIONAL INTENSITY" : {
 
     },
+    "Emotional Processing" : {
+
+    },
     "Error" : {
 
     },
+    "EXPLORE" : {
+
+    },
     "EXPOSE THE LIES" : {
+
+    },
+    "Eyes Opened" : {
 
     },
     "Forgot password?" : {
@@ -193,7 +444,16 @@
     "Found in: %@" : {
 
     },
+    "Foundation required" : {
+
+    },
+    "From quantum physics to Dragon Ball\nFrom Buddha to birth charts" : {
+
+    },
     "Full text available in future update" : {
+
+    },
+    "FURTHER READING" : {
 
     },
     "Generate New Question" : {
@@ -230,6 +490,12 @@
 
     },
     "Inventory and examine your beliefs" : {
+
+    },
+    "KEY INSIGHT" : {
+
+    },
+    "KEY TAKEAWAYS" : {
 
     },
     "landing.primaryAction" : {
@@ -283,6 +549,27 @@
         }
       }
     },
+    "Layer %lld" : {
+
+    },
+    "Layer %lld Complete!" : {
+
+    },
+    "Layer Completed ✓" : {
+
+    },
+    "LESSON" : {
+
+    },
+    "Lesson %lld" : {
+
+    },
+    "Lesson Completed ✓" : {
+
+    },
+    "LESSONS" : {
+
+    },
     "Let your thoughts flow freely..." : {
 
     },
@@ -304,13 +591,49 @@
     "MAP" : {
 
     },
+    "Mark as Complete" : {
+
+    },
+    "Mark Complete" : {
+
+    },
+    "Mark Layer as Understood" : {
+
+    },
     "Mild" : {
+
+    },
+    "Module" : {
+
+    },
+    "Module %lld" : {
+
+    },
+    "MODULE %lld" : {
+
+    },
+    "More" : {
+
+    },
+    "MORE" : {
+
+    },
+    "Most people think awakening means discovering a hidden layer.\nIt usually means seeing that the layers exist at all." : {
+
+    },
+    "NEW" : {
 
     },
     "Next: %lld" : {
 
     },
     "No beliefs yet" : {
+
+    },
+    "No courses match your filter" : {
+
+    },
+    "No documentaries found" : {
 
     },
     "No entries yet" : {
@@ -328,19 +651,55 @@
     "NOTES (Optional)" : {
 
     },
+    "Notes are saved automatically" : {
+
+    },
     "OK" : {
+
+    },
+    "Open your eyes" : {
+
+    },
+    "Open Your Eyes" : {
 
     },
     "Origin: %@" : {
 
     },
+    "OVERVIEW" : {
+
+    },
     "Parents, school, media, culture..." : {
+
+    },
+    "PHD CONSCIOUSNESS" : {
+
+    },
+    "PhD-Level Course" : {
+
+    },
+    "POWER LEVEL" : {
+
+    },
+    "Power Up Complete" : {
+
+    },
+    "PRACTICE" : {
+
+    },
+    "PRACTICES" : {
 
     },
     "Profile" : {
 
     },
+    "PROGRESS" : {
+
+    },
     "Question Bank" : {
+
+    },
+    "QUICK START" : {
 
     },
     "Read Full Text" : {
@@ -350,6 +709,9 @@
 
     },
     "Reflect" : {
+
+    },
+    "REFLECTION PROMPTS" : {
 
     },
     "Resolved" : {
@@ -376,6 +738,12 @@
     "Scroll through the dimensions.\nFrom Divine Fullness to Material Prison." : {
 
     },
+    "Search documentaries..." : {
+
+    },
+    "Searchable library with summaries" : {
+
+    },
     "Send" : {
 
     },
@@ -400,7 +768,16 @@
     "SOON" : {
 
     },
+    "Start Course" : {
+
+    },
     "Start examining what you believe" : {
+
+    },
+    "SunFlow: Reignited" : {
+
+    },
+    "SUNFLOW: REIGNITED" : {
 
     },
     "Take your time. This is for you, not for anyone else." : {
@@ -424,6 +801,12 @@
     "texts" : {
 
     },
+    "The Complete Curriculum" : {
+
+    },
+    "The Dark Night of the Soul" : {
+
+    },
     "The Dragon's Descent" : {
 
     },
@@ -436,10 +819,19 @@
     "The Library" : {
 
     },
+    "THE LIE" : {
+
+    },
     "THE LIES OF THE BIBLE" : {
 
     },
     "The light-bringers they made into monsters" : {
+
+    },
+    "The Matrix Decoded" : {
+
+    },
+    "THE MATRIX DECODED" : {
 
     },
     "The Realms" : {
@@ -448,10 +840,22 @@
     "The recovered wisdom they tried to destroy" : {
 
     },
+    "The Science & Philosophy\nof Consciousness" : {
+
+    },
+    "The Science & Philosophy of Consciousness" : {
+
+    },
     "The Sun Dragon says:" : {
 
     },
+    "THE TRUTH" : {
+
+    },
     "THE TRUTH PRESERVED" : {
+
+    },
+    "The truth they don't want you to know" : {
 
     },
     "Those They Lied About" : {
@@ -466,6 +870,27 @@
     "TODAY'S CHECK-IN" : {
 
     },
+    "TRANSFORMATION PATH" : {
+
+    },
+    "Truth Courses & Documentaries" : {
+
+    },
+    "Truth They Don't Show on TV" : {
+
+    },
+    "Try a different search or category" : {
+
+    },
+    "Understand the 10 layers of programming" : {
+
+    },
+    "Understanding Progress" : {
+
+    },
+    "Understanding the system is the first step" : {
+
+    },
     "Update Status" : {
 
     },
@@ -475,7 +900,10 @@
     "vs" : {
 
     },
-    "Welcome to Aperture" : {
+    "Watch on YouTube" : {
+
+    },
+    "Watch the truth they don't show on TV" : {
 
     },
     "WHAT DO YOU BELIEVE?" : {
@@ -499,6 +927,9 @@
     "When reality ≠ what you were taught" : {
 
     },
+    "When you start seeing through the illusions, emotions arise. Grief for the life you thought was real. Anger at those who lied. Betrayal from systems you trusted.\n\nThese feelings are not obstacles to awakening—they ARE the awakening. You cannot skip this part." : {
+
+    },
     "Where did I go unconscious today?" : {
 
     },
@@ -506,6 +937,15 @@
 
     },
     "YOU ARE HERE" : {
+
+    },
+    "You do not smash the Matrix. You debug it.\n\nThe exit is not rage or rejection. It is pattern recognition, boundary setting, and reclaiming agency one layer at a time." : {
+
+    },
+    "YOU MIGHT EXPERIENCE" : {
+
+    },
+    "You now understand: %@" : {
 
     },
     "You've reached %@!\n\n%@" : {
@@ -518,10 +958,10 @@
         }
       }
     },
-    "Your consciousness journey begins" : {
+    "Your journey continues" : {
 
     },
-    "Your journey continues" : {
+    "YOUR NOTES" : {
 
     },
     "YOUR REFLECTION" : {

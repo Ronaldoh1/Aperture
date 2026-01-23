@@ -463,175 +463,316 @@ struct SunDragonView: View {
     
     var size: CGFloat = 100
     @State private var isAnimating = false
+    @State private var breatheScale: CGFloat = 1.0
+    @State private var bodyWave: CGFloat = 0
     
     var body: some View {
         
         ZStack {
-            
-            // Outer glow
-            Circle()
-                .fill(
-                    RadialGradient(
-                        colors: [
-                            Palette.accent.gold.opacity(0.4),
-                            Palette.primary.orange.opacity(0.2),
-                            Color.clear
-                        ],
-                        center: .center,
-                        startRadius: size * 0.2,
-                        endRadius: size * 0.6
+            // Outer aura - multiple layers for depth
+            ForEach(0..<3, id: \.self) { i in
+                Circle()
+                    .fill(
+                        RadialGradient(
+                            colors: [
+                                Palette.accent.gold.opacity(0.3 - Double(i) * 0.1),
+                                Palette.primary.orange.opacity(0.15 - Double(i) * 0.05),
+                                Color.clear
+                            ],
+                            center: .center,
+                            startRadius: size * 0.2,
+                            endRadius: size * (0.7 + CGFloat(i) * 0.15)
+                        )
                     )
-                )
-                .frame(width: size * 1.3, height: size * 1.3)
-                .scaleEffect(isAnimating ? 1.1 : 1.0)
+                    .frame(width: size * (1.4 + CGFloat(i) * 0.2), height: size * (1.4 + CGFloat(i) * 0.2))
+                    .scaleEffect(breatheScale + CGFloat(i) * 0.02)
+            }
             
-            // Dragon body - serpentine sun dragon
-            SunDragonShape()
+            // Shenron-style coiled dragon
+            ShenronDragonShape(wave: bodyWave)
                 .fill(
                     LinearGradient(
                         colors: [
+                            Color(red: 0.0, green: 0.6, blue: 0.3),  // Shenron green
+                            Color(red: 0.1, green: 0.7, blue: 0.4),
                             Palette.accent.gold,
-                            Palette.primary.orange,
-                            Palette.accent.gold.opacity(0.9),
-                            Palette.primary.red.opacity(0.8)
+                            Color(red: 0.1, green: 0.7, blue: 0.4),
+                            Color(red: 0.0, green: 0.5, blue: 0.25)
                         ],
                         startPoint: .top,
                         endPoint: .bottom
                     )
                 )
                 .frame(width: size, height: size)
-                .shadow(color: Palette.accent.gold.opacity(0.6), radius: 8, x: 0, y: 4)
+                .overlay(
+                    ShenronDragonShape(wave: bodyWave)
+                        .stroke(
+                            LinearGradient(
+                                colors: [Palette.accent.gold, Color.white.opacity(0.5)],
+                                startPoint: .top,
+                                endPoint: .bottom
+                            ),
+                            lineWidth: 1.5
+                        )
+                        .frame(width: size, height: size)
+                )
+                .shadow(color: Palette.accent.gold.opacity(0.8), radius: 12, x: 0, y: 0)
+                .shadow(color: Color(red: 0, green: 0.5, blue: 0.3).opacity(0.5), radius: 6, x: 0, y: 4)
             
-            // Dragon eyes - golden orbs
-            VStack {
-                HStack(spacing: size * 0.2) {
-                    Circle()
-                        .fill(
-                            RadialGradient(
-                                colors: [Color.white, Palette.accent.gold],
-                                center: .center,
-                                startRadius: 0,
-                                endRadius: size * 0.05
-                            )
-                        )
-                        .frame(width: size * 0.1, height: size * 0.1)
-                        .shadow(color: Palette.accent.gold, radius: 3)
-                    
-                    Circle()
-                        .fill(
-                            RadialGradient(
-                                colors: [Color.white, Palette.accent.gold],
-                                center: .center,
-                                startRadius: 0,
-                                endRadius: size * 0.05
-                            )
-                        )
-                        .frame(width: size * 0.1, height: size * 0.1)
-                        .shadow(color: Palette.accent.gold, radius: 3)
+            // Dragon head details
+            VStack(spacing: 0) {
+                // Eyes - fierce red Shenron eyes
+                HStack(spacing: size * 0.12) {
+                    DragonEye(size: size * 0.08)
+                        .offset(x: -size * 0.02)
+                    DragonEye(size: size * 0.08)
+                        .offset(x: size * 0.02)
                 }
-                .offset(y: -size * 0.22)
+                .offset(y: -size * 0.02)
                 
                 Spacer()
             }
             .frame(height: size)
+            .offset(y: -size * 0.18)
             
+            // Whiskers - iconic Shenron feature
+            HStack(spacing: size * 0.5) {
+                DragonWhisker(size: size, direction: .left)
+                DragonWhisker(size: size, direction: .right)
+            }
+            .offset(y: -size * 0.12)
         }
         .onAppear {
+            // Breathing animation
+            withAnimation(.easeInOut(duration: 3.0).repeatForever(autoreverses: true)) {
+                breatheScale = 1.08
+            }
+            // Body wave animation
             withAnimation(.easeInOut(duration: 2.0).repeatForever(autoreverses: true)) {
-                isAnimating = true
+                bodyWave = 1.0
             }
         }
-        
     }
-    
 }
 
-// MARK: - Sun Dragon Shape
+// MARK: - Dragon Eye
 
-struct SunDragonShape: Shape {
+struct DragonEye: View {
+    var size: CGFloat
+    @State private var glowing = false
+    
+    var body: some View {
+        ZStack {
+            // Eye glow
+            Circle()
+                .fill(
+                    RadialGradient(
+                        colors: [Color.red.opacity(0.8), Color.red.opacity(0.3), Color.clear],
+                        center: .center,
+                        startRadius: 0,
+                        endRadius: size
+                    )
+                )
+                .frame(width: size * 2.5, height: size * 2.5)
+                .opacity(glowing ? 0.8 : 0.4)
+            
+            // Eye
+            Ellipse()
+                .fill(
+                    RadialGradient(
+                        colors: [Color.red, Color(red: 0.8, green: 0, blue: 0)],
+                        center: .center,
+                        startRadius: 0,
+                        endRadius: size * 0.5
+                    )
+                )
+                .frame(width: size, height: size * 0.7)
+            
+            // Pupil
+            Ellipse()
+                .fill(Color.black)
+                .frame(width: size * 0.4, height: size * 0.5)
+            
+            // Shine
+            Circle()
+                .fill(Color.white.opacity(0.8))
+                .frame(width: size * 0.2, height: size * 0.2)
+                .offset(x: -size * 0.15, y: -size * 0.1)
+        }
+        .onAppear {
+            withAnimation(.easeInOut(duration: 1.5).repeatForever(autoreverses: true)) {
+                glowing = true
+            }
+        }
+    }
+}
+
+// MARK: - Dragon Whisker
+
+struct DragonWhisker: View {
+    var size: CGFloat
+    var direction: WhiskerDirection
+    
+    enum WhiskerDirection {
+        case left, right
+    }
+    
+    @State private var waving = false
+    
+    var body: some View {
+        WhiskerShape()
+            .stroke(
+                LinearGradient(
+                    colors: [Palette.accent.gold, Palette.primary.orange],
+                    startPoint: .top,
+                    endPoint: .bottom
+                ),
+                style: StrokeStyle(lineWidth: 2.5, lineCap: .round)
+            )
+            .frame(width: size * 0.25, height: size * 0.3)
+            .scaleEffect(x: direction == .left ? -1 : 1)
+            .rotationEffect(.degrees(waving ? -5 : 5))
+            .onAppear {
+                withAnimation(.easeInOut(duration: 1.2).repeatForever(autoreverses: true)) {
+                    waving = true
+                }
+            }
+    }
+}
+
+struct WhiskerShape: Shape {
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        let w = rect.width
+        let h = rect.height
+        
+        path.move(to: CGPoint(x: w * 0.2, y: 0))
+        path.addCurve(
+            to: CGPoint(x: w, y: h * 0.8),
+            control1: CGPoint(x: w * 0.4, y: h * 0.3),
+            control2: CGPoint(x: w * 0.9, y: h * 0.5)
+        )
+        
+        return path
+    }
+}
+
+// MARK: - Shenron Dragon Shape (Improved)
+
+struct ShenronDragonShape: Shape {
+    var wave: CGFloat = 0
+    
+    var animatableData: CGFloat {
+        get { wave }
+        set { wave = newValue }
+    }
     
     func path(in rect: CGRect) -> Path {
         var path = Path()
         
         let w = rect.width
         let h = rect.height
+        let waveOffset = wave * w * 0.02
         
-        // Serpentine dragon body - Shenron inspired
-        path.move(to: CGPoint(x: w * 0.5, y: h * 0.05))
+        // Dragon head (top)
+        path.move(to: CGPoint(x: w * 0.5, y: h * 0.02))
         
-        // Head - wider at top
+        // Right side of head - with horns
         path.addCurve(
-            to: CGPoint(x: w * 0.85, y: h * 0.25),
-            control1: CGPoint(x: w * 0.72, y: h * 0.05),
-            control2: CGPoint(x: w * 0.88, y: h * 0.15)
+            to: CGPoint(x: w * 0.75, y: h * 0.12),
+            control1: CGPoint(x: w * 0.62, y: h * 0.02),
+            control2: CGPoint(x: w * 0.72, y: h * 0.06)
         )
         
-        // Right horn/whisker
-        path.addQuadCurve(
-            to: CGPoint(x: w * 0.78, y: h * 0.3),
-            control: CGPoint(x: w * 0.95, y: h * 0.22)
-        )
+        // Right horn
+        path.addLine(to: CGPoint(x: w * 0.85, y: h * 0.05))
+        path.addLine(to: CGPoint(x: w * 0.78, y: h * 0.15))
         
-        // Right body curve
+        // Right cheek and jaw
         path.addCurve(
-            to: CGPoint(x: w * 0.65, y: h * 0.55),
-            control1: CGPoint(x: w * 0.82, y: h * 0.4),
-            control2: CGPoint(x: w * 0.72, y: h * 0.5)
+            to: CGPoint(x: w * 0.72 + waveOffset, y: h * 0.28),
+            control1: CGPoint(x: w * 0.82, y: h * 0.2),
+            control2: CGPoint(x: w * 0.78, y: h * 0.25)
         )
         
-        // Mid serpentine
+        // Serpentine body - first curve right
         path.addCurve(
-            to: CGPoint(x: w * 0.55, y: h * 0.75),
-            control1: CGPoint(x: w * 0.58, y: h * 0.62),
-            control2: CGPoint(x: w * 0.6, y: h * 0.7)
+            to: CGPoint(x: w * 0.78 - waveOffset, y: h * 0.45),
+            control1: CGPoint(x: w * 0.85, y: h * 0.32),
+            control2: CGPoint(x: w * 0.85, y: h * 0.4)
         )
         
-        // Tail
+        // Body curves back left
         path.addCurve(
-            to: CGPoint(x: w * 0.5, y: h * 0.95),
-            control1: CGPoint(x: w * 0.52, y: h * 0.85),
-            control2: CGPoint(x: w * 0.51, y: h * 0.92)
+            to: CGPoint(x: w * 0.55 + waveOffset, y: h * 0.58),
+            control1: CGPoint(x: w * 0.7, y: h * 0.52),
+            control2: CGPoint(x: w * 0.6, y: h * 0.56)
         )
         
-        // Left tail
+        // Body curves right again
         path.addCurve(
-            to: CGPoint(x: w * 0.45, y: h * 0.75),
-            control1: CGPoint(x: w * 0.49, y: h * 0.92),
-            control2: CGPoint(x: w * 0.48, y: h * 0.85)
+            to: CGPoint(x: w * 0.68 - waveOffset, y: h * 0.72),
+            control1: CGPoint(x: w * 0.62, y: h * 0.62),
+            control2: CGPoint(x: w * 0.7, y: h * 0.68)
         )
         
-        // Left serpentine
+        // Tail section
         path.addCurve(
-            to: CGPoint(x: w * 0.35, y: h * 0.55),
-            control1: CGPoint(x: w * 0.4, y: h * 0.7),
-            control2: CGPoint(x: w * 0.42, y: h * 0.62)
+            to: CGPoint(x: w * 0.5, y: h * 0.98),
+            control1: CGPoint(x: w * 0.65, y: h * 0.85),
+            control2: CGPoint(x: w * 0.55, y: h * 0.95)
         )
         
-        // Left body
+        // Left side - tail
         path.addCurve(
-            to: CGPoint(x: w * 0.22, y: h * 0.3),
-            control1: CGPoint(x: w * 0.28, y: h * 0.5),
-            control2: CGPoint(x: w * 0.18, y: h * 0.4)
+            to: CGPoint(x: w * 0.32 + waveOffset, y: h * 0.72),
+            control1: CGPoint(x: w * 0.45, y: h * 0.95),
+            control2: CGPoint(x: w * 0.35, y: h * 0.85)
         )
         
-        // Left horn/whisker
-        path.addQuadCurve(
-            to: CGPoint(x: w * 0.15, y: h * 0.25),
-            control: CGPoint(x: w * 0.05, y: h * 0.22)
-        )
-        
-        // Back to head
+        // Left body curve
         path.addCurve(
-            to: CGPoint(x: w * 0.5, y: h * 0.05),
-            control1: CGPoint(x: w * 0.12, y: h * 0.15),
-            control2: CGPoint(x: w * 0.28, y: h * 0.05)
+            to: CGPoint(x: w * 0.45 - waveOffset, y: h * 0.58),
+            control1: CGPoint(x: w * 0.3, y: h * 0.68),
+            control2: CGPoint(x: w * 0.38, y: h * 0.62)
+        )
+        
+        // Left upper body
+        path.addCurve(
+            to: CGPoint(x: w * 0.22 + waveOffset, y: h * 0.45),
+            control1: CGPoint(x: w * 0.4, y: h * 0.56),
+            control2: CGPoint(x: w * 0.3, y: h * 0.52)
+        )
+        
+        // Left neck
+        path.addCurve(
+            to: CGPoint(x: w * 0.28 - waveOffset, y: h * 0.28),
+            control1: CGPoint(x: w * 0.15, y: h * 0.4),
+            control2: CGPoint(x: w * 0.15, y: h * 0.32)
+        )
+        
+        // Left jaw
+        path.addCurve(
+            to: CGPoint(x: w * 0.22, y: h * 0.15),
+            control1: CGPoint(x: w * 0.22, y: h * 0.25),
+            control2: CGPoint(x: w * 0.18, y: h * 0.2)
+        )
+        
+        // Left horn
+        path.addLine(to: CGPoint(x: w * 0.15, y: h * 0.05))
+        path.addLine(to: CGPoint(x: w * 0.25, y: h * 0.12))
+        
+        // Back to head top
+        path.addCurve(
+            to: CGPoint(x: w * 0.5, y: h * 0.02),
+            control1: CGPoint(x: w * 0.28, y: h * 0.06),
+            control2: CGPoint(x: w * 0.38, y: h * 0.02)
         )
         
         path.closeSubpath()
         
         return path
     }
-    
 }
 
 // MARK: - Timeline Era Card

@@ -6,9 +6,12 @@ import Swinject
 struct LandingEntryView: View {
     
     private let presenter: LandingPresenterType
+    @Binding var selectedTab: Int
     
-    init(container: Container, onRoute: @escaping (LandingRoute) -> Void) {
+    init(container: Container, selectedTab: Binding<Int>, onRoute: @escaping (LandingRoute) -> Void) {
         print("🟡 LandingEntryView: Starting initialization")
+        
+        self._selectedTab = selectedTab
         
         // Register the router
         let router = LandingRouter(onRoute: onRoute)
@@ -25,6 +28,6 @@ struct LandingEntryView: View {
     }
     
     var body: some View {
-        LandingView(presenter: presenter)
+        LandingView(presenter: presenter, selectedTab: $selectedTab)
     }
 }

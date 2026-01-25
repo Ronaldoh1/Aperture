@@ -10,7 +10,13 @@
     "— Gloria Steinem" : {
 
     },
+    "— Whis, Dragon Ball Super" : {
+
+    },
     "?" : {
+
+    },
+    "\"%@\"" : {
 
     },
     "\"Biblical angels: wheels covered in eyes, six-winged beings on fire, four-faced creatures. 'Be not afraid' because people were TERRIFIED. Then someone drew a cute baby with wings and called it a day. 👼\"" : {
@@ -20,6 +26,15 @@
 
     },
     "\"Push beyond your limits. That's what makes a Saiyan a Saiyan.\"" : {
+
+    },
+    "\"The body moves on its own.\"" : {
+
+    },
+    "\"The body moves on its own.\" — Whis" : {
+
+    },
+    "\"The Constitution doesn't GIVE you rights. You are BORN with natural rights. The Constitution PROTECTS those rights from government interference.\"" : {
 
     },
     "\"The most important subject never taught in school\"" : {
@@ -49,10 +64,42 @@
     "\"This course won't give you answers—it will show you that you ARE the answer. The one who questions consciousness is consciousness questioning itself.\"" : {
 
     },
+    "\"When the student is ready, the teacher appears.\"" : {
+
+    },
     "\"You didn't fall INTO this world. You came from ABOVE it. The journey isn't up - it's remembering.\"" : {
 
     },
+    "%@" : {
+
+    },
+    "%@\n\n%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@\n\n%2$@"
+          }
+        }
+      }
+    },
+    "%@ %@ • %@ Element" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ %2$@ • %3$@ Element"
+          }
+        }
+      }
+    },
     "%@ hours" : {
+
+    },
+    "%@ provides fast, secure access without typing passwords." : {
+
+    },
+    "%@ TRIGGERS" : {
 
     },
     "%@h" : {
@@ -61,13 +108,22 @@
     "%lld" : {
 
     },
+    "%lld applicable" : {
+
+    },
     "%lld available" : {
+
+    },
+    "%lld core courses remaining to awaken your dragon" : {
 
     },
     "%lld Courses" : {
 
     },
     "%lld docs" : {
+
+    },
+    "%lld documented cases" : {
 
     },
     "%lld hidden moments" : {
@@ -98,16 +154,44 @@
         }
       }
     },
+    "%lld out of %lld stars" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld out of %2$lld stars"
+          }
+        }
+      }
+    },
+    "%lld percent complete" : {
+
+    },
     "%lld practices" : {
 
     },
     "%lld prompts" : {
 
     },
+    "%lld steps" : {
+
+    },
+    "%lld STEPS" : {
+
+    },
     "%lld total" : {
 
     },
     "%lld traditions" : {
+
+    },
+    "%lld triggers" : {
+
+    },
+    "%lld ways to enter flow" : {
+
+    },
+    "%lld XP" : {
 
     },
     "%lld/%lld" : {
@@ -162,6 +246,9 @@
     "• YOU ARE HERE" : {
 
     },
+    "••••••••" : {
+
+    },
     "☀️" : {
 
     },
@@ -177,13 +264,37 @@
     "⚙️" : {
 
     },
+    "⚠️ DISRUPTED BY" : {
+
+    },
+    "⚠️ IMPORTANT" : {
+
+    },
     "⚠️ WARNING: This content will change how you see the world" : {
+
+    },
+    "⚠️ WARNINGS" : {
+
+    },
+    "✓" : {
+
+    },
+    "✓ OPTIMAL ACTIVITIES" : {
+
+    },
+    "✗" : {
+
+    },
+    "✗ AVOID" : {
 
     },
     "✦" : {
 
     },
     "✨ SIGNIFICANCE" : {
+
+    },
+    "❌ COMMON MISTAKES TO AVOID" : {
 
     },
     "🌅 WHERE DID I GO UNCONSCIOUS TODAY?" : {
@@ -210,6 +321,9 @@
     "🐉" : {
 
     },
+    "🐉 DRAGON BALL EQUIVALENT" : {
+
+    },
     "🐉 DRAGON'S WISDOM" : {
 
     },
@@ -223,6 +337,12 @@
 
     },
     "💡" : {
+
+    },
+    "💥" : {
+
+    },
+    "📋 DOCUMENTED TRUTH" : {
 
     },
     "📖🔥" : {
@@ -258,7 +378,34 @@
     "🔴" : {
 
     },
+    "🥚" : {
+
+    },
+    "0" : {
+
+    },
+    "01" : {
+
+    },
+    "3" : {
+
+    },
+    "5 Protocols" : {
+
+    },
+    "6" : {
+
+    },
+    "6 anchors to calibrate your internal clock" : {
+
+    },
+    "7-day free trial • Cancel anytime" : {
+
+    },
     "8+ documentaries • Embedded videos" : {
+
+    },
+    "9" : {
 
     },
     "10 Layers of Control" : {
@@ -267,16 +414,52 @@
     "13+ courses • 8 documentaries" : {
 
     },
+    "14 Triggers" : {
+
+    },
     "15 doctrines exposed. Tap to see what\nthey don't want you to know." : {
 
     },
+    "25 Lies" : {
+
+    },
     "A divine spark temporarily\nexperiencing limitation" : {
+
+    },
+    "Access the sacred texts library in Aperture" : {
+
+    },
+    "Account" : {
+
+    },
+    "ACTION ITEMS" : {
+
+    },
+    "Actions" : {
 
     },
     "Add Belief" : {
 
     },
     "AFFIRMATIONS" : {
+
+    },
+    "After 1 minute" : {
+
+    },
+    "After 5 minutes" : {
+
+    },
+    "After 15 minutes" : {
+
+    },
+    "After 30 minutes" : {
+
+    },
+    "After your free trial, %@ will be charged to your Apple ID. Subscription automatically renews unless cancelled at least 24 hours before the end of the current period." : {
+
+    },
+    "Age: %lld days" : {
 
     },
     "Alexandria" : {
@@ -291,7 +474,16 @@
     "Already have an account?" : {
 
     },
+    "Already have an account? Sign In" : {
+
+    },
+    "AMENDMENTS & FOUNDATIONS" : {
+
+    },
     "Ancient wisdom meets modern awakening" : {
+
+    },
+    "and" : {
 
     },
     "Answered" : {
@@ -306,6 +498,9 @@
     "APERTURE" : {
 
     },
+    "Aperture Locked" : {
+
+    },
     "Aperture Tutorial" : {
 
     },
@@ -313,6 +508,27 @@
 
     },
     "APPLY WHAT YOU LEARNED" : {
+
+    },
+    "Are you sure you want to sign out?" : {
+
+    },
+    "As you complete courses and awaken to truth, your dragon will hatch, grow, and evolve alongside you." : {
+
+    },
+    "Authenticate to continue" : {
+
+    },
+    "Authenticating..." : {
+
+    },
+    "Auto-Lock" : {
+
+    },
+    "Automatically lock the app after being in the background." : {
+
+    },
+    "Awaken Your Consciousness" : {
 
     },
     "Awakening" : {
@@ -336,7 +552,40 @@
     "Back" : {
 
     },
+    "Based on your birth chart and awakening path, we've channeled names that resonate with your cosmic energy." : {
+
+    },
+    "Before your dragon egg arrives, we'd like to know a little about you." : {
+
+    },
+    "Begin Creating Good" : {
+
+    },
+    "Begin Journey" : {
+
+    },
+    "Begin Your Journey" : {
+
+    },
+    "Begin Your Training" : {
+
+    },
     "BEINGS IN THIS REALM" : {
+
+    },
+    "Beliefs installed during childhood that people report recognizing after awakening. Pick one per week. Examine what it cost you." : {
+
+    },
+    "BEST FOR" : {
+
+    },
+    "BEST VALUE" : {
+
+    },
+    "Biometric Security" : {
+
+    },
+    "Bug Report" : {
 
     },
     "Built with" : {
@@ -345,7 +594,13 @@
     "by %@" : {
 
     },
+    "By continuing, you agree to our" : {
+
+    },
     "by Ron" : {
+
+    },
+    "Cancel" : {
 
     },
     "CATEGORIES" : {
@@ -354,13 +609,40 @@
     "CATEGORY" : {
 
     },
+    "CHAKRA PROGRESS" : {
+
+    },
+    "CHARACTERISTICS" : {
+
+    },
+    "Check Progress" : {
+
+    },
+    "Check your learning progress in Aperture" : {
+
+    },
+    "Choose wisely. This companion will grow with you on your awakening journey." : {
+
+    },
+    "Chronotypes" : {
+
+    },
+    "Circadian Anchors" : {
+
+    },
     "Cognitive Dissonance" : {
 
     },
     "Complete all 10 layers to unlock full tools" : {
 
     },
+    "Complete courses to hatch your dragon and watch it evolve into a reflection of your awakening journey." : {
+
+    },
     "Completed" : {
+
+    },
+    "Confirm Name" : {
 
     },
     "Consciousness" : {
@@ -369,13 +651,37 @@
     "Consciousness Explorer" : {
 
     },
+    "Consulting the stars..." : {
+
+    },
+    "Content Suggestion" : {
+
+    },
+    "Continue as Guest" : {
+
+    },
     "Continue Learning" : {
+
+    },
+    "Continue with %@" : {
+
+    },
+    "Continue with Email" : {
 
     },
     "Continue your journey" : {
 
     },
+    "Control Mechanisms" : {
+
+    },
     "Control through manufactured terror" : {
+
+    },
+    "Corporate Crimes" : {
+
+    },
+    "COSMIC SUGGESTIONS" : {
 
     },
     "Cosmos" : {
@@ -387,7 +693,13 @@
     "COURSE" : {
 
     },
+    "Course not found" : {
+
+    },
     "Course Progress" : {
+
+    },
+    "Create Account" : {
 
     },
     "CURRENT STATUS" : {
@@ -402,13 +714,64 @@
     "Daily Check-In • Cognitive Dissonance Log\nReality Audit • Question Bank" : {
 
     },
+    "Daily Phases" : {
+
+    },
+    "Daily Wisdom" : {
+
+    },
+    "DATA & SYNC" : {
+
+    },
+    "Defense: " : {
+
+    },
+    "Delete" : {
+
+    },
+    "Delete Account" : {
+
+    },
     "Describe a moment when you lost awareness and reacted automatically." : {
+
+    },
+    "DO NOT:" : {
+
+    },
+    "DOCUMENTED ATROCITIES" : {
+
+    },
+    "DOCUMENTED TRUTH" : {
+
+    },
+    "DOJ cases • Senate reports • Declassified docs" : {
+
+    },
+    "DOJ settlements, FDA safety communications, congressional testimony. The paper trail is public." : {
 
     },
     "DOMAIN" : {
 
     },
     "Don't have an account?" : {
+
+    },
+    "Don't have an account? Sign Up" : {
+
+    },
+    "Done" : {
+
+    },
+    "Double tap to authenticate using biometrics" : {
+
+    },
+    "Double tap to share this content" : {
+
+    },
+    "Dragon Companion" : {
+
+    },
+    "Dragon Name" : {
 
     },
     "DRAGON'S WISDOM" : {
@@ -420,22 +783,79 @@
     "e.g., Success requires hard work..." : {
 
     },
+    "Email" : {
+
+    },
+    "Email (optional)" : {
+
+    },
+    "Emergency Resources" : {
+
+    },
     "EMOTIONAL INTENSITY" : {
 
     },
     "Emotional Processing" : {
 
     },
+    "Enable" : {
+
+    },
+    "Enable %@" : {
+
+    },
+    "Enable %@?" : {
+
+    },
+    "Enter a name..." : {
+
+    },
+    "Enter flow on command • Calibrate your rhythm" : {
+
+    },
+    "Enter flow on command. Calibrate your rhythm." : {
+
+    },
     "Error" : {
 
     },
+    "Everything here links to primary sources: DOJ cases, FDA communications, Senate reports, peer-reviewed journals, or declassified government documents. These are not theories - they are documented institutional actions." : {
+
+    },
+    "Examples:" : {
+
+    },
     "EXPLORE" : {
+
+    },
+    "Explore Cosmos" : {
+
+    },
+    "Explore flow states, triggers, and protocols" : {
+
+    },
+    "Explore the cosmic timeline in Aperture" : {
+
+    },
+    "Explore the cosmos in Aperture" : {
 
     },
     "EXPOSE THE LIES" : {
 
     },
     "Eyes Opened" : {
+
+    },
+    "Feature Request" : {
+
+    },
+    "FILTER BY STATUS" : {
+
+    },
+    "Flow States" : {
+
+    },
+    "FOLLOW THE MONEY" : {
 
     },
     "Forgot password?" : {
@@ -447,6 +867,9 @@
     "Foundation required" : {
 
     },
+    "From micro-moments to Ultra Instinct" : {
+
+    },
     "From quantum physics to Dragon Ball\nFrom Buddha to birth charts" : {
 
     },
@@ -456,13 +879,28 @@
     "FURTHER READING" : {
 
     },
+    "General" : {
+
+    },
     "Generate New Question" : {
+
+    },
+    "Get Daily Wisdom" : {
+
+    },
+    "Get My Progress" : {
 
     },
     "GNOSTIC COSMOLOGY" : {
 
     },
     "Gnostic Revelation" : {
+
+    },
+    "Government Crimes" : {
+
+    },
+    "Government crimes, corporate lies, control mechanisms" : {
 
     },
     "Hell Yes!" : {
@@ -477,10 +915,34 @@
     "Home" : {
 
     },
+    "HOW TO" : {
+
+    },
     "How would you like to descend through time?" : {
 
     },
+    "ICE ADMINISTRATIVE WARRANT" : {
+
+    },
+    "If only an ICE warrant: 'This is not a judicial warrant. I do not consent to entry.'" : {
+
+    },
+    "Immediately" : {
+
+    },
+    "Impact: %@" : {
+
+    },
+    "IN PLAIN ENGLISH" : {
+
+    },
     "INSIGHT (OPTIONAL)" : {
+
+    },
+    "Institutional Lies" : {
+
+    },
+    "INSTITUTIONAL LIES" : {
 
     },
     "INSTITUTIONAL ROT EXPOSED" : {
@@ -492,10 +954,31 @@
     "Inventory and examine your beliefs" : {
 
     },
+    "Journey Complete! Your dragon is AWAKENED." : {
+
+    },
+    "JOURNEY TO AWAKENING" : {
+
+    },
+    "JUDICIAL WARRANT" : {
+
+    },
+    "KEY FACTS" : {
+
+    },
     "KEY INSIGHT" : {
 
     },
+    "KEY POINTS" : {
+
+    },
+    "KEY RIGHTS" : {
+
+    },
     "KEY TAKEAWAYS" : {
+
+    },
+    "Know Your Warrants" : {
 
     },
     "landing.primaryAction" : {
@@ -549,6 +1032,12 @@
         }
       }
     },
+    "LANDMARK CASES" : {
+
+    },
+    "Language" : {
+
+    },
     "Layer %lld" : {
 
     },
@@ -576,6 +1065,12 @@
     "LEVEL %lld" : {
 
     },
+    "Lock App Now" : {
+
+    },
+    "Lock When Leaving App" : {
+
+    },
     "Log a moment when you lost awareness and reacted automatically" : {
 
     },
@@ -600,6 +1095,15 @@
     "Mark Layer as Understood" : {
 
     },
+    "Master your flow state. Optimize your rhythm." : {
+
+    },
+    "Maybe Later" : {
+
+    },
+    "MEANING" : {
+
+    },
     "Mild" : {
 
     },
@@ -612,6 +1116,9 @@
     "MODULE %lld" : {
 
     },
+    "MODULES" : {
+
+    },
     "More" : {
 
     },
@@ -621,7 +1128,16 @@
     "Most people think awakening means discovering a hidden layer.\nIt usually means seeing that the layers exist at all." : {
 
     },
+    "Name Your Dragon" : {
+
+    },
+    "Never" : {
+
+    },
     "NEW" : {
+
+    },
+    "Next: %@" : {
 
     },
     "Next: %lld" : {
@@ -639,7 +1155,22 @@
     "No entries yet" : {
 
     },
+    "No one pushed you. No one forced you." : {
+
+    },
+    "No one will push you. No one will force you." : {
+
+    },
     "No questions yet" : {
+
+    },
+    "No theories - just primary sources" : {
+
+    },
+    "Not a shadow council - just incentives, cognitive biases, and institutions protecting themselves. Here's how they work." : {
+
+    },
+    "Not financial advice. Educational content only." : {
 
     },
     "Not logged yet" : {
@@ -654,7 +1185,40 @@
     "Notes are saved automatically" : {
 
     },
+    "NUMEROLOGY" : {
+
+    },
+    "Off" : {
+
+    },
     "OK" : {
+
+    },
+    "On" : {
+
+    },
+    "Open ${course}" : {
+
+    },
+    "Open a specific course in Aperture" : {
+
+    },
+    "Open Alexandria" : {
+
+    },
+    "Open Alexandria Library" : {
+
+    },
+    "Open Course" : {
+
+    },
+    "Open Courses" : {
+
+    },
+    "Open the Aperture course library" : {
+
+    },
+    "Open Timeline" : {
 
     },
     "Open your eyes" : {
@@ -663,13 +1227,31 @@
     "Open Your Eyes" : {
 
     },
+    "or" : {
+
+    },
+    "OR CREATE YOUR OWN" : {
+
+    },
+    "ORIGIN" : {
+
+    },
     "Origin: %@" : {
+
+    },
+    "ORIGINAL TEXT" : {
 
     },
     "OVERVIEW" : {
 
     },
     "Parents, school, media, culture..." : {
+
+    },
+    "Password" : {
+
+    },
+    "PEAK" : {
 
     },
     "PHD CONSCIOUSNESS" : {
@@ -690,22 +1272,85 @@
     "PRACTICES" : {
 
     },
+    "PREMIUM" : {
+
+    },
+    "PREMIUM FEATURE" : {
+
+    },
+    "PRIMARY" : {
+
+    },
+    "PRIMARY SOURCES" : {
+
+    },
+    "Primary sources. Documented crimes. No conspiracy theories." : {
+
+    },
+    "Privacy" : {
+
+    },
+    "Privacy Policy" : {
+
+    },
     "Profile" : {
 
     },
     "PROGRESS" : {
 
     },
+    "Protect Premium Content" : {
+
+    },
     "Question Bank" : {
+
+    },
+    "Quick & secure access" : {
+
+    },
+    "Quick and secure biometric authentication" : {
+
+    },
+    "Quick Reference" : {
+
+    },
+    "Quick Reference: Scripts to Memorize" : {
 
     },
     "QUICK START" : {
 
     },
+    "Quick unlock when returning to app" : {
+
+    },
+    "Rate Aperture" : {
+
+    },
     "Read Full Text" : {
 
     },
+    "REAL SCENARIOS" : {
+
+    },
+    "REAL WORLD APPLICATION" : {
+
+    },
     "Reality Audit" : {
+
+    },
+    "Receive a wisdom quote from Aperture" : {
+
+    },
+    "Receive Your Dragon Egg" : {
+
+    },
+    "Receive Your Egg" : {
+
+    },
+    "RECOMMENDATIONS" : {
+
+    },
+    "RECOMMENDED TOOLS" : {
 
     },
     "Reflect" : {
@@ -714,7 +1359,28 @@
     "REFLECTION PROMPTS" : {
 
     },
+    "Regenerate" : {
+
+    },
+    "Remember Me" : {
+
+    },
+    "Report Issue" : {
+
+    },
+    "Require authentication for premium features" : {
+
+    },
+    "Require unlock when returning" : {
+
+    },
+    "REQUIREMENTS" : {
+
+    },
     "Resolved" : {
+
+    },
+    "RTL" : {
 
     },
     "SACRED TEXTS" : {
@@ -732,7 +1398,19 @@
     "Save Reflection" : {
 
     },
+    "Save these numbers BEFORE you need them." : {
+
+    },
+    "SAY THIS:" : {
+
+    },
     "Score: %lld" : {
+
+    },
+    "Scripts to Memorize" : {
+
+    },
+    "SCRIPTS TO MEMORIZE" : {
 
     },
     "Scroll through the dimensions.\nFrom Divine Fullness to Material Prison." : {
@@ -741,16 +1419,46 @@
     "Search documentaries..." : {
 
     },
+    "Search for local rapid response hotlines in your area" : {
+
+    },
     "Searchable library with summaries" : {
+
+    },
+    "SECONDARY" : {
+
+    },
+    "Security" : {
+
+    },
+    "Selected:" : {
 
     },
     "Send" : {
 
     },
+    "Send Feedback" : {
+
+    },
     "Sending…" : {
 
     },
+    "Share" : {
+
+    },
+    "Show Dragon" : {
+
+    },
+    "Show My Dragon" : {
+
+    },
     "Sign In" : {
+
+    },
+    "Sign in with Apple" : {
+
+    },
+    "Sign Out" : {
 
     },
     "Sign Up" : {
@@ -762,10 +1470,25 @@
     "Skip" : {
 
     },
+    "Sleep Architecture" : {
+
+    },
     "Socratic questions to challenge assumptions" : {
 
     },
+    "Something Went Wrong" : {
+
+    },
     "SOON" : {
+
+    },
+    "Source: %@" : {
+
+    },
+    "SOURCED" : {
+
+    },
+    "Start 7-Day Free Trial" : {
 
     },
     "Start Course" : {
@@ -774,10 +1497,31 @@
     "Start examining what you believe" : {
 
     },
+    "Stay signed in between sessions" : {
+
+    },
+    "STEP BY STEP" : {
+
+    },
+    "Submit Feedback" : {
+
+    },
+    "SunFlow Premium" : {
+
+    },
+    "SunFlow State" : {
+
+    },
+    "SUNFLOW STATE" : {
+
+    },
     "SunFlow: Reignited" : {
 
     },
     "SUNFLOW: REIGNITED" : {
+
+    },
+    "Syncing..." : {
 
     },
     "Take your time. This is for you, not for anyone else." : {
@@ -789,10 +1533,16 @@
     "Tap each lie to see what they don't want you to know" : {
 
     },
+    "Tap to copy. Practice saying these out loud." : {
+
+    },
     "TAP TO EXPOSE" : {
 
     },
     "Tap to reflect" : {
+
+    },
+    "Terms of Service" : {
 
     },
     "Terrifying cosmic functions, not cute babies" : {
@@ -801,7 +1551,16 @@
     "texts" : {
 
     },
+    "Thank You! 🙏" : {
+
+    },
+    "THE 5 LEVELS OF FLOW" : {
+
+    },
     "The Complete Curriculum" : {
+
+    },
+    "THE CONTROL ROOM" : {
 
     },
     "The Dark Night of the Soul" : {
@@ -834,10 +1593,16 @@
     "THE MATRIX DECODED" : {
 
     },
+    "THE PROGRAMMING" : {
+
+    },
     "The Realms" : {
 
     },
     "The recovered wisdom they tried to destroy" : {
+
+    },
+    "THE SCIENCE" : {
 
     },
     "The Science & Philosophy\nof Consciousness" : {
@@ -858,6 +1623,24 @@
     "The truth they don't want you to know" : {
 
     },
+    "These are not conspiracy theories. Each case links to government records, congressional testimony, or declassified documents." : {
+
+    },
+    "This distinction could determine your fate." : {
+
+    },
+    "This helps personalize your companion to match your unique journey." : {
+
+    },
+    "This is educational information, NOT legal advice." : {
+
+    },
+    "This is educational information, NOT legal advice. Immigration law changes frequently. Always consult a qualified immigration attorney for your specific situation." : {
+
+    },
+    "This will permanently delete your account and all associated data. This action cannot be undone." : {
+
+    },
     "Those They Lied About" : {
 
     },
@@ -870,7 +1653,13 @@
     "TODAY'S CHECK-IN" : {
 
     },
+    "TRAITS (%lld)" : {
+
+    },
     "TRANSFORMATION PATH" : {
+
+    },
+    "TROUGH" : {
 
     },
     "Truth Courses & Documentaries" : {
@@ -882,6 +1671,9 @@
     "Try a different search or category" : {
 
     },
+    "Type" : {
+
+    },
     "Understand the 10 layers of programming" : {
 
     },
@@ -891,10 +1683,37 @@
     "Understanding the system is the first step" : {
 
     },
+    "Understanding your sleep cycles" : {
+
+    },
+    "Unlock Premium" : {
+
+    },
+    "Unlock this feature to master your flow state and optimize your circadian rhythm." : {
+
+    },
+    "Unlock with %@" : {
+
+    },
+    "Unlocked by: %@" : {
+
+    },
     "Update Status" : {
 
     },
+    "Use %@ for quick access to Aperture." : {
+
+    },
+    "Use %@ for quick and secure access to Aperture next time." : {
+
+    },
+    "VERIFICATION STANDARD" : {
+
+    },
     "Version 1.0.0" : {
+
+    },
+    "View your dragon companion in Aperture" : {
 
     },
     "vs" : {
@@ -906,7 +1725,19 @@
     "Watch the truth they don't show on TV" : {
 
     },
+    "Welcome Back" : {
+
+    },
+    "Welcome back, %@" : {
+
+    },
     "WHAT DO YOU BELIEVE?" : {
+
+    },
+    "WHAT IT IS" : {
+
+    },
+    "What syncs to iCloud:" : {
 
     },
     "What they don't teach in school" : {
@@ -924,6 +1755,12 @@
     "What They Said vs The Gnostic Truth" : {
 
     },
+    "What type of feedback?" : {
+
+    },
+    "WHAT YOU GET" : {
+
+    },
     "When reality ≠ what you were taught" : {
 
     },
@@ -936,7 +1773,19 @@
     "WHERE DID THIS COME FROM? (Optional)" : {
 
     },
+    "Which animal matches your energy pattern?" : {
+
+    },
+    "WHY THIS MATTERS" : {
+
+    },
+    "WHY THIS NAME FOR YOU" : {
+
+    },
     "YOU ARE HERE" : {
+
+    },
+    "You did this, %@." : {
 
     },
     "You do not smash the Matrix. You debug it.\n\nThe exit is not rage or rejection. It is pattern recognition, boundary setting, and reclaiming agency one layer at a time." : {
@@ -958,13 +1807,61 @@
         }
       }
     },
+    "Your accountability comes from curiosity, will, and the desire to become free." : {
+
+    },
+    "Your body follows a 24-hour rhythm. Work with it." : {
+
+    },
+    "Your curiosity, will, and desire brought you here." : {
+
+    },
+    "Your data stays on YOUR device" : {
+
+    },
+    "Your data stays on YOUR device. We don't collect or sell your information." : {
+
+    },
+    "Your data stays with YOU via your Apple ID. We never see or store your personal information." : {
+
+    },
+    "Your Dragon Awaits" : {
+
+    },
+    "Your Dragon Awaits a Name" : {
+
+    },
+    "Your egg is ready, %@!" : {
+
+    },
+    "Your feedback" : {
+
+    },
+    "Your feedback helps us improve Aperture for everyone." : {
+
+    },
+    "YOUR JOURNEY BEGINS" : {
+
+    },
     "Your journey continues" : {
+
+    },
+    "Your name" : {
 
     },
     "YOUR NOTES" : {
 
     },
+    "YOUR PROGRESS" : {
+
+    },
     "YOUR REFLECTION" : {
+
+    },
+    "YOUR RIGHTS:" : {
+
+    },
+    "your@email.com" : {
 
     }
   },

@@ -441,7 +441,10 @@ struct TraditionCard: View {
                         .stroke(tradition.color.opacity(0.2), lineWidth: 1)
                 )
         )
-        .onTapGesture(perform: onTap)
+        .onTapGesture {
+            HapticManager.shared.cardFlip()
+            onTap()
+        }
         
     }
     
@@ -737,7 +740,10 @@ struct SacredTextCard: View {
                         .stroke(text.color.opacity(0.2), lineWidth: 1)
                 )
         )
-        .onTapGesture(perform: onTap)
+        .onTapGesture {
+            HapticManager.shared.textOpened()
+            onTap()
+        }
         
     }
     

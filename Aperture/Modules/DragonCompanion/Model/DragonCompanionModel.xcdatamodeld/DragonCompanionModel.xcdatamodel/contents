@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22225" systemVersion="23C71" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+    
+    <entity name="DragonCompanionEntity" representedClassName="DragonCompanionEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="chakraProgressData" optional="YES" attributeType="Binary"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="currentMood" optional="YES" attributeType="String" defaultValueString="sleeping"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="name" optional="YES" attributeType="String" defaultValueString="Dragon"/>
+        <attribute name="primaryElement" optional="YES" attributeType="String" defaultValueString="void"/>
+        <attribute name="secondaryElement" optional="YES" attributeType="String"/>
+        <attribute name="stage" optional="YES" attributeType="String" defaultValueString="egg"/>
+        <attribute name="totalXP" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="traitsData" optional="YES" attributeType="Binary"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="profile" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserProfileEntity" inverseName="dragon" inverseEntity="UserProfileEntity"/>
+    </entity>
+    
+    <entity name="UserProfileEntity" representedClassName="UserProfileEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="birthDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="displayName" optional="YES" attributeType="String" defaultValueString="Seeker"/>
+        <attribute name="favoriteColorsData" optional="YES" attributeType="Binary"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="learningStyle" optional="YES" attributeType="String" defaultValueString="visual"/>
+        <attribute name="lifeGoalsData" optional="YES" attributeType="Binary"/>
+        <attribute name="motivation" optional="YES" attributeType="String" defaultValueString="seekingTruth"/>
+        <attribute name="personalMantra" optional="YES" attributeType="String"/>
+        <attribute name="resonatesWithData" optional="YES" attributeType="Binary"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="zodiacSignRaw" optional="YES" attributeType="String"/>
+        <relationship name="completedCourses" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CompletedCourseEntity" inverseName="profile" inverseEntity="CompletedCourseEntity"/>
+        <relationship name="dragon" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="DragonCompanionEntity" inverseName="profile" inverseEntity="DragonCompanionEntity"/>
+    </entity>
+    
+    <entity name="CompletedCourseEntity" representedClassName="CompletedCourseEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="category" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="completedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="courseId" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="xpAwarded" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="profile" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserProfileEntity" inverseName="completedCourses" inverseEntity="UserProfileEntity"/>
+    </entity>
+    
+</model>

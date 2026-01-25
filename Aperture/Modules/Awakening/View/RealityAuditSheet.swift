@@ -224,6 +224,7 @@ struct AddBeliefView: View {
     
     private func saveEntry() {
         let entry = RealityAuditEntry(domain: domain, belief: belief.trimmingCharacters(in: .whitespacesAndNewlines), status: status, origin: origin.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : origin, notes: notes.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : notes)
+        HapticManager.shared.success()
         onSave(entry)
         onDismiss()
     }

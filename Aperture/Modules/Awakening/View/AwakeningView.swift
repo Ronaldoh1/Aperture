@@ -365,7 +365,10 @@ struct AwakeningView: View {
     }
     
     private func featureCard(icon: String, title: String, subtitle: String, stat: String, color: Color, action: @escaping () -> Void) -> some View {
-        Button(action: action) {
+        Button(action: { 
+            HapticManager.shared.cardFlip()
+            action() 
+        }) {
             HStack(spacing: 14) {
                 ZStack {
                     Circle().fill(color.opacity(0.2)).frame(width: 48, height: 48)

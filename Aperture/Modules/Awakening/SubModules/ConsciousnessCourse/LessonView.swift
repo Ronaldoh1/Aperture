@@ -407,6 +407,9 @@ struct LessonView: View {
             progress.completedLessons.append(lesson.id)
             progress.lastAccessDate = Date()
             saveProgress()
+            
+            // Haptic feedback for completion
+            HapticManager.shared.lessonCompleted()
         }
     }
     

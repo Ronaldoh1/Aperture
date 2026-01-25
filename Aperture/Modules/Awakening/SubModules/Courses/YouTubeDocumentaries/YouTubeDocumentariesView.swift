@@ -748,7 +748,10 @@ struct DocCategoryChip: View {
     let action: () -> Void
     
     var body: some View {
-        Button(action: action) {
+        Button(action: { 
+            HapticManager.shared.selectionChanged()
+            action() 
+        }) {
             HStack(spacing: 6) {
                 Image(systemName: icon)
                     .font(.system(size: 12))
@@ -773,7 +776,10 @@ struct DocumentaryCard: View {
     let onTap: () -> Void
     
     var body: some View {
-        Button(action: onTap) {
+        Button(action: { 
+            HapticManager.shared.cardFlip()
+            onTap() 
+        }) {
             VStack(alignment: .leading, spacing: 12) {
                 // Thumbnail
                 ZStack(alignment: .bottomTrailing) {

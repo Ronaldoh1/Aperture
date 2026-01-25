@@ -57,6 +57,7 @@ struct DragonBallCourseView: View {
         .sheet(item: $selectedLesson) { lesson in
             DBLessonDetailView(lesson: lesson, onComplete: {
                 completedLessons.insert(lesson.id)
+                HapticManager.shared.lessonCompleted()
             })
         }
         .onAppear {
@@ -512,7 +513,10 @@ struct DBLessonRow: View {
     
     var body: some View {
         
-        Button(action: onTap) {
+        Button(action: { 
+            HapticManager.shared.light()
+            onTap() 
+        }) {
             HStack(spacing: 12) {
                 
                 // Status

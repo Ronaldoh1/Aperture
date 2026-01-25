@@ -113,6 +113,7 @@ struct DailyCheckInSheet: View {
             category: selectedCategory,
             insight: insight.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : insight.trimmingCharacters(in: .whitespacesAndNewlines)
         )
+        HapticManager.shared.success()
         onSave(checkIn)
     }
 }

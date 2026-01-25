@@ -1,0 +1,744 @@
+# 🏛 Aperture Architecture Guide
+
+This document provides in-depth guidance on Aperture's architecture, patterns, and best practices for developers.
+
+---
+
+## Table of Contents
+
+1. [VIPER Overview](#viper-overview)
+2. [Creating a New Module](#creating-a-new-module)
+3. [Dependency Injection](#dependency-injection)
+4. [Data Flow](#data-flow)
+5. [Navigation](#navigation)
+6. [State Management](#state-management)
+7. [Error Handling](#error-handling)
+8. [Best Practices](#best-practices)
+
+---
+
+## VIPER Overview
+
+### Why VIPER?
+
+VIPER provides:
+- **Testability**: Each component can be unit tested in isolation
+- **Scalability**: Easy to add features without touching existing code
+- **Maintainability**: Clear separation of concerns
+- **Team Collaboration**: Multiple developers can work on different components
+
+### Component Diagram
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                           MODULE                                 │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                  │
+│    ┌──────────────────────────────────────────────────────┐     │
+│    │                      VIEW                             │     │
+│    │  • SwiftUI Views                                      │     │
+│    │  • Observes Presenter (@ObservedObject)               │     │
+│    │  • Sends user actions to Presenter                    │     │
+│    └────────────────────────┬─────────────────────────────┘     │
+│                             │                                    │
+│                             ▼                                    │
+│    ┌──────────────────────────────────────────────────────┐     │
+│    │                    PRESENTER                          │     │
+│    │  • ObservableObject (publishes state)                 │     │
+│    │  • Contains business logic                            │     │
+│    │  • Transforms data for View                           │     │
+│    │  • Calls Interactor for data operations               │     │
+│    └──────────────────────────────────────────────────────┘     │
+│                             │                                    │
+│              ┌──────────────┴──────────────┐                    │
+│              ▼                              ▼                    │
+│    ┌──────────────────┐          ┌──────────────────┐           │
+│    │    INTERACTOR    │          │     ROUTER       │           │
+│    │  • Data fetching │          │  • Navigation    │           │
+│    │  • Core Data     │          │  • Deep links    │           │
+│    │  • Network calls │          │  • Coordination  │           │
+│    └────────┬─────────┘          └──────────────────┘           │
+│             │                                                    │
+│             ▼                                                    │
+│    ┌──────────────────┐                                         │
+│    │     ENTITY       │                                         │
+│    │  • Data models   │                                         │
+│    │  • DTOs          │                                         │
+│    │  • Core Data     │                                         │
+│    └──────────────────┘                                         │
+│                                                                  │
+│    ┌──────────────────────────────────────────────────────┐     │
+│    │                    ASSEMBLY                           │     │
+│    │  • Dependency Injection via Swinject                  │     │
+│    │  • Wires all components together                      │     │
+│    └──────────────────────────────────────────────────────┘     │
+│                                                                  │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Creating a New Module
+
+### Step 1: Create Folder Structure
+
+```
+Modules/
+└── NewFeature/
+    ├── Assembly/
+    │   └── NewFeatureAssembly.swift
+    ├── Contract/
+    │   └── NewFeatureContract.swift
+    ├── Entity/
+    │   └── NewFeatureEntity.swift
+    ├── Interactor/
+    │   └── NewFeatureInteractor.swift
+    ├── Presenter/
+    │   └── NewFeaturePresenter.swift
+    ├── Router/
+    │   └── NewFeatureRouter.swift
+    └── View/
+        └── NewFeatureView.swift
+```
+
+### Step 2: Define Contract (Protocols)
+
+```swift
+// NewFeatureContract.swift
+
+import SwiftUI
+
+// MARK: - View Protocol
+protocol NewFeatureViewProtocol: AnyObject {
+    var presenter: NewFeaturePresenterProtocol? { get set }
+}
+
+// MARK: - Presenter Protocol
+protocol NewFeaturePresenterProtocol: ObservableObject {
+    var isLoading: Bool { get }
+    var items: [NewFeatureItem] { get }
+    var errorMessage: String? { get }
+    
+    func viewDidLoad()
+    func didSelectItem(_ item: NewFeatureItem)
+    func refresh()
+}
+
+// MARK: - Interactor Protocol
+protocol NewFeatureInteractorProtocol: AnyObject {
+    var presenter: NewFeatureInteractorOutputProtocol? { get set }
+    
+    func fetchItems()
+    func saveItem(_ item: NewFeatureItem)
+}
+
+// MARK: - Interactor Output Protocol
+protocol NewFeatureInteractorOutputProtocol: AnyObject {
+    func didFetchItems(_ items: [NewFeatureItem])
+    func didFailWithError(_ error: Error)
+}
+
+// MARK: - Router Protocol
+protocol NewFeatureRouterProtocol: AnyObject {
+    func navigateToDetail(_ item: NewFeatureItem)
+    func dismiss()
+}
+```
+
+### Step 3: Create Entity
+
+```swift
+// NewFeatureEntity.swift
+
+import Foundation
+
+struct NewFeatureItem: Identifiable, Codable {
+    let id: String
+    let title: String
+    let description: String
+    let createdAt: Date
+    
+    init(id: String = UUID().uuidString, title: String, description: String) {
+        self.id = id
+        self.title = title
+        self.description = description
+        self.createdAt = Date()
+    }
+}
+```
+
+### Step 4: Implement Interactor
+
+```swift
+// NewFeatureInteractor.swift
+
+import Foundation
+
+final class NewFeatureInteractor: NewFeatureInteractorProtocol {
+    
+    weak var presenter: NewFeatureInteractorOutputProtocol?
+    
+    private let repository: NewFeatureRepositoryProtocol
+    
+    init(repository: NewFeatureRepositoryProtocol) {
+        self.repository = repository
+    }
+    
+    func fetchItems() {
+        Task {
+            do {
+                let items = try await repository.getAll()
+                await MainActor.run {
+                    presenter?.didFetchItems(items)
+                }
+            } catch {
+                await MainActor.run {
+                    presenter?.didFailWithError(error)
+                }
+            }
+        }
+    }
+    
+    func saveItem(_ item: NewFeatureItem) {
+        Task {
+            do {
+                try await repository.save(item)
+                fetchItems() // Refresh list
+            } catch {
+                await MainActor.run {
+                    presenter?.didFailWithError(error)
+                }
+            }
+        }
+    }
+}
+```
+
+### Step 5: Implement Presenter
+
+```swift
+// NewFeaturePresenter.swift
+
+import SwiftUI
+import Combine
+
+final class NewFeaturePresenter: ObservableObject, NewFeaturePresenterProtocol {
+    
+    // MARK: - Published Properties
+    @Published var isLoading: Bool = false
+    @Published var items: [NewFeatureItem] = []
+    @Published var errorMessage: String?
+    
+    // MARK: - Dependencies
+    var interactor: NewFeatureInteractorProtocol?
+    var router: NewFeatureRouterProtocol?
+    
+    // MARK: - Lifecycle
+    func viewDidLoad() {
+        fetchData()
+    }
+    
+    // MARK: - Actions
+    func didSelectItem(_ item: NewFeatureItem) {
+        HapticManager.shared.light()
+        router?.navigateToDetail(item)
+    }
+    
+    func refresh() {
+        fetchData()
+    }
+    
+    // MARK: - Private
+    private func fetchData() {
+        isLoading = true
+        errorMessage = nil
+        interactor?.fetchItems()
+    }
+}
+
+// MARK: - Interactor Output
+extension NewFeaturePresenter: NewFeatureInteractorOutputProtocol {
+    
+    func didFetchItems(_ items: [NewFeatureItem]) {
+        self.isLoading = false
+        self.items = items
+    }
+    
+    func didFailWithError(_ error: Error) {
+        self.isLoading = false
+        self.errorMessage = error.localizedDescription
+        ErrorHandler.shared.handle(error, context: "NewFeature")
+    }
+}
+```
+
+### Step 6: Implement Router
+
+```swift
+// NewFeatureRouter.swift
+
+import SwiftUI
+
+final class NewFeatureRouter: NewFeatureRouterProtocol {
+    
+    weak var viewController: UIViewController?
+    
+    func navigateToDetail(_ item: NewFeatureItem) {
+        // For SwiftUI, use NavigationLink in View
+        // Or post notification for navigation
+        NotificationCenter.default.post(
+            name: .navigateToNewFeatureDetail,
+            object: item
+        )
+    }
+    
+    func dismiss() {
+        viewController?.dismiss(animated: true)
+    }
+}
+
+extension Notification.Name {
+    static let navigateToNewFeatureDetail = Notification.Name("navigateToNewFeatureDetail")
+}
+```
+
+### Step 7: Create View
+
+```swift
+// NewFeatureView.swift
+
+import SwiftUI
+
+struct NewFeatureView: View {
+    
+    @StateObject var presenter: NewFeaturePresenter
+    
+    var body: some View {
+        ZStack {
+            // Background
+            Color.black.ignoresSafeArea()
+            
+            // Content
+            if presenter.isLoading {
+                ProgressView()
+                    .tint(.white)
+            } else if let error = presenter.errorMessage {
+                errorView(error)
+            } else {
+                contentView
+            }
+        }
+        .onAppear {
+            presenter.viewDidLoad()
+        }
+    }
+    
+    private var contentView: some View {
+        ScrollView {
+            LazyVStack(spacing: 16) {
+                ForEach(presenter.items) { item in
+                    itemRow(item)
+                        .onTapGesture {
+                            presenter.didSelectItem(item)
+                        }
+                }
+            }
+            .padding()
+        }
+        .refreshable {
+            presenter.refresh()
+        }
+    }
+    
+    private func itemRow(_ item: NewFeatureItem) -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(item.title)
+                .font(.headline)
+                .foregroundColor(.white)
+            
+            Text(item.description)
+                .font(.subheadline)
+                .foregroundColor(.gray)
+        }
+        .padding()
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(Color.white.opacity(0.1))
+        .cornerRadius(12)
+    }
+    
+    private func errorView(_ message: String) -> some View {
+        VStack(spacing: 16) {
+            Image(systemName: "exclamationmark.triangle")
+                .font(.largeTitle)
+                .foregroundColor(.orange)
+            
+            Text(message)
+                .foregroundColor(.white)
+            
+            Button("Retry") {
+                presenter.refresh()
+            }
+            .buttonStyle(.bordered)
+        }
+    }
+}
+```
+
+### Step 8: Wire with Assembly
+
+```swift
+// NewFeatureAssembly.swift
+
+import Swinject
+
+final class NewFeatureAssembly: Assembly {
+    
+    func assemble(container: Container) {
+        
+        // Register Interactor
+        container.register(NewFeatureInteractorProtocol.self) { resolver in
+            let repository = resolver.resolve(NewFeatureRepositoryProtocol.self)!
+            return NewFeatureInteractor(repository: repository)
+        }
+        
+        // Register Presenter
+        container.register(NewFeaturePresenter.self) { resolver in
+            let presenter = NewFeaturePresenter()
+            let interactor = resolver.resolve(NewFeatureInteractorProtocol.self)!
+            
+            presenter.interactor = interactor
+            interactor.presenter = presenter
+            
+            return presenter
+        }
+        
+        // Register Router
+        container.register(NewFeatureRouterProtocol.self) { _ in
+            NewFeatureRouter()
+        }
+    }
+    
+    // Factory method for creating the view
+    static func createView(container: Container) -> NewFeatureView {
+        let presenter = container.resolve(NewFeaturePresenter.self)!
+        let router = container.resolve(NewFeatureRouterProtocol.self)!
+        presenter.router = router
+        return NewFeatureView(presenter: presenter)
+    }
+}
+```
+
+---
+
+## Dependency Injection
+
+### Swinject Container
+
+```swift
+// AppContainer.swift
+
+import Swinject
+
+final class AppContainer {
+    
+    static let shared = AppContainer()
+    
+    let container: Container
+    
+    private init() {
+        container = Container()
+        registerAssemblies()
+    }
+    
+    private func registerAssemblies() {
+        let assembler = Assembler([
+            // Core
+            CoreAssembly(),
+            
+            // Modules
+            AwakeningAssembly(),
+            DragonCompanionAssembly(),
+            TimelineAssembly(),
+            CosmosAssembly(),
+            AlexandriaAssembly(),
+            NewFeatureAssembly(), // Add new modules here
+        ], container: container)
+    }
+    
+    func resolve<T>(_ type: T.Type) -> T? {
+        return container.resolve(type)
+    }
+}
+```
+
+### Usage
+
+```swift
+// In SwiftUI View
+let view = NewFeatureAssembly.createView(container: AppContainer.shared.container)
+
+// Or resolve directly
+let presenter = AppContainer.shared.resolve(NewFeaturePresenter.self)
+```
+
+---
+
+## Data Flow
+
+### Unidirectional Data Flow
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                                                              │
+│   User Action                                                │
+│       │                                                      │
+│       ▼                                                      │
+│   ┌───────┐     Intent      ┌───────────┐                   │
+│   │ View  │ ───────────────►│ Presenter │                   │
+│   └───────┘                 └─────┬─────┘                   │
+│       ▲                           │                          │
+│       │                           │ Request                  │
+│       │                           ▼                          │
+│       │                     ┌────────────┐                   │
+│       │ State               │ Interactor │                   │
+│       │ (@Published)        └─────┬──────┘                   │
+│       │                           │                          │
+│       │                           │ Fetch/Save               │
+│       │                           ▼                          │
+│       │                     ┌────────────┐                   │
+│       │                     │ Repository │                   │
+│       │                     └─────┬──────┘                   │
+│       │                           │                          │
+│       │                           ▼                          │
+│       │                     ┌────────────┐                   │
+│   ┌───┴─────┐               │ Core Data  │                   │
+│   │Presenter│◄──────────────│  Firebase  │                   │
+│   └─────────┘    Response   └────────────┘                   │
+│                                                              │
+└─────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Navigation
+
+### SwiftUI Navigation
+
+```swift
+// Using NavigationStack (iOS 16+)
+struct RootView: View {
+    @State private var navigationPath = NavigationPath()
+    
+    var body: some View {
+        NavigationStack(path: $navigationPath) {
+            ContentView()
+                .navigationDestination(for: Course.self) { course in
+                    CourseDetailView(course: course)
+                }
+                .navigationDestination(for: Lesson.self) { lesson in
+                    LessonView(lesson: lesson)
+                }
+        }
+    }
+}
+```
+
+### Deep Links
+
+```swift
+// Handle in App
+.onOpenURL { url in
+    DeepLinkHandler.shared.handle(url: url)
+}
+
+// URL Schemes
+// aperture://course/dragon-ball
+// aperture://lesson/dragon-ball/lesson-1
+// aperture://dragon
+```
+
+---
+
+## State Management
+
+### Presenter as State Container
+
+```swift
+final class MyPresenter: ObservableObject {
+    
+    // UI State
+    @Published var isLoading = false
+    @Published var items: [Item] = []
+    @Published var errorMessage: String?
+    
+    // Derived State
+    var hasItems: Bool { !items.isEmpty }
+    var itemCount: Int { items.count }
+}
+```
+
+### Combine Integration
+
+```swift
+final class MyPresenter: ObservableObject {
+    
+    @Published var searchText = ""
+    @Published var filteredItems: [Item] = []
+    
+    private var cancellables = Set<AnyCancellable>()
+    
+    init() {
+        $searchText
+            .debounce(for: .milliseconds(300), scheduler: RunLoop.main)
+            .removeDuplicates()
+            .sink { [weak self] query in
+                self?.filterItems(query: query)
+            }
+            .store(in: &cancellables)
+    }
+}
+```
+
+---
+
+## Error Handling
+
+### Centralized Error Handler
+
+```swift
+// Use throughout the app
+ErrorHandler.shared.handle(error, context: "Loading courses")
+
+// With recovery
+ErrorHandler.shared.handleWithRecovery(error, context: "Network request") {
+    // Retry action
+    self.fetchData()
+}
+```
+
+### Safe Execution
+
+```swift
+// Wrap risky operations
+ErrorHandler.shared.safeExecute(context: "Parsing JSON") {
+    let data = try JSONDecoder().decode(MyType.self, from: json)
+    return data
+}
+```
+
+---
+
+## Best Practices
+
+### 1. Keep Views Dumb
+Views should only:
+- Render UI based on Presenter state
+- Forward user actions to Presenter
+- Never contain business logic
+
+### 2. Presenters are the Brain
+Presenters should:
+- Be the single source of truth for UI state
+- Transform data for display
+- Handle all business logic
+- Be testable without UI
+
+### 3. Interactors Handle Data
+Interactors should:
+- Be stateless (no @Published)
+- Fetch and save data
+- Call repositories
+- Handle data transformations
+
+### 4. Entities are Pure Data
+Entities should:
+- Be simple structs/classes
+- Be Codable when needed
+- Not contain business logic
+- Not depend on other VIPER components
+
+### 5. Routers Handle Navigation
+Routers should:
+- Create destination views
+- Handle navigation logic
+- Manage deep links
+- Coordinate between modules
+
+### 6. Assemblies Wire Everything
+Assemblies should:
+- Register all dependencies
+- Provide factory methods
+- Not contain logic
+- Be the only place that knows about concrete types
+
+---
+
+## Module Communication
+
+### Between Modules
+
+```swift
+// Option 1: NotificationCenter
+NotificationCenter.default.post(name: .dragonEvolved, object: newStage)
+
+// Option 2: Delegate/Protocol
+protocol DragonDelegate: AnyObject {
+    func dragonDidEvolve(to stage: Int)
+}
+
+// Option 3: Combine Publisher
+let dragonEvolved = PassthroughSubject<Int, Never>()
+```
+
+### Shared State
+
+```swift
+// Singleton for app-wide state
+final class AppState: ObservableObject {
+    static let shared = AppState()
+    
+    @Published var currentUser: User?
+    @Published var dragonXP: Int = 0
+    @Published var isPremium: Bool = false
+}
+```
+
+---
+
+## Testing Strategy
+
+### Unit Tests per Component
+
+```swift
+// Test Presenter
+class MyPresenterTests: XCTestCase {
+    var presenter: MyPresenter!
+    var mockInteractor: MockInteractor!
+    
+    override func setUp() {
+        mockInteractor = MockInteractor()
+        presenter = MyPresenter()
+        presenter.interactor = mockInteractor
+    }
+    
+    func testFetchItemsLoading() {
+        presenter.viewDidLoad()
+        XCTAssertTrue(presenter.isLoading)
+    }
+}
+
+// Test Interactor
+class MyInteractorTests: XCTestCase {
+    var interactor: MyInteractor!
+    var mockRepository: MockRepository!
+    
+    func testFetchCallsRepository() {
+        interactor.fetchItems()
+        XCTAssertTrue(mockRepository.getAllCalled)
+    }
+}
+```
+
+---
+
+*Last updated: January 25, 2026*

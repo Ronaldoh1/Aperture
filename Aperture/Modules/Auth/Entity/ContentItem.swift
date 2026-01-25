@@ -65,5 +65,4 @@ struct ContentItem: Identifiable, Codable, Equatable {
             return "\(views)"
         }
     }
-    
 }

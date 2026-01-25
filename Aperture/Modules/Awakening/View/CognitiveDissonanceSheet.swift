@@ -185,6 +185,7 @@ struct AddDissonanceEntryView: View {
     
     private func saveEntry() {
         let entry = CognitiveDissonanceEntry(trigger: trigger.trimmingCharacters(in: .whitespacesAndNewlines), whatIWasTaught: whatIWasTaught.trimmingCharacters(in: .whitespacesAndNewlines), whatIObserved: whatIObserved.trimmingCharacters(in: .whitespacesAndNewlines), emotionalIntensity: Int(emotionalIntensity), domain: selectedDomain)
+        HapticManager.shared.success()
         onSave(entry)
         onDismiss()
     }

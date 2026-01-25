@@ -96,8 +96,8 @@ struct TimelineView: View {
             
             Spacer()
             
-            // Sun Dragon - Shenron style
-            SunDragonView(size: 160)
+            // Sun Dragon - Real kundalini serpent image
+            AnimatedDragonView(size: 180, showParticles: true, interactive: true)
                 .shadow(color: Palette.accent.gold.opacity(0.6), radius: 30)
             
             // Dragon speech
@@ -963,6 +963,7 @@ struct TimelineEraCard: View {
         .scaleEffect(isDragonAbsorbed ? 1.015 : 1.0)
         .animation(.spring(response: 0.3, dampingFraction: 0.7), value: isDragonAbsorbed)
         .onTapGesture {
+            HapticManager.shared.timelineEventSelected()
             onTap()
         }
         

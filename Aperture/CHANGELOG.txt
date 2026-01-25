@@ -1,0 +1,181 @@
+# Changelog
+
+All notable changes to Aperture will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+---
+
+## [Unreleased]
+
+### Planned
+- Siri Shortcuts integration
+- Live Activities for learning streaks
+- Core ML recommendation engine
+- VisionOS compatibility
+
+---
+
+## [1.5.0] - 2026-01-25
+
+### Added
+- **Biometric Authentication** - Face ID / Touch ID for quick access
+- **Authentication Manager** - Centralized auth state management
+- **Lock Screen** - Auto-lock with configurable timeout
+- **Security Settings View** - User preferences for auth
+- **Financial Literacy Courses**
+  - Money Fundamentals (8 lessons)
+  - Stock Market Basics (7 lessons)
+  - Cryptocurrency 101 (7 lessons)
+  - Anti-Scam Protection (8 lessons)
+- **Keychain Manager** - Secure credential storage
+- **Share Manager** - Share courses, streaks, achievements
+- **Deep Link Handler** - URL scheme navigation
+- **Widget Extension** - Dragon companion widgets
+- **Review Manager** - Smart App Store review prompts
+- **Error Handling System** - Comprehensive crash prevention
+
+### Changed
+- Authentication flow now prioritizes biometrics
+- Improved onboarding experience
+- Enhanced haptic feedback coverage
+
+### Fixed
+- Duplicate file build errors
+- Memory leaks in dragon animation
+
+---
+
+## [1.4.0] - 2026-01-24
+
+### Added
+- **Firebase Crashlytics** - Crash reporting and analytics
+- **Comprehensive Error Handling** - AppError enum with 20+ error types
+- **Error Recovery** - Safe execution wrappers
+- **Crash-free monitoring** - Real-time crash metrics
+
+### Changed
+- Error messages now user-friendly
+- Improved error logging
+
+---
+
+## [1.3.0] - 2026-01-23
+
+### Added
+- **Haptic Feedback System** - 35 touch points throughout app
+- **HapticManager** - Centralized haptic control
+- **Accessibility Helpers** - VoiceOver, Dynamic Type support
+- **Motion Sensitivity** - Respect reduce motion preference
+
+### Changed
+- All buttons now have haptic feedback
+- Animations respect accessibility settings
+
+---
+
+## [1.2.0] - 2026-01-22
+
+### Added
+- **Localization Support** - 12 languages
+- **LocalizationManager** - Dynamic language switching
+- **RTL Support** - Arabic layout support
+- **Digital Security Course** - Password management lessons
+- **Immigration Law Course** - Know your rights content
+
+### Languages Added
+- Spanish, French, German, Portuguese
+- Chinese (Simplified), Japanese, Korean
+- Arabic, Hindi, Russian, Italian
+
+---
+
+## [1.1.0] - 2026-01-20
+
+### Added
+- **Dragon Companion System**
+  - 5 evolution stages
+  - XP progression
+  - Animated dragon view
+  - Core Data persistence
+  - CloudKit sync
+- **Dragon Naming Flow** - Personalized companion
+- **Profile Onboarding** - User setup wizard
+- **Dormant Dragon Awakening** - Dramatic intro sequence
+
+### Changed
+- Home screen now features dragon companion
+- Progress tied to dragon XP
+
+---
+
+## [1.0.0] - 2026-01-18
+
+### Added
+- **Initial Release**
+- **VIPER Architecture** - Clean code structure
+- **5 Main Modules**
+  - Awakening (courses hub)
+  - Timeline (historical events)
+  - Cosmos (sacred geometry)
+  - Alexandria (resources)
+  - More (settings)
+- **Course System**
+  - Dragon Ball Awakening
+  - Master Lies Exposed
+  - Birth Chart Basics
+  - Know Your Rights
+  - Constitution 101
+- **Tab Bar Navigation**
+- **Cosmic UI Theme** - Dark mode, star backgrounds
+- **Firebase Integration** - Auth, Firestore
+- **Swinject DI** - Dependency injection
+- **SwiftyBeaver Logging**
+
+---
+
+## Version History Summary
+
+| Version | Date | Highlights |
+|---------|------|------------|
+| 1.5.0 | 2026-01-25 | Biometrics, Financial Courses, Widgets |
+| 1.4.0 | 2026-01-24 | Crashlytics, Error Handling |
+| 1.3.0 | 2026-01-23 | Haptics, Accessibility |
+| 1.2.0 | 2026-01-22 | 12 Languages, Security Course |
+| 1.1.0 | 2026-01-20 | Dragon Companion |
+| 1.0.0 | 2026-01-18 | Initial Release |
+
+---
+
+## Upgrade Notes
+
+### 1.4.x → 1.5.x
+- Add `NSFaceIDUsageDescription` to Info.plist
+- New Core/Auth/ files must be added to project
+- Keychain entitlements may be needed
+
+### 1.3.x → 1.4.x
+- Firebase Crashlytics requires additional setup
+- Run script build phase for dSYM upload
+
+### 1.2.x → 1.3.x
+- No breaking changes
+
+### 1.1.x → 1.2.x
+- Localizable.strings files added
+- Check string keys if customized
+
+### 1.0.x → 1.1.x
+- Core Data model updated
+- Delete app data on simulator before testing
+
+---
+
+[Unreleased]: https://github.com/sunflow/aperture/compare/v1.5.0...HEAD
+[1.5.0]: https://github.com/sunflow/aperture/compare/v1.4.0...v1.5.0
+[1.4.0]: https://github.com/sunflow/aperture/compare/v1.3.0...v1.4.0
+[1.3.0]: https://github.com/sunflow/aperture/compare/v1.2.0...v1.3.0
+[1.2.0]: https://github.com/sunflow/aperture/compare/v1.1.0...v1.2.0
+[1.1.0]: https://github.com/sunflow/aperture/compare/v1.0.0...v1.1.0
+[1.0.0]: https://github.com/sunflow/aperture/releases/tag/v1.0.0

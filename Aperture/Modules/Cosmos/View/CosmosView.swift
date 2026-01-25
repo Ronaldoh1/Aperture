@@ -611,7 +611,7 @@ struct DemonizedEntityCard: View {
                         .stroke(entity.color.opacity(0.25), lineWidth: 1)
                 )
         )
-        .onTapGesture(perform: onTap)
+        .onTapGesture { HapticManager.shared.cardFlip(); onTap() }
         
     }
     
@@ -682,7 +682,7 @@ struct RealmCard: View {
         .overlay(cardBorder)
         .shadow(color: realm.color.opacity(isExpanded ? 0.3 : 0.15), radius: isExpanded ? 20 : 10)
         .padding(.vertical, 8)
-        .onTapGesture(perform: onTap)
+        .onTapGesture { HapticManager.shared.cardFlip(); onTap() }
         
     }
     
@@ -1399,7 +1399,7 @@ struct BiblicalLiesNavigationCard: View {
             .shadow(color: Palette.accent.gold.opacity(0.3), radius: 20)
             
         }
-        .onTapGesture(perform: onTap)
+        .onTapGesture { HapticManager.shared.cardFlip(); onTap() }
         .onAppear {
             withAnimation(
                 .easeInOut(duration: 2.0)
@@ -1598,7 +1598,7 @@ struct BiblicalLieCard: View {
                         .stroke(lie.color.opacity(0.2), lineWidth: 1)
                 )
         )
-        .onTapGesture(perform: onTap)
+        .onTapGesture { HapticManager.shared.cardFlip(); onTap() }
         
     }
     

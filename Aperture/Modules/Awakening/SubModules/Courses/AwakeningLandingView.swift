@@ -32,8 +32,14 @@ struct AwakeningLandingView: View {
                         // Header
                         headerSection
                         
+                        // SUNFLOW STATE - PREMIUM FEATURE
+                        sunflowStateSection
+                        
                         // DOCUMENTARIES (NEW - Top of list for discoverability)
                         documentariesSection
+                        
+                        // INSTITUTIONAL LIES - PRIMARY SOURCES
+                        institutionalLiesSection
                         
                         // THE MATRIX EXPOSED
                         matrixExposedSection
@@ -230,6 +236,140 @@ struct AwakeningLandingView: View {
         .padding(.vertical, 20)
     }
     
+    // MARK: - SunFlow State Section (PREMIUM)
+    
+    private var sunflowStateSection: some View {
+        
+        NavigationLink(destination: PremiumGateView(featureName: "SunFlow State") { SunFlowStateView() }) {
+            
+            VStack(spacing: 16) {
+                
+                HStack {
+                    
+                    HStack(spacing: 8) {
+                        Image(systemName: "crown.fill")
+                            .foregroundColor(Palette.accent.gold)
+                        Text("PREMIUM")
+                            .font(.system(size: 10, weight: .bold, design: .rounded))
+                            .foregroundColor(Palette.accent.gold)
+                            .tracking(1)
+                    }
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 5)
+                    .background(
+                        Capsule()
+                            .fill(Palette.accent.gold.opacity(0.15))
+                    )
+                    
+                    Spacer()
+                    
+                }
+                
+                HStack(spacing: 16) {
+                    
+                    ZStack {
+                        
+                        Circle()
+                            .fill(
+                                RadialGradient(
+                                    colors: [Palette.accent.gold.opacity(0.4), Palette.accent.gold.opacity(0.1)],
+                                    center: .center,
+                                    startRadius: 10,
+                                    endRadius: 35
+                                )
+                            )
+                            .frame(width: 70, height: 70)
+                        
+                        Image(systemName: "sun.max.trianglebadge.exclamationmark.fill")
+                            .font(.system(size: 32))
+                            .foregroundStyle(
+                                LinearGradient(
+                                    colors: [Palette.accent.gold, Palette.primary.orange],
+                                    startPoint: .top,
+                                    endPoint: .bottom
+                                )
+                            )
+                        
+                    }
+                    
+                    VStack(alignment: .leading, spacing: 6) {
+                        
+                        Text("SunFlow State")
+                            .font(.system(size: 20, weight: .black, design: .rounded))
+                            .foregroundColor(.white)
+                        
+                        Text("Enter flow on command • Calibrate your rhythm")
+                            .font(.system(size: 12, weight: .medium))
+                            .foregroundColor(Palette.text.secondary)
+                        
+                        HStack(spacing: 12) {
+                            
+                            HStack(spacing: 4) {
+                                Image(systemName: "bolt.fill")
+                                    .font(.system(size: 10))
+                                Text("14 Triggers")
+                                    .font(.system(size: 10, weight: .semibold))
+                            }
+                            .foregroundColor(Palette.accent.gold)
+                            
+                            HStack(spacing: 4) {
+                                Image(systemName: "list.bullet.rectangle")
+                                    .font(.system(size: 10))
+                                Text("5 Protocols")
+                                    .font(.system(size: 10, weight: .semibold))
+                            }
+                            .foregroundColor(Palette.primary.cyan)
+                            
+                        }
+                        
+                    }
+                    
+                    Spacer()
+                    
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundColor(Palette.accent.gold)
+                    
+                }
+                
+                Text("\"The body moves on its own.\" — Whis")
+                    .font(.system(size: 11, weight: .medium, design: .rounded))
+                    .foregroundColor(Palette.text.muted)
+                    .italic()
+                
+            }
+            .padding(18)
+            .background(
+                RoundedRectangle(cornerRadius: 20, style: .continuous)
+                    .fill(
+                        LinearGradient(
+                            colors: [
+                                Palette.accent.gold.opacity(0.15),
+                                Palette.accent.gold.opacity(0.05)
+                            ],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 20, style: .continuous)
+                            .stroke(
+                                LinearGradient(
+                                    colors: [Palette.accent.gold.opacity(0.5), Palette.accent.gold.opacity(0.2)],
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing
+                                ),
+                                lineWidth: 1.5
+                            )
+                    )
+            )
+            .shadow(color: Palette.accent.gold.opacity(0.2), radius: 15, x: 0, y: 8)
+            
+        }
+        .buttonStyle(ScaleButtonStyle())
+        
+    }
+    
     // MARK: - Documentaries Section (NEW)
     
     private var documentariesSection: some View {
@@ -309,6 +449,89 @@ struct AwakeningLandingView: View {
                 .overlay(
                     RoundedRectangle(cornerRadius: 16)
                         .stroke(Color.red.opacity(0.2), lineWidth: 1)
+                )
+        )
+    }
+    
+    // MARK: - Institutional Lies Section (PRIMARY SOURCES)
+    
+    private var institutionalLiesSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack {
+                Text("📋 DOCUMENTED TRUTH")
+                    .font(.system(size: 14, weight: .bold, design: .rounded))
+                    .foregroundColor(Palette.accent.gold)
+                
+                Spacer()
+                
+                Text("SOURCED")
+                    .font(.system(size: 10, weight: .bold, design: .rounded))
+                    .foregroundColor(.black)
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 4)
+                    .background(Palette.accent.gold)
+                    .clipShape(Capsule())
+            }
+            
+            Text("Government crimes, corporate lies, control mechanisms")
+                .font(.system(size: 12, weight: .medium))
+                .foregroundColor(Palette.text.secondary)
+            
+            NavigationLink(destination: InstitutionalLiesView()) {
+                HStack(spacing: 16) {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(Palette.accent.gold.opacity(0.2))
+                            .frame(width: 60, height: 60)
+                        
+                        Image(systemName: "doc.text.magnifyingglass")
+                            .font(.system(size: 28))
+                            .foregroundColor(Palette.accent.gold)
+                    }
+                    
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("Institutional Lies")
+                            .font(.system(size: 16, weight: .bold, design: .rounded))
+                            .foregroundColor(.white)
+                        
+                        Text("No theories - just primary sources")
+                            .font(.system(size: 12, weight: .medium))
+                            .foregroundColor(Palette.text.secondary)
+                        
+                        HStack(spacing: 4) {
+                            Image(systemName: "checkmark.shield.fill")
+                                .font(.system(size: 10))
+                            Text("DOJ cases • Senate reports • Declassified docs")
+                                .font(.system(size: 11, weight: .medium))
+                        }
+                        .foregroundColor(Palette.text.muted)
+                    }
+                    
+                    Spacer()
+                    
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundColor(Palette.text.muted)
+                }
+                .padding(16)
+                .background(
+                    RoundedRectangle(cornerRadius: 16)
+                        .fill(Color.white.opacity(0.05))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 16)
+                                .stroke(Palette.accent.gold.opacity(0.3), lineWidth: 1)
+                        )
+                )
+            }
+            .buttonStyle(ScaleButtonStyle())
+        }
+        .padding(16)
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color.white.opacity(0.03))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(Palette.accent.gold.opacity(0.2), lineWidth: 1)
                 )
         )
     }
@@ -1073,7 +1296,11 @@ struct GenericLessonDetailView: View {
                             }
                         }.padding(16).background(RoundedRectangle(cornerRadius: 16).fill(color.opacity(0.1)))
                     }
-                    Button(action: { onComplete(); dismiss() }) {
+                    Button(action: { 
+                        HapticManager.shared.courseCompleted()
+                        onComplete()
+                        dismiss() 
+                    }) {
                         HStack { Image(systemName: "checkmark.circle.fill"); Text("Mark Complete") }
                             .font(.system(size: 16, weight: .bold, design: .rounded)).foregroundColor(.black).frame(maxWidth: .infinity).padding(.vertical, 16).background(color).clipShape(RoundedRectangle(cornerRadius: 14))
                     }

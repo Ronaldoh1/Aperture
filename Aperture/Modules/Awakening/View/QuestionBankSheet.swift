@@ -89,6 +89,7 @@ struct QuestionBankSheet: View {
     
     private func generateNewQuestion() {
         let question = QuestionBank.getRandomQuestion()
+        HapticManager.shared.cardFlip()
         onSave(question)
         newQuestion = question
     }

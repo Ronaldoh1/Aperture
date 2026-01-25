@@ -2,6 +2,7 @@ import Foundation
 
 struct User: Codable, Identifiable {
     
+    
     let id: String
     let email: String
     let displayName: String?
@@ -22,5 +23,4 @@ struct User: Codable, Identifiable {
     var preferredLanguage: String = "en"
     var notificationsEnabled: Bool = true
     var darkModeEnabled: Bool = true
-    
 }

@@ -3,6 +3,7 @@ import SwiftUI
 
 enum Realm: String, Codable, CaseIterable {
     
+    
     case physical = "Physical"
     case mental = "Mental"
     case spiritual = "Spiritual"
@@ -54,5 +55,4 @@ enum Realm: String, Codable, CaseIterable {
             return "Connect to higher dimensions and universal truth"
         }
     }
-    
 }

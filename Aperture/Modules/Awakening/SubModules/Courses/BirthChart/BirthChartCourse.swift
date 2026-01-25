@@ -431,46 +431,17 @@ struct BirthChartCalculator {
     }
 }
 
-// MARK: - Zodiac Sign Enum
+// MARK: - ZodiacSign Extensions for BirthChart
+// Main ZodiacSign enum is in UserProfileEntity.swift
 
-enum ZodiacSign: String, CaseIterable, Codable, Identifiable {
-    case aries = "Aries"
-    case taurus = "Taurus"
-    case gemini = "Gemini"
-    case cancer = "Cancer"
-    case leo = "Leo"
-    case virgo = "Virgo"
-    case libra = "Libra"
-    case scorpio = "Scorpio"
-    case sagittarius = "Sagittarius"
-    case capricorn = "Capricorn"
-    case aquarius = "Aquarius"
-    case pisces = "Pisces"
-    
+extension ZodiacSign: Identifiable {
     var id: String { rawValue }
     
     var index: Int {
         ZodiacSign.allCases.firstIndex(of: self) ?? 0
     }
     
-    var symbol: String {
-        switch self {
-        case .aries: return "♈"
-        case .taurus: return "♉"
-        case .gemini: return "♊"
-        case .cancer: return "♋"
-        case .leo: return "♌"
-        case .virgo: return "♍"
-        case .libra: return "♎"
-        case .scorpio: return "♏"
-        case .sagittarius: return "♐"
-        case .capricorn: return "♑"
-        case .aquarius: return "♒"
-        case .pisces: return "♓"
-        }
-    }
-    
-    var element: String {
+    var elementString: String {
         switch self {
         case .aries, .leo, .sagittarius: return "Fire 🔥"
         case .taurus, .virgo, .capricorn: return "Earth 🌍"

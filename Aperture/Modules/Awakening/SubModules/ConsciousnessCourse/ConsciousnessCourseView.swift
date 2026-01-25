@@ -151,7 +151,10 @@ struct ConsciousnessCourseView: View {
             
             ForEach(db.modules) { module in
                 ConsciousnessModuleCard(module: module, progress: progress)
-                    .onTapGesture { selectedModule = module }
+                    .onTapGesture { 
+                        HapticManager.shared.cardFlip()
+                        selectedModule = module 
+                    }
             }
         }
     }
@@ -387,7 +390,10 @@ struct ModuleDetailView: View {
             
             ForEach(module.lessons) { lesson in
                 LessonCard(lesson: lesson, module: module, isComplete: progress.completedLessons.contains(lesson.id))
-                    .onTapGesture { selectedLesson = lesson }
+                    .onTapGesture { 
+                        HapticManager.shared.light()
+                        selectedLesson = lesson 
+                    }
             }
         }
     }

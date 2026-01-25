@@ -65,6 +65,7 @@ struct MasterLiesCourseView: View {
         .sheet(item: $selectedLie) { lie in
             LieDetailView(lie: lie, onComplete: {
                 completedLies.insert(lie.id)
+                HapticManager.shared.lessonCompleted()
             })
         }
         .onAppear {
@@ -430,7 +431,10 @@ struct LieRow: View {
     
     var body: some View {
         
-        Button(action: onTap) {
+        Button(action: { 
+            HapticManager.shared.light()
+            onTap() 
+        }) {
             HStack(spacing: 12) {
                 
                 // Status

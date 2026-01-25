@@ -31,7 +31,15 @@ struct CosmicButton: View {
 
     var body: some View {
 
-        Button(action: action) {
+        Button(action: {
+            // Haptic feedback based on style
+            if style == .primary {
+                HapticManager.shared.medium()
+            } else {
+                HapticManager.shared.light()
+            }
+            action()
+        }) {
 
             ZStack {
 

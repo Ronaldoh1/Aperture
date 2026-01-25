@@ -25,6 +25,7 @@ struct CourseInfo: Identifiable {
         case science = "Science"
         case systems = "Systems"
         case practical = "Practical"
+        case financial = "Financial"
         
         var icon: String {
             switch self {
@@ -34,6 +35,7 @@ struct CourseInfo: Identifiable {
             case .science: return "atom"
             case .systems: return "network"
             case .practical: return "hammer"
+            case .financial: return "dollarsign.circle"
             }
         }
     }
@@ -257,6 +259,54 @@ struct CourseCatalog {
             estimatedHours: 2,
             category: .systems,
             difficulty: .advanced
+        ),
+        
+        // ══════════════════════════════════════════════════
+        // FINANCIAL LITERACY (Don't Get Played)
+        // ══════════════════════════════════════════════════
+        CourseInfo(
+            id: "money-fundamentals",
+            title: "Money Fundamentals",
+            subtitle: "What they should have taught in school",
+            icon: "dollarsign.circle.fill",
+            colorHex: "#2E7D32",
+            moduleCount: 4,
+            estimatedHours: 4.5,
+            category: .financial,
+            difficulty: .beginner
+        ),
+        CourseInfo(
+            id: "anti-scam-awareness",
+            title: "Don't Fall For The Vibes",
+            subtitle: "Protection from manipulation & scams",
+            icon: "exclamationmark.shield.fill",
+            colorHex: "#D32F2F",
+            moduleCount: 4,
+            estimatedHours: 3.5,
+            category: .financial,
+            difficulty: .beginner
+        ),
+        CourseInfo(
+            id: "stock-market-fundamentals",
+            title: "Stock Market Decoded",
+            subtitle: "Investing vs gambling - know the difference",
+            icon: "chart.xyaxis.line",
+            colorHex: "#1976D2",
+            moduleCount: 4,
+            estimatedHours: 4.5,
+            category: .financial,
+            difficulty: .intermediate
+        ),
+        CourseInfo(
+            id: "crypto-fundamentals",
+            title: "Crypto Without The Hype",
+            subtitle: "Understanding blockchain, not gambling",
+            icon: "bitcoinsign.circle.fill",
+            colorHex: "#FF9800",
+            moduleCount: 4,
+            estimatedHours: 4.5,
+            category: .financial,
+            difficulty: .intermediate
         )
     ]
     
@@ -437,6 +487,7 @@ struct CourseHubView: View {
             ForEach(filteredCourses) { course in
                 CourseCard(course: course)
                     .onTapGesture {
+                        HapticManager.shared.cardFlip()
                         selectedCourse = course
                     }
             }

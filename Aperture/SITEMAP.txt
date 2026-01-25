@@ -1,0 +1,385 @@
+# Aperture App - Site Map
+
+## Navigation Structure
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                         RootTabView                              │
+│  ┌─────────┬──────────┬─────────┬────────────┬────────┐        │
+│  │  Home   │ Timeline │ Cosmos  │ Alexandria │  More  │        │
+│  │  (0)    │   (1)    │   (2)   │    (3)     │  (4)   │        │
+│  └─────────┴──────────┴─────────┴────────────┴────────┘        │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Tab 0: Home (Landing)
+
+**Module:** `/Modules/Landing/`
+
+**View Files:**
+- `LandingView.swift` - Main composition
+- `LandingEntryView.swift` - VIPER entry point
+- `LandingHeaderSection.swift` - Logo & title
+- `LandingNavigationSection.swift` - 4-card grid
+- `LandingQuickActionsSection.swift` - Quick action rows
+- `LandingDragonSection.swift` - Dragon wisdom quotes
+- `NavigationCard.swift` - Reusable nav card
+- `QuickActionRow.swift` - Reusable action row
+
+**Navigation:**
+```
+Landing
+├── Timeline (tab switch → 1)
+├── Cosmos (tab switch → 2)
+├── Alexandria (tab switch → 3)
+└── Awakening (tab switch → 4 → More → Awakening)
+```
+
+---
+
+## Tab 1: Timeline
+
+**Module:** `/Modules/Timeline/`
+
+**View Files:**
+- `TimelineView.swift` - Main view (1,239 lines)
+  - Contains: SunDragonView, DragonEye, DragonWhisker, ShenronDragonShape
+  - Contains: TimelineEraCard, TimelineDetailView
+- `TimelineEntryView.swift` - VIPER entry
+- `GnosticRevelationView.swift` - Special revelation content
+
+**Content:**
+- Hidden history timeline with eras
+- Dragon companion that guides through history
+- Institutional rot exposed per era
+- Dragon comments on each era
+
+---
+
+## Tab 2: Cosmos
+
+**Module:** `/Modules/Cosmos/`
+
+**View Files:**
+- `CosmosView.swift` - Main view (1,801 lines)
+  - Contains: RealmCard, EntityRow, EntityDetailView
+  - Contains: MiniMapDot, DemonizedEntityCard, FlowLayout
+  - Contains: BiblicalLiesNavigationCard, BiblicalLiesListView, BiblicalLieCard, BiblicalLieDetailView
+- `CosmosEntryView.swift` - VIPER entry
+
+**Content:**
+- Gnostic realms (Pleroma → Material)
+- Cosmic entities (Aeons, Archons, etc.)
+- Biblical lies section
+- The Demonized Ones (misunderstood entities)
+
+---
+
+## Tab 3: Alexandria
+
+**Module:** `/Modules/Alexandria/`
+
+**View Files:**
+- `AlexandriaView.swift` - Main view (1,089 lines)
+  - Contains: TraditionCard, TraditionDetailView
+  - Contains: SacredTextCard, SacredTextDetailView
+- `AlexandriaEntryView.swift` - VIPER entry
+
+**Content:**
+- Sacred text traditions (Gnostic, Hermetic, Eastern, etc.)
+- Individual sacred texts with:
+  - Summary
+  - Key teachings
+  - What they buried
+  - Full text excerpts
+  - Dragon comments
+
+---
+
+## Tab 4: More
+
+**Module:** `/Modules/More/`
+
+**View Files:**
+- `MoreView.swift` - Main menu
+- `MoreMenuCard.swift` - Menu item component
+- `MoreHeaderSection.swift` - Header with icon
+- `MoreAppInfoSection.swift` - Footer with dragon quote
+
+**Navigation:**
+```
+More
+├── Awakening → AwakeningLandingView
+├── Profile → ProfileView
+├── Settings (TODO)
+└── About (TODO)
+```
+
+---
+
+## Awakening Academy
+
+**Module:** `/Modules/Awakening/`
+
+### Entry Points
+- `AwakeningView.swift` - Tools dashboard
+- `AwakeningEntryView.swift` - VIPER entry
+
+### Tools (in AwakeningView)
+- Daily Check-In Sheet
+- Cognitive Dissonance Sheet
+- Emotional Processing Sheet
+- Question Bank Sheet
+- Reality Audit Sheet
+
+### Courses Landing
+**File:** `/SubModules/Courses/AwakeningLandingView.swift`
+
+```
+Awakening Academy
+│
+├── 👑 SUNFLOW STATE (PREMIUM)
+│   └── SunFlowStateView
+│       ├── Flow States (5 levels: Micro → Ultra Instinct)
+│       ├── Flow Triggers (14 science-backed)
+│       │   ├── Psychological (5)
+│       │   ├── Environmental (4)
+│       │   ├── Social (3)
+│       │   └── Creative (2)
+│       ├── Circadian Calibration
+│       │   ├── Daily Phases (6)
+│       │   ├── Chronotypes (Lion/Bear/Wolf/Dolphin)
+│       │   ├── Circadian Anchors (6)
+│       │   └── Sleep Architecture
+│       ├── Flow Protocols (5)
+│       │   ├── 90-Minute Deep Work
+│       │   ├── Pomodoro Flow (4x25)
+│       │   ├── Morning Activation
+│       │   ├── Pre-Flow Ritual
+│       │   └── Evening Wind-Down
+│       └── Flow Blockers (8)
+│
+├── 📺 DOCUMENTARIES
+│   └── YouTubeDocumentariesView (10 docs)
+│
+├── 📋 DOCUMENTED TRUTH
+│   └── InstitutionalLiesView
+│       ├── Government Crimes (5 cases)
+│       │   └── GovernmentCrimesListView → GovernmentCrimeDetailView
+│       ├── Corporate Crimes (5 cases)
+│       │   └── CorporateCrimesListView → CorporateCrimeDetailView
+│       ├── Control Mechanisms (8 mechanisms)
+│       │   └── ControlMechanismsListView
+│       └── 25 Awakening Lies (6 categories)
+│           └── AwakeningLiesListView
+│
+├── ⛪ RELIGION EXPOSED
+│   ├── The Vatican Exposed (CatholicChurchExposeCourse)
+│   └── The Bible Decoded (BibleDecodedCourse)
+│
+├── 🔴 THE MATRIX EXPOSED
+│   ├── The Matrix (MatrixSystemCourse)
+│   ├── Left vs Right (LeftRightProgrammingCourse)
+│   ├── The Race Lie (RaceLieCourse)
+│   └── LGBTQ Truth (LGBTQTruthCourse)
+│
+├── 📜 HIDDEN HISTORY
+│   ├── Colonial Christianity (ColonialChristianityCourse)
+│   ├── Egyptian Yeshua (EgyptYeshuaCourse)
+│   └── Divine Feminine (DivineFeminineCourse)
+│
+├── 💀 THE LIES EXPOSED
+│   ├── Master Lies → MasterLiesCourseView
+│   ├── Pro-Life Expose (ProLifeExposeCourse)
+│   └── Demiurge (DemiurgeCourse)
+│
+├── ⚙️ CONTROL SYSTEMS
+│   ├── The Great Scams (placeholder)
+│   └── Systems of Control (placeholder)
+│
+├── 🧠 CONSCIOUSNESS
+│   ├── PhD Consciousness (placeholder)
+│   └── Quantum Reality (placeholder)
+│
+├── 🐉 ANIME WISDOM
+│   ├── Dragon Ball Awakening → DragonBallCourseView
+│   └── Saint Seiya (placeholder)
+│
+└── 🕉️ SPIRITUAL TRADITIONS
+    ├── Buddha's Path (placeholder)
+    └── Sacred Geometry (placeholder)
+```
+
+---
+
+## SunFlow State Module (PREMIUM) ⭐ NEW
+
+**Path:** `/Modules/Awakening/SubModules/SunFlowState/`
+
+### Philosophy
+> "The body moves on its own." — Whis, Dragon Ball Super
+
+SunFlow State is the premium crown jewel that teaches users to:
+1. **Enter flow on command** - Not waiting for inspiration, but triggering it
+2. **Stay in flow longer** - Recognizing and removing blockers
+3. **Calibrate circadian rhythm** - Working with biology, not against it
+
+### Entity Layer (3 files, ~1,350 lines)
+
+| File | Content |
+|------|---------|
+| `FlowStateEntity.swift` | 5 flow states, 14 triggers (4 categories), 8 blockers |
+| `CircadianRhythmEntity.swift` | 6 daily phases, 4 chronotypes, 6 anchors, 3 sleep stages |
+| `FlowRoutineEntity.swift` | 5 protocols with steps, weekly schedule, tracking metrics |
+
+### View Layer (2 files)
+
+| File | Purpose |
+|------|---------|
+| `SunFlowStateView.swift` | Main premium landing with section picker |
+| `SunFlowStateDetailViews.swift` | Detail views for all sections |
+
+### Premium Gating
+
+| File | Purpose |
+|------|---------|
+| `/Core/Premium/PremiumGate.swift` | Premium status, gate view, upgrade sheet |
+
+### Content Breakdown
+
+**5 Flow States:**
+1. Micro Flow - Brief absorption (Kaioken x2)
+2. Shallow Flow - Sustained engagement (Super Saiyan)
+3. Deep Flow - Complete absorption (Super Saiyan Blue)
+4. Group Flow - Collective state (Fusion)
+5. Ultra Instinct - Body moves before mind
+
+**14 Flow Triggers (by category):**
+- Psychological (5): Challenge-skill balance, Clear goals, Immediate feedback, Deep embodiment, Risk
+- Environmental (4): Novelty, Complexity, Distraction elimination, Circadian alignment
+- Social (3): Serious concentration, Shared risk, Yes-and
+- Creative (2): Pattern recognition, Creation over consumption
+
+**6 Daily Phases:**
+1. Dawn Awakening (5-7 AM)
+2. Morning Peak (9 AM-12 PM) ← PRIME TIME
+3. Midday Transition (12-2 PM)
+4. Afternoon Recovery (2-5 PM)
+5. Evening Wind-Down (5-9 PM)
+6. Night Rest (9 PM-5 AM)
+
+**4 Chronotypes:**
+- 🦁 Lion - Early risers (15-20%)
+- 🐻 Bear - Solar cycle followers (55%)
+- 🐺 Wolf - Night owls (15-20%)
+- 🐬 Dolphin - Light sleepers (10%)
+
+**5 Flow Protocols:**
+1. 90-Minute Deep Work Block (6 steps)
+2. Pomodoro Flow 4x25 (8 steps)
+3. Morning Activation (7 steps)
+4. Pre-Flow Ritual (5 steps)
+5. Evening Wind-Down (6 steps)
+
+**8 Flow Blockers:**
+1. Multitasking
+2. Notifications
+3. Perfectionism
+4. Low Stakes
+5. Energy Depletion
+6. Unclear Goals
+7. Wrong Time of Day
+8. Emotional Noise
+
+---
+
+## Institutional Lies Module
+
+**Path:** `/Modules/Awakening/SubModules/Courses/InstitutionalLies/`
+
+### Entity Layer
+| File | Content |
+|------|---------|
+| `GovernmentCrimesModule.swift` | Tuskegee, MKUltra, Church Committee, Northwoods, Gulf of Tonkin |
+| `CorporateCrimesModule.swift` | Opioids, Vioxx, Tobacco, Insurance, 1971 |
+| `ControlMechanismsModule.swift` | 8 documented control mechanisms |
+| `AwakeningLiesModule.swift` | 25 personal illusions (6 categories) |
+
+### View Layer
+| File | Purpose |
+|------|---------|
+| `InstitutionalLiesView.swift` | Main landing with 4 sections |
+| `GovernmentCrimesListView.swift` | List of government crimes |
+| `GovernmentCrimeDetailView.swift` | Crime detail with sources |
+| `CorporateCrimesListView.swift` | List of corporate crimes |
+| `CorporateCrimeDetailView.swift` | Crime detail with sources |
+| `ControlMechanismsListView.swift` | Control mechanisms with defenses |
+| `AwakeningLiesListView.swift` | 25 lies with category filter |
+
+---
+
+## Profile Module
+
+**Module:** `/Modules/Profile/`
+
+**View Files:**
+- `ProfileView.swift` - Main view
+- `ProfileEntryView.swift` - VIPER entry
+- `ProfileHeaderSection.swift` - Avatar & title
+- `ProfileCard.swift` - Menu card component
+
+**Content:**
+- Progress tracking
+- Achievements
+- Settings
+- Sign out
+
+---
+
+## Core Shared Components
+
+**Path:** `/Core/Components/`
+
+| Component | Purpose |
+|-----------|---------|
+| `CosmicBackground.swift` | Reusable starfield background |
+| `Buttons/ScaleButtonStyle.swift` | Press animation for buttons |
+| `Buttons/CosmicButton.swift` | Styled cosmic button |
+| `Overlay/LoadingOverlay.swift` | Loading state overlay |
+
+**Path:** `/Core/Premium/`
+
+| Component | Purpose |
+|-----------|---------|
+| `PremiumGate.swift` | Premium status, gate UI, upgrade flow |
+
+---
+
+## Module Status
+
+| Module | Status | Notes |
+|--------|--------|-------|
+| Auth | ✅ Complete | Reference VIPER-X implementation |
+| Landing | ✅ Complete | 8 view files |
+| Timeline | ✅ Complete | Single file, fully functional |
+| Cosmos | ✅ Complete | Single file, fully functional |
+| Alexandria | ✅ Complete | Single file, fully functional |
+| More | ✅ Complete | 4 view files |
+| Profile | ✅ Complete | 4 view files |
+| Awakening | ✅ Complete | Tools + Courses |
+| Institutional Lies | ✅ Complete | 11 files, primary sources |
+| **SunFlow State** | ✅ Complete | **PREMIUM** - 5 files, 2,100+ lines |
+
+---
+
+## Premium Features
+
+| Feature | Price | Status |
+|---------|-------|--------|
+| SunFlow State | $9.99/mo or $59.99/yr | ✅ Complete |
+
+---
+
+*Last updated: January 23, 2026*

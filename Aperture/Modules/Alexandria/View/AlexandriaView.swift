@@ -241,6 +241,128 @@ struct AlexandriaView: View {
                 .font(.system(size: 14, weight: .medium, design: .rounded))
                 .foregroundColor(Palette.text.secondary)
             
+            // Featured: Gnostic Library
+            NavigationLink(destination: GnosticLibraryView()) {
+                HStack(spacing: 14) {
+                    
+                    ZStack {
+                        Circle()
+                            .fill(
+                                LinearGradient(
+                                    colors: [.purple, .blue],
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing
+                                )
+                            )
+                            .frame(width: 50, height: 50)
+                        
+                        Image(systemName: "books.vertical.fill")
+                            .font(.system(size: 22))
+                            .foregroundColor(.white)
+                    }
+                    
+                    VStack(alignment: .leading, spacing: 4) {
+                        HStack {
+                            Text("THE GNOSTIC LIBRARY")
+                                .font(.system(size: 14, weight: .bold, design: .rounded))
+                                .foregroundColor(.white)
+                            
+                            Text("NEW")
+                                .font(.system(size: 8, weight: .bold))
+                                .foregroundColor(.white)
+                                .padding(.horizontal, 6)
+                                .padding(.vertical, 2)
+                                .background(Color.purple)
+                                .cornerRadius(4)
+                        }
+                        
+                        Text("Complete texts, cosmology & sacred links")
+                            .font(.system(size: 11, weight: .medium, design: .rounded))
+                            .foregroundColor(Palette.text.secondary)
+                        
+                        Text("Apocryphon of John • Gospel of Thomas • Pistis Sophia & more")
+                            .font(.system(size: 9, weight: .medium))
+                            .foregroundColor(.purple.opacity(0.8))
+                    }
+                    
+                    Spacer()
+                    
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: 14))
+                        .foregroundColor(.purple)
+                }
+                .padding(14)
+                .background(
+                    RoundedRectangle(cornerRadius: 12, style: .continuous)
+                        .fill(Color.purple.opacity(0.15))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 12, style: .continuous)
+                                .stroke(Color.purple.opacity(0.3), lineWidth: 1)
+                        )
+                )
+            }
+            
+            // Featured: History Debugged
+            NavigationLink(destination: HistoryDebuggedView()) {
+                HStack(spacing: 14) {
+                    
+                    ZStack {
+                        Circle()
+                            .fill(
+                                LinearGradient(
+                                    colors: [.orange, .red],
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing
+                                )
+                            )
+                            .frame(width: 50, height: 50)
+                        
+                        Image(systemName: "clock.arrow.circlepath")
+                            .font(.system(size: 22))
+                            .foregroundColor(.white)
+                    }
+                    
+                    VStack(alignment: .leading, spacing: 4) {
+                        HStack {
+                            Text("HISTORY DEBUGGED")
+                                .font(.system(size: 14, weight: .bold, design: .rounded))
+                                .foregroundColor(.white)
+                            
+                            Text("NEW")
+                                .font(.system(size: 8, weight: .bold))
+                                .foregroundColor(.white)
+                                .padding(.horizontal, 6)
+                                .padding(.vertical, 2)
+                                .background(Color.orange)
+                                .cornerRadius(4)
+                        }
+                        
+                        Text("The OS upgrade for your worldview")
+                            .font(.system(size: 11, weight: .medium, design: .rounded))
+                            .foregroundColor(Palette.text.secondary)
+                        
+                        Text("Columbus • Thanksgiving • Founding Fathers • Dark Ages & more")
+                            .font(.system(size: 9, weight: .medium))
+                            .foregroundColor(.orange.opacity(0.8))
+                    }
+                    
+                    Spacer()
+                    
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: 14))
+                        .foregroundColor(.orange)
+                }
+                .padding(14)
+                .background(
+                    RoundedRectangle(cornerRadius: 12, style: .continuous)
+                        .fill(Color.orange.opacity(0.15))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 12, style: .continuous)
+                                .stroke(Color.orange.opacity(0.3), lineWidth: 1)
+                        )
+                )
+            }
+            
             // Tradition cards
             ForEach(LibraryCategory.hiddenKnowledge.traditions) { tradition in
                 TraditionCard(tradition: tradition) {

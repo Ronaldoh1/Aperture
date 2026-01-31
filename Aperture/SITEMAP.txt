@@ -86,6 +86,7 @@ Landing
   - Contains: TraditionCard, TraditionDetailView
   - Contains: SacredTextCard, SacredTextDetailView
 - `AlexandriaEntryView.swift` - VIPER entry
+- `GnosticLibrary/GnosticLibraryView.swift` - Complete Gnostic texts ⭐ NEW
 
 **Content:**
 - Sacred text traditions (Gnostic, Hermetic, Eastern, etc.)
@@ -95,6 +96,82 @@ Landing
   - What they buried
   - Full text excerpts
   - Dragon comments
+
+### Gnostic Library ⭐ NEW
+
+Comprehensive Gnostic texts library with direct links to read online:
+
+**15+ Sacred Texts with Links:**
+| Text | Collection | Link |
+|------|------------|------|
+| Apocryphon of John | Nag Hammadi | gnosis.org/naghamm/apocjn-davies.html |
+| Gospel of Thomas | Nag Hammadi | gnosis.org/naghamm/gosthom.html |
+| Gospel of Philip | Nag Hammadi | gnosis.org/naghamm/gop.html |
+| Gospel of Truth | Nag Hammadi | gnosis.org/naghamm/got.html |
+| Gospel of Mary | Berlin Codex | gnosis.org/library/marygosp.htm |
+| Hypostasis of Archons | Nag Hammadi | gnosis.org/naghamm/hypostas.html |
+| Origin of the World | Nag Hammadi | gnosis.org/naghamm/origin.html |
+| Thunder, Perfect Mind | Nag Hammadi | gnosis.org/naghamm/thunder.html |
+| Gospel of Judas | Other | gnosis.org/library/judas.htm |
+| Sophia of Jesus Christ | Nag Hammadi | gnosis.org/naghamm/sjc.html |
+| Treatise on Resurrection | Nag Hammadi | gnosis.org/naghamm/res.html |
+| Pistis Sophia | Askew Codex | gnosis.org/library/pistis-sophia/index.htm |
+| Corpus Hermeticum | Hermetica | gnosis.org/library/hermet.htm |
+| Ginza Rabba | Mandaean | gnosis.org/library/ginza.htm |
+| Books of Jeu | Bruce Codex | gnosis.org/library/1jeub.htm |
+
+**Gnostic Cosmology:**
+- The Monad/Father
+- Barbelo (First Thought)
+- Autogenes/Christ
+- Sophia (Fallen Wisdom)
+- Yaldabaoth (Demiurge)
+- The Seven Archons
+- Adamas (Perfect Human)
+
+**Features:**
+- Three tabs: Texts, Cosmology, Overview
+- Search and filter by collection
+- Difficulty ratings (1-5)
+- Direct "Read Full Text" buttons
+- PDF downloads where available
+- Dragon comments 🐉
+
+### History Debugged ⭐ NEW
+
+**Path:** `/Modules/Alexandria/HistoryDebugged/HistoryDebuggedView.swift`
+
+"The OS Upgrade for Your Worldview" - Unprogramming textbook lies with sourced truth.
+
+**10 Topics Covered:**
+| Topic | Era | Impact |
+|-------|-----|--------|
+| Columbus "Discovering" America | Colonial | ⭐⭐⭐⭐⭐ |
+| Pilgrims & Thanksgiving | Colonial | ⭐⭐⭐⭐ |
+| Founding Fathers as Flawless | Colonial | ⭐⭐⭐⭐⭐ |
+| "Empty Land" Myth | Colonial | ⭐⭐⭐⭐⭐ |
+| American Revolution | Colonial | ⭐⭐⭐⭐ |
+| Salem Witch Burnings | Colonial | ⭐⭐⭐ |
+| Napoleon's Height | Modern | ⭐⭐ |
+| Africa as "Primitive" | Medieval | ⭐⭐⭐⭐⭐ |
+| Einstein Failed Math | Modern | ⭐⭐ |
+| The "Dark Ages" | Medieval | ⭐⭐⭐⭐ |
+
+**Each Topic Includes:**
+- The Lie (what you were taught)
+- The Truth (what actually happened)
+- Key Facts (bullet points)
+- Who Benefits (follow the money)
+- The Awakening (why this matters now)
+- Further Reading (books, articles, Wikipedia links)
+- Dragon Comment 🐉
+
+**Features:**
+- Filter by Era (Ancient, Medieval, Colonial, Modern)
+- Filter by Region (Americas, Europe, Africa, Asia, Global)
+- Search functionality
+- Impact ratings (1-5 stars)
+- All content locally stored
 
 ---
 
@@ -357,6 +434,161 @@ SunFlow State is the premium crown jewel that teaches users to:
 
 ---
 
+## AwakeTogether Module ⭐ EXPANDED
+
+**Path:** `/Modules/AwakeTogether/`
+
+### Philosophy
+> "The Empathy Engine for Humanity's Great Awakening"
+> Bridge ideological divides, synthesize chaos into clarity, augment potential
+
+AwakeTogether is the consciousness toolkit hub containing:
+- **HAKAI Suite** - 破壊 Destroy harmful patterns
+- **Consciousness Tools** - Track, protect, ground, and verify
+- **Educational Resources** - Courses, research, TED talks
+
+### Structure
+```
+AwakeTogether/
+├── AwakeTogetherView.swift (Main Hub)
+│
+├── HAKAI Suite (破壊 Destroy)
+│   ├── HakaiHate/ - Check posts before sharing
+│   │   └── HakaiHateView.swift
+│   └── HakaiMatrixLies/ - Unprogram societal lies ⭐ NEW
+│       └── HakaiMatrixLiesView.swift (40+ lies, 12 categories)
+│
+├── Consciousness Tools
+│   ├── AwakeningTracker/ - Track your journey
+│   │   └── AwakeningTrackerView.swift
+│   ├── MindShield/ - Protect your mind
+│   │   └── MindShieldView.swift
+│   ├── RealityAnchor/ - Grounding exercises
+│   │   └── RealityAnchorView.swift
+│   └── EquityWeave/ - Know your worth
+│       └── EquityWeaveView.swift
+│
+├── Truth & Verification
+│   └── TruthToolkit/ - Fact-check with Gnostic principles ⭐ NEW
+│       └── TruthVerificationToolkitView.swift
+│
+├── Educational Hub
+│   ├── ConsciousnessCourse/ - 4-Level Awakening Journey ⭐ NEW
+│   │   └── ConsciousnessAwakeningCourse.swift
+│   └── ConsciousnessHub/ - TED, YouTube, Books, Researchers ⭐ NEW
+│       └── ScienceOfConsciousnessHub.swift
+│
+└── Core/
+    ├── BetaControlPanelView.swift
+    └── FeatureFlagManager.swift
+```
+
+### HAKAI: Matrix Lies Module ⭐ EXPANDED
+
+**Path:** `/Modules/AwakeTogether/HakaiMatrixLies/`
+
+The ultimate database of societal deceptions - "You're the visionary hacker—debugging the simulation"
+
+**18 Categories, 85+ Lies:**
+| Category | # Lies | Focus |
+|----------|--------|-------|
+| Education | 3 | Factory model myth |
+| Health | 3 | Wellness industrial complex |
+| Work | 3 | Hustle grind illusion |
+| Life | 3 | "Happily ever after" script |
+| Love | 3 | Fairy tale trap |
+| Food | 3 | "Healthy" label scam |
+| Drinks | 3 | Hydration & buzz hype |
+| Social | 3 | The facade game |
+| Ego | 3 | Inner saboteur |
+| Financial | 5 | Debt & wealth mirage |
+| Media | 4 | Narrative spin cycle |
+| Racism | 8 | Systemic rootkit (expanded) |
+| **Environmental** | 6 | The greenwashing grid ⭐ NEW |
+| **Foreign Affairs** | 5 | Geopolitical smoke screen ⭐ NEW |
+| **Investment** | 7 | Wall Street casino ⭐ NEW |
+| **Retirement** | 7 | Golden years mirage ⭐ NEW |
+| **Manipulation** | 8 | Mind control playbook ⭐ NEW |
+| **Economic** | 8 | The invisible hand job ⭐ NEW |
+
+**Each lie includes:**
+- Why it's perpetuated
+- Who benefits (follow the money)
+- The exposure (truth with receipts)
+- Escape hack (actionable steps)
+- Dragon comment (spicy wisdom)
+- Severity rating (1-5 programming depth)
+
+### Truth Verification Toolkit ⭐ NEW
+
+**Path:** `/Modules/AwakeTogether/TruthToolkit/`
+
+**Features:**
+- Local AI-powered narrative analysis (MVP)
+- 12 propaganda techniques database
+- Gnostic lens analysis (Demiurge alignment, Archon tactics)
+- "Who Benefits?" identification
+- Socratic counterpoints
+- Awakening suggestions
+- Analysis history
+
+**Propaganda Techniques Detected:**
+1. Fear-Mongering
+2. Us vs. Them
+3. Appeal to Authority
+4. Bandwagon/Social Proof
+5. Emotional Manipulation
+6. False Urgency
+7. Card Stacking
+8. Name-Calling/Labeling
+9. Gaslighting
+10. Repetition
+11. Straw Man
+12. Appeal to Tradition
+
+### Consciousness Awakening Course ⭐ NEW
+
+**Path:** `/Modules/AwakeTogether/ConsciousnessCourse/`
+
+**4-Level Progressive Curriculum:**
+
+| Level | Title | Focus | Duration |
+|-------|-------|-------|----------|
+| 1 | Awakening the Self | What is consciousness, symptoms, mindfulness | 2-3 weeks |
+| 2 | Expanding Perception | 4 levels of consciousness, brainwaves, shadow work | 3-4 weeks |
+| 3 | Higher States & Intuition | 9 intuitive levels, timeline intuition, collective fields | 4-6 weeks |
+| 4 | Unity & Beyond | Non-dual awareness, samadhi, service | Ongoing |
+
+**Each module includes:**
+- Video content (TED Talks, YouTube)
+- Reading materials
+- Guided meditations
+- Daily practices
+- Quizzes
+
+### Science of Consciousness Hub ⭐ NEW
+
+**Path:** `/Modules/AwakeTogether/ConsciousnessHub/`
+
+**Curated Resource Library:**
+
+| Type | Examples |
+|------|----------|
+| TED Talks | Anil Seth (16M views), David Chalmers, Antonio Damasio |
+| YouTube | Eckhart Tolle, Sadhguru, Actualized.org, Alan Watts |
+| Books | "Being You", "Map of Consciousness", "Power of Now" |
+| Researchers | Anil Seth, David Chalmers, Giulio Tononi, Christof Koch |
+| Podcasts | Making Sense, On Being |
+
+**Features:**
+- Category filtering (Neuroscience, Philosophy, Spirituality, etc.)
+- Difficulty ratings
+- Key insights per resource
+- Recommended learning path
+- "Why Consciousness Matters" section
+
+---
+
 ## Module Status
 
 | Module | Status | Notes |
@@ -371,15 +603,12 @@ SunFlow State is the premium crown jewel that teaches users to:
 | Awakening | ✅ Complete | Tools + Courses |
 | Institutional Lies | ✅ Complete | 11 files, primary sources |
 | **SunFlow State** | ✅ Complete | **PREMIUM** - 5 files, 2,100+ lines |
+| **AwakeTogether** | ✅ Complete | **EXPANDED** - 9+ modules |
+| **HAKAI: Matrix Lies** | ✅ Complete | 40+ lies, 12 categories |
+| **Truth Toolkit** | ✅ Complete | Gnostic propaganda analysis |
+| **Consciousness Course** | ✅ Complete | 4-level curriculum |
+| **Consciousness Hub** | ✅ Complete | Curated TED/YouTube/Books |
 
 ---
 
-## Premium Features
-
-| Feature | Price | Status |
-|---------|-------|--------|
-| SunFlow State | $9.99/mo or $59.99/yr | ✅ Complete |
-
----
-
-*Last updated: January 23, 2026*
+*Last updated: January 29, 2026*

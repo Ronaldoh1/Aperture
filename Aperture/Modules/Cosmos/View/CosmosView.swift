@@ -1077,7 +1077,7 @@ struct EntityDetailView: View {
             
             sectionHeader(title: "Associated With", icon: "link", color: Palette.primary.cyan)
             
-            FlowLayout(spacing: 8) {
+            CosmosFlowLayout(spacing: 8) {
                 ForEach(entity.associatedWith, id: \.self) { item in
                     Text(item)
                         .font(.system(size: 12, weight: .medium, design: .rounded))
@@ -1145,7 +1145,7 @@ struct EntityDetailView: View {
 
 // MARK: - Flow Layout for Tags
 
-struct FlowLayout: Layout {
+struct CosmosFlowLayout: Layout {
     
     var spacing: CGFloat = 8
     

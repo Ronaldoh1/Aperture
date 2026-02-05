@@ -47,9 +47,7 @@ struct CosmosSegmentedControl: View {
         let isSelected = selectedSection == section
         
         return Button(action: {
-            withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
-                selectedSection = section
-            }
+            selectedSection = section
             HapticManager.shared.selectionChanged()
         }) {
             HStack(spacing: 6) {
@@ -73,6 +71,7 @@ struct CosmosSegmentedControl: View {
                     }
                 }
             )
+            .animation(.spring(response: 0.3, dampingFraction: 0.7), value: selectedSection)
         }
         .buttonStyle(PlainButtonStyle())
     }

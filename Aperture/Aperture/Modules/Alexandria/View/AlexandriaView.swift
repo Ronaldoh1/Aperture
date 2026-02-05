@@ -10,6 +10,7 @@ struct AlexandriaView: View {
     @State private var selectedCategory: LibraryCategory?
     @State private var selectedTradition: TextTradition?
     @State private var selectedText: SacredText?
+    @State private var showForbiddenGospels = false
     
     private var presenter: AlexandriaPresenterType {
         presenterBox.presenter
@@ -162,6 +163,9 @@ struct AlexandriaView: View {
             // Sacred Texts - Primary
             sacredTextsSection
             
+            // Forbidden Gospels - Featured
+            forbiddenGospelsSection
+            
             // Hidden Knowledge
             hiddenKnowledgeSection
             
@@ -219,6 +223,126 @@ struct AlexandriaView: View {
                         .stroke(Palette.accent.gold.opacity(0.2), lineWidth: 1)
                 )
         )
+        
+    }
+    
+    // MARK: - Forbidden Gospels Section
+    
+    private var forbiddenGospelsSection: some View {
+        
+        VStack(alignment: .leading, spacing: 14) {
+            
+            // Section header
+            HStack {
+                
+                Image(systemName: "lock.open.trianglebadge.exclamationmark")
+                    .font(.system(size: 18, weight: .bold))
+                    .foregroundColor(Color.red)
+                
+                Text("FORBIDDEN GOSPELS")
+                    .font(.system(size: 13, weight: .bold, design: .rounded))
+                    .tracking(2)
+                    .foregroundColor(Color.red)
+                
+                Spacer()
+                
+                Text("HIDDEN")
+                    .font(.system(size: 8, weight: .bold))
+                    .foregroundColor(.white)
+                    .padding(.horizontal, 6)
+                    .padding(.vertical, 2)
+                    .background(Color.red.opacity(0.8))
+                    .cornerRadius(4)
+                
+            }
+            
+            Text("The gospels they banned — not because they were fake, but because they were too free")
+                .font(.system(size: 14, weight: .medium, design: .rounded))
+                .foregroundColor(Palette.text.secondary)
+            
+            // Dragon quote
+            HStack(alignment: .top, spacing: 10) {
+                
+                Text("🐉")
+                    .font(.system(size: 16))
+                
+                Text("\"They hid this truth from everyone. Not all gospels were written to be read. Some were written — and that is why they were hidden.\"")
+                    .font(.system(size: 12, weight: .medium, design: .rounded))
+                    .italic()
+                    .foregroundColor(Color.red.opacity(0.8))
+                    .lineSpacing(3)
+                
+            }
+            .padding(10)
+            .background(
+                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                    .fill(Color.red.opacity(0.08))
+            )
+            
+            // CTA Button
+            Button(action: {
+                HapticManager.shared.heavy()
+                showForbiddenGospels = true
+            }) {
+                HStack(spacing: 12) {
+                    
+                    ZStack {
+                        Circle()
+                            .fill(
+                                LinearGradient(
+                                    colors: [Color.red, Color(red: 0.6, green: 0.1, blue: 0.1)],
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing
+                                )
+                            )
+                            .frame(width: 44, height: 44)
+                        
+                        Image(systemName: "book.closed.fill")
+                            .font(.system(size: 20))
+                            .foregroundColor(.white)
+                    }
+                    
+                    VStack(alignment: .leading, spacing: 3) {
+                        Text("EXPLORE THE FORBIDDEN TEXTS")
+                            .font(.system(size: 13, weight: .bold, design: .rounded))
+                            .foregroundColor(.white)
+                        Text("Thomas • Mary Magdalene • Philip • Judas")
+                            .font(.system(size: 10, weight: .medium))
+                            .foregroundColor(Color.red.opacity(0.7))
+                    }
+                    
+                    Spacer()
+                    
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundColor(Color.red.opacity(0.6))
+                    
+                }
+                .padding(14)
+                .background(
+                    RoundedRectangle(cornerRadius: 12, style: .continuous)
+                        .fill(Color.red.opacity(0.12))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 12, style: .continuous)
+                                .stroke(Color.red.opacity(0.3), lineWidth: 1)
+                        )
+                )
+            }
+            .buttonStyle(ScaleButtonStyle())
+            
+        }
+        .padding(16)
+        .background(
+            RoundedRectangle(cornerRadius: 16, style: .continuous)
+                .fill(Color.white.opacity(0.03))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16, style: .continuous)
+                        .stroke(Color.red.opacity(0.2), lineWidth: 1)
+                )
+        )
+        .sheet(isPresented: $showForbiddenGospels) {
+            ForbiddenGospelsView()
+        }
         
     }
     

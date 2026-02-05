@@ -90,9 +90,14 @@ struct CosmosView: View {
             
             ScrollView(.vertical, showsIndicators: false) {
                 
-                LazyVStack(spacing: 0) {
+                VStack(spacing: 0) {
                     
-                    // Header
+                    // Scroll-to-top anchor
+                    Color.clear
+                        .frame(height: 0)
+                        .id("cosmosTop")
+                    
+                    // Header (adapts to selected section)
                     cosmosHeader
                         .padding(.top, 20)
                         .padding(.bottom, 32)
@@ -184,12 +189,19 @@ struct CosmosView: View {
                     
                 }
                 .padding(.horizontal, 16)
+                .id(selectedSection) // Force full re-layout when tab changes
                 
             }
             .coordinateSpace(name: "cosmosScroll")
             .onAppear {
-                // Capture scroll proxy for programmatic scrolling
                 scrollProxy = proxy
+            }
+            .onChange(of: selectedSection) { _ in
+                // Reset scroll to top and collapse any expanded realm on tab switch
+                selectedRealm = nil
+                withAnimation(.easeOut(duration: 0.15)) {
+                    proxy.scrollTo("cosmosTop", anchor: .top)
+                }
             }
             
         }
@@ -212,22 +224,22 @@ struct CosmosView: View {
         
         VStack(spacing: 16) {
             
-            Text("GNOSTIC COSMOLOGY")
+            Text(cosmosHeaderLabel)
                 .font(.system(size: 11, weight: .bold, design: .rounded))
                 .tracking(4)
-                .foregroundColor(Palette.accent.gold.opacity(0.7))
+                .foregroundColor(cosmosHeaderAccent.opacity(0.7))
             
-            Text("The Realms")
+            Text(cosmosHeaderTitle)
                 .font(.system(size: 32, weight: .bold, design: .rounded))
                 .foregroundStyle(
                     LinearGradient(
-                        colors: [Palette.text.primary, Palette.primary.violet],
+                        colors: [Palette.text.primary, cosmosHeaderGradientEnd],
                         startPoint: .top,
                         endPoint: .bottom
                     )
                 )
             
-            Text("Scroll through the dimensions.\nFrom Divine Fullness to Material Prison.")
+            Text(cosmosHeaderSubtitle)
                 .font(.system(size: 14, weight: .medium, design: .rounded))
                 .foregroundColor(Palette.text.secondary)
                 .multilineTextAlignment(.center)
@@ -240,11 +252,53 @@ struct CosmosView: View {
                     .opacity(0.5)
             }
             .font(.system(size: 12, weight: .light))
-            .foregroundColor(Palette.accent.gold.opacity(0.6))
+            .foregroundColor(cosmosHeaderAccent.opacity(0.6))
             .padding(.top, 8)
             
         }
         
+    }
+    
+    // MARK: - Dynamic Header Properties
+    
+    private var cosmosHeaderLabel: String {
+        switch selectedSection {
+        case .spheres: return "GNOSTIC COSMOLOGY"
+        case .liesAndTruths: return "CANONICAL VS. GNOSTIC"
+        case .entities: return "COSMIC BEINGS"
+        }
+    }
+    
+    private var cosmosHeaderTitle: String {
+        switch selectedSection {
+        case .spheres: return "The Realms"
+        case .liesAndTruths: return "Lies & Truths"
+        case .entities: return "The Entities"
+        }
+    }
+    
+    private var cosmosHeaderSubtitle: String {
+        switch selectedSection {
+        case .spheres: return "Scroll through the dimensions.\nFrom Divine Fullness to Material Prison."
+        case .liesAndTruths: return "What they said vs. what's real.\nFlip every label they gave you."
+        case .entities: return "The beings across all realms.\nFrom Archons to Angels."
+        }
+    }
+    
+    private var cosmosHeaderAccent: Color {
+        switch selectedSection {
+        case .spheres: return Palette.accent.gold
+        case .liesAndTruths: return Palette.primary.red
+        case .entities: return Palette.primary.cyan
+        }
+    }
+    
+    private var cosmosHeaderGradientEnd: Color {
+        switch selectedSection {
+        case .spheres: return Palette.primary.violet
+        case .liesAndTruths: return Palette.primary.red
+        case .entities: return Palette.primary.cyan
+        }
     }
     
     // MARK: - You Are Here Footer

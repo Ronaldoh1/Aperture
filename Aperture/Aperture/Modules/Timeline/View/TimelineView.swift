@@ -136,9 +136,18 @@ struct TimelineView: View {
             
             Spacer()
             
-            // Sun Dragon - Real kundalini serpent image
-            AnimatedDragonView(size: 180, showParticles: true, interactive: true)
-                .shadow(color: Palette.accent.gold.opacity(0.6), radius: 30)
+            // Sacred Geometry — Animated Flower of Life with Sun Dragon at center
+            ZStack {
+                // The Flower of Life — pattern of creation, divine light
+                AnimatedFlowerOfLife(size: 280, accentColor: Palette.accent.gold)
+                
+                // Sun Dragon at the heart of the geometry
+                Image("SunDragon")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 120, height: 180)
+                    .shadow(color: Palette.accent.gold.opacity(0.6), radius: 20)
+            }
             
             // Dragon speech
             VStack(spacing: 16) {

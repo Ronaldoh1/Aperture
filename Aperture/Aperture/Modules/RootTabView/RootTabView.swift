@@ -97,16 +97,20 @@ struct RootTabView: View {
             // Dragon Bubble Overlay (appears on all tabs)
             if dragonBubbleManager.bubbleEnabled {
                 DragonBubbleView(manager: dragonBubbleManager)
-                    .ignoresSafeArea()
+                    .allowsHitTesting(true)
             }
         }
-        // Long press anywhere to summon Dragon (when dismissed)
-        .onLongPressGesture(minimumDuration: 1.5) {
-            if dragonBubbleManager.isDismissed {
-                dragonBubbleManager.show()
-                HapticManager.shared.success()
-            }
-        }
+        // FIXED: Use simultaneousGesture so tab bar taps aren't blocked
+        // .onLongPressGesture DELAYS all child taps while waiting for the 1.5s threshold
+        .simultaneousGesture(
+            LongPressGesture(minimumDuration: 1.5)
+                .onEnded { _ in
+                    if dragonBubbleManager.isDismissed {
+                        dragonBubbleManager.show()
+                        HapticManager.shared.success()
+                    }
+                }
+        )
         
     }
     

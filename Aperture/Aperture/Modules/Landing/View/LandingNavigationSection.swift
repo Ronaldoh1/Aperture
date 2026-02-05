@@ -50,14 +50,8 @@ struct LandingNavigationSection: View {
                     selectedTab = 3  // Awakening is now tab 3
                 }
 
-                NavigationCard(
-                    icon: "books.vertical.fill",
-                    title: "Alexandria",
-                    subtitle: "Sacred Library",
-                    color: Palette.primary.violet
-                ) {
-                    selectedTab = 4  // More menu (contains Alexandria)
-                }
+                // Alexandria - Animated CTA (pulses until tapped 5 times)
+                AlexandriaCallToActionCard(selectedTab: $selectedTab)
 
             }
 

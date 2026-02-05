@@ -375,14 +375,8 @@ struct PersonalizedLandingView: View {
                     selectedTab = 3
                 }
                 
-                ExploreCard(
-                    icon: "books.vertical.fill",
-                    title: "Alexandria",
-                    subtitle: "Sacred Library",
-                    color: Palette.primary.violet
-                ) {
-                    selectedTab = 4 // More menu
-                }
+                // Alexandria - Animated CTA (pulses until tapped 5 times)
+                AlexandriaCallToActionCard(selectedTab: $selectedTab, style: .explore)
             }
         }
     }

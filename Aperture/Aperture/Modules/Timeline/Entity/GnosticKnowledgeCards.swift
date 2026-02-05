@@ -230,6 +230,47 @@ extension GnosticCard {
                     content: "They buried the texts. They burned the teachers. They rewrote history. They built institutions to stand between you and this truth. And still, after 2000 years of suppression, you found your way here. The spark cannot be extinguished. Welcome home."
                 )
             ]
+        ),
+        
+        // ═══════════════════════════════════════════════════════════
+        // CARD 7: THE FORBIDDEN GOSPELS - THEY HID THIS FROM EVERYONE
+        // ═══════════════════════════════════════════════════════════
+        
+        GnosticCard(
+            title: "The Forbidden Gospels",
+            subtitle: "They Hid This Truth From Everyone",
+            icon: "lock.open.trianglebadge.exclamationmark",
+            color: Color(red: 0.85, green: 0.2, blue: 0.2),
+            sections: [
+                GnosticSection(
+                    heading: "The Lie You Were Taught",
+                    content: "When we think of the Gospels we believe there are only four. Matthew, Mark, Luke, John. This is not true. Many more existed — and were banned. Not because they were false. But because they were too free."
+                ),
+                GnosticSection(
+                    heading: "What They Actually Taught",
+                    content: "The Gospels of Thomas, Mary Magdalene, Philip, and Judas Iscariot are texts where Jesus did not found religions — he spoke of the kingdom WITHIN you. Of knowledge as a path. Of the divine spark inhabiting the human being. These gospels did not preach guilt. They preached awakening."
+                ),
+                GnosticSection(
+                    heading: "A Teacher, Not a God-King",
+                    content: "These texts did not show a divinized, untouchable, distant Jesus. They showed a teacher who REMINDED human beings who they really were. Not a savior to worship from your knees — but a mirror showing you the light you already carry."
+                ),
+                GnosticSection(
+                    heading: "Why They Were Hidden",
+                    content: "Because they were dangerous to power. A people who KNOW do not need intermediaries. They are not easy to control. A soul that awakens does not obey out of fear. And a conscious human being cannot be easily governed."
+                ),
+                GnosticSection(
+                    heading: "How the Truth Was Edited",
+                    content: "When Christianity became the official religion of the Empire, spirituality was no longer an experience — it became a doctrine. The gospels that did not uphold guilt, sacrifice eternal, and the authority of the Church were branded as heresy. Not because they were fake. But because they were too free. The message was tamed. Faith became a golden cage."
+                ),
+                GnosticSection(
+                    heading: "The Echo That Never Dies",
+                    content: "But the forbidden does not disappear. It just waits. Every time someone questions, every time someone feels that something doesn't fit, every time someone senses that the divine does not live in temples but in consciousness — the echo of these silenced texts is heard again."
+                ),
+                GnosticSection(
+                    heading: "🐉☀️ The Real Question",
+                    content: "Perhaps the forbidden gospels were not hidden to protect God — but so that human beings would not remember who THEY are. That is the echo of a truth that can never be hidden."
+                )
+            ]
         )
         
     ]

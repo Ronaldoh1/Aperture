@@ -19,6 +19,10 @@ struct AwakeningView: View {
     @State private var matrixProgress: MatrixEducationProgress = .default
     @State private var courseProgress: CourseProgress = .default
     
+    // Essentials / Philosophy intro
+    @State private var showEssentials = false
+    @State private var hasCheckedFirstVisit = false
+    
     private var presenter: AwakeningPresenterType { presenterBox.presenter }
     
     init(presenter: AwakeningPresenterType) {
@@ -26,7 +30,7 @@ struct AwakeningView: View {
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 cosmicBackground
                 
@@ -47,6 +51,20 @@ struct AwakeningView: View {
             }
             .navigationTitle("Awakening")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        HapticManager.shared.light()
+                        showEssentials = true
+                    } label: {
+                        Image(systemName: "info.circle")
+                            .foregroundColor(Palette.accent.gold)
+                    }
+                }
+            }
+            .sheet(isPresented: $showEssentials) {
+                AwakeningEssentialsView()
+            }
             .sheet(isPresented: $showDailyCheckIn) {
                 DailyCheckInSheet { checkIn in
                     presenter.saveCheckIn(checkIn)
@@ -91,7 +109,25 @@ struct AwakeningView: View {
                 }
             }
         }
-        .onAppear { presenter.viewDidLoad() }
+        .onAppear { 
+            presenter.viewDidLoad()
+            
+            // Show essentials on first visit
+            if !hasCheckedFirstVisit {
+                hasCheckedFirstVisit = true
+                if !AwakeningFirstVisitManager.shared.hasSeenEssentials {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        showEssentials = true
+                    }
+                }
+            }
+        }
+        .onChange(of: showEssentials) { isShowing in
+            if !isShowing {
+                // Mark as seen when dismissed
+                AwakeningFirstVisitManager.shared.markAsSeen()
+            }
+        }
         .onChange(of: presenterBox.newLevelUp) { newLevel in
             if let level = newLevel {
                 levelUpData = level

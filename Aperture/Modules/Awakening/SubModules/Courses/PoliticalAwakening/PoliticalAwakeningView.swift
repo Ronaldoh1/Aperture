@@ -367,7 +367,7 @@ enum PoliticalSection: String, CaseIterable {
 // MARK: - Preview
 
 #Preview {
-    NavigationView {
+    NavigationStack {
         PoliticalAwakeningView()
     }
 }

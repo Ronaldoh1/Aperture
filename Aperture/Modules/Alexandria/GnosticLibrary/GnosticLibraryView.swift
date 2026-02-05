@@ -1276,7 +1276,7 @@ struct GnosticTextDetailView: View {
     @Environment(\.openURL) private var openURL
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
                     // Header
@@ -1482,7 +1482,7 @@ struct GnosticBeingDetailView: View {
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
                     // Header
@@ -1555,7 +1555,7 @@ struct GnosticBeingDetailView: View {
 }
 
 #Preview {
-    NavigationView {
+    NavigationStack {
         GnosticLibraryView()
     }
 }

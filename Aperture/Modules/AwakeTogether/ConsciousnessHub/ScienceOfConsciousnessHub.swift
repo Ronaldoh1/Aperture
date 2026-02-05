@@ -534,7 +534,7 @@ struct ResourceDetailView: View {
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView {
                 VStack(spacing: 20) {
                     // Hero
@@ -1308,7 +1308,7 @@ struct ConsciousnessLibrary {
 }
 
 #Preview {
-    NavigationView {
+    NavigationStack {
         ScienceOfConsciousnessHubView()
     }
 }

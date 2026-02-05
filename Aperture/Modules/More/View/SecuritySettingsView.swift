@@ -59,7 +59,7 @@ struct SecuritySettingsView: View {
     // MARK: - Account Section
     
     private var accountSection: some View {
-        Section {
+        Section(header: Text("Account")) {
             // Current user info
             if let user = authManager.currentUser {
                 HStack(spacing: 14) {
@@ -119,15 +119,13 @@ struct SecuritySettingsView: View {
                         .foregroundColor(.red)
                 }
             }
-        } header: {
-            Text("Account")
         }
     }
     
     // MARK: - Biometric Section
     
     private var biometricSection: some View {
-        Section {
+        Section(header: Text("Biometric Security"), footer: Text("\(authManager.biometricType.displayName) provides fast, secure access without typing passwords.")) {
             // Biometric toggle
             Toggle(isOn: $authManager.biometricLoginEnabled) {
                 HStack(spacing: 12) {
@@ -180,17 +178,13 @@ struct SecuritySettingsView: View {
                 HapticManager.shared.light()
             }
             
-        } header: {
-            Text("Biometric Security")
-        } footer: {
-            Text("\(authManager.biometricType.displayName) provides fast, secure access without typing passwords.")
         }
     }
     
     // MARK: - Auto-Lock Section
     
     private var autoLockSection: some View {
-        Section {
+        Section(header: Text("Auto-Lock"), footer: Text("Automatically lock the app after being in the background.")) {
             Picker(selection: $authManager.autoLockMinutes) {
                 Text("Immediately").tag(0)
                 Text("After 1 minute").tag(1)
@@ -212,17 +206,13 @@ struct SecuritySettingsView: View {
             .onChange(of: authManager.autoLockMinutes) { _ in
                 HapticManager.shared.light()
             }
-        } header: {
-            Text("Auto-Lock")
-        } footer: {
-            Text("Automatically lock the app after being in the background.")
         }
     }
     
     // MARK: - Privacy Section
     
     private var privacySection: some View {
-        Section {
+        Section(header: Text("Privacy")) {
             // Remember me toggle
             Toggle(isOn: $authManager.rememberMe) {
                 HStack(spacing: 12) {
@@ -266,15 +256,13 @@ struct SecuritySettingsView: View {
             .onChange(of: appLockSettings.requireAuthForPremium) { _ in
                 HapticManager.shared.light()
             }
-        } header: {
-            Text("Privacy")
         }
     }
     
     // MARK: - Danger Zone
     
     private var dangerZoneSection: some View {
-        Section {
+        Section(header: Text("Actions")) {
             // Lock app now
             Button(action: {
                 HapticManager.shared.medium()
@@ -308,8 +296,6 @@ struct SecuritySettingsView: View {
                         .foregroundColor(.red)
                 }
             }
-        } header: {
-            Text("Actions")
         }
         .alert("Delete Account", isPresented: $showDeleteAccountAlert) {
             Button("Delete", role: .destructive) {
@@ -354,7 +340,7 @@ struct SecuritySettingsRow: View {
 // MARK: - Preview
 
 #Preview {
-    NavigationView {
+    NavigationStack {
         SecuritySettingsView()
     }
     .preferredColorScheme(.dark)

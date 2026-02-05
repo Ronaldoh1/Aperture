@@ -1485,7 +1485,7 @@ struct EducationLessonView: View {
 // MARK: - Preview
 
 #Preview {
-    NavigationView {
+    NavigationStack {
         EducationExposedCourse()
     }
 }

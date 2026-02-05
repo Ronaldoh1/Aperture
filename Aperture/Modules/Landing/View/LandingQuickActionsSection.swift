@@ -26,7 +26,7 @@ struct LandingQuickActionsSection: View {
                     subtitle: "Resume your last course",
                     color: Palette.primary.cyan
                 ) {
-                    selectedTab = 4
+                    selectedTab = 3  // Awakening tab
                 }
 
                 QuickActionRow(
@@ -35,16 +35,16 @@ struct LandingQuickActionsSection: View {
                     subtitle: "Challenge your programming",
                     color: Palette.primary.violet
                 ) {
-                    selectedTab = 4
+                    selectedTab = 3  // Awakening tab
                 }
 
                 QuickActionRow(
                     icon: "flame.fill",
-                    title: "Institutional Lies Exposed",
-                    subtitle: "Documented deception",
+                    title: "Explore Alternative Traditions",
+                    subtitle: "Canonical vs. suppressed texts",
                     color: Palette.primary.red
                 ) {
-                    selectedTab = 2
+                    selectedTab = 2  // Cosmos tab
                 }
 
             }

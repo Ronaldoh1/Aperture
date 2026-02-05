@@ -5,9 +5,15 @@ import SwiftUI
 struct MoreView: View {
 
     @Binding var selectedTab: Int
-    @State private var showAwakening = false
+    @State private var showAlexandria = false
     @State private var showProfile = false
     @State private var showDragonCompanion = false
+    @State private var showSettings = false
+    @State private var showFAQ = false
+    @State private var showAbout = false
+    @State private var showJourneyProgress = false
+    @State private var showBookmarks = false
+    @State private var showFlowState = false
 
     var body: some View {
 
@@ -38,8 +44,10 @@ struct MoreView: View {
             }
             .navigationTitle("")
             .navigationBarHidden(true)
-            .navigationDestination(isPresented: $showAwakening) {
-                AwakeningEntryView(presenter: AppContainer.shared.container.resolve(AwakeningPresenterType.self)!)
+            .navigationDestination(isPresented: $showAlexandria) {
+                AlexandriaEntryView(container: AppContainer.shared.container) { route in
+                    print("🟠 MoreView: Alexandria route - \(route)")
+                }
             }
             .navigationDestination(isPresented: $showProfile) {
                 ProfileEntryView(container: AppContainer.shared.container) { route in
@@ -48,6 +56,24 @@ struct MoreView: View {
             }
             .navigationDestination(isPresented: $showDragonCompanion) {
                 DragonCompanionView()
+            }
+            .navigationDestination(isPresented: $showFAQ) {
+                FAQView()
+            }
+            .navigationDestination(isPresented: $showSettings) {
+                SettingsView()
+            }
+            .navigationDestination(isPresented: $showAbout) {
+                AboutApertureView()
+            }
+            .navigationDestination(isPresented: $showJourneyProgress) {
+                JourneyProgressView()
+            }
+            .navigationDestination(isPresented: $showBookmarks) {
+                BookmarksView(selectedTab: $selectedTab)
+            }
+            .navigationDestination(isPresented: $showFlowState) {
+                FlowStateView()
             }
 
         }
@@ -64,21 +90,23 @@ struct MoreView: View {
                 title: "Dragon Companion",
                 subtitle: "Your awakening partner grows with you",
                 color: Color(hex: "#FF6B35"),
-                badge: "🥚 NEW"
+                badge: "🐉 NEW"
             ) {
                 showDragonCompanion = true
             }
 
+            // ALEXANDRIA - Sacred Library (moved from tab bar)
             MoreMenuCard(
-                icon: "sun.max.fill",
-                title: "Awakening",
-                subtitle: "Courses & consciousness training",
-                color: Palette.accent.gold,
-                badge: "13 courses"
+                icon: "books.vertical.fill",
+                title: "Alexandria",
+                subtitle: "Sacred Library & primary sources",
+                color: Palette.primary.violet,
+                badge: nil
             ) {
-                showAwakening = true
+                showAlexandria = true
             }
 
+            // PROFILE
             MoreMenuCard(
                 icon: "person.circle.fill",
                 title: "Profile",
@@ -89,6 +117,40 @@ struct MoreView: View {
                 showProfile = true
             }
 
+            // JOURNEY PROGRESS (NEW)
+            MoreMenuCard(
+                icon: "chart.line.uptrend.xyaxis",
+                title: "Journey Progress",
+                subtitle: "Track your awakening journey",
+                color: .green,
+                badge: nil
+            ) {
+                showJourneyProgress = true
+            }
+
+            // BOOKMARKS (NEW)
+            MoreMenuCard(
+                icon: "bookmark.fill",
+                title: "Bookmarks",
+                subtitle: "Saved content for later",
+                color: Palette.accent.gold,
+                badge: nil
+            ) {
+                showBookmarks = true
+            }
+
+            // FLOWSTATE (PREMIUM)
+            MoreMenuCard(
+                icon: "brain.head.profile",
+                title: "FlowState",
+                subtitle: "AI-guided focus sessions",
+                color: .purple,
+                badge: "✨ PRO"
+            ) {
+                showFlowState = true
+            }
+
+            // SETTINGS
             MoreMenuCard(
                 icon: "gearshape.fill",
                 title: "Settings",
@@ -96,9 +158,21 @@ struct MoreView: View {
                 color: Palette.text.muted,
                 badge: nil
             ) {
-                // TODO: Navigate to settings
+                showSettings = true
             }
 
+            // FAQ
+            MoreMenuCard(
+                icon: "questionmark.circle.fill",
+                title: "FAQ",
+                subtitle: "Common questions answered",
+                color: Palette.accent.gold,
+                badge: nil
+            ) {
+                showFAQ = true
+            }
+
+            // ABOUT
             MoreMenuCard(
                 icon: "info.circle.fill",
                 title: "About Aperture",
@@ -106,7 +180,7 @@ struct MoreView: View {
                 color: Palette.primary.violet,
                 badge: nil
             ) {
-                // TODO: Navigate to about
+                showAbout = true
             }
 
         }

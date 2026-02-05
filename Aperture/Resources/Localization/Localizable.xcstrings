@@ -4,6 +4,12 @@
     "" : {
 
     },
+    " and gave birth to " : {
+
+    },
+    " fell from the " : {
+
+    },
     "- %@" : {
 
     },
@@ -16,16 +22,37 @@
     "— Gloria Steinem" : {
 
     },
+    "— Max Planck: \"Consciousness is fundamental. Physical matter is derivative of consciousness.\"" : {
+
+    },
+    "— Neville Goddard" : {
+
+    },
+    "— Nikola Tesla" : {
+
+    },
     "— Whis, Dragon Ball Super" : {
 
     },
     "?" : {
 
     },
+    "." : {
+
+    },
     "\"....%@....\"" : {
 
     },
     "\"%@\"" : {
+
+    },
+    "\"All appearances are projections of your own mind. Recognize this and you are free.\"" : {
+
+    },
+    "\"Ancient civilizations didn't vanish—their wisdom went underground, encoded in symbols, waiting for this moment.\"" : {
+
+    },
+    "\"Assume the feeling of the wish fulfilled and observe the route that your attention follows.\"" : {
 
     },
     "\"Biblical angels: wheels covered in eyes, six-winged beings on fire, four-faced creatures. 'Be not afraid' because people were TERRIFIED. Then someone drew a cute baby with wings and called it a day. 👼\"" : {
@@ -37,7 +64,19 @@
     "\"Hell isn't a place you go when you die. It's a state you're in when you don't know who you are. You might already be there. Gnosis is the way out. The fire isn't punishment - it's the burning of ignorance.\"" : {
 
     },
+    "\"I cannot prove that I am not living in a simulation. Neither can you. But does it matter? The experience of existence—simulated or not—is undeniably real to the one experiencing it.\"" : {
+
+    },
     "\"If history is buggy with lies, we're all glitching. Let's debug.\"" : {
+
+    },
+    "\"If you only knew the magnificence of 3, 6, and 9...\"" : {
+
+    },
+    "\"If you removed all empty space and energy from everyone on Earth (8 billion people), you would only have enough physical stuff to fit within a tiny sugar cube.\"" : {
+
+    },
+    "\"Institutions peddle myths; we deliver math.\"" : {
 
     },
     "\"Not thinking about anything is Zen. Once you know this, walking, sitting, or lying down, everything you do is Zen.\" — Bodhidharma" : {
@@ -55,10 +94,19 @@
     "\"The Constitution doesn't GIVE you rights. You are BORN with natural rights. The Constitution PROTECTS those rights from government interference.\"" : {
 
     },
+    "\"The day science begins to study non-physical phenomena, it will make more progress in one decade than in all the previous centuries.\"" : {
+
+    },
+    "\"The lips of wisdom are closed, except to the ears of Understanding.\"" : {
+
+    },
     "\"The most important subject never taught in school\"" : {
 
     },
     "\"The only prison is the one you don't know you're in.\"" : {
+
+    },
+    "\"The Outer World Follows The Inner World\"" : {
 
     },
     "\"The quality of your questions determines the quality of your life. Sit with this. Don't rush to an answer.\"" : {
@@ -88,10 +136,29 @@
     "\"You didn't fall INTO this world. You came from ABOVE it. The journey isn't up - it's remembering.\"" : {
 
     },
+    "\"You must assume the feeling of the wish fulfilled until your assumption has all the sensory vividness of reality.\"" : {
+
+    },
     "\"You're the visionary hacker—debugging the simulation\"" : {
 
     },
     "(%@)" : {
+
+    },
+    "(%lld)" : {
+
+    },
+    "(%lld/%lld)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "(%1$lld/%2$lld)"
+          }
+        }
+      }
+    },
+    "(optional)" : {
 
     },
     "/ 100" : {
@@ -101,6 +168,9 @@
 
     },
     "#%@" : {
+
+    },
+    "#%lld" : {
 
     },
     "%@" : {
@@ -132,6 +202,16 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "%1$@ %2$@ • %3$@ Element"
+          }
+        }
+      }
+    },
+    "%@ • %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ • %2$@"
           }
         }
       }
@@ -221,6 +301,9 @@
         }
       }
     },
+    "%lld nights" : {
+
+    },
     "%lld out of %lld stars" : {
       "localizations" : {
         "en" : {
@@ -258,6 +341,9 @@
     "%lld STEPS" : {
 
     },
+    "%lld syncs" : {
+
+    },
     "%lld texts" : {
 
     },
@@ -282,8 +368,21 @@
     "%lld XP" : {
 
     },
+    "%lld XP to next level" : {
+
+    },
     "%lld." : {
 
+    },
+    "%lld. %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld. %2$@"
+          }
+        }
+      }
     },
     "%lld/%lld" : {
       "localizations" : {
@@ -325,10 +424,42 @@
         }
       }
     },
+    "%lld/%lld nights" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld/%2$lld nights"
+          }
+        }
+      }
+    },
     "%lld/10" : {
 
     },
+    "%lld/15 Chapters" : {
+
+    },
     "%lld%%" : {
+
+    },
+    "%lld%% complete" : {
+
+    },
+    "%lld%% complete • ~20 min" : {
+
+    },
+    "%lld+ more %@ with free account" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld+ more %2$@ with free account"
+          }
+        }
+      }
+    },
+    "%lldm" : {
 
     },
     "%lldth percentile" : {
@@ -364,6 +495,9 @@
     "• ProPublica investigations" : {
 
     },
+    "• Seek common ground before differences\n• Ask 'who benefits from this conflict?'\n• Remember: We're all consciousness having a human experience\n• The enemy is not your neighbor - it's the system of control" : {
+
+    },
     "• What emotion is this triggering?" : {
 
     },
@@ -388,6 +522,21 @@
     "••••••••" : {
 
     },
+    "© 2026 SunFlow: Reignited" : {
+
+    },
+    "→" : {
+
+    },
+    "+" : {
+
+    },
+    "= %@" : {
+
+    },
+    "~%lld teachings" : {
+
+    },
     "~45 min" : {
 
     },
@@ -409,6 +558,9 @@
     "~90 min" : {
 
     },
+    "⏱️ MOMENT-TO-MOMENT PRACTICES" : {
+
+    },
     "☀️" : {
 
     },
@@ -418,13 +570,67 @@
     "☀️ Light / Truth" : {
 
     },
+    "☀️ Solar Sync" : {
+
+    },
     "☀️🐉" : {
+
+    },
+    "☎️ HOTLINES" : {
+
+    },
+    "☎️ LÍNEAS DE AYUDA" : {
 
     },
     "☸️" : {
 
     },
+    "⚔️" : {
+
+    },
+    "⚔️ MANUFACTURED DIVISIONS" : {
+
+    },
+    "⚔️ THE INNER BATTLE" : {
+
+    },
+    "⚖️" : {
+
+    },
+    "⚖️ Seven Principles" : {
+
+    },
+    "⚖️ THE ARGUMENTS" : {
+
+    },
+    "⚖️ Universal Laws" : {
+
+    },
+    "⚗️" : {
+
+    },
     "⚙️" : {
+
+    },
+    "⚛️" : {
+
+    },
+    "⚛️ PHYSICS ANOMALIES" : {
+
+    },
+    "⚛️ Real Physics" : {
+
+    },
+    "⚛️ THE SCIENCE" : {
+
+    },
+    "⚠️" : {
+
+    },
+    "⚠️ 5 SCARCITY TRAPS" : {
+
+    },
+    "⚠️ Astral projection is an advanced practice. Ensure you are grounded and mentally prepared." : {
 
     },
     "⚠️ CURRENT ACTIVE THREAT" : {
@@ -436,10 +642,64 @@
     "⚠️ IMPORTANT" : {
 
     },
+    "⚠️ NOTE" : {
+
+    },
+    "⚠️ PITFALLS TO AVOID" : {
+
+    },
     "⚠️ Proceed With Caution" : {
 
     },
+    "⚠️ QUÉ NO HACER" : {
+
+    },
+    "⚠️ SAFETY" : {
+
+    },
+    "⚠️ THE THINKING CRISIS" : {
+
+    },
     "⚠️ WARNING: This content will change how you see the world" : {
+
+    },
+    "⚠️ WHAT NOT TO DO" : {
+
+    },
+    "⚡ ADVANCED CAUSE & EFFECT" : {
+
+    },
+    "⚡ CRITICAL POINT: 200" : {
+
+    },
+    "⚡ INTERRUPT THE PATTERN" : {
+
+    },
+    "⚡ WORDS ENDING IN EL" : {
+
+    },
+    "✅" : {
+
+    },
+    "✅ ARGUMENTS FOR" : {
+
+    },
+    "✅ FLIPPED THOUGHT" : {
+
+    },
+    "✅ IF SIMULATION IS TRUE" : {
+
+    },
+    "✅ Mark as Complete" : {
+
+    },
+    "✅ REALITY" : {
+
+    },
+    "✅ THE RIGHT QUESTION" : {
+
+    },
+    "✓" : {
 
     },
     "✓ OPTIMAL ACTIVITIES" : {
@@ -451,16 +711,88 @@
     "✗ AVOID" : {
 
     },
+    "✡️" : {
+
+    },
     "✦" : {
+
+    },
+    "✨" : {
+
+    },
+    "✨ %@" : {
+
+    },
+    "✨ 10 KEY SAYINGS" : {
+
+    },
+    "✨ BENEFITS" : {
 
     },
     "✨ SIGNIFICANCE" : {
 
     },
+    "✨ Sync Tracker" : {
+
+    },
+    "✨ THE ANTIDOTE" : {
+
+    },
+    "✨ THE ARCHANGELS" : {
+
+    },
+    "✨ THE MIRACLE" : {
+
+    },
+    "✨ THE TRUE MEANING" : {
+
+    },
+    "✨ WHAT'S POSSIBLE" : {
+
+    },
+    "✨🐲✨" : {
+
+    },
+    "❌" : {
+
+    },
+    "❌ ARGUMENTS AGAINST" : {
+
+    },
     "❌ COMMON MISTAKES TO AVOID" : {
 
     },
+    "❌ FALSE MEMORY" : {
+
+    },
+    "❌ NEGATIVE THOUGHT" : {
+
+    },
+    "❌ THE WRONG QUESTION" : {
+
+    },
+    "❓ NEW QUESTIONS TO ASK" : {
+
+    },
+    "❓ WHAT IS AN ANGEL?" : {
+
+    },
+    "⭐ PREMIUM EXERCISES" : {
+
+    },
+    "🌀 100 Paradoxes" : {
+
+    },
     "🌅 WHERE DID I GO UNCONSCIOUS TODAY?" : {
+
+    },
+    "🌍 UNIVERSAL CONNECTION" : {
+
+    },
+    "🌍 WE ARE ALL THE SAME" : {
+
+    },
+    "🌐 IMPLICATIONS" : {
 
     },
     "🌑" : {
@@ -469,22 +801,91 @@
     "🌑 Control / Erasure" : {
 
     },
+    "🌙" : {
+
+    },
+    "🌙 SATS Chamber" : {
+
+    },
+    "🌟 THE 7 STAGES" : {
+
+    },
+    "🍄 THE MARIO ANALOGY" : {
+
+    },
     "🎉 LEVEL UP!" : {
+
+    },
+    "🎓" : {
+
+    },
+    "🎓 Training" : {
 
     },
     "🎬 KEY MOMENTS" : {
 
     },
+    "🎬 YOUR SCENE" : {
+
+    },
+    "🎮 PLAYER VS CHARACTER" : {
+
+    },
     "🎯" : {
+
+    },
+    "🎯 CORE PRINCIPLES" : {
+
+    },
+    "🎯 DAILY APPLICATION" : {
+
+    },
+    "🎯 DAILY PRACTICE" : {
+
+    },
+    "🎯 GUIDED PROTOCOLS" : {
 
     },
     "🎯 WHO BENEFITS" : {
 
     },
+    "🎯 WHY THIS MATTERS" : {
+
+    },
+    "🎯 YOUR MISSION" : {
+
+    },
+    "🏆" : {
+
+    },
+    "🏗️" : {
+
+    },
+    "🏗️ Architect" : {
+
+    },
+    "🏛️" : {
+
+    },
+    "🏛️ Esoteric Archives" : {
+
+    },
+    "🏛️ THE THREE GODS OF EGYPT" : {
+
+    },
     "🐉" : {
 
     },
+    "🐉 %@" : {
+
+    },
+    "🐉 %@'S WISDOM" : {
+
+    },
     "🐉 DRAGON BALL EQUIVALENT" : {
+
+    },
+    "🐉 DRAGON WISDOM" : {
 
     },
     "🐉 DRAGON'S WISDOM" : {
@@ -496,10 +897,61 @@
     "🐍" : {
 
     },
+    "🐛" : {
+
+    },
+    "🐛 'GLITCHES' REPORTED" : {
+
+    },
+    "🐣" : {
+
+    },
+    "🐲" : {
+
+    },
+    "👁️" : {
+
+    },
+    "👁️ Chosen One Oracle" : {
+
+    },
+    "👁️ LEVEL 7: METACOGNITION" : {
+
+    },
+    "👁️ THE ELITE SECRET" : {
+
+    },
+    "👍" : {
+
+    },
+    "👤 YOUR THREE-PART BEING" : {
+
+    },
+    "👼" : {
+
+    },
     "👼 ANGELS - THE TRUTH" : {
 
     },
+    "💀" : {
+
+    },
+    "💀 Bardo Navigator" : {
+
+    },
     "💀 THE LIES THEY TOLD" : {
+
+    },
+    "💎 HERMETIC AXIOMS" : {
+
+    },
+    "💎 KEY INSIGHT" : {
+
+    },
+    "💎 KEY QUOTE" : {
+
+    },
+    "💎 WEALTH AFFIRMATIONS" : {
 
     },
     "💡" : {
@@ -508,31 +960,190 @@
     "💡 %@" : {
 
     },
+    "💡 EXPLANATION / RESOLUTION" : {
+
+    },
+    "💡 THE KEY TRUTH" : {
+
+    },
+    "💣 THE TRUTH" : {
+
+    },
     "💥" : {
+
+    },
+    "💪 THE INNER-CISE" : {
+
+    },
+    "💫 DOMINANT FEELING" : {
+
+    },
+    "💬 FRASES CLAVE" : {
+
+    },
+    "💬 KEY PHRASES" : {
+
+    },
+    "💭" : {
+
+    },
+    "💭 FINAL THOUGHT" : {
+
+    },
+    "💰" : {
+
+    },
+    "💰 Wealth Consciousness" : {
 
     },
     "💰 Worth the Investment (Maybe)" : {
 
     },
+    "📅 COMMITMENT" : {
+
+    },
+    "📊" : {
+
+    },
+    "📊 BY THE NUMBERS" : {
+
+    },
+    "📊 Frequency" : {
+
+    },
+    "📊 STATISTICS" : {
+
+    },
+    "📊 THE DATA IS ALARMING" : {
+
+    },
+    "📊 THE PRINCIPLE OF POLARITY" : {
+
+    },
     "📋 DOCUMENTED TRUTH" : {
+
+    },
+    "📋 KEY RULES" : {
+
+    },
+    "📋 STEPS" : {
+
+    },
+    "📖 BIBLICAL NAMES WITH EL" : {
+
+    },
+    "📖 EXPLANATION" : {
+
+    },
+    "📖 THE PARADOX" : {
+
+    },
+    "📖 THE SCALE" : {
+
+    },
+    "📖 THE TECHNIQUE" : {
+
+    },
+    "📖 VISUALIZATION" : {
+
+    },
+    "📖 YOUR MONEY STORY" : {
 
     },
     "📖🔥" : {
 
     },
+    "📚" : {
+
+    },
+    "📚 15 CHAPTERS" : {
+
+    },
+    "📚 BLOOM'S DISCOVERY (1956)" : {
+
+    },
     "📚 EVIDENCE" : {
+
+    },
+    "📚 SOURCE" : {
 
     },
     "📚 TEXTS" : {
 
     },
+    "📚 TRAINING MODULES" : {
+
+    },
+    "📚 WHAT YOU'LL MASTER" : {
+
+    },
+    "📚 WHY THEY HID IT" : {
+
+    },
+    "📜" : {
+
+    },
+    "📜 RECENT SYNCHRONICITIES" : {
+
+    },
+    "📜 Sacred Etymology" : {
+
+    },
+    "📜 THE ALLEGORICAL MEANING" : {
+
+    },
+    "📜 The Kybalion" : {
+
+    },
+    "📜 THE THREE BARDOS" : {
+
+    },
     "📝 SUMMARY" : {
+
+    },
+    "📝 TODAY'S FLIPS (%lld)" : {
+
+    },
+    "📞 CONTACTOS DE EMERGENCIA" : {
+
+    },
+    "📞 EMERGENCY CONTACTS" : {
 
     },
     "📺 DOCUMENTARIES" : {
 
     },
+    "📿 Gnostic Texts" : {
+
+    },
+    "🔄" : {
+
+    },
+    "🔄 IDENTITY SHIFTING" : {
+
+    },
+    "🔄 THE SHIFT" : {
+
+    },
+    "🔆 PROTOCOLS" : {
+
+    },
     "🔍" : {
+
+    },
+    "🔍 DEEPER DECODING" : {
+
+    },
+    "🔍 EVIDENCE" : {
+
+    },
+    "🔍 INDUSTRY LIES" : {
+
+    },
+    "🔍 INTERPRETATION" : {
+
+    },
+    "🔍 SELF-ASSESSMENT" : {
 
     },
     "🔑 KEY INSIGHTS" : {
@@ -541,19 +1152,196 @@
     "🔑 KEY POINTS" : {
 
     },
+    "🔑 KEY TEACHING" : {
+
+    },
+    "🔑 THE KEY INSIGHT" : {
+
+    },
+    "🔒" : {
+
+    },
+    "🔒 Forbidden" : {
+
+    },
+    "🔒 WHY SOCIETY IS STUCK" : {
+
+    },
+    "🔓 THE BREAKDOWN" : {
+
+    },
+    "🔝 HOW TO ASCEND" : {
+
+    },
     "🔥" : {
+
+    },
+    "🔥 SPARK REMINDER" : {
 
     },
     "🔥 THE DEMONIZED ONES" : {
 
     },
+    "🔬" : {
+
+    },
+    "🔬 POTENTIAL EVIDENCE" : {
+
+    },
+    "🔮 Mandela Effects" : {
+
+    },
+    "🔮 THE CORE PRINCIPLE" : {
+
+    },
+    "🔮 THE HYPOTHESIS" : {
+
+    },
+    "🔮 THE MANDELA EFFECT" : {
+
+    },
+    "🔮 THE PATTERN" : {
+
+    },
+    "🔯" : {
+
+    },
+    "🔯 Symbols" : {
+
+    },
     "🔴" : {
+
+    },
+    "🔹 KEY TRAITS" : {
+
+    },
+    "🔺" : {
+
+    },
+    "🔺 BOSTROM'S TRILEMMA" : {
+
+    },
+    "🔺 THE 6 LEVELS (+1)" : {
+
+    },
+    "🕹️" : {
+
+    },
+    "🖥️" : {
+
+    },
+    "🖥️ Simulation Theory" : {
+
+    },
+    "🤝" : {
+
+    },
+    "🤝 Division" : {
+
+    },
+    "🥗" : {
+
+    },
+    "🥗 Nutrition" : {
 
     },
     "🥚" : {
 
     },
+    "🧘 PRACTICES TO CONNECT TO THE PLAYER" : {
+
+    },
+    "🧘 PREPARATION PRACTICES" : {
+
+    },
+    "🧠" : {
+
+    },
+    "🧠 Consciousness Codex" : {
+
+    },
+    "🧠 KEY PROPONENTS" : {
+
+    },
+    "🧠 Kybalion Quiz" : {
+
+    },
+    "🧠 Levels of Thinking" : {
+
+    },
+    "🧠 Mental Diet" : {
+
+    },
+    "🧠 PINEAL DECALCIFICATION" : {
+
+    },
+    "🧠 PROPOSED THEORIES" : {
+
+    },
+    "🧠 Rational Awakening" : {
+
+    },
+    "🧠 Rational Enlightenment" : {
+
+    },
+    "🧠 THE SCIENCE OF CHANGE" : {
+
+    },
+    "🧪 PROPOSED TESTS" : {
+
+    },
+    "🪞" : {
+
+    },
+    "🪞 Mirror Principle" : {
+
+    },
+    "😊 SMILING IN THE MIRROR" : {
+
+    },
+    "😰" : {
+
+    },
+    "😱 THE TERRIFYING PART" : {
+
+    },
+    "🚀" : {
+
+    },
+    "🚀 Astral Guide" : {
+
+    },
+    "🚨 ICE Emergency" : {
+
+    },
     "🚨 The Debt Trap Majors" : {
+
+    },
+    "🛠️" : {
+
+    },
+    "🛠️ PRACTICAL IMPLICATIONS" : {
+
+    },
+    "🛠️ RATIONAL TOOLS" : {
+
+    },
+    "🛡️" : {
+
+    },
+    "🛡️ CONOZCA SUS DERECHOS" : {
+
+    },
+    "🛡️ KNOW YOUR RIGHTS" : {
+
+    },
+    "🛡️ Mind Defense" : {
+
+    },
+    "🛡️ SELECT SHIELD TYPE" : {
+
+    },
+    "🛡️ Vibe Shield" : {
 
     },
     "$%@" : {
@@ -571,10 +1359,22 @@
     "3" : {
 
     },
+    "3 • 6 • 9" : {
+
+    },
+    "3 Parts" : {
+
+    },
     "5 practices found in EVERY tradition" : {
 
     },
     "5 Protocols" : {
+
+    },
+    "5 proven techniques for OBE" : {
+
+    },
+    "5 Traps" : {
 
     },
     "5-4-3-2-1 GROUNDING" : {
@@ -595,6 +1395,9 @@
     "8 Lessons" : {
 
     },
+    "8 paths of the awakened soul" : {
+
+    },
     "8+ documentaries • Embedded videos" : {
 
     },
@@ -602,6 +1405,18 @@
 
     },
     "9 Lessons" : {
+
+    },
+    "10 Advanced Analyzers - AI-Augmented for Empirical Elites" : {
+
+    },
+    "10 Core Catalysts" : {
+
+    },
+    "10 Core Catalysts - Evidence Entry Points for All" : {
+
+    },
+    "10 Hermetic keys to meditation" : {
 
     },
     "10 Layers of Control" : {
@@ -619,7 +1434,13 @@
     "14 Triggers" : {
 
     },
+    "14 Universal Laws" : {
+
+    },
     "15 doctrines exposed. Tap to see what\nthey don't want you to know." : {
+
+    },
+    "20 exercises rooted in cognitive science" : {
 
     },
     "20 MAJORS: THE REALITY CHECK" : {
@@ -628,10 +1449,22 @@
     "25 Lies" : {
 
     },
+    "25 techniques to spot manipulation" : {
+
+    },
+    "50+ Logical Fallacies - Coming Soon" : {
+
+    },
+    "85+ Forbidden Teachings" : {
+
+    },
     "90%" : {
 
     },
     "100% transparent methodology" : {
+
+    },
+    "200 (Courage) is the dividing line between power and force. Above 200, you contribute to the world. Below 200, you drain it." : {
 
     },
     "2026 Campaign Tracker" : {
@@ -646,6 +1479,9 @@
     "A Documented History" : {
 
     },
+    "A framework for navigating awakening" : {
+
+    },
     "A motivated self-learner can match any college graduate. The knowledge is free—only effort has a price." : {
 
     },
@@ -655,16 +1491,25 @@
     "A People's History" : {
 
     },
+    "A unified path through awakening traditions,\nhidden history, and practical transformation." : {
+
+    },
     "A-Z" : {
 
     },
     "About" : {
 
     },
+    "About Aperture" : {
+
+    },
     "About This Course" : {
 
     },
     "ABOUT THIS MODULE" : {
+
+    },
+    "Access texts that were hidden, burned, or declared heretical. The Nag Hammadi library, Dead Sea Scrolls, and more." : {
 
     },
     "Access the sacred texts library in Aperture" : {
@@ -679,10 +1524,19 @@
     "Actions" : {
 
     },
+    "Activate Shield" : {
+
+    },
+    "Active learning replaces passive consumption" : {
+
+    },
     "Active Threat" : {
 
     },
     "ACTIVE THREAT" : {
+
+    },
+    "Actually:" : {
 
     },
     "Add" : {
@@ -700,7 +1554,13 @@
     "Add candidates to compare" : {
 
     },
+    "Add Contact" : {
+
+    },
     "Add First Entry" : {
+
+    },
+    "Add Note" : {
 
     },
     "Add Source" : {
@@ -730,13 +1590,25 @@
     "Age: %lld days" : {
 
     },
+    "AI-Augmented" : {
+
+    },
+    "AI-guided focus for deep work and awakening" : {
+
+    },
     "Alexandria" : {
+
+    },
+    "Align with natural light cycles" : {
 
     },
     "All" : {
 
     },
     "All awakening paths carry some risk. Please approach with awareness." : {
+
+    },
+    "All biblical 'wars' are allegories for the battle within:" : {
 
     },
     "All information is from public records:" : {
@@ -757,6 +1629,9 @@
     "All States" : {
 
     },
+    "Allow notifications to receive daily reminders and Dragon wisdom." : {
+
+    },
     "Already have an account?" : {
 
     },
@@ -770,6 +1645,15 @@
 
     },
     "Americans are sicker and dying younger than people in other wealthy nations. The food supply is a major reason." : {
+
+    },
+    "An angel is an impulse that comes from your higher mind—from the electromagnetic field of the right hemisphere of your brain." : {
+
+    },
+    "An ANGEL is the god impulse in you." : {
+
+    },
+    "An Egyptian Word, Not Hebrew" : {
 
     },
     "Analysis happens on-device using local AI. Your offer letter is NEVER uploaded to any server. Data is deleted after analysis." : {
@@ -790,10 +1674,19 @@
     "Analyzing..." : {
 
     },
+    "ANCHOR THE FEELING" : {
+
+    },
+    "Ancient Knowledge Preserved" : {
+
+    },
     "Ancient wisdom meets modern awakening" : {
 
     },
     "and" : {
+
+    },
+    "Angels" : {
 
     },
     "Answered" : {
@@ -806,6 +1699,15 @@
 
     },
     "APERTURE" : {
+
+    },
+    "Aperture exists to synthesize the world's wisdom traditions, reveal hidden historical patterns, and provide practical tools for conscious evolution." : {
+
+    },
+    "Aperture is educational, comparative, and exploratory. We encourage you to question all material—including this platform. Form your own conclusions. Your awakening is yours alone." : {
+
+    },
+    "Aperture is optimized for dark mode. Light mode coming soon." : {
 
     },
     "Aperture Locked" : {
@@ -823,13 +1725,25 @@
     "APPLY WHAT YOU LEARNED" : {
 
     },
+    "Archetype Assessment" : {
+
+    },
     "Archon Tactics Identified:" : {
+
+    },
+    "Are we living in a computer simulation?" : {
 
     },
     "Are you sure you want to sign out?" : {
 
     },
+    "Arguments" : {
+
+    },
     "As you complete courses and awaken to truth, your dragon will hatch, grow, and evolve alongside you." : {
+
+    },
+    "Ascend" : {
 
     },
     "Ask for:" : {
@@ -838,7 +1752,19 @@
     "Ask yourself before consuming:" : {
 
     },
+    "Ask: How do they show up with their finances? What do they believe about money? What is their internal relationship with wealth?" : {
+
+    },
     "Assess" : {
+
+    },
+    "Astral Projection Guide" : {
+
+    },
+    "At least one of these three propositions MUST be true:" : {
+
+    },
+    "Audio narration • ~20 min" : {
 
     },
     "Authenticate to continue" : {
@@ -907,7 +1833,13 @@
     "Back" : {
 
     },
+    "BACK" : {
+
+    },
     "BANNED IN OTHER COUNTRIES, LEGAL IN US" : {
+
+    },
+    "Bardo Navigator" : {
 
     },
     "base salary" : {
@@ -923,7 +1855,22 @@
         }
       }
     },
+    "Based on Federico Faggin's revolutionary theory" : {
+
+    },
     "Based on your birth chart and awakening path, we've channeled names that resonate with your cosmic energy." : {
+
+    },
+    "Based on your intent..." : {
+
+    },
+    "Bayes Calculator" : {
+
+    },
+    "Bayes Calculator - Coming Soon" : {
+
+    },
+    "Because EL is the God Impulse" : {
 
     },
     "Before voting, find out:" : {
@@ -938,10 +1885,22 @@
     "Begin Creating Good" : {
 
     },
+    "BEGIN ENCODING" : {
+
+    },
+    "Begin Exercise" : {
+
+    },
     "Begin Journey" : {
 
     },
     "Begin Practice" : {
+
+    },
+    "Begin SATS Session" : {
+
+    },
+    "Begin Session" : {
 
     },
     "Begin Your Journey" : {
@@ -983,10 +1942,28 @@
     "Beyond the theater. See the system for what it is." : {
 
     },
+    "Bias Checker" : {
+
+    },
+    "Bias Checker Tool" : {
+
+    },
+    "Bias Checker Tool - Coming Soon" : {
+
+    },
     "Biometric Security" : {
 
     },
+    "Block on Debugger" : {
+
+    },
+    "Block on Jailbreak" : {
+
+    },
     "Bodhi Enlightenment" : {
+
+    },
+    "Bookmarks" : {
 
     },
     "Books and apps can only take you so far. At some point, most paths benefit from human guidance. Look for:" : {
@@ -1001,7 +1978,16 @@
     "Bug Report" : {
 
     },
+    "Build your world consciously" : {
+
+    },
     "Built with" : {
+
+    },
+    "Built with 🐉 in NYC" : {
+
+    },
+    "But the PLAYER knows how to navigate. The player knows to jump on enemies, get the fireflower, collect upgrades, and advance through levels." : {
 
     },
     "by %@" : {
@@ -1011,6 +1997,9 @@
 
     },
     "by Ron" : {
+
+    },
+    "By: %@" : {
 
     },
     "Calm-like experience with behavioral nudges" : {
@@ -1023,6 +2012,12 @@
 
     },
     "Candidate Name" : {
+
+    },
+    "CANONICAL VS. ALTERNATIVE TRADITIONS" : {
+
+    },
+    "Catch negative thoughts. Flip them immediately." : {
 
     },
     "CATEGORIES" : {
@@ -1040,6 +2035,9 @@
     "CHAKRA PROGRESS" : {
 
     },
+    "Chapter %lld" : {
+
+    },
     "CHARACTERISTICS" : {
 
     },
@@ -1055,7 +2053,16 @@
     "Check yourself before you post" : {
 
     },
+    "Choose up to 3 quick access items" : {
+
+    },
+    "Choose what resonates most. This helps personalize your journey." : {
+
+    },
     "Choose wisely. This companion will grow with you on your awakening journey." : {
+
+    },
+    "Choose your matrix: Red pill or regression analysis?" : {
 
     },
     "Chronotypes" : {
@@ -1068,6 +2075,18 @@
 
     },
     "Clear" : {
+
+    },
+    "Clear All" : {
+
+    },
+    "Clear All Bookmarks?" : {
+
+    },
+    "Client after client doubles their income, attracts dream homes, cars, vacations—flying first class—because they changed their THINKING about money first." : {
+
+    },
+    "Close" : {
 
     },
     "Cognitive Dissonance" : {
@@ -1106,6 +2125,9 @@
     "Common Mistakes to Avoid:" : {
 
     },
+    "Common questions about Aperture and your journey" : {
+
+    },
     "Compare Candidates" : {
 
     },
@@ -1116,6 +2138,9 @@
 
     },
     "Comparison Grid" : {
+
+    },
+    "Complete" : {
 
     },
     "Complete all 10 layers to unlock full tools" : {
@@ -1133,6 +2158,9 @@
     "Completed" : {
 
     },
+    "Completed ✓" : {
+
+    },
     "Config" : {
 
     },
@@ -1145,6 +2173,9 @@
     "CONSCIOUSNESS AWAKENING" : {
 
     },
+    "Consciousness Codex" : {
+
+    },
     "Consciousness Course" : {
 
     },
@@ -1155,6 +2186,9 @@
 
     },
     "CONSCIOUSNESS TOOLS" : {
+
+    },
+    "Consciousness Trainer" : {
 
     },
     "Conservative" : {
@@ -1175,7 +2209,19 @@
     "Content Suggestion" : {
 
     },
+    "Continue" : {
+
+    },
+    "CONTINUE" : {
+
+    },
     "Continue as Guest" : {
+
+    },
+    "Continue Browsing" : {
+
+    },
+    "Continue Exploring" : {
 
     },
     "Continue Learning" : {
@@ -1190,6 +2236,9 @@
     "Continue your journey" : {
 
     },
+    "Control Detection Toolkit" : {
+
+    },
     "Control Mechanisms" : {
 
     },
@@ -1200,6 +2249,12 @@
 
     },
     "Copy Email" : {
+
+    },
+    "Core" : {
+
+    },
+    "Core Concepts" : {
 
     },
     "Corporate Crimes" : {
@@ -1235,6 +2290,15 @@
     "Create Account" : {
 
     },
+    "Create Free Account" : {
+
+    },
+    "CREATE SHIFT" : {
+
+    },
+    "CREATE YOUR SATS SCENE" : {
+
+    },
     "CRITICAL" : {
 
     },
@@ -1256,10 +2320,16 @@
     "CURRICULUM" : {
 
     },
+    "Customize Quick Access" : {
+
+    },
     "Daily Check-In" : {
 
     },
     "Daily Check-In • Cognitive Dissonance Log\nReality Audit • Question Bank" : {
+
+    },
+    "Daily Dragon Message" : {
 
     },
     "Daily Phases" : {
@@ -1271,6 +2341,9 @@
     "DAILY REALITY CHECK" : {
 
     },
+    "Daily Reminder" : {
+
+    },
     "Daily Wisdom" : {
 
     },
@@ -1280,13 +2353,31 @@
     "Data Source: %@" : {
 
     },
+    "David Hawkins' Map of Consciousness" : {
+
+    },
     "DAY %lld" : {
+
+    },
+    "day streak" : {
 
     },
     "days" : {
 
     },
+    "Decode" : {
+
+    },
     "Deep Dive Resources" : {
+
+    },
+    "Deep Work: %lldm" : {
+
+    },
+    "Deep: %lldm" : {
+
+    },
+    "Defense Techniques" : {
 
     },
     "Defense: " : {
@@ -1301,7 +2392,16 @@
     "Delete Account" : {
 
     },
+    "Deliberately hold high vibration" : {
+
+    },
     "Describe a moment when you lost awareness and reacted automatically." : {
+
+    },
+    "Describe a short scene (5-10 seconds) that IMPLIES the wish is already fulfilled. First person, present tense." : {
+
+    },
+    "Describe your short scene (5-10 seconds max)" : {
 
     },
     "Different names, same truth. The paths are many, the destination is one." : {
@@ -1319,10 +2419,25 @@
     "Discern Illusions from Reality" : {
 
     },
+    "Discover Your Archetype" : {
+
+    },
+    "Dismiss" : {
+
+    },
+    "Distraction" : {
+
+    },
+    "Distractions: %lld" : {
+
+    },
     "Divine Being" : {
 
     },
     "DIVINE BEINGS" : {
+
+    },
+    "Division Deprogramming" : {
 
     },
     "Documented • Cited • Truthful" : {
@@ -1364,6 +2479,12 @@
     "Double tap to share this content" : {
 
     },
+    "Dr. David Hawkins calibrated human consciousness on a logarithmic scale from 1-1000. Below 200 is destructive; above 200 is constructive. Each level has its own emotional signature and life view." : {
+
+    },
+    "Dragon" : {
+
+    },
     "Dragon Companion" : {
 
     },
@@ -1373,7 +2494,13 @@
     "DRAGON SAYS" : {
 
     },
+    "Dragon Wisdom" : {
+
+    },
     "DRAGON'S WISDOM" : {
+
+    },
+    "Duration" : {
 
     },
     "e.g., I got triggered by a comment and snapped..." : {
@@ -1391,7 +2518,22 @@
     "e.g., U.S. Representative, Senator, President" : {
 
     },
+    "Edit" : {
+
+    },
     "Education Exposed" : {
+
+    },
+    "Educational psychologist Benjamin Bloom created a taxonomy of thinking—originally for teachers, but actually a blueprint for human cognition itself." : {
+
+    },
+    "EL" : {
+
+    },
+    "EL = The God Impulse" : {
+
+    },
+    "El Words" : {
 
     },
     "ELECTION DAY" : {
@@ -1407,6 +2549,9 @@
 
     },
     "Email (optional)" : {
+
+    },
+    "Emergency Contacts" : {
 
     },
     "EMERGENCY QUICK REFERENCE" : {
@@ -1433,13 +2578,43 @@
     "Enable All MVP" : {
 
     },
+    "Enable Notifications" : {
+
+    },
+    "ENCODE" : {
+
+    },
+    "ENCODED:" : {
+
+    },
+    "ENCODING COMPLETE" : {
+
+    },
+    "End" : {
+
+    },
+    "End Session" : {
+
+    },
+    "Energetic protection techniques" : {
+
+    },
+    "Energy called:" : {
+
+    },
     "Energy Level" : {
 
     },
     "Energy:" : {
 
     },
+    "Enforce Security Checks" : {
+
+    },
     "Enter a name..." : {
+
+    },
+    "Enter Aperture" : {
 
     },
     "Enter Candidate Information" : {
@@ -1451,7 +2626,13 @@
     "Enter flow on command. Calibrate your rhythm." : {
 
     },
+    "Enter Flow State" : {
+
+    },
     "ENTER HEADLINE OR NARRATIVE" : {
+
+    },
+    "Entering: %lldm" : {
 
     },
     "Episodes to Start With" : {
@@ -1472,10 +2653,25 @@
     "ESSENTIAL CONSCIOUSNESS TALKS" : {
 
     },
+    "Est. people who remember wrong:" : {
+
+    },
     "Evaluate candidates with transparency.\nNo spin. No illusions. Just data." : {
 
     },
+    "Even if you meditate and visualize for an hour, what about the other 15+ hours? You are in INFINITE ACTION—always dwelling on something in thought and feeling." : {
+
+    },
+    "Every angel name ends in EL because they all represent different aspects of the God impulse working through you:" : {
+
+    },
     "Every awakening path has been walked by millions before you. Trust the process, but always listen to your body and mind. If something doesn't feel right, slow down or seek guidance." : {
+
+    },
+    "Every moment you choose depth over speed, curiosity over certainty, reflection over reaction—you ASCEND." : {
+
+    },
+    "Every person has a money story—beliefs formed from:" : {
 
     },
     "Every tradition describes the same process:" : {
@@ -1485,6 +2681,18 @@
 
     },
     "Everything here links to primary sources: DOJ cases, FDA communications, Senate reports, peer-reviewed journals, or declassified government documents. These are not theories - they are documented institutional actions." : {
+
+    },
+    "Everything you're experiencing—your relationships, your bank account, your struggles, your successes—is showing you YOU. The mirror is not random circumstances, not punishment, not luck. It's a reflection of your internal state." : {
+
+    },
+    "Evidence" : {
+
+    },
+    "Evidence Journal" : {
+
+    },
+    "Evidence-Based Exercises" : {
 
     },
     "EVIL" : {
@@ -1499,7 +2707,22 @@
     "Evil Score" : {
 
     },
+    "Evo Drivers" : {
+
+    },
+    "Evolutionary Drivers - Coming Soon" : {
+
+    },
+    "Example: %@" : {
+
+    },
     "Examples:" : {
+
+    },
+    "Excellent! You understand the Hermetic principles well." : {
+
+    },
+    "Exercise included" : {
 
     },
     "EXPLORE" : {
@@ -1511,19 +2734,37 @@
     "Explore flow states, triggers, and protocols" : {
 
     },
+    "Explore sample content from our library of suppressed texts, hidden history, and universal awakening paths." : {
+
+    },
+    "Explore the Awakening Module" : {
+
+    },
     "Explore the cosmic timeline in Aperture" : {
 
     },
     "Explore the cosmos in Aperture" : {
 
     },
-    "EXPOSE THE LIES" : {
+    "EXPLORE THE DIFFERENCES" : {
+
+    },
+    "Explore the hidden realms of existence as described in ancient Gnostic texts. The truth about reality is stranger than you've been told." : {
 
     },
     "EXPOSED" : {
 
     },
     "Eyes Opened" : {
+
+    },
+    "Fallacy Database" : {
+
+    },
+    "Fallacy Detector" : {
+
+    },
+    "FAQ" : {
 
     },
     "Feature Request" : {
@@ -1541,19 +2782,40 @@
     "FEC Candidate ID (e.g., H0NY14138)" : {
 
     },
+    "Feedback" : {
+
+    },
     "Find This Book" : {
 
     },
     "FINDING TEACHERS" : {
 
     },
+    "Flip & Log" : {
+
+    },
     "Flow States" : {
+
+    },
+    "FlowState" : {
+
+    },
+    "FlowState Settings" : {
 
     },
     "FOLLOW THE MONEY" : {
 
     },
+    "Food as medicine, food as poison" : {
+
+    },
     "Food Industry Exposed" : {
+
+    },
+    "FORBIDDEN SECTION" : {
+
+    },
+    "FORGE REALITY" : {
 
     },
     "Forgot password?" : {
@@ -1571,13 +2833,25 @@
     "FREE" : {
 
     },
+    "Free (10)" : {
+
+    },
     "Free Education" : {
+
+    },
+    "🆓 FREE EXERCISES" : {
 
     },
     "Free or nearly free college in developed nations:" : {
 
     },
     "Free World-Class Education" : {
+
+    },
+    "Frequency Mastery" : {
+
+    },
+    "Frequently Asked Questions" : {
 
     },
     "From micro-moments to Ultra Instinct" : {
@@ -1601,16 +2875,25 @@
     "FURTHER READING" : {
 
     },
+    "G O D M O D E" : {
+
+    },
     "General" : {
 
     },
     "Generate New Question" : {
 
     },
+    "Get brief practice prompts throughout the day to stay present." : {
+
+    },
     "Get Daily Wisdom" : {
 
     },
     "Get My Progress" : {
+
+    },
+    "Get reminded at 8 PM if you haven't practiced that day." : {
 
     },
     "Global Methods for Spiritual Awakening" : {
@@ -1637,6 +2920,12 @@
     "Gnostic-Powered Narrative Analysis" : {
 
     },
+    "GODMODE" : {
+
+    },
+    "Good progress! Review the chapters for deeper mastery." : {
+
+    },
     "Good to post! ✓" : {
 
     },
@@ -1652,6 +2941,9 @@
     "GREEN FLAGS" : {
 
     },
+    "Ground this in practice" : {
+
+    },
     "Ground yourself when the world feels unreal" : {
 
     },
@@ -1664,16 +2956,25 @@
     "HAKAI HATE" : {
 
     },
+    "Haptics" : {
+
+    },
     "Hell Yes!" : {
 
     },
     "Hell, The Antichrist & Fear" : {
 
     },
+    "Here's your first insight..." : {
+
+    },
     "Heritage Foundation" : {
 
     },
     "Heritage Foundation Exposed" : {
+
+    },
+    "Hermetic Philosophy of Ancient Egypt and Greece" : {
 
     },
     "HIDDEN KNOWLEDGE" : {
@@ -1742,7 +3043,52 @@
     "How was your practice?" : {
 
     },
+    "How was your session?" : {
+
+    },
     "How would you like to descend through time?" : {
+
+    },
+    "Human civilization is built on pyramids—not just stone ones, but invisible hierarchies of thought, layers of meaning, and levels of thinking that range from basic impulses to true revelation." : {
+
+    },
+    "I am living in my dream home..." : {
+
+    },
+    "I AM THE MONAD" : {
+
+    },
+    "I am..." : {
+
+    },
+    "I grow as you grow." : {
+
+    },
+    "I recommend starting with" : {
+
+    },
+    "I see my bank balance showing $1M..." : {
+
+    },
+    "I Understand - Enter" : {
+
+    },
+    "I'll be here whenever you need guidance." : {
+
+    },
+    "I'm your companion on this journey." : {
+
+    },
+    "ICE Settings" : {
+
+    },
+    "If they can keep you fighting your neighbor, you won't notice who's robbing the house." : {
+
+    },
+    "Imagine a pole with Spirit/Pure Energy at the top and grossest matter at the bottom. Everything exists somewhere on this pole—vibrating at different frequencies." : {
+
+    },
+    "Imagine life as a video game..." : {
 
     },
     "Immediately" : {
@@ -1751,13 +3097,22 @@
     "Impact: %@" : {
 
     },
+    "Implications" : {
+
+    },
     "IMPORTANT SAFETY" : {
 
     },
     "in %lld years" : {
 
     },
+    "In Gnostic mythology, " : {
+
+    },
     "IN PLAIN ENGLISH" : {
+
+    },
+    "Including us. We encourage healthy skepticism and independent verification. Your journey of discovery is yours alone." : {
 
     },
     "Independence ≠ Truth. Apply the same skepticism to all sources." : {
@@ -1787,6 +3142,9 @@
     "INTEGRATION IS KEY" : {
 
     },
+    "Integrity Checks" : {
+
+    },
     "Integrity Score" : {
 
     },
@@ -1802,13 +3160,43 @@
     "Inventory and examine your beliefs" : {
 
     },
+    "IS + RA + EL = ISRAEL" : {
+
+    },
+    "Is Lawyer" : {
+
+    },
     "Is this narrative serving you?" : {
+
+    },
+    "Israel" : {
+
+    },
+    "ISRAEL" : {
+
+    },
+    "Israel has nothing whatsoever to do with the country in the Middle East. The word Israel is in THREE PARTS. It's an Egyptian word." : {
+
+    },
+    "Israel is NOT a Jewish word." : {
+
+    },
+    "Israel is not a place on a map. Israel is a STATE OF BEING—the alignment of spirit, mind, and divine impulse within YOU." : {
 
     },
     "Israel-Palestine" : {
 
     },
     "Israel-Palestine History" : {
+
+    },
+    "It reveals why some people develop clarity, perspective, and wisdom—while others remain stuck, repeating what they've been told without any deeper understanding." : {
+
+    },
+    "It's like unlocking the ability to DEBUG your own mind—identifying cognitive biases, emotional triggers, and blind spots in real-time." : {
+
+    },
+    "It's not about your vocation—it's about your mindset" : {
 
     },
     "It's not news. It's a business." : {
@@ -1824,6 +3212,21 @@
 
     },
     "JOURNEY TO AWAKENING" : {
+
+    },
+    "Just because you have these patterns doesn't mean you're stuck. Awareness is the first step to transformation." : {
+
+    },
+    "Just like you can't build muscles without going to the gym and lifting weights, you cannot grow your inner muscles without doing the inner-cise." : {
+
+    },
+    "Keep awakening →" : {
+
+    },
+    "Keep practicing to earn achievements!" : {
+
+    },
+    "Keep studying! The Kybalion's wisdom awaits." : {
 
     },
     "Key Cabinet Members" : {
@@ -1845,6 +3248,12 @@
 
     },
     "KEY POINTS" : {
+
+    },
+    "Key Points:" : {
+
+    },
+    "KEY PRACTICES" : {
 
     },
     "Key Races to Watch" : {
@@ -1887,6 +3296,9 @@
 
     },
     "Kundalini rises from Root (1) to Crown (7), piercing each chakra" : {
+
+    },
+    "L%lld" : {
 
     },
     "landing.primaryAction" : {
@@ -1958,6 +3370,9 @@
     "Learn to recognize manipulation tactics" : {
 
     },
+    "Learning intentional identity shifting helps you utilize the Mirror Principle in the quickest way possible. This is what elites learn from childhood—how to shift who they're BEING to shift what shows up." : {
+
+    },
     "LESSON" : {
 
     },
@@ -1979,16 +3394,45 @@
     "LEVEL %lld" : {
 
     },
+    "Level %lld • %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Level %1$lld • %2$@"
+          }
+        }
+      }
+    },
+    "Level %lld: %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Level %1$lld: %2$@"
+          }
+        }
+      }
+    },
     "Liberal" : {
 
     },
     "Lie Exposed" : {
 
     },
+    "Listen" : {
+
+    },
     "Listen on Apple Podcasts" : {
 
     },
     "Listen on Spotify" : {
+
+    },
+    "Listen to Article" : {
+
+    },
+    "Listen to Full Guide" : {
 
     },
     "Lock App Now" : {
@@ -2006,11 +3450,33 @@
     "Log moments when reality conflicts\nwith what you were taught" : {
 
     },
+    "LOG SYNC" : {
+
+    },
+    "Log Synchronicity" : {
+
+    },
     "Logged today" : {
+
+    },
+    "Long press anywhere to summon me." : {
 
     },
     "Low" : {
 
+    },
+    "Lv.%lld" : {
+
+    },
+    "Lv.%lld %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Lv.%1$lld %2$@"
+          }
+        }
+      }
     },
     "Major Court Cases" : {
 
@@ -2033,6 +3499,9 @@
     "MAP" : {
 
     },
+    "Mario in the game has no idea what to do. He doesn't know why turtles are coming at him. He doesn't know he can jump on blocks for coins and power-ups." : {
+
+    },
     "Mark as Complete" : {
 
     },
@@ -2040,6 +3509,9 @@
 
     },
     "Mark Complete" : {
+
+    },
+    "Mark Complete & Continue" : {
 
     },
     "Mark Incomplete" : {
@@ -2051,6 +3523,9 @@
     "MARKET COMPARISON" : {
 
     },
+    "Master keys to understanding reality" : {
+
+    },
     "Master these basics first. Then explore any tradition that calls to you. The path finds you when you're ready." : {
 
     },
@@ -2058,6 +3533,9 @@
 
     },
     "Master your flow state. Optimize your rhythm." : {
+
+    },
+    "Mastery Progress" : {
 
     },
     "Matrix" : {
@@ -2084,6 +3562,15 @@
     "Memorize these. They could save your life or freedom." : {
 
     },
+    "Mental Diet" : {
+
+    },
+    "Metacognition is the ability to watch your own mind the way you watch a movie. You're observing the observer." : {
+
+    },
+    "Micro-Practice Reminders" : {
+
+    },
     "Midterms often have lower turnout but equal importance. Your vote matters MORE." : {
 
     },
@@ -2091,6 +3578,9 @@
 
     },
     "Milestone" : {
+
+    },
+    "Mind Defense" : {
 
     },
     "MindShield" : {
@@ -2117,10 +3607,28 @@
     "MODULES" : {
 
     },
+    "Monad Check-In" : {
+
+    },
+    "MONAD FORGE" : {
+
+    },
     "More" : {
 
     },
     "MORE" : {
+
+    },
+    "Morning Reminder" : {
+
+    },
+    "Most people don't even realize there ARE higher levels of thinking that they can ascend to." : {
+
+    },
+    "Most people only understand cause and effect on the physical plane (push something → it moves). But cause and effect also works on higher planes:" : {
+
+    },
+    "Most people spend their lives trying to fix the reflection, not realizing that it's their internal state—their beliefs, their frequency, their perception—that's shaping what they see." : {
 
     },
     "Most people think awakening means discovering a hidden layer.\nIt usually means seeing that the layers exist at all." : {
@@ -2129,7 +3637,16 @@
     "MVP FEATURES (Local/No Backend)" : {
 
     },
+    "Name" : {
+
+    },
     "Name Your Dragon" : {
+
+    },
+    "Narrating..." : {
+
+    },
+    "Narration Active" : {
 
     },
     "NARRATIVE MAPPING" : {
@@ -2141,16 +3658,28 @@
     "Neural bridges for consciousness expansion" : {
 
     },
+    "Neural Correlates Map - Coming Soon" : {
+
+    },
+    "Neural Map" : {
+
+    },
     "Never" : {
 
     },
     "Never miss a primary or registration deadline" : {
 
     },
+    "Neville Goddard's manifestation technique" : {
+
+    },
     "NEW" : {
 
     },
     "New Entry" : {
+
+    },
+    "NEXT" : {
 
     },
     "Next Lesson" : {
@@ -2162,16 +3691,37 @@
     "Next: %lld" : {
 
     },
+    "Next: %lld shifts to level up" : {
+
+    },
+    "No achievements yet" : {
+
+    },
+    "NO ACTIVE SHIFTS" : {
+
+    },
     "No beliefs yet" : {
 
     },
+    "No bookmarks yet" : {
+
+    },
+    "No contacts added. Add contacts in Settings." : {
+
+    },
     "No courses match your filter" : {
+
+    },
+    "No courses started yet" : {
 
     },
     "No documentaries found" : {
 
     },
     "No entries yet" : {
+
+    },
+    "No hay contactos. Agregue contactos en Configuración." : {
 
     },
     "No one pushed you. No one forced you." : {
@@ -2186,7 +3736,16 @@
     "No resources match your filters" : {
 
     },
+    "No results found" : {
+
+    },
+    "No security check performed" : {
+
+    },
     "No theories - just primary sources" : {
+
+    },
+    "NONE YET" : {
 
     },
     "Not a shadow council - just incentives, cognitive biases, and institutions protecting themselves. Here's how they work." : {
@@ -2207,10 +3766,16 @@
     "Note: Candidate information updates as primaries conclude. Check resources below for current data." : {
 
     },
+    "Note: These are anecdotal and have mundane explanations. Listed for completeness." : {
+
+    },
     "Note: These are MEDIAN starting salaries. Half make less. And you're starting with $30-100K+ in debt." : {
 
     },
     "Notes" : {
+
+    },
+    "Notes (optional)" : {
 
     },
     "NOTES (Optional)" : {
@@ -2219,10 +3784,25 @@
     "Notes are saved automatically" : {
 
     },
+    "Notice the word ANGEL ends in EL. That's because it represents the divine impulse—that good idea that suddenly comes to you, that moment when you finally remember what you're supposed to do." : {
+
+    },
+    "Notifications" : {
+
+    },
     "November 3, 2026" : {
 
     },
+    "Now Playing" : {
+
+    },
     "NUMEROLOGY" : {
+
+    },
+    "Nutrition Awakening" : {
+
+    },
+    "of %lld" : {
 
     },
     "of children born in 1940 earned more than their parents" : {
@@ -2243,10 +3823,19 @@
     "On" : {
 
     },
+    "One of the most powerful universal laws you've never been taught" : {
+
+    },
+    "One tap to start your practice." : {
+
+    },
     "Oneness Core" : {
 
     },
     "Only 50% born in 1980 can say the same" : {
+
+    },
+    "Only practice sun gazing during safe hours (first/last hour of daylight). Start with 10 seconds, increase gradually. Never look directly at bright sun." : {
 
     },
     "Open ${course}" : {
@@ -2259,6 +3848,9 @@
 
     },
     "Open Alexandria Library" : {
+
+    },
+    "Open Aperture →" : {
 
     },
     "Open Course" : {
@@ -2291,6 +3883,9 @@
     "Or upload: Coming in V2" : {
 
     },
+    "Organized by intensity level" : {
+
+    },
     "ORIGIN" : {
 
     },
@@ -2303,10 +3898,16 @@
     "Our Approach" : {
 
     },
+    "Our Commitment" : {
+
+    },
     "Our Data Sources" : {
 
     },
     "Our Methodology" : {
+
+    },
+    "Overview" : {
 
     },
     "OVERVIEW" : {
@@ -2339,19 +3940,52 @@
     "PASTE YOUR OFFER LETTER" : {
 
     },
+    "Pause" : {
+
+    },
+    "Paused" : {
+
+    },
     "PAY EQUITY AUDIT" : {
 
     },
     "PDF" : {
 
     },
+    "Peaceful abundance, deep gratitude..." : {
+
+    },
     "PEAK" : {
+
+    },
+    "People Remember:" : {
+
+    },
+    "Phase Durations (minutes)" : {
 
     },
     "PHD CONSCIOUSNESS" : {
 
     },
     "PhD-Level Course" : {
+
+    },
+    "Phone" : {
+
+    },
+    "Physical matter is denser, slower vibration. There needs to be concentrated energy flow for it to manifest. You must DWELL in a certain energy long enough for it to show up physically. There is a LAG TIME." : {
+
+    },
+    "PILOT STATUS" : {
+
+    },
+    "Player" : {
+
+    },
+    "Playing" : {
+
+    },
+    "Pleroma" : {
 
     },
     "Policy Impact Scenarios:" : {
@@ -2372,7 +4006,13 @@
     "Power Up Complete" : {
 
     },
+    "Practical instruments for clear thinking" : {
+
+    },
     "Practical steps to begin this awakening path. Build gradually—this isn't a race." : {
+
+    },
+    "Practical tools for mental sovereignty" : {
 
     },
     "Practice" : {
@@ -2384,7 +4024,16 @@
     "Practice Complete!" : {
 
     },
+    "PRACTICE EXERCISE" : {
+
+    },
     "PRACTICE GUIDE" : {
+
+    },
+    "Practice now" : {
+
+    },
+    "Practice Prompts" : {
 
     },
     "PRACTICE STEPS" : {
@@ -2396,13 +4045,22 @@
     "Practice without integration is incomplete. Ask yourself daily: How am I living what I'm learning? Awakening isn't a weekend workshop—it's a life commitment." : {
 
     },
+    "Practiced" : {
+
+    },
     "PRACTICES" : {
 
     },
     "PREMIUM" : {
 
     },
+    "Premium (10)" : {
+
+    },
     "PREMIUM FEATURE" : {
+
+    },
+    "Prepare: %lldm" : {
 
     },
     "Previous" : {
@@ -2424,6 +4082,9 @@
 
     },
     "Primary sources. Documented crimes. No conspiracy theories." : {
+
+    },
+    "Principle: %@" : {
 
     },
     "Privacy" : {
@@ -2468,7 +4129,29 @@
     "Protect your consciousness from manipulation" : {
 
     },
+    "Protecting your consciousness from manipulation" : {
+
+    },
+    "Pyramid" : {
+
+    },
+    "Quantum Fields & Embodied Consciousness" : {
+
+    },
+    "Question %lld of %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Question %1$lld of %2$lld"
+          }
+        }
+      }
+    },
     "Question Bank" : {
+
+    },
+    "Question Everything" : {
 
     },
     "QUESTIONS THAT REVEAL TRUTH:" : {
@@ -2477,7 +4160,16 @@
     "Quick & secure access" : {
 
     },
+    "Quick Access" : {
+
+    },
+    "QUICK ACCESS" : {
+
+    },
     "QUICK ACTIONS" : {
+
+    },
+    "QUICK ANCHORS" : {
 
     },
     "Quick and secure biometric authentication" : {
@@ -2490,6 +4182,9 @@
 
     },
     "Quick Network Profiles" : {
+
+    },
+    "Quick Practice" : {
 
     },
     "QUICK REALITY CHECK" : {
@@ -2516,7 +4211,22 @@
     "QUIZ" : {
 
     },
+    "Quiz Complete!" : {
+
+    },
     "Rate Aperture" : {
+
+    },
+    "Rate your vibration today:\n1 (Low) → 10 (Peak)" : {
+
+    },
+    "Rational Enlightenment" : {
+
+    },
+    "Rationality Quotient Quiz" : {
+
+    },
+    "Rationality Tools" : {
 
     },
     "Re-Check" : {
@@ -2528,6 +4238,12 @@
     "READ THE TEXT" : {
 
     },
+    "Ready to Begin Your Journey?" : {
+
+    },
+    "Real Physics" : {
+
+    },
     "REAL WORLD APPLICATION" : {
 
     },
@@ -2537,19 +4253,49 @@
     "REALITY ANCHOR" : {
 
     },
+    "Reality Architect" : {
+
+    },
     "Reality Audit" : {
+
+    },
+    "Reality Obeys My Spark" : {
+
+    },
+    "Reality Operating System" : {
+
+    },
+    "REALITY SHIFT" : {
+
+    },
+    "Reality Shifts" : {
+
+    },
+    "REALITY TOOLS" : {
 
     },
     "Reality: %@" : {
 
     },
+    "REALIZED" : {
+
+    },
     "Receive a wisdom quote from Aperture" : {
+
+    },
+    "Receive daily wisdom from your Dragon companion at noon." : {
 
     },
     "Receive Your Dragon Egg" : {
 
     },
     "Receive Your Egg" : {
+
+    },
+    "RECENT" : {
+
+    },
+    "Recognizing manufactured conflict" : {
 
     },
     "RECOMMENDATIONS" : {
@@ -2585,10 +4331,19 @@
     "REGION" : {
 
     },
+    "Relationship" : {
+
+    },
     "Remember" : {
 
     },
     "Remember Me" : {
+
+    },
+    "Reminder Time" : {
+
+    },
+    "Remove" : {
 
     },
     "Report Issue" : {
@@ -2624,13 +4379,40 @@
     "RESOURCES" : {
 
     },
+    "Rest: %lldm" : {
+
+    },
+    "Retake Assessment" : {
+
+    },
+    "RETURN TO GODMODE" : {
+
+    },
     "Revenue" : {
 
     },
     "Revenue: %@" : {
 
     },
+    "REVIEW" : {
+
+    },
+    "Revision Lab" : {
+
+    },
+    "Rewrite past events in your imagination.\nRemember them differently until the memory feels natural." : {
+
+    },
+    "RQ Quiz" : {
+
+    },
     "RTL" : {
+
+    },
+    "Run Security Audit" : {
+
+    },
+    "Sacred Symbols" : {
 
     },
     "SACRED TEXTS" : {
@@ -2651,7 +4433,19 @@
     "Sample Email:" : {
 
     },
+    "SAMPLE QUOTES" : {
+
+    },
     "Sample Representatives" : {
+
+    },
+    "SATS" : {
+
+    },
+    "SATS Session" : {
+
+    },
+    "SATS Session - Coming Soon" : {
 
     },
     "Save" : {
@@ -2666,13 +4460,28 @@
     "Save Check-In" : {
 
     },
+    "Save content you want to revisit later" : {
+
+    },
     "Save Entry" : {
 
     },
     "Save Reflection" : {
 
     },
+    "Saying %lld" : {
+
+    },
+    "Scene: %@" : {
+
+    },
     "SCIENCE OF CONSCIOUSNESS" : {
+
+    },
+    "Science-backed paths to peak cognition" : {
+
+    },
+    "SCIENTIFIC RESOURCES" : {
 
     },
     "Score" : {
@@ -2684,13 +4493,25 @@
     "Score: %lld" : {
 
     },
+    "Score: %lld/100" : {
+
+    },
     "Scoring Rubric" : {
 
     },
     "Scroll through the dimensions.\nFrom Divine Fullness to Material Prison." : {
 
     },
+    "SEAL YOUR SHIFT" : {
+
+    },
+    "Search" : {
+
+    },
     "Search All 535 Members" : {
+
+    },
+    "Search Aperture..." : {
 
     },
     "Search by FEC ID or import from OpenSecrets" : {
@@ -2702,10 +4523,16 @@
     "Search documentaries..." : {
 
     },
+    "Search effects..." : {
+
+    },
     "Search lies..." : {
 
     },
     "Search officials..." : {
+
+    },
+    "Search paradoxes..." : {
 
     },
     "Search podcasts, hosts, topics..." : {
@@ -2726,10 +4553,28 @@
     "SECONDARY" : {
 
     },
+    "Section" : {
+
+    },
     "Security" : {
 
     },
+    "Security Audit" : {
+
+    },
+    "Security checks help protect your data and ensure the app hasn't been tampered with." : {
+
+    },
+    "Security Options" : {
+
+    },
+    "Security Status" : {
+
+    },
     "See how policy decisions affect YOUR wealth" : {
+
+    },
+    "See the cosmic architecture behind this" : {
 
     },
     "See Through the Theater" : {
@@ -2756,16 +4601,43 @@
     "Serene" : {
 
     },
+    "Session History" : {
+
+    },
+    "SESSION PHASES" : {
+
+    },
+    "Set Time" : {
+
+    },
+    "SET YOUR INTENTION" : {
+
+    },
+    "Settings" : {
+
+    },
+    "Shake phone twice to activate emergency mode" : {
+
+    },
     "Share" : {
 
     },
     "SHARED PROOF: WE ALL THE SAME" : {
 
     },
+    "Shield Active" : {
+
+    },
     "SHIELD STRENGTH" : {
 
     },
+    "Shift" : {
+
+    },
     "Show Dragon" : {
+
+    },
+    "Show Floating Button" : {
 
     },
     "Show My Dragon" : {
@@ -2789,6 +4661,9 @@
     "SIGNIFICANCE" : {
 
     },
+    "Simulation Theory" : {
+
+    },
     "Since %@" : {
 
     },
@@ -2801,6 +4676,12 @@
     "Skip" : {
 
     },
+    "Skip Onboarding?" : {
+
+    },
+    "Skip to explore" : {
+
+    },
     "Sleep Architecture" : {
 
     },
@@ -2810,16 +4691,25 @@
     "Socratic questions to challenge assumptions" : {
 
     },
+    "Solar Sync" : {
+
+    },
     "Something Went Wrong" : {
 
     },
     "SOON" : {
 
     },
+    "Sophia" : {
+
+    },
     "Sort" : {
 
     },
     "Sort by:" : {
+
+    },
+    "Sounds" : {
 
     },
     "Source Name" : {
@@ -2835,6 +4725,9 @@
 
     },
     "SOURCES" : {
+
+    },
+    "Spark Intensity" : {
 
     },
     "Start 7-Day Free Trial" : {
@@ -2861,6 +4754,12 @@
     "Start Quiz" : {
 
     },
+    "State Akin to Sleep" : {
+
+    },
+    "State your desire as if it's already done. \"I am...\" or \"I have...\"" : {
+
+    },
     "State/District (Optional)" : {
 
     },
@@ -2874,6 +4773,21 @@
 
     },
     "Stop" : {
+
+    },
+    "Stop Narration" : {
+
+    },
+    "Stopped" : {
+
+    },
+    "Streak Protection" : {
+
+    },
+    "Streak Warnings" : {
+
+    },
+    "Strength: %@" : {
 
     },
     "Submit Feedback" : {
@@ -2894,6 +4808,9 @@
     "SUGGESTIONS" : {
 
     },
+    "Summoning Dragon..." : {
+
+    },
     "SunFlow Premium" : {
 
     },
@@ -2909,7 +4826,22 @@
     "SUNFLOW: REIGNITED" : {
 
     },
+    "Swipe to explore samples" : {
+
+    },
+    "SYNCHRONICITIES" : {
+
+    },
+    "Synchronicity Tracker" : {
+
+    },
     "Syncing..." : {
+
+    },
+    "Take the 32-Question Assessment" : {
+
+    },
+    "Take the quiz" : {
 
     },
     "Take your time. This is for you, not for anyone else." : {
@@ -2933,16 +4865,28 @@
     "TAP TO EXPOSE" : {
 
     },
+    "Tap to practice →" : {
+
+    },
     "Tap to reflect" : {
 
     },
+    "Tap to start" : {
+
+    },
     "Tap to Stop" : {
+
+    },
+    "TARGET NIGHTS: %lld" : {
 
     },
     "Terms of Service" : {
 
     },
     "Terrifying cosmic functions, not cute babies" : {
+
+    },
+    "TESLA ENCODING RITUAL" : {
 
     },
     "Text Details" : {
@@ -2964,16 +4908,25 @@
     "Thank You! 🙏" : {
 
     },
+    "The 'Promised Land' is not a geographic location—it's the state of consciousness where you live from your highest self." : {
+
+    },
     "The $1.7 trillion scam they call 'education'" : {
 
     },
     "THE 5 LEVELS OF FLOW" : {
 
     },
+    "THE 8 ARCHETYPES" : {
+
+    },
     "The American Dream" : {
 
     },
     "THE AMERICAN FOOD CRISIS" : {
+
+    },
+    "The Angels End in EL" : {
 
     },
     "THE BIG PICTURE" : {
@@ -2986,6 +4939,12 @@
 
     },
     "The Buddhist Path to Awakening" : {
+
+    },
+    "THE CHARACTER" : {
+
+    },
+    "The Cognitive Pyramid" : {
 
     },
     "THE COLLECTIONS" : {
@@ -3006,10 +4965,16 @@
     "The Core Truth" : {
 
     },
+    "The Cosmic Principles" : {
+
+    },
     "The Dark Night of the Soul" : {
 
     },
     "The Dragon's Descent" : {
+
+    },
+    "The Drone Self" : {
 
     },
     "The Education System" : {
@@ -3027,6 +4992,9 @@
     "THE FIVE UNIVERSALS" : {
 
     },
+    "The forge awaits your desire.\nWhat reality will you create?" : {
+
+    },
     "THE FOUR NOBLE TRUTHS" : {
 
     },
@@ -3042,7 +5010,16 @@
     "THE GNOSTIC TRUTH" : {
 
     },
+    "The Golden Path" : {
+
+    },
+    "The Gospel of Thomas" : {
+
+    },
     "The interventions they don't teach" : {
+
+    },
+    "The Kybalion" : {
 
     },
     "The Library" : {
@@ -3051,10 +5028,10 @@
     "THE LIE" : {
 
     },
-    "THE LIES OF THE BIBLE" : {
+    "The light-bringers they made into monsters" : {
 
     },
-    "The light-bringers they made into monsters" : {
+    "The Mandela Effect is likely explained by the fallibility of human memory, confabulation, and social influence—not alternate timelines. However, exploring these phenomena helps us understand how memory works." : {
 
     },
     "The map is not the territory. The name is not the thing. But all maps point to the same mountain." : {
@@ -3064,6 +5041,15 @@
 
     },
     "THE MATRIX DECODED" : {
+
+    },
+    "The Mirror Principle" : {
+
+    },
+    "The Monad Awakens" : {
+
+    },
+    "The most important tool. Remember: You don't get what you WANT, you get who you ARE." : {
 
     },
     "The mythology that keeps you running\non a treadmill designed to break you." : {
@@ -3081,6 +5067,9 @@
     "THE ONENESS CORE" : {
 
     },
+    "The operating system of reality" : {
+
+    },
     "The OS upgrade for your worldview" : {
 
     },
@@ -3088,6 +5077,12 @@
 
     },
     "The path finds you when you're ready. Your job is to show up consistently. The rest unfolds naturally." : {
+
+    },
+    "The people in power—the so-called elites—were taught these things at a very young age. They were shown this through example as babies and learned it systematically as they got older. They were taught how to WORK WITH the mirror, not fight it." : {
+
+    },
+    "THE PLAYER" : {
 
     },
     "THE PROBLEM" : {
@@ -3120,10 +5115,28 @@
     "The Science & Philosophy of Consciousness" : {
 
     },
+    "The science behind rational awakening" : {
+
+    },
+    "The Science of Wealth" : {
+
+    },
+    "The Secret Sayings of Jesus" : {
+
+    },
     "The Serpent Power of Hinduism" : {
 
     },
     "THE SEVEN CHAKRAS" : {
+
+    },
+    "The Seven Hermetic Principles" : {
+
+    },
+    "The Shadow Level Above the Pyramid" : {
+
+    },
+    "The Simulation Hypothesis proposes that all of reality, including Earth and the rest of the universe, could be an artificial simulation, such as a computer simulation run by an advanced civilization." : {
 
     },
     "The story they didn't want you to know" : {
@@ -3136,6 +5149,9 @@
 
     },
     "The system isn't broken—it's working exactly as designed. To benefit them, not you." : {
+
+    },
+    "The top is not a PLACE—it's a PRACTICE. Nobody reaches it and stays permanently. You rise, fall, and rise again." : {
 
     },
     "THE TRUTH" : {
@@ -3156,6 +5172,9 @@
     "THE UNIVERSAL MECHANISM" : {
 
     },
+    "The universe is always communicating" : {
+
+    },
     "The villains hiding in plain sight" : {
 
     },
@@ -3174,10 +5193,16 @@
     "These countries have higher quality of life, longer life expectancy, and their graduates aren't drowning in debt." : {
 
     },
+    "These created—usually SUBCONSCIOUSLY—your beliefs about money that are now reflected in your financial reality." : {
+
+    },
     "These features require backend infrastructure" : {
 
     },
     "These races will likely determine control of Congress and key state governments:" : {
+
+    },
+    "They believe they're thinking simply because information is passing through their minds. It's like riding shotgun and convincing yourself you're the one steering." : {
 
     },
     "They blame:" : {
@@ -3187,6 +5212,12 @@
 
     },
     "They work for you. Know who they really serve." : {
+
+    },
+    "This action cannot be undone." : {
+
+    },
+    "This analogy from Reality Transurfing perfectly illustrates the process:" : {
 
     },
     "This course examines how corporate media operates. Understanding media ownership, business models, and documented failures helps you become a more discerning news consumer." : {
@@ -3207,7 +5238,19 @@
     "This is educational information, NOT legal advice. Immigration law changes frequently. Always consult a qualified immigration attorney for your specific situation." : {
 
     },
+    "This is why so many people's physical world is nowhere near where they want it to be. Their inner garden is overrun with weeds—negative thoughts, lower emotions like guilt, shame, fear, apathy, anger. Because that's where they're dwelling, that's what shows up in the mirror." : {
+
+    },
+    "This is your starting point, not your limit.\nYou can explore everything." : {
+
+    },
     "This isn't an accident. The hidden curriculum is compliance." : {
+
+    },
+    "This isn't science fiction—it's a serious philosophical and scientific proposition explored by physicists, philosophers, and technologists." : {
+
+    },
+    "This model is a THEORY, not absolute truth. Test it in your experience. Your direct knowing is more important than any framework." : {
 
     },
     "This offer is in the" : {
@@ -3217,6 +5260,12 @@
 
     },
     "This path describes the same awakening as all others. Energy rises, ego dissolves, unity is realized. The names change, the experience is one." : {
+
+    },
+    "This section contains teachings that challenge fundamental beliefs about reality, religion, and consciousness.\n\nProceed with discernment. Question everything—including this." : {
+
+    },
+    "THIS WEEK" : {
 
     },
     "This will permanently delete your account and all associated data. This action cannot be undone." : {
@@ -3231,6 +5280,12 @@
     "Through the ashes of erased sun gods" : {
 
     },
+    "Throughout ancient languages, words ending in EL often contain references to divinity, spiritual concepts, or higher forces." : {
+
+    },
+    "Tibetan Book of the Dead teachings" : {
+
+    },
     "Timeline" : {
 
     },
@@ -3241,6 +5296,9 @@
 
     },
     "Toggle features for beta testing" : {
+
+    },
+    "Tools" : {
 
     },
     "TOP DONORS" : {
@@ -3256,6 +5314,12 @@
 
     },
     "Total weekly screen time:" : {
+
+    },
+    "Total: %lld minutes" : {
+
+    },
+    "Track your awakening journey with your Dragon." : {
 
     },
     "Track your media consumption" : {
@@ -3306,6 +5370,9 @@
     "Try all five practices in one week:" : {
 
     },
+    "Try different keywords or check the spelling" : {
+
+    },
     "Try: \"%@\"" : {
 
     },
@@ -3325,6 +5392,9 @@
 
     },
     "Type" : {
+
+    },
+    "Type it here..." : {
 
     },
     "U.S. Foreign Policy" : {
@@ -3348,7 +5418,13 @@
     "Universal Awakening Arsenal" : {
 
     },
+    "Universal forces that are also qualities within you" : {
+
+    },
     "UNIVERSAL SAFETY PRINCIPLES" : {
+
+    },
+    "Unlock Full Access" : {
 
     },
     "Unlock Premium" : {
@@ -3393,6 +5469,9 @@
     "Version 1.0.0" : {
 
     },
+    "Vibration Shield" : {
+
+    },
     "View Full Comparison Grid" : {
 
     },
@@ -3403,6 +5482,9 @@
 
     },
     "Visit" : {
+
+    },
+    "Visit Dragon →" : {
 
     },
     "Visit Site" : {
@@ -3441,6 +5523,9 @@
     "We All The Same" : {
 
     },
+    "We believe awakening is humanity's birthright—not a privilege reserved for monks, mystics, or the initiated few. By showing the common thread across all traditions, we help you find your path without dogma, gurus, or gatekeepers." : {
+
+    },
     "We believe in transparency. Here's where we get our data:" : {
 
     },
@@ -3468,7 +5553,19 @@
     "Welcome back, %@" : {
 
     },
+    "What brings you to Aperture?" : {
+
+    },
     "WHAT DO YOU BELIEVE?" : {
+
+    },
+    "WHAT DO YOU DESIRE?" : {
+
+    },
+    "What emotion does the fulfilled wish evoke?" : {
+
+    },
+    "What emotion/feeling anchors this reality? This is your trigger phrase when doubt arises." : {
 
     },
     "WHAT HAPPENS NEXT" : {
@@ -3480,7 +5577,19 @@
     "WHAT IT IS" : {
 
     },
+    "What limiting thought came up?" : {
+
+    },
+    "What mainstream science won't teach" : {
+
+    },
+    "What synchronicity did you notice?" : {
+
+    },
     "What syncs to iCloud:" : {
+
+    },
+    "What they didn't want you to remember" : {
 
     },
     "What They DON'T Teach" : {
@@ -3510,6 +5619,12 @@
     "What type of feedback?" : {
 
     },
+    "What will you focus on?" : {
+
+    },
+    "What would you like to call me?" : {
+
+    },
     "What You Can Do" : {
 
     },
@@ -3519,22 +5634,49 @@
     "WHAT YOU GET" : {
 
     },
+    "What You'll Discover" : {
+
+    },
     "WHAT'S AT STAKE IN 2026" : {
 
     },
     "What's on your mind?" : {
 
     },
+    "What's the empowered version?" : {
+
+    },
     "When corporations cause problems, they blame others:" : {
+
+    },
+    "When large groups of people remember events differently than they occurred. Named after many remembering Nelson Mandela dying in prison in the 1980s—he actually died in 2013." : {
+
+    },
+    "When one mind climbs, it changes more than just that mind. It changes everyone connected to it." : {
 
     },
     "When reality ≠ what you were taught" : {
 
     },
+    "When scripture speaks of 'Russia (Rosh) coming down to attack Israel,' it's not about geopolitics. It's about YOUR inner battle:" : {
+
+    },
+    "When there is HARMONY between your Spirit (Isis) and your Mind (Ra), then there is GOD (El) in you." : {
+
+    },
     "When you feel reactive, pause and ask:" : {
 
     },
+    "When you notice scarcity thinking:" : {
+
+    },
+    "When you see people driving nice cars, living in beautiful homes, flying first class—most people ask about their JOB. This is scarcity thinking." : {
+
+    },
     "When you start seeing through the illusions, emotions arise. Grief for the life you thought was real. Anger at those who lied. Betrayal from systems you trusted.\n\nThese feelings are not obstacles to awakening—they ARE the awakening. You cannot skip this part." : {
+
+    },
+    "When you think differently about money:" : {
 
     },
     "Where did I go unconscious today?" : {
@@ -3547,6 +5689,9 @@
 
     },
     "Which animal matches your energy pattern?" : {
+
+    },
+    "Which of these resonate with you? Chances are you have 1, 2, 3 or maybe ALL 5 operating in your life." : {
 
     },
     "While politicians blame immigrants, 'welfare queens,' and foreign countries, the real extraction of American wealth happens in corporate boardrooms." : {
@@ -3570,10 +5715,19 @@
     "WHY CONSCIOUSNESS MATTERS" : {
 
     },
+    "Why does it take TIME for the mirror to change?" : {
+
+    },
     "Why Independent Media Matters" : {
 
     },
+    "Why most people never learn to truly think" : {
+
+    },
     "WHY PODCASTS FOR AWAKENING?" : {
+
+    },
+    "Why Stuck" : {
 
     },
     "WHY THIS MATTERS" : {
@@ -3582,7 +5736,28 @@
     "WHY THIS NAME FOR YOU" : {
 
     },
+    "WHY WAS THIS HIDDEN?" : {
+
+    },
+    "Write as if it's already true. Example: \"I am abundant and wealth flows to me effortlessly.\"" : {
+
+    },
+    "WRITE THIS:" : {
+
+    },
+    "Yaldabaoth" : {
+
+    },
+    "Yet despite the astonishing tools available today, most people never climb past the first steps. Society operates at the LOWEST layers—remembering, or more accurately, simply regurgitating everything they've been told." : {
+
+    },
     "YOU ARE HERE" : {
+
+    },
+    "You ARE Israel when your spirit, mind, and divine impulse are in harmony." : {
+
+    },
+    "You can always personalize your experience later in Settings." : {
 
     },
     "You can't avoid everything, but you can make informed choices. Knowledge is power." : {
@@ -3594,7 +5769,13 @@
     "You do not smash the Matrix. You debug it.\n\nThe exit is not rage or rejection. It is pattern recognition, boundary setting, and reclaiming agency one layer at a time." : {
 
     },
+    "You just took your first step." : {
+
+    },
     "YOU MIGHT EXPERIENCE" : {
+
+    },
+    "You must keep smiling even when the mirror shows a stonewall face. That face is just history. A new future is always available." : {
 
     },
     "You now understand: %@" : {
@@ -3603,7 +5784,19 @@
     "You practiced for %lld minutes" : {
 
     },
+    "You were taught to fight the world, to hustle and grind, to try and fix everything around you in order to succeed. But what if the life you are living right now isn't life at all—it is merely a REFLECTION?" : {
+
+    },
     "You'll receive gentle reminders during practice" : {
+
+    },
+    "You're Awakening..." : {
+
+    },
+    "You've been lied to about how life and reality works." : {
+
+    },
+    "You've explored the samples. Create a free account to access the full library of 25+ awakening traditions, suppressed texts, and guided practices." : {
 
     },
     "You've reached %@!\n\n%@" : {
@@ -3620,6 +5813,9 @@
 
     },
     "Your body follows a 24-hour rhythm. Work with it." : {
+
+    },
+    "Your clarity becomes a light guiding others to the top. In a world trapped at the bottom, climbing is a REVOLUTIONARY ACT." : {
 
     },
     "Your Clarity Codex is empty" : {
@@ -3655,6 +5851,18 @@
     "Your feedback helps us improve Aperture for everyone." : {
 
     },
+    "Your goal: Connect to the PLAYER more than the character. When you do, certain things start showing up that you never could have created from the character's perspective." : {
+
+    },
+    "YOUR INTENTION" : {
+
+    },
+    "Your intention has been sealed in the vortex.\nThe universe is now rearranging." : {
+
+    },
+    "Your Journey" : {
+
+    },
     "YOUR JOURNEY" : {
 
     },
@@ -3662,6 +5870,9 @@
 
     },
     "Your journey continues" : {
+
+    },
+    "Your manifestations will appear here." : {
 
     },
     "YOUR MEDIA DIET" : {
@@ -3673,13 +5884,28 @@
     "YOUR NOTES" : {
 
     },
+    "YOUR PATH" : {
+
+    },
+    "Your path: %@" : {
+
+    },
+    "Your Path: %@" : {
+
+    },
     "Your Post" : {
+
+    },
+    "Your Primary Archetype:" : {
 
     },
     "Your Privacy is Protected" : {
 
     },
     "YOUR PROGRESS" : {
+
+    },
+    "Your Rationality Quotient" : {
 
     },
     "YOUR REFLECTION" : {

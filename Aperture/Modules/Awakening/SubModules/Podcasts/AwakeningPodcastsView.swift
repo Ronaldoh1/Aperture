@@ -73,6 +73,7 @@ enum PodcastCategory: String, CaseIterable {
 // MARK: - Main View
 
 struct AwakeningPodcastsView: View {
+    @StateObject private var interactor = PodcastInteractor()
     @State private var selectedCategory: PodcastCategory? = nil
     @State private var searchText = ""
     @State private var showingPodcast: AwakeningPodcast? = nil
@@ -527,7 +528,7 @@ struct PodcastDetailSheet: View {
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView {
                 VStack(spacing: 24) {
                     // Header
@@ -792,7 +793,7 @@ struct PodcastFlowLayout: Layout {
 // MARK: - Preview
 
 #Preview {
-    NavigationView {
+    NavigationStack {
         AwakeningPodcastsView()
     }
 }

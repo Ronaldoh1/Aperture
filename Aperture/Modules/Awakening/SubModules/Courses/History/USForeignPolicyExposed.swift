@@ -1419,7 +1419,7 @@ struct ForeignPolicyLessonView: View {
 // MARK: - Preview
 
 #Preview {
-    NavigationView {
+    NavigationStack {
         USForeignPolicyExposed()
     }
 }

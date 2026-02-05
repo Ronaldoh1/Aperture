@@ -234,9 +234,9 @@ struct FeedbackSheet: View {
     @State private var showThankYou = false
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
-                Section("What type of feedback?") {
+                Section(header: Text("What type of feedback?")) {
                     Picker("Type", selection: $feedbackType) {
                         Text("Bug Report").tag(FeedbackManager.FeedbackType.bug)
                         Text("Feature Request").tag(FeedbackManager.FeedbackType.feature)
@@ -246,12 +246,12 @@ struct FeedbackSheet: View {
                     .pickerStyle(.menu)
                 }
                 
-                Section("Your feedback") {
+                Section(header: Text("Your feedback")) {
                     TextEditor(text: $message)
                         .frame(minHeight: 100)
                 }
                 
-                Section("Email (optional)") {
+                Section(header: Text("Email (optional)")) {
                     TextField("your@email.com", text: $email)
                         .keyboardType(.emailAddress)
                         .autocapitalization(.none)

@@ -82,6 +82,17 @@ struct CourseCatalog {
             category: .consciousness,
             difficulty: .advanced
         ),
+        CourseInfo(
+            id: "drone_self",
+            title: "The Drone Self",
+            subtitle: "Quantum fields & embodied consciousness",
+            icon: "antenna.radiowaves.left.and.right",
+            colorHex: "#00E5FF",
+            moduleCount: 7,
+            estimatedHours: 6,
+            category: .consciousness,
+            difficulty: .advanced
+        ),
         
         // ══════════════════════════════════════════════════
         // SPIRITUAL TRADITIONS
@@ -368,7 +379,14 @@ struct CourseHubView: View {
             }
         }
         .sheet(item: $selectedCourse) { course in
-            CourseDetailPlaceholder(course: course)
+            switch course.id {
+            case "drone_self":
+                DroneSelfCourseView()
+            case "dragonball":
+                DragonBallCourseView()
+            default:
+                CourseDetailPlaceholder(course: course)
+            }
         }
     }
     

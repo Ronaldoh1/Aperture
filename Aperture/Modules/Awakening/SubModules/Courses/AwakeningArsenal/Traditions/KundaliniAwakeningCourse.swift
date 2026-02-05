@@ -1532,7 +1532,7 @@ struct KundaliniLessonView: View {
 }
 
 #Preview {
-    NavigationView {
+    NavigationStack {
         KundaliniAwakeningCourse()
     }
 }

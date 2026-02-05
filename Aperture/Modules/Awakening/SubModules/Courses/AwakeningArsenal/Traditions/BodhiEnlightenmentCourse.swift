@@ -1891,7 +1891,7 @@ struct BodhiLessonView: View {
 }
 
 #Preview {
-    NavigationView {
+    NavigationStack {
         BodhiEnlightenmentCourse()
     }
 }

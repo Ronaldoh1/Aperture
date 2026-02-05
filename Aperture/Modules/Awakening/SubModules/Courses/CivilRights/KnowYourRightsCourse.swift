@@ -1837,7 +1837,7 @@ struct RightsLessonView: View {
 // MARK: - Preview
 
 #Preview {
-    NavigationView {
+    NavigationStack {
         KnowYourRightsCourse()
     }
 }

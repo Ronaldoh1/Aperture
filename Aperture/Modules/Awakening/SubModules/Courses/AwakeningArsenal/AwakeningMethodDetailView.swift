@@ -618,7 +618,7 @@ class VoiceGuideManager: ObservableObject {
 // MARK: - Preview
 
 #Preview {
-    NavigationView {
+    NavigationStack {
         AwakeningMethodDetailView(
             method: AwakeningMethod(
                 id: "preview-kundalini",

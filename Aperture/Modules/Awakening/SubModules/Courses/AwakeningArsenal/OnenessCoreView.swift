@@ -18,7 +18,7 @@ struct OnenessCoreView: View {
         TraditionNode(name: "Christ", icon: "✝️", color: .purple, energyTerm: "Holy Spirit", egoTerm: "Kenosis", unityTerm: "Theosis", angle: 102.9),
         TraditionNode(name: "Kabbalah", icon: "✡️", color: .blue, energyTerm: "Shefa", egoTerm: "Bitul", unityTerm: "Devekut", angle: 128.6),
         TraditionNode(name: "Shamanism", icon: "🦅", color: .brown, energyTerm: "Power", egoTerm: "Soul Loss", unityTerm: "Wholeness", angle: 154.3),
-        TraditionNode(name: "Egypt", icon: "𓂀", color: .gold, energyTerm: "Ka", egoTerm: "Weighing", unityTerm: "Akh", angle: 180),
+        TraditionNode(name: "Egypt", icon: "𓂀", color: Palette.accent.gold, energyTerm: "Ka", egoTerm: "Weighing", unityTerm: "Akh", angle: 180),
         TraditionNode(name: "Zen", icon: "🎎", color: .gray, energyTerm: "Ki", egoTerm: "No-Self", unityTerm: "Satori", angle: 205.7),
         TraditionNode(name: "Aboriginal", icon: "🌌", color: .indigo, energyTerm: "Mana", egoTerm: "Dissolution", unityTerm: "Dreamtime", angle: 231.4),
         TraditionNode(name: "Maya/Aztec", icon: "🌞", color: .orange, energyTerm: "Tonalli", egoTerm: "Death", unityTerm: "Cosmic Union", angle: 257.1),
@@ -379,7 +379,7 @@ struct ComparisonGridView: View {
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView(.horizontal) {
                 VStack(alignment: .leading, spacing: 0) {
                     // Header Row
@@ -442,16 +442,10 @@ struct ComparisonGridView: View {
     }
 }
 
-// MARK: - Color Extension
-
-extension Color {
-    static let gold = Color(red: 1, green: 0.84, blue: 0)
-}
-
 // MARK: - Preview
 
-#Preview {
-    NavigationView {
+#Preview("OnenessCoreView") {
+    NavigationStack {
         OnenessCoreView()
     }
 }

@@ -303,7 +303,6 @@ class APIPodcastStorage: PodcastStorageProtocol {
 
 // MARK: - Interactor
 
-@MainActor
 class PodcastInteractor: ObservableObject {
     
     private var storage: PodcastStorageProtocol
@@ -418,14 +417,12 @@ class PodcastInteractor: ObservableObject {
 struct PodcastAssembly {
     
     @MainActor static func build() -> AwakeningPodcastsView {
-        _ = PodcastInteractor()
-        // Would inject via environment
         return AwakeningPodcastsView()
     }
     
     @MainActor static func buildWithCustomBackend(baseURL: String, apiKey: String) -> AwakeningPodcastsView {
-        let storage = APIPodcastStorage(baseURL: baseURL, apiKey: apiKey)
-        let interactor = PodcastInteractor(storage: storage)
+        // Note: Custom backend configuration would need to be handled differently
+        // For now, returns standard view - backend switching can be done via interactor methods
         return AwakeningPodcastsView()
     }
 }

@@ -1474,7 +1474,7 @@ struct IPLessonView: View {
 }
 
 #Preview {
-    NavigationView {
+    NavigationStack {
         IsraelPalestineHistoryCourse()
     }
 }

@@ -1387,7 +1387,7 @@ struct MatrixLieDetailView: View {
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
                     // Header
@@ -1543,7 +1543,7 @@ struct MatrixLieDetailView: View {
 }
 
 #Preview {
-    NavigationView {
+    NavigationStack {
         HakaiMatrixLiesView()
     }
 }

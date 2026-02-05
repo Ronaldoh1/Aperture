@@ -1296,7 +1296,7 @@ struct AmericanDreamLessonView: View {
 // MARK: - Preview
 
 #Preview {
-    NavigationView {
+    NavigationStack {
         AmericanDreamExposedCourse()
     }
 }

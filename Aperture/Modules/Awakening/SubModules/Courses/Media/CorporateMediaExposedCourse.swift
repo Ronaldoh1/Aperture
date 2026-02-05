@@ -1602,7 +1602,7 @@ struct MediaLessonView: View {
 }
 
 #Preview {
-    NavigationView {
+    NavigationStack {
         CorporateMediaExposedCourse()
     }
 }

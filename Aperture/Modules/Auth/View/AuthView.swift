@@ -59,6 +59,9 @@ struct AuthView: View {
             }
 
             sessionBadge
+            
+            // Info button in top-right corner
+            infoButtonOverlay
 
         }
         .onAppear {
@@ -73,6 +76,18 @@ struct AuthView: View {
             )
         }
 
+    }
+    
+    private var infoButtonOverlay: some View {
+        VStack {
+            HStack {
+                Spacer()
+                ApertureInfoButton()
+                    .padding(.trailing, 16)
+                    .padding(.top, 12)
+            }
+            Spacer()
+        }
     }
 
     @ViewBuilder

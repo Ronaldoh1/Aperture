@@ -694,7 +694,7 @@ struct HateAnalysisHistoryView: View {
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
                 Text("Coming in V2")
                     .foregroundColor(.gray)
@@ -716,7 +716,7 @@ struct HateAnalysisHistoryView: View {
 }
 
 #Preview {
-    NavigationView {
+    NavigationStack {
         HakaiHateView()
     }
 }

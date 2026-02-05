@@ -549,7 +549,7 @@ struct KeyRace {
 }
 
 #Preview {
-    NavigationView {
+    NavigationStack {
         Campaign2026TrackerView()
     }
 }

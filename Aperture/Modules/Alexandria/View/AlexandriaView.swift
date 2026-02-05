@@ -21,7 +21,7 @@ struct AlexandriaView: View {
     
     var body: some View {
         
-        NavigationView {
+        NavigationStack {
             
             ZStack {
                 
@@ -37,6 +37,13 @@ struct AlexandriaView: View {
                         
                         // Main Content - Sacred Texts First
                         categorySection
+                        
+                        // Dragon context chip
+                        DragonContextChip(
+                            context: .alexandria(textId: nil),
+                            customText: "Ask the Dragon about sacred texts"
+                        )
+                        .padding(.top, 20)
                         
                         Spacer(minLength: 40)
                         

@@ -42,21 +42,21 @@ struct LandingNavigationSection: View {
                 }
 
                 NavigationCard(
-                    icon: "books.vertical.fill",
-                    title: "Alexandria",
-                    subtitle: "Sacred Library",
+                    icon: "sun.max.fill",
+                    title: "Awakening",
+                    subtitle: "13 Traditions",
                     color: Palette.accent.gold
                 ) {
-                    selectedTab = 3
+                    selectedTab = 3  // Awakening is now tab 3
                 }
 
                 NavigationCard(
-                    icon: "sun.max.fill",
-                    title: "Awakening",
-                    subtitle: "Courses",
-                    color: Palette.primary.red
+                    icon: "books.vertical.fill",
+                    title: "Alexandria",
+                    subtitle: "Sacred Library",
+                    color: Palette.primary.violet
                 ) {
-                    selectedTab = 4
+                    selectedTab = 4  // More menu (contains Alexandria)
                 }
 
             }

@@ -7,6 +7,7 @@ struct LandingEntryView: View {
     
     private let presenter: LandingPresenterType
     @Binding var selectedTab: Int
+    @ObservedObject private var journeyStore = UserJourneyStore.shared
     
     init(container: Container, selectedTab: Binding<Int>, onRoute: @escaping (LandingRoute) -> Void) {
         print("🟡 LandingEntryView: Starting initialization")
@@ -28,6 +29,15 @@ struct LandingEntryView: View {
     }
     
     var body: some View {
-        LandingView(presenter: presenter, selectedTab: $selectedTab)
+        // Use personalized landing if user completed onboarding with a journey type
+        if journeyStore.hasCompletedOnboarding && journeyStore.journeyType != nil {
+            PersonalizedLandingView(
+                journeyStore: journeyStore,
+                selectedTab: $selectedTab
+            )
+        } else {
+            // Fallback to original landing (shouldn't happen after onboarding)
+            LandingView(presenter: presenter, selectedTab: $selectedTab)
+        }
     }
 }

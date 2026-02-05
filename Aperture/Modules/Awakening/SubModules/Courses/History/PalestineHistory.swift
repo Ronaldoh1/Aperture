@@ -1331,7 +1331,7 @@ struct PalestineLessonView: View {
 }
 
 #Preview {
-    NavigationView {
+    NavigationStack {
         PalestineHistory()
     }
 }

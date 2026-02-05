@@ -1190,19 +1190,19 @@ struct GenericLessonView: View {
 // MARK: - Previews
 
 #Preview("Super PACs") {
-    NavigationView {
+    NavigationStack {
         SuperPACsCourse()
     }
 }
 
 #Preview("Heritage") {
-    NavigationView {
+    NavigationStack {
         HeritageFoundationCourse()
     }
 }
 
 #Preview("AIPAC") {
-    NavigationView {
+    NavigationStack {
         AIPACCourse()
     }
 }

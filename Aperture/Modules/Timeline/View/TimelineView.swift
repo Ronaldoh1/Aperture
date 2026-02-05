@@ -33,11 +33,13 @@ struct TimelineView: View {
     @State private var showDetail: Bool = false
     @State private var cardPositions: [UUID: CGRect] = [:]
     
-    // Dragon companion state
+    // Dragon companion state — persisted so user isn't trapped on re-entry
     @State private var dragonState: DragonDialogState = .greeting
-    @State private var hasChosenInterval: Bool = false
+    @AppStorage("timeline_hasChosenInterval") private var hasChosenInterval: Bool = false
+    @AppStorage("timeline_greetingSeen") private var greetingSeen: Bool = false
     @State private var dragonMessage: String = ""
     @State private var messageIndex: Int = 0
+    @State private var showDescentAnimation: Bool = false
     
     private var presenter: TimelinePresenterType {
         presenterBox.presenter
@@ -49,7 +51,7 @@ struct TimelineView: View {
     
     var body: some View {
         
-        NavigationView {
+        NavigationStack {
             
             ZStack {
                 
@@ -57,6 +59,14 @@ struct TimelineView: View {
                 
                 if !hasChosenInterval {
                     dragonGreetingView
+                } else if showDescentAnimation {
+                    // Dramatic Shenron descent before timeline appears
+                    ShenronDescentView {
+                        withAnimation(.spring(response: 0.6, dampingFraction: 0.8)) {
+                            showDescentAnimation = false
+                        }
+                    }
+                    .transition(.opacity)
                 } else {
                     timelineScrollView
                     
@@ -83,7 +93,13 @@ struct TimelineView: View {
         }
         .onAppear {
             presenter.viewDidLoad()
-            startDragonGreeting()
+            if greetingSeen && hasChosenInterval {
+                // Returning user — go straight to timeline
+                dragonState = .descending
+                dragonMessage = ""
+            } else if !greetingSeen {
+                startDragonGreeting()
+            }
         }
         
     }
@@ -93,6 +109,30 @@ struct TimelineView: View {
     private var dragonGreetingView: some View {
         
         VStack(spacing: 20) {
+            
+            // Skip button - always accessible
+            HStack {
+                Spacer()
+                Button {
+                    skipGreeting()
+                } label: {
+                    HStack(spacing: 4) {
+                        Text("Skip")
+                            .font(.system(size: 13, weight: .medium, design: .rounded))
+                        Image(systemName: "forward.fill")
+                            .font(.system(size: 10))
+                    }
+                    .foregroundColor(Palette.text.muted)
+                    .padding(.horizontal, 14)
+                    .padding(.vertical, 8)
+                    .background(
+                        Capsule()
+                            .fill(Color.white.opacity(0.1))
+                    )
+                }
+            }
+            .padding(.horizontal, 20)
+            .padding(.top, 8)
             
             Spacer()
             
@@ -182,6 +222,13 @@ struct TimelineView: View {
         
     }
     
+    private func skipGreeting() {
+        withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
+            dragonState = .askingInterval
+            dragonMessage = "Choose how to descend through time, seeker."
+        }
+    }
+    
     private func startDragonGreeting() {
         let messages = [
             "Greetings, seeker of truth...",
@@ -215,14 +262,16 @@ struct TimelineView: View {
     
     private func selectInterval(_ interval: TimelineJumpInterval) {
         presenterBox.selectedInterval = interval
+        greetingSeen = true
         
         withAnimation {
-            dragonMessage = "Excellent, seeker. We descend through \(presenterBox.eras.count) moments where truth was hidden.\n\nScroll down. I will be with you."
+            dragonMessage = "Excellent, seeker. We descend through \(presenterBox.eras.count) moments where truth was hidden."
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             withAnimation(.spring(response: 0.6, dampingFraction: 0.8)) {
                 hasChosenInterval = true
+                showDescentAnimation = true  // Trigger Shenron descent
                 dragonState = .descending
             }
         }
@@ -314,14 +363,13 @@ struct TimelineView: View {
                     )
             }
             
-            // Sun Dragon
-            SunDragonView(size: 55)
-                .scaleEffect(1.0 + (progress * 0.15))
-                .rotationEffect(Angle(degrees: sin(Double(progress) * .pi * 4) * 5))
+            // Shenron Guardian
+            ShenronScrollCompanion(scrollProgress: progress, size: 70)
+                .rotationEffect(Angle(degrees: sin(Double(progress) * .pi * 4) * 3))
                 .shadow(color: Palette.accent.gold.opacity(0.4), radius: 10)
             
         }
-        .position(x: 45, y: dragonY)
+        .position(x: 50, y: dragonY)
         .allowsHitTesting(false)
         .animation(.easeOut(duration: 0.12), value: scrollOffset)
         
@@ -1225,6 +1273,41 @@ struct TimelineDetailView: View {
                             .foregroundColor(Palette.text.muted)
                     }
                     .padding(.top, 10)
+                    
+                    // MARK: - Cross-Module Links
+                    
+                    VStack(spacing: 12) {
+                        Divider()
+                            .background(Color.white.opacity(0.1))
+                            .padding(.horizontal, 40)
+                        
+                        // Portal to Cosmos
+                        HStack {
+                            Button(action: {
+                                // Open Cosmos (handled by parent)
+                                onDismiss()
+                                // Note: In a real implementation, we'd pass a callback to navigate
+                            }) {
+                                HStack(spacing: 8) {
+                                    Image(systemName: "arrow.right.circle.fill")
+                                        .font(.system(size: 14))
+                                    Text("See the cosmic architecture behind this")
+                                        .font(.system(size: 13, weight: .medium))
+                                }
+                                .foregroundColor(.cyan)
+                            }
+                            
+                            Spacer()
+                        }
+                        .padding(.horizontal, 20)
+                        
+                        // Dragon context chip
+                        DragonContextChip(
+                            context: .timeline(eventId: era.id.uuidString),
+                            customText: "Ask the Dragon about this event"
+                        )
+                    }
+                    .padding(.top, 16)
                     
                     Spacer(minLength: 80)
                     

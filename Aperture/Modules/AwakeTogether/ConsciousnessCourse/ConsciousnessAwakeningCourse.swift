@@ -617,7 +617,7 @@ struct LevelDetailView: View {
     @State private var selectedModule: AwakeningModule?
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView {
                 VStack(spacing: 20) {
                     // Level Header
@@ -736,7 +736,7 @@ struct CourseModuleDetailView: View {
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
                     // Module Header
@@ -875,7 +875,7 @@ struct CourseModuleDetailView: View {
 }
 
 #Preview {
-    NavigationView {
+    NavigationStack {
         ConsciousnessAwakeningCourseView()
     }
 }

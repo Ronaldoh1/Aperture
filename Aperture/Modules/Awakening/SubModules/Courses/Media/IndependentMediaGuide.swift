@@ -595,7 +595,7 @@ struct IndieMediaOutlet {
 }
 
 #Preview {
-    NavigationView {
+    NavigationStack {
         IndependentMediaGuide()
     }
 }

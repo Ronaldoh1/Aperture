@@ -134,7 +134,7 @@ struct TorusField: View {
     
 }
 
-#Preview {
+#Preview("TorusField") {
     ZStack {
         Color.black.ignoresSafeArea()
         

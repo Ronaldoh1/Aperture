@@ -585,7 +585,7 @@ struct ElectionLessonView: View {
 // MARK: - Preview
 
 #Preview {
-    NavigationView {
+    NavigationStack {
         ElectionsExposedCourse()
     }
 }

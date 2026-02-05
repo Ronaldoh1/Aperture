@@ -1154,7 +1154,7 @@ struct HeritageLessonView: View {
 }
 
 #Preview {
-    NavigationView {
+    NavigationStack {
         HeritageFoundationExposedCourse()
     }
 }

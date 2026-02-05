@@ -700,7 +700,7 @@ struct CourtCase {
 }
 
 #Preview {
-    NavigationView {
+    NavigationStack {
         GovernmentOfficialsView()
     }
 }

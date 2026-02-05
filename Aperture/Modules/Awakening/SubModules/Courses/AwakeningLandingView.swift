@@ -888,6 +888,13 @@ struct AwakeningLandingView: View {
     
     private var footerSection: some View {
         VStack(spacing: 12) {
+            // Dragon context chip
+            DragonContextChip(
+                context: .awakening(courseId: nil),
+                customText: "Ask the Dragon about your awakening"
+            )
+            .padding(.bottom, 8)
+            
             // Sacred geometry divider
             HStack(spacing: 8) {
                 Rectangle().fill(Palette.accent.gold.opacity(0.3)).frame(height: 1)

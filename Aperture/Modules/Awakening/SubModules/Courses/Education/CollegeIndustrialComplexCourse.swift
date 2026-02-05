@@ -2156,7 +2156,7 @@ struct CollegeLessonView: View {
 }
 
 #Preview {
-    NavigationView {
+    NavigationStack {
         CollegeIndustrialComplexCourse()
     }
 }

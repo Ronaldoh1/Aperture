@@ -697,7 +697,7 @@ struct EvilCorp {
 }
 
 #Preview {
-    NavigationView {
+    NavigationStack {
         CorporationsExposedView()
     }
 }

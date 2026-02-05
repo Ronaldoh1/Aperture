@@ -454,7 +454,7 @@ struct BetaControlPanelView: View {
 }
 
 #Preview {
-    NavigationView {
+    NavigationStack {
         BetaControlPanelView()
     }
 }

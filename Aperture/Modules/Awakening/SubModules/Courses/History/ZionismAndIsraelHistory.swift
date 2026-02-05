@@ -1203,7 +1203,7 @@ struct ZionismLessonView: View {
 }
 
 #Preview {
-    NavigationView {
+    NavigationStack {
         ZionismAndIsraelHistory()
     }
 }

@@ -705,7 +705,7 @@ class AwakeningArsenalViewModel: ObservableObject {
                 tradition: "Ancient Egyptian",
                 region: .africa,
                 icon: "𓂀",
-                color: .gold,
+                color: Palette.accent.gold,
                 briefDescription: "Unite soul aspects for eternal flight and divine becoming",
                 fullDescription: """
                 Ancient Egyptians had sophisticated understanding of the soul's multiple aspects: Ka (vital force/double), Ba (personality soul that travels), Akh (illuminated spirit), and others. Temple initiations activated and unified these for 'Osiris becoming'—dying to mortality, becoming eternal.
@@ -1279,7 +1279,7 @@ struct UniversalAwakeningMethodDetailView: View {
 }
 
 #Preview {
-    NavigationView {
+    NavigationStack {
         UniversalAwakeningArsenalView()
     }
 }

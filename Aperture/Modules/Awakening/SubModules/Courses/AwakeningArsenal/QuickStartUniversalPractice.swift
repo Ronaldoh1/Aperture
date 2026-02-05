@@ -397,7 +397,7 @@ struct QuickStartUniversalPracticeView: View {
 }
 
 #Preview {
-    NavigationView {
+    NavigationStack {
         QuickStartUniversalPracticeView()
     }
 }

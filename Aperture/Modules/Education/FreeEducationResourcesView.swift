@@ -512,7 +512,7 @@ struct FreeResource {
 }
 
 #Preview {
-    NavigationView {
+    NavigationStack {
         FreeEducationResourcesView()
     }
 }

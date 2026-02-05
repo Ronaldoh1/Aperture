@@ -1503,7 +1503,7 @@ struct ZenLessonView: View {
 }
 
 #Preview {
-    NavigationView {
+    NavigationStack {
         ZenSatoriCourse()
     }
 }

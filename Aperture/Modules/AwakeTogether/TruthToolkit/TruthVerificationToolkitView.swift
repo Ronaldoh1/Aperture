@@ -1002,7 +1002,7 @@ struct PropagandaLibraryView: View {
     @State private var selectedTechnique: PropagandaTechnique?
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView {
                 VStack(spacing: 12) {
                     ForEach(PropagandaDatabase.allTechniques) { technique in
@@ -1065,7 +1065,7 @@ struct AnalysisHistoryView: View {
     let history: [NarrativeAnalysis]
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 ForEach(history) { analysis in
                     VStack(alignment: .leading, spacing: 6) {
@@ -1110,7 +1110,7 @@ struct AnalysisHistoryView: View {
 }
 
 #Preview {
-    NavigationView {
+    NavigationStack {
         TruthVerificationToolkitView()
     }
 }

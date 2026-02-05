@@ -882,7 +882,7 @@ struct PayAuditView: View {
 }
 
 #Preview {
-    NavigationView {
+    NavigationStack {
         EquityWeaveView()
     }
 }

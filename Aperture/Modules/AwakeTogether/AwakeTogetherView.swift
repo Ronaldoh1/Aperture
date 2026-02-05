@@ -43,7 +43,7 @@ struct AwakeTogetherView: View {
             }
         }
         .sheet(isPresented: $showingBetaPanel) {
-            NavigationView {
+            NavigationStack {
                 BetaControlPanelView()
             }
         }
@@ -485,7 +485,7 @@ struct SerenePlaceholderView: View {
 }
 
 #Preview {
-    NavigationView {
+    NavigationStack {
         AwakeTogetherView()
     }
 }

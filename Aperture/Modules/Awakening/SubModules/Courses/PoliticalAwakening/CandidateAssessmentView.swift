@@ -603,7 +603,7 @@ struct RedFlag {
 // MARK: - Preview
 
 #Preview {
-    NavigationView {
+    NavigationStack {
         CandidateAssessmentView()
     }
 }

@@ -421,7 +421,7 @@ struct AddMediaSourceView: View {
     @State private var manipulationScore: Int = 5
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView {
                 VStack(spacing: 20) {
                     // Source Name
@@ -582,7 +582,7 @@ struct ManipulationPatternsView: View {
     ]
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView {
                 VStack(spacing: 16) {
                     Text("Learn to recognize manipulation tactics")
@@ -876,13 +876,13 @@ struct RealityAnchorView: View {
 }
 
 #Preview("MindShield") {
-    NavigationView {
+    NavigationStack {
         MindShieldView()
     }
 }
 
 #Preview("Reality Anchor") {
-    NavigationView {
+    NavigationStack {
         RealityAnchorView()
     }
 }

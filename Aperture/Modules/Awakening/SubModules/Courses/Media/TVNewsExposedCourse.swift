@@ -1411,7 +1411,7 @@ struct TVNewsLessonView: View {
 }
 
 #Preview {
-    NavigationView {
+    NavigationStack {
         TVNewsExposedCourse()
     }
 }

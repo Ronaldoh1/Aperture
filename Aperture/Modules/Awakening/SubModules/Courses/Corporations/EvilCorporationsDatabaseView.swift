@@ -972,7 +972,7 @@ struct CorporationDetailView: View {
 }
 
 #Preview {
-    NavigationView {
+    NavigationStack {
         EvilCorporationsDatabaseView()
     }
 }

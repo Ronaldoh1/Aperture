@@ -18,7 +18,7 @@ struct CandidateDataEntryView: View {
     let parties = ["Democrat", "Republican", "Independent", "Green", "Libertarian", "Other"]
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView {
                 VStack(spacing: 24) {
                     // Quick Import
@@ -580,13 +580,13 @@ struct ElectionTrackerView: View {
 }
 
 #Preview("Comparison") {
-    NavigationView {
+    NavigationStack {
         CandidateComparisonView()
     }
 }
 
 #Preview("Election Tracker") {
-    NavigationView {
+    NavigationStack {
         ElectionTrackerView()
     }
 }

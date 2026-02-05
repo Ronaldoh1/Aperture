@@ -599,7 +599,7 @@ struct NewJournalEntryView: View {
     let moods = ["😴", "😔", "😐", "😌", "😊", "🤯", "✨", "🔥"]
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView {
                 VStack(spacing: 20) {
                     // Mood Selector
@@ -785,7 +785,7 @@ struct MilestoneDetailView: View {
     @State private var notes = ""
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView {
                 VStack(spacing: 20) {
                     // Status
@@ -890,7 +890,7 @@ class AudioRecorder: NSObject, ObservableObject {
 }
 
 #Preview {
-    NavigationView {
+    NavigationStack {
         AwakeningTrackerView()
     }
 }

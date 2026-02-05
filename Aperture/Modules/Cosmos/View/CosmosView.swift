@@ -14,7 +14,12 @@ struct CosmosView: View {
     @State private var selectedRealm: CosmicRealm?
     @State private var selectedEntity: CosmicEntity?
     @State private var standaloneEntityRealm: CosmicRealm? = nil // For entities not in a realm
-    @State private var showBiblicalLies: Bool = false // For the Lies of the Bible list
+    @State private var showAlternativeTraditions: Bool = false // For the Canonical vs. Alternative Traditions list
+    
+    // NEW: Segmented control state
+    @State private var selectedSection: CosmosSection = .spheres
+    @State private var expandedSections: Set<String> = []
+    @State private var scrollProxy: ScrollViewProxy?
     
     private let realms = CosmicRealm.realmsTopToBottom // Pleroma at top, Earth at bottom
     
@@ -28,21 +33,32 @@ struct CosmosView: View {
     
     var body: some View {
         
-        NavigationView {
+        NavigationStack {
             
             ZStack {
                 
                 cosmicBackground
                 
-                HStack(spacing: 0) {
+                VStack(spacing: 0) {
+                    // NEW: Segmented control at top
+                    CosmosSegmentedControl(selectedSection: $selectedSection)
+                        .padding(.top, 8)
+                        .padding(.bottom, 12)
                     
-                    // Main Scroll Content
-                    realmScrollView
-                    
-                    // Mini Map
-                    miniMapView
+                    HStack(spacing: 0) {
+                        // Main Scroll Content
+                        realmScrollView
+                        
+                        // Tappable Mini Map
+                        TappableMiniMap(
+                            realms: realms,
+                            currentRealmIndex: currentRealmIndex,
+                            onRealmTap: { index, realmId in
+                                scrollToSection(realmId: realmId)
+                            }
+                        )
                         .frame(width: 60)
-                    
+                    }
                 }
                 
             }
@@ -53,9 +69,9 @@ struct CosmosView: View {
                     selectedEntity = nil
                 }
             }
-            .sheet(isPresented: $showBiblicalLies) {
-                BiblicalLiesListView {
-                    showBiblicalLies = false
+            .sheet(isPresented: $showAlternativeTraditions) {
+                AlternativeTraditionsListView {
+                    showAlternativeTraditions = false
                 }
             }
             
@@ -81,69 +97,88 @@ struct CosmosView: View {
                         .padding(.top, 20)
                         .padding(.bottom, 32)
                     
-                    // Realms
-                    ForEach(Array(realms.enumerated()), id: \.element.id) { index, realm in
-                        
-                        RealmCard(
-                            realm: realm,
-                            isExpanded: selectedRealm?.id == realm.id,
-                            onTap: {
-                                withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
-                                    if selectedRealm?.id == realm.id {
-                                        selectedRealm = nil
-                                    } else {
-                                        selectedRealm = realm
-                                    }
-                                }
-                            },
-                            onEntityTap: { entity in
-                                selectedEntity = entity
-                                selectedRealm = realm
-                            }
-                        )
-                        .id(realm.id)
-                        .background(
-                            GeometryReader { geo -> Color in
-                                DispatchQueue.main.async {
-                                    let frame = geo.frame(in: .named("cosmosScroll"))
-                                    let screenMid = UIScreen.main.bounds.height / 2
-                                    
-                                    if frame.minY < screenMid && frame.maxY > screenMid {
-                                        if currentRealmIndex != index {
-                                            currentRealmIndex = index
+                    // SPHERES SECTION (filtered by segmented control)
+                    if selectedSection == .spheres || selectedSection == .entities {
+                        // Realms
+                        ForEach(Array(realms.enumerated()), id: \.element.id) { index, realm in
+                            
+                            RealmCard(
+                                realm: realm,
+                                isExpanded: selectedRealm?.id == realm.id,
+                                onTap: {
+                                    withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
+                                        if selectedRealm?.id == realm.id {
+                                            selectedRealm = nil
+                                        } else {
+                                            selectedRealm = realm
                                         }
                                     }
+                                },
+                                onEntityTap: { entity in
+                                    selectedEntity = entity
+                                    selectedRealm = realm
                                 }
-                                return Color.clear
-                            }
-                        )
+                            )
+                            .id(realm.id)
+                            .background(
+                                GeometryReader { geo -> Color in
+                                    DispatchQueue.main.async {
+                                        let frame = geo.frame(in: .named("cosmosScroll"))
+                                        let screenMid = UIScreen.main.bounds.height / 2
+                                        
+                                        if frame.minY < screenMid && frame.maxY > screenMid {
+                                            if currentRealmIndex != index {
+                                                currentRealmIndex = index
+                                            }
+                                        }
+                                    }
+                                    return Color.clear
+                                }
+                            )
+                            
+                        }
                         
+                        // Footer - You Are Here
+                        youAreHereFooter
+                            .padding(.top, 40)
                     }
-                    
-                    // Footer - You Are Here
-                    youAreHereFooter
-                        .padding(.top, 40)
                     
                     // ═══════════════════════════════════════════════════════════
                     // THE DEMONIZED ONES - Those They Lied About
                     // ═══════════════════════════════════════════════════════════
                     
-                    demonizedOnesSection
-                        .padding(.top, 40)
+                    if selectedSection == .entities || selectedSection == .liesAndTruths {
+                        demonizedOnesSection
+                            .padding(.top, 40)
+                            .id("demonized")
+                    }
                     
                     // ═══════════════════════════════════════════════════════════
                     // THE LIES THEY TOLD - Hell, Antichrist, etc.
                     // ═══════════════════════════════════════════════════════════
                     
-                    liesTheyToldSection
-                        .padding(.top, 40)
+                    if selectedSection == .liesAndTruths {
+                        liesTheyToldSection
+                            .padding(.top, 40)
+                            .id("lies")
+                    }
                     
                     // ═══════════════════════════════════════════════════════════
                     // ANGELS - The Truth
                     // ═══════════════════════════════════════════════════════════
                     
-                    angelsTruthSection
-                        .padding(.top, 40)
+                    if selectedSection == .entities || selectedSection == .liesAndTruths {
+                        angelsTruthSection
+                            .padding(.top, 40)
+                            .id("angels")
+                    }
+                    
+                    // Dragon context chip at bottom
+                    DragonContextChip(
+                        context: .cosmos(sectionId: selectedSection.rawValue),
+                        customText: "Ask the Dragon about the Cosmos"
+                    )
+                    .padding(.top, 30)
                     
                     Spacer(minLength: 100)
                     
@@ -152,9 +187,23 @@ struct CosmosView: View {
                 
             }
             .coordinateSpace(name: "cosmosScroll")
+            .onAppear {
+                // Capture scroll proxy for programmatic scrolling
+                scrollProxy = proxy
+            }
             
         }
         
+    }
+    
+    // MARK: - Scroll To Section Helper
+    
+    private func scrollToSection(realmId: String) {
+        guard let proxy = scrollProxy else { return }
+        
+        withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
+            proxy.scrollTo(realmId, anchor: .top)
+        }
     }
     
     // MARK: - Cosmos Header
@@ -394,9 +443,9 @@ struct CosmosView: View {
                 
             }
             
-            // THE LIES OF THE BIBLE - Special navigation card
-            BiblicalLiesNavigationCard {
-                showBiblicalLies = true
+            // CANONICAL VS. ALTERNATIVE TRADITIONS - Special navigation card
+            AlternativeTraditionsCard {
+                showAlternativeTraditions = true
             }
             
             // Dragon Comment
@@ -997,6 +1046,37 @@ struct EntityDetailView: View {
                             funFactSection(funFact: funFact)
                         }
                         
+                        // MARK: - Cross-Module Links
+                        VStack(spacing: 12) {
+                            Divider()
+                                .background(Color.white.opacity(0.1))
+                            
+                            // Portal to Awakening
+                            HStack {
+                                Button(action: {
+                                    // Close sheet and navigate (handled by parent)
+                                    onDismiss()
+                                }) {
+                                    HStack(spacing: 8) {
+                                        Image(systemName: "arrow.right.circle.fill")
+                                            .font(.system(size: 14))
+                                        Text("Ground this in practice")
+                                            .font(.system(size: 13, weight: .medium))
+                                    }
+                                    .foregroundColor(Palette.accent.gold)
+                                }
+                                
+                                Spacer()
+                            }
+                            
+                            // Dragon context chip
+                            DragonContextChip(
+                                context: .cosmos(sectionId: entity.id.uuidString),
+                                customText: "Ask the Dragon about \(entity.name)"
+                            )
+                        }
+                        .padding(.top, 16)
+                        
                         Spacer(minLength: 40)
                         
                     }
@@ -1199,17 +1279,10 @@ struct CosmosFlowLayout: Layout {
     
 }
 
-// MARK: - Safe Array Access
-
-extension Array {
-    subscript(safe index: Index) -> Element? {
-        indices.contains(index) ? self[index] : nil
-    }
-}
 
 // MARK: - Biblical Lies Navigation Card
 
-struct BiblicalLiesNavigationCard: View {
+struct AlternativeTraditionsCard: View {
     
     let onTap: () -> Void
     
@@ -1313,7 +1386,7 @@ struct BiblicalLiesNavigationCard: View {
                 .frame(height: 160)
                 
                 // Title
-                Text("THE LIES OF THE BIBLE")
+                Text("CANONICAL VS. ALTERNATIVE TRADITIONS")
                     .font(.system(size: 14, weight: .black, design: .rounded))
                     .tracking(3)
                     .foregroundStyle(
@@ -1339,7 +1412,7 @@ struct BiblicalLiesNavigationCard: View {
                 // CTA Button
                 HStack(spacing: 8) {
                     
-                    Text("EXPOSE THE LIES")
+                    Text("EXPLORE THE DIFFERENCES")
                         .font(.system(size: 13, weight: .black, design: .rounded))
                         .tracking(2)
                     
@@ -1415,7 +1488,7 @@ struct BiblicalLiesNavigationCard: View {
 
 // MARK: - Biblical Lies List View
 
-struct BiblicalLiesListView: View {
+struct AlternativeTraditionsListView: View {
     
     let onDismiss: () -> Void
     
@@ -1462,7 +1535,7 @@ struct BiblicalLiesListView: View {
                             Text("📖🔥")
                                 .font(.system(size: 50))
                             
-                            Text("THE LIES OF THE BIBLE")
+                            Text("CANONICAL VS. ALTERNATIVE TRADITIONS")
                                 .font(.system(size: 13, weight: .bold, design: .rounded))
                                 .tracking(3)
                                 .foregroundColor(Palette.primary.red)

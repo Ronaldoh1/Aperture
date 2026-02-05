@@ -955,7 +955,7 @@ struct CorpDetailView: View {
 }
 
 #Preview {
-    NavigationView {
+    NavigationStack {
         EvilCorporationsDatabase()
     }
 }

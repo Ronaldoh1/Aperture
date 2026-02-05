@@ -1604,7 +1604,7 @@ struct FoodLessonView: View {
 }
 
 #Preview {
-    NavigationView {
+    NavigationStack {
         FoodIndustryExposedCourse()
     }
 }

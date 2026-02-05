@@ -14,10 +14,10 @@ struct ParadoxesCourse {
     
     var color: Color { Color(hex: colorHex) }
     
-    let paradoxes: [Paradox] = [
+    let paradoxes: [CourseParadox] = [
         
         // TIME PARADOXES
-        Paradox(
+        CourseParadox(
             id: "grandfather",
             category: .time,
             title: "The Grandfather Paradox",
@@ -46,7 +46,7 @@ struct ParadoxesCourse {
             mindBender: "If you never existed to go back, did the trip happen? For whom?"
         ),
         
-        Paradox(
+        CourseParadox(
             id: "bootstrap",
             category: .time,
             title: "The Bootstrap Paradox",
@@ -73,7 +73,7 @@ We assume every effect has a prior cause. The bootstrap paradox shows informatio
             mindBender: "Where does something come from if it only exists because it was already there?"
         ),
         
-        Paradox(
+        CourseParadox(
             id: "fermi",
             category: .existence,
             title: "Fermi's Paradox",
@@ -111,7 +111,7 @@ Even conservative estimates suggest intelligent civilizations should be EVERYWHE
         ),
         
         // PHYSICS PARADOXES
-        Paradox(
+        CourseParadox(
             id: "twins",
             category: .physics,
             title: "The Twin Paradox",
@@ -139,7 +139,7 @@ GPS satellites experience time dilation. Without corrections, GPS would drift by
             mindBender: "If you traveled fast enough for long enough, you could return to find everyone you knew dead—while you barely aged."
         ),
         
-        Paradox(
+        CourseParadox(
             id: "schrodinger",
             category: .physics,
             title: "Schrödinger's Cat",
@@ -166,7 +166,7 @@ When DOES collapse happen? What counts as observation? A measuring device? A con
             mindBender: "If observation creates reality, and no one observes, does reality exist?"
         ),
         
-        Paradox(
+        CourseParadox(
             id: "quantum_zeno",
             category: .physics,
             title: "Quantum Zeno Effect",
@@ -194,7 +194,7 @@ Quantum computing uses this effect to protect quantum states from decoherence.
         ),
         
         // LOGICAL PARADOXES
-        Paradox(
+        CourseParadox(
             id: "liar",
             category: .logic,
             title: "The Liar's Paradox",
@@ -221,7 +221,7 @@ Any consistent mathematical system complex enough to include arithmetic contains
             mindBender: "If a system is complex enough to talk about itself, it contains paradoxes. Does this apply to consciousness examining itself?"
         ),
         
-        Paradox(
+        CourseParadox(
             id: "ship_theseus",
             category: .identity,
             title: "Ship of Theseus",
@@ -249,7 +249,7 @@ Are you the "same person" you were at age 5? What makes you YOU?
             mindBender: "If every cell in your body is replaced, at what point did 'you' die and someone else take over?"
         ),
         
-        Paradox(
+        CourseParadox(
             id: "omnipotence",
             category: .theological,
             title: "The Omnipotence Paradox",
@@ -279,7 +279,7 @@ Does omnipotence even make sense as a concept? Might infinity itself contain con
             mindBender: "If unlimited power is self-contradictory, are there necessary limits built into existence?"
         ),
         
-        Paradox(
+        CourseParadox(
             id: "simulation",
             category: .existence,
             title: "Simulation Argument",
@@ -318,7 +318,7 @@ If true:
             mindBender: "If this is a simulation, what would you do differently? If nothing, does it matter?"
         ),
         
-        Paradox(
+        CourseParadox(
             id: "free_will",
             category: .identity,
             title: "The Free Will Paradox",
@@ -358,7 +358,7 @@ To "choose" freely:
 }
 
 // Supporting Types
-struct Paradox: Identifiable {
+struct CourseParadox: Identifiable {
     let id: String
     let category: ParadoxCategory
     let title: String

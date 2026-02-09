@@ -1,0 +1,23 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# APERTURE - Ruby Dependencies
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# Install: bundle install
+# Update:  bundle update
+#
+# ═══════════════════════════════════════════════════════════════════════════════
+
+source "https://rubygems.org"
+
+# Fastlane - Automation for iOS deployment
+gem "fastlane", "~> 2.220"
+
+# CocoaPods - If using pods (uncomment if needed)
+# gem "cocoapods", "~> 1.15"
+
+# Dotenv - Load environment variables from .env
+gem "dotenv"
+
+# Load fastlane plugins from Pluginfile
+plugins_path = File.join(File.dirname(__FILE__), 'fastlane', 'Pluginfile')
+eval_gemfile(plugins_path) if File.exist?(plugins_path)

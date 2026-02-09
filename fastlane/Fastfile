@@ -1,0 +1,317 @@
+# ═══════════════════════════════════════════════════════════════════════════
+# APERTURE - Fastlane Configuration
+# Easy TestFlight distribution for friends and testers
+# ═══════════════════════════════════════════════════════════════════════════
+#
+# QUICK START:
+#   1. Install fastlane: brew install fastlane
+#   2. Update Appfile with your Apple ID
+#   3. Run: fastlane beta
+#
+# AVAILABLE LANES:
+#   fastlane build        - Quick build check (no signing)
+#   fastlane beta         - Deploy to TestFlight
+#   fastlane quick_beta   - Fast TestFlight deploy (auto build number)
+#   fastlane adhoc        - Create IPA for direct sharing
+#   fastlane release      - App Store submission
+#
+# ═══════════════════════════════════════════════════════════════════════════
+
+default_platform(:ios)
+
+# ─────────────────────────────────────────────────────────────────────────────
+# CONFIGURATION
+# ─────────────────────────────────────────────────────────────────────────────
+
+APP_IDENTIFIER = ENV["APP_IDENTIFIER"] || "com.sunflow.aperture"
+SCHEME = ENV["SCHEME"] || "Aperture"
+PROJECT = "Aperture.xcodeproj"
+TEAM_ID = ENV["TEAM_ID"] || nil  # Set your team ID here or in env
+
+# ─────────────────────────────────────────────────────────────────────────────
+# iOS LANES
+# ─────────────────────────────────────────────────────────────────────────────
+
+platform :ios do
+  
+  # ═══════════════════════════════════════════════════════════════════════════
+  # BUILD CHECK - Verify app compiles without signing
+  # ═══════════════════════════════════════════════════════════════════════════
+  
+  desc "🔨 Build the app to verify it compiles (no signing required)"
+  lane :build do
+    UI.message("Building Aperture for compilation check...")
+    
+    xcodebuild(
+      scheme: SCHEME,
+      project: PROJECT,
+      destination: "generic/platform=iOS Simulator",
+      xcargs: "-configuration Debug -skipPackagePluginValidation CODE_SIGNING_ALLOWED=NO"
+    )
+    
+    UI.success("✅ Build successful! App compiles correctly.")
+  end
+  
+  
+  # ═══════════════════════════════════════════════════════════════════════════
+  # SIMULATOR BUILD - Build for simulator testing
+  # ═══════════════════════════════════════════════════════════════════════════
+  
+  desc "📱 Build for iOS Simulator"
+  lane :simulator do
+    UI.message("Building for iPhone 15 Pro Simulator...")
+    
+    xcodebuild(
+      scheme: SCHEME,
+      project: PROJECT,
+      destination: "platform=iOS Simulator,name=iPhone 15 Pro",
+      xcargs: "-configuration Debug"
+    )
+    
+    UI.success("✅ Simulator build ready!")
+  end
+  
+  
+  # ═══════════════════════════════════════════════════════════════════════════
+  # BETA - Deploy to TestFlight for friends
+  # ═══════════════════════════════════════════════════════════════════════════
+  
+  desc "🚀 Deploy to TestFlight for friends to test"
+  lane :beta do |options|
+    UI.header("Deploying Aperture to TestFlight")
+    
+    # Ensure clean git state (optional, disable with SKIP_GIT_CHECK=1)
+    unless ENV['SKIP_GIT_CHECK']
+      ensure_git_status_clean rescue UI.important("⚠️ Git state not clean, continuing anyway...")
+    end
+    
+    # Increment build number
+    new_build = increment_build_number(
+      build_number: Time.now.strftime("%Y%m%d.%H%M")
+    )
+    UI.message("Build number: #{new_build}")
+    
+    # Build the app
+    build_app(
+      scheme: SCHEME,
+      project: PROJECT,
+      export_method: "app-store",
+      clean: true,
+      output_directory: "./build",
+      output_name: "Aperture.ipa"
+    )
+    
+    # Get changelog
+    changelog = options[:changelog] || "🐉 New Aperture build with latest consciousness expansion features"
+    
+    # Upload to TestFlight
+    upload_to_testflight(
+      skip_waiting_for_build_processing: true,
+      changelog: changelog,
+      distribute_external: false,  # Set to true to auto-distribute to external testers
+      notify_external_testers: false
+    )
+    
+    UI.success("🎉 Beta uploaded to TestFlight!")
+    UI.message("Friends will receive it once Apple processes the build (usually 15-30 min)")
+  end
+  
+  
+  # ═══════════════════════════════════════════════════════════════════════════
+  # QUICK BETA - Fastest path to TestFlight
+  # ═══════════════════════════════════════════════════════════════════════════
+  
+  desc "⚡ Quick deploy to TestFlight (fastest path)"
+  lane :quick_beta do
+    UI.header("Quick Beta Deploy")
+    
+    # Auto build number based on timestamp
+    build_num = Time.now.strftime("%Y%m%d.%H%M")
+    increment_build_number(build_number: build_num)
+    
+    # Build and archive
+    build_app(
+      scheme: SCHEME,
+      project: PROJECT,
+      export_method: "app-store",
+      skip_profile_detection: true
+    )
+    
+    # Upload immediately
+    upload_to_testflight(
+      skip_waiting_for_build_processing: true,
+      changelog: "Quick beta - #{Time.now.strftime('%B %d, %Y at %I:%M %p')}"
+    )
+    
+    UI.success("⚡ Quick beta uploaded!")
+  end
+  
+  
+  # ═══════════════════════════════════════════════════════════════════════════
+  # AD-HOC - Build IPA for direct sharing (no TestFlight)
+  # ═══════════════════════════════════════════════════════════════════════════
+  
+  desc "📦 Build ad-hoc IPA for direct distribution via AirDrop/email"
+  lane :adhoc do
+    UI.header("Building Ad-Hoc IPA for Direct Distribution")
+    
+    # Build number
+    increment_build_number(build_number: Time.now.strftime("%Y%m%d.%H%M"))
+    
+    # Build with ad-hoc export
+    build_app(
+      scheme: SCHEME,
+      project: PROJECT,
+      export_method: "ad-hoc",
+      output_directory: "./build",
+      output_name: "Aperture-AdHoc.ipa"
+    )
+    
+    ipa_path = "./build/Aperture-AdHoc.ipa"
+    
+    UI.success("📦 Ad-hoc IPA ready!")
+    UI.message("")
+    UI.message("═" * 60)
+    UI.message("IPA Location: #{File.expand_path(ipa_path)}")
+    UI.message("═" * 60)
+    UI.message("")
+    UI.message("To share with friends:")
+    UI.message("1. AirDrop the IPA file directly")
+    UI.message("2. They install via Apple Configurator or Finder")
+    UI.message("3. Device must be registered in your provisioning profile")
+  end
+  
+  
+  # ═══════════════════════════════════════════════════════════════════════════
+  # RELEASE - App Store submission
+  # ═══════════════════════════════════════════════════════════════════════════
+  
+  desc "🏆 Submit to App Store"
+  lane :release do |options|
+    UI.header("Submitting Aperture to App Store")
+    
+    # Get version
+    version = options[:version]
+    unless version
+      current = get_version_number(target: "Aperture")
+      version = UI.input("Enter version number (current: #{current}):")
+    end
+    
+    # Update version
+    increment_version_number(version_number: version)
+    increment_build_number(build_number: "1")
+    
+    # Build
+    build_app(
+      scheme: SCHEME,
+      project: PROJECT,
+      export_method: "app-store",
+      clean: true
+    )
+    
+    # Upload
+    upload_to_app_store(
+      force: true,
+      skip_screenshots: true,
+      skip_metadata: false,
+      precheck_include_in_app_purchases: false,
+      submit_for_review: false  # Set true to auto-submit
+    )
+    
+    # Git tag
+    add_git_tag(tag: "v#{version}")
+    push_git_tags rescue nil
+    
+    UI.success("🏆 Version #{version} uploaded to App Store Connect!")
+  end
+  
+  
+  # ═══════════════════════════════════════════════════════════════════════════
+  # CERTIFICATES - Code signing setup
+  # ═══════════════════════════════════════════════════════════════════════════
+  
+  desc "🔐 Sync all certificates and profiles"
+  lane :certs do
+    UI.header("Setting up code signing...")
+    
+    # Development
+    match(
+      type: "development",
+      app_identifier: APP_IDENTIFIER,
+      readonly: is_ci
+    )
+    
+    # Ad-hoc for direct distribution
+    match(
+      type: "adhoc", 
+      app_identifier: APP_IDENTIFIER,
+      readonly: is_ci
+    )
+    
+    # App Store
+    match(
+      type: "appstore",
+      app_identifier: APP_IDENTIFIER,
+      readonly: is_ci
+    )
+    
+    UI.success("🔐 All certificates synced!")
+  end
+  
+  desc "🔑 Sync development certificates only"
+  lane :dev_certs do
+    match(type: "development", readonly: true)
+  end
+  
+  
+  # ═══════════════════════════════════════════════════════════════════════════
+  # REGISTER DEVICES - Add friend's devices for ad-hoc
+  # ═══════════════════════════════════════════════════════════════════════════
+  
+  desc "📱 Register a new device for testing"
+  lane :register_device do
+    device_name = UI.input("Enter device name (e.g., Ron's iPhone):")
+    device_udid = UI.input("Enter device UDID:")
+    
+    register_devices(
+      devices: {
+        device_name => device_udid
+      }
+    )
+    
+    # Refresh provisioning profiles
+    match(type: "development", force_for_new_devices: true)
+    match(type: "adhoc", force_for_new_devices: true)
+    
+    UI.success("📱 Device registered! They can now install ad-hoc builds.")
+  end
+  
+  
+  # ═══════════════════════════════════════════════════════════════════════════
+  # TESTS - Run test suite
+  # ═══════════════════════════════════════════════════════════════════════════
+  
+  desc "🧪 Run all tests"
+  lane :test do
+    run_tests(
+      scheme: SCHEME,
+      project: PROJECT,
+      devices: ["iPhone 15 Pro"],
+      clean: true,
+      code_coverage: true
+    )
+  end
+  
+  
+  # ═══════════════════════════════════════════════════════════════════════════
+  # ERROR HANDLING
+  # ═══════════════════════════════════════════════════════════════════════════
+  
+  error do |lane, exception|
+    UI.error("=" * 60)
+    UI.error("❌ #{lane} failed!")
+    UI.error(exception.message)
+    UI.error("=" * 60)
+  end
+  
+end

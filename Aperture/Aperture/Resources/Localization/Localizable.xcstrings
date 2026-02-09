@@ -957,6 +957,12 @@
         }
       }
     },
+    "%lld min daily" : {
+
+    },
+    "%lld minutes daily" : {
+
+    },
     "%lld modules" : {
       "localizations" : {
         "es" : {
@@ -1407,6 +1413,9 @@
           }
         }
       }
+    },
+    "%lld%% Complete" : {
+
     },
     "%lld%% complete • ~20 min" : {
       "localizations" : {
@@ -3996,6 +4005,9 @@
     "1,700 Years of Programming" : {
 
     },
+    "2 min" : {
+
+    },
     "2,500 years of refined wisdom on ending suffering, seeing reality clearly, and awakening to your true nature." : {
       "localizations" : {
         "es" : {
@@ -4355,6 +4367,9 @@
           }
         }
       }
+    },
+    "30-Day Practice Protocol" : {
+
     },
     "50+ Logical Fallacies - Coming Soon" : {
       "localizations" : {
@@ -5523,6 +5538,9 @@
           }
         }
       }
+    },
+    "Available free at gnosis.org and sacred-texts.com" : {
+
     },
     "Avoid: %@" : {
       "localizations" : {
@@ -6847,6 +6865,9 @@
         }
       }
     },
+    "Complete Day %lld" : {
+
+    },
     "Complete Gate %lld to unlock" : {
 
     },
@@ -6917,6 +6938,9 @@
       }
     },
     "Consciousness aligned → Teaching appears" : {
+
+    },
+    "CONSCIOUSNESS ASSESSMENT" : {
 
     },
     "CONSCIOUSNESS AWAKENING" : {
@@ -7048,6 +7072,9 @@
     "Content Disclaimer" : {
 
     },
+    "Content Loaded" : {
+
+    },
     "Content Suggestion" : {
       "localizations" : {
         "es" : {
@@ -7117,6 +7144,9 @@
           }
         }
       }
+    },
+    "CONTINUE LEARNING" : {
+
     },
     "Continue with %@" : {
       "localizations" : {
@@ -7417,6 +7447,9 @@
         }
       }
     },
+    "Current Version: %@" : {
+
+    },
     "Current:" : {
       "localizations" : {
         "es" : {
@@ -7575,6 +7608,9 @@
           }
         }
       }
+    },
+    "Day %lld/30" : {
+
     },
     "day streak" : {
       "localizations" : {
@@ -8086,6 +8122,9 @@
         }
       }
     },
+    "Dragon Says" : {
+
+    },
     "DRAGON SAYS" : {
       "localizations" : {
         "es" : {
@@ -8105,6 +8144,9 @@
           }
         }
       }
+    },
+    "Dragon's Introduction" : {
+
     },
     "DRAGON'S WISDOM" : {
       "localizations" : {
@@ -8404,6 +8446,9 @@
         }
       }
     },
+    "Enabled: %lld features" : {
+
+    },
     "ENCODE" : {
       "localizations" : {
         "es" : {
@@ -8646,6 +8691,9 @@
           }
         }
       }
+    },
+    "Essential Texts" : {
+
     },
     "Est. people who remember wrong:" : {
       "localizations" : {
@@ -9052,6 +9100,9 @@
         }
       }
     },
+    "Feature Flags" : {
+
+    },
     "Feature Request" : {
       "localizations" : {
         "es" : {
@@ -9112,6 +9163,9 @@
         }
       }
     },
+    "Find My Path" : {
+
+    },
     "Find This Book" : {
       "localizations" : {
         "es" : {
@@ -9121,6 +9175,9 @@
           }
         }
       }
+    },
+    "Find Your Path" : {
+
     },
     "FINDING TEACHERS" : {
       "localizations" : {
@@ -9302,6 +9359,9 @@
           }
         }
       }
+    },
+    "FPS: %lld" : {
+
     },
     "FRAMEWORK" : {
 
@@ -10188,6 +10248,9 @@
         }
       }
     },
+    "I'll explore on my own" : {
+
+    },
     "I'm your companion on this journey." : {
       "localizations" : {
         "es" : {
@@ -10766,6 +10829,9 @@
           }
         }
       }
+    },
+    "Key Insight" : {
+
     },
     "KEY INSIGHT" : {
       "localizations" : {
@@ -11753,6 +11819,9 @@
         }
       }
     },
+    "Memory: %@" : {
+
+    },
     "Mental Diet" : {
       "localizations" : {
         "es" : {
@@ -12477,6 +12546,9 @@
     "Not ready → Teaching remains hidden" : {
 
     },
+    "Not sure where to start?" : {
+
+    },
     "Not What You Think" : {
       "localizations" : {
         "es" : {
@@ -13191,6 +13263,9 @@
         }
       }
     },
+    "Phase: %@" : {
+
+    },
     "PHD CONSCIOUSNESS" : {
       "localizations" : {
         "es" : {
@@ -13248,6 +13323,9 @@
       }
     },
     "Pineal Gland" : {
+
+    },
+    "PISTIS SOPHIA" : {
 
     },
     "Player" : {
@@ -13528,6 +13606,9 @@
     "Premium course with 5 modules and 12 lessons" : {
 
     },
+    "Premium Feature" : {
+
+    },
     "PREMIUM FEATURE" : {
       "localizations" : {
         "es" : {
@@ -13537,6 +13618,9 @@
           }
         }
       }
+    },
+    "Premium Paywall Coming Soon" : {
+
     },
     "Prepare: %lldm" : {
       "localizations" : {
@@ -14473,6 +14557,9 @@
     "Release" : {
 
     },
+    "remaining" : {
+
+    },
     "Remember" : {
       "localizations" : {
         "es" : {
@@ -14573,6 +14660,9 @@
         }
       }
     },
+    "Reset All" : {
+
+    },
     "Reset All Flags?" : {
       "localizations" : {
         "es" : {
@@ -14632,6 +14722,9 @@
           }
         }
       }
+    },
+    "Resume" : {
+
     },
     "Retake Assessment" : {
       "localizations" : {
@@ -15865,6 +15958,9 @@
     "Start" : {
 
     },
+    "Start %lld min Practice" : {
+
+    },
     "Start 7-Day Free Trial" : {
       "localizations" : {
         "es" : {
@@ -15884,6 +15980,9 @@
           }
         }
       }
+    },
+    "Start Assessment" : {
+
     },
     "Start Breathing" : {
       "localizations" : {
@@ -15950,6 +16049,12 @@
           }
         }
       }
+    },
+    "Start Today's Practice" : {
+
+    },
+    "Startup: %lldms" : {
+
     },
     "State Akin to Sleep" : {
       "localizations" : {
@@ -16251,6 +16356,12 @@
           }
         }
       }
+    },
+    "Take a 2-minute assessment and we'll recommend the perfect courses for where you are right now." : {
+
+    },
+    "Take a quick assessment to discover which courses are right for where you are right now." : {
+
     },
     "Take the 32-Question Assessment" : {
       "localizations" : {
@@ -16726,6 +16837,9 @@
     "THE DETECTION FRAMEWORKS" : {
 
     },
+    "The Divine Feminine Awakening" : {
+
+    },
     "The Drone Self" : {
       "localizations" : {
         "es" : {
@@ -16814,6 +16928,9 @@
           }
         }
       }
+    },
+    "The foundation of Sophia awakening" : {
+
     },
     "THE FOUR NOBLE TRUTHS" : {
       "localizations" : {
@@ -18454,6 +18571,9 @@
         }
       }
     },
+    "Upcoming: %lld features" : {
+
+    },
     "Update Status" : {
       "localizations" : {
         "es" : {
@@ -18525,6 +18645,9 @@
       }
     },
     "Verify Age" : {
+
+    },
+    "Version %@" : {
 
     },
     "Version 1.0.0" : {
@@ -18796,6 +18919,19 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "SIMULADOR DE RIQUEZA"
+          }
+        }
+      }
+    },
+    "Week %lld" : {
+
+    },
+    "Week %lld: %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Week %1$lld: %2$@"
           }
         }
       }
@@ -19533,6 +19669,12 @@
     "You" : {
 
     },
+    "You also resonate with" : {
+
+    },
+    "You are" : {
+
+    },
     "YOU ARE HERE" : {
       "localizations" : {
         "es" : {
@@ -20071,6 +20213,9 @@
           }
         }
       }
+    },
+    "YOUR RECOMMENDED PATH" : {
+
     },
     "YOUR REFLECTION" : {
       "localizations" : {

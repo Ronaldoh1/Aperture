@@ -1,0 +1,56 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# APERTURE - Appfile Configuration
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# This file contains the app-specific configuration for fastlane.
+# Update these values with your actual credentials.
+#
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# ─────────────────────────────────────────────────────────────────────────────────
+# APP IDENTIFIER
+# ─────────────────────────────────────────────────────────────────────────────────
+# Your app's bundle identifier (must match Xcode project)
+
+app_identifier("com.sunflow.aperture")
+
+# ─────────────────────────────────────────────────────────────────────────────────
+# APPLE ID
+# ─────────────────────────────────────────────────────────────────────────────────
+# The Apple ID email associated with your developer account
+
+apple_id(ENV["APPLE_ID"] || "your-apple-id@email.com")
+
+# ─────────────────────────────────────────────────────────────────────────────────
+# TEAM ID
+# ─────────────────────────────────────────────────────────────────────────────────
+# Your Apple Developer Team ID
+# Find it at: https://developer.apple.com/account → Membership → Team ID
+
+team_id(ENV["TEAM_ID"] || "XXXXXXXXXX")
+
+# ─────────────────────────────────────────────────────────────────────────────────
+# APP STORE CONNECT
+# ─────────────────────────────────────────────────────────────────────────────────
+# Team ID for App Store Connect (if different from developer portal)
+# Usually the same as team_id
+
+itc_team_id(ENV["ITC_TEAM_ID"] || ENV["TEAM_ID"])
+
+# ─────────────────────────────────────────────────────────────────────────────────
+# CONTEXT-SPECIFIC OVERRIDES
+# ─────────────────────────────────────────────────────────────────────────────────
+
+for_platform :ios do
+  # iOS-specific settings here
+end
+
+for_lane :release do
+  # Production-specific settings
+  # app_identifier("com.sunflow.aperture")
+end
+
+for_lane :beta do
+  # Beta-specific settings (if using different bundle ID for beta)
+  # app_identifier("com.sunflow.aperture.beta")
+end

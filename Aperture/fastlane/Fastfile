@@ -1,0 +1,380 @@
+# ═══════════════════════════════════════════════════════════════════════════
+# APERTURE - Fastlane Configuration
+# Supports: TestFlight + Firebase App Distribution
+# ═══════════════════════════════════════════════════════════════════════════
+#
+# QUICK START:
+#   1. Install fastlane: brew install fastlane
+#   2. Install Firebase plugin: fastlane add_plugin firebase_app_distribution
+#   3. Update Appfile with your credentials
+#   4. Run: fastlane beta_all (deploys to both!)
+#
+# AVAILABLE LANES:
+#   fastlane build              - Verify build (no signing)
+#   fastlane beta               - TestFlight only
+#   fastlane firebase           - Firebase only
+#   fastlane beta_all           - Both TestFlight + Firebase
+#   fastlane adhoc              - Ad-hoc IPA for direct sharing
+#   fastlane release            - App Store submission
+#
+# ═══════════════════════════════════════════════════════════════════════════
+
+default_platform(:ios)
+
+# ─────────────────────────────────────────────────────────────────────────────
+# CONFIGURATION
+# ─────────────────────────────────────────────────────────────────────────────
+
+APP_IDENTIFIER = ENV["APP_IDENTIFIER"] || "com.sunflow.aperture"
+SCHEME = ENV["SCHEME"] || "Aperture"
+PROJECT = "Aperture.xcodeproj"
+
+# Firebase Configuration
+FIREBASE_APP_ID = ENV["FIREBASE_APP_ID"] || "1:YOUR_PROJECT_ID:ios:YOUR_APP_ID"
+FIREBASE_TESTERS_FILE = "fastlane/testers.txt"
+FIREBASE_GROUPS = "aperture-testers"  # Firebase tester group name
+
+# ─────────────────────────────────────────────────────────────────────────────
+# iOS LANES
+# ─────────────────────────────────────────────────────────────────────────────
+
+platform :ios do
+  
+  # ═══════════════════════════════════════════════════════════════════════════
+  # BUILD CHECK - No signing required
+  # ═══════════════════════════════════════════════════════════════════════════
+  
+  desc "🔨 Build the app to verify compilation (no signing)"
+  lane :build do
+    UI.header("Building Aperture...")
+    
+    xcodebuild(
+      scheme: SCHEME,
+      project: PROJECT,
+      destination: "generic/platform=iOS Simulator",
+      xcargs: "-configuration Debug CODE_SIGNING_ALLOWED=NO"
+    )
+    
+    UI.success("✅ Build successful!")
+  end
+  
+  
+  # ═══════════════════════════════════════════════════════════════════════════
+  # TESTFLIGHT BETA
+  # ═══════════════════════════════════════════════════════════════════════════
+  
+  desc "🚀 Deploy to TestFlight"
+  lane :beta do |options|
+    UI.header("Deploying to TestFlight")
+    
+    # Increment build number
+    build_num = Time.now.strftime("%Y%m%d.%H%M")
+    increment_build_number(build_number: build_num)
+    UI.message("Build number: #{build_num}")
+    
+    # Build for App Store
+    build_app(
+      scheme: SCHEME,
+      project: PROJECT,
+      export_method: "app-store",
+      output_directory: "./build",
+      output_name: "Aperture-AppStore.ipa"
+    )
+    
+    # Upload to TestFlight
+    changelog = options[:changelog] || generate_changelog
+    
+    upload_to_testflight(
+      skip_waiting_for_build_processing: true,
+      changelog: changelog,
+      distribute_external: false,
+      notify_external_testers: false
+    )
+    
+    UI.success("🎉 TestFlight upload complete!")
+    UI.message("Build will be available in ~15-30 minutes")
+  end
+  
+  
+  # ═══════════════════════════════════════════════════════════════════════════
+  # FIREBASE APP DISTRIBUTION
+  # ═══════════════════════════════════════════════════════════════════════════
+  
+  desc "🔥 Deploy to Firebase App Distribution"
+  lane :firebase do |options|
+    UI.header("Deploying to Firebase App Distribution")
+    
+    # Increment build number
+    build_num = Time.now.strftime("%Y%m%d.%H%M")
+    increment_build_number(build_number: build_num)
+    
+    # Build for Ad-Hoc (Firebase uses ad-hoc distribution)
+    build_app(
+      scheme: SCHEME,
+      project: PROJECT,
+      export_method: "ad-hoc",
+      output_directory: "./build",
+      output_name: "Aperture-Firebase.ipa"
+    )
+    
+    # Release notes
+    release_notes = options[:notes] || generate_changelog
+    
+    # Upload to Firebase
+    firebase_app_distribution(
+      app: FIREBASE_APP_ID,
+      ipa_path: "./build/Aperture-Firebase.ipa",
+      release_notes: release_notes,
+      groups: FIREBASE_GROUPS,
+      # OR use testers file:
+      # testers_file: FIREBASE_TESTERS_FILE,
+      firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"]  # Set this in your environment
+    )
+    
+    UI.success("🔥 Firebase distribution complete!")
+    UI.message("Testers will receive an email/notification shortly")
+  end
+  
+  
+  # ═══════════════════════════════════════════════════════════════════════════
+  # BOTH: TESTFLIGHT + FIREBASE
+  # ═══════════════════════════════════════════════════════════════════════════
+  
+  desc "🚀🔥 Deploy to BOTH TestFlight AND Firebase"
+  lane :beta_all do |options|
+    UI.header("Deploying to TestFlight + Firebase")
+    
+    changelog = options[:changelog] || generate_changelog
+    
+    # Build once, distribute twice
+    build_num = Time.now.strftime("%Y%m%d.%H%M")
+    increment_build_number(build_number: build_num)
+    
+    # 1. Build for App Store (TestFlight)
+    UI.message("Building for TestFlight...")
+    build_app(
+      scheme: SCHEME,
+      project: PROJECT,
+      export_method: "app-store",
+      output_directory: "./build",
+      output_name: "Aperture-AppStore.ipa"
+    )
+    
+    # 2. Upload to TestFlight
+    UI.message("Uploading to TestFlight...")
+    upload_to_testflight(
+      skip_waiting_for_build_processing: true,
+      changelog: changelog,
+      distribute_external: false
+    )
+    
+    # 3. Build for Firebase (ad-hoc)
+    UI.message("Building for Firebase...")
+    build_app(
+      scheme: SCHEME,
+      project: PROJECT,
+      export_method: "ad-hoc",
+      output_directory: "./build",
+      output_name: "Aperture-Firebase.ipa"
+    )
+    
+    # 4. Upload to Firebase
+    UI.message("Uploading to Firebase...")
+    firebase_app_distribution(
+      app: FIREBASE_APP_ID,
+      ipa_path: "./build/Aperture-Firebase.ipa",
+      release_notes: changelog,
+      groups: FIREBASE_GROUPS,
+      firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"]
+    )
+    
+    UI.success("=" * 50)
+    UI.success("🎉 Deployed to BOTH platforms!")
+    UI.success("=" * 50)
+    UI.message("TestFlight: ~15-30 min processing")
+    UI.message("Firebase: Available immediately")
+  end
+  
+  
+  # ═══════════════════════════════════════════════════════════════════════════
+  # AD-HOC - Direct sharing via AirDrop/email
+  # ═══════════════════════════════════════════════════════════════════════════
+  
+  desc "📦 Build ad-hoc IPA for direct distribution"
+  lane :adhoc do
+    UI.header("Building Ad-Hoc IPA")
+    
+    increment_build_number(build_number: Time.now.strftime("%Y%m%d.%H%M"))
+    
+    build_app(
+      scheme: SCHEME,
+      project: PROJECT,
+      export_method: "ad-hoc",
+      output_directory: "./build",
+      output_name: "Aperture-AdHoc.ipa"
+    )
+    
+    ipa_path = File.expand_path("./build/Aperture-AdHoc.ipa")
+    
+    UI.success("📦 Ad-hoc IPA ready!")
+    UI.message("Location: #{ipa_path}")
+    UI.message("")
+    UI.message("Share via AirDrop or email to testers")
+    UI.message("(Devices must be registered in provisioning profile)")
+  end
+  
+  
+  # ═══════════════════════════════════════════════════════════════════════════
+  # APP STORE RELEASE
+  # ═══════════════════════════════════════════════════════════════════════════
+  
+  desc "🏆 Submit to App Store"
+  lane :release do |options|
+    UI.header("Submitting to App Store")
+    
+    # Get version
+    version = options[:version]
+    unless version
+      current = get_version_number(target: "Aperture")
+      version = UI.input("Enter version number (current: #{current}):")
+    end
+    
+    # Update version numbers
+    increment_version_number(version_number: version)
+    increment_build_number(build_number: "1")
+    
+    # Build
+    build_app(
+      scheme: SCHEME,
+      project: PROJECT,
+      export_method: "app-store",
+      clean: true
+    )
+    
+    # Upload
+    upload_to_app_store(
+      force: true,
+      skip_screenshots: true,
+      skip_metadata: false,
+      submit_for_review: false  # Set true to auto-submit
+    )
+    
+    # Git tag
+    git_commit(path: ["**/Info.plist", "**/project.pbxproj"], message: "Release v#{version}")
+    add_git_tag(tag: "v#{version}")
+    push_git_tags rescue nil
+    
+    UI.success("🏆 Version #{version} uploaded!")
+  end
+  
+  
+  # ═══════════════════════════════════════════════════════════════════════════
+  # CERTIFICATES & PROFILES
+  # ═══════════════════════════════════════════════════════════════════════════
+  
+  desc "🔐 Sync all certificates and profiles"
+  lane :certs do
+    UI.header("Syncing certificates...")
+    
+    match(type: "development", app_identifier: APP_IDENTIFIER, readonly: is_ci)
+    match(type: "adhoc", app_identifier: APP_IDENTIFIER, readonly: is_ci)
+    match(type: "appstore", app_identifier: APP_IDENTIFIER, readonly: is_ci)
+    
+    UI.success("🔐 Certificates synced!")
+  end
+  
+  desc "🔑 Development certificates only"
+  lane :dev_certs do
+    match(type: "development", readonly: true)
+  end
+  
+  
+  # ═══════════════════════════════════════════════════════════════════════════
+  # DEVICE REGISTRATION
+  # ═══════════════════════════════════════════════════════════════════════════
+  
+  desc "📱 Register a new device for testing"
+  lane :register_device do
+    device_name = UI.input("Device name (e.g., Ron's iPhone):")
+    device_udid = UI.input("Device UDID:")
+    
+    register_devices(
+      devices: { device_name => device_udid }
+    )
+    
+    # Refresh profiles
+    match(type: "development", force_for_new_devices: true)
+    match(type: "adhoc", force_for_new_devices: true)
+    
+    UI.success("📱 Device registered! Rebuild to include.")
+  end
+  
+  desc "📱 Register devices from file"
+  lane :register_devices_file do
+    register_devices(
+      devices_file: "./fastlane/devices.txt"
+    )
+    
+    match(type: "development", force_for_new_devices: true)
+    match(type: "adhoc", force_for_new_devices: true)
+    
+    UI.success("📱 Devices registered from file!")
+  end
+  
+  
+  # ═══════════════════════════════════════════════════════════════════════════
+  # TESTING
+  # ═══════════════════════════════════════════════════════════════════════════
+  
+  desc "🧪 Run all tests"
+  lane :test do
+    run_tests(
+      scheme: SCHEME,
+      project: PROJECT,
+      devices: ["iPhone 15 Pro"],
+      clean: true,
+      code_coverage: true
+    )
+  end
+  
+  
+  # ═══════════════════════════════════════════════════════════════════════════
+  # HELPER METHODS
+  # ═══════════════════════════════════════════════════════════════════════════
+  
+  def generate_changelog
+    # Auto-generate changelog from git commits
+    changelog = changelog_from_git_commits(
+      commits_count: 10,
+      pretty: "- %s",
+      date_format: "short",
+      match_lightweight_tag: false,
+      merge_commit_filtering: "exclude_merges"
+    ) rescue "New build with latest features and fixes"
+    
+    # Add build info
+    build_time = Time.now.strftime("%B %d, %Y at %I:%M %p")
+    
+    "Build: #{build_time}\n\nChanges:\n#{changelog}"
+  end
+  
+  
+  # ═══════════════════════════════════════════════════════════════════════════
+  # ERROR HANDLING
+  # ═══════════════════════════════════════════════════════════════════════════
+  
+  error do |lane, exception|
+    UI.error("=" * 60)
+    UI.error("❌ #{lane} failed!")
+    UI.error(exception.message)
+    UI.error("=" * 60)
+    
+    # Optional: Slack notification on failure
+    # slack(
+    #   message: "Aperture build failed: #{exception.message}",
+    #   success: false,
+    #   channel: "#builds"
+    # )
+  end
+  
+end

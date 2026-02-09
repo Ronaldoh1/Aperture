@@ -529,7 +529,7 @@ struct TimelineView: View {
         
         let yearText: String
         if safeIndex == 0 && tappedEraIndex == nil {
-            yearText = "Present"
+            yearText = "You're here"
         } else {
             yearText = eras[safeIndex].yearDisplay
         }
@@ -567,7 +567,7 @@ struct TimelineView: View {
         let newIndex: Int
         if progress < 0.08 {
             newIndex = 0
-            dragonMessage = "The present day..."
+            dragonMessage = "You're here. The Great Awakening begins..."
         } else if progress < 0.2 {
             newIndex = 1
             dragonMessage = "Modern control systems..."

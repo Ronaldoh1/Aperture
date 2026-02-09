@@ -122,13 +122,13 @@ struct AwakeningView: View {
                 }
             }
         }
-        .onChange(of: showEssentials) { isShowing in
+        .onChange(of: showEssentials) { _, isShowing in
             if !isShowing {
                 // Mark as seen when dismissed
                 AwakeningFirstVisitManager.shared.markAsSeen()
             }
         }
-        .onChange(of: presenterBox.newLevelUp) { newLevel in
+        .onChange(of: presenterBox.newLevelUp) { _, newLevel in
             if let level = newLevel {
                 levelUpData = level
                 showLevelUpAlert = true

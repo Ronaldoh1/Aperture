@@ -22,6 +22,7 @@ struct NavigationCard: View {
                 Image(systemName: icon)
                     .font(.system(size: 32, weight: .semibold))
                     .foregroundColor(color)
+                    .accessibilityHidden(true)
 
                 VStack(spacing: 4) {
 
@@ -49,6 +50,10 @@ struct NavigationCard: View {
 
         }
         .buttonStyle(ScaleButtonStyle())
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(title). \(subtitle)")
+        .accessibilityHint("Double tap to explore \(title)")
+        .accessibilityAddTraits(.isButton)
 
     }
 

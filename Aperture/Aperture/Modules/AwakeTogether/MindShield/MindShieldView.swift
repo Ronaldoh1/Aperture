@@ -256,7 +256,7 @@ struct MindShieldView: View {
             
             // Manipulation indicator
             HStack(spacing: 2) {
-                ForEach(0..<5) { i in
+                ForEach(0..<5, id: \.self) { i in
                     Circle()
                         .fill(i < source.manipulationScore / 2 ? Color.red : Color.white.opacity(0.2))
                         .frame(width: 6, height: 6)

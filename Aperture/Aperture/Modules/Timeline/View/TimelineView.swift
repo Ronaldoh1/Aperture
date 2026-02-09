@@ -11,11 +11,11 @@ struct ScrollOffsetPreferenceKey: PreferenceKey {
     }
 }
 
-// MARK: - Dragon Dialog State
+// MARK: - Dialog State
 
 enum DragonDialogState {
     case greeting
-    case askingInterval
+    case readyToBegin
     case descending
     case commenting
 }
@@ -32,14 +32,19 @@ struct TimelineView: View {
     @State private var isDragonAbsorbed: Bool = false
     @State private var showDetail: Bool = false
     @State private var cardPositions: [UUID: CGRect] = [:]
+    @State private var tappedEraIndex: Int? = nil
+    @State private var cardScreenPositions: [Int: CGFloat] = [:]  // index → global midY
     
-    // Dragon companion state — persisted so user isn't trapped on re-entry
+    // Dialog state — persisted so user isn't trapped on re-entry
     @State private var dragonState: DragonDialogState = .greeting
     @AppStorage("timeline_hasChosenInterval") private var hasChosenInterval: Bool = false
     @AppStorage("timeline_greetingSeen") private var greetingSeen: Bool = false
     @State private var dragonMessage: String = ""
     @State private var messageIndex: Int = 0
     @State private var showDescentAnimation: Bool = false
+    
+    // 3-dot menu state
+    @State private var showMenu: Bool = false
     
     private var presenter: TimelinePresenterType {
         presenterBox.presenter
@@ -58,9 +63,9 @@ struct TimelineView: View {
                 cosmicBackground
                 
                 if !hasChosenInterval {
-                    dragonGreetingView
+                    chronokeeperGreetingView
                 } else if showDescentAnimation {
-                    // Dramatic Shenron descent before timeline appears
+                    // Dramatic clock descent before timeline appears
                     ShenronDescentView {
                         withAnimation(.spring(response: 0.6, dampingFraction: 0.8)) {
                             showDescentAnimation = false
@@ -71,8 +76,13 @@ struct TimelineView: View {
                     timelineScrollView
                     
                     if !isDragonAbsorbed {
-                        dragonCompanionOverlay
+                        yearArrowOverlay
                     }
+                }
+                
+                // 3-dot menu overlay (always accessible when timeline is showing)
+                if hasChosenInterval && !showDescentAnimation {
+                    timelineMenuOverlay
                 }
                 
             }
@@ -98,154 +108,299 @@ struct TimelineView: View {
                 dragonState = .descending
                 dragonMessage = ""
             } else if !greetingSeen {
-                startDragonGreeting()
+                startChronokeeperGreeting()
             }
         }
         
     }
     
-    // MARK: - Dragon Greeting View
+    // MARK: - 3-Dot Menu Overlay
     
-    private var dragonGreetingView: some View {
-        
-        VStack(spacing: 20) {
-            
-            // Skip button - always accessible
+    private var timelineMenuOverlay: some View {
+        VStack {
             HStack {
                 Spacer()
-                Button {
-                    skipGreeting()
-                } label: {
-                    HStack(spacing: 4) {
-                        Text("Skip")
-                            .font(.system(size: 13, weight: .medium, design: .rounded))
-                        Image(systemName: "forward.fill")
-                            .font(.system(size: 10))
+                
+                ZStack(alignment: .topTrailing) {
+                    // Menu button
+                    Button {
+                        withAnimation(.spring(response: 0.35, dampingFraction: 0.75)) {
+                            showMenu.toggle()
+                        }
+                    } label: {
+                        ZStack {
+                            Circle()
+                                .fill(Color.black.opacity(0.5))
+                                .frame(width: 36, height: 36)
+                                .overlay(
+                                    Circle()
+                                        .stroke(Palette.accent.gold.opacity(0.3), lineWidth: 1)
+                                )
+                            
+                            Image(systemName: "ellipsis")
+                                .font(.system(size: 14, weight: .bold))
+                                .foregroundColor(Palette.accent.gold)
+                                .rotationEffect(.degrees(showMenu ? 90 : 0))
+                        }
                     }
-                    .foregroundColor(Palette.text.muted)
-                    .padding(.horizontal, 14)
-                    .padding(.vertical, 8)
-                    .background(
-                        Capsule()
-                            .fill(Color.white.opacity(0.1))
-                    )
+                    
+                    // Dropdown menu
+                    if showMenu {
+                        VStack(spacing: 0) {
+                            menuItem(
+                                icon: "arrow.counterclockwise",
+                                label: "Restart Journey",
+                                delay: 0.0
+                            ) {
+                                restartTimeline()
+                            }
+                            
+                            Divider()
+                                .background(Palette.accent.gold.opacity(0.2))
+                            
+                            menuItem(
+                                icon: "arrow.up.to.line",
+                                label: "Back to Top",
+                                delay: 0.05
+                            ) {
+                                scrollToTop()
+                            }
+                        }
+                        .background(
+                            RoundedRectangle(cornerRadius: 14, style: .continuous)
+                                .fill(
+                                    LinearGradient(
+                                        colors: [
+                                            Color(hex: "#1a1408").opacity(0.95),
+                                            Color.black.opacity(0.95)
+                                        ],
+                                        startPoint: .top,
+                                        endPoint: .bottom
+                                    )
+                                )
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 14, style: .continuous)
+                                        .stroke(
+                                            LinearGradient(
+                                                colors: [Palette.accent.gold.opacity(0.4), Palette.primary.cyan.opacity(0.2)],
+                                                startPoint: .topLeading,
+                                                endPoint: .bottomTrailing
+                                            ),
+                                            lineWidth: 1
+                                        )
+                                )
+                                .shadow(color: Palette.accent.gold.opacity(0.15), radius: 20)
+                        )
+                        .frame(width: 200)
+                        .offset(y: 44)
+                        .transition(.asymmetric(
+                            insertion: .scale(scale: 0.8, anchor: .topTrailing)
+                                .combined(with: .opacity)
+                                .combined(with: .offset(y: -10)),
+                            removal: .scale(scale: 0.9, anchor: .topTrailing)
+                                .combined(with: .opacity)
+                        ))
+                    }
                 }
             }
-            .padding(.horizontal, 20)
+            .padding(.horizontal, 16)
             .padding(.top, 8)
             
             Spacer()
-            
-            // Sacred Geometry — Animated Flower of Life with Sun Dragon at center
-            ZStack {
-                // The Flower of Life — pattern of creation, divine light
-                AnimatedFlowerOfLife(size: 280, accentColor: Palette.accent.gold)
-                
-                // Sun Dragon at the heart of the geometry
-                Image("SunDragon")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 120, height: 180)
-                    .shadow(color: Palette.accent.gold.opacity(0.6), radius: 20)
+        }
+    }
+    
+    private func menuItem(icon: String, label: String, delay: Double, action: @escaping () -> Void) -> some View {
+        Button {
+            withAnimation(.spring(response: 0.35, dampingFraction: 0.75)) {
+                showMenu = false
             }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                action()
+            }
+        } label: {
+            HStack(spacing: 12) {
+                Image(systemName: icon)
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundColor(Palette.accent.gold)
+                    .frame(width: 20)
+                
+                Text(label)
+                    .font(.system(size: 14, weight: .medium, design: .rounded))
+                    .foregroundColor(Palette.text.primary)
+                
+                Spacer()
+            }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 13)
+            .contentShape(Rectangle())
+        }
+    }
+    
+    private func restartTimeline() {
+        withAnimation(.spring(response: 0.5, dampingFraction: 0.8)) {
+            hasChosenInterval = false
+            greetingSeen = false
+            dragonState = .greeting
+            dragonMessage = ""
+            selectedEra = nil
+            isDragonAbsorbed = false
+            showDetail = false
+            showDescentAnimation = false
+            scrollOffset = 0
+            messageIndex = 0
+            tappedEraIndex = nil
+            cardScreenPositions = [:]
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            startChronokeeperGreeting()
+        }
+    }
+    
+    private func scrollToTop() {
+        // Post a notification or use scroll proxy — simplest approach
+        withAnimation(.spring(response: 0.6, dampingFraction: 0.8)) {
+            scrollOffset = 0
+        }
+    }
+    
+    // MARK: - Chronokeeper Greeting View (was Dragon Greeting)
+    
+    private var chronokeeperGreetingView: some View {
+        
+        ScrollView(showsIndicators: false) {
             
-            // Dragon speech
             VStack(spacing: 16) {
                 
-                Text(dragonMessage)
-                    .font(.system(size: 17, weight: .medium, design: .rounded))
-                    .foregroundColor(Palette.text.primary)
-                    .multilineTextAlignment(.center)
-                    .lineSpacing(5)
-                    .padding(.horizontal, 20)
-                    .frame(minHeight: 120)
-                    .animation(.easeInOut(duration: 0.3), value: dragonMessage)
-                
-                if dragonState == .askingInterval {
-                    intervalSelectionView
+                // Skip button - always accessible
+                HStack {
+                    Spacer()
+                    Button {
+                        skipGreeting()
+                    } label: {
+                        HStack(spacing: 4) {
+                            Text("Skip")
+                                .font(.system(size: 13, weight: .medium, design: .rounded))
+                            Image(systemName: "forward.fill")
+                                .font(.system(size: 10))
+                        }
+                        .foregroundColor(Palette.text.muted)
+                        .padding(.horizontal, 14)
+                        .padding(.vertical, 8)
+                        .background(
+                            Capsule()
+                                .fill(Color.white.opacity(0.1))
+                        )
+                    }
                 }
+                .padding(.horizontal, 20)
+                .padding(.top, 8)
+                
+                // Animated Clock with Flower of Life
+                ZStack {
+                    // The Flower of Life — pattern of creation, divine light
+                    AnimatedFlowerOfLife(size: 240, accentColor: Palette.accent.gold)
+                    
+                    // Animated Clock at the heart of the geometry
+                    ChronusGreetingClock(size: 120)
+                }
+                .padding(.top, 4)
+                
+                // Chronokeeper speech
+                VStack(spacing: 16) {
+                    
+                    Text(dragonMessage)
+                        .font(.system(size: 17, weight: .medium, design: .rounded))
+                        .foregroundColor(Palette.text.primary)
+                        .multilineTextAlignment(.center)
+                        .lineSpacing(5)
+                        .padding(.horizontal, 20)
+                        .frame(minHeight: 100)
+                        .animation(.easeInOut(duration: 0.3), value: dragonMessage)
+                    
+                    if dragonState == .readyToBegin {
+                        beginJourneyButton
+                    }
+                    
+                }
+                .padding(24)
+                .background(
+                    RoundedRectangle(cornerRadius: 24, style: .continuous)
+                        .fill(Color.black.opacity(0.6))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 24, style: .continuous)
+                                .stroke(
+                                    LinearGradient(
+                                        colors: [Palette.accent.gold.opacity(0.5), Palette.primary.cyan.opacity(0.3)],
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    ),
+                                    lineWidth: 1.5
+                                )
+                        )
+                )
+                .padding(.horizontal, 20)
+                
+                // Fixed bottom spacing — no ambiguity, this is the end
+                Spacer()
+                    .frame(height: 30)
                 
             }
-            .padding(24)
-            .background(
-                RoundedRectangle(cornerRadius: 24, style: .continuous)
-                    .fill(Color.black.opacity(0.6))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 24, style: .continuous)
-                            .stroke(
-                                LinearGradient(
-                                    colors: [Palette.accent.gold.opacity(0.5), Palette.primary.orange.opacity(0.3)],
-                                    startPoint: .topLeading,
-                                    endPoint: .bottomTrailing
-                                ),
-                                lineWidth: 1.5
-                            )
-                    )
-            )
-            .padding(.horizontal, 20)
-            
-            Spacer()
             
         }
+        .scrollDismissesKeyboard(.interactively)
+        .scrollBounceBehavior(.basedOnSize)
         
     }
     
-    private var intervalSelectionView: some View {
+    private var beginJourneyButton: some View {
         
-        VStack(spacing: 12) {
-            
-            Text("How would you like to descend through time?")
-                .font(.system(size: 14, weight: .bold, design: .rounded))
-                .foregroundColor(Palette.accent.gold)
-            
-            ForEach(TimelineJumpInterval.allCases, id: \.self) { interval in
-                Button {
-                    selectInterval(interval)
-                } label: {
-                    HStack {
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text(interval.label)
-                                .font(.system(size: 15, weight: .bold, design: .rounded))
-                                .foregroundColor(Palette.text.primary)
-                            Text(interval.description)
-                                .font(.system(size: 11, weight: .medium, design: .rounded))
-                                .foregroundColor(Palette.text.secondary)
-                        }
-                        Spacer()
-                        Text("☀️")
-                            .font(.system(size: 20))
-                    }
-                    .padding(14)
-                    .background(
-                        RoundedRectangle(cornerRadius: 12, style: .continuous)
-                            .fill(Palette.surface.fieldFill)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 12, style: .continuous)
-                                    .stroke(Palette.accent.gold.opacity(0.2), lineWidth: 1)
-                            )
-                    )
-                }
+        Button {
+            beginJourney()
+        } label: {
+            HStack(spacing: 10) {
+                Image(systemName: "clock.arrow.circlepath")
+                    .font(.system(size: 18))
+                Text("Begin the Journey")
+                    .font(.system(size: 16, weight: .bold, design: .rounded))
             }
-            
+            .foregroundColor(.black)
+            .padding(.horizontal, 32)
+            .padding(.vertical, 14)
+            .background(
+                Capsule()
+                    .fill(
+                        LinearGradient(
+                            colors: [Palette.accent.gold, Palette.accent.gold.opacity(0.8)],
+                            startPoint: .leading,
+                            endPoint: .trailing
+                        )
+                    )
+                    .shadow(color: Palette.accent.gold.opacity(0.4), radius: 12, y: 4)
+            )
         }
+        .transition(.scale.combined(with: .opacity))
+        .padding(.top, 8)
         
     }
     
     private func skipGreeting() {
-        withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
-            dragonState = .askingInterval
-            dragonMessage = "Choose how to descend through time, seeker."
+        greetingSeen = true
+        withAnimation(.spring(response: 0.6, dampingFraction: 0.8)) {
+            hasChosenInterval = true
+            showDescentAnimation = true
+            dragonState = .descending
         }
     }
     
-    private func startDragonGreeting() {
+    private func startChronokeeperGreeting() {
         let messages = [
             "Greetings, seeker of truth...",
-            "I am the Sun Dragon — guardian of the light they tried to extinguish.",
+            "I am the Chronokeeper — guardian of the moments they tried to erase.",
             "For millennia, every civilization on Earth honored the sun. Ra in Egypt. Inti in Peru. Tonatiuh in Mexico. Kinich Ahau among the Maya. Surya in India. Dazbog in Bosnia and the Slavic lands.",
             "Then came the Church of Rome.\n\nThey could not control people who knew they carried divine light within. So they burned the temples. Killed the priests. Stole December 25th from Sol Invictus.",
             "The Inca? Slaughtered. The Maya codices? Burned by Bishop de Landa. The Aztec Templo Mayor? A Catholic cathedral stands on its bones today.",
-            "But the sun still rises.\n\nAnd now... I will guide you down through the layers of deception, back to the truth they stole.",
+            "But the sun still rises.\n\nAnd now... I will turn back the clock, unwinding the centuries of deception, back to the truth they stole.",
         ]
         
         dragonMessage = messages[0]
@@ -260,7 +415,7 @@ struct TimelineView: View {
                     if index == messages.count - 1 {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
                             withAnimation {
-                                dragonState = .askingInterval
+                                dragonState = .readyToBegin
                             }
                         }
                     }
@@ -269,18 +424,17 @@ struct TimelineView: View {
         }
     }
     
-    private func selectInterval(_ interval: TimelineJumpInterval) {
-        presenterBox.selectedInterval = interval
+    private func beginJourney() {
         greetingSeen = true
         
         withAnimation {
-            dragonMessage = "Excellent, seeker. We descend through \(presenterBox.eras.count) moments where truth was hidden."
+            dragonMessage = "The journey begins... \(presenterBox.eras.count) moments where truth was hidden."
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             withAnimation(.spring(response: 0.6, dampingFraction: 0.8)) {
                 hasChosenInterval = true
-                showDescentAnimation = true  // Trigger Shenron descent
+                showDescentAnimation = true
                 dragonState = .descending
             }
         }
@@ -318,8 +472,20 @@ struct TimelineView: View {
                         ) { position in
                             cardPositions[era.id] = position
                         } onTap: {
-                            absorbDragonIntoCard(era)
+                            tappedEraIndex = index
+                            absorbClockIntoCard(era)
                         }
+                        .background(
+                            GeometryReader { geo in
+                                Color.clear
+                                    .onChange(of: scrollOffset) {
+                                        cardScreenPositions[index] = geo.frame(in: .global).midY
+                                    }
+                                    .onAppear {
+                                        cardScreenPositions[index] = geo.frame(in: .global).midY
+                                    }
+                            }
+                        )
                     }
                 }
                 .padding(.horizontal, 24)
@@ -336,55 +502,65 @@ struct TimelineView: View {
         .coordinateSpace(name: "scroll")
         .onPreferenceChange(ScrollOffsetPreferenceKey.self) { value in
             scrollOffset = value
-            updateDragonComment()
+            updateTimeComment()
         }
         
     }
     
-    // MARK: - Dragon Companion Overlay
+    // MARK: - Year Arrow Indicator
     
-    private var dragonCompanionOverlay: some View {
+    @ViewBuilder
+    private var yearArrowOverlay: some View {
         
-        let maxScroll: CGFloat = CGFloat(presenterBox.eras.count) * 140
-        let progress = min(max(-scrollOffset / maxScroll, 0), 1)
-        let screenHeight = UIScreen.main.bounds.height
-        let dragonY = 90 + (progress * (screenHeight - 220))
-        
-        return VStack(spacing: 6) {
-            
-            // Mini speech bubble
-            if !dragonMessage.isEmpty {
-                Text(dragonMessage)
-                    .font(.system(size: 10, weight: .medium, design: .rounded))
-                    .foregroundColor(Palette.text.primary)
-                    .multilineTextAlignment(.leading)
-                    .lineLimit(3)
-                    .padding(.horizontal, 10)
-                    .padding(.vertical, 6)
-                    .frame(maxWidth: 140)
-                    .background(
-                        RoundedRectangle(cornerRadius: 10, style: .continuous)
-                            .fill(Color.black.opacity(0.75))
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                    .stroke(Palette.accent.gold.opacity(0.3), lineWidth: 1)
-                            )
-                    )
-            }
-            
-            // Shenron Guardian
-            ShenronScrollCompanion(scrollProgress: progress, size: 70)
-                .rotationEffect(Angle(degrees: sin(Double(progress) * .pi * 4) * 3))
-                .shadow(color: Palette.accent.gold.opacity(0.4), radius: 10)
-            
+        if !presenterBox.eras.isEmpty {
+            yearArrowContent
         }
-        .position(x: 50, y: dragonY)
+        
+    }
+    
+    private var yearArrowContent: some View {
+        
+        let eras = presenterBox.eras
+        let activeIndex = tappedEraIndex ?? 0
+        let safeIndex = min(max(activeIndex, 0), eras.count - 1)
+        
+        // Get the card's current screen Y, fallback to a reasonable default
+        let arrowY = cardScreenPositions[safeIndex] ?? 480
+        
+        let yearText: String
+        if safeIndex == 0 && tappedEraIndex == nil {
+            yearText = "Present"
+        } else {
+            yearText = eras[safeIndex].yearDisplay
+        }
+        
+        return HStack(spacing: 4) {
+            Text(yearText)
+                .font(.system(size: 11, weight: .bold, design: .monospaced))
+                .foregroundColor(Palette.accent.gold)
+            
+            Image(systemName: "arrowtriangle.right.fill")
+                .font(.system(size: 8))
+                .foregroundColor(Palette.accent.gold.opacity(0.8))
+        }
+        .padding(.horizontal, 8)
+        .padding(.vertical, 4)
+        .background(
+            Capsule()
+                .fill(Color.black.opacity(0.7))
+                .overlay(
+                    Capsule()
+                        .stroke(Palette.accent.gold.opacity(0.3), lineWidth: 1)
+                )
+        )
+        .position(x: 42, y: arrowY)
         .allowsHitTesting(false)
-        .animation(.easeOut(duration: 0.12), value: scrollOffset)
+        .animation(.spring(response: 0.4, dampingFraction: 0.75), value: tappedEraIndex)
+        .animation(.easeOut(duration: 0.1), value: scrollOffset)
         
     }
     
-    private func updateDragonComment() {
+    private func updateTimeComment() {
         let maxScroll: CGFloat = CGFloat(presenterBox.eras.count) * 140
         let progress = min(max(-scrollOffset / maxScroll, 0), 1)
         
@@ -420,9 +596,9 @@ struct TimelineView: View {
         }
     }
     
-    // MARK: - Absorb Dragon
+    // MARK: - Absorb Clock into Card
     
-    private func absorbDragonIntoCard(_ era: TimelineEra) {
+    private func absorbClockIntoCard(_ era: TimelineEra) {
         selectedEra = era
         
         withAnimation(.spring(response: 0.5, dampingFraction: 0.7)) {
@@ -441,20 +617,29 @@ struct TimelineView: View {
         
         VStack(spacing: 10) {
             
-            Text("☀️🐉")
-                .font(.system(size: 36))
-            
-            Text("The Dragon's Descent")
-                .font(.system(size: 26, weight: .bold, design: .rounded))
+            Image(systemName: "clock.arrow.circlepath")
+                .font(.system(size: 34, weight: .semibold))
                 .foregroundStyle(
                     LinearGradient(
-                        colors: [Palette.accent.gold, Palette.primary.orange],
+                        colors: [Palette.accent.gold, Palette.primary.cyan],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
+                .shadow(color: Palette.accent.gold.opacity(0.5), radius: 8)
+            
+            Text("Travel in Time to Find the Truth")
+                .font(.system(size: 24, weight: .bold, design: .rounded))
+                .foregroundStyle(
+                    LinearGradient(
+                        colors: [Palette.accent.gold, Palette.primary.cyan],
                         startPoint: .top,
                         endPoint: .bottom
                     )
                 )
+                .multilineTextAlignment(.center)
             
-            Text("Through the ashes of erased sun gods")
+            Text("Unwind the centuries of deception")
                 .font(.system(size: 14, weight: .medium, design: .rounded))
                 .foregroundColor(Palette.text.secondary)
             
@@ -514,321 +699,54 @@ struct TimelineView: View {
     
 }
 
-// MARK: - Sun Dragon View (Shenron-style)
+// MARK: - Chronus Greeting Clock (Animated clock for the greeting screen)
 
-struct SunDragonView: View {
+struct ChronusGreetingClock: View {
     
-    var size: CGFloat = 100
-    @State private var isAnimating = false
-    @State private var breatheScale: CGFloat = 1.0
-    @State private var bodyWave: CGFloat = 0
+    var size: CGFloat
+    @State private var minuteAngle: Double = 0
+    @State private var hourAngle: Double = 0
+    @State private var glowPulse: CGFloat = 1.0
     
     var body: some View {
-        
         ZStack {
-            // Outer aura - multiple layers for depth
-            ForEach(0..<3, id: \.self) { i in
-                Circle()
-                    .fill(
-                        RadialGradient(
-                            colors: [
-                                Palette.accent.gold.opacity(0.3 - Double(i) * 0.1),
-                                Palette.primary.orange.opacity(0.15 - Double(i) * 0.05),
-                                Color.clear
-                            ],
-                            center: .center,
-                            startRadius: size * 0.2,
-                            endRadius: size * (0.7 + CGFloat(i) * 0.15)
-                        )
-                    )
-                    .frame(width: size * (1.4 + CGFloat(i) * 0.2), height: size * (1.4 + CGFloat(i) * 0.2))
-                    .scaleEffect(breatheScale + CGFloat(i) * 0.02)
-            }
-            
-            // Shenron-style coiled dragon
-            ShenronDragonShape(wave: bodyWave)
+            // Outer aura
+            Circle()
                 .fill(
-                    LinearGradient(
+                    RadialGradient(
                         colors: [
-                            Color(red: 0.0, green: 0.6, blue: 0.3),  // Shenron green
-                            Color(red: 0.1, green: 0.7, blue: 0.4),
-                            Palette.accent.gold,
-                            Color(red: 0.1, green: 0.7, blue: 0.4),
-                            Color(red: 0.0, green: 0.5, blue: 0.25)
+                            Palette.accent.gold.opacity(0.25),
+                            Palette.primary.cyan.opacity(0.1),
+                            Color.clear
                         ],
-                        startPoint: .top,
-                        endPoint: .bottom
-                    )
-                )
-                .frame(width: size, height: size)
-                .overlay(
-                    ShenronDragonShape(wave: bodyWave)
-                        .stroke(
-                            LinearGradient(
-                                colors: [Palette.accent.gold, Color.white.opacity(0.5)],
-                                startPoint: .top,
-                                endPoint: .bottom
-                            ),
-                            lineWidth: 1.5
-                        )
-                        .frame(width: size, height: size)
-                )
-                .shadow(color: Palette.accent.gold.opacity(0.8), radius: 12, x: 0, y: 0)
-                .shadow(color: Color(red: 0, green: 0.5, blue: 0.3).opacity(0.5), radius: 6, x: 0, y: 4)
-            
-            // Dragon head details
-            VStack(spacing: 0) {
-                // Eyes - fierce red Shenron eyes
-                HStack(spacing: size * 0.12) {
-                    DragonEye(size: size * 0.08)
-                        .offset(x: -size * 0.02)
-                    DragonEye(size: size * 0.08)
-                        .offset(x: size * 0.02)
-                }
-                .offset(y: -size * 0.02)
-                
-                Spacer()
-            }
-            .frame(height: size)
-            .offset(y: -size * 0.18)
-            
-            // Whiskers - iconic Shenron feature
-            HStack(spacing: size * 0.5) {
-                DragonWhisker(size: size, direction: .left)
-                DragonWhisker(size: size, direction: .right)
-            }
-            .offset(y: -size * 0.12)
-        }
-        .onAppear {
-            // Breathing animation
-            withAnimation(.easeInOut(duration: 3.0).repeatForever(autoreverses: true)) {
-                breatheScale = 1.08
-            }
-            // Body wave animation
-            withAnimation(.easeInOut(duration: 2.0).repeatForever(autoreverses: true)) {
-                bodyWave = 1.0
-            }
-        }
-    }
-}
-
-// MARK: - Dragon Eye
-
-struct DragonEye: View {
-    var size: CGFloat
-    @State private var glowing = false
-    
-    var body: some View {
-        ZStack {
-            // Eye glow
-            Circle()
-                .fill(
-                    RadialGradient(
-                        colors: [Color.red.opacity(0.8), Color.red.opacity(0.3), Color.clear],
                         center: .center,
-                        startRadius: 0,
-                        endRadius: size
+                        startRadius: size * 0.3,
+                        endRadius: size * 0.8
                     )
                 )
-                .frame(width: size * 2.5, height: size * 2.5)
-                .opacity(glowing ? 0.8 : 0.4)
+                .frame(width: size * 1.6, height: size * 1.6)
+                .scaleEffect(glowPulse)
             
-            // Eye
-            Ellipse()
-                .fill(
-                    RadialGradient(
-                        colors: [Color.red, Color(red: 0.8, green: 0, blue: 0)],
-                        center: .center,
-                        startRadius: 0,
-                        endRadius: size * 0.5
-                    )
-                )
-                .frame(width: size, height: size * 0.7)
-            
-            // Pupil
-            Ellipse()
-                .fill(Color.black)
-                .frame(width: size * 0.4, height: size * 0.5)
-            
-            // Shine
-            Circle()
-                .fill(Color.white.opacity(0.8))
-                .frame(width: size * 0.2, height: size * 0.2)
-                .offset(x: -size * 0.15, y: -size * 0.1)
-        }
-        .onAppear {
-            withAnimation(.easeInOut(duration: 1.5).repeatForever(autoreverses: true)) {
-                glowing = true
-            }
-        }
-    }
-}
-
-// MARK: - Dragon Whisker
-
-struct DragonWhisker: View {
-    var size: CGFloat
-    var direction: WhiskerDirection
-    
-    enum WhiskerDirection {
-        case left, right
-    }
-    
-    @State private var waving = false
-    
-    var body: some View {
-        WhiskerShape()
-            .stroke(
-                LinearGradient(
-                    colors: [Palette.accent.gold, Palette.primary.orange],
-                    startPoint: .top,
-                    endPoint: .bottom
-                ),
-                style: StrokeStyle(lineWidth: 2.5, lineCap: .round)
+            ChronusClockFace(
+                hourAngle: hourAngle,
+                minuteAngle: minuteAngle,
+                size: size,
+                glowIntensity: 0.6
             )
-            .frame(width: size * 0.25, height: size * 0.3)
-            .scaleEffect(x: direction == .left ? -1 : 1)
-            .rotationEffect(.degrees(waving ? -5 : 5))
-            .onAppear {
-                withAnimation(.easeInOut(duration: 1.2).repeatForever(autoreverses: true)) {
-                    waving = true
-                }
+            .shadow(color: Palette.accent.gold.opacity(0.6), radius: 20)
+        }
+        .onAppear {
+            // Slow counter-clockwise rotation (hinting at time reversal)
+            withAnimation(.linear(duration: 12).repeatForever(autoreverses: false)) {
+                minuteAngle = -360
             }
-    }
-}
-
-struct WhiskerShape: Shape {
-    func path(in rect: CGRect) -> Path {
-        var path = Path()
-        let w = rect.width
-        let h = rect.height
-        
-        path.move(to: CGPoint(x: w * 0.2, y: 0))
-        path.addCurve(
-            to: CGPoint(x: w, y: h * 0.8),
-            control1: CGPoint(x: w * 0.4, y: h * 0.3),
-            control2: CGPoint(x: w * 0.9, y: h * 0.5)
-        )
-        
-        return path
-    }
-}
-
-// MARK: - Shenron Dragon Shape (Improved)
-
-struct ShenronDragonShape: Shape {
-    var wave: CGFloat = 0
-    
-    var animatableData: CGFloat {
-        get { wave }
-        set { wave = newValue }
-    }
-    
-    func path(in rect: CGRect) -> Path {
-        var path = Path()
-        
-        let w = rect.width
-        let h = rect.height
-        let waveOffset = wave * w * 0.02
-        
-        // Dragon head (top)
-        path.move(to: CGPoint(x: w * 0.5, y: h * 0.02))
-        
-        // Right side of head - with horns
-        path.addCurve(
-            to: CGPoint(x: w * 0.75, y: h * 0.12),
-            control1: CGPoint(x: w * 0.62, y: h * 0.02),
-            control2: CGPoint(x: w * 0.72, y: h * 0.06)
-        )
-        
-        // Right horn
-        path.addLine(to: CGPoint(x: w * 0.85, y: h * 0.05))
-        path.addLine(to: CGPoint(x: w * 0.78, y: h * 0.15))
-        
-        // Right cheek and jaw
-        path.addCurve(
-            to: CGPoint(x: w * 0.72 + waveOffset, y: h * 0.28),
-            control1: CGPoint(x: w * 0.82, y: h * 0.2),
-            control2: CGPoint(x: w * 0.78, y: h * 0.25)
-        )
-        
-        // Serpentine body - first curve right
-        path.addCurve(
-            to: CGPoint(x: w * 0.78 - waveOffset, y: h * 0.45),
-            control1: CGPoint(x: w * 0.85, y: h * 0.32),
-            control2: CGPoint(x: w * 0.85, y: h * 0.4)
-        )
-        
-        // Body curves back left
-        path.addCurve(
-            to: CGPoint(x: w * 0.55 + waveOffset, y: h * 0.58),
-            control1: CGPoint(x: w * 0.7, y: h * 0.52),
-            control2: CGPoint(x: w * 0.6, y: h * 0.56)
-        )
-        
-        // Body curves right again
-        path.addCurve(
-            to: CGPoint(x: w * 0.68 - waveOffset, y: h * 0.72),
-            control1: CGPoint(x: w * 0.62, y: h * 0.62),
-            control2: CGPoint(x: w * 0.7, y: h * 0.68)
-        )
-        
-        // Tail section
-        path.addCurve(
-            to: CGPoint(x: w * 0.5, y: h * 0.98),
-            control1: CGPoint(x: w * 0.65, y: h * 0.85),
-            control2: CGPoint(x: w * 0.55, y: h * 0.95)
-        )
-        
-        // Left side - tail
-        path.addCurve(
-            to: CGPoint(x: w * 0.32 + waveOffset, y: h * 0.72),
-            control1: CGPoint(x: w * 0.45, y: h * 0.95),
-            control2: CGPoint(x: w * 0.35, y: h * 0.85)
-        )
-        
-        // Left body curve
-        path.addCurve(
-            to: CGPoint(x: w * 0.45 - waveOffset, y: h * 0.58),
-            control1: CGPoint(x: w * 0.3, y: h * 0.68),
-            control2: CGPoint(x: w * 0.38, y: h * 0.62)
-        )
-        
-        // Left upper body
-        path.addCurve(
-            to: CGPoint(x: w * 0.22 + waveOffset, y: h * 0.45),
-            control1: CGPoint(x: w * 0.4, y: h * 0.56),
-            control2: CGPoint(x: w * 0.3, y: h * 0.52)
-        )
-        
-        // Left neck
-        path.addCurve(
-            to: CGPoint(x: w * 0.28 - waveOffset, y: h * 0.28),
-            control1: CGPoint(x: w * 0.15, y: h * 0.4),
-            control2: CGPoint(x: w * 0.15, y: h * 0.32)
-        )
-        
-        // Left jaw
-        path.addCurve(
-            to: CGPoint(x: w * 0.22, y: h * 0.15),
-            control1: CGPoint(x: w * 0.22, y: h * 0.25),
-            control2: CGPoint(x: w * 0.18, y: h * 0.2)
-        )
-        
-        // Left horn
-        path.addLine(to: CGPoint(x: w * 0.15, y: h * 0.05))
-        path.addLine(to: CGPoint(x: w * 0.25, y: h * 0.12))
-        
-        // Back to head top
-        path.addCurve(
-            to: CGPoint(x: w * 0.5, y: h * 0.02),
-            control1: CGPoint(x: w * 0.28, y: h * 0.06),
-            control2: CGPoint(x: w * 0.38, y: h * 0.02)
-        )
-        
-        path.closeSubpath()
-        
-        return path
+            withAnimation(.linear(duration: 40).repeatForever(autoreverses: false)) {
+                hourAngle = -360
+            }
+            withAnimation(.easeInOut(duration: 3.0).repeatForever(autoreverses: true)) {
+                glowPulse = 1.08
+            }
+        }
     }
 }
 
@@ -1146,8 +1064,8 @@ struct TimelineDetailView: View {
                         VStack(alignment: .center, spacing: 14) {
                             ForEach(era.description.components(separatedBy: "\n\n"), id: \.self) { para in
                                 Text(para)
-                                    .font(.system(size: para.hasPrefix("☀️") || para.hasPrefix("🐉") ? 16 : 15, weight: para.hasPrefix("☀️") || para.hasPrefix("🐉") ? .bold : .medium, design: .rounded))
-                                    .foregroundColor(para.hasPrefix("☀️") || para.hasPrefix("🐉") ? Palette.accent.gold : Palette.text.primary)
+                                    .font(.system(size: para.hasPrefix("☀️") ? 16 : 15, weight: para.hasPrefix("☀️") ? .bold : .medium, design: .rounded))
+                                    .foregroundColor(para.hasPrefix("☀️") ? Palette.accent.gold : Palette.text.primary)
                                     .multilineTextAlignment(.center)
                                     .lineSpacing(4)
                             }
@@ -1224,16 +1142,17 @@ struct TimelineDetailView: View {
                         
                     }
                     
-                    // DRAGON COMMENT
+                    // CHRONOKEEPER COMMENT (was Dragon Comment)
                     if !era.dragonComment.isEmpty {
                         
                         HStack(alignment: .top, spacing: 12) {
                             
-                            Text("🐉☀️")
-                                .font(.system(size: 24))
+                            Image(systemName: "clock.arrow.circlepath")
+                                .font(.system(size: 22))
+                                .foregroundColor(Palette.accent.gold)
                             
                             VStack(alignment: .leading, spacing: 4) {
-                                Text("The Sun Dragon says:")
+                                Text("The Chronokeeper reveals:")
                                     .font(.system(size: 11, weight: .bold, design: .rounded))
                                     .foregroundColor(Palette.accent.gold.opacity(0.7))
                                 
@@ -1250,7 +1169,7 @@ struct TimelineDetailView: View {
                             RoundedRectangle(cornerRadius: 16, style: .continuous)
                                 .fill(
                                     LinearGradient(
-                                        colors: [Palette.accent.gold.opacity(0.1), Palette.primary.orange.opacity(0.05)],
+                                        colors: [Palette.accent.gold.opacity(0.1), Palette.primary.cyan.opacity(0.05)],
                                         startPoint: .topLeading,
                                         endPoint: .bottomTrailing
                                     )
@@ -1293,9 +1212,7 @@ struct TimelineDetailView: View {
                         // Portal to Cosmos
                         HStack {
                             Button(action: {
-                                // Open Cosmos (handled by parent)
                                 onDismiss()
-                                // Note: In a real implementation, we'd pass a callback to navigate
                             }) {
                                 HStack(spacing: 8) {
                                     Image(systemName: "arrow.right.circle.fill")
@@ -1313,7 +1230,7 @@ struct TimelineDetailView: View {
                         // Dragon context chip
                         DragonContextChip(
                             context: .timeline(eventId: era.id.uuidString),
-                            customText: "Ask the Dragon about this event"
+                            customText: "Ask about this event"
                         )
                     }
                     .padding(.top, 16)

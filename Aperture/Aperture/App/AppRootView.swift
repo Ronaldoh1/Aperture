@@ -10,6 +10,7 @@ struct AppRootView: View {
     @StateObject private var journeyStore = UserJourneyStore.shared
     @StateObject private var guestManager = GuestModeManager.shared
     @StateObject private var introManager = IntroductionManager.shared
+    @StateObject private var legalGateManager = LegalGateManager.shared
 
     @State private var authStartInSignUp = false
     @State private var showGuestPreview = false
@@ -17,23 +18,31 @@ struct AppRootView: View {
     var body: some View {
 
         ZStack {
-            // Main content
-            mainContent
-            
-            // Introduction overlay (shows on first launch)
-            if introManager.shouldShowIntroduction {
-                ApertureIntroductionView {
-                    // When introduction completes, also mark onboarding as done
-                    // so we skip the old quiz flow
-                    introManager.markIntroductionAsSeen()
-                    journeyStore.completeOnboarding()
-                    guestManager.markWelcomeSeen()
+            // Legal gate must be cleared first
+            if legalGateManager.showLegalGate {
+                LegalGateView()
+                    .transition(.opacity)
+                    .zIndex(1000)
+            } else {
+                // Main content
+                mainContent
+                
+                // Introduction overlay (shows on first launch)
+                if introManager.shouldShowIntroduction {
+                    ApertureIntroductionView {
+                        // When introduction completes, also mark onboarding as done
+                        // so we skip the old quiz flow
+                        introManager.markIntroductionAsSeen()
+                        journeyStore.completeOnboarding()
+                        guestManager.markWelcomeSeen()
+                    }
+                    .transition(.opacity)
+                    .zIndex(999)
                 }
-                .transition(.opacity)
-                .zIndex(999)
             }
         }
         .animation(.easeInOut(duration: 0.3), value: introManager.shouldShowIntroduction)
+        .animation(.easeInOut(duration: 0.3), value: legalGateManager.showLegalGate)
     }
     
     @ViewBuilder

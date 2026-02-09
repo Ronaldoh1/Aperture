@@ -8,7 +8,7 @@ import SwiftUI
 // MARK: - Models
 
 struct MatrixLie: Identifiable, Codable {
-    let id = UUID()
+    var id = UUID()
     let lie: String
     let category: MatrixLieCategory
     let whyPerpetruated: String
@@ -17,6 +17,10 @@ struct MatrixLie: Identifiable, Codable {
     let severity: Int // 1-5 (how deeply programmed)
     let whoBenefits: [String]
     let dragonComment: String
+    
+    enum CodingKeys: String, CodingKey {
+        case lie, category, whyPerpetruated, exposure, escapeHack, severity, whoBenefits, dragonComment
+    }
 }
 
 enum MatrixLieCategory: String, CaseIterable, Codable {
@@ -1179,7 +1183,7 @@ struct HakaiMatrixLiesView: View {
         VStack(spacing: 12) {
             ZStack {
                 // Glitch effect circles
-                ForEach(0..<3) { i in
+                ForEach(0..<3, id: \.self) { i in
                     Circle()
                         .stroke(Color.red.opacity(0.3), lineWidth: 2)
                         .frame(width: CGFloat(80 + i * 15), height: CGFloat(80 + i * 15))
@@ -1355,7 +1359,7 @@ struct HakaiMatrixLiesView: View {
                         
                         // Severity
                         HStack(spacing: 2) {
-                            ForEach(0..<5) { i in
+                            ForEach(0..<5, id: \.self) { i in
                                 Image(systemName: i < lie.severity ? "circle.fill" : "circle")
                                     .font(.system(size: 6))
                                     .foregroundColor(i < lie.severity ? .red : .gray)
@@ -1431,7 +1435,7 @@ struct MatrixLieDetailView: View {
                             Text("Programming Depth:")
                                 .font(.system(size: 10))
                                 .foregroundColor(.gray)
-                            ForEach(0..<5) { i in
+                            ForEach(0..<5, id: \.self) { i in
                                 Circle()
                                     .fill(i < lie.severity ? Color.red : Color.white.opacity(0.2))
                                     .frame(width: 8, height: 8)

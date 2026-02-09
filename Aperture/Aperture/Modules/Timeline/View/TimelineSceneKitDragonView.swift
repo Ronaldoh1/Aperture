@@ -31,7 +31,7 @@ struct TimelineSceneKitDragonView: View {
                         .onAppear {
                             self.progress = p
                         }
-                        .onChange(of: offset) { _ in
+                        .onChange(of: offset) { _, _ in
                             self.progress = p
                         }
                 }

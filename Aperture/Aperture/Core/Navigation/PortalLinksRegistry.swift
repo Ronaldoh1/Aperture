@@ -50,7 +50,9 @@ class PortalNavigationManager: ObservableObject {
             queue: .main
         ) { [weak self] notification in
             if let destination = notification.userInfo?["destination"] as? PortalDestination {
-                self?.navigate(to: destination)
+                Task { @MainActor in
+                    self?.navigate(to: destination)
+                }
             }
         }
     }

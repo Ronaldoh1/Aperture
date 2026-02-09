@@ -417,7 +417,7 @@ struct ScienceOfConsciousnessHubView: View {
                         
                         // Difficulty
                         HStack(spacing: 1) {
-                            ForEach(0..<5) { i in
+                            ForEach(0..<5, id: \.self) { i in
                                 Circle()
                                     .fill(i < resource.difficulty ? Color.cyan : Color.white.opacity(0.2))
                                     .frame(width: 4, height: 4)

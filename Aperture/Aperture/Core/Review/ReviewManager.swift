@@ -121,9 +121,16 @@ final class ReviewManager {
     
     private func requestReview() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            // iOS 16+ API
             if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
-                SKStoreReviewController.requestReview(in: scene)
+                if #available(iOS 18.0, *) {
+                    // iOS 18+ uses new StoreKit API
+                    Task { @MainActor in
+                        AppStore.requestReview(in: scene)
+                    }
+                } else {
+                    // iOS 16-17 uses SKStoreReviewController
+                    SKStoreReviewController.requestReview(in: scene)
+                }
             }
             
             // Record that we asked

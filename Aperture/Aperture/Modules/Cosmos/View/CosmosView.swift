@@ -196,7 +196,7 @@ struct CosmosView: View {
             .onAppear {
                 scrollProxy = proxy
             }
-            .onChange(of: selectedSection) { _ in
+            .onChange(of: selectedSection) { _, _ in
                 // Reset scroll to top and collapse any expanded realm on tab switch
                 selectedRealm = nil
                 withAnimation(.easeOut(duration: 0.15)) {

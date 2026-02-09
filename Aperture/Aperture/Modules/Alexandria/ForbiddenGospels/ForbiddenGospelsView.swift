@@ -221,6 +221,33 @@ struct ForbiddenGospelsView: View {
                 color: Color.red
             )
             
+            // Gospel of Truth
+            gospelCard(
+                name: "Gospel of Truth",
+                icon: "sun.max.fill",
+                tagline: "Ignorance is the only sin",
+                description: "Attributed to Valentinus, one of Christianity's greatest mystics.\n\nThis gospel teaches that the only 'fall' was into ignorance — forgetting who we truly are. Sin is not disobedience but FORGETFULNESS.\n\n\"The gospel of truth is joy for those who have received from the Father the gift of knowing him.\"\n\nSalvation isn't about being saved FROM something. It's about REMEMBERING what you always were. No priests required.",
+                color: Color(red: 1.0, green: 0.8, blue: 0.2)
+            )
+            
+            // Secret Book of John
+            gospelCard(
+                name: "Secret Book of John",
+                icon: "lock.shield.fill",
+                tagline: "The true cosmology they erased",
+                description: "The most complete Gnostic creation story.\n\nIt reveals how the material world was created by a flawed, arrogant being who THOUGHT he was God — the Demiurge. Humanity carries a divine spark trapped in matter.\n\nJesus appears to John after the crucifixion to reveal these secrets — knowledge that would make institutional religion obsolete.\n\nThe Church couldn't allow a cosmology where the 'God' of the Old Testament was actually a confused, jealous imposter.",
+                color: Color(red: 0.4, green: 0.6, blue: 1.0)
+            )
+            
+            // Thunder: Perfect Mind
+            gospelCard(
+                name: "Thunder: Perfect Mind",
+                icon: "bolt.fill",
+                tagline: "The voice of divine feminine paradox",
+                description: "A stunning poem spoken by a feminine divine voice that defies all categories:\n\n\"I am the first and the last.\nI am the honored one and the scorned one.\nI am the whore and the holy one.\nI am the wife and the virgin.\"\n\nThis text celebrates paradox as the nature of the divine. It refuses to let you put God in a box. The masculine institutional Church had no place for such wild feminine wisdom.",
+                color: Color(red: 0.8, green: 0.4, blue: 0.9)
+            )
+            
         }
         .padding(18)
         .background(sectionBackground(color: .red))

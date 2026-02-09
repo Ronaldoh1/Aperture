@@ -300,7 +300,7 @@ extension View {
  
  // Tab bar:
  TabView(selection: $tab) { ... }
-     .onChange(of: tab) { _ in
+     .onChange(of: tab) {
          HapticManager.shared.tabChanged()
      }
  

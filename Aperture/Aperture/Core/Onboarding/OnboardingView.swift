@@ -15,6 +15,7 @@ struct OnboardingView: View {
     @State private var selectedJourney: UserJourneyType?
     @State private var dragonName: String = ""
     @State private var showSkipConfirmation = false
+    @State private var showPersonaQuiz = false
     
     var body: some View {
         ZStack {
@@ -426,6 +427,22 @@ struct OnboardingView: View {
             }
             .font(.system(size: 15, weight: .medium))
             
+            // Optional: Deeper discovery with Persona Quiz
+            Button(action: { showPersonaQuiz = true }) {
+                HStack(spacing: 8) {
+                    Image(systemName: "person.fill.questionmark")
+                    Text("Discover your awakening archetype")
+                }
+                .font(.system(size: 14, weight: .medium))
+                .foregroundColor(.purple)
+                .padding(.horizontal, 20)
+                .padding(.vertical, 10)
+                .background(
+                    Capsule()
+                        .stroke(Color.purple.opacity(0.5), lineWidth: 1)
+                )
+            }
+            
             Spacer()
             
             // Enter Aperture button
@@ -446,6 +463,12 @@ struct OnboardingView: View {
             .padding(.bottom, 20)
         }
         .padding(.horizontal, 24)
+        .sheet(isPresented: $showPersonaQuiz) {
+            PersonaQuizView { persona in
+                // Persona identified during onboarding
+                showPersonaQuiz = false
+            }
+        }
     }
     
     private func firstInsight(for journey: UserJourneyType) -> String {

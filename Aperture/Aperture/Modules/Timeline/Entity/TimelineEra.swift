@@ -324,6 +324,21 @@ extension TimelineEra {
         ),
         
         TimelineEra(
+            year: 1945,
+            yearDisplay: "1945",
+            title: "Nag Hammadi Discovery",
+            subtitle: "The buried gospels resurface",
+            description: "In the Egyptian desert, a peasant finds a sealed jar containing 52 ancient texts — gospels, teachings, and wisdom writings hidden for 1,600 years since 367 AD when Bishop Athanasius ordered all 'non-canonical' books destroyed. These include Gospel of Thomas ('The kingdom is spread upon the earth and people do not see it'), Gospel of Philip ('You saw Christ, you became Christ'), and Thunder: Perfect Mind. The original teachings of gnosis — direct knowing — resurface after being buried by Nicaea.",
+            institutionalRot: [],
+            icon: "scroll.fill",
+            gradient: [Palette.accent.gold, Palette.primary.cyan],
+            category: .gnostic,
+            isRevealed: true,
+            region: "🇪🇬 Egypt",
+            dragonComment: "They tried to burn the inner path. Monks sealed it in the desert. The truth cannot be permanently destroyed. It always resurfaces when humanity is ready."
+        ),
+        
+        TimelineEra(
             year: 1913,
             yearDisplay: "1913",
             title: "Federal Reserve & Income Tax",
@@ -608,18 +623,20 @@ extension TimelineEra {
             year: 325,
             yearDisplay: "325 CE",
             title: "Council of Nicaea",
-            subtitle: "The Great Editing",
-            description: "Constantine standardizes Christianity. Gnostic gospels burned. Jesus becomes external savior.",
+            subtitle: "The Great Editing: Yeshua → Jesus",
+            description: "Constantine standardizes Christianity. His name YESHUA (יֵשׁוּעַ) — meaning 'salvation,' containing the sacred code of awakening — becomes JESUS through Greek and Latin. Gnostic gospels declaring 'the kingdom is within you' are burned. The living vibration becomes a label. Direct knowing (gnosis) becomes belief in doctrine (pistis). The inner Christ becomes an external savior you can never become.",
             institutionalRot: [
-                InstitutionalControl(institution: .religion, mechanism: "Gnostics (inner divinity) = heretics. Books burned.", truth: "'Kingdom within' became 'you need the Church'"),
-                InstitutionalControl(institution: .religion, mechanism: "Jesus as gnosis teacher → sacrifice for sins.", truth: "Liberation philosophy → control religion")
+                InstitutionalControl(institution: .religion, mechanism: "Yeshua → Iēsous → Iesus → Jesus. Each translation stripped the sacred frequency.", truth: "They didn't just change a name. They buried a key."),
+                InstitutionalControl(institution: .religion, mechanism: "Gnostics (inner divinity) declared heretics. Gospel of Thomas burned.", truth: "'Kingdom within' became 'you need the Church'"),
+                InstitutionalControl(institution: .religion, mechanism: "Nicene Creed: what you must BELIEVE about him. Zero about what he TAUGHT.", truth: "Religion ABOUT Jesus replaced religion OF Yeshua"),
+                InstitutionalControl(institution: .government, mechanism: "Constantine needed unity, not awakening. Diverse mystic movement → state religion.", truth: "Political control disguised as theology")
             ],
             icon: "building.columns.fill",
             gradient: [Palette.primary.red, Palette.primary.orange],
             category: .roman,
             isRevealed: false,
             region: nil,
-            dragonComment: "One emperor. Many gospels. Chose version requiring obedience to authority."
+            dragonComment: "They took a name that was a vibration, a code, a map back to the divine — and made it a label to put on buildings. Yeshua taught becoming. Jesus became something to worship from a distance."
         ),
         
         // ═══════════════════════════════════════════════════════════════
@@ -645,15 +662,15 @@ extension TimelineEra {
             year: 30,
             yearDisplay: "~30 CE",
             title: "Yeshua's True Teaching",
-            subtitle: "The Gnostic Christ",
-            description: "'The Kingdom of God is within you.' Direct knowledge. No intermediaries. You ARE the light.",
+            subtitle: "The Living Name before they changed it",
+            description: "'The Kingdom of God is within you.' His name יֵשׁוּעַ (Yeshua) contained the code: YUD (divine spark) + SHIN (eternal fire) + VAV (connection/spine) + AYIN (inner eye). A map of awakening in four letters. He taught direct knowing, not belief. Inner Christ, not external savior. Gospel of Thomas: 'Split wood - I am there. Lift stone - find me.' He came not to be worshipped but to show you what you could become. 'Greater works than these shall you do.'",
             institutionalRot: [],
             icon: "sparkles",
             gradient: [Palette.accent.gold, Palette.primary.cyan],
             category: .ancient,
             isRevealed: true,
             region: nil,
-            dragonComment: "What did he teach before Rome rewrote him? 'Split wood - I am there. Lift stone - find me.'"
+            dragonComment: "His name was a vibration, not a label. A code for awakening, not a deity to worship. They gave you 'Jesus' and took away 'Yeshua' because one requires a church and the other only requires you."
         ),
         
         TimelineEra(

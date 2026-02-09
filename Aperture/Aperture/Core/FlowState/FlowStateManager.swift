@@ -555,9 +555,6 @@ struct FlowStateView: View {
     }
     
     private func phasePreview(_ phase: FlowPhase, duration: Int) -> some View {
-        let totalDuration = manager.prepareDuration + manager.enteringDuration + manager.deepWorkDuration + manager.restDuration
-        let width = CGFloat(duration) / CGFloat(totalDuration)
-        
         return GeometryReader { geo in
             Rectangle()
                 .fill(phase.color.opacity(0.6))

@@ -218,7 +218,7 @@ struct SacredGeometryBackground: View {
             
             // Interlocking triangles
             ForEach(0..<9, id: \.self) { i in
-                Triangle()
+                SacredTriangle()
                     .stroke(style.primaryColor, lineWidth: 1)
                     .frame(width: size * (0.5 - Double(i) * 0.04))
                     .rotationEffect(.degrees(i % 2 == 0 ? 0 : 180))
@@ -403,7 +403,7 @@ struct SacredGeometryBackground: View {
                 .stroke(style.primaryColor, lineWidth: 1)
                 .frame(width: size)
         case 3: // Solar Plexus - Triangle down
-            Triangle()
+            SacredTriangle()
                 .stroke(style.primaryColor, lineWidth: 1)
                 .frame(width: size)
                 .rotationEffect(.degrees(180))
@@ -416,7 +416,7 @@ struct SacredGeometryBackground: View {
                 .stroke(style.primaryColor, lineWidth: 1)
                 .frame(width: size)
         case 6: // Third Eye - Om / Triangle
-            Triangle()
+            SacredTriangle()
                 .stroke(style.primaryColor, lineWidth: 1)
                 .frame(width: size)
         case 7: // Crown - Thousand petals
@@ -496,7 +496,7 @@ struct StarOfDavid: Shape {
     }
 }
 
-struct Triangle: Shape {
+struct SacredTriangle: Shape {
     func path(in rect: CGRect) -> Path {
         var path = Path()
         path.move(to: CGPoint(x: rect.midX, y: rect.minY))

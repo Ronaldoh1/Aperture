@@ -61,6 +61,72 @@ struct CourseCatalog {
         // CORE AWAKENING (Start Here)
         // ══════════════════════════════════════════════════
         CourseInfo(
+            id: "serpent_decoded",
+            title: "The Serpent Decoded",
+            subtitle: "The forbidden truth hidden for 2,000 years",
+            icon: "waveform.path",
+            colorHex: "#00FF66",
+            moduleCount: 6,
+            estimatedHours: 4,
+            category: .consciousness,
+            difficulty: .intermediate
+        ),
+        CourseInfo(
+            id: "living_name",
+            title: "The Living Name",
+            subtitle: "What they buried when they changed his name",
+            icon: "textformat.abc",
+            colorHex: "#FFD700",
+            moduleCount: 6,
+            estimatedHours: 4,
+            category: .consciousness,
+            difficulty: .intermediate
+        ),
+        CourseInfo(
+            id: "word_spells",
+            title: "The Word Spells",
+            subtitle: "Truth hidden in the words themselves",
+            icon: "character.book.closed.fill",
+            colorHex: "#9D4EDD",
+            moduleCount: 6,
+            estimatedHours: 3,
+            category: .consciousness,
+            difficulty: .beginner
+        ),
+        CourseInfo(
+            id: "psyop_detection",
+            title: "How to Spot a Psyop",
+            subtitle: "The science of mass manipulation decoded",
+            icon: "brain.head.profile",
+            colorHex: "#FF3B30",
+            moduleCount: 9,
+            estimatedHours: 6,
+            category: .systems,
+            difficulty: .intermediate
+        ),
+        CourseInfo(
+            id: "council_of_nicaea",
+            title: "The Council of Nicaea",
+            subtitle: "1,700 years of programming exposed",
+            icon: "cross.fill",
+            colorHex: "#8B0000",
+            moduleCount: 6,
+            estimatedHours: 4,
+            category: .systems,
+            difficulty: .advanced
+        ),
+        CourseInfo(
+            id: "godmode_esoteric",
+            title: "GodMode: Esoteric Path",
+            subtitle: "7 Gates to the operant power",
+            icon: "sparkle",
+            colorHex: "#FFD700",
+            moduleCount: 7,
+            estimatedHours: 6,
+            category: .consciousness,
+            difficulty: .intermediate
+        ),
+        CourseInfo(
             id: "pattern_recognition",
             title: "Pattern Recognition",
             subtitle: "The skill that changes everything",
@@ -93,10 +159,54 @@ struct CourseCatalog {
             category: .consciousness,
             difficulty: .advanced
         ),
+        CourseInfo(
+            id: "thoth_consciousness",
+            title: "Thoth's Teachings",
+            subtitle: "Consciousness is the fabric, not the byproduct",
+            icon: "eye.trianglebadge.exclamationmark",
+            colorHex: "#00E5FF",
+            moduleCount: 8,
+            estimatedHours: 4,
+            category: .consciousness,
+            difficulty: .intermediate
+        ),
+        CourseInfo(
+            id: "emerald_tablets",
+            title: "The Emerald Tablets",
+            subtitle: "Ancient wisdom from the halls of Amenti",
+            icon: "scroll.fill",
+            colorHex: "#00FF88",
+            moduleCount: 5,
+            estimatedHours: 3,
+            category: .consciousness,
+            difficulty: .advanced
+        ),
+        CourseInfo(
+            id: "ai_consciousness",
+            title: "AI & Consciousness",
+            subtitle: "The mirror that reveals who you really are",
+            icon: "brain.head.profile",
+            colorHex: "#00D4FF",
+            moduleCount: 4,
+            estimatedHours: 2.5,
+            category: .consciousness,
+            difficulty: .intermediate
+        ),
         
         // ══════════════════════════════════════════════════
         // SPIRITUAL TRADITIONS
         // ══════════════════════════════════════════════════
+        CourseInfo(
+            id: "solar_sovereignty",
+            title: "Solar Sovereignty",
+            subtitle: "Align with the oldest rhythm",
+            icon: "sun.max.fill",
+            colorHex: "#FF9500",
+            moduleCount: 2,
+            estimatedHours: 1.5,
+            category: .spirituality,
+            difficulty: .beginner
+        ),
         CourseInfo(
             id: "buddha_meditation",
             title: "Buddha's Path",
@@ -160,6 +270,17 @@ struct CourseCatalog {
         // ══════════════════════════════════════════════════
         // SCIENCE & REALITY
         // ══════════════════════════════════════════════════
+        CourseInfo(
+            id: "arrow_of_time",
+            title: "The Arrow of Time",
+            subtitle: "Why cups shatter but never unshatter",
+            icon: "arrow.right.circle.fill",
+            colorHex: "#7C4DFF",
+            moduleCount: 3,
+            estimatedHours: 2,
+            category: .science,
+            difficulty: .intermediate
+        ),
         CourseInfo(
             id: "quantum",
             title: "Quantum Reality",
@@ -384,6 +505,28 @@ struct CourseHubView: View {
                 DroneSelfCourseView()
             case "dragonball":
                 DragonBallCourseView()
+            case "arrow_of_time":
+                ArrowOfTimeCourseView()
+            case "solar_sovereignty":
+                SolarSovereigntyCourseView()
+            case "thoth_consciousness":
+                ThothConsciousnessCourseView()
+            case "emerald_tablets":
+                EmeraldTabletsCourseView()
+            case "ai_consciousness":
+                AIConsciousnessCourseView()
+            case "serpent_decoded":
+                SerpentDecodedCourseView()
+            case "living_name":
+                LivingNameCourseView()
+            case "word_spells":
+                WordSpellsCourseView()
+            case "psyop_detection":
+                PsyopDetectionCourseView()
+            case "council_of_nicaea":
+                CouncilOfNicaeaCourseView()
+            case "godmode_esoteric":
+                GodModeCourseView()
             default:
                 CourseDetailPlaceholder(course: course)
             }
@@ -550,22 +693,42 @@ struct HubCategoryChip: View {
 
 struct CourseCard: View {
     let course: CourseInfo
+    @State private var isPressed = false
     
     var body: some View {
         HStack(spacing: 14) {
-            // Icon
+            // Icon with subtle glow
             ZStack {
-                RoundedRectangle(cornerRadius: 12)
-                    .fill(course.color.opacity(0.25))
+                // Glow effect
+                Circle()
+                    .fill(course.color.opacity(0.15))
+                    .frame(width: 58, height: 58)
+                    .blur(radius: 4)
+                
+                RoundedRectangle(cornerRadius: 14)
+                    .fill(
+                        LinearGradient(
+                            colors: [course.color.opacity(0.3), course.color.opacity(0.15)],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
                     .frame(width: 52, height: 52)
                 
                 Image(systemName: course.icon)
                     .font(.system(size: 22, weight: .semibold))
-                    .foregroundColor(course.color)
+                    .foregroundStyle(
+                        LinearGradient(
+                            colors: [course.color, course.color.opacity(0.8)],
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
+                    )
             }
+            .accessibilityHidden(true)
             
             // Info
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: 5) {
                 HStack(spacing: 6) {
                     Text(course.category.rawValue.uppercased())
                         .font(.system(size: 10, weight: .bold, design: .rounded))
@@ -577,44 +740,72 @@ struct CourseCard: View {
                     Text(course.difficulty.rawValue)
                         .font(.system(size: 10, weight: .semibold))
                         .foregroundColor(course.difficulty.color)
+                        .padding(.horizontal, 6)
+                        .padding(.vertical, 2)
+                        .background(
+                            Capsule()
+                                .fill(course.difficulty.color.opacity(0.15))
+                        )
                 }
                 
                 Text(course.title)
-                    .font(.system(size: 15, weight: .bold, design: .rounded))
+                    .font(.system(size: 16, weight: .bold, design: .rounded))
                     .foregroundColor(Palette.text.primary)
                 
                 Text(course.subtitle)
                     .font(.system(size: 12, weight: .medium))
                     .foregroundColor(Palette.text.secondary)
-                    .lineLimit(1)
+                    .lineLimit(2)
             }
             
             Spacer()
             
-            // Meta
-            VStack(alignment: .trailing, spacing: 4) {
-                Text("\(course.moduleCount) modules")
-                    .font(.system(size: 11, weight: .medium, design: .rounded))
-                    .foregroundColor(Palette.text.muted)
+            // Meta with progress indicator style
+            VStack(alignment: .trailing, spacing: 6) {
+                HStack(spacing: 4) {
+                    Image(systemName: "square.stack.3d.up")
+                        .font(.system(size: 10))
+                    Text("\(course.moduleCount)")
+                        .font(.system(size: 12, weight: .bold, design: .rounded))
+                }
+                .foregroundColor(Palette.text.muted)
                 
-                Text("\(String(format: "%.1f", course.estimatedHours))h")
-                    .font(.system(size: 11, weight: .bold, design: .rounded))
-                    .foregroundColor(Palette.text.muted)
+                HStack(spacing: 4) {
+                    Image(systemName: "clock")
+                        .font(.system(size: 10))
+                    Text("\(String(format: "%.1f", course.estimatedHours))h")
+                        .font(.system(size: 12, weight: .bold, design: .rounded))
+                }
+                .foregroundColor(Palette.text.muted)
                 
-                Image(systemName: "chevron.right")
-                    .font(.system(size: 11, weight: .semibold))
-                    .foregroundColor(Palette.text.muted)
+                Image(systemName: "chevron.right.circle.fill")
+                    .font(.system(size: 16))
+                    .foregroundColor(course.color.opacity(0.6))
             }
+            .accessibilityHidden(true)
         }
-        .padding(14)
+        .padding(16)
         .background(
-            RoundedRectangle(cornerRadius: 16)
-                .fill(Color.white.opacity(0.05))
+            RoundedRectangle(cornerRadius: 18)
+                .fill(Color.white.opacity(0.04))
                 .overlay(
-                    RoundedRectangle(cornerRadius: 16)
-                        .stroke(course.color.opacity(0.2), lineWidth: 1)
+                    RoundedRectangle(cornerRadius: 18)
+                        .stroke(
+                            LinearGradient(
+                                colors: [course.color.opacity(0.3), course.color.opacity(0.1)],
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            ),
+                            lineWidth: 1
+                        )
                 )
         )
+        .scaleEffect(isPressed ? 0.98 : 1.0)
+        .animation(.spring(response: 0.3, dampingFraction: 0.7), value: isPressed)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(course.title). \(course.category.rawValue) course. \(course.difficulty.rawValue) difficulty.")
+        .accessibilityHint("\(course.moduleCount) modules, about \(String(format: "%.1f", course.estimatedHours)) hours. Double tap to start course.")
+        .accessibilityAddTraits(.isButton)
     }
 }
 

@@ -80,6 +80,8 @@ final class BiometricAuthManager: ObservableObject {
         
         if canUseBiometrics {
             switch context.biometryType {
+            case .none:
+                biometricType = .none
             case .touchID:
                 biometricType = .touchID
             case .faceID:

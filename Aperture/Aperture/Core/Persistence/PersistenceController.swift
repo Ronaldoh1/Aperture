@@ -170,7 +170,7 @@ extension PersistenceController {
 
     func checkCloudStatus() -> CloudStatus {
 
-        guard let token = FileManager.default.ubiquityIdentityToken else {
+        guard FileManager.default.ubiquityIdentityToken != nil else {
             return .notSignedIn
         }
 

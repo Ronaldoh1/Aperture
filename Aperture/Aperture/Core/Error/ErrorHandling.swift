@@ -340,7 +340,7 @@ final class CrashReporter {
         info["message"] = message
         info["timestamp"] = Date().timeIntervalSince1970
         
-        let nsError = NSError(
+        let _ = NSError(
             domain: "com.sunflow.aperture.nonfatal",
             code: 0,
             userInfo: info

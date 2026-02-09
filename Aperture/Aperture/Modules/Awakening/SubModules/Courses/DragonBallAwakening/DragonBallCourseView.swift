@@ -150,7 +150,7 @@ struct DragonBallCourseView: View {
             // Dragon Ball icon
             ZStack {
                 // Ki aura
-                ForEach(0..<3) { i in
+                ForEach(0..<3, id: \.self) { i in
                     Circle()
                         .stroke(course.color.opacity(0.3 - Double(i) * 0.1), lineWidth: 2)
                         .frame(width: CGFloat(80 + i * 20), height: CGFloat(80 + i * 20))

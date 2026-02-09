@@ -55,7 +55,7 @@ struct AwakeTogetherView: View {
         VStack(spacing: 16) {
             ZStack {
                 // Animated rings
-                ForEach(0..<3) { i in
+                ForEach(0..<3, id: \.self) { i in
                     Circle()
                         .stroke(
                             LinearGradient(

@@ -20,6 +20,7 @@ struct GodModeHubView: View {
     @State private var showVibrationShield = false
     @State private var showDailyCheckIn = false
     @State private var showSynchronicities = false
+    @State private var showCurriculum = false
     @State private var sparkPulse = false
     
     enum GodModeTool: String, CaseIterable {
@@ -90,6 +91,9 @@ struct GodModeHubView: View {
                     VStack(spacing: 24) {
                         // Header with spark
                         headerSection
+                        
+                        // Esoteric Curriculum Card
+                        curriculumCard
                         
                         // Monad Status
                         monadStatusCard
@@ -163,6 +167,9 @@ struct GodModeHubView: View {
             .sheet(isPresented: $showSynchronicities) {
                 SynchronicityTrackerView()
             }
+            .sheet(isPresented: $showCurriculum) {
+                GodModeCourseView()
+            }
         }
     }
     
@@ -204,6 +211,82 @@ struct GodModeHubView: View {
                 endRadius: 500
             )
             .ignoresSafeArea()
+        }
+    }
+    
+    // MARK: - Curriculum Card
+    
+    private var curriculumCard: some View {
+        Button {
+            showCurriculum = true
+        } label: {
+            HStack(spacing: 16) {
+                // Icon
+                ZStack {
+                    Circle()
+                        .fill(
+                            LinearGradient(
+                                colors: [Color(red: 1, green: 0.84, blue: 0), Color(red: 1, green: 0.5, blue: 0)],
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            )
+                        )
+                        .frame(width: 50, height: 50)
+                    
+                    Image(systemName: "book.closed.fill")
+                        .font(.system(size: 22))
+                        .foregroundColor(.black)
+                }
+                
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("THE ESOTERIC CURRICULUM")
+                        .font(.system(size: 11, weight: .bold))
+                        .foregroundColor(Color(red: 1, green: 0.84, blue: 0))
+                        .tracking(1)
+                    
+                    Text("7 Gates to Mastery")
+                        .font(.system(size: 17, weight: .bold))
+                        .foregroundColor(.white)
+                    
+                    Text("Progressive lessons from ignition to integration")
+                        .font(.system(size: 12))
+                        .foregroundColor(.white.opacity(0.6))
+                }
+                
+                Spacer()
+                
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 16, weight: .semibold))
+                    .foregroundColor(Color(red: 1, green: 0.84, blue: 0).opacity(0.6))
+            }
+            .padding(16)
+            .background(
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(
+                        LinearGradient(
+                            colors: [
+                                Color(red: 1, green: 0.84, blue: 0).opacity(0.15),
+                                Color(red: 0.6, green: 0.3, blue: 1).opacity(0.1)
+                            ],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 16)
+                            .stroke(
+                                LinearGradient(
+                                    colors: [
+                                        Color(red: 1, green: 0.84, blue: 0).opacity(0.5),
+                                        Color(red: 0.6, green: 0.3, blue: 1).opacity(0.3)
+                                    ],
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing
+                                ),
+                                lineWidth: 1
+                            )
+                    )
+            )
         }
     }
     

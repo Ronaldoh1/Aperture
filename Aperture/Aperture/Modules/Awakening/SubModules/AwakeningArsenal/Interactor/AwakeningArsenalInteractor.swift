@@ -204,12 +204,12 @@ class AwakeningArsenalInteractor: AwakeningArsenalInteractorProtocol, Observable
     func toggleBookmark(methodId: String) async throws {
         if bookmarkedIds.contains(methodId) {
             try await service.removeBookmark(userId: userId, methodId: methodId)
-            await MainActor.run {
+            _ = await MainActor.run {
                 self.bookmarkedIds.remove(methodId)
             }
         } else {
             try await service.bookmarkMethod(userId: userId, methodId: methodId)
-            await MainActor.run {
+            _ = await MainActor.run {
                 self.bookmarkedIds.insert(methodId)
             }
         }

@@ -56,38 +56,8 @@ struct TrackedCourseProgress: Codable, Identifiable {
     }
 }
 
-// MARK: - Achievement
-
-struct Achievement: Codable, Identifiable {
-    let id: String
-    let title: String
-    let description: String
-    let icon: String
-    let dateEarned: Date
-    let category: AchievementCategory
-    
-    enum AchievementCategory: String, Codable {
-        case streak = "streak"
-        case course = "course"
-        case exploration = "exploration"
-        case practice = "practice"
-        case dragon = "dragon"
-        case special = "special"
-        
-        var color: Color {
-            switch self {
-            case .streak: return .orange
-            case .course: return Palette.accent.gold
-            case .exploration: return Palette.primary.cyan
-            case .practice: return .purple
-            case .dragon: return .red
-            case .special: return .pink
-            }
-        }
-    }
-}
-
 // MARK: - Progress Tracker
+// Note: Achievement is defined in AchievementSystem.swift
 
 @MainActor
 class ProgressTracker: ObservableObject {
@@ -169,7 +139,7 @@ class ProgressTracker: ObservableObject {
                     title: "Course Completed!",
                     description: "Completed \(courseProgress[index].courseName)",
                     icon: "checkmark.seal.fill",
-                    category: .course
+                    category: .knowledge
                 )
             }
         }
@@ -236,7 +206,7 @@ class ProgressTracker: ObservableObject {
                     title: "\(milestone) Day Streak!",
                     description: "Maintained a \(milestone)-day practice streak",
                     icon: "flame.fill",
-                    category: .streak
+                    category: .consistency
                 )
             }
         }
@@ -252,7 +222,7 @@ class ProgressTracker: ObservableObject {
                     title: "\(milestone) Practices!",
                     description: "Completed \(milestone) practices",
                     icon: "figure.mind.and.body",
-                    category: .practice
+                    category: .mastery
                 )
             }
         }
@@ -268,7 +238,7 @@ class ProgressTracker: ObservableObject {
                     title: "Cosmic Explorer",
                     description: "Explored \(milestone) cosmic realms",
                     icon: "globe.americas.fill",
-                    category: .exploration
+                    category: .awakening
                 )
             }
         }
@@ -284,13 +254,13 @@ class ProgressTracker: ObservableObject {
                     title: "Dragon Whisperer",
                     description: "Had \(milestone) conversations with your Dragon",
                     icon: "flame.fill",
-                    category: .dragon
+                    category: .special
                 )
             }
         }
     }
     
-    private func earnAchievement(id: String, title: String, description: String, icon: String, category: Achievement.AchievementCategory) {
+    private func earnAchievement(id: String, title: String, description: String, icon: String, category: AchievementCategory) {
         guard !achievements.contains(where: { $0.id == id }) else { return }
         
         let achievement = Achievement(
@@ -298,8 +268,12 @@ class ProgressTracker: ObservableObject {
             title: title,
             description: description,
             icon: icon,
-            dateEarned: Date(),
-            category: category
+            category: category,
+            rarity: .common,
+            requirement: .totalXP(amount: 0),
+            xpReward: 50,
+            secretUntilUnlocked: false,
+            dateEarned: Date()
         )
         
         achievements.insert(achievement, at: 0)
@@ -777,7 +751,7 @@ struct AchievementCard: View {
                     .font(.system(size: 12))
                     .foregroundColor(.gray)
                 
-                Text(achievement.dateEarned.formatted(date: .abbreviated, time: .omitted))
+                Text(achievement.dateEarned?.formatted(date: .abbreviated, time: .omitted) ?? "")
                     .font(.system(size: 10))
                     .foregroundColor(.gray.opacity(0.6))
             }

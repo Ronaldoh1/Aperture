@@ -315,7 +315,7 @@ struct DigitalSecurityModuleView: View {
                 }
             }
             .sheet(item: $selectedLesson) { lesson in
-                LessonDetailView(lesson: lesson, completedLessons: $completedLessons)
+                SecurityLessonDetailView(lesson: lesson, completedLessons: $completedLessons)
             }
 
         }
@@ -440,7 +440,7 @@ struct DigitalSecurityModuleView: View {
 
 // MARK: - Lesson Detail View
 
-struct LessonDetailView: View {
+struct SecurityLessonDetailView: View {
 
     let lesson: DigitalSecurityLesson
     @Binding var completedLessons: Set<String>

@@ -173,7 +173,7 @@ struct MatrixEducationView: View {
     
     private func loadProgress() {
         let storage = AwakeningStorage()
-        let profile = storage.loadProfile()
+        _ = storage.loadProfile()
         // Map from profile to education progress if stored
         // For now, use separate storage
         if let data = UserDefaults.standard.data(forKey: "matrix_education_progress"),

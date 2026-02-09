@@ -379,7 +379,7 @@ struct HakaiHateView: View {
                         
                         // Severity dots
                         HStack(spacing: 2) {
-                            ForEach(0..<5) { i in
+                            ForEach(0..<5, id: \.self) { i in
                                 Circle()
                                     .fill(i < trigger.severity ? Color.red : Color.white.opacity(0.2))
                                     .frame(width: 6, height: 6)
@@ -611,7 +611,6 @@ class PostAnalyzer: ObservableObject {
         
         // Find triggers
         var triggers: [HateTrigger] = []
-        let lowercaseText = text.lowercased()
         
         for pattern in triggerPatterns {
             if let regex = try? NSRegularExpression(pattern: pattern.pattern, options: .caseInsensitive) {

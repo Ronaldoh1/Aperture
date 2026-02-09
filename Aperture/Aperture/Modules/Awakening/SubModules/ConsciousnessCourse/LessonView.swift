@@ -360,7 +360,7 @@ struct LessonView: View {
                 .frame(minHeight: 80, maxHeight: 150)
                 .padding(10)
                 .background(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(Color.white.opacity(0.05)))
-                .onChange(of: notes) { _ in saveNotes() }
+                .onChange(of: notes) { _, _ in saveNotes() }
             
             Text("Notes are saved automatically")
                 .font(.system(size: 11, weight: .medium, design: .rounded))

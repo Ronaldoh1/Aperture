@@ -38,7 +38,7 @@ struct KundaliniAwakeningCourse: View {
         VStack(spacing: 16) {
             ZStack {
                 // Serpent coil visualization
-                ForEach(0..<7) { i in
+                ForEach(0..<7, id: \.self) { i in
                     Circle()
                         .stroke(chakraColors[i], lineWidth: 3)
                         .frame(width: CGFloat(30 + i * 15), height: CGFloat(30 + i * 15))

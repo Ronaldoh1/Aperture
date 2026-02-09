@@ -135,10 +135,13 @@ final class ShareManager {
                 popover.sourceView = sourceView
                 popover.sourceRect = sourceView.bounds
             } else {
-                // Fallback for iPad
-                popover.sourceView = UIApplication.shared.windows.first?.rootViewController?.view
-                popover.sourceRect = CGRect(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY, width: 0, height: 0)
-                popover.permittedArrowDirections = []
+                // Fallback for iPad - use window scene
+                if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                   let rootView = windowScene.windows.first?.rootViewController?.view {
+                    popover.sourceView = rootView
+                    popover.sourceRect = CGRect(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY, width: 0, height: 0)
+                    popover.permittedArrowDirections = []
+                }
             }
         }
         
@@ -267,9 +270,19 @@ struct ShareButton: View {
 
 struct ShareSheet: UIViewControllerRepresentable {
     let items: [Any]
+    var onComplete: ((Bool) -> Void)?
+    
+    init(items: [Any], onComplete: ((Bool) -> Void)? = nil) {
+        self.items = items
+        self.onComplete = onComplete
+    }
     
     func makeUIViewController(context: Context) -> UIActivityViewController {
-        UIActivityViewController(activityItems: items, applicationActivities: nil)
+        let controller = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        controller.completionWithItemsHandler = { _, completed, _, _ in
+            onComplete?(completed)
+        }
+        return controller
     }
     
     func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {}

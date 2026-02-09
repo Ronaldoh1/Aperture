@@ -217,7 +217,7 @@ extension KeychainManager {
         get { getString(forKey: .authToken) }
         set {
             if let token = newValue {
-                save(token, forKey: .authToken)
+                _ = save(token, forKey: .authToken)
             } else {
                 delete(key: .authToken)
             }

@@ -36,7 +36,16 @@ struct LandingView: View {
                     if godModeManager.isUnlocked {
                         godModePortalButton
                     }
+                    
+                    // Psyop Scanner - Killer Feature
+                    PsyopScannerCard()
+                    
+                    // Persona Discovery
+                    PersonaQuickCard()
 
+                    // Growth Features: Achievements & Sharing
+                    GrowthFeaturesSection()
+                    
                     LandingNavigationSection(selectedTab: $selectedTab)
 
                     LandingQuickActionsSection(selectedTab: $selectedTab)

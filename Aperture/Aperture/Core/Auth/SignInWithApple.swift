@@ -154,7 +154,7 @@ extension SignInWithAppleManager: ASAuthorizationControllerDelegate {
             self.isSignedIn = true
             
             // Save to Keychain
-            KeychainManager.shared.save(userIdentifier, forKey: .userId)
+            _ = KeychainManager.shared.save(userIdentifier, forKey: .userId)
             
             // Send to backend for verification if needed
             self.authenticateWithBackend(
@@ -177,6 +177,9 @@ extension SignInWithAppleManager: ASAuthorizationControllerDelegate {
         
         // Handle specific errors
         if let authError = error as? ASAuthorizationError {
+            // Log the error code for debugging
+            print("   ASAuthorizationError code: \(authError.code.rawValue)")
+            
             switch authError.code {
             case .canceled:
                 print("   User canceled sign in")
@@ -188,8 +191,8 @@ extension SignInWithAppleManager: ASAuthorizationControllerDelegate {
                 print("   Request not handled")
             case .unknown:
                 print("   Unknown error")
-            @unknown default:
-                print("   Unhandled error")
+            default:
+                print("   Other error: \(authError.localizedDescription)")
             }
         }
     }
@@ -242,12 +245,12 @@ struct SignInWithAppleButton: View {
             .onTapGesture {
                 manager.signIn()
             }
-            .onChange(of: manager.isSignedIn) { isSignedIn in
+            .onChange(of: manager.isSignedIn) { _, isSignedIn in
                 if isSignedIn, let userId = manager.userIdentifier {
                     onCompletion?(.success(userId))
                 }
             }
-            .onChange(of: manager.hasError) { hasError in
+            .onChange(of: manager.hasError) { _, hasError in
                 if hasError, let message = manager.errorMessage {
                     onCompletion?(.failure(NSError(domain: "AppleSignIn", code: -1, userInfo: [NSLocalizedDescriptionKey: message])))
                     manager.hasError = false // Reset

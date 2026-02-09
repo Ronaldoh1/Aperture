@@ -23,12 +23,16 @@ struct NarrativeAnalysis: Identifiable, Codable {
 }
 
 struct DetectedTechnique: Identifiable, Codable {
-    let id = UUID()
+    var id = UUID()
     let name: String
     let description: String
     let severity: Int // 1-5
     let example: String
     let defense: String
+    
+    enum CodingKeys: String, CodingKey {
+        case name, description, severity, example, defense
+    }
 }
 
 struct GnosticLens: Codable {
@@ -804,7 +808,7 @@ struct TruthVerificationToolkitView: View {
                         Spacer()
                         
                         HStack(spacing: 2) {
-                            ForEach(0..<5) { i in
+                            ForEach(0..<5, id: \.self) { i in
                                 Circle()
                                     .fill(i < tech.severity ? Color.red : Color.white.opacity(0.2))
                                     .frame(width: 6, height: 6)

@@ -154,7 +154,9 @@ class DragonBubbleManager: ObservableObject {
             object: nil,
             queue: .main
         ) { [weak self] _ in
-            self?.triggerPulse()
+            Task { @MainActor in
+                self?.triggerPulse()
+            }
         }
     }
 }

@@ -1065,7 +1065,7 @@ struct GnosticLibraryView: View {
                         
                         // Difficulty
                         HStack(spacing: 2) {
-                            ForEach(0..<5) { i in
+                            ForEach(0..<5, id: \.self) { i in
                                 Circle()
                                     .fill(i < text.difficulty ? text.collection.color : Color.white.opacity(0.2))
                                     .frame(width: 6, height: 6)

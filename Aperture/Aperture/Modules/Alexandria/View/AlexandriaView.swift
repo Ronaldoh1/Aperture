@@ -11,6 +11,8 @@ struct AlexandriaView: View {
     @State private var selectedTradition: TextTradition?
     @State private var selectedText: SacredText?
     @State private var showForbiddenGospels = false
+    @State private var searchText = ""
+    @FocusState private var isSearchFocused: Bool
     
     private var presenter: AlexandriaPresenterType {
         presenterBox.presenter
@@ -18,6 +20,29 @@ struct AlexandriaView: View {
     
     init(presenter: AlexandriaPresenterType) {
         _presenterBox = StateObject(wrappedValue: AlexandriaPresenterBox(presenter: presenter))
+    }
+    
+    // MARK: - Search Filtering
+    
+    private var filteredTraditions: [TextTradition] {
+        guard !searchText.isEmpty else {
+            return LibraryCategory.sacredTexts.traditions
+        }
+        
+        let lowercased = searchText.lowercased()
+        return LibraryCategory.sacredTexts.traditions.filter { tradition in
+            tradition.name.lowercased().contains(lowercased) ||
+            tradition.description.lowercased().contains(lowercased) ||
+            tradition.period.lowercased().contains(lowercased) ||
+            tradition.texts.contains { text in
+                text.name.lowercased().contains(lowercased) ||
+                text.summary.lowercased().contains(lowercased)
+            }
+        }
+    }
+    
+    private var hasSearchResults: Bool {
+        !searchText.isEmpty && filteredTraditions.isEmpty
     }
     
     var body: some View {
@@ -35,6 +60,9 @@ struct AlexandriaView: View {
                         Spacer(minLength: 20)
                         
                         headerSection
+                        
+                        // Search Bar
+                        searchBarSection
                         
                         // Main Content - Sacred Texts First
                         categorySection
@@ -75,6 +103,109 @@ struct AlexandriaView: View {
         }
         .onAppear {
             presenter.viewDidLoad()
+        }
+        
+    }
+    
+    // MARK: - Search Bar
+    
+    private var searchBarSection: some View {
+        
+        VStack(spacing: 12) {
+            
+            HStack(spacing: 12) {
+                
+                HStack(spacing: 10) {
+                    
+                    Image(systemName: "magnifyingglass")
+                        .font(.system(size: 16, weight: .medium))
+                        .foregroundColor(isSearchFocused ? Palette.accent.gold : Palette.text.muted)
+                    
+                    TextField("Search texts, traditions, wisdom...", text: $searchText)
+                        .font(.system(size: 15, weight: .medium, design: .rounded))
+                        .foregroundColor(Palette.text.primary)
+                        .focused($isSearchFocused)
+                        .autocorrectionDisabled()
+                        .submitLabel(.search)
+                        .accessibilityLabel("Search library")
+                        .accessibilityHint("Search through sacred texts and traditions")
+                    
+                    if !searchText.isEmpty {
+                        Button {
+                            searchText = ""
+                            HapticManager.shared.light()
+                        } label: {
+                            Image(systemName: "xmark.circle.fill")
+                                .font(.system(size: 18))
+                                .foregroundColor(Palette.text.muted)
+                        }
+                        .accessibilityLabel("Clear search")
+                    }
+                    
+                }
+                .padding(.horizontal, 14)
+                .padding(.vertical, 12)
+                .background(
+                    RoundedRectangle(cornerRadius: 12, style: .continuous)
+                        .fill(Color.white.opacity(0.05))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 12, style: .continuous)
+                                .stroke(
+                                    isSearchFocused ? Palette.accent.gold.opacity(0.5) : Palette.text.muted.opacity(0.2),
+                                    lineWidth: 1
+                                )
+                        )
+                )
+                
+            }
+            
+            // No results message
+            if hasSearchResults {
+                HStack(spacing: 8) {
+                    Image(systemName: "text.page.badge.magnifyingglass")
+                        .font(.system(size: 16))
+                        .foregroundColor(Palette.text.muted)
+                    
+                    Text("No texts found for \"\(searchText)\"")
+                        .font(.system(size: 14, weight: .medium, design: .rounded))
+                        .foregroundColor(Palette.text.muted)
+                }
+                .padding(.top, 8)
+            }
+            
+            // Search suggestions when focused
+            if isSearchFocused && searchText.isEmpty {
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("POPULAR SEARCHES")
+                        .font(.system(size: 10, weight: .bold, design: .rounded))
+                        .tracking(1.5)
+                        .foregroundColor(Palette.text.muted)
+                    
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 8) {
+                            ForEach(["Gnostic", "Hermes", "Gospel", "Emerald", "Thoth", "Nag Hammadi"], id: \.self) { suggestion in
+                                Button {
+                                    searchText = suggestion
+                                    HapticManager.shared.light()
+                                } label: {
+                                    Text(suggestion)
+                                        .font(.system(size: 13, weight: .medium, design: .rounded))
+                                        .foregroundColor(Palette.accent.gold)
+                                        .padding(.horizontal, 12)
+                                        .padding(.vertical, 6)
+                                        .background(
+                                            Capsule()
+                                                .fill(Palette.accent.gold.opacity(0.15))
+                                        )
+                                }
+                                .accessibilityLabel("Search for \(suggestion)")
+                            }
+                        }
+                    }
+                }
+                .padding(.top, 4)
+            }
+            
         }
         
     }
@@ -196,7 +327,7 @@ struct AlexandriaView: View {
                 
                 Spacer()
                 
-                Text("\(LibraryCategory.sacredTexts.traditions.count) traditions")
+                Text("\(filteredTraditions.count) traditions")
                     .font(.system(size: 11, weight: .medium, design: .rounded))
                     .foregroundColor(Palette.text.muted)
                 
@@ -207,7 +338,7 @@ struct AlexandriaView: View {
                 .foregroundColor(Palette.text.secondary)
             
             // Tradition cards
-            ForEach(LibraryCategory.sacredTexts.traditions) { tradition in
+            ForEach(filteredTraditions) { tradition in
                 TraditionCard(tradition: tradition) {
                     selectedTradition = tradition
                 }

@@ -144,7 +144,7 @@ struct SecuritySettingsView: View {
                     }
                 }
             }
-            .onChange(of: authManager.biometricLoginEnabled) { enabled in
+            .onChange(of: authManager.biometricLoginEnabled) { _, enabled in
                 HapticManager.shared.light()
                 if enabled {
                     Task {
@@ -174,7 +174,7 @@ struct SecuritySettingsView: View {
                     }
                 }
             }
-            .onChange(of: appLockSettings.lockOnBackground) { _ in
+            .onChange(of: appLockSettings.lockOnBackground) { _, _ in
                 HapticManager.shared.light()
             }
             
@@ -203,7 +203,7 @@ struct SecuritySettingsView: View {
                         .font(.system(size: 16, weight: .medium, design: .rounded))
                 }
             }
-            .onChange(of: authManager.autoLockMinutes) { _ in
+            .onChange(of: authManager.autoLockMinutes) { _, _ in
                 HapticManager.shared.light()
             }
         }
@@ -231,7 +231,7 @@ struct SecuritySettingsView: View {
                     }
                 }
             }
-            .onChange(of: authManager.rememberMe) { _ in
+            .onChange(of: authManager.rememberMe) { _, _ in
                 HapticManager.shared.light()
             }
             
@@ -253,7 +253,7 @@ struct SecuritySettingsView: View {
                     }
                 }
             }
-            .onChange(of: appLockSettings.requireAuthForPremium) { _ in
+            .onChange(of: appLockSettings.requireAuthForPremium) { _, _ in
                 HapticManager.shared.light()
             }
         }

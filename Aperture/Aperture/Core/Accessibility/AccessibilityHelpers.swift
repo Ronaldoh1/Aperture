@@ -58,7 +58,7 @@ extension View {
     
     /// Announce changes to VoiceOver users
     func announceOnChange<V: Equatable>(_ value: V, announcement: @escaping (V) -> String) -> some View {
-        self.onChange(of: value) { newValue in
+        self.onChange(of: value) { _, newValue in
             UIAccessibility.post(
                 notification: .announcement,
                 argument: announcement(newValue)

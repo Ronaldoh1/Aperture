@@ -229,7 +229,6 @@ struct DragonBubbleView: View {
                 
                 // Check if near edges for dismiss hint
                 let newX = manager.bubblePosition.x + value.translation.width
-                let newY = manager.bubblePosition.y + value.translation.height
                 
                 showDismissHint = newX < 60 || newX > UIScreen.main.bounds.width - 60
                 

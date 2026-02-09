@@ -45,7 +45,7 @@ struct UniversalAwakeningArsenalView: View {
             // Animated Oneness Core
             ZStack {
                 // Outer glow
-                ForEach(0..<3) { i in
+                ForEach(0..<3, id: \.self) { i in
                     Circle()
                         .stroke(
                             LinearGradient(
@@ -279,7 +279,7 @@ struct UniversalAwakeningArsenalView: View {
             
             // Difficulty
             HStack(spacing: 4) {
-                ForEach(0..<5) { i in
+                ForEach(0..<5, id: \.self) { i in
                     Circle()
                         .fill(i < method.difficulty ? method.color : Color.gray.opacity(0.3))
                         .frame(width: 6, height: 6)
@@ -1037,7 +1037,7 @@ struct UniversalAwakeningMethodDetailView: View {
                 Text("Intensity:")
                     .font(.system(size: 12))
                     .foregroundColor(.gray)
-                ForEach(0..<5) { i in
+                ForEach(0..<5, id: \.self) { i in
                     Image(systemName: i < method.difficulty ? "flame.fill" : "flame")
                         .font(.system(size: 12))
                         .foregroundColor(i < method.difficulty ? method.color : .gray.opacity(0.3))

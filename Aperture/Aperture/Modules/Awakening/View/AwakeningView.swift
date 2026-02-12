@@ -135,6 +135,7 @@ struct AwakeningView: View {
                 presenterBox.newLevelUp = nil
             }
         }
+        .withModuleTutorial(.awakening)
     }
     
     private var levelCard: some View {

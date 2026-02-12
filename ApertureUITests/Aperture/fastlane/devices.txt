@@ -1,0 +1,17 @@
+# ═══════════════════════════════════════════════════════════════════════════
+# APERTURE - Test Devices
+# ═══════════════════════════════════════════════════════════════════════════
+#
+# Format: Device Name	UDID
+# Tab-separated, one device per line.
+#
+# Find UDID:
+#   - Connect device to Mac
+#   - Open Finder -> Click device -> Click device info text
+#   - Copy the UDID (not Serial Number)
+#
+# Or use: fastlane register_device (interactive)
+#
+
+Device ID	Device Name
+00008030-001234567890ABCD	Ron's iPhone 15 Pro

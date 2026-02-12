@@ -1,0 +1,18 @@
+# ═══════════════════════════════════════════════════════════════════════════
+# APERTURE - Firebase App Distribution Testers
+# ═══════════════════════════════════════════════════════════════════════════
+#
+# Add tester emails, one per line.
+# These testers will receive emails when new builds are uploaded to Firebase.
+#
+# Usage: fastlane firebase (uses this file automatically)
+#
+
+# Core Team
+ron@sunflow.io
+
+# Beta Testers
+# tester1@example.com
+# tester2@example.com
+
+# Add more testers below:

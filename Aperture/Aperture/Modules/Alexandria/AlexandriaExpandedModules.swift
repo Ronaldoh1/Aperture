@@ -308,7 +308,7 @@ struct NutritionAwakeningView: View {
                                 .foregroundStyle(Color(hex: "27AE60"))
                                 .tracking(2)
                             
-                            FlowLayout(spacing: 8) {
+                            AlexandriaFlowLayout(spacing: 8) {
                                 ForEach(pinealFoods, id: \.self) { food in
                                     Text(food)
                                         .font(.caption)
@@ -343,7 +343,7 @@ struct NutritionAwakeningView: View {
 }
 
 // Simple flow layout for tags
-struct FlowLayout: Layout {
+struct AlexandriaFlowLayout: Layout {
     var spacing: CGFloat = 8
     
     func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {

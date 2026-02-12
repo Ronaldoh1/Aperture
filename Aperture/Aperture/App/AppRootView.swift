@@ -14,16 +14,28 @@ struct AppRootView: View {
 
     @State private var authStartInSignUp = false
     @State private var showGuestPreview = false
+    @State private var showLaunchAnimation = true
 
     var body: some View {
 
         ZStack {
+            // Launch animation (shows first, then fades out)
+            if showLaunchAnimation {
+                LaunchAnimationView {
+                    withAnimation(.easeOut(duration: 0.4)) {
+                        showLaunchAnimation = false
+                    }
+                }
+                .transition(.opacity)
+                .zIndex(2000)
+            }
+            
             // Legal gate must be cleared first
-            if legalGateManager.showLegalGate {
+            if legalGateManager.showLegalGate && !showLaunchAnimation {
                 LegalGateView()
                     .transition(.opacity)
                     .zIndex(1000)
-            } else {
+            } else if !showLaunchAnimation {
                 // Main content
                 mainContent
                 
@@ -33,7 +45,7 @@ struct AppRootView: View {
                         // When introduction completes, also mark onboarding as done
                         // so we skip the old quiz flow
                         introManager.markIntroductionAsSeen()
-                        journeyStore.completeOnboarding()
+                        journeyStore.completeOnboardingWithDefaults()
                         guestManager.markWelcomeSeen()
                     }
                     .transition(.opacity)
@@ -43,6 +55,7 @@ struct AppRootView: View {
         }
         .animation(.easeInOut(duration: 0.3), value: introManager.shouldShowIntroduction)
         .animation(.easeInOut(duration: 0.3), value: legalGateManager.showLegalGate)
+        .animation(.easeInOut(duration: 0.4), value: showLaunchAnimation)
     }
     
     @ViewBuilder

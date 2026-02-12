@@ -67,12 +67,12 @@ struct AlexandriaView: View {
                         // Main Content - Sacred Texts First
                         categorySection
                         
-                        // Dragon context chip
-                        DragonContextChip(
-                            context: .alexandria(textId: nil),
-                            customText: "Ask the Dragon about sacred texts"
-                        )
-                        .padding(.top, 20)
+                        // Dragon context chip - removed, module deprecated
+                        // DragonContextChip(
+                        //     context: .alexandria(textId: nil),
+                        //     customText: "Ask the Dragon about sacred texts"
+                        // )
+                        // .padding(.top, 20)
                         
                         Spacer(minLength: 40)
                         
@@ -104,6 +104,7 @@ struct AlexandriaView: View {
         .onAppear {
             presenter.viewDidLoad()
         }
+        .withModuleTutorial(.alexandria)
         
     }
     
@@ -480,158 +481,12 @@ struct AlexandriaView: View {
     // MARK: - Hidden Knowledge Section
     
     private var hiddenKnowledgeSection: some View {
-        
         VStack(alignment: .leading, spacing: 16) {
-            
-            // Section header
-            HStack {
-                
-                Image(systemName: "eye.slash.fill")
-                    .font(.system(size: 18, weight: .bold))
-                    .foregroundColor(Palette.primary.cyan)
-                
-                Text("HIDDEN KNOWLEDGE")
-                    .font(.system(size: 13, weight: .bold, design: .rounded))
-                    .tracking(2)
-                    .foregroundColor(Palette.primary.cyan)
-                
-                Spacer()
-                
-            }
-            
-            Text("What they don't teach in school")
-                .font(.system(size: 14, weight: .medium, design: .rounded))
-                .foregroundColor(Palette.text.secondary)
-            
-            // Featured: Gnostic Library
-            NavigationLink(destination: GnosticLibraryView()) {
-                HStack(spacing: 14) {
-                    
-                    ZStack {
-                        Circle()
-                            .fill(
-                                LinearGradient(
-                                    colors: [.purple, .blue],
-                                    startPoint: .topLeading,
-                                    endPoint: .bottomTrailing
-                                )
-                            )
-                            .frame(width: 50, height: 50)
-                        
-                        Image(systemName: "books.vertical.fill")
-                            .font(.system(size: 22))
-                            .foregroundColor(.white)
-                    }
-                    
-                    VStack(alignment: .leading, spacing: 4) {
-                        HStack {
-                            Text("THE GNOSTIC LIBRARY")
-                                .font(.system(size: 14, weight: .bold, design: .rounded))
-                                .foregroundColor(.white)
-                            
-                            Text("NEW")
-                                .font(.system(size: 8, weight: .bold))
-                                .foregroundColor(.white)
-                                .padding(.horizontal, 6)
-                                .padding(.vertical, 2)
-                                .background(Color.purple)
-                                .cornerRadius(4)
-                        }
-                        
-                        Text("Complete texts, cosmology & sacred links")
-                            .font(.system(size: 11, weight: .medium, design: .rounded))
-                            .foregroundColor(Palette.text.secondary)
-                        
-                        Text("Apocryphon of John • Gospel of Thomas • Pistis Sophia & more")
-                            .font(.system(size: 9, weight: .medium))
-                            .foregroundColor(.purple.opacity(0.8))
-                    }
-                    
-                    Spacer()
-                    
-                    Image(systemName: "chevron.right")
-                        .font(.system(size: 14))
-                        .foregroundColor(.purple)
-                }
-                .padding(14)
-                .background(
-                    RoundedRectangle(cornerRadius: 12, style: .continuous)
-                        .fill(Color.purple.opacity(0.15))
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 12, style: .continuous)
-                                .stroke(Color.purple.opacity(0.3), lineWidth: 1)
-                        )
-                )
-            }
-            
-            // Featured: History Debugged
-            NavigationLink(destination: HistoryDebuggedView()) {
-                HStack(spacing: 14) {
-                    
-                    ZStack {
-                        Circle()
-                            .fill(
-                                LinearGradient(
-                                    colors: [.orange, .red],
-                                    startPoint: .topLeading,
-                                    endPoint: .bottomTrailing
-                                )
-                            )
-                            .frame(width: 50, height: 50)
-                        
-                        Image(systemName: "clock.arrow.circlepath")
-                            .font(.system(size: 22))
-                            .foregroundColor(.white)
-                    }
-                    
-                    VStack(alignment: .leading, spacing: 4) {
-                        HStack {
-                            Text("HISTORY DEBUGGED")
-                                .font(.system(size: 14, weight: .bold, design: .rounded))
-                                .foregroundColor(.white)
-                            
-                            Text("NEW")
-                                .font(.system(size: 8, weight: .bold))
-                                .foregroundColor(.white)
-                                .padding(.horizontal, 6)
-                                .padding(.vertical, 2)
-                                .background(Color.orange)
-                                .cornerRadius(4)
-                        }
-                        
-                        Text("The OS upgrade for your worldview")
-                            .font(.system(size: 11, weight: .medium, design: .rounded))
-                            .foregroundColor(Palette.text.secondary)
-                        
-                        Text("Columbus • Thanksgiving • Founding Fathers • Dark Ages & more")
-                            .font(.system(size: 9, weight: .medium))
-                            .foregroundColor(.orange.opacity(0.8))
-                    }
-                    
-                    Spacer()
-                    
-                    Image(systemName: "chevron.right")
-                        .font(.system(size: 14))
-                        .foregroundColor(.orange)
-                }
-                .padding(14)
-                .background(
-                    RoundedRectangle(cornerRadius: 12, style: .continuous)
-                        .fill(Color.orange.opacity(0.15))
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 12, style: .continuous)
-                                .stroke(Color.orange.opacity(0.3), lineWidth: 1)
-                        )
-                )
-            }
-            
-            // Tradition cards
-            ForEach(LibraryCategory.hiddenKnowledge.traditions) { tradition in
-                TraditionCard(tradition: tradition) {
-                    selectedTradition = tradition
-                }
-            }
-            
+            hiddenKnowledgeSectionHeader
+            gnosticLibraryCard
+            solarTheologyCard
+            historyDebuggedCard
+            hiddenKnowledgeTraditions
         }
         .padding(16)
         .background(
@@ -642,7 +497,219 @@ struct AlexandriaView: View {
                         .stroke(Palette.primary.cyan.opacity(0.2), lineWidth: 1)
                 )
         )
-        
+    }
+    
+    private var hiddenKnowledgeSectionHeader: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack {
+                Image(systemName: "eye.slash.fill")
+                    .font(.system(size: 18, weight: .bold))
+                    .foregroundColor(Palette.primary.cyan)
+                
+                Text("HIDDEN KNOWLEDGE")
+                    .font(.system(size: 13, weight: .bold, design: .rounded))
+                    .tracking(2)
+                    .foregroundColor(Palette.primary.cyan)
+                
+                Spacer()
+            }
+            
+            Text("What they don't teach in school")
+                .font(.system(size: 14, weight: .medium, design: .rounded))
+                .foregroundColor(Palette.text.secondary)
+        }
+    }
+    
+    private var gnosticLibraryCard: some View {
+        NavigationLink(destination: GnosticLibraryView()) {
+            HStack(spacing: 14) {
+                ZStack {
+                    Circle()
+                        .fill(
+                            LinearGradient(
+                                colors: [.purple, .blue],
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            )
+                        )
+                        .frame(width: 50, height: 50)
+                    
+                    Image(systemName: "books.vertical.fill")
+                        .font(.system(size: 22))
+                        .foregroundColor(.white)
+                }
+                
+                VStack(alignment: .leading, spacing: 4) {
+                    HStack {
+                        Text("THE GNOSTIC LIBRARY")
+                            .font(.system(size: 14, weight: .bold, design: .rounded))
+                            .foregroundColor(.white)
+                        
+                        Text("NEW")
+                            .font(.system(size: 8, weight: .bold))
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 6)
+                            .padding(.vertical, 2)
+                            .background(Color.purple)
+                            .cornerRadius(4)
+                    }
+                    
+                    Text("Complete texts, cosmology & sacred links")
+                        .font(.system(size: 11, weight: .medium, design: .rounded))
+                        .foregroundColor(Palette.text.secondary)
+                    
+                    Text("Apocryphon of John • Gospel of Thomas • Pistis Sophia & more")
+                        .font(.system(size: 9, weight: .medium))
+                        .foregroundColor(.purple.opacity(0.8))
+                }
+                
+                Spacer()
+                
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 14))
+                    .foregroundColor(.purple)
+            }
+            .padding(14)
+            .background(
+                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                    .fill(Color.purple.opacity(0.15))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 12, style: .continuous)
+                            .stroke(Color.purple.opacity(0.3), lineWidth: 1)
+                    )
+            )
+        }
+    }
+    
+    private var solarTheologyCard: some View {
+        NavigationLink(destination: SolarTheologyCourseView()) {
+            HStack(spacing: 14) {
+                ZStack {
+                    Circle()
+                        .fill(
+                            RadialGradient(
+                                colors: [Color(hex: "#FFF4E0"), Color(hex: "#FFD700"), Color(hex: "#FF8C00")],
+                                center: .center,
+                                startRadius: 0,
+                                endRadius: 25
+                            )
+                        )
+                        .frame(width: 50, height: 50)
+                    
+                    Image(systemName: "sun.max.fill")
+                        .font(.system(size: 22))
+                        .foregroundColor(Color(hex: "#8B4513"))
+                }
+                
+                VStack(alignment: .leading, spacing: 4) {
+                    HStack {
+                        Text("SOLAR THEOLOGY")
+                            .font(.system(size: 14, weight: .bold, design: .rounded))
+                            .foregroundColor(.white)
+                        
+                        Text("DEEP")
+                            .font(.system(size: 8, weight: .bold))
+                            .foregroundColor(.black)
+                            .padding(.horizontal, 6)
+                            .padding(.vertical, 2)
+                            .background(Color(hex: "#FFD700"))
+                            .cornerRadius(4)
+                    }
+                    
+                    Text("All religions trace back to sun worship")
+                        .font(.system(size: 11, weight: .medium, design: .rounded))
+                        .foregroundColor(Palette.text.secondary)
+                    
+                    Text("Hindu origins • December 25th decoded • Rome's secret")
+                        .font(.system(size: 9, weight: .medium))
+                        .foregroundColor(Color(hex: "#FFD700").opacity(0.8))
+                }
+                
+                Spacer()
+                
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 14))
+                    .foregroundColor(Color(hex: "#FFD700"))
+            }
+            .padding(14)
+            .background(
+                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                    .fill(Color(hex: "#FFD700").opacity(0.1))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 12, style: .continuous)
+                            .stroke(Color(hex: "#FFD700").opacity(0.3), lineWidth: 1)
+                    )
+            )
+        }
+    }
+    
+    private var historyDebuggedCard: some View {
+        NavigationLink(destination: HistoryDebuggedView()) {
+            HStack(spacing: 14) {
+                ZStack {
+                    Circle()
+                        .fill(
+                            LinearGradient(
+                                colors: [.orange, .red],
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            )
+                        )
+                        .frame(width: 50, height: 50)
+                    
+                    Image(systemName: "clock.arrow.circlepath")
+                        .font(.system(size: 22))
+                        .foregroundColor(.white)
+                }
+                
+                VStack(alignment: .leading, spacing: 4) {
+                    HStack {
+                        Text("HISTORY DEBUGGED")
+                            .font(.system(size: 14, weight: .bold, design: .rounded))
+                            .foregroundColor(.white)
+                        
+                        Text("NEW")
+                            .font(.system(size: 8, weight: .bold))
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 6)
+                            .padding(.vertical, 2)
+                            .background(Color.orange)
+                            .cornerRadius(4)
+                    }
+                    
+                    Text("The OS upgrade for your worldview")
+                        .font(.system(size: 11, weight: .medium, design: .rounded))
+                        .foregroundColor(Palette.text.secondary)
+                    
+                    Text("Columbus • Thanksgiving • Founding Fathers • Dark Ages & more")
+                        .font(.system(size: 9, weight: .medium))
+                        .foregroundColor(.orange.opacity(0.8))
+                }
+                
+                Spacer()
+                
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 14))
+                    .foregroundColor(.orange)
+            }
+            .padding(14)
+            .background(
+                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                    .fill(Color.orange.opacity(0.15))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 12, style: .continuous)
+                            .stroke(Color.orange.opacity(0.3), lineWidth: 1)
+                    )
+            )
+        }
+    }
+    
+    private var hiddenKnowledgeTraditions: some View {
+        ForEach(LibraryCategory.hiddenKnowledge.traditions) { tradition in
+            TraditionCard(tradition: tradition) {
+                selectedTradition = tradition
+            }
+        }
     }
     
     // MARK: - Coming Soon

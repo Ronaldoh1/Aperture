@@ -8,6 +8,7 @@ struct LandingView: View {
     @StateObject private var presenterBox: LandingPresenterBox
     @Binding var selectedTab: Int
     @ObservedObject private var godModeManager = GodModeManager.shared
+    @ObservedObject private var featurePrefs = FeaturePreferencesManager.shared
     @State private var showGodModeHub = false
     @State private var portalPulse = false
 
@@ -38,7 +39,14 @@ struct LandingView: View {
                     }
                     
                     // Psyop Scanner - Killer Feature
-                    PsyopScannerCard()
+                    if featurePrefs.psyopScannerEnabled {
+                        PsyopScannerCard()
+                    }
+                    
+                    // Food Consciousness - Body Awakening
+                    if featurePrefs.foodConsciousnessEnabled {
+                        FoodConsciousnessLandingSection()
+                    }
                     
                     // Persona Discovery
                     PersonaQuickCard()

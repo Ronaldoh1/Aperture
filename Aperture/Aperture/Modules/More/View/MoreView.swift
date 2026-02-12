@@ -7,13 +7,14 @@ struct MoreView: View {
     @Binding var selectedTab: Int
     @State private var showAlexandria = false
     @State private var showProfile = false
-    @State private var showDragonCompanion = false
+    @State private var showBadgeCollection = false
     @State private var showSettings = false
     @State private var showFAQ = false
     @State private var showAbout = false
     @State private var showJourneyProgress = false
     @State private var showBookmarks = false
     @State private var showFlowState = false
+    @State private var showFoodConsciousness = false
 
     var body: some View {
 
@@ -54,8 +55,8 @@ struct MoreView: View {
                     print("🟠 MoreView: Profile route - \(route)")
                 }
             }
-            .navigationDestination(isPresented: $showDragonCompanion) {
-                DragonCompanionView()
+            .navigationDestination(isPresented: $showBadgeCollection) {
+                BadgeCollectionView()
             }
             .navigationDestination(isPresented: $showFAQ) {
                 FAQView()
@@ -75,6 +76,9 @@ struct MoreView: View {
             .navigationDestination(isPresented: $showFlowState) {
                 FlowStateView()
             }
+            .navigationDestination(isPresented: $showFoodConsciousness) {
+                FoodConsciousnessView()
+            }
 
         }
 
@@ -84,15 +88,15 @@ struct MoreView: View {
 
         VStack(spacing: 16) {
 
-            // DRAGON COMPANION - Featured at top
+            // SACRED GEOMETRY BADGES - Featured at top
             MoreMenuCard(
-                icon: "flame.fill",
-                title: "Dragon Companion",
-                subtitle: "Your awakening partner grows with you",
-                color: Color(hex: "#FF6B35"),
-                badge: "🐉 NEW"
+                icon: "seal.fill",
+                title: "Sacred Geometry",
+                subtitle: "Your earned badges & achievements",
+                color: Color(hex: "#FFD700"),
+                badge: "✨ \(SacredBadgeManager.shared.totalBadgeCount)"
             ) {
-                showDragonCompanion = true
+                showBadgeCollection = true
             }
 
             // ALEXANDRIA - Sacred Library (moved from tab bar)
@@ -148,6 +152,19 @@ struct MoreView: View {
                 badge: "✨ PRO"
             ) {
                 showFlowState = true
+            }
+            
+            // FOOD CONSCIOUSNESS
+            if FeaturePreferencesManager.shared.foodConsciousnessEnabled {
+                MoreMenuCard(
+                    icon: "leaf.circle.fill",
+                    title: "Food Consciousness",
+                    subtitle: "Scan ingredients, expose fast food & drinks",
+                    color: .green,
+                    badge: "🧬 NEW"
+                ) {
+                    showFoodConsciousness = true
+                }
             }
 
             // SETTINGS

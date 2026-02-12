@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Aperture_Launch_390x844@1x (1).png",
+      "filename" : "LaunchScreen_1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Aperture_Launch_780x1688@2x (1).png",
+      "filename" : "LaunchScreen_2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Aperture_Launch_1170x2532@3x (2).png",
+      "filename" : "LaunchScreen_3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

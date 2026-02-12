@@ -111,6 +111,7 @@ struct TimelineView: View {
                 startChronokeeperGreeting()
             }
         }
+        .withModuleTutorial(.timeline)
         
     }
     
@@ -1142,6 +1143,9 @@ struct TimelineDetailView: View {
                         
                     }
                     
+                    // GNOSTIC REVELATIONS SECTION
+                    gnosticRevelationsSection
+                    
                     // CHRONOKEEPER COMMENT (was Dragon Comment)
                     if !era.dragonComment.isEmpty {
                         
@@ -1227,11 +1231,11 @@ struct TimelineDetailView: View {
                         }
                         .padding(.horizontal, 20)
                         
-                        // Dragon context chip
-                        DragonContextChip(
-                            context: .timeline(eventId: era.id.uuidString),
-                            customText: "Ask about this event"
-                        )
+                        // Dragon context chip - removed, module deprecated
+                        // DragonContextChip(
+                        //     context: .timeline(eventId: era.id.uuidString),
+                        //     customText: "Ask about this event"
+                        // )
                     }
                     .padding(.top, 16)
                     
@@ -1243,6 +1247,37 @@ struct TimelineDetailView: View {
             
         }
         
+    }
+    
+    // MARK: - Gnostic Revelations Section
+    
+    @ViewBuilder
+    private var gnosticRevelationsSection: some View {
+        // Show a random revelation - in production, match to era keywords
+        let revelations = GnosticRevelationDatabase.all.shuffled().prefix(1)
+        
+        if !revelations.isEmpty {
+            VStack(alignment: .leading, spacing: 16) {
+                
+                HStack {
+                    Image(systemName: "eye.trianglebadge.exclamationmark")
+                        .foregroundColor(Color(hex: "#FFD700"))
+                    Text("GNOSTIC REVELATION")
+                        .font(.system(size: 12, weight: .bold, design: .rounded))
+                        .foregroundColor(Color(hex: "#FFD700"))
+                        .tracking(1)
+                }
+                .frame(maxWidth: .infinity, alignment: .center)
+                .padding(.top, 10)
+                
+                ForEach(Array(revelations)) { revelation in
+                    TimelineRevelationCard(revelation: revelation)
+                }
+                
+            }
+            .padding(.horizontal, 20)
+            .padding(.top, 16)
+        }
     }
     
 }

@@ -5,8 +5,8 @@ import SwiftUI
 
 struct SettingsView: View {
     
-    // Dragon Bubble Settings
-    @ObservedObject private var bubbleManager = DragonBubbleManager.shared
+    // Sacred Geometry Bubble Settings
+    @ObservedObject private var bubbleManager = SacredGeometryBubbleManager.shared
     
     // User Preferences
     @AppStorage("notifications_enabled") private var notificationsEnabled = true
@@ -26,8 +26,8 @@ struct SettingsView: View {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 24) {
                     
-                    // Dragon Settings
-                    dragonSettingsSection
+                    // Badge Settings
+                    badgeSettingsSection
                     
                     // Appearance
                     appearanceSection
@@ -37,6 +37,9 @@ struct SettingsView: View {
                     
                     // Accessibility
                     accessibilitySection
+                    
+                    // Feature Preferences
+                    featurePreferencesSection
                     
                     // Security
                     securitySection
@@ -59,37 +62,25 @@ struct SettingsView: View {
     
     // MARK: - Dragon Settings
     
-    private var dragonSettingsSection: some View {
+    private var badgeSettingsSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            sectionHeader("Dragon Companion", icon: "🐉")
+            sectionHeader("Sacred Geometry", icon: "✨")
             
             // Bubble Enabled
             SettingsToggle(
-                title: "Show Dragon Bubble",
-                subtitle: "Floating companion appears on all screens",
-                isOn: $bubbleManager.bubbleEnabled
+                title: "Show Badge Bubble",
+                subtitle: "Floating Flower of Life on all screens",
+                isOn: $bubbleManager.isVisible
             )
             
-            // Reset Position
+            // View Badge Collection
             SettingsButton(
-                title: "Reset Bubble Position",
-                subtitle: "Move Dragon back to default location",
-                icon: "arrow.counterclockwise"
+                title: "View Badge Collection",
+                subtitle: "\(SacredBadgeManager.shared.totalBadgeCount) badges earned",
+                icon: "seal.fill",
+                color: Palette.accent.gold
             ) {
-                bubbleManager.resetPosition()
-                HapticManager.shared.success()
-            }
-            
-            // Show Bubble (if dismissed)
-            if bubbleManager.isDismissed {
-                SettingsButton(
-                    title: "Show Dragon Bubble",
-                    subtitle: "Bring back your companion",
-                    icon: "eye.fill",
-                    color: Palette.accent.gold
-                ) {
-                    bubbleManager.show()
-                }
+                // This will be handled by navigation
             }
         }
         .padding()
@@ -178,6 +169,37 @@ struct SettingsView: View {
                 subtitle: "Start guided meditations automatically",
                 isOn: $autoPlayAudio
             )
+        }
+        .padding()
+        .background(sectionBackground)
+    }
+    
+    // MARK: - Feature Preferences
+    
+    private var featurePreferencesSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            sectionHeader("Feature Preferences", icon: "slider.horizontal.3")
+            
+            NavigationLink(destination: FeaturePreferencesSettingsView()) {
+                HStack {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("Customize Features")
+                            .font(.system(size: 15))
+                            .foregroundColor(.white)
+                        
+                        Text("Enable or disable Food Consciousness, FlowState, etc.")
+                            .font(.system(size: 12))
+                            .foregroundColor(.gray)
+                    }
+                    
+                    Spacer()
+                    
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: 14))
+                        .foregroundColor(.gray)
+                }
+                .padding(.vertical, 8)
+            }
         }
         .padding()
         .background(sectionBackground)

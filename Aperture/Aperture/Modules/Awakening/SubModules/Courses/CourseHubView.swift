@@ -240,6 +240,17 @@ struct CourseCatalog {
             category: .spirituality,
             difficulty: .intermediate
         ),
+        CourseInfo(
+            id: "solar_theology",
+            title: "Solar Theology",
+            subtitle: "All religions trace back to sun worship",
+            icon: "sun.max.fill",
+            colorHex: "#FFD700",
+            moduleCount: 6,
+            estimatedHours: 4,
+            category: .spirituality,
+            difficulty: .advanced
+        ),
         
         // ══════════════════════════════════════════════════
         // ANIME WISDOM
@@ -525,6 +536,8 @@ struct CourseHubView: View {
                 PsyopDetectionCourseView()
             case "council_of_nicaea":
                 CouncilOfNicaeaCourseView()
+            case "solar_theology":
+                SolarTheologyCourseView()
             case "godmode_esoteric":
                 GodModeCourseView()
             default:

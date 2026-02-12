@@ -21,6 +21,7 @@ struct GodModeHubView: View {
     @State private var showDailyCheckIn = false
     @State private var showSynchronicities = false
     @State private var showCurriculum = false
+    @State private var showEtymologyCourse = false
     @State private var sparkPulse = false
     
     enum GodModeTool: String, CaseIterable {
@@ -92,8 +93,8 @@ struct GodModeHubView: View {
                         // Header with spark
                         headerSection
                         
-                        // Esoteric Curriculum Card
-                        curriculumCard
+                        // Courses Section (Esoteric + Etymology)
+                        coursesSection
                         
                         // Monad Status
                         monadStatusCard
@@ -170,7 +171,11 @@ struct GodModeHubView: View {
             .sheet(isPresented: $showCurriculum) {
                 GodModeCourseView()
             }
+            .sheet(isPresented: $showEtymologyCourse) {
+                EtymologyCourseView()
+            }
         }
+        .withModuleTutorial(.godMode)
     }
     
     // MARK: - Background
@@ -215,6 +220,168 @@ struct GodModeHubView: View {
     }
     
     // MARK: - Curriculum Card
+    
+    // MARK: - Courses Section
+    
+    private var coursesSection: some View {
+        VStack(spacing: 16) {
+            // Section header
+            HStack {
+                Text("SACRED CURRICULUM")
+                    .font(.system(size: 11, weight: .bold))
+                    .foregroundColor(Color(red: 1, green: 0.84, blue: 0))
+                    .tracking(1)
+                
+                Spacer()
+            }
+            
+            // Esoteric Path Course
+            Button {
+                showCurriculum = true
+            } label: {
+                courseCard(
+                    title: "The Esoteric Path",
+                    subtitle: "7 Gates to Mastery",
+                    description: "From ignition to integration",
+                    icon: "book.closed.fill",
+                    gradientColors: [Color(red: 1, green: 0.84, blue: 0), Color(red: 1, green: 0.5, blue: 0)],
+                    progress: getEsotericProgress()
+                )
+            }
+            
+            // Etymology Course
+            Button {
+                showEtymologyCourse = true
+            } label: {
+                courseCard(
+                    title: "The Word Is The Sword",
+                    subtitle: "Etymology & Word Power",
+                    description: "Unlock the occult power of language",
+                    icon: "text.book.closed.fill",
+                    gradientColors: [Color(hex: "#9C27B0"), Color(hex: "#E040FB")],
+                    progress: getEtymologyProgress()
+                )
+            }
+        }
+    }
+    
+    private func courseCard(
+        title: String,
+        subtitle: String,
+        description: String,
+        icon: String,
+        gradientColors: [Color],
+        progress: Double
+    ) -> some View {
+        HStack(spacing: 16) {
+            // Icon
+            ZStack {
+                Circle()
+                    .fill(
+                        LinearGradient(
+                            colors: gradientColors,
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
+                    .frame(width: 50, height: 50)
+                
+                Image(systemName: icon)
+                    .font(.system(size: 22))
+                    .foregroundColor(.black)
+            }
+            
+            VStack(alignment: .leading, spacing: 4) {
+                Text(subtitle.uppercased())
+                    .font(.system(size: 10, weight: .bold))
+                    .foregroundColor(gradientColors[0])
+                    .tracking(0.5)
+                
+                Text(title)
+                    .font(.system(size: 16, weight: .bold))
+                    .foregroundColor(.white)
+                
+                Text(description)
+                    .font(.system(size: 11))
+                    .foregroundColor(.white.opacity(0.6))
+                
+                // Progress bar
+                if progress > 0 {
+                    GeometryReader { geo in
+                        ZStack(alignment: .leading) {
+                            RoundedRectangle(cornerRadius: 2)
+                                .fill(Color.white.opacity(0.1))
+                                .frame(height: 4)
+                            
+                            RoundedRectangle(cornerRadius: 2)
+                                .fill(LinearGradient(colors: gradientColors, startPoint: .leading, endPoint: .trailing))
+                                .frame(width: geo.size.width * progress, height: 4)
+                        }
+                    }
+                    .frame(height: 4)
+                }
+            }
+            
+            Spacer()
+            
+            VStack(alignment: .trailing, spacing: 4) {
+                if progress > 0 && progress < 1 {
+                    Text("\(Int(progress * 100))%")
+                        .font(.system(size: 12, weight: .bold))
+                        .foregroundColor(gradientColors[0])
+                } else if progress >= 1 {
+                    Image(systemName: "checkmark.seal.fill")
+                        .foregroundColor(.green)
+                }
+                
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundColor(gradientColors[0].opacity(0.6))
+            }
+        }
+        .padding(16)
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(
+                    LinearGradient(
+                        colors: [
+                            gradientColors[0].opacity(0.15),
+                            gradientColors[1].opacity(0.1)
+                        ],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(
+                            LinearGradient(
+                                colors: [
+                                    gradientColors[0].opacity(0.5),
+                                    gradientColors[1].opacity(0.3)
+                                ],
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            ),
+                            lineWidth: 1
+                        )
+                )
+        )
+    }
+    
+    private func getEsotericProgress() -> Double {
+        let progress = GodModeProgressManager.shared.progress
+        let total = GodModeCourse.shared.modules.flatMap { $0.lessons }.count
+        guard total > 0 else { return 0 }
+        return Double(progress.completedLessons.count) / Double(total)
+    }
+    
+    private func getEtymologyProgress() -> Double {
+        let progress = EtymologyProgressManager.shared.progress
+        let total = EtymologyCourse.shared.modules.flatMap { $0.lessons }.count
+        guard total > 0 else { return 0 }
+        return Double(progress.completedLessons.count) / Double(total)
+    }
     
     private var curriculumCard: some View {
         Button {

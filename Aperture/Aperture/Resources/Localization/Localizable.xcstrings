@@ -47,6 +47,9 @@
         }
       }
     },
+    "— ALDEBARAN" : {
+
+    },
     "— Gloria Steinem" : {
       "localizations" : {
         "es" : {
@@ -56,6 +59,12 @@
           }
         }
       }
+    },
+    "— Jordan Maxwell" : {
+
+    },
+    "— Luke 17:21" : {
+
     },
     "— Max Planck: \"Consciousness is fundamental. Physical matter is derivative of consciousness.\"" : {
       "localizations" : {
@@ -86,6 +95,9 @@
           }
         }
       }
+    },
+    "— Reported in Times of Israel, Haaretz" : {
+
     },
     "— Whis, Dragon Ball Super" : {
       "localizations" : {
@@ -143,6 +155,9 @@
         }
       }
     },
+    "\"Amen.\"" : {
+
+    },
     "\"Ancient civilizations didn't vanish—their wisdom went underground, encoded in symbols, waiting for this moment.\"" : {
       "localizations" : {
         "es" : {
@@ -152,6 +167,12 @@
           }
         }
       }
+    },
+    "\"Anti-Semitism\" has been weaponized\nto silence criticism of a POLITICAL STATE,\nnot a people." : {
+
+    },
+    "\"Anyone who wants to thwart the establishment of a Palestinian state has to support bolstering Hamas.\"" : {
+
     },
     "\"Assume the feeling of the wish fulfilled and observe the route that your attention follows.\"" : {
       "localizations" : {
@@ -173,6 +194,12 @@
         }
       }
     },
+    "\"EXPLODE THE" : {
+
+    },
+    "\"Girls from 9-10 are in demand...\"" : {
+
+    },
     "\"Gnosis: Direct knowledge of the divine\"" : {
       "localizations" : {
         "es" : {
@@ -192,6 +219,12 @@
           }
         }
       }
+    },
+    "\"HOLY\" TRINITY" : {
+
+    },
+    "\"I AM the Father, the Son,\nand the Holy Spirit.\nI AM the fractal of Source.\"" : {
+
     },
     "\"I cannot prove that I am not living in a simulation. Neither can you. But does it matter? The experience of existence—simulated or not—is undeniably real to the one experiencing it.\"" : {
       "localizations" : {
@@ -233,6 +266,9 @@
         }
       }
     },
+    "\"In the beginning was the Word, and the Word was God.\"" : {
+
+    },
     "\"Institutions peddle myths; we deliver math.\"" : {
       "localizations" : {
         "es" : {
@@ -253,6 +289,12 @@
         }
       }
     },
+    "\"Once you understand how this stuff works, you begin to see that the story goes back to India. Goes back to the Hindus. Goes back to Egypt.\"" : {
+
+    },
+    "\"Protecting Christians\" = COVER STORY" : {
+
+    },
     "\"Push beyond your limits. That's what makes a Saiyan a Saiyan.\"" : {
       "localizations" : {
         "es" : {
@@ -262,6 +304,12 @@
           }
         }
       }
+    },
+    "\"Separation of Church and State\"" : {
+
+    },
+    "\"Separation of church and state\"?" : {
+
     },
     "\"The body moves on its own.\"" : {
       "localizations" : {
@@ -302,6 +350,9 @@
           }
         }
       }
+    },
+    "\"The Kingdom of Heaven is WITHIN you.\"" : {
+
     },
     "\"The lips of wisdom are closed, except to the ears of Understanding.\"" : {
       "localizations" : {
@@ -432,7 +483,11 @@
     "\"Those who believe they're immune to manipulation are the MOST suggestible. They're the easiest to manipulate.\"" : {
 
     },
+    "\"TRAITOR\" TO THE IMPOSTER" : {
+
+    },
     "\"When the student is ready, the teacher appears.\"" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -482,6 +537,9 @@
         }
       }
     },
+    "(%lld teaspoons)" : {
+
+    },
     "(%lld)" : {
       "localizations" : {
         "es" : {
@@ -508,7 +566,11 @@
         }
       }
     },
+    "(Also called Yaldabaoth, Saklas, Samael)" : {
+
+    },
     "(optional)" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -517,6 +579,15 @@
           }
         }
       }
+    },
+    "(Saint Seiya)" : {
+
+    },
+    "(This helps us show you what you might not have seen)" : {
+
+    },
+    "(Vatican symbols, SUNday, December 25)" : {
+
     },
     "/ 10^123" : {
 
@@ -597,6 +668,7 @@
       }
     },
     "%@ %@ • %@ Element" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -771,6 +843,46 @@
         }
       }
     },
+    "%lld / %lld Lessons" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld / %2$lld Lessons"
+          }
+        }
+      }
+    },
+    "%lld / %lld min" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld / %2$lld min"
+          }
+        }
+      }
+    },
+    "%lld / %lld Revelations" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld / %2$lld Revelations"
+          }
+        }
+      }
+    },
+    "%lld %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld %2$@"
+          }
+        }
+      }
+    },
     "%lld Active" : {
 
     },
@@ -783,6 +895,12 @@
           }
         }
       }
+    },
+    "%lld Badges" : {
+
+    },
+    "%lld Badges Earned" : {
+
     },
     "%lld breaths" : {
       "localizations" : {
@@ -805,6 +923,7 @@
       }
     },
     "%lld core courses remaining to awaken your dragon" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -833,6 +952,9 @@
           }
         }
       }
+    },
+    "%lld days" : {
+
     },
     "%lld days. %@" : {
       "localizations" : {
@@ -867,6 +989,9 @@
         }
       }
     },
+    "%lld drinks" : {
+
+    },
     "%lld friend%@ awakened" : {
       "localizations" : {
         "en" : {
@@ -886,6 +1011,9 @@
           }
         }
       }
+    },
+    "%lld hours" : {
+
     },
     "%lld insight(s)" : {
       "localizations" : {
@@ -960,6 +1088,12 @@
     "%lld min daily" : {
 
     },
+    "%lld min left" : {
+
+    },
+    "%lld min/day" : {
+
+    },
     "%lld minutes daily" : {
 
     },
@@ -1015,6 +1149,16 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "%1$lld of %2$lld lessons"
+          }
+        }
+      }
+    },
+    "%lld of %lld Shapes Discovered" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld of %2$lld Shapes Discovered"
           }
         }
       }
@@ -1095,6 +1239,9 @@
         }
       }
     },
+    "%lld remaining" : {
+
+    },
     "%lld shows" : {
       "localizations" : {
         "es" : {
@@ -1155,6 +1302,9 @@
         }
       }
     },
+    "%lld toxic ingredients" : {
+
+    },
     "%lld traditions" : {
       "localizations" : {
         "es" : {
@@ -1206,6 +1356,7 @@
       }
     },
     "%lld XP" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -1226,6 +1377,7 @@
       }
     },
     "%lld XP to next level" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -1354,12 +1506,32 @@
         }
       }
     },
+    "%lld/%lld Shapes" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld/%2$lld Shapes"
+          }
+        }
+      }
+    },
     "%lld/%lld today" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "%1$lld/%2$lld today"
+          }
+        }
+      }
+    },
+    "%lld/%lld unique shapes" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld/%2$lld unique shapes"
           }
         }
       }
@@ -1443,12 +1615,25 @@
         }
       }
     },
+    "%lldg sugar" : {
+
+    },
     "%lldm" : {
       "localizations" : {
         "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%lldm"
+          }
+        }
+      }
+    },
+    "%lldm → %lldm" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lldm → %2$lldm"
           }
         }
       }
@@ -1476,7 +1661,13 @@
         }
       }
     },
+    "• %lld days ago" : {
+
+    },
     "• Best: %lld" : {
+
+    },
+    "• Did I protect my focus time?" : {
 
     },
     "• Do they take corporate PAC money?" : {
@@ -1518,6 +1709,9 @@
           }
         }
       }
+    },
+    "• More real-world examples\n• Deeper historical context\n• Audio versions of lessons\n• Community discussion features\n• Advanced follow-up course" : {
+
     },
     "• New York Times, Washington Post reporting" : {
       "localizations" : {
@@ -1569,6 +1763,15 @@
         }
       }
     },
+    "• Ship the MVP\n• Spend quality time with family\n• Exercise 4x/week\n• Learn Swift" : {
+
+    },
+    "• What distracted me most?" : {
+
+    },
+    "• What drained me?" : {
+
+    },
     "• What emotion is this triggering?" : {
       "localizations" : {
         "es" : {
@@ -1578,6 +1781,9 @@
           }
         }
       }
+    },
+    "• What gave me energy?" : {
+
     },
     "• Where do they stand on voting rights?" : {
       "localizations" : {
@@ -1665,10 +1871,16 @@
     "→" : {
 
     },
+    "→ %@" : {
+
+    },
     "+" : {
 
     },
     "+%lld" : {
+
+    },
+    "+%lld more items" : {
 
     },
     "+%lld points earned" : {
@@ -1692,6 +1904,24 @@
           }
         }
       }
+    },
+    "= AMEN-RA (Egyptian Sun God)" : {
+
+    },
+    "= CONTROL" : {
+
+    },
+    "= CORRUPTION" : {
+
+    },
+    "= SOVEREIGNTY" : {
+
+    },
+    "= THE COVER STORY" : {
+
+    },
+    "= THE LIE" : {
+
     },
     "~%lld teachings" : {
       "localizations" : {
@@ -1773,6 +2003,12 @@
         }
       }
     },
+    "⏰" : {
+
+    },
+    "⏰ #ClockThat" : {
+
+    },
     "⏱️ MOMENT-TO-MOMENT PRACTICES" : {
       "localizations" : {
         "es" : {
@@ -1783,7 +2019,13 @@
         }
       }
     },
+    "⏳ THE \"SECOND COMING\" DECEPTION ⏳" : {
+
+    },
     "☀️" : {
+
+    },
+    "☀️ 🙏 ✨" : {
 
     },
     "☀️ FULLY AWAKENED ☀️" : {
@@ -1836,10 +2078,28 @@
         }
       }
     },
+    "☠️" : {
+
+    },
     "☧" : {
 
     },
+    "☪️" : {
+
+    },
     "☸️" : {
+
+    },
+    "♈️♉️♊️♋️♌️♍️♎️♏️♐️♑️♒️♓️" : {
+
+    },
+    "♉️" : {
+
+    },
+    "♊️" : {
+
+    },
+    "♐️" : {
 
     },
     "⚔️" : {
@@ -1854,6 +2114,9 @@
           }
         }
       }
+    },
+    "⚔️ SAINT SEIYA ⚔️" : {
+
     },
     "⚔️ THE INNER BATTLE" : {
       "localizations" : {
@@ -1887,6 +2150,9 @@
           }
         }
       }
+    },
+    "⚖️ THE ASYMMETRY ⚖️" : {
+
     },
     "⚖️ Universal Laws" : {
       "localizations" : {
@@ -2040,6 +2306,12 @@
         }
       }
     },
+    "⚠️ THE CONFLICT OF INTEREST ⚠️" : {
+
+    },
+    "⚠️ THE FIRST 4 COMMANDMENTS ⚠️" : {
+
+    },
     "⚠️ THE THINKING CRISIS" : {
       "localizations" : {
         "es" : {
@@ -2069,6 +2341,9 @@
           }
         }
       }
+    },
+    "⚠️ ZIONISM ≠ JUDAISM ⚠️" : {
+
     },
     "⚡ ADVANCED CAUSE & EFFECT" : {
       "localizations" : {
@@ -2100,6 +2375,9 @@
         }
       }
     },
+    "⚡ THE ONLY DIFFERENCE ⚡" : {
+
+    },
     "⚡ WORDS ENDING IN EL" : {
       "localizations" : {
         "es" : {
@@ -2109,6 +2387,27 @@
           }
         }
       }
+    },
+    "⛪ %@" : {
+
+    },
+    "🇦🇷" : {
+
+    },
+    "🇦🇷 ARGENTINA" : {
+
+    },
+    "🇪🇬" : {
+
+    },
+    "🇸🇻" : {
+
+    },
+    "🇻🇪" : {
+
+    },
+    "🇻🇪 VENEZUELA" : {
+
     },
     "✅" : {
 
@@ -2132,6 +2431,9 @@
           }
         }
       }
+    },
+    "✅ Foods to Embrace" : {
+
     },
     "✅ IF SIMULATION IS TRUE" : {
       "localizations" : {
@@ -2179,6 +2481,12 @@
     "✓ %@" : {
 
     },
+    "✓ Correct!" : {
+
+    },
+    "✓ MURDERED" : {
+
+    },
     "✓ OPTIMAL ACTIVITIES" : {
       "localizations" : {
         "es" : {
@@ -2202,13 +2510,28 @@
         }
       }
     },
+    "✗ Not quite" : {
+
+    },
+    "✝️" : {
+
+    },
+    "✝️ THE SIGN OF THE CROSS ✝️" : {
+
+    },
     "✡️" : {
+
+    },
+    "✡️ ANTI-ZIONIST JEWS EXIST ✡️" : {
 
     },
     "✦" : {
 
     },
     "✨" : {
+
+    },
+    "✨ #truth ✨" : {
 
     },
     "✨ %@" : {
@@ -2240,6 +2563,9 @@
           }
         }
       }
+    },
+    "✨ SACRED GEOMETRY PROGRESS" : {
+
     },
     "✨ SIGNIFICANCE" : {
       "localizations" : {
@@ -2312,6 +2638,7 @@
       }
     },
     "✨🐲✨" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -2354,6 +2681,9 @@
         }
       }
     },
+    "❌ Foods to Avoid" : {
+
+    },
     "❌ NEGATIVE THOUGHT" : {
       "localizations" : {
         "es" : {
@@ -2373,6 +2703,9 @@
           }
         }
       }
+    },
+    "❓" : {
+
     },
     "❓ NEW QUESTIONS TO ASK" : {
       "localizations" : {
@@ -2394,6 +2727,12 @@
         }
       }
     },
+    "⬛" : {
+
+    },
+    "⭐" : {
+
+    },
     "⭐ PREMIUM EXERCISES" : {
       "localizations" : {
         "es" : {
@@ -2403,6 +2742,9 @@
           }
         }
       }
+    },
+    "🌀" : {
+
     },
     "🌀 100 Paradoxes" : {
       "localizations" : {
@@ -2490,6 +2832,9 @@
         }
       }
     },
+    "🌟 TRUTH HIDDEN IN ANIME 🌟" : {
+
+    },
     "🍄 THE MARIO ANALOGY" : {
       "localizations" : {
         "es" : {
@@ -2499,6 +2844,9 @@
           }
         }
       }
+    },
+    "🍎 GARDEN OF EDEN — REREAD 🍎" : {
+
     },
     "🎉 LEVEL UP!" : {
       "localizations" : {
@@ -2606,6 +2954,9 @@
         }
       }
     },
+    "🎯 WHO BENEFITS?" : {
+
+    },
     "🎯 WHY THIS MATTERS" : {
       "localizations" : {
         "es" : {
@@ -2629,6 +2980,9 @@
     "🏆" : {
 
     },
+    "🏆 Wins" : {
+
+    },
     "🏗️" : {
 
     },
@@ -2643,6 +2997,9 @@
       }
     },
     "🏛️" : {
+
+    },
+    "🏛️ CHURCH & STATE: NEVER SEPARATE 🏛️" : {
 
     },
     "🏛️ Esoteric Archives" : {
@@ -2665,10 +3022,14 @@
         }
       }
     },
+    "🏦 SCOTT BESSENT — TREASURY" : {
+
+    },
     "🐉" : {
 
     },
     "🐉 %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -2679,6 +3040,7 @@
       }
     },
     "🐉 %@'S WISDOM" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -2744,12 +3106,6 @@
         }
       }
     },
-    "🐣" : {
-
-    },
-    "🐲" : {
-
-    },
     "👁️" : {
 
     },
@@ -2782,6 +3138,9 @@
           }
         }
       }
+    },
+    "👁️🔥" : {
+
     },
     "👍" : {
 
@@ -2832,6 +3191,9 @@
         }
       }
     },
+    "💎 FOLLOW THE RESOURCES 💎" : {
+
+    },
     "💎 HERMETIC AXIOMS" : {
       "localizations" : {
         "es" : {
@@ -2872,6 +3234,12 @@
         }
       }
     },
+    "💔 THIS IS WHY LIFE IS SO HARD 💔" : {
+
+    },
+    "💜" : {
+
+    },
     "💡" : {
 
     },
@@ -2885,6 +3253,9 @@
         }
       }
     },
+    "💡 Examples:" : {
+
+    },
     "💡 EXPLANATION / RESOLUTION" : {
       "localizations" : {
         "es" : {
@@ -2894,6 +3265,12 @@
           }
         }
       }
+    },
+    "💡 Prompts" : {
+
+    },
+    "💡 Suggestion ideas:" : {
+
     },
     "💡 THE KEY TRUTH" : {
       "localizations" : {
@@ -2905,6 +3282,9 @@
         }
       }
     },
+    "💡 THE REAL TRUTH 💡" : {
+
+    },
     "💣 THE TRUTH" : {
       "localizations" : {
         "es" : {
@@ -2914,9 +3294,6 @@
           }
         }
       }
-    },
-    "💥" : {
-
     },
     "💪 THE INNER-CISE" : {
       "localizations" : {
@@ -2972,6 +3349,9 @@
       }
     },
     "💰" : {
+
+    },
+    "💰 FOLLOW THE MONEY 💰" : {
 
     },
     "💰 Wealth Consciousness" : {
@@ -3086,6 +3466,15 @@
           }
         }
       }
+    },
+    "📋 WEEK SUMMARY" : {
+
+    },
+    "📐" : {
+
+    },
+    "📖" : {
+
     },
     "📖 BIBLICAL NAMES WITH EL" : {
       "localizations" : {
@@ -3276,6 +3665,9 @@
         }
       }
     },
+    "📜 THE GNOSTICS KNEW 📜" : {
+
+    },
     "📜 The Kybalion" : {
       "localizations" : {
         "es" : {
@@ -3285,6 +3677,9 @@
           }
         }
       }
+    },
+    "📜 THE PROOF 📜" : {
+
     },
     "📜 THE THREE BARDOS" : {
       "localizations" : {
@@ -3442,6 +3837,9 @@
         }
       }
     },
+    "🔑 KEY INSIGHT" : {
+
+    },
     "🔑 KEY INSIGHTS" : {
       "localizations" : {
         "es" : {
@@ -3495,6 +3893,9 @@
         }
       }
     },
+    "🔒 This is private and helps personalize your experience" : {
+
+    },
     "🔒 WHY SOCIETY IS STUCK" : {
       "localizations" : {
         "es" : {
@@ -3504,6 +3905,9 @@
           }
         }
       }
+    },
+    "🔓 BREAKING FREE 🔓" : {
+
     },
     "🔓 THE BREAKDOWN" : {
       "localizations" : {
@@ -3547,6 +3951,9 @@
           }
         }
       }
+    },
+    "🔥 THE SMOKING GUN 🔥" : {
+
     },
     "🔬" : {
 
@@ -3627,6 +4034,21 @@
     "🔴" : {
 
     },
+    "🔴 + 🔵 = 💜" : {
+
+    },
+    "🔴 Republicans" : {
+
+    },
+    "🔴🔵" : {
+
+    },
+    "🔵" : {
+
+    },
+    "🔵 Democrats" : {
+
+    },
     "🔹 KEY TRAITS" : {
       "localizations" : {
         "es" : {
@@ -3660,6 +4082,21 @@
         }
       }
     },
+    "🔺 THE TRINITY DECODED 🔺" : {
+
+    },
+    "🕊️" : {
+
+    },
+    "🕊️ ATHENA vs THE DEMIURGE 🕊️" : {
+
+    },
+    "🕊️ THE REAL SEMITES 🕊️" : {
+
+    },
+    "🕸️ THE WEB — IT'S ALL CONNECTED" : {
+
+    },
     "🕹️" : {
 
     },
@@ -3675,6 +4112,9 @@
           }
         }
       }
+    },
+    "🤔" : {
+
     },
     "🤝" : {
 
@@ -3702,7 +4142,7 @@
         }
       }
     },
-    "🥚" : {
+    "🧍" : {
 
     },
     "🧘 PRACTICES TO CONNECT TO THE PLAYER" : {
@@ -3838,6 +4278,12 @@
         }
       }
     },
+    "🧬 ☀️" : {
+
+    },
+    "🪐" : {
+
+    },
     "🪞" : {
 
     },
@@ -3850,6 +4296,12 @@
           }
         }
       }
+    },
+    "😂🫠😂" : {
+
+    },
+    "😂😂😂" : {
+
     },
     "😊 SMILING IN THE MIRROR" : {
       "localizations" : {
@@ -3886,6 +4338,9 @@
           }
         }
       }
+    },
+    "🚧 Challenges" : {
+
     },
     "🚨 ICE Emergency" : {
       "localizations" : {
@@ -3983,6 +4438,9 @@
         }
       }
     },
+    "🛢️ THE OIL FACTOR" : {
+
+    },
     "$%@" : {
       "localizations" : {
         "es" : {
@@ -3993,7 +4451,13 @@
         }
       }
     },
-    "0" : {
+    "$3.8 BILLION annually" : {
+
+    },
+    "$287 MILLION+" : {
+
+    },
+    "0 min" : {
 
     },
     "1" : {
@@ -4003,6 +4467,9 @@
 
     },
     "1,700 Years of Programming" : {
+
+    },
+    "2 hrs" : {
 
     },
     "2 min" : {
@@ -4017,6 +4484,9 @@
           }
         }
       }
+    },
+    "2D Cross" : {
+
     },
     "3" : {
       "localizations" : {
@@ -4048,7 +4518,13 @@
         }
       }
     },
+    "4 administrations. Both parties." : {
+
+    },
     "4 in • 4 hold • 4 out • 4 hold" : {
+
+    },
+    "5 min" : {
 
     },
     "5 Modules • 12 Lessons" : {
@@ -4187,6 +4663,7 @@
       }
     },
     "9" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -4266,6 +4743,9 @@
         }
       }
     },
+    "10 min" : {
+
+    },
     "10^%lld" : {
 
     },
@@ -4273,6 +4753,15 @@
 
     },
     "10⁶⁸ years" : {
+
+    },
+    "12 days after being named in Epstein files?" : {
+
+    },
+    "12 DAYS SILENCE" : {
+
+    },
+    "12 is the number of COMPLETION.\nIt's the ZODIAC WHEEL.\nThey operate by it.\nThey waited EXACTLY 12 days." : {
 
     },
     "12 Lessons" : {
@@ -4284,6 +4773,9 @@
           }
         }
       }
+    },
+    "12 modules" : {
+
     },
     "13+ courses • 8 documentaries" : {
       "localizations" : {
@@ -4324,6 +4816,15 @@
           }
         }
       }
+    },
+    "15 min" : {
+
+    },
+    "16 YEARS OF SILENCE" : {
+
+    },
+    "16+ years of silence on immigration." : {
+
     },
     "20 exercises rooted in cognitive science" : {
       "localizations" : {
@@ -4368,6 +4869,9 @@
         }
       }
     },
+    "30 min" : {
+
+    },
     "30-Day Practice Protocol" : {
 
     },
@@ -4385,6 +4889,9 @@
 
     },
     "60 seconds to sovereignty" : {
+
+    },
+    "60,000+ migrants missing." : {
 
     },
     "85+ Forbidden Teachings" : {
@@ -4427,10 +4934,25 @@
         }
       }
     },
+    "325 AD" : {
+
+    },
     "325 AD — Present" : {
 
     },
+    "500+ years later. SAME PATTERN. SAME SILENCE." : {
+
+    },
     "720" : {
+
+    },
+    "1492" : {
+
+    },
+    "1492 → 2026" : {
+
+    },
+    "2026" : {
 
     },
     "2026 Campaign Tracker" : {
@@ -4516,6 +5038,15 @@
     "a Psyop" : {
 
     },
+    "A ROMAN EMPEROR" : {
+
+    },
+    "A self-centered, jealous, demanding entity." : {
+
+    },
+    "A solved border = Palantir loses billions.\nA permanent crisis = Palantir prints money." : {
+
+    },
     "A unified path through awakening traditions,\nhidden history, and practical transformation." : {
       "localizations" : {
         "es" : {
@@ -4575,6 +5106,9 @@
           }
         }
       }
+    },
+    "Accept Challenge" : {
+
     },
     "Access texts that were hidden, burned, or declared heretical. The Nag Hammadi library, Dead Sea Scrolls, and more." : {
       "localizations" : {
@@ -4654,6 +5188,9 @@
     "Active" : {
 
     },
+    "Active for %lld min" : {
+
+    },
     "Active learning replaces passive consumption" : {
       "localizations" : {
         "es" : {
@@ -4693,6 +5230,9 @@
           }
         }
       }
+    },
+    "Actually: %@" : {
+
     },
     "Add" : {
       "localizations" : {
@@ -4754,6 +5294,9 @@
         }
       }
     },
+    "Add contact name or email" : {
+
+    },
     "Add First Entry" : {
       "localizations" : {
         "es" : {
@@ -4763,6 +5306,12 @@
           }
         }
       }
+    },
+    "Add Item" : {
+
+    },
+    "Add name or email" : {
+
     },
     "Add Note" : {
       "localizations" : {
@@ -4783,6 +5332,9 @@
           }
         }
       }
+    },
+    "Add to Inbox" : {
+
     },
     "Adjust Frequency" : {
 
@@ -4864,6 +5416,7 @@
 
     },
     "Age: %lld days" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -4892,6 +5445,9 @@
           }
         }
       }
+    },
+    "AIOLOS" : {
+
     },
     "Alexandria" : {
       "localizations" : {
@@ -4995,6 +5551,9 @@
         }
       }
     },
+    "All religions trace back to sun worship" : {
+
+    },
     "ALL RESOURCES (%lld)" : {
       "localizations" : {
         "es" : {
@@ -5015,6 +5574,15 @@
         }
       }
     },
+    "ALL THREE = CUBE WORSHIP" : {
+
+    },
+    "All Toxic Chemicals" : {
+
+    },
+    "Allow calls from VIPs" : {
+
+    },
     "Allow notifications to receive daily reminders and Dragon wisdom." : {
       "localizations" : {
         "es" : {
@@ -5024,6 +5592,9 @@
           }
         }
       }
+    },
+    "Allow repeated calls" : {
+
     },
     "Already have an account?" : {
       "localizations" : {
@@ -5044,6 +5615,12 @@
           }
         }
       }
+    },
+    "Already turned off non-essential alerts" : {
+
+    },
+    "Always have." : {
+
     },
     "Ambition" : {
 
@@ -5141,6 +5718,9 @@
         }
       }
     },
+    "Analyze Ingredients" : {
+
+    },
     "Analyze Narrative" : {
       "localizations" : {
         "es" : {
@@ -5160,6 +5740,9 @@
           }
         }
       }
+    },
+    "Analyzing your habits..." : {
+
     },
     "Analyzing your interests..." : {
 
@@ -5214,6 +5797,15 @@
         }
       }
     },
+    "And then systematically disconnected you from it." : {
+
+    },
+    "And they made you WORSHIP it as God." : {
+
+    },
+    "And we built something to help." : {
+
+    },
     "And what if Jesus himself pointed to the serpent as a symbol of salvation—and they've been hiding it from you for 2,000 years?" : {
 
     },
@@ -5236,6 +5828,12 @@
           }
         }
       }
+    },
+    "Anti-Israel" : {
+
+    },
+    "Any other feedback?" : {
+
     },
     "Any realization or pattern..." : {
       "localizations" : {
@@ -5350,6 +5948,9 @@
         }
       }
     },
+    "Approved $20 BILLION to Argentina" : {
+
+    },
     "Archetype Assessment" : {
       "localizations" : {
         "es" : {
@@ -5359,6 +5960,9 @@
           }
         }
       }
+    },
+    "Archive" : {
+
     },
     "Archon Tactics Identified:" : {
       "localizations" : {
@@ -5407,6 +6011,7 @@
 
     },
     "As you complete courses and awaken to truth, your dragon will hatch, grow, and evolve alongside you." : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -5456,6 +6061,9 @@
         }
       }
     },
+    "ASPECT" : {
+
+    },
     "Aspiration" : {
 
     },
@@ -5479,6 +6087,9 @@
         }
       }
     },
+    "at" : {
+
+    },
     "At least one of these three propositions MUST be true:" : {
       "localizations" : {
         "es" : {
@@ -5488,6 +6099,9 @@
           }
         }
       }
+    },
+    "ATHENA" : {
+
     },
     "Audio narration • ~20 min" : {
       "localizations" : {
@@ -5518,6 +6132,9 @@
           }
         }
       }
+    },
+    "Auto-enable during focus blocks" : {
+
     },
     "Auto-Lock" : {
       "localizations" : {
@@ -5741,6 +6358,18 @@
     "Badge" : {
 
     },
+    "Badge Details" : {
+
+    },
+    "BAILOUT" : {
+
+    },
+    "BANK" : {
+
+    },
+    "Banned In" : {
+
+    },
     "BANNED IN OTHER COUNTRIES, LEGAL IN US" : {
       "localizations" : {
         "es" : {
@@ -5798,6 +6427,7 @@
       }
     },
     "Based on your birth chart and awakening path, we've channeled names that resonate with your cosmic energy." : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -5847,6 +6477,9 @@
         }
       }
     },
+    "Because they NEED the villain." : {
+
+    },
     "Because they were dangerous to power." : {
       "localizations" : {
         "es" : {
@@ -5856,6 +6489,12 @@
           }
         }
       }
+    },
+    "before" : {
+
+    },
+    "before the programming could reach you." : {
+
     },
     "Before voting, find out:" : {
       "localizations" : {
@@ -5870,6 +6509,9 @@
     "Before we begin, we need to verify a few things to ensure this content is appropriate for you." : {
 
     },
+    "Before we begin..." : {
+
+    },
     "BEFORE YOU POST" : {
       "localizations" : {
         "es" : {
@@ -5881,6 +6523,7 @@
       }
     },
     "Before your dragon egg arrives, we'd like to know a little about you." : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -5891,6 +6534,7 @@
       }
     },
     "Begin Creating Good" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -5970,6 +6614,9 @@
         }
       }
     },
+    "Begin your awakening journey" : {
+
+    },
     "Begin Your Journey" : {
       "localizations" : {
         "es" : {
@@ -6022,6 +6669,9 @@
           }
         }
       }
+    },
+    "Benefits of Fasting" : {
+
     },
     "Best For" : {
       "localizations" : {
@@ -6103,6 +6753,12 @@
         }
       }
     },
+    "Beyond the Veil" : {
+
+    },
+    "BEYOND THE VEIL" : {
+
+    },
     "Bias Checker" : {
       "localizations" : {
         "es" : {
@@ -6166,6 +6822,9 @@
         }
       }
     },
+    "Block time for deep work" : {
+
+    },
     "Blocked" : {
 
     },
@@ -6181,6 +6840,12 @@
           }
         }
       }
+    },
+    "Body Consciousness" : {
+
+    },
+    "BOOGEYMAN" : {
+
     },
     "Bookmarks" : {
       "localizations" : {
@@ -6201,6 +6866,9 @@
           }
         }
       }
+    },
+    "Born December 25 (winter solstice), dies for 3 days, rises again.\nIt's not history. It's ASTRONOMY." : {
+
     },
     "Box Breathing" : {
 
@@ -6280,6 +6948,18 @@
         }
       }
     },
+    "But criticize THIS one? \"Anti-Semite.\"" : {
+
+    },
+    "But here's what\nyour side did too..." : {
+
+    },
+    "But it gets deeper..." : {
+
+    },
+    "But NOW they speak up?" : {
+
+    },
     "But so that human beings would not remember who THEY are." : {
       "localizations" : {
         "es" : {
@@ -6309,6 +6989,15 @@
           }
         }
       }
+    },
+    "But They Cut Us Off From Our Source" : {
+
+    },
+    "But told YOU that the sun god is EVIL" : {
+
+    },
+    "But wait — %@ isn't the only one..." : {
+
     },
     "by %@" : {
       "localizations" : {
@@ -6340,6 +7029,9 @@
         }
       }
     },
+    "By State" : {
+
+    },
     "By: %@" : {
       "localizations" : {
         "es" : {
@@ -6349,6 +7041,12 @@
           }
         }
       }
+    },
+    "CABALLEROS DEL ZODIACO" : {
+
+    },
+    "Called by CONSTANTINE" : {
+
     },
     "Calm-like experience with behavioral nudges" : {
       "localizations" : {
@@ -6457,6 +7155,7 @@
       }
     },
     "CHAKRA PROGRESS" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -6465,6 +7164,9 @@
           }
         }
       }
+    },
+    "CHALLENGES" : {
+
     },
     "Chapter %lld" : {
       "localizations" : {
@@ -6485,6 +7187,9 @@
           }
         }
       }
+    },
+    "Check email only 3x per day: 9 AM, 1 PM, 5 PM" : {
+
     },
     "Check My Post" : {
       "localizations" : {
@@ -6526,6 +7231,12 @@
         }
       }
     },
+    "Child trafficking. Cover-ups. Silence." : {
+
+    },
+    "Children suffering the ENTIRE time." : {
+
+    },
     "Choose up to 3 quick access items" : {
       "localizations" : {
         "es" : {
@@ -6546,7 +7257,11 @@
         }
       }
     },
+    "Choose which features to enable. You can change these anytime in Settings." : {
+
+    },
     "Choose wisely. This companion will grow with you on your awakening journey." : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -6566,6 +7281,18 @@
         }
       }
     },
+    "CHRISTIAN ZIONISM" : {
+
+    },
+    "CHRISTIAN ZIONISM DOES:" : {
+
+    },
+    "Christianity" : {
+
+    },
+    "CHRISTIANS killed by bombs" : {
+
+    },
     "Chronotypes" : {
       "localizations" : {
         "es" : {
@@ -6575,6 +7302,9 @@
           }
         }
       }
+    },
+    "CHURCHES BOMBED IN GAZA (2023)" : {
+
     },
     "Circadian (C)" : {
 
@@ -6598,6 +7328,12 @@
           }
         }
       }
+    },
+    "Clean Eating" : {
+
+    },
+    "Clean Eating Guide" : {
+
     },
     "Clear" : {
       "localizations" : {
@@ -6665,6 +7401,12 @@
         }
       }
     },
+    "Coincidence? There are no coincidences." : {
+
+    },
+    "COLLECTION PROGRESS" : {
+
+    },
     "College CAN be worth it—but only with eyes wide open about the real costs and outcomes." : {
       "localizations" : {
         "es" : {
@@ -6714,6 +7456,9 @@
           }
         }
       }
+    },
+    "COLUMBUS: THE FIRST ELITE TRAFFICKER" : {
+
     },
     "Coming in V2" : {
       "localizations" : {
@@ -6784,6 +7529,9 @@
           }
         }
       }
+    },
+    "Commonly Found In" : {
+
     },
     "Compare Candidates" : {
       "localizations" : {
@@ -6856,6 +7604,7 @@
       }
     },
     "Complete courses to hatch your dragon and watch it evolve into a reflection of your awakening journey." : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -6864,6 +7613,9 @@
           }
         }
       }
+    },
+    "Complete courses to unlock sacred shapes." : {
+
     },
     "Complete Day %lld" : {
 
@@ -6907,6 +7659,9 @@
     "Completed Today" : {
 
     },
+    "Complexity: %lld/7" : {
+
+    },
     "Config" : {
       "localizations" : {
         "es" : {
@@ -6918,6 +7673,7 @@
       }
     },
     "Confirm Name" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -7047,6 +7803,7 @@
       }
     },
     "Consulting the stars..." : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -7135,6 +7892,9 @@
         }
       }
     },
+    "Continue Journey" : {
+
+    },
     "Continue Learning" : {
       "localizations" : {
         "es" : {
@@ -7178,6 +7938,12 @@
         }
       }
     },
+    "CONTINUE YOUR JOURNEY" : {
+
+    },
+    "CONTROL" : {
+
+    },
     "Control Detection Toolkit" : {
       "localizations" : {
         "es" : {
@@ -7208,6 +7974,12 @@
         }
       }
     },
+    "CONTROL TRINITY" : {
+
+    },
+    "Convenient, isn't it? 🫠" : {
+
+    },
     "Copy" : {
       "localizations" : {
         "es" : {
@@ -7227,6 +7999,9 @@
           }
         }
       }
+    },
+    "Copy the ingredient list from a product and paste it below" : {
+
     },
     "Core" : {
       "localizations" : {
@@ -7278,7 +8053,11 @@
         }
       }
     },
+    "Corrupt" : {
+
+    },
     "COSMIC SUGGESTIONS" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -7297,6 +8076,15 @@
           }
         }
       }
+    },
+    "COSMOS WITHIN" : {
+
+    },
+    "COSMOS WITHIN\"" : {
+
+    },
+    "COUNCIL OF NICAEA" : {
+
     },
     "Course" : {
       "localizations" : {
@@ -7317,6 +8105,12 @@
           }
         }
       }
+    },
+    "Course Complete!" : {
+
+    },
+    "Course Feedback" : {
+
     },
     "COURSE LEVELS" : {
       "localizations" : {
@@ -7407,6 +8201,9 @@
     "CRITICAL AWARENESS" : {
 
     },
+    "Critical Chemicals to Avoid" : {
+
+    },
     "CROSS-REFERENCE" : {
       "localizations" : {
         "es" : {
@@ -7416,6 +8213,9 @@
           }
         }
       }
+    },
+    "CUBE" : {
+
     },
     "Curated library of consciousness research" : {
       "localizations" : {
@@ -7470,6 +8270,15 @@
         }
       }
     },
+    "Customize and share your collection." : {
+
+    },
+    "CUSTOMIZE COLORS" : {
+
+    },
+    "Customize Features" : {
+
+    },
     "Customize Quick Access" : {
       "localizations" : {
         "es" : {
@@ -7479,6 +8288,9 @@
           }
         }
       }
+    },
+    "Customize Your Experience" : {
+
     },
     "Daily Check-In" : {
       "localizations" : {
@@ -7509,6 +8321,9 @@
           }
         }
       }
+    },
+    "Daily Flow Goal" : {
+
     },
     "Daily Phases" : {
       "localizations" : {
@@ -7553,6 +8368,9 @@
         }
       }
     },
+    "Daily review reminder" : {
+
+    },
     "DAILY SUNRISE RITUAL" : {
 
     },
@@ -7566,7 +8384,11 @@
         }
       }
     },
+    "DARK" : {
+
+    },
     "DATA & SYNC" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -7598,6 +8420,9 @@
           }
         }
       }
+    },
+    "Day" : {
+
     },
     "DAY %lld" : {
       "localizations" : {
@@ -7632,6 +8457,9 @@
         }
       }
     },
+    "DECEIVER" : {
+
+    },
     "Deception" : {
 
     },
@@ -7648,7 +8476,13 @@
     "DECODE MODULES" : {
 
     },
+    "DECODED" : {
+
+    },
     "DECODES" : {
+
+    },
+    "DEEP" : {
 
     },
     "Deep dive into the gospels they banned" : {
@@ -7670,6 +8504,12 @@
           }
         }
       }
+    },
+    "Deep work hours per day" : {
+
+    },
+    "DEEP WORK MODE" : {
+
     },
     "Deep Work: %lldm" : {
       "localizations" : {
@@ -7781,6 +8621,12 @@
         }
       }
     },
+    "Destabilized = Oil stays in ground.\nIt's not incompetence. It's STRATEGY." : {
+
+    },
+    "Details (optional)" : {
+
+    },
     "Detect manipulation • Protect your peace" : {
 
     },
@@ -7791,6 +8637,12 @@
 
     },
     "DETECTION MODULES" : {
+
+    },
+    "Different masks. Same purpose.\nKeep you looking outside instead of within." : {
+
+    },
+    "Different Names" : {
 
     },
     "Different names, same truth. The paths are many, the destination is one." : {
@@ -7823,6 +8675,12 @@
         }
       }
     },
+    "Dim lock screen" : {
+
+    },
+    "Dirty Secrets" : {
+
+    },
     "Disable V2" : {
       "localizations" : {
         "es" : {
@@ -7843,6 +8701,9 @@
         }
       }
     },
+    "Discover what they hid from you" : {
+
+    },
     "Discover Your Archetype" : {
       "localizations" : {
         "es" : {
@@ -7856,7 +8717,11 @@
     "Discover your awakening archetype" : {
 
     },
+    "Discover Your Cosmic Blueprint" : {
+
+    },
     "Dismiss" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -7875,6 +8740,9 @@
           }
         }
       }
+    },
+    "Distraction Audit" : {
+
     },
     "Distractions: %lld" : {
       "localizations" : {
@@ -7905,6 +8773,9 @@
           }
         }
       }
+    },
+    "Divine Feminine" : {
+
     },
     "Division Deprogramming" : {
       "localizations" : {
@@ -7949,6 +8820,9 @@
         }
       }
     },
+    "DOCUMENTED HISTORY" : {
+
+    },
     "DOCUMENTED TRUTH" : {
       "localizations" : {
         "es" : {
@@ -7958,6 +8832,12 @@
           }
         }
       }
+    },
+    "DOCUMENTED: ISRAEL PROPPED UP HAMAS" : {
+
+    },
+    "Does that sound like infinite, unconditional love?" : {
+
     },
     "DOJ cases • Senate reports • Declassified docs" : {
       "localizations" : {
@@ -8093,6 +8973,7 @@
       }
     },
     "Dragon" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -8103,6 +8984,7 @@
       }
     },
     "Dragon Companion" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -8113,6 +8995,7 @@
       }
     },
     "Dragon Name" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -8158,6 +9041,15 @@
         }
       }
     },
+    "Drinks Exposed" : {
+
+    },
+    "DUALITY UNINTEGRATED" : {
+
+    },
+    "Due" : {
+
+    },
     "Duration" : {
       "localizations" : {
         "es" : {
@@ -8167,6 +9059,9 @@
           }
         }
       }
+    },
+    "Duration: %@" : {
+
     },
     "e.g., I got triggered by a comment and snapped..." : {
       "localizations" : {
@@ -8217,6 +9112,24 @@
           }
         }
       }
+    },
+    "Each badge carries ancient wisdom." : {
+
+    },
+    "Earn Sacred Geometry Badges" : {
+
+    },
+    "Earn sacred symbols as you explore consciousness, complete courses, and unlock hidden knowledge. Each badge represents a milestone in your awakening journey." : {
+
+    },
+    "EARNED BADGES" : {
+
+    },
+    "EARNED FROM" : {
+
+    },
+    "Easy to hide" : {
+
     },
     "Edit" : {
       "localizations" : {
@@ -8343,6 +9256,15 @@
         }
       }
     },
+    "Email Batching" : {
+
+    },
+    "Email Windows" : {
+
+    },
+    "Email: %lldx/day" : {
+
+    },
     "Embodied practice" : {
 
     },
@@ -8446,6 +9368,9 @@
         }
       }
     },
+    "Enable or disable Food Consciousness, FlowState, etc." : {
+
+    },
     "Enabled: %lld features" : {
 
     },
@@ -8458,6 +9383,9 @@
           }
         }
       }
+    },
+    "ENCODED MEANING" : {
+
     },
     "ENCODED:" : {
       "localizations" : {
@@ -8550,6 +9478,7 @@
       }
     },
     "Enter a name..." : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -8618,6 +9547,12 @@
           }
         }
       }
+    },
+    "Enter item" : {
+
+    },
+    "Enter your name" : {
+
     },
     "Entering: %lldm" : {
       "localizations" : {
@@ -8748,6 +9683,12 @@
         }
       }
     },
+    "Every culture on Earth — YOUR ancestors — revered the Sun before imperialism erased it." : {
+
+    },
+    "Every day at" : {
+
+    },
     "Every moment borrowed from initial order." : {
 
     },
@@ -8772,6 +9713,15 @@
       }
     },
     "Every prayer, every sermon, every 'holy' word carries the buried light of what they suppressed. The sun worship never ended. It just went underground—into language." : {
+
+    },
+    "EVERY RELIGION TEACHES YOU TO WAIT:" : {
+
+    },
+    "Every ritual has a hidden meaning. They make you perform these acts without knowing what you're actually invoking." : {
+
+    },
+    "Every time you cross yourself, you activate\nthe control program and seal it with Egypt. 😂" : {
 
     },
     "Every tradition describes the same process:" : {
@@ -9050,6 +10000,9 @@
         }
       }
     },
+    "Expose toxic ingredients" : {
+
+    },
     "EXPOSED" : {
       "localizations" : {
         "es" : {
@@ -9059,6 +10012,9 @@
           }
         }
       }
+    },
+    "Extracting resources = REAL AGENDA" : {
+
     },
     "Eyes Opened" : {
       "localizations" : {
@@ -9100,7 +10056,19 @@
         }
       }
     },
+    "Fast Food Exposed" : {
+
+    },
+    "Fasting Guide" : {
+
+    },
+    "FATHER" : {
+
+    },
     "Feature Flags" : {
+
+    },
+    "Feature Preferences" : {
 
     },
     "Feature Request" : {
@@ -9179,6 +10147,9 @@
     "Find Your Path" : {
 
     },
+    "Finding opportunities to reclaim your time" : {
+
+    },
     "FINDING TEACHERS" : {
       "localizations" : {
         "es" : {
@@ -9201,6 +10172,18 @@
           }
         }
       }
+    },
+    "Flow Notifications" : {
+
+    },
+    "FLOW SCORE" : {
+
+    },
+    "Flow Setup" : {
+
+    },
+    "Flow State" : {
+
     },
     "Flow States" : {
       "localizations" : {
@@ -9238,7 +10221,28 @@
         }
       }
     },
+    "Focus block reminders" : {
+
+    },
+    "FOCUS BLOCKS" : {
+
+    },
+    "Focus blocks: %lld" : {
+
+    },
+    "Focus Mode" : {
+
+    },
+    "FOCUS MODES" : {
+
+    },
+    "Focus Settings" : {
+
+    },
     "Focus:" : {
+
+    },
+    "Fold into 3D" : {
 
     },
     "FOLLOW THE MONEY" : {
@@ -9251,6 +10255,9 @@
         }
       }
     },
+    "Follow the money..." : {
+
+    },
     "Food as medicine, food as poison" : {
       "localizations" : {
         "es" : {
@@ -9261,6 +10268,9 @@
         }
       }
     },
+    "Food Consciousness" : {
+
+    },
     "Food Industry Exposed" : {
       "localizations" : {
         "es" : {
@@ -9270,6 +10280,9 @@
           }
         }
       }
+    },
+    "Food Scanner" : {
+
     },
     "Food, sunlight" : {
 
@@ -9329,6 +10342,15 @@
           }
         }
       }
+    },
+    "Former: Key Square Group (hedge fund)" : {
+
+    },
+    "Former: Soros Fund Management CIO" : {
+
+    },
+    "Found %lld Toxic Ingredients" : {
+
     },
     "Found in: %@" : {
       "localizations" : {
@@ -9482,6 +10504,9 @@
         }
       }
     },
+    "From: %@" : {
+
+    },
     "Full Name" : {
       "localizations" : {
         "es" : {
@@ -9598,6 +10623,9 @@
         }
       }
     },
+    "Get Started" : {
+
+    },
     "Global Methods for Spiritual Awakening" : {
       "localizations" : {
         "es" : {
@@ -9661,6 +10689,9 @@
         }
       }
     },
+    "GNOSTIC REVELATION" : {
+
+    },
     "Gnostic-Powered Narrative Analysis" : {
       "localizations" : {
         "es" : {
@@ -9672,6 +10703,9 @@
       }
     },
     "Go back" : {
+
+    },
+    "GOD" : {
 
     },
     "GODMODE" : {
@@ -9703,6 +10737,9 @@
           }
         }
       }
+    },
+    "GOV'T" : {
+
     },
     "Government Crimes" : {
       "localizations" : {
@@ -9773,6 +10810,12 @@
         }
       }
     },
+    "Haikai Audit" : {
+
+    },
+    "HAIKAI SUGGESTIONS" : {
+
+    },
     "HAKAI" : {
       "localizations" : {
         "es" : {
@@ -9813,6 +10856,30 @@
         }
       }
     },
+    "Harmful Ingredients" : {
+
+    },
+    "Has Due Date" : {
+
+    },
+    "Has Oil" : {
+
+    },
+    "He MERGED church and state\nand encoded it as \"divine.\"" : {
+
+    },
+    "He writes the policies that create the contracts\nthat benefit his portfolio." : {
+
+    },
+    "Health Effects" : {
+
+    },
+    "Healthier Alternative" : {
+
+    },
+    "Healthier Alternatives" : {
+
+    },
     "Heat Death" : {
 
     },
@@ -9843,6 +10910,15 @@
 
     },
     "Help others see through the programming.\nEarn XP for every friend who joins." : {
+
+    },
+    "Help us improve (optional)" : {
+
+    },
+    "Help us understand your experience" : {
+
+    },
+    "Here are the receipts:" : {
 
     },
     "Here's your first insight..." : {
@@ -9885,6 +10961,9 @@
         }
       }
     },
+    "HERO WHO SAVED TRUTH" : {
+
+    },
     "HIDDEN" : {
       "localizations" : {
         "es" : {
@@ -9907,6 +10986,9 @@
           }
         }
       }
+    },
+    "Hidden Sugars" : {
+
     },
     "Hidden Truth (Pleroma Perspective):" : {
       "localizations" : {
@@ -9935,6 +11017,9 @@
 
     },
     "High entropy → No structure to record" : {
+
+    },
+    "Hindu origins • December 25th decoded • Rome's secret" : {
 
     },
     "History" : {
@@ -10010,6 +11095,9 @@
         }
       }
     },
+    "Hour" : {
+
+    },
     "Hours per Week" : {
       "localizations" : {
         "es" : {
@@ -10029,6 +11117,9 @@
           }
         }
       }
+    },
+    "HOW CAN THIS EXIST?" : {
+
     },
     "How Elections Really Work" : {
       "localizations" : {
@@ -10073,6 +11164,9 @@
         }
       }
     },
+    "HOW THEY DISCONNECTED US" : {
+
+    },
     "HOW TO" : {
       "localizations" : {
         "es" : {
@@ -10082,6 +11176,9 @@
           }
         }
       }
+    },
+    "HOW TO EARN BADGES" : {
+
     },
     "How To Practice:" : {
       "localizations" : {
@@ -10126,6 +11223,9 @@
         }
       }
     },
+    "How was the difficulty level?" : {
+
+    },
     "How was your practice?" : {
       "localizations" : {
         "es" : {
@@ -10146,6 +11246,9 @@
         }
       }
     },
+    "How would you rate %@?" : {
+
+    },
     "Human civilization is built on pyramids—not just stone ones, but invisible hierarchies of thought, layers of meaning, and levels of thinking that range from basic impulses to true revelation." : {
       "localizations" : {
         "es" : {
@@ -10155,6 +11258,9 @@
           }
         }
       }
+    },
+    "I Am Awakened" : {
+
     },
     "I am living in my dream home..." : {
       "localizations" : {
@@ -10186,7 +11292,11 @@
         }
       }
     },
+    "I Found the Kingdom" : {
+
+    },
     "I grow as you grow." : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -10239,6 +11349,7 @@
 
     },
     "I'll be here whenever you need guidance." : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -10251,7 +11362,14 @@
     "I'll explore on my own" : {
 
     },
+    "I'm ready for the full picture" : {
+
+    },
+    "I'm Ready to See More" : {
+
+    },
     "I'm your companion on this journey." : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -10270,6 +11388,9 @@
           }
         }
       }
+    },
+    "If \"separation of church and state\" was real..." : {
+
     },
     "If they can keep you fighting your neighbor, you won't notice who's robbing the house." : {
       "localizations" : {
@@ -10341,6 +11462,12 @@
         }
       }
     },
+    "IMPOSSIBLE to hide" : {
+
+    },
+    "Imposter Pope" : {
+
+    },
     "in %lld years" : {
       "localizations" : {
         "es" : {
@@ -10350,6 +11477,9 @@
           }
         }
       }
+    },
+    "In Columbus's own letters, he wrote:" : {
+
     },
     "In Gnostic mythology, " : {
       "localizations" : {
@@ -10370,6 +11500,12 @@
           }
         }
       }
+    },
+    "Inbox Zero!" : {
+
+    },
+    "Inbox Zero! 🎉" : {
+
     },
     "Including us. We encourage healthy skepticism and independent verification. Your journey of discovery is yours alone." : {
       "localizations" : {
@@ -10424,6 +11560,18 @@
         }
       }
     },
+    "Infinite love doesn't demand obedience." : {
+
+    },
+    "Info at LIGHT SPEED" : {
+
+    },
+    "Info by SHIP" : {
+
+    },
+    "Ingredient Scanner" : {
+
+    },
     "Inhibitors" : {
 
     },
@@ -10475,6 +11623,9 @@
           }
         }
       }
+    },
+    "Instructions:" : {
+
     },
     "INTEGRATION IS KEY" : {
       "localizations" : {
@@ -10536,6 +11687,9 @@
         }
       }
     },
+    "Intermittent Fasting" : {
+
+    },
     "Intuition" : {
 
     },
@@ -10586,6 +11740,9 @@
       }
     },
     "Isfet" : {
+
+    },
+    "Islam" : {
 
     },
     "Israel" : {
@@ -10658,6 +11815,12 @@
         }
       }
     },
+    "Israeli officials admitted supporting Hamas to divide Palestinians and weaken the secular PLO." : {
+
+    },
+    "It never was." : {
+
+    },
     "It reveals why some people develop clarity, perspective, and wisdom—while others remain stuck, repeating what they've been told without any deeper understanding." : {
       "localizations" : {
         "es" : {
@@ -10671,6 +11834,9 @@
     "It was a vibration. A code. A map back to the divine. They didn't just change his name—they buried a key." : {
 
     },
+    "It's a closed loop. They bail out their friends.\nWith YOUR money." : {
+
+    },
     "It's like unlocking the ability to DEBUG your own mind—identifying cognitive biases, emotional triggers, and blind spots in real-time." : {
       "localizations" : {
         "es" : {
@@ -10680,6 +11846,15 @@
           }
         }
       }
+    },
+    "IT'S LITERALLY WHAT HAPPENED TO THE CHURCH:" : {
+
+    },
+    "It's not about democracy.\nIt's not about human rights.\nIt's about ALIGNMENT. 🎯" : {
+
+    },
+    "It's not about protecting Jewish people.\nIt's about protecting a POLITICAL AGENDA." : {
+
     },
     "It's not about your vocation—it's about your mindset" : {
       "localizations" : {
@@ -10691,6 +11866,9 @@
         }
       }
     },
+    "It's not chaos. It's STRATEGY.\nAnd now you see it." : {
+
+    },
     "It's not news. It's a business." : {
       "localizations" : {
         "es" : {
@@ -10701,6 +11879,18 @@
         }
       }
     },
+    "It's the CHRISTOS (anointing oil) that rises\nup your 33 vertebrae (Jesus died at 33)\nto anoint your PINEAL GLAND." : {
+
+    },
+    "IT'S THE SAME TRIANGLE." : {
+
+    },
+    "It's the SUN's journey through the zodiac — personified as a savior figure in every culture that observed the sky." : {
+
+    },
+    "It's UP. ⬆️" : {
+
+    },
     "Japan • Buddhism • Ch'an" : {
       "localizations" : {
         "es" : {
@@ -10710,6 +11900,9 @@
           }
         }
       }
+    },
+    "JAVIER MILEI — THE RECEIPTS" : {
+
     },
     "Joined %@" : {
 
@@ -10725,6 +11918,7 @@
       }
     },
     "Journey Complete! Your dragon is AWAKENED." : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -10735,6 +11929,7 @@
       }
     },
     "JOURNEY TO AWAKENING" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -10743,6 +11938,9 @@
           }
         }
       }
+    },
+    "Judaism" : {
+
     },
     "Just because you have these patterns doesn't mean you're stuck. Awareness is the first step to transformation." : {
       "localizations" : {
@@ -10764,7 +11962,11 @@
         }
       }
     },
+    "Just Show Me Everything" : {
+
+    },
     "Keep awakening →" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -10865,6 +12067,9 @@
           }
         }
       }
+    },
+    "Key Points" : {
+
     },
     "KEY POINTS" : {
       "localizations" : {
@@ -10985,6 +12190,9 @@
           }
         }
       }
+    },
+    "Know What You Consume" : {
+
     },
     "Know Your Government" : {
       "localizations" : {
@@ -11150,6 +12358,9 @@
         }
       }
     },
+    "Learn the benefits of giving your body a break" : {
+
+    },
     "Learn to recognize manipulation tactics" : {
       "localizations" : {
         "es" : {
@@ -11171,6 +12382,9 @@
       }
     },
     "Less" : {
+
+    },
+    "Lesson" : {
 
     },
     "LESSON" : {
@@ -11219,6 +12433,9 @@
         }
       }
     },
+    "lessons" : {
+
+    },
     "LESSONS" : {
       "localizations" : {
         "es" : {
@@ -11260,6 +12477,7 @@
       }
     },
     "Level %lld • %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11314,6 +12532,12 @@
         }
       }
     },
+    "LIGHT" : {
+
+    },
+    "List 3 things you want to focus on" : {
+
+    },
     "Listen" : {
       "localizations" : {
         "es" : {
@@ -11365,6 +12589,9 @@
       }
     },
     "Local order" : {
+
+    },
+    "Local Warnings" : {
 
     },
     "Lock App Now" : {
@@ -11440,6 +12667,9 @@
         }
       }
     },
+    "Log Usage" : {
+
+    },
     "Logged today" : {
       "localizations" : {
         "es" : {
@@ -11451,6 +12681,7 @@
       }
     },
     "Long press anywhere to summon me." : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -11459,6 +12690,9 @@
           }
         }
       }
+    },
+    "LOSERS 📉" : {
+
     },
     "Low" : {
       "localizations" : {
@@ -11480,6 +12714,7 @@
 
     },
     "Lv.%lld" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -11490,6 +12725,7 @@
       }
     },
     "Lv.%lld %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11530,6 +12766,9 @@
           }
         }
       }
+    },
+    "Make Sense of Your Reality" : {
+
     },
     "Manipulation Level" : {
       "localizations" : {
@@ -11572,6 +12811,9 @@
       }
     },
     "Many Colors" : {
+
+    },
+    "Many European Zionists are Ashkenazi —\ndescended from Khazar converts, from Eastern Europe.\nNot originally from the Levant." : {
 
     },
     "Many more existed — and were banned. Gospels that did not speak of obedience, but of knowledge. That preached not guilt, but awakening. That did not show a divinized, untouchable, distant Jesus — but a teacher who reminded human beings who they really were." : {
@@ -11677,6 +12919,12 @@
         }
       }
     },
+    "Marketing vs Reality" : {
+
+    },
+    "Marketing:" : {
+
+    },
     "Master keys to understanding reality" : {
       "localizations" : {
         "es" : {
@@ -11763,6 +13011,9 @@
     "Matter" : {
 
     },
+    "Maybe later" : {
+
+    },
     "Maybe Later" : {
       "localizations" : {
         "es" : {
@@ -11774,6 +13025,7 @@
       }
     },
     "MEANING" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -11885,6 +13137,15 @@
         }
       }
     },
+    "Millions are waking up to the same realization." : {
+
+    },
+    "Mind\nBody\nSpirit" : {
+
+    },
+    "Mind Consciousness" : {
+
+    },
     "Mind Defense" : {
       "localizations" : {
         "es" : {
@@ -11914,6 +13175,9 @@
           }
         }
       }
+    },
+    "Minutes Used" : {
+
     },
     "mirrors" : {
 
@@ -12021,6 +13285,12 @@
         }
       }
     },
+    "Monday" : {
+
+    },
+    "Months to cross" : {
+
+    },
     "More" : {
       "localizations" : {
         "es" : {
@@ -12101,6 +13371,12 @@
         }
       }
     },
+    "My Courses" : {
+
+    },
+    "My reality doesn't make sense" : {
+
+    },
     "Name" : {
       "localizations" : {
         "es" : {
@@ -12112,6 +13388,7 @@
       }
     },
     "Name Your Dragon" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -12161,7 +13438,13 @@
         }
       }
     },
+    "Neither / Independent" : {
+
+    },
     "Net result: Universe entropy INCREASES" : {
+
+    },
+    "Netanyahu's strategy:" : {
 
     },
     "Neural bridges for consciousness expansion" : {
@@ -12257,6 +13540,9 @@
         }
       }
     },
+    "Next Day" : {
+
+    },
     "Next Lesson" : {
       "localizations" : {
         "es" : {
@@ -12268,6 +13554,7 @@
       }
     },
     "Next: %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -12367,6 +13654,9 @@
         }
       }
     },
+    "NO CRISIS = NO CONTRACTS = NO MONEY" : {
+
+    },
     "No documentaries found" : {
       "localizations" : {
         "es" : {
@@ -12397,7 +13687,14 @@
         }
       }
     },
+    "No known toxins detected!" : {
+
+    },
+    "No known toxins found" : {
+
+    },
     "No one pushed you. No one forced you." : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -12408,6 +13705,7 @@
       }
     },
     "No one will push you. No one will force you." : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -12473,6 +13771,18 @@
         }
       }
     },
+    "No usage logged yet" : {
+
+    },
+    "No VIPs added yet" : {
+
+    },
+    "No VIPs added. These contacts can always reach you." : {
+
+    },
+    "Noble" : {
+
+    },
     "NONE YET" : {
       "localizations" : {
         "es" : {
@@ -12513,6 +13823,9 @@
         }
       }
     },
+    "Not enemies.\nNeighbors who were tricked into fighting." : {
+
+    },
     "Not everyone claiming to be 'independent' is trustworthy. Watch out for:" : {
       "localizations" : {
         "es" : {
@@ -12532,6 +13845,9 @@
           }
         }
       }
+    },
+    "Not in a church. Not in the sky.\nWITHIN. Your pineal gland is the gateway." : {
+
     },
     "Not logged yet" : {
       "localizations" : {
@@ -12629,6 +13945,9 @@
         }
       }
     },
+    "Notes for the week" : {
+
+    },
     "Notice the word ANGEL ends in EL. That's because it represents the divine impulse—that good idea that suddenly comes to you, that moment when you finally remember what you're supposed to do." : {
       "localizations" : {
         "es" : {
@@ -12649,6 +13968,12 @@
         }
       }
     },
+    "Notifications Disabled" : {
+
+    },
+    "Notifications Enabled" : {
+
+    },
     "November 3, 2026" : {
       "localizations" : {
         "es" : {
@@ -12662,6 +13987,9 @@
     "Now" : {
 
     },
+    "NOW" : {
+
+    },
     "Now Playing" : {
       "localizations" : {
         "es" : {
@@ -12672,7 +14000,20 @@
         }
       }
     },
+    "NOW WE CAN SEE IT IN REAL TIME." : {
+
+    },
+    "Now you do. 👁️🔥" : {
+
+    },
+    "Now you know where to look." : {
+
+    },
+    "Now: US Treasury Secretary" : {
+
+    },
     "NUMEROLOGY" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -12691,6 +14032,9 @@
           }
         }
       }
+    },
+    "Obesity: %@%%" : {
+
     },
     "of %lld" : {
       "localizations" : {
@@ -12742,6 +14086,9 @@
         }
       }
     },
+    "OFFICIAL" : {
+
+    },
     "OK" : {
       "localizations" : {
         "es" : {
@@ -12762,7 +14109,13 @@
         }
       }
     },
+    "Once you see the pattern," : {
+
+    },
     "ONE" : {
+
+    },
+    "One Control System" : {
 
     },
     "One Light" : {
@@ -12778,7 +14131,14 @@
         }
       }
     },
+    "One sounds like a tyrant." : {
+
+    },
+    "One sounds like Source." : {
+
+    },
     "One tap to start your practice." : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -12808,6 +14168,9 @@
         }
       }
     },
+    "Only check email during these hours:" : {
+
+    },
     "Only practice sun gazing during safe hours (first/last hour of daylight). Start with 10 seconds, increase gradually. Never look directly at bright sun." : {
       "localizations" : {
         "es" : {
@@ -12817,6 +14180,9 @@
           }
         }
       }
+    },
+    "Only the packaging." : {
+
     },
     "Open ${course}" : {
       "localizations" : {
@@ -12859,6 +14225,7 @@
       }
     },
     "Open Aperture →" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -12931,6 +14298,9 @@
     "Opening your eyes..." : {
 
     },
+    "Optimized Notifications" : {
+
+    },
     "or" : {
       "localizations" : {
         "es" : {
@@ -12941,7 +14311,11 @@
         }
       }
     },
+    "OR" : {
+
+    },
     "OR CREATE YOUR OWN" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -12950,6 +14324,9 @@
           }
         }
       }
+    },
+    "Or does that sound like a narcissistic control freak?" : {
+
     },
     "Or search from:" : {
       "localizations" : {
@@ -12971,6 +14348,9 @@
         }
       }
     },
+    "Organic fruits, vegetables, and whole foods" : {
+
+    },
     "Organized by intensity level" : {
       "localizations" : {
         "es" : {
@@ -12982,6 +14362,7 @@
       }
     },
     "ORIGIN" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -13010,6 +14391,12 @@
           }
         }
       }
+    },
+    "OT \"GOD\"" : {
+
+    },
+    "OTHER ANIME THAT TOLD YOU TRUTH:" : {
+
     },
     "Our Approach" : {
       "localizations" : {
@@ -13054,6 +14441,9 @@
     "Outer Reality" : {
 
     },
+    "Over budget!" : {
+
+    },
     "Overview" : {
       "localizations" : {
         "es" : {
@@ -13083,6 +14473,18 @@
           }
         }
       }
+    },
+    "OWNS PALANTIR STOCK" : {
+
+    },
+    "P1 items: 1 hour before\nP2-P5 items: Morning of due date" : {
+
+    },
+    "paid for by a \"Christian nation\" (USA)" : {
+
+    },
+    "PALANTIR — THE SURVEILLANCE MACHINE" : {
+
     },
     "Palestine" : {
       "localizations" : {
@@ -13157,6 +14559,9 @@
     "Paste any headline, article, or social media post..." : {
 
     },
+    "Paste Ingredients Here" : {
+
+    },
     "PASTE YOUR OFFER LETTER" : {
       "localizations" : {
         "es" : {
@@ -13166,6 +14571,15 @@
           }
         }
       }
+    },
+    "PATTERN RECOGNITION" : {
+
+    },
+    "Pattern recognition isn't left or right." : {
+
+    },
+    "PATTERN: %@" : {
+
     },
     "PATTERNS DETECTED" : {
 
@@ -13241,6 +14655,12 @@
       }
     },
     "PER + CRY" : {
+
+    },
+    "per day" : {
+
+    },
+    "per week" : {
 
     },
     "Perhaps the forbidden gospels were not hidden to protect God." : {
@@ -13328,6 +14748,9 @@
     "PISTIS SOPHIA" : {
 
     },
+    "PLANNING RITUALS" : {
+
+    },
     "Player" : {
       "localizations" : {
         "es" : {
@@ -13410,6 +14833,9 @@
         }
       }
     },
+    "POTENTIAL TIME SAVED" : {
+
+    },
     "POWER LEVEL" : {
       "localizations" : {
         "es" : {
@@ -13490,6 +14916,9 @@
         }
       }
     },
+    "Practice Exercise" : {
+
+    },
     "PRACTICE EXERCISE" : {
       "localizations" : {
         "es" : {
@@ -13511,6 +14940,7 @@
       }
     },
     "Practice now" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -13561,6 +14991,7 @@
       }
     },
     "Practiced" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -13579,6 +15010,9 @@
           }
         }
       }
+    },
+    "PRE-DATES JESUS" : {
+
     },
     "PREMIUM" : {
       "localizations" : {
@@ -13653,6 +15087,7 @@
       }
     },
     "PRIMARY" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -13712,6 +15147,27 @@
         }
       }
     },
+    "PRIORITIES" : {
+
+    },
+    "Priorities: %lld" : {
+
+    },
+    "Priority %lld" : {
+
+    },
+    "Priority due date reminders" : {
+
+    },
+    "Priority Inbox" : {
+
+    },
+    "PRIORITY INBOX" : {
+
+    },
+    "Priority Level" : {
+
+    },
     "Privacy" : {
       "localizations" : {
         "es" : {
@@ -13744,6 +15200,12 @@
           }
         }
       }
+    },
+    "Pro-Israel" : {
+
+    },
+    "Pro-Wall Street" : {
+
     },
     "Profile" : {
       "localizations" : {
@@ -13808,6 +15270,9 @@
         }
       }
     },
+    "PROOF THEY WORK TOGETHER:" : {
+
+    },
     "Propaganda Library" : {
       "localizations" : {
         "es" : {
@@ -13848,6 +15313,9 @@
         }
       }
     },
+    "Protect these blocks like meetings. They're non-negotiable." : {
+
+    },
     "Protect your consciousness from manipulation" : {
       "localizations" : {
         "es" : {
@@ -13857,6 +15325,9 @@
           }
         }
       }
+    },
+    "Protect your time and attention" : {
+
     },
     "Protecting your consciousness from manipulation" : {
       "localizations" : {
@@ -14023,6 +15494,9 @@
         }
       }
     },
+    "QUICK LOG" : {
+
+    },
     "Quick Network Profiles" : {
       "localizations" : {
         "es" : {
@@ -14034,6 +15508,7 @@
       }
     },
     "Quick Practice" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -14145,6 +15620,9 @@
           }
         }
       }
+    },
+    "Rate Your Experience" : {
+
     },
     "Rate your vibration today:\n1 (Low) → 10 (Peak)" : {
       "localizations" : {
@@ -14336,6 +15814,9 @@
         }
       }
     },
+    "Reality:" : {
+
+    },
     "Reality: %@" : {
       "localizations" : {
         "es" : {
@@ -14377,6 +15858,7 @@
       }
     },
     "Receive Your Dragon Egg" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -14387,6 +15869,7 @@
       }
     },
     "Receive Your Egg" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -14407,6 +15890,9 @@
       }
     },
     "RECLAIM YOUR CALM" : {
+
+    },
+    "RECLAIM YOUR CONNECTION" : {
 
     },
     "Recognizing manufactured conflict" : {
@@ -14511,6 +15997,9 @@
         }
       }
     },
+    "Reflect on Last Week" : {
+
+    },
     "REFLECTION PROMPTS" : {
       "localizations" : {
         "es" : {
@@ -14525,6 +16014,7 @@
 
     },
     "Regenerate" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -14557,6 +16047,18 @@
     "Release" : {
 
     },
+    "RELIGION" : {
+
+    },
+    "Religion\nGovernment\nBanking" : {
+
+    },
+    "RELIGION + POLITICS FUSED" : {
+
+    },
+    "Religion, Government, and Banking are not separate." : {
+
+    },
     "remaining" : {
 
     },
@@ -14580,6 +16082,9 @@
         }
       }
     },
+    "Remind me" : {
+
+    },
     "Reminder Time" : {
       "localizations" : {
         "es" : {
@@ -14599,6 +16104,12 @@
           }
         }
       }
+    },
+    "Remove distractions. Optimize your time.\nAchieve deep focus." : {
+
+    },
+    "REPLACED" : {
+
     },
     "Report Issue" : {
       "localizations" : {
@@ -14683,6 +16194,12 @@
         }
       }
     },
+    "Reset Course?" : {
+
+    },
+    "Reset to Defaults" : {
+
+    },
     "Resolved" : {
       "localizations" : {
         "es" : {
@@ -14713,6 +16230,9 @@
         }
       }
     },
+    "Resources: %@" : {
+
+    },
     "Rest: %lldm" : {
       "localizations" : {
         "es" : {
@@ -14736,6 +16256,9 @@
         }
       }
     },
+    "Return to Cosmos" : {
+
+    },
     "RETURN TO GODMODE" : {
       "localizations" : {
         "es" : {
@@ -14745,6 +16268,9 @@
           }
         }
       }
+    },
+    "REVEAL" : {
+
     },
     "Revenue" : {
       "localizations" : {
@@ -14829,6 +16355,27 @@
         }
       }
     },
+    "SACRED CURRICULUM" : {
+
+    },
+    "Sacred Geometries:" : {
+
+    },
+    "Sacred Geometry" : {
+
+    },
+    "Sacred Geometry Badges" : {
+
+    },
+    "SACRED GEOMETRY EARNED" : {
+
+    },
+    "Sacred Geometry Unlocked" : {
+
+    },
+    "SACRED GEOMETRY UNLOCKED" : {
+
+    },
     "Sacred Library" : {
       "localizations" : {
         "es" : {
@@ -14869,6 +16416,9 @@
         }
       }
     },
+    "Safe Alternatives" : {
+
+    },
     "SAFETY NOTES" : {
       "localizations" : {
         "es" : {
@@ -14879,7 +16429,22 @@
         }
       }
     },
+    "SAGA" : {
+
+    },
+    "Saga killed the Pope and took over.\nThe knights followed an imposter.\nAiolos saved the truth and died for it.\nAldebaran said \"explode the cosmos WITHIN.\"" : {
+
+    },
+    "SAME" : {
+
+    },
+    "Same continent. Same crises. Opposite treatment." : {
+
+    },
     "Same frequency" : {
+
+    },
+    "Same issues. Same actions.\nDifferent packaging." : {
 
     },
     "Same mechanism, different vocabulary" : {
@@ -14891,6 +16456,21 @@
           }
         }
       }
+    },
+    "Same pattern.\nDifferent names." : {
+
+    },
+    "Same pattern. Same control.\nKeep them WAITING. Keep them PASSIVE." : {
+
+    },
+    "Same playbook. Different century. The tactics evolve but the goal remains: CONTROL." : {
+
+    },
+    "Same Saturn. Different packaging." : {
+
+    },
+    "SAME STORY" : {
+
     },
     "SAME TRUTH, DIFFERENT WORDS" : {
       "localizations" : {
@@ -14932,6 +16512,9 @@
         }
       }
     },
+    "SANCTUARY" : {
+
+    },
     "SATS" : {
       "localizations" : {
         "es" : {
@@ -14962,6 +16545,12 @@
         }
       }
     },
+    "Saturday" : {
+
+    },
+    "Saturn's discipline is in you 🪐" : {
+
+    },
     "Save" : {
       "localizations" : {
         "es" : {
@@ -14981,6 +16570,9 @@
           }
         }
       }
+    },
+    "Save %lldm/day" : {
+
     },
     "Save Belief" : {
       "localizations" : {
@@ -15002,6 +16594,9 @@
         }
       }
     },
+    "Save Colors" : {
+
+    },
     "Save content you want to revisit later" : {
       "localizations" : {
         "es" : {
@@ -15021,6 +16616,12 @@
           }
         }
       }
+    },
+    "Save Image" : {
+
+    },
+    "Save Plan" : {
+
     },
     "Save Reflection" : {
       "localizations" : {
@@ -15045,6 +16646,9 @@
     "Scan" : {
 
     },
+    "Scan ingredients, expose fast food & drinks" : {
+
+    },
     "Scene: %@" : {
       "localizations" : {
         "es" : {
@@ -15054,6 +16658,9 @@
           }
         }
       }
+    },
+    "Schedule Focus Time" : {
+
     },
     "SCIENCE OF CONSCIOUSNESS" : {
       "localizations" : {
@@ -15138,6 +16745,9 @@
         }
       }
     },
+    "Screen Time" : {
+
+    },
     "SEAL YOUR SHIFT" : {
       "localizations" : {
         "es" : {
@@ -15219,6 +16829,9 @@
       }
     },
     "Search for %@" : {
+
+    },
+    "Search ingredients..." : {
 
     },
     "Search library" : {
@@ -15311,6 +16924,7 @@
       }
     },
     "SECONDARY" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -15321,6 +16935,9 @@
       }
     },
     "seconds" : {
+
+    },
+    "Seconds to cross" : {
 
     },
     "Section" : {
@@ -15383,6 +17000,9 @@
         }
       }
     },
+    "See Beyond the Veil" : {
+
+    },
     "See how policy decisions affect YOUR wealth" : {
       "localizations" : {
         "es" : {
@@ -15406,6 +17026,15 @@
         }
       }
     },
+    "See The Final Truth" : {
+
+    },
+    "See The Pattern" : {
+
+    },
+    "See the pattern behind all religions" : {
+
+    },
     "See Through the Theater" : {
       "localizations" : {
         "es" : {
@@ -15415,6 +17044,9 @@
           }
         }
       }
+    },
+    "See what they hid" : {
+
     },
     "Select a state above to see your Governor, State Legislators, and other officials." : {
       "localizations" : {
@@ -15437,6 +17069,7 @@
       }
     },
     "Selected:" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -15445,6 +17078,9 @@
           }
         }
       }
+    },
+    "SEMITIC = From the land of Shem (Middle East)" : {
+
     },
     "Send" : {
       "localizations" : {
@@ -15506,6 +17142,9 @@
         }
       }
     },
+    "Set Boundaries" : {
+
+    },
     "Set Time" : {
       "localizations" : {
         "es" : {
@@ -15515,6 +17154,9 @@
           }
         }
       }
+    },
+    "Set up your profile to generate focus blocks" : {
+
     },
     "SET YOUR INTENTION" : {
       "localizations" : {
@@ -15556,6 +17198,9 @@
         }
       }
     },
+    "Share Your Feedback" : {
+
+    },
     "SHARED PROOF: WE ALL THE SAME" : {
       "localizations" : {
         "es" : {
@@ -15596,10 +17241,17 @@
         }
       }
     },
+    "SHION" : {
+
+    },
+    "Show Badges" : {
+
+    },
     "Show Diversity" : {
 
     },
     "Show Dragon" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -15622,7 +17274,14 @@
     "Show Forward (Natural)" : {
 
     },
+    "Show Me" : {
+
+    },
+    "Show My Badges" : {
+
+    },
     "Show My Dragon" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -15707,6 +17366,12 @@
         }
       }
     },
+    "SILENCE" : {
+
+    },
+    "Silence all notifications" : {
+
+    },
     "Simple awareness = flows" : {
 
     },
@@ -15760,6 +17425,9 @@
         }
       }
     },
+    "Skip & Use Defaults (All Enabled)" : {
+
+    },
     "Skip Onboarding?" : {
       "localizations" : {
         "es" : {
@@ -15792,6 +17460,21 @@
           }
         }
       }
+    },
+    "So what's the REAL truth?" : {
+
+    },
+    "Social Media Budget" : {
+
+    },
+    "SOCIAL MEDIA BUDGET" : {
+
+    },
+    "Social Media Detox" : {
+
+    },
+    "Social: %lldm/day" : {
+
     },
     "SOCRATIC COUNTERPOINTS" : {
       "localizations" : {
@@ -15826,6 +17509,9 @@
         }
       }
     },
+    "SOLAR THEOLOGY" : {
+
+    },
     "Something Went Wrong" : {
       "localizations" : {
         "es" : {
@@ -15835,6 +17521,9 @@
           }
         }
       }
+    },
+    "SON" : {
+
     },
     "SOON" : {
       "localizations" : {
@@ -15889,6 +17578,9 @@
         }
       }
     },
+    "Source" : {
+
+    },
     "Source Name" : {
       "localizations" : {
         "es" : {
@@ -15939,6 +17631,9 @@
         }
       }
     },
+    "Sources: %@" : {
+
+    },
     "Spark a Friend" : {
 
     },
@@ -15951,6 +17646,9 @@
           }
         }
       }
+    },
+    "SPIRIT" : {
+
     },
     "Spread the Spark" : {
 
@@ -15994,6 +17692,12 @@
         }
       }
     },
+    "Start Challenge" : {
+
+    },
+    "Start Collecting" : {
+
+    },
     "Start Course" : {
       "localizations" : {
         "es" : {
@@ -16020,6 +17724,9 @@
     "Start exploring to see personalized suggestions" : {
 
     },
+    "Start Flow" : {
+
+    },
     "Start Here" : {
       "localizations" : {
         "es" : {
@@ -16039,6 +17746,9 @@
           }
         }
       }
+    },
+    "Start My Awakening" : {
+
     },
     "Start Quiz" : {
       "localizations" : {
@@ -16099,6 +17809,12 @@
         }
       }
     },
+    "Stay Hydrated" : {
+
+    },
+    "Stay hydrated with clean water. Avoid sugary drinks and artificial sweeteners." : {
+
+    },
     "Stay signed in between sessions" : {
       "localizations" : {
         "es" : {
@@ -16118,6 +17834,9 @@
           }
         }
       }
+    },
+    "STEPHEN MILLER" : {
+
     },
     "Still unwinding" : {
 
@@ -16188,6 +17907,9 @@
         }
       }
     },
+    "Submit Answer" : {
+
+    },
     "Submit Feedback" : {
       "localizations" : {
         "es" : {
@@ -16208,6 +17930,9 @@
         }
       }
     },
+    "Sugar & chemical dangers" : {
+
+    },
     "SUGGESTED COUNTER OFFER" : {
       "localizations" : {
         "es" : {
@@ -16227,6 +17952,9 @@
           }
         }
       }
+    },
+    "SUGGESTED FOR %@" : {
+
     },
     "SUGGESTED REWRITE" : {
       "localizations" : {
@@ -16249,6 +17977,7 @@
       }
     },
     "Summoning Dragon..." : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -16257,6 +17986,9 @@
           }
         }
       }
+    },
+    "Sunday" : {
+
     },
     "SunFlow Premium" : {
       "localizations" : {
@@ -16348,6 +18080,7 @@
       }
     },
     "Syncing..." : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -16357,10 +18090,19 @@
         }
       }
     },
+    "Taíno girls. Trafficked. Documented.\nTheological scholars have confirmed this." : {
+
+    },
     "Take a 2-minute assessment and we'll recommend the perfect courses for where you are right now." : {
 
     },
     "Take a quick assessment to discover which courses are right for where you are right now." : {
+
+    },
+    "Take Again" : {
+
+    },
+    "Take back YOUR trinity. 👁️🔥" : {
 
     },
     "Take the 32-Question Assessment" : {
@@ -16385,6 +18127,9 @@
           }
         }
       }
+    },
+    "Take the Quiz" : {
+
     },
     "Take your time. This is for you, not for anyone else." : {
       "localizations" : {
@@ -16457,6 +18202,7 @@
       }
     },
     "Tap to practice →" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -16476,10 +18222,14 @@
         }
       }
     },
+    "Tap to reveal hidden knowledge" : {
+
+    },
     "Tap to shatter" : {
 
     },
     "Tap to start" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -16499,6 +18249,9 @@
         }
       }
     },
+    "Tap to view your badge collection" : {
+
+    },
     "TARGET NIGHTS: %lld" : {
       "localizations" : {
         "es" : {
@@ -16510,6 +18263,12 @@
       }
     },
     "Technology has outpaced the human brain's ability to adapt. The same techniques that train dolphins control populations. This course teaches you to see the mechanisms." : {
+
+    },
+    "Tell Us More" : {
+
+    },
+    "tells you:" : {
 
     },
     "Terms accepted" : {
@@ -16591,6 +18350,9 @@
         }
       }
     },
+    "Thank You!" : {
+
+    },
     "Thank You! 🙏" : {
       "localizations" : {
         "es" : {
@@ -16611,6 +18373,9 @@
         }
       }
     },
+    "That's awakening. That's what they fear." : {
+
+    },
     "The 'Promised Land' is not a geographic location—it's the state of consciousness where you live from your highest self." : {
       "localizations" : {
         "es" : {
@@ -16620,6 +18385,21 @@
           }
         }
       }
+    },
+    "The \"bad guy\" wanted them to have KNOWLEDGE?" : {
+
+    },
+    "The \"Christ\" is not a person coming from the sky." : {
+
+    },
+    "The \"God\" of the Old Testament is NOT the true Source." : {
+
+    },
+    "The \"good guy\" wanted them IGNORANT?" : {
+
+    },
+    "The \"Second Coming\" is YOUR AWAKENING.\nIt happens WITHIN. Not in the clouds.\nNot someday. NOW." : {
+
     },
     "The $1.7 trillion scam they call 'education'" : {
       "localizations" : {
@@ -16651,6 +18431,12 @@
         }
       }
     },
+    "THE 12 DAYS OF SILENCE" : {
+
+    },
+    "The 12 disciples are the 12 zodiac signs.\nThe zodiac wheel is in YOU.\nDiscover how the stars mapped your soul." : {
+
+    },
     "The American Dream" : {
       "localizations" : {
         "es" : {
@@ -16680,6 +18466,18 @@
           }
         }
       }
+    },
+    "THE ANSWER" : {
+
+    },
+    "The Astrotheological Origins of Religion" : {
+
+    },
+    "The average American drinks 45 gallons of soda per year" : {
+
+    },
+    "THE AWAKENING" : {
+
     },
     "THE BIG PICTURE" : {
       "localizations" : {
@@ -16731,6 +18529,9 @@
         }
       }
     },
+    "THE CHRIST WITHIN" : {
+
+    },
     "The Chronokeeper reveals:" : {
       "localizations" : {
         "es" : {
@@ -16760,6 +18561,9 @@
           }
         }
       }
+    },
+    "The colonizers didn't bring light —\nthey brought a DISGUISED VERSION of the same light\nand claimed monopoly on it." : {
+
     },
     "The Complete Curriculum" : {
       "localizations" : {
@@ -16791,6 +18595,9 @@
         }
       }
     },
+    "THE CONTROL TRIANGLE" : {
+
+    },
     "THE CORE MECHANISM" : {
       "localizations" : {
         "es" : {
@@ -16811,6 +18618,9 @@
         }
       }
     },
+    "THE CORRUPTION FROM WITHIN" : {
+
+    },
     "The Cosmic Principles" : {
       "localizations" : {
         "es" : {
@@ -16824,6 +18634,18 @@
     "THE COUNCIL OF NICAEA" : {
 
     },
+    "The crimes are the SAME." : {
+
+    },
+    "The crisis is the product" : {
+
+    },
+    "THE CROSS IS A CUBE" : {
+
+    },
+    "The cross is the UNFOLDED NET of Saturn's cube. When you make the sign of the cross, you're tracing the cube on your body." : {
+
+    },
     "The Dark Night of the Soul" : {
       "localizations" : {
         "es" : {
@@ -16833,6 +18655,12 @@
           }
         }
       }
+    },
+    "THE DELIBERATE CONFLATION:" : {
+
+    },
+    "THE DEMIURGE:" : {
+
     },
     "THE DETECTION FRAMEWORKS" : {
 
@@ -16880,6 +18708,9 @@
         }
       }
     },
+    "The entire zodiac is in you ⭐" : {
+
+    },
     "THE ESOTERIC CURRICULUM" : {
 
     },
@@ -16895,6 +18726,18 @@
           }
         }
       }
+    },
+    "THE FALSE GOD" : {
+
+    },
+    "The fight is UP vs DOWN." : {
+
+    },
+    "The fight isn't LEFT vs RIGHT." : {
+
+    },
+    "The first FOUR commandments are about HIM." : {
+
     },
     "THE FIVE UNIVERSALS" : {
       "localizations" : {
@@ -16928,6 +18771,9 @@
           }
         }
       }
+    },
+    "THE FORMULA:" : {
+
     },
     "The foundation of Sophia awakening" : {
 
@@ -16982,6 +18828,9 @@
         }
       }
     },
+    "The Gnostics believed exactly this.\nThat's why the Church DESTROYED them." : {
+
+    },
     "The Golden Path" : {
       "localizations" : {
         "es" : {
@@ -17012,6 +18861,18 @@
         }
       }
     },
+    "The Hidden Teachings" : {
+
+    },
+    "THE HIJACKED INSTITUTION" : {
+
+    },
+    "THE INSTITUTION WAS HIJACKED" : {
+
+    },
+    "The internet broke their playbook.\nAwakening is inevitable." : {
+
+    },
     "The interventions they don't teach" : {
       "localizations" : {
         "es" : {
@@ -17021,6 +18882,21 @@
           }
         }
       }
+    },
+    "THE INVITATION" : {
+
+    },
+    "The Invocation" : {
+
+    },
+    "The Jesus story existed THOUSANDS of years before Bethlehem.\nThey didn't write an original — they COPIED." : {
+
+    },
+    "THE KEY REVELATION" : {
+
+    },
+    "THE KINGDOM WITHIN" : {
+
     },
     "The Kybalion" : {
       "localizations" : {
@@ -17075,6 +18951,9 @@
     "THE LIVING NAME" : {
 
     },
+    "THE MACHINE" : {
+
+    },
     "The man you know as Jesus was never called that. Not by his mother. Not by his followers. His name was Yeshua—and it wasn't just a name." : {
 
     },
@@ -17097,6 +18976,9 @@
           }
         }
       }
+    },
+    "The masses followed the fraud unknowingly" : {
+
     },
     "The Matrix Decoded" : {
       "localizations" : {
@@ -17141,6 +19023,9 @@
         }
       }
     },
+    "The moon is in you 🌙" : {
+
+    },
     "The most important tool. Remember: You don't get what you WANT, you get who you ARE." : {
       "localizations" : {
         "es" : {
@@ -17170,6 +19055,9 @@
           }
         }
       }
+    },
+    "THE NUMBER 12" : {
+
     },
     "The Numbers Don't Lie" : {
       "localizations" : {
@@ -17234,6 +19122,9 @@
         }
       }
     },
+    "THE PARALLEL" : {
+
+    },
     "The path finds you when you're ready. Your job is to show up consistently. The rest unfolds naturally." : {
       "localizations" : {
         "es" : {
@@ -17244,6 +19135,9 @@
         }
       }
     },
+    "THE PATTERN" : {
+
+    },
     "The people in power—the so-called elites—were taught these things at a very young age. They were shown this through example as babies and learned it systematically as they got older. They were taught how to WORK WITH the mirror, not fight it." : {
       "localizations" : {
         "es" : {
@@ -17253,6 +19147,18 @@
           }
         }
       }
+    },
+    "The PEOPLE vs The MACHINE." : {
+
+    },
+    "The pineal gland / pine cone / third eye is EVERYWHERE in ancient art and architecture. They know. They just don't tell YOU." : {
+
+    },
+    "The playbook hasn't changed since 1492." : {
+
+    },
+    "The Playbook Never Changed" : {
+
     },
     "THE PLAYER" : {
       "localizations" : {
@@ -17284,6 +19190,12 @@
         }
       }
     },
+    "THE QUESTION" : {
+
+    },
+    "The real Creator doesn't threaten eternal punishment." : {
+
+    },
     "The real villains destroying the American Dream" : {
       "localizations" : {
         "es" : {
@@ -17304,6 +19216,9 @@
         }
       }
     },
+    "THE REVELATION" : {
+
+    },
     "THE SACRED LETTERS" : {
 
     },
@@ -17316,6 +19231,9 @@
           }
         }
       }
+    },
+    "The Same Story, Different Names" : {
+
     },
     "THE SCAPEGOATING PLAYBOOK" : {
       "localizations" : {
@@ -17430,6 +19348,9 @@
         }
       }
     },
+    "THE SILENCING MECHANISM" : {
+
+    },
     "The Simulation Hypothesis proposes that all of reality, including Earth and the rest of the universe, could be an artificial simulation, such as a computer simulation run by an advanced civilization." : {
       "localizations" : {
         "es" : {
@@ -17449,6 +19370,21 @@
           }
         }
       }
+    },
+    "THE SUN HAS ALWAYS BEEN THERE" : {
+
+    },
+    "The Sun has ALWAYS been there for you.\nIt's time to return to your source." : {
+
+    },
+    "The sun is in the sky.\nThe moon reflects its light.\nAnd YOU contain them all." : {
+
+    },
+    "The sun is in you ☀️" : {
+
+    },
+    "The Sun is Reborn!" : {
+
     },
     "THE SYSTEM IS THE PROBLEM" : {
       "localizations" : {
@@ -17470,6 +19406,15 @@
         }
       }
     },
+    "THE SYSTEM WAS DESIGNED THIS WAY." : {
+
+    },
+    "The target is always YOU." : {
+
+    },
+    "THE TELL" : {
+
+    },
     "The top is not a PLACE—it's a PRACTICE. Nobody reaches it and stays permanently. You rise, fall, and rise again." : {
       "localizations" : {
         "es" : {
@@ -17480,6 +19425,15 @@
         }
       }
     },
+    "The Trinity doctrine was NOT in early Christianity." : {
+
+    },
+    "The Trinity isn't holy.\nIt's the ORG CHART of human farming." : {
+
+    },
+    "The TRUE Source doesn't need worship." : {
+
+    },
     "THE TRUTH" : {
       "localizations" : {
         "es" : {
@@ -17489,6 +19443,9 @@
           }
         }
       }
+    },
+    "THE TRUTH ABOUT YOU" : {
+
     },
     "THE TRUTH PRESERVED" : {
       "localizations" : {
@@ -17533,6 +19490,9 @@
         }
       }
     },
+    "THE ULTIMATE IRONY" : {
+
+    },
     "THE UNIVERSAL MECHANISM" : {
       "localizations" : {
         "es" : {
@@ -17567,6 +19527,15 @@
 
     },
     "The Words Themselves" : {
+
+    },
+    "Their Operating System" : {
+
+    },
+    "THEIR Trinity" : {
+
+    },
+    "These are also receipts:" : {
 
     },
     "These are not conspiracy theories. Each case links to government records, congressional testimony, or declassified documents." : {
@@ -17649,6 +19618,9 @@
         }
       }
     },
+    "These people's messages will never be silenced" : {
+
+    },
     "These races will likely determine control of Congress and key state governments:" : {
       "localizations" : {
         "es" : {
@@ -17658,6 +19630,9 @@
           }
         }
       }
+    },
+    "THEY ARE NOT THE SAME" : {
+
     },
     "They believe they're thinking simply because information is passing through their minds. It's like riding shotgun and convincing yourself you're the one steering." : {
       "localizations" : {
@@ -17689,7 +19664,25 @@
         }
       }
     },
+    "They called this false creator god the DEMIURGE" : {
+
+    },
+    "They claim to protect Christians. But only SOME Christians. Why?" : {
+
+    },
     "They couldn't destroy the truth. So they hid it in the words themselves—hoping you'd never look." : {
+
+    },
+    "They created the enemy.\nThen used that enemy to justify bombing Christians.\nClassic divide and conquer." : {
+
+    },
+    "They don't suddenly have morals." : {
+
+    },
+    "They FIGHT each other on the surface — but serve the SAME purpose:" : {
+
+    },
+    "They have DAMAGE CONTROL." : {
 
     },
     "They hid this truth from everyone." : {
@@ -17702,6 +19695,39 @@
         }
       }
     },
+    "They literally GAVE IT AWAY" : {
+
+    },
+    "They literally told you with CHRISTIAN ZIONISM" : {
+
+    },
+    "They made you WORSHIP the control structure" : {
+
+    },
+    "They need each other for CONTROL." : {
+
+    },
+    "They NEED each other. The target is always YOU." : {
+
+    },
+    "They never were." : {
+
+    },
+    "They protest. They speak out.\nBut mainstream media won't show them.\nBecause it breaks the narrative." : {
+
+    },
+    "They put substances in your food, water, and products that literally turn your third eye to STONE." : {
+
+    },
+    "They say: \"%@\"" : {
+
+    },
+    "They were FUSED from day one." : {
+
+    },
+    "They weren't \"pagans\" who needed saving.\nThey were observing the SAME cosmic truth." : {
+
+    },
     "They work for you. Know who they really serve." : {
       "localizations" : {
         "es" : {
@@ -17711,6 +19737,18 @@
           }
         }
       }
+    },
+    "They work TOGETHER." : {
+
+    },
+    "They worship the sun in SECRET" : {
+
+    },
+    "They've made these four things SEEM like one.\nSo criticism of the POLITICAL MOVEMENT\ngets labeled \"anti-Semitic.\"" : {
+
+    },
+    "They've sanctioned him. Isolated him.\nDemonized him. Tried coups.\n\nBut they WON'T actually remove him." : {
+
     },
     "This action cannot be undone." : {
       "localizations" : {
@@ -17776,6 +19814,7 @@
       }
     },
     "This helps personalize your companion to match your unique journey." : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -17786,6 +19825,12 @@
       }
     },
     "This helps us personalize your experience.\nYou can change this anytime." : {
+
+    },
+    "This ingredient isn't in our database" : {
+
+    },
+    "This is DAMAGE CONTROL." : {
 
     },
     "This is educational information, NOT legal advice. Immigration law changes frequently. Always consult a qualified immigration attorney for your specific situation." : {
@@ -17809,6 +19854,9 @@
       }
     },
     "This Is Me" : {
+
+    },
+    "This is why he gets the money.\nHe's ALIGNED." : {
 
     },
     "This is why so many people's physical world is nowhere near where they want it to be. Their inner garden is overrun with weeds—negative thoughts, lower emotions like guilt, shame, fear, apathy, anger. Because that's where they're dwelling, that's what shows up in the mirror." : {
@@ -17840,6 +19888,9 @@
           }
         }
       }
+    },
+    "This isn't morality." : {
+
     },
     "This isn't science fiction—it's a serious philosophical and scientific proposition explored by physicists, philosophers, and technologists." : {
       "localizations" : {
@@ -17904,6 +19955,9 @@
         }
       }
     },
+    "This silences criticism of:" : {
+
+    },
     "THIS WEEK" : {
       "localizations" : {
         "es" : {
@@ -17913,6 +19967,9 @@
           }
         }
       }
+    },
+    "This will erase all progress and start from the beginning. Your earned badges will be kept." : {
+
     },
     "This will permanently delete your account and all associated data. This action cannot be undone." : {
       "localizations" : {
@@ -17957,6 +20014,15 @@
     "Thoth's Teachings" : {
 
     },
+    "THREE RELIGIONS" : {
+
+    },
+    "THREE-IN-ONE keeping you:" : {
+
+    },
+    "Three-in-One. \"Separate\" but SAME essence." : {
+
+    },
     "Throughout ancient languages, words ending in EL often contain references to divinity, spiritual concepts, or higher forces." : {
       "localizations" : {
         "es" : {
@@ -17997,6 +20063,15 @@
         }
       }
     },
+    "To Give Us Light" : {
+
+    },
+    "to Palantir since 2014" : {
+
+    },
+    "TODAY" : {
+
+    },
     "TODAY'S CHECK-IN" : {
       "localizations" : {
         "es" : {
@@ -18007,7 +20082,16 @@
         }
       }
     },
+    "TODAY'S FLOW" : {
+
+    },
+    "TODAY'S FOCUS BLOCKS" : {
+
+    },
     "Today's ritual complete!" : {
+
+    },
+    "TODAY'S USAGE" : {
 
     },
     "Together: The divine spark, through fire, connects you to spiritual sight" : {
@@ -18033,6 +20117,9 @@
         }
       }
     },
+    "Top 3 Priorities" : {
+
+    },
     "TOP DONORS" : {
       "localizations" : {
         "es" : {
@@ -18042,6 +20129,9 @@
           }
         }
       }
+    },
+    "Top Fast Food Chains" : {
+
     },
     "TOP PICKS FOR AWAKENING" : {
       "localizations" : {
@@ -18099,7 +20189,14 @@
         }
       }
     },
+    "Toxic Drinks" : {
+
+    },
+    "Toxic Ingredients Found" : {
+
+    },
     "Track your awakening journey with your Dragon." : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -18120,6 +20217,7 @@
       }
     },
     "TRAITS (%lld)" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -18199,6 +20297,12 @@
         }
       }
     },
+    "True Pope" : {
+
+    },
+    "Trump's immigration architect" : {
+
+    },
     "Truth" : {
       "localizations" : {
         "es" : {
@@ -18261,6 +20365,12 @@
           }
         }
       }
+    },
+    "Truth-Seeker" : {
+
+    },
+    "TRUTH-SEEKER SAVES DIVINE FEMININE" : {
+
     },
     "Truth: %lld%%" : {
       "localizations" : {
@@ -18448,6 +20558,9 @@
         }
       }
     },
+    "UNDISCOVERED" : {
+
+    },
     "Universal Awakening Arsenal" : {
       "localizations" : {
         "es" : {
@@ -18522,6 +20635,7 @@
 
     },
     "Unlocked by: %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -18634,6 +20748,18 @@
         }
       }
     },
+    "Vatican Bank in\nEpstein files" : {
+
+    },
+    "Vatican blessed\nhis voyages" : {
+
+    },
+    "VENEZUELA — THE USEFUL CRISIS" : {
+
+    },
+    "Venezuela has the LARGEST proven oil reserves\nin the world. Larger than Saudi Arabia." : {
+
+    },
     "VERIFICATION STANDARD" : {
       "localizations" : {
         "es" : {
@@ -18670,6 +20796,15 @@
         }
       }
     },
+    "View All %lld Chemicals →" : {
+
+    },
+    "View by State" : {
+
+    },
+    "View Collection →" : {
+
+    },
     "View Full Comparison Grid" : {
       "localizations" : {
         "es" : {
@@ -18691,6 +20826,7 @@
       }
     },
     "View your dragon companion in Aperture" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -18699,6 +20835,15 @@
           }
         }
       }
+    },
+    "View your Sacred Geometry badge collection in Aperture" : {
+
+    },
+    "VIP Contacts" : {
+
+    },
+    "VIP CONTACTS" : {
+
     },
     "Visible" : {
 
@@ -18714,6 +20859,7 @@
       }
     },
     "Visit Dragon →" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -18803,6 +20949,21 @@
         }
       }
     },
+    "VS" : {
+
+    },
+    "Wait..." : {
+
+    },
+    "WAKE UP." : {
+
+    },
+    "WALL STREET → TREASURY → BAILOUT → WALL STREET" : {
+
+    },
+    "Want more content like this?" : {
+
+    },
     "Watch Now" : {
       "localizations" : {
         "es" : {
@@ -18843,6 +21004,9 @@
         }
       }
     },
+    "WE ARE SOLAR BEINGS" : {
+
+    },
     "We believe awakening is humanity's birthright—not a privilege reserved for monks, mystics, or the initiated few. By showing the common thread across all traditions, we help you find your path without dogma, gurus, or gatekeepers." : {
       "localizations" : {
         "es" : {
@@ -18872,6 +21036,9 @@
           }
         }
       }
+    },
+    "WE CAN HELP" : {
+
     },
     "We have no political affiliation. We follow the money regardless of party." : {
       "localizations" : {
@@ -18913,6 +21080,9 @@
         }
       }
     },
+    "We'll start with what's familiar, then show you the bigger pattern." : {
+
+    },
     "WEALTH SIMULATOR" : {
       "localizations" : {
         "es" : {
@@ -18936,6 +21106,12 @@
         }
       }
     },
+    "Weekly Planning" : {
+
+    },
+    "Weekly planning reminder" : {
+
+    },
     "Welcome Back" : {
       "localizations" : {
         "es" : {
@@ -18947,6 +21123,7 @@
       }
     },
     "Welcome back, %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -18956,7 +21133,13 @@
         }
       }
     },
+    "Welcome to the elevation. 🔺" : {
+
+    },
     "Welcome, Seeker" : {
+
+    },
+    "What are they so afraid of people seeing\nthat they need this much machinery to hide it?" : {
 
     },
     "What brings you to Aperture?" : {
@@ -19019,7 +21202,28 @@
         }
       }
     },
+    "What if the \"God\" of the Old Testament isn't who they told you?" : {
+
+    },
+    "What if the Demiurge wanted obedient slaves?" : {
+
+    },
     "What if the serpent in Genesis was never God's enemy? What if everything the church taught you about the fall was inverted?" : {
+
+    },
+    "What if the serpent was the LIBERATOR?" : {
+
+    },
+    "What if the story is INVERTED?" : {
+
+    },
+    "WHAT IMPERIALISM DID" : {
+
+    },
+    "What is it?" : {
+
+    },
+    "WHAT IT ACTUALLY MEANS" : {
 
     },
     "What It Does:" : {
@@ -19062,6 +21266,12 @@
         }
       }
     },
+    "What MUST happen this week?" : {
+
+    },
+    "What needs your attention?" : {
+
+    },
     "What synchronicity did you notice?" : {
       "localizations" : {
         "es" : {
@@ -19073,6 +21283,7 @@
       }
     },
     "What syncs to iCloud:" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -19125,6 +21336,9 @@
         }
       }
     },
+    "What They Hid From You" : {
+
+    },
     "What they killed to hide.\nWhat you were born to remember." : {
       "localizations" : {
         "es" : {
@@ -19134,6 +21348,9 @@
           }
         }
       }
+    },
+    "What They Never Wanted You to Know" : {
+
     },
     "What They Said" : {
       "localizations" : {
@@ -19165,6 +21382,9 @@
         }
       }
     },
+    "WHAT THEY TOLD YOU" : {
+
+    },
     "What they're really feeding you" : {
       "localizations" : {
         "es" : {
@@ -19185,6 +21405,12 @@
         }
       }
     },
+    "What was your favorite part?" : {
+
+    },
+    "What Were You Raised With?" : {
+
+    },
     "What will you focus on?" : {
       "localizations" : {
         "es" : {
@@ -19195,7 +21421,17 @@
         }
       }
     },
+    "What worked? What didn't?" : {
+
+    },
+    "What would you add to this course?" : {
+
+    },
+    "What would you change?" : {
+
+    },
     "What would you like to call me?" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -19204,6 +21440,9 @@
           }
         }
       }
+    },
+    "WHAT YOU BOTH SEE" : {
+
     },
     "What You Can Do" : {
       "localizations" : {
@@ -19338,6 +21577,9 @@
         }
       }
     },
+    "When the Epstein files dropped, the Vatican went SILENT. Then suddenly... they had something to say." : {
+
+    },
     "When there is HARMONY between your Spirit (Isis) and your Mind (Ra), then there is GOD (El) in you." : {
       "localizations" : {
         "es" : {
@@ -19444,6 +21686,9 @@
         }
       }
     },
+    "Where was their \"moral clarity\" for 16+ years across 4 administrations?" : {
+
+    },
     "Which animal matches your energy pattern?" : {
       "localizations" : {
         "es" : {
@@ -19454,6 +21699,9 @@
         }
       }
     },
+    "WHICH CHRISTIANS MATTER?" : {
+
+    },
     "Which of these resonate with you? Chances are you have 1, 2, 3 or maybe ALL 5 operating in your life." : {
       "localizations" : {
         "es" : {
@@ -19463,6 +21711,12 @@
           }
         }
       }
+    },
+    "Which one does your church worship?" : {
+
+    },
+    "Which side of the political divide\ndo you typically identify with?" : {
+
     },
     "While politicians blame immigrants, 'welfare queens,' and foreign countries, the real extraction of American wealth happens in corporate boardrooms." : {
       "localizations" : {
@@ -19483,6 +21737,12 @@
           }
         }
       }
+    },
+    "WHILE YOU WAIT:" : {
+
+    },
+    "WHO ACTUALLY BENEFITS?" : {
+
     },
     "WHO BENEFITS" : {
       "localizations" : {
@@ -19524,6 +21784,12 @@
         }
       }
     },
+    "WHO WINS:" : {
+
+    },
+    "Why 12 days of silence on child trafficking... but instant response on politics?" : {
+
+    },
     "WHY CONSCIOUSNESS MATTERS" : {
       "localizations" : {
         "es" : {
@@ -19564,6 +21830,9 @@
         }
       }
     },
+    "WHY NOT REMOVE MADURO?" : {
+
+    },
     "WHY PODCASTS FOR AWAKENING?" : {
       "localizations" : {
         "es" : {
@@ -19595,6 +21864,7 @@
       }
     },
     "WHY THIS NAME FOR YOU" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -19613,6 +21883,30 @@
           }
         }
       }
+    },
+    "Why would NOW be any different?" : {
+
+    },
+    "WINNERS 📈" : {
+
+    },
+    "WITHIN. 👁️" : {
+
+    },
+    "WORD IS SWORD" : {
+
+    },
+    "Work Days" : {
+
+    },
+    "Work Schedule" : {
+
+    },
+    "Worst Offenders" : {
+
+    },
+    "Would you recommend this course?" : {
+
     },
     "Wound tight" : {
 
@@ -19669,10 +21963,16 @@
     "You" : {
 
     },
+    "YOU" : {
+
+    },
     "You also resonate with" : {
 
     },
     "You are" : {
+
+    },
+    "YOU ARE ELECTROMAGNETIC" : {
 
     },
     "YOU ARE HERE" : {
@@ -19695,6 +21995,9 @@
         }
       }
     },
+    "You are not Jewish, Christian, or Muslim.\n\nYou are a FRACTAL OF INFINITE SOURCE\nhaving a temporary human experience." : {
+
+    },
     "You can always personalize your experience later in Settings." : {
       "localizations" : {
         "es" : {
@@ -19704,6 +22007,9 @@
           }
         }
       }
+    },
+    "You can criticize ANY other political movement." : {
+
     },
     "You can't avoid everything, but you can make informed choices. Knowledge is power." : {
       "localizations" : {
@@ -19715,7 +22021,11 @@
         }
       }
     },
+    "you can't unsee it." : {
+
+    },
     "You did this, %@." : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -19734,6 +22044,15 @@
           }
         }
       }
+    },
+    "You don't need a dark church to connect to Source.\nJust awareness. Breath. Sun. Silence." : {
+
+    },
+    "You don't need a priest, a church, or permission. You ARE the temple. Here's how to reconnect:" : {
+
+    },
+    "You have more in common\nthan you've been told." : {
+
     },
     "You just took your first step." : {
       "localizations" : {
@@ -19788,6 +22107,24 @@
         }
       }
     },
+    "You saw this in El Salvador" : {
+
+    },
+    "You watched this in El Salvador\nbefore the machine could reach you." : {
+
+    },
+    "You were always right. 👁️🔥" : {
+
+    },
+    "You were just taught to look outside." : {
+
+    },
+    "You were never separate from the Kingdom." : {
+
+    },
+    "You were RIGHT. You were always right.\nYou just didn't have the vocabulary yet." : {
+
+    },
     "You were taught to fight the world, to hustle and grind, to try and fix everything around you in order to succeed. But what if the life you are living right now isn't life at all—it is merely a REFLECTION?" : {
       "localizations" : {
         "es" : {
@@ -19808,6 +22145,9 @@
         }
       }
     },
+    "You're already optimized!" : {
+
+    },
     "You're Awakening..." : {
       "localizations" : {
         "es" : {
@@ -19817,6 +22157,15 @@
           }
         }
       }
+    },
+    "You're not \"returning to paganism.\"\nYou're REMEMBERING what your DNA already knows." : {
+
+    },
+    "You're not alone." : {
+
+    },
+    "You're right about the %@s..." : {
+
     },
     "You've been lied to about how life and reality works." : {
       "localizations" : {
@@ -19857,7 +22206,11 @@
     "You've reached Level %lld" : {
 
     },
+    "You've Seen Beyond the Veil" : {
+
+    },
     "Your accountability comes from curiosity, will, and the desire to become free." : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -19873,10 +22226,13 @@
     "Your Awakened Friends" : {
 
     },
+    "YOUR AWAKENING" : {
+
+    },
     "Your awakening archetype" : {
 
     },
-    "Your awakening guide. Swipe to interact." : {
+    "Your Birth Chart" : {
 
     },
     "Your body follows a 24-hour rhythm. Work with it." : {
@@ -19888,6 +22244,15 @@
           }
         }
       }
+    },
+    "Your body is 60% water" : {
+
+    },
+    "Your Body is 60% Water" : {
+
+    },
+    "Your body is a temple. Know what you're putting into it." : {
+
     },
     "Your clarity becomes a light guiding others to the top. In a world trapped at the bottom, climbing is a REVOLUTIONARY ACT." : {
       "localizations" : {
@@ -19910,6 +22275,7 @@
       }
     },
     "Your curiosity, will, and desire brought you here." : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -19920,6 +22286,7 @@
       }
     },
     "Your data stays on YOUR device" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -19930,6 +22297,7 @@
       }
     },
     "Your data stays on YOUR device. We don't collect or sell your information." : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -19940,6 +22308,7 @@
       }
     },
     "Your data stays with YOU via your Apple ID. We never see or store your personal information." : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -19950,6 +22319,7 @@
       }
     },
     "Your Dragon Awaits" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -19960,6 +22330,7 @@
       }
     },
     "Your Dragon Awaits a Name" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -19980,6 +22351,7 @@
       }
     },
     "Your egg is ready, %@!" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -19999,6 +22371,9 @@
         }
       }
     },
+    "Your feedback helps us create better awakening experiences" : {
+
+    },
     "Your feedback helps us improve Aperture for everyone." : {
       "localizations" : {
         "es" : {
@@ -20009,6 +22384,15 @@
         }
       }
     },
+    "YOUR FEEDBACK SUMMARY" : {
+
+    },
+    "Your first badge awaits..." : {
+
+    },
+    "YOUR FOCUS BLOCKS" : {
+
+    },
     "Your goal: Connect to the PLAYER more than the character. When you do, certain things start showing up that you never could have created from the character's perspective." : {
       "localizations" : {
         "es" : {
@@ -20018,6 +22402,9 @@
           }
         }
       }
+    },
+    "Your heart's EM field is measurable 3+ feet away. Your brain produces electricity. You are a FIELD of consciousness connected to the quantum field — not just a meat suit." : {
+
     },
     "YOUR INTENTION" : {
       "localizations" : {
@@ -20063,6 +22450,7 @@
       }
     },
     "YOUR JOURNEY BEGINS" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -20095,6 +22483,9 @@
         }
       }
     },
+    "Your Mayan ancestors, Egyptian priests, Slavic shamans, and Japanese emperors were ALL observing the SAME REALITY:" : {
+
+    },
     "YOUR MEDIA DIET" : {
       "localizations" : {
         "es" : {
@@ -20105,7 +22496,11 @@
         }
       }
     },
+    "Your mind is clear 🧘" : {
+
+    },
     "Your name" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -20114,6 +22509,9 @@
           }
         }
       }
+    },
+    "Your Name" : {
+
     },
     "YOUR NOTES" : {
       "localizations" : {
@@ -20124,6 +22522,9 @@
           }
         }
       }
+    },
+    "Your ongoing priorities:" : {
+
     },
     "Your Path" : {
 
@@ -20161,6 +22562,9 @@
     "Your Persona" : {
 
     },
+    "Your Pineal Gland • Third Eye • Gateway to Source" : {
+
+    },
     "Your Post" : {
       "localizations" : {
         "es" : {
@@ -20193,6 +22597,9 @@
           }
         }
       }
+    },
+    "Your Progress" : {
+
     },
     "YOUR PROGRESS" : {
       "localizations" : {
@@ -20238,6 +22645,12 @@
       }
     },
     "YOUR SPARK CODE" : {
+
+    },
+    "Your Suggestions" : {
+
+    },
+    "YOUR Trinity" : {
 
     },
     "your@email.com" : {
@@ -20299,6 +22712,9 @@
           }
         }
       }
+    },
+    "Zodiac Course" : {
+
     },
     "יֵשׁוּעַ" : {
 

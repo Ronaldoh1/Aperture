@@ -423,7 +423,7 @@ struct PreDatedSaviorsView: View {
             }
             
             // Attributes
-            FlowLayout(spacing: 6) {
+            ReligionFlowLayout(spacing: 6) {
                 ForEach(savior.attributes, id: \.self) { attribute in
                     Text("✓ \(attribute)")
                         .font(.system(size: 10, weight: .medium))
@@ -717,7 +717,7 @@ struct FinalTruthView: View {
 
 // MARK: - Flow Layout Helper
 
-struct FlowLayout: Layout {
+struct ReligionFlowLayout: Layout {
     var spacing: CGFloat = 8
     
     func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {

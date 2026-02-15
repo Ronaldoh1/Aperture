@@ -450,6 +450,232 @@ struct CourseCatalog {
             estimatedHours: 4.5,
             category: .financial,
             difficulty: .intermediate
+        ),
+        
+        // ══════════════════════════════════════════════════
+        // ALEXANDRIA EXPANSION — NEW MODULES
+        // ══════════════════════════════════════════════════
+        CourseInfo(
+            id: "antichrist_decoded",
+            title: "The Anti-Christ Decoded",
+            subtitle: "The lie behind the greatest fear — only 4 verses",
+            icon: "eye.slash.fill",
+            colorHex: "#FF2D55",
+            moduleCount: 3,
+            estimatedHours: 2.5,
+            category: .consciousness,
+            difficulty: .intermediate
+        ),
+        CourseInfo(
+            id: "baphomet_mirror",
+            title: "Baphomet — The Mirror",
+            subtitle: "The truth behind the symbol of fear",
+            icon: "pentagon.fill",
+            colorHex: "#9D4EDD",
+            moduleCount: 2,
+            estimatedHours: 2,
+            category: .consciousness,
+            difficulty: .advanced
+        ),
+        CourseInfo(
+            id: "gospel_judas",
+            title: "The Gospel of Judas",
+            subtitle: "Traitor or guardian of the forbidden secret?",
+            icon: "key.fill",
+            colorHex: "#C0392B",
+            moduleCount: 1,
+            estimatedHours: 1.5,
+            category: .spirituality,
+            difficulty: .advanced
+        ),
+        CourseInfo(
+            id: "guilt_power",
+            title: "Por Mi Culpa — Guilt & Power",
+            subtitle: "The prayer that broke the spirit",
+            icon: "heart.slash.fill",
+            colorHex: "#8B0000",
+            moduleCount: 1,
+            estimatedHours: 1.5,
+            category: .spirituality,
+            difficulty: .intermediate
+        ),
+        CourseInfo(
+            id: "tonantzin",
+            title: "Tonantzin — The Mother They Erased",
+            subtitle: "The Virgin of Guadalupe decoded",
+            icon: "figure.stand.dress",
+            colorHex: "#006847",
+            moduleCount: 1,
+            estimatedHours: 2,
+            category: .spirituality,
+            difficulty: .intermediate
+        ),
+        CourseInfo(
+            id: "cross_solar",
+            title: "The Cross — Solar Portal",
+            subtitle: "Not punishment. Rebirth.",
+            icon: "cross.fill",
+            colorHex: "#FFD700",
+            moduleCount: 1,
+            estimatedHours: 1.5,
+            category: .spirituality,
+            difficulty: .intermediate
+        ),
+        CourseInfo(
+            id: "crucifixion_initiation",
+            title: "Death as Initiation",
+            subtitle: "The universal death-rebirth mystery",
+            icon: "arrow.up.to.line.alt",
+            colorHex: "#E8D44D",
+            moduleCount: 1,
+            estimatedHours: 1.5,
+            category: .spirituality,
+            difficulty: .advanced
+        ),
+        CourseInfo(
+            id: "twelve_plus_one",
+            title: "12 + 1 = 13",
+            subtitle: "The sacred code hidden in plain sight",
+            icon: "circle.hexagongrid.fill",
+            colorHex: "#00BCD4",
+            moduleCount: 1,
+            estimatedHours: 1,
+            category: .consciousness,
+            difficulty: .beginner
+        ),
+        CourseInfo(
+            id: "anunnaki",
+            title: "The Anunnaki",
+            subtitle: "Before the beginning — 450,000 years of history",
+            icon: "sparkles",
+            colorHex: "#C0A060",
+            moduleCount: 1,
+            estimatedHours: 2,
+            category: .consciousness,
+            difficulty: .advanced
+        ),
+        CourseInfo(
+            id: "elohim",
+            title: "The Divine Plural — Elohim",
+            subtitle: "Who was never a single god",
+            icon: "person.3.fill",
+            colorHex: "#7B68EE",
+            moduleCount: 1,
+            estimatedHours: 1.5,
+            category: .consciousness,
+            difficulty: .intermediate
+        ),
+        CourseInfo(
+            id: "nephilim_watchers",
+            title: "Nephilim & The Watchers",
+            subtitle: "The forbidden union that changed everything",
+            icon: "figure.stand.line.dotted.figure.stand",
+            colorHex: "#4ECDC4",
+            moduleCount: 1,
+            estimatedHours: 1.5,
+            category: .consciousness,
+            difficulty: .advanced
+        ),
+        CourseInfo(
+            id: "urantia_gaia",
+            title: "Urantia & Gaia",
+            subtitle: "Two names, one living Earth",
+            icon: "globe.europe.africa.fill",
+            colorHex: "#27AE60",
+            moduleCount: 1,
+            estimatedHours: 1,
+            category: .science,
+            difficulty: .intermediate
+        ),
+        CourseInfo(
+            id: "christ_consciousness",
+            title: "The Return — Christ Consciousness",
+            subtitle: "A name or a collective activation?",
+            icon: "sun.max.trianglebadge.exclamationmark.fill",
+            colorHex: "#FFD700",
+            moduleCount: 1,
+            estimatedHours: 1.5,
+            category: .spirituality,
+            difficulty: .intermediate
+        ),
+        CourseInfo(
+            id: "lemuria_atlantis",
+            title: "The Two Lost Worlds",
+            subtitle: "Two civilizations destroyed by ego",
+            icon: "water.waves",
+            colorHex: "#1ABC9C",
+            moduleCount: 1,
+            estimatedHours: 2,
+            category: .consciousness,
+            difficulty: .advanced
+        ),
+        CourseInfo(
+            id: "abracadabra",
+            title: "ABRACADABRA",
+            subtitle: "The word that creates reality",
+            icon: "wand.and.stars",
+            colorHex: "#9B59B6",
+            moduleCount: 1,
+            estimatedHours: 1,
+            category: .consciousness,
+            difficulty: .beginner
+        ),
+        CourseInfo(
+            id: "tarot_arcana",
+            title: "The Arcana Within",
+            subtitle: "The soul's map they called the devil's cards",
+            icon: "suit.spade.fill",
+            colorHex: "#8E44AD",
+            moduleCount: 1,
+            estimatedHours: 2,
+            category: .spirituality,
+            difficulty: .intermediate
+        ),
+        CourseInfo(
+            id: "one_forty_four_k",
+            title: "The 144,000",
+            subtitle: "Critical mass of awakened consciousness",
+            icon: "star.leadinghalf.filled",
+            colorHex: "#F39C12",
+            moduleCount: 1,
+            estimatedHours: 1,
+            category: .consciousness,
+            difficulty: .intermediate
+        ),
+        CourseInfo(
+            id: "alchemy_great_work",
+            title: "The Great Work — Alchemy",
+            subtitle: "The science of consciousness transformation",
+            icon: "flask.fill",
+            colorHex: "#D4AF37",
+            moduleCount: 1,
+            estimatedHours: 2,
+            category: .consciousness,
+            difficulty: .advanced
+        ),
+        CourseInfo(
+            id: "antarctica",
+            title: "Antarctica — Beyond the Ice Wall",
+            subtitle: "The final mystery",
+            icon: "snowflake",
+            colorHex: "#3498DB",
+            moduleCount: 2,
+            estimatedHours: 3,
+            category: .consciousness,
+            difficulty: .advanced
+        ),
+        
+        // QUANTUM NOURISH
+        CourseInfo(
+            id: "quantum_nourish",
+            title: "Quantum Nourish",
+            subtitle: "Eat your way to enlightenment",
+            icon: "leaf.circle.fill",
+            colorHex: "#2ECC71",
+            moduleCount: 8,
+            estimatedHours: 6,
+            category: .practical,
+            difficulty: .beginner
         )
     ]
     
@@ -540,6 +766,48 @@ struct CourseHubView: View {
                 SolarTheologyCourseView()
             case "godmode_esoteric":
                 GodModeCourseView()
+            // ALEXANDRIA EXPANSION COURSES
+            case "antichrist_decoded":
+                if let c = AlexandriaCourseRegistry.course(for: "antichrist_decoded") { AlexandriaCourseView(course: c) }
+            case "baphomet_mirror":
+                if let c = AlexandriaCourseRegistry.course(for: "baphomet_mirror") { AlexandriaCourseView(course: c) }
+            case "gospel_judas":
+                if let c = AlexandriaCourseRegistry.course(for: "gospel_judas") { AlexandriaCourseView(course: c) }
+            case "guilt_power":
+                if let c = AlexandriaCourseRegistry.course(for: "guilt_power") { AlexandriaCourseView(course: c) }
+            case "tonantzin":
+                if let c = AlexandriaCourseRegistry.course(for: "tonantzin") { AlexandriaCourseView(course: c) }
+            case "cross_solar":
+                if let c = AlexandriaCourseRegistry.course(for: "cross_solar") { AlexandriaCourseView(course: c) }
+            case "crucifixion_initiation":
+                if let c = AlexandriaCourseRegistry.course(for: "crucifixion_initiation") { AlexandriaCourseView(course: c) }
+            case "twelve_plus_one":
+                if let c = AlexandriaCourseRegistry.course(for: "twelve_plus_one") { AlexandriaCourseView(course: c) }
+            case "anunnaki":
+                if let c = AlexandriaCourseRegistry.course(for: "anunnaki") { AlexandriaCourseView(course: c) }
+            case "elohim":
+                if let c = AlexandriaCourseRegistry.course(for: "elohim") { AlexandriaCourseView(course: c) }
+            case "nephilim_watchers":
+                if let c = AlexandriaCourseRegistry.course(for: "nephilim_watchers") { AlexandriaCourseView(course: c) }
+            case "urantia_gaia":
+                if let c = AlexandriaCourseRegistry.course(for: "urantia_gaia") { AlexandriaCourseView(course: c) }
+            case "christ_consciousness":
+                if let c = AlexandriaCourseRegistry.course(for: "christ_consciousness") { AlexandriaCourseView(course: c) }
+            case "lemuria_atlantis":
+                if let c = AlexandriaCourseRegistry.course(for: "lemuria_atlantis") { AlexandriaCourseView(course: c) }
+            case "abracadabra":
+                if let c = AlexandriaCourseRegistry.course(for: "abracadabra") { AlexandriaCourseView(course: c) }
+            case "tarot_arcana":
+                if let c = AlexandriaCourseRegistry.course(for: "tarot_arcana") { AlexandriaCourseView(course: c) }
+            case "one_forty_four_k":
+                if let c = AlexandriaCourseRegistry.course(for: "one_forty_four_k") { AlexandriaCourseView(course: c) }
+            case "alchemy_great_work":
+                if let c = AlexandriaCourseRegistry.course(for: "alchemy_great_work") { AlexandriaCourseView(course: c) }
+            case "antarctica":
+                if let c = AlexandriaCourseRegistry.course(for: "antarctica") { AlexandriaCourseView(course: c) }
+            // QUANTUM NOURISH
+            case "quantum_nourish":
+                QuantumNourishView()
             default:
                 CourseDetailPlaceholder(course: course)
             }

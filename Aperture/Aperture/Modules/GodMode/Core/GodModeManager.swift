@@ -18,6 +18,25 @@ class GodModeManager: ObservableObject {
     @Published private(set) var isRevealing: Bool = false
     @Published var showGodModePortal: Bool = false
     
+    // MARK: - God Mode Email Whitelist (Feature Flag)
+    
+    static let godModeEmails: [String] = [
+        "2ronald.hernandez@gmail.com"
+    ]
+    
+    /// Check if the current authenticated user is authorized for God Mode
+    var isAuthorizedUser: Bool {
+        guard let email = currentUserEmail else { return false }
+        return Self.godModeEmails.contains(email.lowercased())
+    }
+    
+    private var currentUserEmail: String? {
+        if let email = UserDefaults.standard.string(forKey: "user.email"), !email.isEmpty {
+            return email
+        }
+        return nil
+    }
+    
     // MARK: - Secret Tap Detection
     
     @Published var tapCount: Int = 0
@@ -80,6 +99,14 @@ class GodModeManager: ObservableObject {
     
     private func triggerUnlock() {
         guard !isRevealing else { return }
+        
+        // CRITICAL: Only allow authorized emails to access God Mode
+        guard isAuthorizedUser else {
+            tapCount = 0
+            tapResetTimer?.cancel()
+            HapticManager.shared.heavy()
+            return
+        }
         
         tapCount = 0
         tapResetTimer?.cancel()

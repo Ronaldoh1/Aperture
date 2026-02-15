@@ -194,7 +194,13 @@
         }
       }
     },
+    "\"Every item on this list was put in your food supply by people who understand frequency. They know exactly what these substances do to your pineal gland, your gut, and your electromagnetic field. This isn't negligence. It's engineering.\"" : {
+
+    },
     "\"EXPLODE THE" : {
+
+    },
+    "\"Fasting isn't starvation — it's liberation. Your body knows how to heal itself. You just have to stop overwhelming it with inputs long enough for the repair systems to activate. Every ancient tradition knew this. Modern science is finally catching up.\"" : {
 
     },
     "\"Girls from 9-10 are in demand...\"" : {
@@ -278,6 +284,9 @@
           }
         }
       }
+    },
+    "\"Meal plans are based on publicly available nutritional research as of 2025. We encourage you to do your own additional research and consult with professionals. We'll continue updating as new science emerges. Your body, your responsibility, your power.\"" : {
+
     },
     "\"Not thinking about anything is Zen. Once you know this, walking, sitting, or lying down, everything you do is Zen.\" — Bodhidharma" : {
       "localizations" : {
@@ -480,6 +489,9 @@
         }
       }
     },
+    "\"This isn't a diet. It's a frequency protocol. Each day builds on the last. By Day 7, your body will be communicating things your mind couldn't hear before. Listen.\"" : {
+
+    },
     "\"Those who believe they're immune to manipulation are the MOST suggestible. They're the easiest to manipulate.\"" : {
 
     },
@@ -526,6 +538,12 @@
           }
         }
       }
+    },
+    "\"Your body is a measuring instrument. Sleep quality, heart rate variability, and activity levels all affect how efficiently you absorb high-frequency nutrition. The data doesn't lie — and neither does your body.\"" : {
+
+    },
+    "\"Your body is a temple. But what frequency is that temple vibrating at? Every meal is a vote — for consciousness or for sleep. Choose wisely.\"" : {
+
     },
     "(%@)" : {
       "localizations" : {
@@ -743,6 +761,9 @@
     "%@ streak" : {
 
     },
+    "%@ TIER" : {
+
+    },
     "%@ TRIGGERS" : {
       "localizations" : {
         "es" : {
@@ -839,6 +860,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%lld"
+          }
+        }
+      }
+    },
+    "%lld / %lld badges earned" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld / %2$lld badges earned"
           }
         }
       }
@@ -955,6 +986,16 @@
     },
     "%lld days" : {
 
+    },
+    "%lld days • Target %lld+ MHz" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld days • Target %2$lld+ MHz"
+          }
+        }
+      }
     },
     "%lld days. %@" : {
       "localizations" : {
@@ -1074,6 +1115,9 @@
           }
         }
       }
+    },
+    "%lld MHz" : {
+
     },
     "%lld min" : {
       "localizations" : {
@@ -1229,6 +1273,16 @@
         }
       }
     },
+    "%lld RED FLAG%@ FOUND" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld RED FLAG%2$@ FOUND"
+          }
+        }
+      }
+    },
     "%lld Red Flags" : {
       "localizations" : {
         "es" : {
@@ -1240,6 +1294,9 @@
       }
     },
     "%lld remaining" : {
+
+    },
+    "%lld results" : {
 
     },
     "%lld shows" : {
@@ -1615,7 +1672,13 @@
         }
       }
     },
+    "%lldg protein" : {
+
+    },
     "%lldg sugar" : {
+
+    },
+    "%lldg/100g" : {
 
     },
     "%lldm" : {
@@ -1877,6 +1940,9 @@
     "+" : {
 
     },
+    "+ %lld more sources" : {
+
+    },
     "+%lld" : {
 
     },
@@ -1921,6 +1987,12 @@
 
     },
     "= THE LIE" : {
+
+    },
+    "~%lld" : {
+
+    },
+    "~%lld MHz" : {
 
     },
     "~%lld teachings" : {
@@ -2058,6 +2130,9 @@
         }
       }
     },
+    "☀️ SunFlow: Reignited" : {
+
+    },
     "☎️ HOTLINES" : {
       "localizations" : {
         "es" : {
@@ -2079,6 +2154,12 @@
       }
     },
     "☠️" : {
+
+    },
+    "☠️ DEATH" : {
+
+    },
+    "☠️ Toxic" : {
 
     },
     "☧" : {
@@ -2345,6 +2426,9 @@
     "⚠️ ZIONISM ≠ JUDAISM ⚠️" : {
 
     },
+    "⚡" : {
+
+    },
     "⚡ ADVANCED CAUSE & EFFECT" : {
       "localizations" : {
         "es" : {
@@ -2378,6 +2462,9 @@
     "⚡ THE ONLY DIFFERENCE ⚡" : {
 
     },
+    "⚡ TRANSCENDENCE" : {
+
+    },
     "⚡ WORDS ENDING IN EL" : {
       "localizations" : {
         "es" : {
@@ -2400,7 +2487,13 @@
     "🇪🇬" : {
 
     },
+    "🇪🇸" : {
+
+    },
     "🇸🇻" : {
+
+    },
+    "🇺🇸" : {
 
     },
     "🇻🇪" : {
@@ -2846,6 +2939,9 @@
       }
     },
     "🍎 GARDEN OF EDEN — REREAD 🍎" : {
+
+    },
+    "🍹" : {
 
     },
     "🎉 LEVEL UP!" : {
@@ -4165,6 +4261,9 @@
         }
       }
     },
+    "🧘 Transcendent" : {
+
+    },
     "🧠" : {
 
     },
@@ -4609,6 +4708,9 @@
     "7 Gates to Mastery" : {
 
     },
+    "7-Day Consciousness Elevation Protocol" : {
+
+    },
     "7-day free trial • Cancel anytime" : {
       "localizations" : {
         "es" : {
@@ -4892,6 +4994,9 @@
 
     },
     "60,000+ migrants missing." : {
+
+    },
+    "72+ MHz" : {
 
     },
     "85+ Forbidden Teachings" : {
@@ -5188,6 +5293,9 @@
     "Active" : {
 
     },
+    "ACTIVE FAST" : {
+
+    },
     "Active for %lld min" : {
 
     },
@@ -5334,6 +5442,9 @@
       }
     },
     "Add to Inbox" : {
+
+    },
+    "ADD TO TODAY'S LOG" : {
 
     },
     "Adjust Frequency" : {
@@ -5717,6 +5828,9 @@
           }
         }
       }
+    },
+    "ANALYZE FREQUENCY" : {
+
     },
     "Analyze Ingredients" : {
 
@@ -6506,10 +6620,19 @@
         }
       }
     },
+    "Before We Begin" : {
+
+    },
     "Before we begin, we need to verify a few things to ensure this content is appropriate for you." : {
 
     },
     "Before we begin..." : {
+
+    },
+    "BEFORE YOU BEGIN" : {
+
+    },
+    "Before you eat, pause and check:" : {
 
     },
     "BEFORE YOU POST" : {
@@ -6702,6 +6825,9 @@
           }
         }
       }
+    },
+    "Best: %@" : {
+
     },
     "Beta Control Panel" : {
       "localizations" : {
@@ -6925,6 +7051,9 @@
         }
       }
     },
+    "BUILDING 🔄" : {
+
+    },
     "Building your recommendations..." : {
 
     },
@@ -7045,6 +7174,9 @@
     "CABALLEROS DEL ZODIACO" : {
 
     },
+    "CALCIFIERS — AVOID THESE" : {
+
+    },
     "Called by CONSTANTINE" : {
 
     },
@@ -7057,6 +7189,9 @@
           }
         }
       }
+    },
+    "Camera will read text automatically" : {
+
     },
     "Cancel" : {
       "localizations" : {
@@ -7164,6 +7299,9 @@
           }
         }
       }
+    },
+    "CHAKRA: %@" : {
+
     },
     "CHALLENGES" : {
 
@@ -7318,6 +7456,9 @@
           }
         }
       }
+    },
+    "CITED SOURCES" : {
+
     },
     "CLARITY CODEX" : {
       "localizations" : {
@@ -7683,6 +7824,12 @@
         }
       }
     },
+    "Connect Apple Health to correlate your biometrics with food frequency. See how sleep, HRV, and activity affect your vibrational state." : {
+
+    },
+    "CONNECT HEALTH DATA" : {
+
+    },
     "Consciousness" : {
       "localizations" : {
         "es" : {
@@ -7752,6 +7899,9 @@
     "Consciousness is the fabric" : {
 
     },
+    "CONSCIOUSNESS KILLERS" : {
+
+    },
     "CONSCIOUSNESS TOOLS" : {
       "localizations" : {
         "es" : {
@@ -7771,6 +7921,9 @@
           }
         }
       }
+    },
+    "Consciousness-Friendly Power" : {
+
     },
     "Conservative" : {
       "localizations" : {
@@ -8003,6 +8156,9 @@
     "Copy the ingredient list from a product and paste it below" : {
 
     },
+    "Copy the ingredients from any food label and paste them here. We'll decode every item." : {
+
+    },
     "Core" : {
       "localizations" : {
         "es" : {
@@ -8054,6 +8210,9 @@
       }
     },
     "Corrupt" : {
+
+    },
+    "COSMIC BADGES" : {
 
     },
     "COSMIC SUGGESTIONS" : {
@@ -8302,6 +8461,9 @@
         }
       }
     },
+    "DAILY CHECK-IN" : {
+
+    },
     "Daily Check-In • Cognitive Dissonance Log\nReality Audit • Question Bank" : {
       "localizations" : {
         "es" : {
@@ -8374,6 +8536,9 @@
     "DAILY SUNRISE RITUAL" : {
 
     },
+    "DAILY VIBE TRACKER" : {
+
+    },
     "Daily Wisdom" : {
       "localizations" : {
         "es" : {
@@ -8434,6 +8599,16 @@
         }
       }
     },
+    "DAY %lld OF %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "DAY %1$lld OF %2$lld"
+          }
+        }
+      }
+    },
     "Day %lld/30" : {
 
     },
@@ -8457,6 +8632,9 @@
         }
       }
     },
+    "DECALCIFIERS & ACTIVATORS" : {
+
+    },
     "DECEIVER" : {
 
     },
@@ -8473,7 +8651,13 @@
         }
       }
     },
+    "DECODE FREQUENCY" : {
+
+    },
     "DECODE MODULES" : {
+
+    },
+    "Decode What's Really in Your Food" : {
 
     },
     "DECODED" : {
@@ -9131,6 +9315,9 @@
     "Easy to hide" : {
 
     },
+    "Eat Your Way to Enlightenment" : {
+
+    },
     "Edit" : {
       "localizations" : {
         "es" : {
@@ -9162,6 +9349,9 @@
       }
     },
     "Effect" : {
+
+    },
+    "EFFECTS" : {
 
     },
     "Ego Seek" : {
@@ -9235,6 +9425,9 @@
           }
         }
       }
+    },
+    "ELEVATED ✨" : {
+
     },
     "Email" : {
       "localizations" : {
@@ -9417,6 +9610,9 @@
         }
       }
     },
+    "End Fast" : {
+
+    },
     "End Session" : {
       "localizations" : {
         "es" : {
@@ -9457,6 +9653,9 @@
         }
       }
     },
+    "ENERGY LEVEL" : {
+
+    },
     "Energy:" : {
       "localizations" : {
         "es" : {
@@ -9476,6 +9675,9 @@
           }
         }
       }
+    },
+    "ENGLISH" : {
+
     },
     "Enter a name..." : {
       "extractionState" : "stale",
@@ -9617,6 +9819,9 @@
         }
       }
     },
+    "ESPAÑOL" : {
+
+    },
     "ESSENTIAL CONSCIOUSNESS TALKS" : {
       "localizations" : {
         "es" : {
@@ -9639,6 +9844,9 @@
           }
         }
       }
+    },
+    "ESTIMATED FREQUENCY" : {
+
     },
     "ETYMOLOGY IS GNOSIS" : {
 
@@ -10062,7 +10270,13 @@
     "Fasting Guide" : {
 
     },
+    "FASTING PROTOCOLS" : {
+
+    },
     "FATHER" : {
+
+    },
+    "FEAR:" : {
 
     },
     "Feature Flags" : {
@@ -10287,6 +10501,9 @@
     "Food, sunlight" : {
 
     },
+    "Foods that decalcify your third eye. Foods that calcify it. Know the difference." : {
+
+    },
     "Forbidden Gospels" : {
       "localizations" : {
         "es" : {
@@ -10350,6 +10567,9 @@
 
     },
     "Found %lld Toxic Ingredients" : {
+
+    },
+    "FOUND IN" : {
 
     },
     "Found in: %@" : {
@@ -10448,6 +10668,12 @@
         }
       }
     },
+    "FREQUENCY CHALLENGES" : {
+
+    },
+    "FREQUENCY DISTRIBUTION" : {
+
+    },
     "Frequency Mastery" : {
       "localizations" : {
         "es" : {
@@ -10464,6 +10690,12 @@
     "Frequency shifts" : {
 
     },
+    "FREQUENCY SPECTRUM" : {
+
+    },
+    "FREQUENCY TARGETS" : {
+
+    },
     "Frequently Asked Questions" : {
       "localizations" : {
         "es" : {
@@ -10473,6 +10705,9 @@
           }
         }
       }
+    },
+    "From Death to Transcendence" : {
+
     },
     "From micro-moments to Ultra Instinct" : {
       "localizations" : {
@@ -11019,6 +11254,12 @@
     "High entropy → No structure to record" : {
 
     },
+    "HIGH-VIBE PROTEIN SOURCES" : {
+
+    },
+    "HIGH-VIBE SNACKS" : {
+
+    },
     "Hindu origins • December 25th decoded • Rome's secret" : {
 
     },
@@ -11259,6 +11500,9 @@
         }
       }
     },
+    "HYDRATION" : {
+
+    },
     "I Am Awakened" : {
 
     },
@@ -11342,6 +11586,9 @@
         }
       }
     },
+    "I UNDERSTAND — LET'S GO" : {
+
+    },
     "I understand and accept these notices" : {
 
     },
@@ -11388,6 +11635,9 @@
           }
         }
       }
+    },
+    "Ideal: %@" : {
+
     },
     "If \"separation of church and state\" was real..." : {
 
@@ -11567,6 +11817,9 @@
 
     },
     "Info by SHIP" : {
+
+    },
+    "INGREDIENT BREAKDOWN" : {
 
     },
     "Ingredient Scanner" : {
@@ -11891,6 +12144,9 @@
     "It's UP. ⬆️" : {
 
     },
+    "items" : {
+
+    },
     "Japan • Buddhism • Ch'an" : {
       "localizations" : {
         "es" : {
@@ -12067,6 +12323,9 @@
           }
         }
       }
+    },
+    "KEY NUTRIENT FOCUS" : {
+
     },
     "Key Points" : {
 
@@ -12509,6 +12768,9 @@
         }
       }
     },
+    "Level Up Your Frequency" : {
+
+    },
     "LEVEL UP!" : {
 
     },
@@ -12588,6 +12850,9 @@
         }
       }
     },
+    "Living Liquid Intelligence" : {
+
+    },
     "Local order" : {
 
     },
@@ -12617,6 +12882,9 @@
     "Log" : {
 
     },
+    "LOG A MEAL" : {
+
+    },
     "Log a moment when you lost awareness and reacted automatically" : {
       "localizations" : {
         "es" : {
@@ -12627,6 +12895,9 @@
         }
       }
     },
+    "LOG CHECK-IN" : {
+
+    },
     "Log Dissonance" : {
       "localizations" : {
         "es" : {
@@ -12636,6 +12907,9 @@
           }
         }
       }
+    },
+    "LOG MEAL" : {
+
     },
     "Log moments when reality conflicts\nwith what you were taught" : {
       "localizations" : {
@@ -12668,6 +12942,9 @@
       }
     },
     "Log Usage" : {
+
+    },
+    "Log your first meal to start tracking your vibrational frequency" : {
 
     },
     "Logged today" : {
@@ -13097,6 +13374,12 @@
         }
       }
     },
+    "MHz" : {
+
+    },
+    "MHz AVG" : {
+
+    },
     "Micro-Practice Reminders" : {
       "localizations" : {
         "es" : {
@@ -13289,6 +13572,9 @@
 
     },
     "Months to cross" : {
+
+    },
+    "MOOD" : {
 
     },
     "More" : {
@@ -13624,6 +13910,9 @@
         }
       }
     },
+    "No compromises. Your body is your temple AND your gym." : {
+
+    },
     "No contacts added. Add contacts in Settings." : {
       "localizations" : {
         "es" : {
@@ -13687,10 +13976,19 @@
         }
       }
     },
+    "No known red flags detected" : {
+
+    },
     "No known toxins detected!" : {
 
     },
     "No known toxins found" : {
+
+    },
+    "No match found for '%@'" : {
+
+    },
+    "No meals logged today" : {
 
     },
     "No one pushed you. No one forced you." : {
@@ -14295,6 +14593,9 @@
         }
       }
     },
+    "Open Your Third Eye Through Diet" : {
+
+    },
     "Opening your eyes..." : {
 
     },
@@ -14326,6 +14627,9 @@
       }
     },
     "Or does that sound like a narcissistic control freak?" : {
+
+    },
+    "OR PASTE INGREDIENTS MANUALLY" : {
 
     },
     "Or search from:" : {
@@ -14559,7 +14863,16 @@
     "Paste any headline, article, or social media post..." : {
 
     },
+    "PASTE INGREDIENT LIST" : {
+
+    },
+    "Paste ingredient list here..." : {
+
+    },
     "Paste Ingredients Here" : {
+
+    },
+    "Paste Supplement Ingredients" : {
 
     },
     "PASTE YOUR OFFER LETTER" : {
@@ -14745,6 +15058,9 @@
     "Pineal Gland" : {
 
     },
+    "Pineal safe" : {
+
+    },
     "PISTIS SOPHIA" : {
 
     },
@@ -14783,6 +15099,9 @@
           }
         }
       }
+    },
+    "POINT AT INGREDIENT LABEL" : {
+
     },
     "Points" : {
 
@@ -15339,6 +15658,9 @@
         }
       }
     },
+    "Protein: %@" : {
+
+    },
     "Psyop Scanner" : {
 
     },
@@ -15358,6 +15680,12 @@
         }
       }
     },
+    "QUANTUM BIOMETRICS" : {
+
+    },
+    "QUANTUM CLEANSING" : {
+
+    },
     "Quantum Fields & Embodied Consciousness" : {
       "localizations" : {
         "es" : {
@@ -15367,6 +15695,36 @@
           }
         }
       }
+    },
+    "QUANTUM FITNESS" : {
+
+    },
+    "QUANTUM INGREDIENT SCANNER" : {
+
+    },
+    "QUANTUM INSIGHT ENGINE" : {
+
+    },
+    "QUANTUM JUICE BAR" : {
+
+    },
+    "QUANTUM MEAL PLAN" : {
+
+    },
+    "QUANTUM NOURISH" : {
+
+    },
+    "Quantum Nourish is an educational tool for exploring the relationship between food choices and consciousness. Please read and acknowledge the following:" : {
+
+    },
+    "Quantum Nutrition Framework" : {
+
+    },
+    "Quantum Pillar" : {
+
+    },
+    "QUANTUM TOOLS" : {
+
     },
     "Question %lld of %lld" : {
       "localizations" : {
@@ -15518,6 +15876,9 @@
         }
       }
     },
+    "QUICK PRESETS" : {
+
+    },
     "QUICK REALITY CHECK" : {
       "localizations" : {
         "es" : {
@@ -15527,6 +15888,9 @@
           }
         }
       }
+    },
+    "QUICK REFERENCE" : {
+
     },
     "Quick Reference: Who Owns What" : {
       "localizations" : {
@@ -15997,6 +16361,9 @@
         }
       }
     },
+    "REFLECT" : {
+
+    },
     "Reflect on Last Week" : {
 
     },
@@ -16151,6 +16518,9 @@
         }
       }
     },
+    "Research is current as of 2025. We encourage additional research and professional consultation. Updates will be ongoing." : {
+
+    },
     "Research Resources" : {
       "localizations" : {
         "es" : {
@@ -16198,6 +16568,9 @@
 
     },
     "Reset to Defaults" : {
+
+    },
+    "Reset. Purify. Elevate." : {
 
     },
     "Resolved" : {
@@ -16315,6 +16688,9 @@
         }
       }
     },
+    "REWARD" : {
+
+    },
     "Rewrite past events in your imagination.\nRemember them differently until the memory feels natural." : {
       "localizations" : {
         "es" : {
@@ -16344,6 +16720,9 @@
           }
         }
       }
+    },
+    "RULES" : {
+
     },
     "Run Security Audit" : {
       "localizations" : {
@@ -16646,7 +17025,16 @@
     "Scan" : {
 
     },
+    "SCAN AGAIN" : {
+
+    },
+    "SCAN FOR RED FLAGS" : {
+
+    },
     "Scan ingredients, expose fast food & drinks" : {
+
+    },
+    "SCAN VERDICT" : {
 
     },
     "Scene: %@" : {
@@ -16658,6 +17046,9 @@
           }
         }
       }
+    },
+    "SCHEDULE" : {
+
     },
     "Schedule Focus Time" : {
 
@@ -16777,6 +17168,9 @@
           }
         }
       }
+    },
+    "Search any food, ingredient, or chemical..." : {
+
     },
     "Search Aperture..." : {
       "localizations" : {
@@ -17198,7 +17592,13 @@
         }
       }
     },
+    "SHARE" : {
+
+    },
     "Share Your Feedback" : {
+
+    },
+    "SHARE YOUR VIBE MAP" : {
 
     },
     "SHARED PROOF: WE ALL THE SAME" : {
@@ -17695,6 +18095,9 @@
     "Start Challenge" : {
 
     },
+    "START CHALLENGE" : {
+
+    },
     "Start Collecting" : {
 
     },
@@ -17747,6 +18150,9 @@
         }
       }
     },
+    "START LOGGING" : {
+
+    },
     "Start My Awakening" : {
 
     },
@@ -17759,6 +18165,9 @@
           }
         }
       }
+    },
+    "START THIS FAST" : {
+
     },
     "Start Today's Practice" : {
 
@@ -17797,6 +18206,9 @@
       }
     },
     "Statistical flow" : {
+
+    },
+    "STATUS" : {
 
     },
     "Stay calm. Assert rights clearly. Document everything." : {
@@ -17870,6 +18282,9 @@
           }
         }
       }
+    },
+    "STREAK" : {
+
     },
     "Streak Protection" : {
       "localizations" : {
@@ -18040,10 +18455,22 @@
         }
       }
     },
+    "SUPPLEMENT SCANNER" : {
+
+    },
     "SUPPRESSED TRUTH" : {
 
     },
     "Surrender" : {
+
+    },
+    "SWAP FOR" : {
+
+    },
+    "SWAP:" : {
+
+    },
+    "Swap: %@" : {
 
     },
     "Swipe to explore samples" : {
@@ -18057,6 +18484,12 @@
       }
     },
     "Swipe up or down to adjust" : {
+
+    },
+    "SYMBOL DECODER" : {
+
+    },
+    "SYMPTOMS (select all that apply)" : {
 
     },
     "SYNCHRONICITIES" : {
@@ -18151,6 +18584,9 @@
         }
       }
     },
+    "Tap any tier to explore its foods" : {
+
+    },
     "Tap any tradition to see how it connects" : {
       "localizations" : {
         "es" : {
@@ -18171,6 +18607,9 @@
         }
       }
     },
+    "Tap each symbol to see the truth behind the fear" : {
+
+    },
     "Tap for full profile" : {
       "localizations" : {
         "es" : {
@@ -18190,6 +18629,9 @@
           }
         }
       }
+    },
+    "Tap to decode →" : {
+
     },
     "TAP TO EXPOSE" : {
       "localizations" : {
@@ -18252,6 +18694,9 @@
     "Tap to view your badge collection" : {
 
     },
+    "TARGET" : {
+
+    },
     "TARGET NIGHTS: %lld" : {
       "localizations" : {
         "es" : {
@@ -18261,6 +18706,9 @@
           }
         }
       }
+    },
+    "Target: %lld+ MHz" : {
+
     },
     "Technology has outpaced the human brain's ability to adapt. The same techniques that train dolphins control populations. This course teaches you to see the mechanisms." : {
 
@@ -18303,6 +18751,9 @@
           }
         }
       }
+    },
+    "TEST THIS MEAL?" : {
+
     },
     "Text Details" : {
       "localizations" : {
@@ -18883,6 +19334,9 @@
         }
       }
     },
+    "THE INVERSION" : {
+
+    },
     "THE INVITATION" : {
 
     },
@@ -18893,6 +19347,9 @@
 
     },
     "THE KEY REVELATION" : {
+
+    },
+    "The Kill List" : {
 
     },
     "THE KINGDOM WITHIN" : {
@@ -19154,6 +19611,9 @@
     "The pineal gland / pine cone / third eye is EVERYWHERE in ancient art and architecture. They know. They just don't tell YOU." : {
 
     },
+    "THE PINEAL PROTOCOL" : {
+
+    },
     "The playbook hasn't changed since 1492." : {
 
     },
@@ -19361,6 +19821,12 @@
         }
       }
     },
+    "THE SIX PILLARS" : {
+
+    },
+    "THE SIX PILLARS OF QUANTUM NUTRITION" : {
+
+    },
     "The story they didn't want you to know" : {
       "localizations" : {
         "es" : {
@@ -19513,6 +19979,9 @@
         }
       }
     },
+    "THE VIBE SPECTRUM" : {
+
+    },
     "The villains hiding in plain sight" : {
       "localizations" : {
         "es" : {
@@ -19630,6 +20099,9 @@
           }
         }
       }
+    },
+    "These substances actively destroy your consciousness hardware. Eliminate them." : {
+
     },
     "THEY ARE NOT THE SAME" : {
 
@@ -19812,6 +20284,9 @@
           }
         }
       }
+    },
+    "This doesn't guarantee safety — always research individual ingredients and consult your healthcare provider." : {
+
     },
     "This helps personalize your companion to match your unique journey." : {
       "extractionState" : "stale",
@@ -20053,6 +20528,9 @@
         }
       }
     },
+    "TIMELINE" : {
+
+    },
     "Tips:" : {
       "localizations" : {
         "es" : {
@@ -20086,6 +20564,9 @@
 
     },
     "TODAY'S FOCUS BLOCKS" : {
+
+    },
+    "TODAY'S FUEL" : {
 
     },
     "Today's ritual complete!" : {
@@ -20131,6 +20612,9 @@
       }
     },
     "Top Fast Food Chains" : {
+
+    },
+    "TOP FOODS" : {
 
     },
     "TOP PICKS FOR AWAKENING" : {
@@ -20215,6 +20699,9 @@
           }
         }
       }
+    },
+    "Train Hard. Eat High-Vibe." : {
+
     },
     "TRAITS (%lld)" : {
       "extractionState" : "stale",
@@ -20372,6 +20859,9 @@
     "TRUTH-SEEKER SAVES DIVINE FEMININE" : {
 
     },
+    "TRUTH:" : {
+
+    },
     "Truth: %lld%%" : {
       "localizations" : {
         "es" : {
@@ -20415,6 +20905,9 @@
     "Try Force" : {
 
     },
+    "Try scanning the ingredient label instead" : {
+
+    },
     "Try Surrender" : {
 
     },
@@ -20427,6 +20920,9 @@
           }
         }
       }
+    },
+    "Try: %@" : {
+
     },
     "Turn your commute into an enlightenment portal" : {
       "localizations" : {
@@ -20786,6 +21282,9 @@
         }
       }
     },
+    "VIBE SCANNER" : {
+
+    },
     "Vibration Shield" : {
       "localizations" : {
         "es" : {
@@ -20797,6 +21296,9 @@
       }
     },
     "View All %lld Chemicals →" : {
+
+    },
+    "VIEW ALL →" : {
 
     },
     "View by State" : {
@@ -20994,6 +21496,9 @@
         }
       }
     },
+    "WATER INTAKE" : {
+
+    },
     "We All The Same" : {
       "localizations" : {
         "es" : {
@@ -21142,6 +21647,9 @@
     "What are they so afraid of people seeing\nthat they need this much machinery to hide it?" : {
 
     },
+    "What are you about to eat?" : {
+
+    },
     "What brings you to Aperture?" : {
       "localizations" : {
         "es" : {
@@ -21151,6 +21659,9 @@
           }
         }
       }
+    },
+    "What did you eat?" : {
+
     },
     "WHAT DO YOU BELIEVE?" : {
       "localizations" : {
@@ -21516,6 +22027,9 @@
           }
         }
       }
+    },
+    "What's Your Frequency Today?" : {
+
     },
     "When Christianity became the official religion of the Empire, spirituality was no longer an experience — it became a doctrine. The gospels that did not uphold guilt, eternal sacrifice, and the authority of the Church were branded as heresy.\n\nNot because they were fake.\nBut because they were too free." : {
       "localizations" : {
@@ -22011,6 +22525,9 @@
     "You can criticize ANY other political movement." : {
 
     },
+    "You can review these disclaimers anytime from the Quantum Nourish settings." : {
+
+    },
     "You can't avoid everything, but you can make informed choices. Knowledge is power." : {
       "localizations" : {
         "es" : {
@@ -22254,6 +22771,9 @@
     "Your body is a temple. Know what you're putting into it." : {
 
     },
+    "Your Body's Frequency Report" : {
+
+    },
     "Your clarity becomes a light guiding others to the top. In a world trapped at the bottom, climbing is a REVOLUTIONARY ACT." : {
       "localizations" : {
         "es" : {
@@ -22473,6 +22993,9 @@
         }
       }
     },
+    "YOUR LEVEL" : {
+
+    },
     "Your manifestations will appear here." : {
       "localizations" : {
         "es" : {
@@ -22565,6 +23088,12 @@
     "Your Pineal Gland • Third Eye • Gateway to Source" : {
 
     },
+    "Your pineal gland is the seat of intuition. These foods either activate it or calcify it." : {
+
+    },
+    "Your plate is a portal. Choose your frequency." : {
+
+    },
     "Your Post" : {
       "localizations" : {
         "es" : {
@@ -22648,6 +23177,9 @@
 
     },
     "Your Suggestions" : {
+
+    },
+    "YOUR TRAINING STYLE" : {
 
     },
     "YOUR Trinity" : {

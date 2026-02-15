@@ -1,21 +1,20 @@
 # ═══════════════════════════════════════════════════════════════════════════
-# APERTURE - Fastlane Configuration
-# Supports: TestFlight + Firebase App Distribution
+# APERTURE - Fastlane Configuration v2.0
+# Complete CI/CD: Device builds, TestFlight, Firebase, Static Analysis
 # ═══════════════════════════════════════════════════════════════════════════
 #
-# QUICK START:
-#   1. Install fastlane: brew install fastlane
-#   2. Install Firebase plugin: fastlane add_plugin firebase_app_distribution
-#   3. Update Appfile with your credentials
-#   4. Run: fastlane beta_all (deploys to both!)
-#
-# AVAILABLE LANES:
-#   fastlane build              - Verify build (no signing)
-#   fastlane beta               - TestFlight only
-#   fastlane firebase           - Firebase only
-#   fastlane beta_all           - Both TestFlight + Firebase
-#   fastlane adhoc              - Ad-hoc IPA for direct sharing
-#   fastlane release            - App Store submission
+# QUICK REFERENCE:
+#   fastlane device          - Build & run on connected device (no tests)
+#   fastlane simulator       - Build for simulator (no tests)
+#   fastlane adhoc           - Ad-hoc IPA for sharing
+#   fastlane beta            - TestFlight deployment
+#   fastlane firebase        - Firebase App Distribution
+#   fastlane analyze         - Static code analysis
+#   fastlane lint_spanish    - Check Spanish localization
+#   fastlane security_audit  - Security check
+#   fastlane test            - Run ALL tests
+#   fastlane test_unit       - Unit tests only
+#   fastlane test_ui         - UI tests only
 #
 # ═══════════════════════════════════════════════════════════════════════════
 
@@ -32,249 +31,695 @@ PROJECT = "Aperture.xcodeproj"
 # Firebase Configuration
 FIREBASE_APP_ID = ENV["FIREBASE_APP_ID"] || "1:YOUR_PROJECT_ID:ios:YOUR_APP_ID"
 FIREBASE_TESTERS_FILE = "fastlane/testers.txt"
-FIREBASE_GROUPS = "aperture-testers"  # Firebase tester group name
+FIREBASE_GROUPS = "aperture-testers"
+
+# Build outputs
+OUTPUT_DIR = "./build"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# HELPER: Verbose logging
+# ─────────────────────────────────────────────────────────────────────────────
+
+def log_verbose(message)
+  UI.message("🔍 [VERBOSE] #{message}")
+end
+
+def log_step(step_name)
+  UI.header("═" * 60)
+  UI.header("📍 #{step_name}")
+  UI.header("═" * 60)
+end
 
 # ─────────────────────────────────────────────────────────────────────────────
 # iOS LANES
 # ─────────────────────────────────────────────────────────────────────────────
 
 platform :ios do
-  
+
   # ═══════════════════════════════════════════════════════════════════════════
-  # BUILD CHECK - No signing required
+  # BEFORE ALL - Setup
   # ═══════════════════════════════════════════════════════════════════════════
   
-  desc "🔨 Build the app to verify compilation (no signing)"
+  before_all do |lane|
+    log_verbose("Starting lane: #{lane}")
+    log_verbose("Project: #{PROJECT}")
+    log_verbose("Scheme: #{SCHEME}")
+    log_verbose("Bundle ID: #{APP_IDENTIFIER}")
+    log_verbose("Time: #{Time.now}")
+    
+    # Ensure output directory exists
+    FileUtils.mkdir_p(OUTPUT_DIR)
+  end
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # BUILD - No signing, just verify compilation
+  # ═══════════════════════════════════════════════════════════════════════════
+  
+  desc "🔨 Build only (no signing, no tests) - Fastest verification"
   lane :build do
-    UI.header("Building Aperture...")
+    log_step("Building Aperture (No Signing)")
     
     xcodebuild(
       scheme: SCHEME,
       project: PROJECT,
       destination: "generic/platform=iOS Simulator",
-      xcargs: "-configuration Debug CODE_SIGNING_ALLOWED=NO"
+      xcargs: "-configuration Debug CODE_SIGNING_ALLOWED=NO -skipPackagePluginValidation"
     )
     
     UI.success("✅ Build successful!")
   end
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # DEVICE - Build and run on connected device (NO TESTS)
+  # ═══════════════════════════════════════════════════════════════════════════
   
+  desc "📱 Build and install on connected device (NO tests)"
+  lane :device do |options|
+    log_step("Building for Connected Device")
+    
+    log_verbose("Detecting connected devices...")
+    
+    # Build for device with development signing
+    gym(
+      scheme: SCHEME,
+      project: PROJECT,
+      configuration: "Debug",
+      export_method: "development",
+      output_directory: OUTPUT_DIR,
+      output_name: "Aperture-Device.ipa",
+      clean: options[:clean] || false,
+      include_bitcode: false,
+      include_symbols: true,
+      silent: false,
+      xcargs: "-allowProvisioningUpdates"
+    )
+    
+    UI.success("=" * 60)
+    UI.success("📱 Device build complete!")
+    UI.success("=" * 60)
+    UI.message("IPA: #{OUTPUT_DIR}/Aperture-Device.ipa")
+    UI.message("")
+    UI.message("To install manually:")
+    UI.message("  1. Open Finder → Your iPhone")
+    UI.message("  2. Drag IPA to the app list")
+    UI.message("  OR use: ios-deploy --bundle #{OUTPUT_DIR}/Aperture-Device.ipa")
+  end
   
+  desc "📱 Build for device with CLEAN build"
+  lane :device_clean do
+    device(clean: true)
+  end
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # SIMULATOR - Build and run on simulator (NO TESTS)
+  # ═══════════════════════════════════════════════════════════════════════════
+  
+  desc "🖥️ Build for simulator (NO tests)"
+  lane :simulator do |options|
+    log_step("Building for Simulator")
+    
+    device_name = options[:device] || "iPhone 15 Pro"
+    log_verbose("Target simulator: #{device_name}")
+    
+    xcodebuild(
+      scheme: SCHEME,
+      project: PROJECT,
+      destination: "platform=iOS Simulator,name=#{device_name}",
+      xcargs: "-configuration Debug CODE_SIGNING_ALLOWED=NO -skipPackagePluginValidation"
+    )
+    
+    UI.success("🖥️ Simulator build complete!")
+    UI.message("Run in Xcode or: open -a Simulator")
+  end
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # TESTS - Various test configurations
+  # ═══════════════════════════════════════════════════════════════════════════
+  
+  desc "🧪 Run ALL tests (unit + UI)"
+  lane :test do |options|
+    log_step("Running All Tests")
+    
+    scan(
+      scheme: SCHEME,
+      project: PROJECT,
+      devices: [options[:device] || "iPhone 15 Pro"],
+      clean: options[:clean] || false,
+      code_coverage: true,
+      output_directory: "#{OUTPUT_DIR}/test_output",
+      output_types: "html,junit",
+      xcargs: "-skipPackagePluginValidation"
+    )
+    
+    UI.success("🧪 All tests passed!")
+  end
+  
+  desc "🧪 Run UNIT tests only (fast)"
+  lane :test_unit do |options|
+    log_step("Running Unit Tests Only")
+    
+    scan(
+      scheme: SCHEME,
+      project: PROJECT,
+      devices: [options[:device] || "iPhone 15 Pro"],
+      only_testing: ["ApertureTests"],
+      code_coverage: true,
+      output_directory: "#{OUTPUT_DIR}/test_output",
+      xcargs: "-skipPackagePluginValidation"
+    )
+    
+    UI.success("🧪 Unit tests passed!")
+  end
+  
+  desc "🧪 Run UI/Integration tests only"
+  lane :test_ui do |options|
+    log_step("Running UI Tests Only")
+    
+    scan(
+      scheme: SCHEME,
+      project: PROJECT,
+      devices: [options[:device] || "iPhone 15 Pro"],
+      only_testing: ["ApertureUITests"],
+      code_coverage: false,
+      output_directory: "#{OUTPUT_DIR}/test_output",
+      xcargs: "-skipPackagePluginValidation"
+    )
+    
+    UI.success("🧪 UI tests passed!")
+  end
+  
+  desc "🧪 Skip ALL tests - just verify build"
+  lane :no_tests do
+    build
+  end
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # AD-HOC - Build for direct distribution
+  # ═══════════════════════════════════════════════════════════════════════════
+  
+  desc "📦 Build ad-hoc IPA (verbose)"
+  lane :adhoc do |options|
+    log_step("Building Ad-Hoc IPA")
+    
+    # Increment build number
+    build_num = Time.now.strftime("%Y%m%d.%H%M")
+    log_verbose("Setting build number: #{build_num}")
+    increment_build_number(build_number: build_num)
+    
+    log_verbose("Starting archive...")
+    
+    gym(
+      scheme: SCHEME,
+      project: PROJECT,
+      configuration: "Release",
+      export_method: "ad-hoc",
+      output_directory: OUTPUT_DIR,
+      output_name: "Aperture-AdHoc.ipa",
+      clean: options[:clean] || false,
+      silent: false,
+      include_bitcode: false,
+      include_symbols: true,
+      xcargs: "-allowProvisioningUpdates"
+    )
+    
+    ipa_path = File.expand_path("#{OUTPUT_DIR}/Aperture-AdHoc.ipa")
+    ipa_size = (File.size(ipa_path) / 1024.0 / 1024.0).round(2) rescue "?"
+    
+    UI.success("=" * 60)
+    UI.success("📦 Ad-hoc IPA ready!")
+    UI.success("=" * 60)
+    UI.message("Location: #{ipa_path}")
+    UI.message("Size: #{ipa_size} MB")
+    UI.message("")
+    UI.message("Share via:")
+    UI.message("  • AirDrop to registered devices")
+    UI.message("  • Upload to Firebase: fastlane firebase_upload")
+  end
+
   # ═══════════════════════════════════════════════════════════════════════════
   # TESTFLIGHT BETA
   # ═══════════════════════════════════════════════════════════════════════════
   
-  desc "🚀 Deploy to TestFlight"
+  desc "🚀 Deploy to TestFlight (verbose)"
   lane :beta do |options|
-    UI.header("Deploying to TestFlight")
+    log_step("Deploying to TestFlight")
     
     # Increment build number
     build_num = Time.now.strftime("%Y%m%d.%H%M")
+    log_verbose("Build number: #{build_num}")
     increment_build_number(build_number: build_num)
-    UI.message("Build number: #{build_num}")
     
-    # Build for App Store
-    build_app(
+    log_verbose("Building for App Store distribution...")
+    
+    gym(
       scheme: SCHEME,
       project: PROJECT,
+      configuration: "Release",
       export_method: "app-store",
-      output_directory: "./build",
-      output_name: "Aperture-AppStore.ipa"
+      output_directory: OUTPUT_DIR,
+      output_name: "Aperture-AppStore.ipa",
+      clean: false,
+      silent: false,
+      include_bitcode: false,
+      include_symbols: true,
+      xcargs: "-allowProvisioningUpdates"
     )
     
     # Upload to TestFlight
     changelog = options[:changelog] || generate_changelog
+    log_verbose("Changelog: #{changelog}")
     
-    upload_to_testflight(
+    log_verbose("Uploading to TestFlight...")
+    
+    pilot(
       skip_waiting_for_build_processing: true,
       changelog: changelog,
       distribute_external: false,
       notify_external_testers: false
     )
     
+    UI.success("=" * 60)
     UI.success("🎉 TestFlight upload complete!")
+    UI.success("=" * 60)
     UI.message("Build will be available in ~15-30 minutes")
   end
-  
-  
+
   # ═══════════════════════════════════════════════════════════════════════════
   # FIREBASE APP DISTRIBUTION
   # ═══════════════════════════════════════════════════════════════════════════
   
-  desc "🔥 Deploy to Firebase App Distribution"
+  desc "🔥 Deploy to Firebase App Distribution (verbose)"
   lane :firebase do |options|
-    UI.header("Deploying to Firebase App Distribution")
+    log_step("Deploying to Firebase App Distribution")
     
     # Increment build number
     build_num = Time.now.strftime("%Y%m%d.%H%M")
+    log_verbose("Build number: #{build_num}")
     increment_build_number(build_number: build_num)
     
-    # Build for Ad-Hoc (Firebase uses ad-hoc distribution)
-    build_app(
+    log_verbose("Building ad-hoc for Firebase...")
+    
+    gym(
       scheme: SCHEME,
       project: PROJECT,
+      configuration: "Release",
       export_method: "ad-hoc",
-      output_directory: "./build",
-      output_name: "Aperture-Firebase.ipa"
+      output_directory: OUTPUT_DIR,
+      output_name: "Aperture-Firebase.ipa",
+      silent: false,
+      include_bitcode: false,
+      xcargs: "-allowProvisioningUpdates"
     )
     
     # Release notes
     release_notes = options[:notes] || generate_changelog
+    log_verbose("Release notes: #{release_notes}")
     
-    # Upload to Firebase
+    # Check for Firebase token
+    unless ENV["FIREBASE_CLI_TOKEN"]
+      UI.important("⚠️  FIREBASE_CLI_TOKEN not set!")
+      UI.message("Run: firebase login:ci")
+      UI.message("Then: export FIREBASE_CLI_TOKEN='your_token'")
+      UI.user_error!("Missing Firebase token")
+    end
+    
+    log_verbose("Uploading to Firebase...")
+    log_verbose("App ID: #{FIREBASE_APP_ID}")
+    log_verbose("Groups: #{FIREBASE_GROUPS}")
+    
     firebase_app_distribution(
       app: FIREBASE_APP_ID,
-      ipa_path: "./build/Aperture-Firebase.ipa",
+      ipa_path: "#{OUTPUT_DIR}/Aperture-Firebase.ipa",
       release_notes: release_notes,
       groups: FIREBASE_GROUPS,
-      # OR use testers file:
-      # testers_file: FIREBASE_TESTERS_FILE,
-      firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"]  # Set this in your environment
+      firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"],
+      debug: true
     )
     
+    UI.success("=" * 60)
     UI.success("🔥 Firebase distribution complete!")
-    UI.message("Testers will receive an email/notification shortly")
+    UI.success("=" * 60)
+    UI.message("Testers will receive notification shortly")
   end
   
-  
+  desc "🔥 Upload existing IPA to Firebase"
+  lane :firebase_upload do |options|
+    log_step("Uploading to Firebase")
+    
+    ipa_path = options[:ipa] || "#{OUTPUT_DIR}/Aperture-AdHoc.ipa"
+    
+    unless File.exist?(ipa_path)
+      UI.user_error!("IPA not found at: #{ipa_path}")
+    end
+    
+    release_notes = options[:notes] || "Manual upload - #{Time.now.strftime('%B %d, %Y')}"
+    
+    firebase_app_distribution(
+      app: FIREBASE_APP_ID,
+      ipa_path: ipa_path,
+      release_notes: release_notes,
+      groups: FIREBASE_GROUPS,
+      firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"],
+      debug: true
+    )
+    
+    UI.success("🔥 Firebase upload complete!")
+  end
+
   # ═══════════════════════════════════════════════════════════════════════════
-  # BOTH: TESTFLIGHT + FIREBASE
+  # DEPLOY TO BOTH PLATFORMS
   # ═══════════════════════════════════════════════════════════════════════════
   
   desc "🚀🔥 Deploy to BOTH TestFlight AND Firebase"
   lane :beta_all do |options|
-    UI.header("Deploying to TestFlight + Firebase")
+    log_step("Deploying to TestFlight + Firebase")
     
     changelog = options[:changelog] || generate_changelog
     
-    # Build once, distribute twice
     build_num = Time.now.strftime("%Y%m%d.%H%M")
     increment_build_number(build_number: build_num)
     
-    # 1. Build for App Store (TestFlight)
-    UI.message("Building for TestFlight...")
-    build_app(
+    # 1. TestFlight
+    UI.message("📱 Step 1/4: Building for TestFlight...")
+    gym(
       scheme: SCHEME,
       project: PROJECT,
       export_method: "app-store",
-      output_directory: "./build",
-      output_name: "Aperture-AppStore.ipa"
+      output_directory: OUTPUT_DIR,
+      output_name: "Aperture-AppStore.ipa",
+      xcargs: "-allowProvisioningUpdates"
     )
     
-    # 2. Upload to TestFlight
-    UI.message("Uploading to TestFlight...")
-    upload_to_testflight(
+    UI.message("📤 Step 2/4: Uploading to TestFlight...")
+    pilot(
       skip_waiting_for_build_processing: true,
       changelog: changelog,
       distribute_external: false
     )
     
-    # 3. Build for Firebase (ad-hoc)
-    UI.message("Building for Firebase...")
-    build_app(
+    # 2. Firebase
+    UI.message("🔨 Step 3/4: Building for Firebase...")
+    gym(
       scheme: SCHEME,
       project: PROJECT,
       export_method: "ad-hoc",
-      output_directory: "./build",
-      output_name: "Aperture-Firebase.ipa"
+      output_directory: OUTPUT_DIR,
+      output_name: "Aperture-Firebase.ipa",
+      xcargs: "-allowProvisioningUpdates"
     )
     
-    # 4. Upload to Firebase
-    UI.message("Uploading to Firebase...")
+    UI.message("🔥 Step 4/4: Uploading to Firebase...")
     firebase_app_distribution(
       app: FIREBASE_APP_ID,
-      ipa_path: "./build/Aperture-Firebase.ipa",
+      ipa_path: "#{OUTPUT_DIR}/Aperture-Firebase.ipa",
       release_notes: changelog,
       groups: FIREBASE_GROUPS,
       firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"]
     )
     
-    UI.success("=" * 50)
+    UI.success("=" * 60)
     UI.success("🎉 Deployed to BOTH platforms!")
-    UI.success("=" * 50)
-    UI.message("TestFlight: ~15-30 min processing")
-    UI.message("Firebase: Available immediately")
+    UI.success("=" * 60)
   end
-  
-  
+
   # ═══════════════════════════════════════════════════════════════════════════
-  # AD-HOC - Direct sharing via AirDrop/email
-  # ═══════════════════════════════════════════════════════════════════════════
-  
-  desc "📦 Build ad-hoc IPA for direct distribution"
-  lane :adhoc do
-    UI.header("Building Ad-Hoc IPA")
-    
-    increment_build_number(build_number: Time.now.strftime("%Y%m%d.%H%M"))
-    
-    build_app(
-      scheme: SCHEME,
-      project: PROJECT,
-      export_method: "ad-hoc",
-      output_directory: "./build",
-      output_name: "Aperture-AdHoc.ipa"
-    )
-    
-    ipa_path = File.expand_path("./build/Aperture-AdHoc.ipa")
-    
-    UI.success("📦 Ad-hoc IPA ready!")
-    UI.message("Location: #{ipa_path}")
-    UI.message("")
-    UI.message("Share via AirDrop or email to testers")
-    UI.message("(Devices must be registered in provisioning profile)")
-  end
-  
-  
-  # ═══════════════════════════════════════════════════════════════════════════
-  # APP STORE RELEASE
+  # STATIC ANALYSIS & LINTING
   # ═══════════════════════════════════════════════════════════════════════════
   
-  desc "🏆 Submit to App Store"
-  lane :release do |options|
-    UI.header("Submitting to App Store")
+  desc "🔍 Run static code analysis (SwiftLint + Xcode Analyzer)"
+  lane :analyze do
+    log_step("Running Static Analysis")
     
-    # Get version
-    version = options[:version]
-    unless version
-      current = get_version_number(target: "Aperture")
-      version = UI.input("Enter version number (current: #{current}):")
+    issues_found = []
+    
+    # 1. SwiftLint
+    log_verbose("Running SwiftLint...")
+    begin
+      swiftlint(
+        mode: :lint,
+        config_file: ".swiftlint.yml",
+        raise_if_swiftlint_error: false,
+        ignore_exit_status: true
+      )
+    rescue => e
+      log_verbose("SwiftLint: #{e.message}")
     end
     
-    # Update version numbers
-    increment_version_number(version_number: version)
-    increment_build_number(build_number: "1")
+    # 2. Xcode Static Analyzer
+    log_verbose("Running Xcode Static Analyzer...")
     
-    # Build
-    build_app(
+    xcodebuild(
       scheme: SCHEME,
       project: PROJECT,
-      export_method: "app-store",
-      clean: true
+      destination: "generic/platform=iOS Simulator",
+      xcargs: "-configuration Debug analyze CODE_SIGNING_ALLOWED=NO CLANG_STATIC_ANALYZER_MODE=deep RUN_CLANG_STATIC_ANALYZER=YES 2>&1 | tee #{OUTPUT_DIR}/analyze.log"
     )
     
-    # Upload
-    upload_to_app_store(
-      force: true,
-      skip_screenshots: true,
-      skip_metadata: false,
-      submit_for_review: false  # Set true to auto-submit
-    )
-    
-    # Git tag
-    git_commit(path: ["**/Info.plist", "**/project.pbxproj"], message: "Release v#{version}")
-    add_git_tag(tag: "v#{version}")
-    push_git_tags rescue nil
-    
-    UI.success("🏆 Version #{version} uploaded!")
+    # Parse results
+    if File.exist?("#{OUTPUT_DIR}/analyze.log")
+      log_content = File.read("#{OUTPUT_DIR}/analyze.log")
+      warnings = log_content.scan(/warning:/).count
+      errors = log_content.scan(/error:/).count
+      
+      UI.success("=" * 60)
+      UI.success("🔍 Static Analysis Complete")
+      UI.success("=" * 60)
+      UI.message("Warnings: #{warnings}")
+      UI.message("Errors: #{errors}")
+      UI.message("Full log: #{OUTPUT_DIR}/analyze.log")
+    end
   end
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # LOCALIZATION CHECK
+  # ═══════════════════════════════════════════════════════════════════════════
   
+  desc "🌍 Check Spanish localization completeness"
+  lane :lint_spanish do
+    log_step("Checking Spanish Localization")
+    
+    # Find xcstrings file
+    xcstrings_files = Dir.glob("**/*.xcstrings").reject { |f| f.include?("Pods") }
+    
+    if xcstrings_files.empty?
+      UI.error("No .xcstrings files found!")
+      next
+    end
+    
+    total_missing = []
+    
+    xcstrings_files.each do |xcstrings_file|
+      UI.message("Checking: #{xcstrings_file}")
+      
+      begin
+        content = JSON.parse(File.read(xcstrings_file))
+        strings = content["strings"] || {}
+        
+        missing_spanish = []
+        total = 0
+        translated = 0
+        
+        strings.each do |key, value|
+          total += 1
+          localizations = value["localizations"] || {}
+          
+          if localizations["es"]
+            spanish = localizations["es"]["stringUnit"]
+            if spanish && spanish["value"] && !spanish["value"].empty?
+              translated += 1
+            else
+              missing_spanish << key
+            end
+          else
+            missing_spanish << key
+          end
+        end
+        
+        percentage = total > 0 ? ((translated.to_f / total) * 100).round(1) : 0
+        
+        UI.message("  Total: #{total}, Translated: #{translated} (#{percentage}%)")
+        
+        if missing_spanish.any?
+          total_missing.concat(missing_spanish)
+        end
+      rescue JSON::ParserError => e
+        UI.error("Failed to parse #{xcstrings_file}: #{e.message}")
+      end
+    end
+    
+    UI.success("=" * 60)
+    UI.success("🌍 Spanish Localization Report")
+    UI.success("=" * 60)
+    
+    if total_missing.any?
+      UI.important("Missing #{total_missing.count} Spanish translations:")
+      total_missing.first(20).each { |key| UI.message("  • #{key}") }
+      if total_missing.count > 20
+        UI.message("  ... and #{total_missing.count - 20} more")
+      end
+      
+      File.write("#{OUTPUT_DIR}/missing_spanish.txt", total_missing.join("\n"))
+      UI.message("\nFull list: #{OUTPUT_DIR}/missing_spanish.txt")
+    else
+      UI.success("✅ All strings translated to Spanish!")
+    end
+  end
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # SECURITY AUDIT
+  # ═══════════════════════════════════════════════════════════════════════════
   
+  desc "🔐 Run security audit"
+  lane :security_audit do
+    log_step("Running Security Audit")
+    
+    issues = []
+    
+    swift_files = Dir.glob("**/*.swift").reject { |f| f.include?("Pods") || f.include?(".build") || f.include?("Tests") }
+    
+    UI.message("Scanning #{swift_files.count} Swift files...")
+    
+    # 1. Check for hardcoded secrets
+    log_verbose("Checking for hardcoded secrets...")
+    
+    secret_patterns = {
+      "API Key" => /["'][\w-]{20,}["']/,
+      "Bearer Token" => /Bearer\s+[\w-]+/,
+      "Password literal" => /password\s*[:=]\s*["'][^"']+["']/i,
+      "Secret literal" => /secret\s*[:=]\s*["'][^"']+["']/i,
+      "Private key" => /-----BEGIN.*PRIVATE KEY-----/
+    }
+    
+    swift_files.each do |file|
+      content = File.read(file) rescue next
+      
+      secret_patterns.each do |name, pattern|
+        if content.match?(pattern)
+          issues << "⚠️  Potential #{name} in #{file}"
+        end
+      end
+    end
+    
+    # 2. Check Info.plist
+    log_verbose("Checking Info.plist...")
+    
+    Dir.glob("**/Info.plist").each do |plist|
+      content = File.read(plist) rescue next
+      
+      if content.include?("NSAllowsArbitraryLoads") && content.include?("<true/>")
+        issues << "⚠️  App Transport Security disabled in #{plist}"
+      end
+      
+      if content.include?("NSCameraUsageDescription").! && content.include?("camera")
+        issues << "⚠️  Missing camera usage description"
+      end
+    end
+    
+    # 3. Check for insecure storage
+    log_verbose("Checking for insecure storage patterns...")
+    
+    swift_files.each do |file|
+      content = File.read(file) rescue next
+      
+      if content.include?("UserDefaults") && (content.match?(/password/i) || content.match?(/token/i) || content.match?(/secret/i))
+        issues << "⚠️  Sensitive data in UserDefaults? Check #{file}"
+      end
+      
+      if content.match?(/print\(.*password/i) || content.match?(/print\(.*token/i)
+        issues << "⚠️  Possible sensitive data logging in #{file}"
+      end
+    end
+    
+    # 4. Check for SSL pinning
+    log_verbose("Checking for SSL pinning...")
+    has_ssl_pinning = swift_files.any? do |file|
+      content = File.read(file) rescue ""
+      content.include?("URLAuthenticationChallenge") || content.include?("pinnedCertificates")
+    end
+    
+    unless has_ssl_pinning
+      issues << "ℹ️  No SSL certificate pinning detected (optional but recommended)"
+    end
+    
+    UI.success("=" * 60)
+    UI.success("🔐 Security Audit Complete")
+    UI.success("=" * 60)
+    
+    if issues.any?
+      UI.important("Found #{issues.count} items to review:")
+      issues.each { |issue| UI.message(issue) }
+      
+      File.write("#{OUTPUT_DIR}/security_audit.txt", issues.join("\n"))
+      UI.message("\nReport saved: #{OUTPUT_DIR}/security_audit.txt")
+    else
+      UI.success("✅ No obvious security issues found!")
+    end
+  end
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # PERSISTENCE CHECK
+  # ═══════════════════════════════════════════════════════════════════════════
+  
+  desc "💾 Check persistence implementation"
+  lane :check_persistence do
+    log_step("Checking Persistence Implementation")
+    
+    swift_files = Dir.glob("**/*.swift").reject { |f| f.include?("Pods") || f.include?(".build") }
+    
+    persistence_types = {
+      "UserDefaults" => [],
+      "CoreData" => [],
+      "SwiftData" => [],
+      "Keychain" => [],
+      "FileManager" => [],
+      "@AppStorage" => [],
+      "Realm" => [],
+      "SQLite" => []
+    }
+    
+    swift_files.each do |file|
+      content = File.read(file) rescue next
+      
+      persistence_types.each do |type, files|
+        if content.include?(type)
+          files << file
+        end
+      end
+    end
+    
+    UI.success("=" * 60)
+    UI.success("💾 Persistence Implementation Report")
+    UI.success("=" * 60)
+    
+    persistence_types.each do |type, files|
+      if files.any?
+        UI.message("")
+        UI.message("#{type}: #{files.count} files")
+        files.first(5).each { |f| UI.message("  • #{f}") }
+        UI.message("  ... and #{files.count - 5} more") if files.count > 5
+      end
+    end
+    
+    # Check for potential issues
+    UI.message("")
+    UI.message("Recommendations:")
+    
+    if persistence_types["UserDefaults"].any? && persistence_types["Keychain"].empty?
+      UI.important("⚠️  Using UserDefaults but no Keychain - store sensitive data in Keychain")
+    end
+    
+    if persistence_types["CoreData"].any? || persistence_types["SwiftData"].any?
+      UI.message("✅ Using structured persistence (CoreData/SwiftData)")
+    end
+  end
+
   # ═══════════════════════════════════════════════════════════════════════════
   # CERTIFICATES & PROFILES
   # ═══════════════════════════════════════════════════════════════════════════
   
   desc "🔐 Sync all certificates and profiles"
   lane :certs do
-    UI.header("Syncing certificates...")
+    log_step("Syncing Certificates")
     
     match(type: "development", app_identifier: APP_IDENTIFIER, readonly: is_ci)
     match(type: "adhoc", app_identifier: APP_IDENTIFIER, readonly: is_ci)
@@ -282,13 +727,7 @@ platform :ios do
     
     UI.success("🔐 Certificates synced!")
   end
-  
-  desc "🔑 Development certificates only"
-  lane :dev_certs do
-    match(type: "development", readonly: true)
-  end
-  
-  
+
   # ═══════════════════════════════════════════════════════════════════════════
   # DEVICE REGISTRATION
   # ═══════════════════════════════════════════════════════════════════════════
@@ -298,67 +737,85 @@ platform :ios do
     device_name = UI.input("Device name (e.g., Ron's iPhone):")
     device_udid = UI.input("Device UDID:")
     
-    register_devices(
-      devices: { device_name => device_udid }
-    )
-    
-    # Refresh profiles
-    match(type: "development", force_for_new_devices: true)
-    match(type: "adhoc", force_for_new_devices: true)
-    
-    UI.success("📱 Device registered! Rebuild to include.")
-  end
-  
-  desc "📱 Register devices from file"
-  lane :register_devices_file do
-    register_devices(
-      devices_file: "./fastlane/devices.txt"
-    )
+    register_devices(devices: { device_name => device_udid })
     
     match(type: "development", force_for_new_devices: true)
     match(type: "adhoc", force_for_new_devices: true)
     
-    UI.success("📱 Devices registered from file!")
+    UI.success("📱 Device registered!")
   end
-  
-  
+
   # ═══════════════════════════════════════════════════════════════════════════
-  # TESTING
+  # APP STORE RELEASE
   # ═══════════════════════════════════════════════════════════════════════════
   
-  desc "🧪 Run all tests"
-  lane :test do
-    run_tests(
+  desc "🏆 Submit to App Store"
+  lane :release do |options|
+    log_step("Submitting to App Store")
+    
+    version = options[:version]
+    unless version
+      current = get_version_number(target: "Aperture") rescue "1.0.0"
+      version = UI.input("Enter version number (current: #{current}):")
+    end
+    
+    increment_version_number(version_number: version)
+    increment_build_number(build_number: "1")
+    
+    gym(
       scheme: SCHEME,
       project: PROJECT,
-      devices: ["iPhone 15 Pro"],
+      export_method: "app-store",
       clean: true,
-      code_coverage: true
+      xcargs: "-allowProvisioningUpdates"
     )
+    
+    deliver(
+      force: true,
+      skip_screenshots: true,
+      skip_metadata: false,
+      submit_for_review: false
+    )
+    
+    git_commit(path: ".", message: "Release v#{version}") rescue nil
+    add_git_tag(tag: "v#{version}") rescue nil
+    
+    UI.success("🏆 Version #{version} uploaded!")
   end
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # FULL AUDIT
+  # ═══════════════════════════════════════════════════════════════════════════
   
-  
+  desc "🔬 Full code audit (analyze + security + localization + persistence)"
+  lane :full_audit do
+    analyze
+    security_audit
+    lint_spanish
+    check_persistence
+    
+    UI.success("=" * 60)
+    UI.success("🔬 Full Audit Complete!")
+    UI.success("=" * 60)
+    UI.message("Check #{OUTPUT_DIR}/ for detailed reports")
+  end
+
   # ═══════════════════════════════════════════════════════════════════════════
   # HELPER METHODS
   # ═══════════════════════════════════════════════════════════════════════════
   
   def generate_changelog
-    # Auto-generate changelog from git commits
     changelog = changelog_from_git_commits(
       commits_count: 10,
       pretty: "- %s",
       date_format: "short",
-      match_lightweight_tag: false,
       merge_commit_filtering: "exclude_merges"
     ) rescue "New build with latest features and fixes"
     
-    # Add build info
     build_time = Time.now.strftime("%B %d, %Y at %I:%M %p")
-    
     "Build: #{build_time}\n\nChanges:\n#{changelog}"
   end
-  
-  
+
   # ═══════════════════════════════════════════════════════════════════════════
   # ERROR HANDLING
   # ═══════════════════════════════════════════════════════════════════════════
@@ -366,15 +823,15 @@ platform :ios do
   error do |lane, exception|
     UI.error("=" * 60)
     UI.error("❌ #{lane} failed!")
-    UI.error(exception.message)
     UI.error("=" * 60)
-    
-    # Optional: Slack notification on failure
-    # slack(
-    #   message: "Aperture build failed: #{exception.message}",
-    #   success: false,
-    #   channel: "#builds"
-    # )
+    UI.error(exception.message)
+    UI.error("")
+    UI.error("Backtrace (first 10 lines):")
+    exception.backtrace.first(10).each { |line| UI.error("  #{line}") }
   end
   
+  after_all do |lane|
+    log_verbose("Lane #{lane} completed successfully ✅")
+  end
+
 end

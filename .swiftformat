@@ -1,0 +1,31 @@
+# Safe SwiftFormat config – compatible with 0.54+ / 0.55+
+--swiftversion 5.10
+
+--indent 4
+
+--wraparguments before-first
+--wrapcollections before-first
+--wrapparameters before-first
+--wrapternary before-first
+
+--elseposition same-line
+
+--linebreaks 2
+--blankLinesBetweenChainedFunctions 1
+--blankLinesBetweenProperties 1
+--blankLinesAroundMark 2
+--blankLinesAroundSections 1
+--blankLinesBetweenImports 1
+
+--bracestyle 1tbs               # same-line opening brace (your preference)
+
+--organizeTypes true
+--markTypes true
+--markExtensions true
+--markPrivateMembers true
+
+--redundantSelf instance
+--redundantVoidReturn true
+--redundantReturn true
+--redundantLet true
+--redundantNilInit true

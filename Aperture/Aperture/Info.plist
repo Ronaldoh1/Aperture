@@ -28,5 +28,23 @@
     <array>
         <string>UIInterfaceOrientationPortrait</string>
     </array>
+    
+    <!-- P1: Camera — Programming Detector AR + Vibe Scanner -->
+    <key>NSCameraUsageDescription</key>
+    <string>Aperture uses your camera to scan labels and detect programming patterns in text around you.</string>
+    
+    <!-- P1: Location — Local Market Finder -->
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Aperture uses your location to find health food stores, farmers markets, and organic shops near you.</string>
+    
+    <!-- P1: Photo Library — Avatar picker -->
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Choose a photo from your library to use as your Timeline avatar.</string>
+    
+    <!-- Audio background playback -->
+    <key>UIBackgroundModes</key>
+    <array>
+        <string>audio</string>
+    </array>
 </dict>
 </plist>

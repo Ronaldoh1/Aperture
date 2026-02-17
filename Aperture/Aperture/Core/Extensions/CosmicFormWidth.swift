@@ -3,39 +3,29 @@
 import SwiftUI
 
 enum CosmicFormMetrics {
-
-    static let fieldMaxWidth: CGFloat = 400
-    static let screenHorizontalPadding: CGFloat = 20
-
+  static let fieldMaxWidth: CGFloat = 400
+  static let screenHorizontalPadding: CGFloat = 20
 }
 
 struct CosmicFormWidthModifier: ViewModifier {
+  let maxWidth: CGFloat
 
-    let maxWidth: CGFloat
-
-    func body(content: Content) -> some View {
-
-        content
-            .frame(maxWidth: maxWidth)
-            .frame(maxWidth: .infinity, alignment: .center)
-            .padding(.horizontal, CosmicFormMetrics.screenHorizontalPadding)
-
-    }
-
+  func body(content: Content) -> some View {
+    content
+      .frame(maxWidth: maxWidth)
+      .frame(maxWidth: .infinity, alignment: .center)
+      .padding(.horizontal, CosmicFormMetrics.screenHorizontalPadding)
+  }
 }
 
 extension View {
-
-    func cosmicFormWidth(
-        maxWidth: CGFloat = CosmicFormMetrics.fieldMaxWidth
-    ) -> some View {
-
-        modifier(
-            CosmicFormWidthModifier(
-                maxWidth: maxWidth
-            )
-        )
-
-    }
-
+  func cosmicFormWidth(
+    maxWidth: CGFloat = CosmicFormMetrics.fieldMaxWidth
+  ) -> some View {
+    modifier(
+      CosmicFormWidthModifier(
+        maxWidth: maxWidth
+      )
+    )
+  }
 }

@@ -7,22 +7,20 @@ import Foundation
 
 @MainActor
 final class TutorialInteractor: @preconcurrency TutorialInteractorType {
+  weak var output: TutorialInteractorOutputType?
 
-    weak var output: TutorialInteractorOutputType?
+  private let store: TutorialStateStore
 
-    private let store: TutorialStateStore
+  init(store: TutorialStateStore) {
+    self.store = store
+  }
 
-    init(store: TutorialStateStore) {
-        self.store = store
-    }
+  func loadState() {
+    output?.didLoad(hasSeenTutorial: store.hasSeenTutorial)
+  }
 
-    func loadState() {
-        output?.didLoad(hasSeenTutorial: store.hasSeenTutorial)
-    }
-
-    func markSeen() {
-        store.markSeen()
-        output?.didMarkSeen()
-    }
-
+  func markSeen() {
+    store.markSeen()
+    output?.didMarkSeen()
+  }
 }

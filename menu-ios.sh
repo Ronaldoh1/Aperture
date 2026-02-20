@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 set -euo pipefail
 
@@ -10,7 +10,6 @@ YELLOW='\033[33m'
 RED='\033[31m'
 MAGENTA='\033[35m'
 BLUE='\033[34m'
-DIM='\033[2m'
 
 find_root() {
   local dir="$PWD"
@@ -40,7 +39,7 @@ run() {
   echo -e "\n${MAGENTA}══════════════════════════════════════════════════════════════${RESET}"
   echo -e "${YELLOW}→ $title${RESET}"
   echo -e "${MAGENTA}══════════════════════════════════════════════════════════════${RESET}\n"
-  eval "$cmd" || error "Command failed (code $?)"
+  eval "$cmd" || error "Command failed"
   echo -e "\n${GREEN}Press Enter to return...${RESET}"
   read -r
 }
@@ -49,7 +48,7 @@ quick_commit() {
   echo -e "${YELLOW}Quick Commit${RESET}"
   echo -e "──────────────────────────────────────────────────────────────"
 
-  read -p "${BLUE}Commit title (required): ${RESET}" title
+  read -r "title?${BLUE}Commit title (required): ${RESET}"
   if [[ -z "$title" ]]; then
     error "Title is required. Aborting."
     echo -e "\n${GREEN}Press Enter...${RESET}"
@@ -57,7 +56,7 @@ quick_commit() {
     return
   fi
 
-  echo -e "${DIM}(Press Enter twice to finish description or leave empty)${RESET}"
+  echo -e "${DIM}Enter description (optional). Press Enter on empty line to finish.${RESET}"
   body=""
   while IFS= read -r line; do
     [[ -z "$line" ]] && break
@@ -85,18 +84,19 @@ show_menu() {
   echo -e "Root: ${YELLOW}$ROOT${RESET}\n"
 
   printf "  ${GREEN}1)${RESET} Build & run on simulator\n"
-  printf "  ${GREEN}2)${RESET} Fastlane gym (archive)\n"
-  printf "  ${GREEN}3)${RESET} Fastlane test\n"
-  printf "  ${GREEN}4)${RESET} swiftlint\n"
-  printf "  ${GREEN}5)${RESET} swiftformat\n"
-  printf "  ${GREEN}6)${RESET} pod install/update\n"
-  printf "  ${GREEN}7)${RESET} Open in Xcode\n"
-  printf "  ${GREEN}8)${RESET} Open Simulator\n"
-  printf "  ${GREEN}9)${RESET} Clean DerivedData\n"
-  printf " ${GREEN}10)${RESET} Quick Git Commit (title + optional body)\n"
+  printf "  ${GREEN}2)${RESET} Build LOUD (verbose debug)\n"
+  printf "  ${GREEN}3)${RESET} Fastlane gym (archive)\n"
+  printf "  ${GREEN}4)${RESET} Fastlane test\n"
+  printf "  ${GREEN}5)${RESET} swiftlint\n"
+  printf "  ${GREEN}6)${RESET} swiftformat\n"
+  printf "  ${GREEN}7)${RESET} pod install/update\n"
+  printf "  ${GREEN}8)${RESET} Open in Xcode\n"
+  printf "  ${GREEN}9)${RESET} Open Simulator\n"
+  printf " ${GREEN}10)${RESET} Clean DerivedData (nuke Xcode cache)\n"
+  printf " ${GREEN}11)${RESET} Quick Git Commit\n"
   printf "  ${RED}0)${RESET} Exit (terminal stays open)\n\n"
 
-  printf "${BLUE}Choice [0-10]: ${RESET}"
+  printf "${BLUE}Choice [0-11]: ${RESET}"
 }
 
 while true; do
@@ -105,28 +105,29 @@ while true; do
 
   case $c in
     0)
-      echo -e "\n${CYAN}Thanks!${RESET} Terminal stays open – type ${YELLOW}exit${RESET} when ready."
+      echo -e "\n${CYAN}Thanks!${RESET} Terminal stays open — type ${YELLOW}exit${RESET} when ready."
       exec $SHELL -l
       ;;
     1) run "xcodebuild -scheme Aperture -configuration Debug -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16' build && xcrun simctl install booted build/Debug-iphonesimulator/Aperture.app && xcrun simctl launch booted com.ronaldoh1.aperture" "Build & run on simulator" ;;
-    2) run "fastlane gym" "Fastlane gym (archive)" ;;
-    3) run "fastlane test" "Fastlane test" ;;
-    4) run "swiftlint --strict" "swiftlint" ;;
-    5) run "swiftformat ." "swiftformat" ;;
-    6) run "pod install --repo-update" "pod install/update" ;;
-    7) run "open -a Xcode Aperture.xcworkspace || open -a Xcode Aperture.xcodeproj" "Open in Xcode" ;;
-    8) run "open -a Simulator" "Open Simulator" ;;
-    9)
-      if confirm "Delete ALL DerivedData? (y/N)"; then
+    2) run "xcodebuild -scheme Aperture -configuration Debug -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16' -verbose build" "Build LOUD (verbose debug)" ;;
+    3) run "fastlane gym" "Fastlane gym (archive)" ;;
+    4) run "fastlane test" "Fastlane test" ;;
+    5) run "swiftlint --strict" "swiftlint" ;;
+    6) run "swiftformat ." "swiftformat" ;;
+    7) run "pod install --repo-update" "pod install/update" ;;
+    8) run "open -a Xcode Aperture.xcworkspace || open -a Xcode Aperture.xcodeproj" "Open in Xcode" ;;
+    9) run "open -a Simulator" "Open Simulator" ;;
+    10)
+      if [[ "$(read -p "${YELLOW}Delete ALL DerivedData? (y/N) ${RESET}" choice; echo "$choice")" == "y" ]]; then
         rm -rf ~/Library/Developer/Xcode/DerivedData/*
-        success "DerivedData cleaned"
+        success "DerivedData cleaned – Xcode will re-generate on next build"
       else
-        warning "Cancelled"
+        echo -e "${YELLOW}Cancelled.${RESET}"
       fi
       echo -e "\n${GREEN}Press Enter...${RESET}"
       read -r
       ;;
-    10) quick_commit ;;
+    11) quick_commit ;;
     *) echo -e "${YELLOW}Invalid${RESET}"; sleep 1 ;;
   esac
 done

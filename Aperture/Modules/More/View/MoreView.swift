@@ -24,6 +24,11 @@ struct MoreView: View {
     @State private var showPrintableExport = false
     @State private var showVoiceScanner = false
     @State private var showSystemicExposure = false
+    @State private var showRevelations = false
+    @State private var showAccountability = false
+    @State private var showAppSettings = false
+    @State private var showSunFlowState = false
+    @State private var showDiveDeeper = false
 
     var body: some View {
 
@@ -115,6 +120,21 @@ struct MoreView: View {
             .navigationDestination(isPresented: $showSystemicExposure) {
                 SystemicExposureView()
             }
+            .navigationDestination(isPresented: $showRevelations) {
+                RevelationsView()
+            }
+            .navigationDestination(isPresented: $showAccountability) {
+                AccountabilityHubView()
+            }
+            .navigationDestination(isPresented: $showAppSettings) {
+                AppSettingsView()
+            }
+            .navigationDestination(isPresented: $showSunFlowState) {
+                SunFlowStateHub()
+            }
+            .navigationDestination(isPresented: $showDiveDeeper) {
+                DiveDeeperHub()
+            }
 
         }
 
@@ -133,6 +153,50 @@ struct MoreView: View {
                 badge: "✨ \(SacredBadgeManager.shared.totalBadgeCount)"
             ) {
                 showBadgeCollection = true
+            }
+            
+            // REVELATIONS — NEW
+            MoreMenuCard(
+                icon: "eye.fill",
+                title: "Revelations",
+                subtitle: "App tracking, data harvesting & behavioral exploitation",
+                color: Color(hex: "#E74C3C"),
+                badge: "🔮 NEW"
+            ) {
+                showRevelations = true
+            }
+            
+            // ACCOUNTABILITY BUDDY — NEW
+            MoreMenuCard(
+                icon: "figure.2.arms.open",
+                title: "Accountability",
+                subtitle: "Daily reports, morning routines & goals",
+                color: Color(red: 1.0, green: 0.85, blue: 0.3),
+                badge: "☀️ NEW"
+            ) {
+                showAccountability = true
+            }
+            
+            // SUN FLOW STATE — Cognitive Sovereignty OS
+            MoreMenuCard(
+                icon: "brain.head.profile",
+                title: "Sun Flow State",
+                subtitle: SunFlowUnlockGate.isUnlocked ? "Your mental operating system" : "🔒 Earn \(SunFlowUnlockGate.badgesNeeded) more badges",
+                color: Color(red: 1.0, green: 0.85, blue: 0.3),
+                badge: SunFlowUnlockGate.isUnlocked ? "☀️ OS" : "🔒"
+            ) {
+                showSunFlowState = true
+            }
+            
+            // DIVE DEEPER — Iceberg explorations
+            MoreMenuCard(
+                icon: "arrow.down.to.line",
+                title: "Dive Deeper",
+                subtitle: "Interrogate beyond the surface level 👀",
+                color: Color(red: 0.3, green: 0.7, blue: 0.9),
+                badge: "🔺"
+            ) {
+                showDiveDeeper = true
             }
 
             // ALEXANDRIA - Sacred Library (moved from tab bar)
@@ -306,11 +370,11 @@ struct MoreView: View {
             MoreMenuCard(
                 icon: "gearshape.fill",
                 title: "Settings",
-                subtitle: "Customize your experience",
+                subtitle: "Notifications, permissions & preferences",
                 color: Palette.text.muted,
                 badge: nil
             ) {
-                showSettings = true
+                showAppSettings = true
             }
 
             // FAQ

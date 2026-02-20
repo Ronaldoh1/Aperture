@@ -98,7 +98,7 @@ struct RootTabView: View {
                 HapticManager.shared.tabChanged()
             }
         }
-        .withSacredGeometryBubble()
+        .withSunCompanion()
         
     }
     

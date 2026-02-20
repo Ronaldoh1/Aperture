@@ -16,12 +16,12 @@ struct CourseAwakeningLevel: Identifiable {
     let duration: String
     let color: Color
     let icon: String
-    let modules: [AwakeningModule]
+    let modules: [AwakeTogetherModule]
     let unlockCriteria: String
     let isLocked: Bool
 }
 
-struct AwakeningModule: Identifiable {
+struct AwakeTogetherModule: Identifiable {
     let id = UUID()
     let title: String
     let description: String
@@ -103,7 +103,7 @@ struct ConsciousnessCourseCurriculum {
         color: .green,
         icon: "leaf.fill",
         modules: [
-            AwakeningModule(
+            AwakeTogetherModule(
                 title: "What Is Consciousness?",
                 description: "Define consciousness as subjective experience (Nagel/Seth). Understand the difference between being conscious and autopilot.",
                 content: [
@@ -124,7 +124,7 @@ struct ConsciousnessCourseCurriculum {
                 isCompleted: false
             ),
             
-            AwakeningModule(
+            AwakeTogetherModule(
                 title: "Symptoms of Awakening",
                 description: "Recognize the signs that consciousness is expanding: the Dark Night of the Soul, increased synchronicities, and the ray of hope.",
                 content: [
@@ -142,7 +142,7 @@ struct ConsciousnessCourseCurriculum {
                 isCompleted: false
             ),
             
-            AwakeningModule(
+            AwakeTogetherModule(
                 title: "Establishing Mindfulness",
                 description: "Build the foundation of present-moment awareness that all higher practices depend on.",
                 content: [
@@ -175,7 +175,7 @@ struct ConsciousnessCourseCurriculum {
         color: .blue,
         icon: "brain.head.profile",
         modules: [
-            AwakeningModule(
+            AwakeTogetherModule(
                 title: "The Four Levels of Consciousness",
                 description: "From Victim → Dependent → Independent → Creator. Understand where you are and how to evolve.",
                 content: [
@@ -195,7 +195,7 @@ struct ConsciousnessCourseCurriculum {
                 isCompleted: false
             ),
             
-            AwakeningModule(
+            AwakeTogetherModule(
                 title: "Brainwave States & Meditation",
                 description: "Understand alpha, theta, and gamma states. Learn to access expanded consciousness through meditation.",
                 content: [
@@ -213,7 +213,7 @@ struct ConsciousnessCourseCurriculum {
                 isCompleted: false
             ),
             
-            AwakeningModule(
+            AwakeTogetherModule(
                 title: "Shadow Work Foundations",
                 description: "Meet and integrate the parts of yourself you've hidden. The shadow holds the keys to wholeness.",
                 content: [
@@ -246,7 +246,7 @@ struct ConsciousnessCourseCurriculum {
         color: .purple,
         icon: "sparkles",
         modules: [
-            AwakeningModule(
+            AwakeTogetherModule(
                 title: "Developing Intuition",
                 description: "Access the 9 levels of intuitive knowing. Learn to trust your inner guidance system.",
                 content: [
@@ -264,7 +264,7 @@ struct ConsciousnessCourseCurriculum {
                 isCompleted: false
             ),
             
-            AwakeningModule(
+            AwakeTogetherModule(
                 title: "Timeline Intuition & Manifestation",
                 description: "Learn to sense probable futures and consciously select desired timelines through focused intention.",
                 content: [
@@ -282,7 +282,7 @@ struct ConsciousnessCourseCurriculum {
                 isCompleted: false
             ),
             
-            AwakeningModule(
+            AwakeTogetherModule(
                 title: "Collective Consciousness & Group Fields",
                 description: "Understand how individual consciousness connects to collective fields. Experience group meditation amplification.",
                 content: [
@@ -315,7 +315,7 @@ struct ConsciousnessCourseCurriculum {
         color: .yellow,
         icon: "sun.max.fill",
         modules: [
-            AwakeningModule(
+            AwakeTogetherModule(
                 title: "Non-Dual Awareness",
                 description: "Experience the dissolution of subject-object duality. Recognize awareness as your true nature.",
                 content: [
@@ -333,7 +333,7 @@ struct ConsciousnessCourseCurriculum {
                 isCompleted: false
             ),
             
-            AwakeningModule(
+            AwakeTogetherModule(
                 title: "Samadhi & Absorption States",
                 description: "Access deep meditative absorption where individual consciousness merges with universal consciousness.",
                 content: [
@@ -351,7 +351,7 @@ struct ConsciousnessCourseCurriculum {
                 isCompleted: false
             ),
             
-            AwakeningModule(
+            AwakeTogetherModule(
                 title: "Service & Embodiment",
                 description: "True ascension manifests as service to others. Integrate awakening into practical life and help the collective evolve.",
                 content: [
@@ -614,7 +614,7 @@ struct LevelDetailView: View {
     let level: CourseAwakeningLevel
     let progress: Float
     @Environment(\.dismiss) private var dismiss
-    @State private var selectedModule: AwakeningModule?
+    @State private var selectedModule: AwakeTogetherModule?
     
     var body: some View {
         NavigationStack {
@@ -676,7 +676,7 @@ struct LevelDetailView: View {
         }
     }
     
-    private func moduleCard(_ module: AwakeningModule) -> some View {
+    private func moduleCard(_ module: AwakeTogetherModule) -> some View {
         Button(action: { selectedModule = module }) {
             VStack(alignment: .leading, spacing: 8) {
                 HStack {
@@ -731,7 +731,7 @@ struct LevelDetailView: View {
 // MARK: - Module Detail View
 
 struct CourseModuleDetailView: View {
-    let module: AwakeningModule
+    let module: AwakeTogetherModule
     let levelColor: Color
     @Environment(\.dismiss) private var dismiss
     

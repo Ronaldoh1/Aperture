@@ -61,6 +61,17 @@ struct CourseCatalog {
         // CORE AWAKENING (Start Here)
         // ══════════════════════════════════════════════════
         CourseInfo(
+            id: "journeys_of_awakening",
+            title: "Journeys of Awakening",
+            subtitle: "Every tradition. Every path. Same territory.",
+            icon: "sunrise.fill",
+            colorHex: "#FF9933",
+            moduleCount: 13,
+            estimatedHours: 16,
+            category: .consciousness,
+            difficulty: .intermediate
+        ),
+        CourseInfo(
             id: "serpent_decoded",
             title: "The Serpent Decoded",
             subtitle: "The forbidden truth hidden for 2,000 years",
@@ -676,6 +687,20 @@ struct CourseCatalog {
             estimatedHours: 6,
             category: .practical,
             difficulty: .beginner
+        ),
+        // ══════════════════════════════════════════════════
+        // LIGHT & DARKNESS — KNOW BOTH SIDES
+        // ══════════════════════════════════════════════════
+        CourseInfo(
+            id: "light_and_darkness",
+            title: "Light & Darkness",
+            subtitle: "Know both sides. Choose freely.",
+            icon: "circle.lefthalf.filled",
+            colorHex: "#B366FF",
+            moduleCount: 6,
+            estimatedHours: 15,
+            category: .consciousness,
+            difficulty: .intermediate
         )
     ]
     
@@ -738,6 +763,9 @@ struct CourseHubView: View {
         }
         .sheet(item: $selectedCourse) { course in
             switch course.id {
+            case "journeys_of_awakening":
+                JourneysOfAwakeningCourseView()
+                    .environmentObject(CourseProgressManager.shared)
             case "drone_self":
                 DroneSelfCourseView()
             case "dragonball":
@@ -808,6 +836,10 @@ struct CourseHubView: View {
             // QUANTUM NOURISH
             case "quantum_nourish":
                 QuantumNourishView()
+            // LIGHT & DARKNESS
+            case "light_and_darkness":
+                LightAndDarknessCourseView()
+                    .environmentObject(CourseProgressManager.shared)
             default:
                 CourseDetailPlaceholder(course: course)
             }

@@ -10,7 +10,7 @@ YELLOW='\033[33m'
 RED='\033[31m'
 MAGENTA='\033[35m'
 BLUE='\033[34m'
-DIM='\033[2m'   # ← This fixes the Quick Commit error
+DIM='\033[2m'
 
 mkdir -p logs
 
@@ -54,28 +54,6 @@ run() {
   read -r
 }
 
-full_analysis() {
-  local log="logs/$(date +%Y%m%d-%H%M%S)-Full-Static-Analysis.log"
-  echo -e "\n${MAGENTA}══════════════════════════════════════════════════════════════${RESET}"
-  echo -e "${YELLOW}→ Running Full Static Analysis (all tools chained)${RESET}"
-  echo -e "${MAGENTA}══════════════════════════════════════════════════════════════${RESET}\n"
-
-  {
-    echo "=== SwiftLint + SwiftFormat ==="
-    swiftlint --strict && swiftformat .
-    echo ""
-    echo "=== Periphery (unused code) ==="
-    periphery scan --config .periphery.yml || echo "Periphery not configured"
-    echo ""
-    echo "=== Xcode Analyze ==="
-    xcodebuild analyze -scheme Aperture -destination 'platform=iOS Simulator,name=iPhone 16' -quiet
-  } 2>&1 | tee "$log"
-
-  success "Full Static Analysis completed — see $log"
-  echo -e "\n${GREEN}Press Enter...${RESET}"
-  read -r
-}
-
 quick_commit() {
   echo -e "${YELLOW}Quick Commit${RESET}"
   echo -e "──────────────────────────────────────────────────────────────"
@@ -88,12 +66,7 @@ quick_commit() {
     return
   fi
 
-  echo -e "${DIM}Enter description (optional). Press Enter on empty line to finish.${RESET}"
-  body=""
-  while IFS= read -r line; do
-    [[ -z "$line" ]] && break
-    body+="$line\n"
-  done
+  read -r "body?${BLUE}Description (optional): ${RESET}"
 
   git add . || { error "git add failed"; return; }
 
@@ -104,7 +77,7 @@ quick_commit() {
   fi
 
   success "Committed: $title"
-  echo -e "\n${GREEN}Press Enter...${RESET}"
+  echo -e "\n${GREEN}Press Enter to return to menu...${RESET}"
   read -r
 }
 
@@ -151,7 +124,7 @@ while true; do
     5) run "xcodebuild test -scheme Aperture -destination 'platform=iOS Simulator,name=iPhone 16' -enableCodeCoverage YES" "Run All Tests + Coverage" ;;
     6) run "swiftlint --strict && swiftformat ." "SwiftLint + SwiftFormat" ;;
     7) run "periphery scan --config .periphery.yml || echo 'Run periphery scan --setup first'" "Periphery (unused code)" ;;
-    8) run "xcodebuild analyze -scheme Aperture -destination 'platform=iOS Simulator,name=iPhone 16'" "Xcode Analyze (Apple static analyzer)" ;;
+    8) run "xcodebuild analyze -scheme Aperture -destination 'platform=iOS Simulator,name=iPhone 16'" "Xcode Analyze" ;;
     9) run "pod install --repo-update" "pod install/update" ;;
     10) run "xcodebuild clean -scheme Aperture" "Clean Build Folder (Cmd+Shift+K)" ;;
     11) clean_derived_data ;;

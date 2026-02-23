@@ -532,9 +532,9 @@ struct FitnessMealPlanDetailView: View {
     @Environment(\.dismiss) var dismiss
     let archetype: AthleteArchetype
     
+    private var mealPlan: FitnessMealPlan { QuantumFitnessMealPlans.mealPlan(for: archetype) }
+
     var body: some View {
-        let plan = QuantumFitnessMealPlans.mealPlan(for: archetype)
-        
         NavigationStack {
             ZStack {
                 Color.black.ignoresSafeArea()
@@ -543,8 +543,8 @@ struct FitnessMealPlanDetailView: View {
                         // Header
                         VStack(spacing: 8) {
                             Image(systemName: archetype.icon).font(.system(size: 36)).foregroundColor(archetype.color)
-                            Text(plan.dayTitle.uppercased()).font(.system(size: 10, weight: .bold)).tracking(3).foregroundColor(archetype.color)
-                            Text("Target: \(plan.dailyMhzTarget)+ MHz").font(.system(size: 14, weight: .bold, design: .rounded)).foregroundColor(Palette.text.primary)
+                            Text(mealPlan.dayTitle.uppercased()).font(.system(size: 10, weight: .bold)).tracking(3).foregroundColor(archetype.color)
+                            Text("Target: \(mealPlan.dailyMhzTarget)+ MHz").font(.system(size: 14, weight: .bold, design: .rounded)).foregroundColor(Palette.text.primary)
                             Text("Protein: \(archetype.dailyProteinGrams)").font(.system(size: 12, weight: .medium)).foregroundColor(Palette.text.muted)
                         }
                         .padding(.top, 12)
@@ -566,20 +566,20 @@ struct FitnessMealPlanDetailView: View {
                         .background(RoundedRectangle(cornerRadius: 12).fill(archetype.color.opacity(0.04)))
                         
                         // Pre-Workout
-                        mealCard(plan.preworkout, label: "PRE-WORKOUT", color: Color(hex: "#F39C12"))
+                        mealCard(mealPlan.preworkout, label: "PRE-WORKOUT", color: Color(hex: "#F39C12"))
                         
                         // Post-Workout
-                        mealCard(plan.postworkout, label: "POST-WORKOUT", color: Color(hex: "#2ECC71"))
+                        mealCard(mealPlan.postworkout, label: "POST-WORKOUT", color: Color(hex: "#2ECC71"))
                         
                         // Main Meals
-                        ForEach(plan.mainMeals) { meal in
+                        ForEach(mealPlan.mainMeals) { meal in
                             mealCard(meal, label: meal.timing.uppercased(), color: archetype.color)
                         }
                         
                         // Snacks
                         VStack(alignment: .leading, spacing: 8) {
                             Text("HIGH-VIBE SNACKS").font(.system(size: 9, weight: .bold)).tracking(1).foregroundColor(Palette.text.muted)
-                            ForEach(plan.snacks, id: \.self) { snack in
+                            ForEach(mealPlan.snacks, id: \.self) { snack in
                                 HStack(spacing: 6) {
                                     Image(systemName: "leaf.fill").font(.system(size: 9)).foregroundColor(Color(hex: "#2ECC71"))
                                     Text(snack).font(.system(size: 12, weight: .medium)).foregroundColor(Palette.text.secondary)
@@ -595,7 +595,7 @@ struct FitnessMealPlanDetailView: View {
                                 Image(systemName: "drop.fill").foregroundColor(Color(hex: "#00BFFF"))
                                 Text("HYDRATION").font(.system(size: 9, weight: .bold)).tracking(1).foregroundColor(Color(hex: "#00BFFF"))
                             }
-                            Text(plan.hydrationNote).font(.system(size: 12, weight: .medium)).foregroundColor(Palette.text.secondary).lineSpacing(3)
+                            Text(mealPlan.hydrationNote).font(.system(size: 12, weight: .medium)).foregroundColor(Palette.text.secondary).lineSpacing(3)
                         }
                         .padding(12)
                         .background(RoundedRectangle(cornerRadius: 10).fill(Color(hex: "#00BFFF").opacity(0.04)))

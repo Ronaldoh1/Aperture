@@ -320,7 +320,7 @@ struct BookmarksView: View {
         case .timeline:
             selectedTab = 1 // Timeline
         case .alexandria:
-            selectedTab = 4 // More
+            selectedTab = 4 // Alexandria Library tab
         }
         
         dismiss()

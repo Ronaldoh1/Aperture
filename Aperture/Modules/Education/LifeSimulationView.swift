@@ -650,7 +650,10 @@ struct LifeSimulationView: View {
     private func impactBadge(_ label: String, _ delta: Int, _ color: Color) -> some View {
         HStack(spacing: 2) {
             Text(delta > 0 ? "+\(delta)" : "\(delta)").font(.system(size: 10, weight: .bold))
-                .foregroundColor(label == "Stress" ? (delta > 0 ? .red : .green) : (delta > 0 ? .green : .red))
+                .foregroundColor({
+                    if label == "Stress" { return delta > 0 ? Color.red : Color.green }
+                    return delta > 0 ? Color.green : Color.red
+                }())
         }
         .padding(.horizontal, 6).padding(.vertical, 3)
         .background(Capsule().fill(color.opacity(0.1)))
@@ -797,11 +800,17 @@ struct LifeSimulationView: View {
         HStack(spacing: 8) {
             Text(label).font(.system(size: 10, weight: .medium)).foregroundColor(.white.opacity(0.4)).frame(width: 80, alignment: .leading)
             Text("\(yours)").font(.system(size: 11, weight: .bold))
-                .foregroundColor(label == "Stress" ? (yours < theirs ? .green : .red) : (yours > theirs ? .green : .red))
+                .foregroundColor({
+                    if label == "Stress" { return yours < theirs ? Color.green : Color.red }
+                    return yours > theirs ? Color.green : Color.red
+                }())
                 .frame(width: 35)
             Text("vs").font(.system(size: 8)).foregroundColor(.white.opacity(0.2))
             Text("\(theirs)").font(.system(size: 11, weight: .bold))
-                .foregroundColor(label == "Stress" ? (theirs < yours ? .green : .blue) : (theirs > yours ? .green : .blue))
+                .foregroundColor({
+                    if label == "Stress" { return theirs < yours ? Color.green : Color.blue }
+                    return theirs > yours ? Color.green : Color.blue
+                }())
                 .frame(width: 35)
             let diff = label == "Stress" ? theirs - yours : yours - theirs
             Text(diff > 0 ? "" : "\(abs(diff)) gap").font(.system(size: 9, weight: .bold))

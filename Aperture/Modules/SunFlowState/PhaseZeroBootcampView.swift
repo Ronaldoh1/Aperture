@@ -138,17 +138,11 @@ struct PhaseZeroBootcampView: View {
             // Day dots
             HStack(spacing: 4) {
                 ForEach(1...14, id: \.self) { day in
-                    let done = engine.bootcamp.stillnessCompletedDays.contains(day)
-                    Circle()
-                        .fill(done ? Color.purple : Color.white.opacity(0.06))
-                        .frame(width: 18, height: 18)
-                        .overlay(
-                            done ? Text("✓").font(.system(size: 8, weight: .black)).foregroundColor(.white) : nil
-                        )
-                        .overlay(
-                            !done && day == engine.bootcamp.currentDay ?
-                            Circle().stroke(Color.purple.opacity(0.5), lineWidth: 1.5) : nil
-                        )
+                    StillnessDayDot(
+                        day: day,
+                        isDone: engine.bootcamp.stillnessCompletedDays.contains(day),
+                        isCurrentDay: day == engine.bootcamp.currentDay
+                    )
                 }
             }
         }
@@ -341,8 +335,10 @@ struct StillnessTimerView: View {
                 timer?.invalidate()
                 isRunning = false
                 isComplete = true
-                engine.completeStillness(day: engine.bootcamp.currentDay)
-                HapticManager.shared.heavy()
+                Task { @MainActor in
+                    engine.completeStillness(day: engine.bootcamp.currentDay)
+                    HapticManager.shared.heavy()
+                }
             }
         }
     }
@@ -726,5 +722,32 @@ struct ProtocolReadView: View {
             .toolbarBackground(Color(hex: "#0a0a0f"), for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
         }
+    }
+}
+
+// MARK: - Helper: Stillness Day Dot
+struct StillnessDayDot: View {
+    let day: Int
+    let isDone: Bool
+    let isCurrentDay: Bool
+
+    var body: some View {
+        ZStack {
+            Circle()
+                .fill(isDone ? Color.purple : Color.white.opacity(0.06))
+                .frame(width: 18, height: 18)
+            if isDone {
+                Text("✓")
+                    .font(.system(size: 8, weight: .black))
+                    .foregroundColor(.white)
+            }
+        }
+        .overlay(
+            Group {
+                if !isDone && isCurrentDay {
+                    Circle().stroke(Color.purple.opacity(0.5), lineWidth: 1.5)
+                }
+            }
+        )
     }
 }

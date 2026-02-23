@@ -34,6 +34,9 @@ struct LandingView: View {
 
                     LandingHeaderSection()
                     
+                    // Saved — quick access to bookmarked modules, courses & texts
+                    LandingSavedSection(selectedTab: $selectedTab)
+                    
                     // GodMode Portal Button (appears after unlock)
                     if godModeManager.isUnlocked {
                         godModePortalButton
@@ -59,7 +62,7 @@ struct LandingView: View {
 
                     LandingQuickActionsSection(selectedTab: $selectedTab)
 
-                    LandingDragonSection()
+                    LandingDragonSection(selectedTab: $selectedTab)
 
                     Spacer(minLength: 100)
 

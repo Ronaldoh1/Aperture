@@ -110,6 +110,7 @@ struct AlexandriaCourseRegistry {
         AntarcticaCourse.course,
         FourthTurningCourse.course,
         MoneyDecodedCourse.course,
+        RealTrinityCourse.course,
     ]
     
     static func course(for id: String) -> AlexandriaCourse? {

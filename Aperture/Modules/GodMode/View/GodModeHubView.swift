@@ -22,6 +22,7 @@ struct GodModeHubView: View {
     @State private var showSynchronicities = false
     @State private var showCurriculum = false
     @State private var showEtymologyCourse = false
+    @State private var showTeslaResonance = false
     @State private var sparkPulse = false
     
     enum GodModeTool: String, CaseIterable {
@@ -174,6 +175,9 @@ struct GodModeHubView: View {
             .sheet(isPresented: $showEtymologyCourse) {
                 EtymologyCourseView()
             }
+            .fullScreenCover(isPresented: $showTeslaResonance) {
+                TeslaResonanceCourseView()
+            }
         }
         .withModuleTutorial(.godMode)
     }
@@ -260,6 +264,20 @@ struct GodModeHubView: View {
                     icon: "text.book.closed.fill",
                     gradientColors: [Color(hex: "#9C27B0"), Color(hex: "#E040FB")],
                     progress: getEtymologyProgress()
+                )
+            }
+
+            // Tesla Resonance Course
+            Button {
+                showTeslaResonance = true
+            } label: {
+                courseCard(
+                    title: "Resonant Awakening",
+                    subtitle: "Tesla's Vibrational Keys",
+                    description: "Energy, frequency & soul evolution · 9 weeks",
+                    icon: "waveform.path.ecg",
+                    gradientColors: [Color(hex: "#FFD700"), Color(hex: "#FF8C00")],
+                    progress: getTeslaProgress()
                 )
             }
         }
@@ -381,6 +399,14 @@ struct GodModeHubView: View {
         let total = EtymologyCourse.shared.modules.flatMap { $0.lessons }.count
         guard total > 0 else { return 0 }
         return Double(progress.completedLessons.count) / Double(total)
+    }
+
+    private func getTeslaProgress() -> Double {
+        var p = TeslaProgress()
+        p.load()
+        let total = teslaResonanceCourse.flatMap { $0.lessons }.count
+        guard total > 0 else { return 0 }
+        return Double(p.completedLessons.count) / Double(total)
     }
     
     private var curriculumCard: some View {

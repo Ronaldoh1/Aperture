@@ -174,7 +174,7 @@ struct LifeContextOnboardingView: View {
                         TextField("", text: $dreamText, prompt: Text("My goal is...").foregroundColor(.white.opacity(0.15)))
                             .font(.system(size: 14)).foregroundColor(.white)
                             .padding(12).background(RoundedRectangle(cornerRadius: 10).fill(Color.white.opacity(0.04)))
-                            .onChange(of: dreamText) { _ in selectedDream = nil }
+                            .onChange(of: dreamText) { _, _ in selectedDream = nil }
                     }
                     
                     Button {

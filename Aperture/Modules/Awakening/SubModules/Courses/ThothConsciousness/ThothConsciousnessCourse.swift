@@ -29,7 +29,7 @@ struct ThothConsciousnessCourse {
             subtitle: "What you've been taught backwards",
             icon: "arrow.triangle.swap",
             lessons: [
-                ThothLesson(
+                ThothConsciousnessLesson(
                     id: "th1_1",
                     title: "Consciousness Creates Matter",
                     content: """
@@ -68,7 +68,7 @@ When you examine quantum physics, you find the same truth: the observer affects 
                     visualType: .consciousnessField
                 ),
                 
-                ThothLesson(
+                ThothConsciousnessLesson(
                     id: "th1_2",
                     title: "As Above, So Below",
                     content: """
@@ -120,7 +120,7 @@ The text revealed entirely different layers of meaning. Synchronicities began fl
                     visualType: .mirrorPrinciple
                 ),
                 
-                ThothLesson(
+                ThothConsciousnessLesson(
                     id: "th1_3",
                     title: "The Book Chooses the Reader",
                     content: """
@@ -181,7 +181,7 @@ This teaching found you because you're finally prepared for these specific insig
             subtitle: "Why forcing awakening always fails",
             icon: "hourglass",
             lessons: [
-                ThothLesson(
+                ThothConsciousnessLesson(
                     id: "th2_1",
                     title: "The Blacksmith's Discovery",
                     content: """
@@ -228,7 +228,7 @@ They develop **spiritual materialism**—collecting experiences, techniques, and
                     visualType: .blacksmithMetal
                 ),
                 
-                ThothLesson(
+                ThothConsciousnessLesson(
                     id: "th2_2",
                     title: "The Four Stages of Readiness",
                     content: """
@@ -282,7 +282,7 @@ This is grasping disguised as seeking. And it blocks everything.
                     visualType: .fourStages
                 ),
                 
-                ThothLesson(
+                ThothConsciousnessLesson(
                     id: "th2_3",
                     title: "Spiritual Ambition vs. Spiritual Aspiration",
                     content: """
@@ -354,7 +354,7 @@ The readiness isn't something you can fake or force. It's a genuine developmenta
             subtitle: "The most counterintuitive teaching",
             icon: "water.waves",
             lessons: [
-                ThothLesson(
+                ThothConsciousnessLesson(
                     id: "th3_1",
                     title: "The Paradox of Control",
                     content: """
@@ -398,7 +398,7 @@ Thoth understood this principle on a cosmic scale.
                     visualType: .surrenderPower
                 ),
                 
-                ThothLesson(
+                ThothConsciousnessLesson(
                     id: "th3_2",
                     title: "The Four Types of Surrender",
                     content: """
@@ -451,7 +451,7 @@ When you stop defending a limited version of yourself, you create space for your
                     visualType: .fourSurrenders
                 ),
                 
-                ThothLesson(
+                ThothConsciousnessLesson(
                     id: "th3_3",
                     title: "The Principle of Rhythm",
                     content: """
@@ -525,7 +525,7 @@ You have an idea for a project or venture.
             subtitle: "Seeing causes instead of effects",
             icon: "eye",
             lessons: [
-                ThothLesson(
+                ThothConsciousnessLesson(
                     id: "th4_1",
                     title: "Michelle's Invisible Star",
                     content: """
@@ -568,7 +568,7 @@ Michelle had stumbled upon one of Thoth's most profound teachings about the natu
                     visualType: .innerVision
                 ),
                 
-                ThothLesson(
+                ThothConsciousnessLesson(
                     id: "th4_2",
                     title: "Developing Inner Sight",
                     content: """
@@ -639,7 +639,7 @@ Inner vision emerges when you become genuinely curious about how things actually
             subtitle: "The radio dial of reality",
             icon: "waveform",
             lessons: [
-                ThothLesson(
+                ThothConsciousnessLesson(
                     id: "th5_1",
                     title: "The Cosmic Radio",
                     content: """
@@ -685,7 +685,7 @@ Entirely different outcome.
                     visualType: .frequencyDial
                 ),
                 
-                ThothLesson(
+                ThothConsciousnessLesson(
                     id: "th5_2",
                     title: "The Three Frequency Ranges",
                     content: """
@@ -745,7 +745,7 @@ What you embody internally becomes what you encounter externally—not through w
                     visualType: .threeRanges
                 ),
                 
-                ThothLesson(
+                ThothConsciousnessLesson(
                     id: "th5_3",
                     title: "Shifting Frequencies",
                     content: """
@@ -811,7 +811,7 @@ That shift in perspective—from trying to control outcomes to understanding the
             subtitle: "Transparency, not destruction",
             icon: "person.fill.questionmark",
             lessons: [
-                ThothLesson(
+                ThothConsciousnessLesson(
                     id: "th6_1",
                     title: "Daniel's Temple Test",
                     content: """
@@ -859,7 +859,7 @@ Your ego helps you:
                     visualType: .egoParadox
                 ),
                 
-                ThothLesson(
+                ThothConsciousnessLesson(
                     id: "th6_2",
                     title: "The Great Inversion (of Ego)",
                     content: """
@@ -927,7 +927,7 @@ Authentic self expresses through personality without being constrained by ego id
             subtitle: "The ultimate recognition",
             icon: "infinity",
             lessons: [
-                ThothLesson(
+                ThothConsciousnessLesson(
                     id: "th7_1",
                     title: "Steven's Tuesday Morning",
                     content: """
@@ -976,7 +976,7 @@ The trees. The morning light. His own breathing. The situation he'd been trying 
                     visualType: .unityConsciousness
                 ),
                 
-                ThothLesson(
+                ThothConsciousnessLesson(
                     id: "th7_2",
                     title: "The Prism of Consciousness",
                     content: """
@@ -1038,7 +1038,7 @@ Since you're not separate from the whole, how you show up affects the entire fie
             subtitle: "From knowledge to embodiment",
             icon: "figure.walk",
             lessons: [
-                ThothLesson(
+                ThothConsciousnessLesson(
                     id: "th8_1",
                     title: "Wisdom in Daily Life",
                     content: """
@@ -1089,7 +1089,7 @@ By transforming his own frequency, he created space for their entire dynamic to 
                     visualType: .dailyWisdom
                 ),
                 
-                ThothLesson(
+                ThothConsciousnessLesson(
                     id: "th8_2",
                     title: "Sacred Work & Technology",
                     content: """
@@ -1148,7 +1148,7 @@ These small acts of awareness gradually transform your relationship with the dig
                     visualType: .sacredWork
                 ),
                 
-                ThothLesson(
+                ThothConsciousnessLesson(
                     id: "th8_3",
                     title: "Finding Your Tribe",
                     content: """
@@ -1207,7 +1207,7 @@ You'll recognize these people by how they make you feel:
                     visualType: .findingTribe
                 ),
                 
-                ThothLesson(
+                ThothConsciousnessLesson(
                     id: "th8_4",
                     title: "The Ultimate Teaching",
                     content: """
@@ -1286,10 +1286,10 @@ struct ThothModule: Identifiable {
     let title: String
     let subtitle: String
     let icon: String
-    let lessons: [ThothLesson]
+    let lessons: [ThothConsciousnessLesson]
 }
 
-struct ThothLesson: Identifiable {
+struct ThothConsciousnessLesson: Identifiable {
     let id: String
     let title: String
     let content: String

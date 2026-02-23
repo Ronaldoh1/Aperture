@@ -9,6 +9,7 @@ import SwiftUI
 struct GodModeCourseView: View {
     
     let course = GodModeCourse.shared
+    @State private var showCitations = false
     @State private var progress = GodModeProgressManager.shared.progress
     @State private var selectedLesson: GodModeLesson?
     @State private var selectedModule: GodModeModule?
@@ -51,6 +52,9 @@ struct GodModeCourseView: View {
                 }
             }
             .navigationTitle("")
+            .sheet(isPresented: $showCitations) {
+                CourseCreditsModal(citations: genericFallbackCitations)
+            }
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
@@ -72,6 +76,12 @@ struct GodModeCourseView: View {
                                 endPoint: .trailing
                             )
                         )
+                }
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button { showCitations = true } label: {
+                        Image(systemName: "books.vertical.fill").font(.system(size: 13)).foregroundColor(.white.opacity(0.5))
+                    }
                 }
             }
             .sheet(item: $selectedLesson) { lesson in

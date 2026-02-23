@@ -1,5 +1,6 @@
 import Foundation
 import Combine
+import UIKit
 
 final class AuthPresenter: AuthPresenterType, AuthInteractorOutputType {
 
@@ -40,6 +41,13 @@ final class AuthPresenter: AuthPresenterType, AuthInteractorOutputType {
         loadingMessage = "Sending reset email"
         error = nil
         interactor?.resetPassword(email: email)
+    }
+
+    func didTapSignInWithGoogle(presenting viewController: UIViewController) {
+        isLoading = true
+        loadingMessage = "Signing in with Google"
+        error = nil
+        interactor?.signInWithGoogle(presenting: viewController)
     }
 
     func didSignIn(user: User) {

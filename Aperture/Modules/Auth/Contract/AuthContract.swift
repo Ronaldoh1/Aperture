@@ -1,3 +1,4 @@
+import UIKit
 import Foundation
 
 protocol AuthViewType: AnyObject {
@@ -14,6 +15,7 @@ protocol AuthInteractorType {
     func signUp(email: String, password: String)
     func resetPassword(email: String)
     func checkAuthStatus()
+    func signInWithGoogle(presenting viewController: UIViewController)
     
 }
 
@@ -37,6 +39,7 @@ protocol AuthPresenterType: AnyObject {
     func didTapSignIn(email: String, password: String)
     func didTapSignUp(email: String, password: String)
     func didTapResetPassword(email: String)
+    func didTapSignInWithGoogle(presenting viewController: UIViewController)
     
 }
 

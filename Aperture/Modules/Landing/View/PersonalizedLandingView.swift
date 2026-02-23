@@ -286,7 +286,7 @@ struct PersonalizedLandingView: View {
         case .showPatterns:
             selectedTab = 1 // Timeline
         case .giveSources:
-            selectedTab = 4 // More (Alexandria)
+            selectedTab = 4 // Alexandria Library tab
         }
     }
     

@@ -21,7 +21,7 @@ enum PortalDestination {
         switch self {
         case .cosmos, .cosmosEntity: return 2
         case .timeline: return 1
-        case .alexandria: return 4  // More menu
+        case .alexandria: return 4  // Alexandria Library tab
         case .awakening, .awakeningPath, .practice: return 3
         case .badges: return 4  // More menu
         case .search: return 0  // Home, then show search

@@ -28,5 +28,6 @@ struct LightAndDarknessCourse {
         module4_SatanAcrossReligions,
         module5_Synthesis,
         module6_HiddenInPlainSight,
+        module7_ReligiousProgramming,
     ]
 }

@@ -14,6 +14,8 @@
 import SwiftUI
 import MessageUI
 import UIKit
+import FirebaseFirestore
+import FirebaseAuth
 
 // MARK: - ═══════════════════════════════════════════════════
 // FEEDBACK MODEL
@@ -126,6 +128,9 @@ struct FeedbackFormView: View {
     @State private var showMailCompose = false
     @State private var showCopiedAlert = false
     @State private var showThankYou = false
+    @State private var isSubmitting = false
+    @State private var submitError: String? = nil
+    @State private var submitSuccess = false
     
     var body: some View {
         NavigationStack {
@@ -282,39 +287,72 @@ struct FeedbackFormView: View {
                 }
                 .padding(10).background(RoundedRectangle(cornerRadius: 10).fill(Color.white.opacity(0.02)))
                 
+                // Error message
+                if let err = submitError {
+                    HStack(spacing: 8) {
+                        Image(systemName: "exclamationmark.triangle.fill")
+                            .font(.system(size: 12))
+                        Text(err)
+                            .font(.system(size: 12))
+                    }
+                    .foregroundColor(Color(red: 1, green: 0.4, blue: 0.4))
+                    .padding(12)
+                    .background(RoundedRectangle(cornerRadius: 10).fill(Color.red.opacity(0.1)))
+                }
+                
                 // Send buttons
                 VStack(spacing: 10) {
-                    // Email button (primary)
+                    // Firebase button (primary)
                     Button {
-                        if MFMailComposeViewController.canSendMail() {
-                            showMailCompose = true
-                        } else {
-                            // Fallback: copy to clipboard
-                            UIPasteboard.general.string = composedBody
-                            showCopiedAlert = true
-                        }
+                        Task { await submitToFirebase() }
                     } label: {
                         HStack(spacing: 8) {
-                            Image(systemName: "paperplane.fill")
-                            Text("SEND FEEDBACK").font(.system(size: 14, weight: .bold))
+                            if isSubmitting {
+                                ProgressView().tint(.black).scaleEffect(0.8)
+                            } else {
+                                Image(systemName: "paperplane.fill")
+                            }
+                            Text(isSubmitting ? "SENDING..." : "SEND FEEDBACK")
+                                .font(.system(size: 14, weight: .bold))
                         }
                         .foregroundColor(.black)
                         .frame(maxWidth: .infinity).padding(.vertical, 14)
                         .background(Capsule().fill(selectedCategory.color))
                     }
-                    .disabled(feedbackText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                    .disabled(feedbackText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || isSubmitting)
                     .opacity(feedbackText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? 0.4 : 1)
                     
-                    // Copy button (secondary)
-                    Button {
-                        UIPasteboard.general.string = composedBody
-                        showCopiedAlert = true
-                    } label: {
-                        HStack(spacing: 6) {
-                            Image(systemName: "doc.on.doc")
-                            Text("Copy to Clipboard Instead").font(.system(size: 12, weight: .medium))
+                    // Fallback row
+                    HStack(spacing: 16) {
+                        // Email fallback
+                        Button {
+                            if MFMailComposeViewController.canSendMail() {
+                                showMailCompose = true
+                            } else {
+                                UIPasteboard.general.string = composedBody
+                                showCopiedAlert = true
+                            }
+                        } label: {
+                            HStack(spacing: 5) {
+                                Image(systemName: "envelope").font(.system(size: 11))
+                                Text("Email instead").font(.system(size: 12, weight: .medium))
+                            }
+                            .foregroundColor(.white.opacity(0.35))
                         }
-                        .foregroundColor(.white.opacity(0.4))
+                        
+                        Text("·").foregroundColor(.white.opacity(0.2))
+                        
+                        // Clipboard fallback
+                        Button {
+                            UIPasteboard.general.string = composedBody
+                            showCopiedAlert = true
+                        } label: {
+                            HStack(spacing: 5) {
+                                Image(systemName: "doc.on.doc").font(.system(size: 11))
+                                Text("Copy").font(.system(size: 12, weight: .medium))
+                            }
+                            .foregroundColor(.white.opacity(0.35))
+                        }
                     }
                 }
                 
@@ -355,6 +393,45 @@ struct FeedbackFormView: View {
     
     // MARK: - Composed Body
     
+    // MARK: - Firebase Submit
+
+    private func submitToFirebase() async {
+        let trimmed = feedbackText.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else { return }
+
+        isSubmitting = true
+        submitError = nil
+
+        do {
+            let db = Firestore.firestore()
+            let userId = Auth.auth().currentUser?.uid ?? "anonymous"
+            let docRef = db.collection("feedback").document()
+
+            let data: [String: Any] = [
+                "id":          docRef.documentID,
+                "userId":      userId,
+                "category":    selectedCategory.rawValue,
+                "rating":      rating,
+                "message":     trimmed,
+                "deviceInfo":  manager.deviceInfo,
+                "appVersion":  Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "unknown",
+                "build":       Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "unknown",
+                "timestamp":   FieldValue.serverTimestamp(),
+                "platform":    "iOS"
+            ]
+
+            try await docRef.setData(data)
+            isSubmitting = false
+            showThankYou = true
+
+        } catch let firestoreError {
+            isSubmitting = false
+            // Graceful fallback: prompt user to use email
+            submitError = "Couldn't reach the server. Try using Email or Copy below."
+            print("🔴 Feedback Firestore error: \(firestoreError.localizedDescription)")
+        }
+    }
+
     private var composedBody: String {
         let body = """
         Category: \(selectedCategory.rawValue)

@@ -1523,11 +1523,81 @@ struct KundaliniLessonView: View {
                 .padding()
                 .background(Color.green.opacity(0.1))
                 .cornerRadius(12)
+
+                // Chakra Check-in
+                KundaliniChakraCheckIn(accentColor: lesson.color)
             }
             .padding()
         }
         .background(Color.black.ignoresSafeArea())
         .navigationBarTitleDisplayMode(.inline)
+    }
+}
+
+// MARK: - Chakra Energy Check-in
+
+struct KundaliniChakraCheckIn: View {
+    let accentColor: Color
+    @State private var levels: [Int] = [5, 5, 5, 5, 5, 5, 5]
+
+    let chakras: [(name: String, sanskrit: String, color: Color, location: String)] = [
+        ("Root",       "Muladhara",  Color(hex: "#E74C3C"), "Base of spine"),
+        ("Sacral",     "Svadhisthana", Color(hex: "#E67E22"), "Below navel"),
+        ("Solar",      "Manipura",   Color(hex: "#F1C40F"), "Solar plexus"),
+        ("Heart",      "Anahata",    Color(hex: "#27AE60"), "Center of chest"),
+        ("Throat",     "Vishuddha",  Color(hex: "#3498DB"), "Throat"),
+        ("Third Eye",  "Ajna",       Color(hex: "#8E44AD"), "Between brows"),
+        ("Crown",      "Sahasrara",  Color(hex: "#D7BDE2"), "Top of head"),
+    ]
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 14) {
+            HStack {
+                Image(systemName: "sparkles").foregroundColor(accentColor)
+                Text("CHAKRA CHECK-IN").font(.system(size: 11, weight: .black)).tracking(2).foregroundColor(accentColor)
+                Spacer()
+                Text("Rate 1-10").font(.system(size: 10)).foregroundColor(.white.opacity(0.35))
+            }
+            Text("How activated does each center feel right now?").font(.system(size: 12)).foregroundColor(.white.opacity(0.5))
+
+            ForEach(0..<chakras.count, id: \.self) { i in
+                HStack(spacing: 10) {
+                    Circle().fill(chakras[i].color).frame(width: 10, height: 10)
+                    VStack(alignment: .leading, spacing: 1) {
+                        Text(chakras[i].name).font(.system(size: 12, weight: .bold)).foregroundColor(.white)
+                        Text(chakras[i].location).font(.system(size: 9)).foregroundColor(.white.opacity(0.35))
+                    }
+                    .frame(width: 70, alignment: .leading)
+                    Slider(value: Binding(
+                        get: { Double(levels[i]) },
+                        set: { levels[i] = Int($0) }
+                    ), in: 1...10, step: 1)
+                    .accentColor(chakras[i].color)
+                    Text("\(levels[i])").font(.system(size: 12, weight: .black)).foregroundColor(chakras[i].color).frame(width: 18)
+                }
+            }
+
+            // Energy map visualization
+            HStack(spacing: 0) {
+                ForEach(0..<chakras.count, id: \.self) { i in
+                    VStack(spacing: 3) {
+                        Capsule()
+                            .fill(chakras[i].color.opacity(Double(levels[i]) / 12.0 + 0.1))
+                            .frame(width: 18, height: CGFloat(levels[i]) * 5 + 8)
+                        Text(chakras[i].name.prefix(1)).font(.system(size: 8)).foregroundColor(.white.opacity(0.4))
+                    }
+                    if i < chakras.count - 1 { Spacer() }
+                }
+            }
+            .frame(height: 70)
+            .padding(.horizontal, 8)
+
+            Text("Note any chakras below 4 — these are the areas to focus your practice today.")
+                .font(.system(size: 11)).foregroundColor(.white.opacity(0.4)).lineSpacing(3)
+        }
+        .padding(16)
+        .background(RoundedRectangle(cornerRadius: 16).fill(accentColor.opacity(0.05))
+            .overlay(RoundedRectangle(cornerRadius: 16).stroke(accentColor.opacity(0.2), lineWidth: 1)))
     }
 }
 

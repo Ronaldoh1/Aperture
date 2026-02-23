@@ -1882,11 +1882,137 @@ struct BodhiLessonView: View {
                 .padding()
                 .background(Color.green.opacity(0.1))
                 .cornerRadius(12)
+
+                // Meditation Timer
+                BodhiMeditationTimer(color: lesson.color)
             }
             .padding()
         }
         .background(Color.black.ignoresSafeArea())
         .navigationBarTitleDisplayMode(.inline)
+    }
+}
+
+// MARK: - Bodhi Meditation Timer
+
+struct BodhiMeditationTimer: View {
+    let color: Color
+    @State private var seconds = 0
+    @State private var running = false
+    @State private var selectedMinutes = 5
+    @State private var timer: Timer? = nil
+    @State private var completed = false
+
+    let durations = [3, 5, 10, 15, 20]
+
+    var progress: Double {
+        let total = selectedMinutes * 60
+        return total > 0 ? Double(seconds) / Double(total) : 0
+    }
+
+    var timeLeft: Int { max(0, selectedMinutes * 60 - seconds) }
+
+    var body: some View {
+        VStack(spacing: 14) {
+            timerHeader
+            if !running && seconds == 0 { durationPicker }
+            timerCircle
+            controlRow
+            if completed {
+                Text("Session complete. Sit for another moment before moving.")
+                    .font(.system(size: 12)).foregroundColor(color).multilineTextAlignment(.center)
+            }
+        }
+        .padding(16)
+        .background(RoundedRectangle(cornerRadius: 16).fill(color.opacity(0.06))
+            .overlay(RoundedRectangle(cornerRadius: 16).stroke(color.opacity(0.25), lineWidth: 1)))
+    }
+
+    private var timerHeader: some View {
+        HStack {
+            Image(systemName: "figure.mind.and.body").foregroundColor(color)
+            Text("MEDITATION TIMER").font(.system(size: 11, weight: .black)).tracking(2).foregroundColor(color)
+            Spacer()
+        }
+    }
+
+    private var durationPicker: some View {
+        HStack(spacing: 8) {
+            Text("Duration:").font(.system(size: 12)).foregroundColor(.white.opacity(0.5))
+            ForEach(durations, id: \.self) { min in
+                Button { selectedMinutes = min } label: {
+                    Text("\(min)m").font(.system(size: 11, weight: selectedMinutes == min ? .black : .regular))
+                        .foregroundColor(selectedMinutes == min ? .black : .white.opacity(0.5))
+                        .padding(.horizontal, 10).padding(.vertical, 5)
+                        .background(selectedMinutes == min ? color : Color.white.opacity(0.06))
+                        .clipShape(Capsule())
+                }
+            }
+        }
+    }
+
+    private var timerCircle: some View {
+        ZStack {
+            Circle().stroke(Color.white.opacity(0.08), lineWidth: 6)
+            Circle().trim(from: 0, to: progress)
+                .stroke(color, style: StrokeStyle(lineWidth: 6, lineCap: .round))
+                .rotationEffect(.degrees(-90))
+                .animation(.linear(duration: 1), value: progress)
+            VStack(spacing: 4) {
+                Text(timeString(timeLeft)).font(.system(size: 28, weight: .black)).foregroundColor(.white)
+                Text(running ? "Breathe..." : (seconds == 0 ? "Ready" : "Paused"))
+                    .font(.system(size: 11)).foregroundColor(.white.opacity(0.4))
+            }
+        }
+        .frame(width: 110, height: 110)
+        .frame(maxWidth: .infinity)
+    }
+
+    private var controlRow: some View {
+        HStack(spacing: 12) {
+            if seconds > 0 {
+                Button { reset() } label: {
+                    Text("Reset").font(.system(size: 13, weight: .bold)).foregroundColor(.white.opacity(0.5))
+                        .padding(.horizontal, 20).padding(.vertical, 10)
+                        .background(Color.white.opacity(0.06)).clipShape(RoundedRectangle(cornerRadius: 10))
+                }
+            }
+            Button { running ? pause() : start() } label: {
+                Text(running ? "Pause" : (seconds == 0 ? "Begin" : "Resume"))
+                    .font(.system(size: 13, weight: .black))
+                    .foregroundColor(.black).padding(.horizontal, 28).padding(.vertical, 10)
+                    .background(color).clipShape(RoundedRectangle(cornerRadius: 10))
+            }
+        }
+    }
+
+    private func timeString(_ s: Int) -> String {
+        String(format: "%d:%02d", s / 60, s % 60)
+    }
+
+    private func start() {
+        completed = false
+        running = true
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+            if seconds < selectedMinutes * 60 {
+                seconds += 1
+            } else {
+                pause()
+                completed = true
+            }
+        }
+    }
+
+    private func pause() {
+        running = false
+        timer?.invalidate()
+        timer = nil
+    }
+
+    private func reset() {
+        pause()
+        seconds = 0
+        completed = false
     }
 }
 

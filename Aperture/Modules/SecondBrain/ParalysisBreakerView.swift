@@ -485,7 +485,13 @@ struct ParalysisBreakerView: View {
         currentStepIndex = 0
         
         // Scale step size based on energy level
-        let stepMinutes = energyLevel <= 1 ? 1 : energyLevel <= 2 ? 2 : energyLevel <= 3 ? 3 : energyLevel <= 4 ? 5 : 10
+        let stepMinutes: Int = {
+            if energyLevel <= 1 { return 1 }
+            if energyLevel <= 2 { return 2 }
+            if energyLevel <= 3 { return 3 }
+            if energyLevel <= 4 { return 5 }
+            return 10
+        }()
         
         // Category-based breakdown using NLP-style keyword matching
         if task.contains("clean") || task.contains("tidy") || task.contains("organize") {

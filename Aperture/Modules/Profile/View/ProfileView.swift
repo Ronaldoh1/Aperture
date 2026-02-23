@@ -75,6 +75,8 @@ struct ProfileView: View {
                 description: "Customize your experience"
             )
 
+            LanguageCardButton()
+
         }
 
     }
@@ -102,4 +104,48 @@ struct ProfileView: View {
 
     }
 
+}
+
+// MARK: - Language Card (for Profile/Settings)
+
+struct LanguageCardButton: View {
+    @State private var showPicker = false
+    @ObservedObject private var manager = LocalizationManager.shared
+
+    var body: some View {
+        Button { showPicker = true } label: {
+            HStack(spacing: 14) {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(Color.purple.opacity(0.12))
+                        .frame(width: 44, height: 44)
+                    Text("🌐").font(.system(size: 20))
+                }
+                VStack(alignment: .leading, spacing: 3) {
+                    Text("Language / Idioma")
+                        .font(.system(size: 15, weight: .semibold))
+                        .foregroundColor(.white)
+                    Text(manager.currentLanguage.displayName)
+                        .font(.system(size: 11))
+                        .foregroundColor(.white.opacity(0.4))
+                }
+                Spacer()
+                Text(manager.currentLanguage.flag)
+                    .font(.system(size: 22))
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 11))
+                    .foregroundColor(.white.opacity(0.2))
+            }
+            .padding(14)
+            .background(
+                RoundedRectangle(cornerRadius: 14)
+                    .fill(Color.white.opacity(0.01))
+                    .overlay(RoundedRectangle(cornerRadius: 14)
+                        .stroke(Color.white.opacity(0.05), lineWidth: 1))
+            )
+        }
+        .sheet(isPresented: $showPicker) {
+            LanguagePickerView()
+        }
+    }
 }

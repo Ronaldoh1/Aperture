@@ -754,7 +754,7 @@ extension TimelineEra {
     
     /// Full timeline including esoteric entries (Templars, Masons, Illuminati, etc.)
     static let fullTimeline: [TimelineEra] = {
-        let combined = comprehensiveTimeline + EsotericTimelineEntries.entries
+        let combined = comprehensiveTimeline + EsotericTimelineEntries.entries + DivineFeminineTimelineEntries.entries
         return combined.sorted { $0.year > $1.year }
     }()
     

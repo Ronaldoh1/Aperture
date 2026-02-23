@@ -1,267 +1,217 @@
 // LocalizationManager.swift
-// Handles localization for SunFlow: Reignited
-// Supports 12 languages for global reach
+// SunFlow: Reignited — Aperture
+// Manages in-app language selection with LATAM Spanish (es-419) support
 
+import Foundation
 import SwiftUI
 
-// MARK: - Localization Manager
-
-class LocalizationManager: ObservableObject {
-
-    static let shared = LocalizationManager()
-
-    @Published var currentLanguage: AppLanguage {
-        didSet {
-            UserDefaults.standard.set(currentLanguage.code, forKey: "app_language")
-        }
-    }
-
-    private init() {
-        if let savedCode = UserDefaults.standard.string(forKey: "app_language"),
-           let language = AppLanguage.allCases.first(where: { $0.code == savedCode }) {
-            self.currentLanguage = language
-        } else {
-            let systemLanguage = Locale.current.language.languageCode?.identifier ?? "en"
-            self.currentLanguage = AppLanguage.fromCode(systemLanguage)
-        }
-    }
-
-    static let supportedLanguages: [AppLanguage] = AppLanguage.allCases
-
-}
-
-// MARK: - Supported Languages (12 Total)
+// MARK: - Supported Languages
 
 enum AppLanguage: String, CaseIterable, Identifiable {
-    case english = "English"
-    case spanish = "Español"
-    case chinese = "中文"
-    case vietnamese = "Tiếng Việt"
-    case tagalog = "Tagalog"
-    case arabic = "العربية"
-    case korean = "한국어"
-    case french = "Français"
-    case portuguese = "Português"
-    case hindi = "हिन्दी"
-    case russian = "Русский"
-    case haitianCreole = "Kreyòl Ayisyen"
+    case systemDefault          = "system"
+    case english                = "en"
+    case latinAmericanSpanish   = "es-419"
 
     var id: String { rawValue }
 
-    var code: String {
+    var displayName: String {
         switch self {
-        case .english: return "en"
-        case .spanish: return "es"
-        case .chinese: return "zh-Hans"
-        case .vietnamese: return "vi"
-        case .tagalog: return "tl"
-        case .arabic: return "ar"
-        case .korean: return "ko"
-        case .french: return "fr"
-        case .portuguese: return "pt-BR"
-        case .hindi: return "hi"
-        case .russian: return "ru"
-        case .haitianCreole: return "ht"
+        case .systemDefault:        return "System Default"
+        case .english:              return "English"
+        case .latinAmericanSpanish: return "Español (Latinoamérica)"
+        }
+    }
+
+    var nativeName: String {
+        switch self {
+        case .systemDefault:        return "Sistema"
+        case .english:              return "English"
+        case .latinAmericanSpanish: return "Español"
         }
     }
 
     var flag: String {
         switch self {
-        case .english: return "🇺🇸"
-        case .spanish: return "🇪🇸"
-        case .chinese: return "🇨🇳"
-        case .vietnamese: return "🇻🇳"
-        case .tagalog: return "🇵🇭"
-        case .arabic: return "🇸🇦"
-        case .korean: return "🇰🇷"
-        case .french: return "🇫🇷"
-        case .portuguese: return "🇧🇷"
-        case .hindi: return "🇮🇳"
-        case .russian: return "🇷🇺"
-        case .haitianCreole: return "🇭🇹"
-        }
-    }
-
-    var nativeName: String { rawValue }
-
-    var isRTL: Bool {
-        self == .arabic
-    }
-
-    static func fromCode(_ code: String) -> AppLanguage {
-        switch code {
-        case "es": return .spanish
-        case "zh-Hans", "zh": return .chinese
-        case "vi": return .vietnamese
-        case "tl", "fil": return .tagalog
-        case "ar": return .arabic
-        case "ko": return .korean
-        case "fr": return .french
-        case "pt-BR", "pt": return .portuguese
-        case "hi": return .hindi
-        case "ru": return .russian
-        case "ht": return .haitianCreole
-        default: return .english
+        case .systemDefault:        return "🌐"
+        case .english:              return "🇺🇸"
+        case .latinAmericanSpanish: return "🌎"
         }
     }
 }
 
-// MARK: - Language Selector View
+// MARK: - Manager
 
-struct LanguageSelectorView: View {
+@MainActor
+final class LocalizationManager: ObservableObject {
 
-    @ObservedObject private var localization = LocalizationManager.shared
-    @Environment(\.dismiss) private var dismiss
+    static let shared = LocalizationManager()
+    private let storageKey = "aperture_app_language"
+
+    @Published private(set) var currentLanguage: AppLanguage {
+        didSet {
+            persist(currentLanguage)
+            NotificationCenter.default.post(name: .appLanguageDidChange, object: currentLanguage)
+        }
+    }
+
+    private init() {
+        let saved = UserDefaults.standard.string(forKey: "aperture_app_language")
+        currentLanguage = AppLanguage(rawValue: saved ?? "system") ?? .systemDefault
+    }
+
+    func setLanguage(_ language: AppLanguage) {
+        currentLanguage = language
+    }
+
+    // MARK: - String lookup (MainActor — use inside @MainActor contexts)
+
+    func localized(_ key: String) -> String {
+        LocalizationManager.localizedKey(key, language: currentLanguage)
+    }
+
+    // MARK: - Nonisolated lookup (safe from any context, e.g. String extensions)
+    // Reads language from UserDefaults directly — no actor hop required.
+
+    nonisolated static func localizedKey(_ key: String, language: AppLanguage? = nil) -> String {
+        let lang: AppLanguage
+        if let language {
+            lang = language
+        } else {
+            let saved = UserDefaults.standard.string(forKey: "aperture_app_language")
+            lang = AppLanguage(rawValue: saved ?? "system") ?? .systemDefault
+        }
+        guard lang != .systemDefault else {
+            return NSLocalizedString(key, comment: "")
+        }
+        let fallbackChain: [String]
+        switch lang {
+        case .latinAmericanSpanish: fallbackChain = ["es-419", "es"]
+        default:                    fallbackChain = [lang.rawValue]
+        }
+        for code in fallbackChain {
+            if let path = Bundle.main.path(forResource: code, ofType: "lproj"),
+               let bundle = Bundle(path: path) {
+                let val = bundle.localizedString(forKey: key, value: nil, table: nil)
+                if val != key { return val }
+            }
+        }
+        return NSLocalizedString(key, comment: "")
+    }
+
+    // MARK: - Private
+
+    private func persist(_ language: AppLanguage) {
+        UserDefaults.standard.set(language.rawValue, forKey: storageKey)
+        // Set Apple language preference for Text() auto-localization
+        if language == .systemDefault {
+            UserDefaults.standard.removeObject(forKey: "AppleLanguages")
+        } else {
+            let codes: [String] = language == .latinAmericanSpanish
+                ? ["es-419", "es", "en"]
+                : [language.rawValue, "en"]
+            UserDefaults.standard.set(codes, forKey: "AppleLanguages")
+        }
+        UserDefaults.standard.synchronize()
+    }
+}
+
+// MARK: - Notification
+
+extension Notification.Name {
+    static let appLanguageDidChange = Notification.Name("aperture.languageDidChange")
+}
+
+// MARK: - String helpers
+
+extension String {
+    // Uses the nonisolated static lookup — safe to call from any context.
+    var localized: String { LocalizationManager.localizedKey(self) }
+
+    func localizedFormat(_ args: CVarArg...) -> String {
+        String(format: localized, arguments: args)
+    }
+}
+
+// MARK: - SwiftUI Environment
+
+struct LocalizationManagerKey: EnvironmentKey {
+    @MainActor static var defaultValue: LocalizationManager { LocalizationManager.shared }
+}
+
+extension EnvironmentValues {
+    var localizationManager: LocalizationManager {
+        get { self[LocalizationManagerKey.self] }
+        set { self[LocalizationManagerKey.self] = newValue }
+    }
+}
+
+// MARK: - Language Picker UI
+
+struct LanguagePickerView: View {
+    @ObservedObject private var manager = LocalizationManager.shared
+    @Environment(\.dismiss) var dismiss
 
     var body: some View {
-
         NavigationStack {
-
             ZStack {
+                Color(red: 0.02, green: 0.02, blue: 0.08).ignoresSafeArea()
+                ScrollView(showsIndicators: false) {
+                    VStack(spacing: 10) {
+                        Spacer().frame(height: 20)
+                        VStack(spacing: 6) {
+                            Text("🌐").font(.system(size: 44))
+                            Text("Language").font(.system(size: 24, weight: .black)).foregroundColor(.white)
+                            Text("Idioma").font(.system(size: 14)).foregroundColor(.white.opacity(0.4))
+                        }.padding(.bottom, 16)
 
-                Color.black.ignoresSafeArea()
-
-                ScrollView {
-
-                    VStack(spacing: 8) {
-
-                        ForEach(LocalizationManager.supportedLanguages) { language in
-                            languageButton(language)
+                        ForEach(AppLanguage.allCases) { lang in
+                            languageRow(lang)
                         }
 
+                        Text("Language changes take effect on next launch.\nLos cambios de idioma se aplican al siguiente inicio.")
+                            .font(.system(size: 10)).foregroundColor(.white.opacity(0.3))
+                            .multilineTextAlignment(.center)
+                            .padding(.top, 24).padding(.horizontal, 32)
+
+                        Spacer(minLength: 40)
                     }
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 20)
-
+                    .padding(.horizontal, 20)
                 }
-
             }
-            .navigationTitle("Language")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Done") {
-                        dismiss()
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button { dismiss() } label: {
+                        Image(systemName: "xmark").foregroundColor(.white)
                     }
-                    .foregroundColor(Palette.accent.gold)
+                }
+                ToolbarItem(placement: .principal) {
+                    Text("Language / Idioma")
+                        .font(.system(size: 15, weight: .bold)).foregroundColor(.white)
                 }
             }
-
         }
-
     }
 
-    private func languageButton(_ language: AppLanguage) -> some View {
-
-        let isSelected = localization.currentLanguage == language
-
-        return Button(action: {
-            withAnimation(.spring(response: 0.3)) {
-                localization.currentLanguage = language
-            }
-        }) {
+    private func languageRow(_ lang: AppLanguage) -> some View {
+        let selected = manager.currentLanguage == lang
+        return Button { manager.setLanguage(lang) } label: {
             HStack(spacing: 14) {
-
-                Text(language.flag)
-                    .font(.title2)
-
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(language.nativeName)
-                        .font(.system(size: 16, weight: .semibold))
-                        .foregroundColor(.white)
-
-                    if language.isRTL {
-                        Text("RTL")
-                            .font(.system(size: 10, weight: .medium))
-                            .foregroundColor(Palette.text.muted)
-                    }
+                Text(lang.flag).font(.system(size: 28))
+                VStack(alignment: .leading, spacing: 3) {
+                    Text(lang.nativeName).font(.system(size: 16, weight: .bold)).foregroundColor(.white)
+                    Text(lang.displayName).font(.system(size: 11)).foregroundColor(.white.opacity(0.4))
                 }
-
                 Spacer()
-
-                if isSelected {
-                    Image(systemName: "checkmark.circle.fill")
-                        .font(.title3)
-                        .foregroundColor(Palette.accent.gold)
+                if selected {
+                    Image(systemName: "checkmark.circle.fill").font(.system(size: 20)).foregroundColor(.purple)
                 }
-
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 14)
-            .background(
-                RoundedRectangle(cornerRadius: 12)
-                    .fill(isSelected ? Palette.accent.gold.opacity(0.15) : Color.white.opacity(0.05))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 12)
-                            .stroke(isSelected ? Palette.accent.gold.opacity(0.3) : Color.clear, lineWidth: 1)
-                    )
-            )
+            .padding(16)
+            .background(RoundedRectangle(cornerRadius: 14)
+                .fill(selected ? Color.purple.opacity(0.08) : Color.white.opacity(0.01))
+                .overlay(RoundedRectangle(cornerRadius: 14)
+                    .stroke(selected ? Color.purple.opacity(0.3) : Color.white.opacity(0.04), lineWidth: 1)))
         }
-
     }
-
-}
-
-// MARK: - Localized Rights Scripts Helper
-
-struct LocalizedRightsScripts {
-
-    // Returns the 7 critical scripts in current language
-    static func getScripts() -> [RightsScript] {
-        [
-            RightsScript(
-                key: "silence",
-                icon: "hand.raised.fill",
-                english: "I invoke my Fifth Amendment right to remain silent."
-            ),
-            RightsScript(
-                key: "nosearch",
-                icon: "magnifyingglass.circle.fill",
-                english: "I do not consent to any searches."
-            ),
-            RightsScript(
-                key: "detained",
-                icon: "figure.walk",
-                english: "Am I being detained or am I free to go?"
-            ),
-            RightsScript(
-                key: "attorney",
-                icon: "person.crop.rectangle.fill",
-                english: "I want to speak to an attorney."
-            ),
-            RightsScript(
-                key: "noentry",
-                icon: "house.fill",
-                english: "I do not consent to entry into my home."
-            ),
-            RightsScript(
-                key: "warrant",
-                icon: "doc.text.fill",
-                english: "Please show me a warrant signed by a judge."
-            ),
-            RightsScript(
-                key: "nosign",
-                icon: "pencil.slash",
-                english: "I do not wish to sign any documents."
-            )
-        ]
-    }
-
-}
-
-struct RightsScript: Identifiable {
-    let id = UUID()
-    let key: String
-    let icon: String
-    let english: String
-
-    var localizedText: String {
-        NSLocalizedString("rights.script.\(key)", comment: "")
-    }
-}
-
-// MARK: - Preview
-
-#Preview {
-    LanguageSelectorView()
 }

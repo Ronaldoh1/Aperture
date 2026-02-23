@@ -24,6 +24,7 @@ enum AuthenticationState: Equatable {
 enum AuthMethod: String, CaseIterable {
     case biometric = "biometric"
     case apple = "apple"
+    case google = "google"
     case email = "email"
     case guest = "guest"
     
@@ -31,6 +32,7 @@ enum AuthMethod: String, CaseIterable {
         switch self {
         case .biometric: return "Face ID / Touch ID"
         case .apple: return "Sign in with Apple"
+        case .google: return "Sign in with Google"
         case .email: return "Email & Password"
         case .guest: return "Continue as Guest"
         }
@@ -40,6 +42,7 @@ enum AuthMethod: String, CaseIterable {
         switch self {
         case .biometric: return "faceid"
         case .apple: return "apple.logo"
+        case .google: return "globe"
         case .email: return "envelope.fill"
         case .guest: return "person.fill.questionmark"
         }
@@ -218,6 +221,44 @@ final class AuthenticationManager: ObservableObject {
     }
     
     // MARK: - Sign In Methods
+    
+    /// Sign in with Google (requires GoogleSignIn SPM package)
+    func signInWithGoogle() async {
+        isLoading = true
+        errorMessage = nil
+
+        guard let vc = UIApplication.shared.topViewController else {
+            errorMessage = "Unable to present sign-in screen."
+            isLoading = false
+            return
+        }
+
+        do {
+            let googleUser = try await GoogleSignInManager.shared.signIn(presenting: vc)
+
+            let user = AuthenticatedUser(
+                id: googleUser.uid,
+                email: googleUser.email,
+                displayName: googleUser.displayName,
+                authMethod: .google,
+                profileImageURL: googleUser.photoURL
+            )
+
+            currentUser = user
+            lastAuthMethodUsed = AuthMethod.google.rawValue
+            _ = keychain.save(googleUser.uid, forKey: .userId)
+            state = .authenticated
+
+        } catch GoogleAuthError.cancelled {
+            // User tapped Back — not an error, just exit silently
+        } catch GoogleAuthError.sdkNotInstalled {
+            errorMessage = "Google Sign-In requires the GoogleSignIn SPM package. See GoogleSignInManager.swift for setup instructions."
+        } catch {
+            errorMessage = error.localizedDescription
+        }
+
+        isLoading = false
+    }
     
     /// Sign in with Apple
     func signInWithApple() async {

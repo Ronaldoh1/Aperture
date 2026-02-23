@@ -681,59 +681,12 @@ struct SwipeFileView: View {
         NavigationStack {
             ZStack {
                 Color(hex: "#0a0a0f").ignoresSafeArea()
-                
                 ScrollView(showsIndicators: false) {
                     VStack(spacing: 14) {
                         Text("Say these exactly. No explanation. No softening.")
                             .font(.system(size: 11, weight: .medium)).foregroundColor(.white.opacity(0.35)).padding(.top, 10)
-                        
-                        // Category filter
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack(spacing: 6) {
-                                Button { selectedCategory = nil } label: {
-                                    Text("All").font(.system(size: 10, weight: selectedCategory == nil ? .bold : .medium))
-                                        .foregroundColor(selectedCategory == nil ? .black : .white.opacity(0.5))
-                                        .padding(.horizontal, 10).padding(.vertical, 5)
-                                        .background(Capsule().fill(selectedCategory == nil ? Color(red: 1.0, green: 0.85, blue: 0.3) : Color.white.opacity(0.05)))
-                                }
-                                ForEach(ErrorCategory.allCases, id: \.self) { cat in
-                                    Button { selectedCategory = cat } label: {
-                                        HStack(spacing: 3) {
-                                            Text(cat.emoji).font(.system(size: 10))
-                                            Text(cat.rawValue).font(.system(size: 9, weight: selectedCategory == cat ? .bold : .medium))
-                                        }
-                                        .foregroundColor(selectedCategory == cat ? .black : .white.opacity(0.5))
-                                        .padding(.horizontal, 8).padding(.vertical, 5)
-                                        .background(Capsule().fill(selectedCategory == cat ? Color(red: 1.0, green: 0.85, blue: 0.3) : Color.white.opacity(0.05)))
-                                    }
-                                }
-                            }
-                        }
-                        
-                        ForEach(filteredScripts) { script in
-                            Button {
-                                UIPasteboard.general.string = script.script
-                                copiedId = script.id
-                                HapticManager.shared.light()
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { copiedId = nil }
-                            } label: {
-                                HStack(spacing: 10) {
-                                    Text(script.category.emoji).font(.system(size: 14))
-                                    Text(""\(script.script)"")
-                                        .font(.system(size: 12, weight: .medium)).foregroundColor(.white.opacity(0.6))
-                                        .italic().multilineTextAlignment(.leading)
-                                    Spacer()
-                                    if copiedId == script.id {
-                                        Text("✓").font(.system(size: 12, weight: .bold)).foregroundColor(.green)
-                                    } else {
-                                        Image(systemName: "doc.on.doc").font(.system(size: 10)).foregroundColor(.white.opacity(0.15))
-                                    }
-                                }
-                                .padding(10).background(RoundedRectangle(cornerRadius: 8).fill(Color.white.opacity(0.02)))
-                            }
-                            .buttonStyle(.plain)
-                        }
-                        
+                        categoryFilter
+                        scriptList
                         Spacer(minLength: 60)
                     }
                     .padding(.horizontal, 16)
@@ -742,11 +695,82 @@ struct SwipeFileView: View {
             .navigationTitle("")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .principal) { Text("No Scripts — Swipe File").font(.system(size: 15, weight: .bold)).foregroundColor(.white) }
-                ToolbarItem(placement: .navigationBarTrailing) { Button("Done") { dismiss() }.foregroundColor(Color(red: 1.0, green: 0.85, blue: 0.3)) }
+                ToolbarItem(placement: .principal) {
+                    Text("No Scripts — Swipe File").font(.system(size: 15, weight: .bold)).foregroundColor(.white)
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Done") { dismiss() }.foregroundColor(Color(red: 1.0, green: 0.85, blue: 0.3))
+                }
             }
             .toolbarBackground(Color(hex: "#0a0a0f"), for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
         }
+    }
+
+    private let gold = Color(red: 1.0, green: 0.85, blue: 0.3)
+
+    private var categoryFilter: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 6) {
+                allCategoryButton
+                ForEach(ErrorCategory.allCases, id: \.self) { cat in
+                    categoryButton(cat)
+                }
+            }
+        }
+    }
+
+    private var allCategoryButton: some View {
+        let isSelected = selectedCategory == nil
+        return Button { selectedCategory = nil } label: {
+            Text("All")
+                .font(.system(size: 10, weight: isSelected ? .bold : .medium))
+                .foregroundColor(isSelected ? .black : .white.opacity(0.5))
+                .padding(.horizontal, 10).padding(.vertical, 5)
+                .background(Capsule().fill(isSelected ? gold : Color.white.opacity(0.05)))
+        }
+    }
+
+    private func categoryButton(_ cat: ErrorCategory) -> some View {
+        let isSelected = selectedCategory == cat
+        return Button { selectedCategory = cat } label: {
+            HStack(spacing: 3) {
+                Text(cat.emoji).font(.system(size: 10))
+                Text(cat.rawValue).font(.system(size: 9, weight: isSelected ? .bold : .medium))
+            }
+            .foregroundColor(isSelected ? .black : .white.opacity(0.5))
+            .padding(.horizontal, 8).padding(.vertical, 5)
+            .background(Capsule().fill(isSelected ? gold : Color.white.opacity(0.05)))
+        }
+    }
+
+    private var scriptList: some View {
+        ForEach(filteredScripts) { script in
+            scriptCard(script)
+        }
+    }
+
+    private func scriptCard(_ script: SwipeScript) -> some View {
+        Button {
+            UIPasteboard.general.string = script.script
+            copiedId = script.id
+            HapticManager.shared.light()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { copiedId = nil }
+        } label: {
+            HStack(spacing: 10) {
+                Text(script.category.emoji).font(.system(size: 14))
+                Text("\"\(script.script)\"")
+                    .font(.system(size: 12, weight: .medium)).foregroundColor(.white.opacity(0.6))
+                    .italic().multilineTextAlignment(.leading)
+                Spacer()
+                if copiedId == script.id {
+                    Text("✓").font(.system(size: 12, weight: .bold)).foregroundColor(.green)
+                } else {
+                    Image(systemName: "doc.on.doc").font(.system(size: 10)).foregroundColor(.white.opacity(0.15))
+                }
+            }
+            .padding(10).background(RoundedRectangle(cornerRadius: 8).fill(Color.white.opacity(0.02)))
+        }
+        .buttonStyle(.plain)
     }
 }

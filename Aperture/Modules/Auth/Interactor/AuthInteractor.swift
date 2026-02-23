@@ -1,16 +1,19 @@
 import Foundation
 import Combine
+import UIKit
 
 final class AuthInteractor: AuthInteractorType {
 
     weak var output: AuthInteractorOutputType?
 
     private let authService: AuthServiceType
+    private let googleSignInService: GoogleSignInServiceType
     private let currentUser: CurrentUserType
     private var cancellables = Set<AnyCancellable>()
 
-    init(authService: AuthServiceType, currentUser: CurrentUserType) {
+    init(authService: AuthServiceType, googleSignInService: GoogleSignInServiceType, currentUser: CurrentUserType) {
         self.authService = authService
+        self.googleSignInService = googleSignInService
         self.currentUser = currentUser
     }
 
@@ -74,6 +77,26 @@ final class AuthInteractor: AuthInteractorType {
             .sink { [weak self] user in
                 self?.output?.didCheckAuth(user: user)
             }
+            .store(in: &cancellables)
+    }
+
+    func signInWithGoogle(presenting viewController: UIViewController) {
+        googleSignInService.signIn(presenting: viewController)
+            .flatMap { [unowned self] user in
+                self.currentUser.saveUser(user).map { user }
+            }
+            .sink(
+                receiveCompletion: { [weak self] in
+                    if case .failure(let error) = $0 {
+                        print("🔴 Google Sign-In failed: \(error.localizedDescription)")
+                        self?.output?.didFail(error: error)
+                    }
+                },
+                receiveValue: { [weak self] user in
+                    print("✅ Google Sign-In: user saved — \(user.id)")
+                    self?.output?.didSignIn(user: user)
+                }
+            )
             .store(in: &cancellables)
     }
 }

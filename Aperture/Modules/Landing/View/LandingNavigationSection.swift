@@ -5,10 +5,23 @@ import SwiftUI
 struct LandingNavigationSection: View {
 
     @Binding var selectedTab: Int
+    @StateObject private var progressTracker = ProgressTracker.shared
+    @State private var showUnlockCelebration = false
+    @State private var wasLocked = true
 
     var body: some View {
 
         VStack(spacing: 16) {
+            EmptyView()
+                .onReceive(progressTracker.$stats) { stats in
+                    let nowUnlocked = stats.timelineEventsViewed >= 5 && stats.cosmosExplored >= 3
+                    if nowUnlocked && wasLocked {
+                        withAnimation(.spring(response: 0.5)) {
+                            showUnlockCelebration = true
+                        }
+                    }
+                    wasLocked = !nowUnlocked
+                }
 
             HStack {
                 Text("EXPLORE")
@@ -55,6 +68,18 @@ struct LandingNavigationSection: View {
 
             }
 
+            // Reality Decoded — full-width locked card
+            RealityDecodedLandingCard(selectedTab: $selectedTab)
+
+        }
+        .overlay {
+            if showUnlockCelebration {
+                RealityDecodedUnlockView {
+                    showUnlockCelebration = false
+                }
+                .zIndex(100)
+                .transition(.opacity.combined(with: .scale))
+            }
         }
 
     }

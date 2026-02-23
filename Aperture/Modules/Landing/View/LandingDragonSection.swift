@@ -4,6 +4,8 @@ import SwiftUI
 
 struct LandingDragonSection: View {
 
+    @Binding var selectedTab: Int
+
     private let quotes: [String] = [
         "The truth was never hidden. You just weren't looking.",
         "Every institution that tells you not to question is hiding something.",
@@ -45,6 +47,44 @@ struct LandingDragonSection: View {
                             .stroke(Palette.accent.gold.opacity(0.3), lineWidth: 1)
                     )
             )
+
+            // Chronokeeper CTA — AI guide accessible from landing
+            Button {
+                HapticManager.shared.tabChanged()
+                selectedTab = 5
+            } label: {
+                HStack(spacing: 10) {
+                    Image(systemName: "bubble.left.and.text.bubble.right.fill")
+                        .font(.system(size: 16))
+                        .foregroundColor(Palette.primary.cyan)
+
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("Ask Chronokeeper")
+                            .font(.system(size: 14, weight: .semibold, design: .rounded))
+                            .foregroundColor(Palette.text.primary)
+                        Text("Your AI guide to all knowledge")
+                            .font(.system(size: 11, weight: .medium))
+                            .foregroundColor(Palette.text.muted)
+                    }
+
+                    Spacer()
+
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: 12, weight: .semibold))
+                        .foregroundColor(Palette.text.muted)
+                }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 12)
+                .background(
+                    RoundedRectangle(cornerRadius: 14, style: .continuous)
+                        .fill(Palette.primary.cyan.opacity(0.07))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 14, style: .continuous)
+                                .stroke(Palette.primary.cyan.opacity(0.2), lineWidth: 1)
+                        )
+                )
+            }
+            .buttonStyle(.plain)
 
         }
 

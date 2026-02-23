@@ -32,6 +32,12 @@ struct AwakeningGuideView: View {
     
     @Environment(\.dismiss) var dismiss
     @StateObject private var state = AwakeningGuideState()
+    @State private var showLightAndDarkness = false
+    @State private var showSurveillanceState = false
+    @State private var showWordSpellsDecoded = false
+    @State private var showDemocracyDecoded = false
+    @State private var showChosenOnes = false
+    @State private var showMonadVsGod = false
     
     private let glow = Color(red: 0.6, green: 0.8, blue: 1.0)   // Calming blue-white
     private let warm = Color(red: 1.0, green: 0.85, blue: 0.5)   // Warm gold
@@ -72,6 +78,24 @@ struct AwakeningGuideView: View {
                 }
             }
             .onAppear { state.load() }
+            .fullScreenCover(isPresented: $showLightAndDarkness) {
+                LightAndDarknessView()
+            }
+            .fullScreenCover(isPresented: $showSurveillanceState) {
+                SurveillanceStateCourseView()
+            }
+            .fullScreenCover(isPresented: $showWordSpellsDecoded) {
+                WordSpellsDecodedCourseView()
+            }
+            .fullScreenCover(isPresented: $showDemocracyDecoded) {
+                DemocracyDecodedHubView()
+            }
+            .fullScreenCover(isPresented: $showChosenOnes) {
+                ChosenOnesCourseView()
+            }
+            .fullScreenCover(isPresented: $showMonadVsGod) {
+                MonadVsGodCourseView()
+            }
         }
     }
     
@@ -462,6 +486,193 @@ struct AwakeningGuideView: View {
             VStack(alignment: .leading, spacing: 6) {
                 Text("COURSES").font(.system(size: 9, weight: .black)).tracking(2).foregroundColor(.white.opacity(0.1))
                 
+                // ── Featured: Light & Darkness ──────────────────────────
+                Button { showLightAndDarkness = true } label: {
+                    HStack(spacing: 12) {
+                        ZStack {
+                            Circle().fill(Color(red: 1.0, green: 0.82, blue: 0.36).opacity(0.12)).frame(width: 44, height: 44)
+                            Text("☀️").font(.system(size: 22))
+                        }
+                        VStack(alignment: .leading, spacing: 3) {
+                            HStack(spacing: 5) {
+                                Text("Light & Darkness").font(.system(size: 14, weight: .black)).foregroundColor(.white)
+                                Text("NEW").font(.system(size: 7, weight: .black)).tracking(1)
+                                    .foregroundColor(.black)
+                                    .padding(.horizontal, 5).padding(.vertical, 2)
+                                    .background(Capsule().fill(Color(red: 1.0, green: 0.82, blue: 0.36)))
+                            }
+                            Text("The Greatest Story Ever Told. Decoded.").font(.system(size: 10, weight: .medium)).foregroundColor(.white.opacity(0.4))
+                            Text("4 courses · 80 min · Jordan Maxwell research").font(.system(size: 9, weight: .medium)).foregroundColor(Color(red: 1.0, green: 0.82, blue: 0.36).opacity(0.5))
+                        }
+                        Spacer()
+                        Image(systemName: "chevron.right").font(.system(size: 11, weight: .semibold))
+                            .foregroundColor(Color(red: 1.0, green: 0.82, blue: 0.36).opacity(0.4))
+                    }
+                    .padding(13)
+                    .background(
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(Color(red: 1.0, green: 0.82, blue: 0.36).opacity(0.04))
+                            .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color(red: 1.0, green: 0.82, blue: 0.36).opacity(0.12), lineWidth: 1))
+                    )
+                }
+                .padding(.bottom, 4)
+                // ────────────────────────────────────────────────────────
+
+                // ── Surveillance State ───────────────────────────────────
+                Button { showSurveillanceState = true } label: {
+                    HStack(spacing: 12) {
+                        ZStack {
+                            Circle().fill(Color(red: 0.95, green: 0.35, blue: 0.25).opacity(0.12)).frame(width: 44, height: 44)
+                            Text("👁️").font(.system(size: 22))
+                        }
+                        VStack(alignment: .leading, spacing: 3) {
+                            HStack(spacing: 5) {
+                                Text("Surveillance State").font(.system(size: 14, weight: .black)).foregroundColor(.white)
+                                Text("NEW").font(.system(size: 7, weight: .black)).tracking(1)
+                                    .foregroundColor(.white)
+                                    .padding(.horizontal, 5).padding(.vertical, 2)
+                                    .background(Capsule().fill(Color(red: 0.95, green: 0.35, blue: 0.25)))
+                            }
+                            Text("When Safety Becomes a Cage.").font(.system(size: 10, weight: .medium)).foregroundColor(.white.opacity(0.4))
+                            Text("5 lessons · COINTELPRO · NSA · Palantir · Your defense")
+                                .font(.system(size: 9, weight: .medium))
+                                .foregroundColor(Color(red: 0.95, green: 0.35, blue: 0.25).opacity(0.5))
+                        }
+                        Spacer()
+                        Image(systemName: "chevron.right").font(.system(size: 11, weight: .semibold))
+                            .foregroundColor(Color(red: 0.95, green: 0.35, blue: 0.25).opacity(0.4))
+                    }
+                    .padding(13)
+                    .background(
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(Color(red: 0.95, green: 0.35, blue: 0.25).opacity(0.04))
+                            .overlay(RoundedRectangle(cornerRadius: 12)
+                                .stroke(Color(red: 0.95, green: 0.35, blue: 0.25).opacity(0.12), lineWidth: 1))
+                    )
+                }
+
+                // ── Word Spells Decoded ───────────────────────────────────
+                Button { showWordSpellsDecoded = true } label: {
+                    HStack(spacing: 12) {
+                        ZStack {
+                            Circle().fill(Color(red: 0.95, green: 0.75, blue: 0.15).opacity(0.12)).frame(width: 44, height: 44)
+                            Text("🔤").font(.system(size: 22))
+                        }
+                        VStack(alignment: .leading, spacing: 3) {
+                            HStack(spacing: 5) {
+                                Text("Word Spells Decoded").font(.system(size: 14, weight: .black)).foregroundColor(.white)
+                                Text("NEW").font(.system(size: 7, weight: .black)).tracking(1)
+                                    .foregroundColor(.black)
+                                    .padding(.horizontal, 5).padding(.vertical, 2)
+                                    .background(Capsule().fill(Color(red: 0.95, green: 0.75, blue: 0.15)))
+                            }
+                            Text("Strip the spell. Find the actual claim.").font(.system(size: 10, weight: .medium)).foregroundColor(.white.opacity(0.4))
+                            Text("5 lessons · Socialism · MAGA vocab · Left triggers · How to respond")
+                                .font(.system(size: 9, weight: .medium))
+                                .foregroundColor(Color(red: 0.95, green: 0.75, blue: 0.15).opacity(0.5))
+                        }
+                        Spacer()
+                        Image(systemName: "chevron.right").font(.system(size: 11, weight: .semibold))
+                            .foregroundColor(Color(red: 0.95, green: 0.75, blue: 0.15).opacity(0.4))
+                    }
+                    .padding(13)
+                    .background(
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(Color(red: 0.95, green: 0.75, blue: 0.15).opacity(0.04))
+                            .overlay(RoundedRectangle(cornerRadius: 12)
+                                .stroke(Color(red: 0.95, green: 0.75, blue: 0.15).opacity(0.12), lineWidth: 1))
+                    )
+                }
+                .padding(.bottom, 4)
+                // ────────────────────────────────────────────────────────
+
+                // ── Democracy Decoded ─────────────────────────────────────
+                Button { showDemocracyDecoded = true } label: {
+                    HStack(spacing: 12) {
+                        ZStack {
+                            Circle().fill(Color(red: 0.29, green: 0.62, blue: 1.0).opacity(0.12)).frame(width: 44, height: 44)
+                            Text("🗳️").font(.system(size: 22))
+                        }
+                        VStack(alignment: .leading, spacing: 3) {
+                            HStack(spacing: 5) {
+                                Text("Democracy Decoded").font(.system(size: 14, weight: .black)).foregroundColor(.white)
+                                Text("NEW").font(.system(size: 7, weight: .black)).tracking(1)
+                                    .foregroundColor(.white).padding(.horizontal, 5).padding(.vertical, 2)
+                                    .background(Capsule().fill(Color(red: 0.29, green: 0.62, blue: 1.0)))
+                            }
+                            Text("How Elections, Money & Reform Actually Work.")
+                                .font(.system(size: 10, weight: .medium)).foregroundColor(.white.opacity(0.4))
+                            Text("3 courses · 13 modules · Quiz engine · RCV Simulator · Belief Audit")
+                                .font(.system(size: 9, weight: .medium))
+                                .foregroundColor(Color(red: 0.29, green: 0.62, blue: 1.0).opacity(0.5))
+                        }
+                        Spacer()
+                        Image(systemName: "chevron.right").font(.system(size: 11, weight: .semibold))
+                            .foregroundColor(Color(red: 0.29, green: 0.62, blue: 1.0).opacity(0.4))
+                    }
+                    .padding(13)
+                    .background(RoundedRectangle(cornerRadius: 12)
+                        .fill(Color(red: 0.29, green: 0.62, blue: 1.0).opacity(0.04))
+                        .overlay(RoundedRectangle(cornerRadius: 12)
+                            .stroke(Color(red: 0.29, green: 0.62, blue: 1.0).opacity(0.12), lineWidth: 1)))
+                }
+                .padding(.bottom, 4)
+
+                // ── Chosen Ones ───────────────────────────────────────────
+                Button { showChosenOnes = true } label: {
+                    HStack(spacing: 12) {
+                        ZStack {
+                            Circle().fill(Color(hex: "#FF6B35").opacity(0.12)).frame(width: 44, height: 44)
+                            Text("✨").font(.system(size: 22))
+                        }
+                        VStack(alignment: .leading, spacing: 3) {
+                            Text("The Chosen Ones").font(.system(size: 14, weight: .black)).foregroundColor(.white)
+                            Text("Discover which of the 8 archetypes you were built to embody")
+                                .font(.system(size: 10, weight: .medium)).foregroundColor(.white.opacity(0.4))
+                            Text("Quiz · 8 archetypes · Prophet · Healer · Rebel · Warrior + more")
+                                .font(.system(size: 9, weight: .medium))
+                                .foregroundColor(Color(hex: "#FF6B35").opacity(0.5))
+                        }
+                        Spacer()
+                        Image(systemName: "chevron.right").font(.system(size: 11, weight: .semibold))
+                            .foregroundColor(Color(hex: "#FF6B35").opacity(0.4))
+                    }
+                    .padding(13)
+                    .background(RoundedRectangle(cornerRadius: 12)
+                        .fill(Color(hex: "#FF6B35").opacity(0.04))
+                        .overlay(RoundedRectangle(cornerRadius: 12)
+                            .stroke(Color(hex: "#FF6B35").opacity(0.12), lineWidth: 1)))
+                }
+                .padding(.bottom, 4)
+
+                // ── The Monad ─────────────────────────────────────────────
+                Button { showMonadVsGod = true } label: {
+                    HStack(spacing: 12) {
+                        ZStack {
+                            Circle().fill(Color(hex: "#C9A84C").opacity(0.12)).frame(width: 44, height: 44)
+                            Text("🌌").font(.system(size: 22))
+                        }
+                        VStack(alignment: .leading, spacing: 3) {
+                            Text("The Monad").font(.system(size: 14, weight: .black)).foregroundColor(.white)
+                            Text("Beyond the God you were given")
+                                .font(.system(size: 10, weight: .medium)).foregroundColor(.white.opacity(0.4))
+                            Text("5 modules · Gnosticism · Demiurge · The Spark Within")
+                                .font(.system(size: 9, weight: .medium))
+                                .foregroundColor(Color(hex: "#C9A84C").opacity(0.5))
+                        }
+                        Spacer()
+                        Image(systemName: "chevron.right").font(.system(size: 11, weight: .semibold))
+                            .foregroundColor(Color(hex: "#C9A84C").opacity(0.4))
+                    }
+                    .padding(13)
+                    .background(RoundedRectangle(cornerRadius: 12)
+                        .fill(Color(hex: "#C9A84C").opacity(0.04))
+                        .overlay(RoundedRectangle(cornerRadius: 12)
+                            .stroke(Color(hex: "#C9A84C").opacity(0.12), lineWidth: 1)))
+                }
+                .padding(.bottom, 4)
+                // ────────────────────────────────────────────────────────
+
                 courseCard("🧬", "The Biology of Awakening", "What's happening in your brain, nervous system, and body", .blue)
                 courseCard("⚡", "Downloads & Synchronicities", "Why you suddenly 'know' things and see patterns everywhere", warm)
                 courseCard("🎵", "Frequencies & Vibrations", "How to raise your energy state — real methods, not woo", .purple)

@@ -78,19 +78,26 @@ struct RootTabView: View {
                     }
                     .tag(3)
                 
-                // Tab 4: Chronokeeper AI Guide
-                ChronokeeperChatView()
+                // Tab 4: Alexandria — Sacred Knowledge Library
+                AlexandriaTabView()
                     .tabItem {
-                        Label("Guide", systemImage: selectedTab == 4 ? "bubble.left.and.text.bubble.right.fill" : "bubble.left.and.text.bubble.right")
+                        Label("Library", systemImage: selectedTab == 4 ? "books.vertical.fill" : "books.vertical")
                     }
                     .tag(4)
-                
-                // Tab 5: More (now contains Alexandria, Profile, Settings, FAQ)
-                MoreView(selectedTab: $selectedTab)
+
+                // Tab 5: Chronokeeper AI Guide
+                ChronokeeperChatView()
                     .tabItem {
-                        Label("More", systemImage: selectedTab == 5 ? "ellipsis.circle.fill" : "ellipsis.circle")
+                        Label("Guide", systemImage: selectedTab == 5 ? "bubble.left.and.text.bubble.right.fill" : "bubble.left.and.text.bubble.right")
                     }
                     .tag(5)
+                
+                // Tab 6: More (Profile, Settings, FAQ)
+                MoreView(selectedTab: $selectedTab)
+                    .tabItem {
+                        Label("More", systemImage: selectedTab == 6 ? "ellipsis.circle.fill" : "ellipsis.circle")
+                    }
+                    .tag(6)
                 
             }
             .tint(Palette.accent.gold)
@@ -122,7 +129,22 @@ struct AwakeningTabView: View {
     }
 }
 
+// MARK: - Alexandria Tab View (Sacred Knowledge Library)
+
+struct AlexandriaTabView: View {
+
+    var body: some View {
+        NavigationStack {
+            AlexandriaEntryView(container: AppContainer.shared.container) { route in
+                print("🟡 AlexandriaTabView: route - \(route)")
+            }
+        }
+    }
+}
+
+
+
+
 #Preview {
     RootTabView()
 }
-

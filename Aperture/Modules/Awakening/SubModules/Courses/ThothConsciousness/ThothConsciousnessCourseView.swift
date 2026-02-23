@@ -8,7 +8,7 @@ import SwiftUI
 struct ThothConsciousnessCourseView: View {
     
     let course = ThothConsciousnessCourse.shared
-    @State private var selectedLesson: ThothLesson?
+    @State private var selectedLesson: ThothConsciousnessLesson?
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
@@ -56,7 +56,7 @@ struct ThothConsciousnessCourseView: View {
                 }
             }
             .sheet(item: $selectedLesson) { lesson in
-                ThothLessonDetailView(lesson: lesson, course: course)
+                ThothConsciousnessLessonDetailView(lesson: lesson, course: course)
             }
         }
     }
@@ -192,9 +192,9 @@ struct ThothConsciousnessCourseView: View {
 
 // MARK: - Lesson Detail View
 
-struct ThothLessonDetailView: View {
+struct ThothConsciousnessLessonDetailView: View {
     
-    let lesson: ThothLesson
+    let lesson: ThothConsciousnessLesson
     let course: ThothConsciousnessCourse
     @Environment(\.dismiss) private var dismiss
     

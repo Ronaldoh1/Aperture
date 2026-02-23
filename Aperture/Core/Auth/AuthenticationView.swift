@@ -147,6 +147,12 @@ struct AuthenticationView: View {
                 biometricButton
             }
             
+            // Sign in with Google
+            GoogleSignInButton {
+                HapticManager.shared.medium()
+                Task { await authManager.signInWithGoogle() }
+            }
+            
             // Sign in with Apple
             // NOTE: Requires Apple Developer Program ($99/year)
             // To disable: set showAppleSignIn = false below

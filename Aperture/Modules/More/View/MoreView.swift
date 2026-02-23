@@ -29,6 +29,8 @@ struct MoreView: View {
     @State private var showAppSettings = false
     @State private var showSunFlowState = false
     @State private var showDiveDeeper = false
+    @State private var showFeedback = false
+    @State private var showVoiceSettings = false
 
     var body: some View {
 
@@ -134,6 +136,12 @@ struct MoreView: View {
             }
             .navigationDestination(isPresented: $showDiveDeeper) {
                 DiveDeeperHub()
+            }
+            .navigationDestination(isPresented: $showFeedback) {
+                FeedbackFormView()
+            }
+            .navigationDestination(isPresented: $showVoiceSettings) {
+                VoicePickerView()
             }
 
         }
@@ -366,6 +374,17 @@ struct MoreView: View {
                 showSourceLibrary = true
             }
 
+            // VOICE SETTINGS
+            MoreMenuCard(
+                icon: "person.wave.2.fill",
+                title: "Voice Settings",
+                subtitle: "Choose narration voice, style & speed",
+                color: Palette.primary.cyan,
+                badge: nil
+            ) {
+                showVoiceSettings = true
+            }
+
             // SETTINGS
             MoreMenuCard(
                 icon: "gearshape.fill",
@@ -375,6 +394,17 @@ struct MoreView: View {
                 badge: nil
             ) {
                 showAppSettings = true
+            }
+
+            // SEND FEEDBACK — Firebase powered
+            MoreMenuCard(
+                icon: "bubble.left.and.bubble.right.fill",
+                title: "Send Feedback",
+                subtitle: "Bug reports, feature requests, love notes ☀️",
+                color: Color(hex: "#00BCD4"),
+                badge: nil
+            ) {
+                showFeedback = true
             }
 
             // FAQ

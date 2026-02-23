@@ -1,4 +1,3 @@
-// CourseHubView.swift
 // THE AWAKENING ACADEMY - All Courses In One Place
 
 import SwiftUI
@@ -697,10 +696,221 @@ struct CourseCatalog {
             subtitle: "Know both sides. Choose freely.",
             icon: "circle.lefthalf.filled",
             colorHex: "#B366FF",
-            moduleCount: 6,
+            moduleCount: 7,
             estimatedHours: 15,
             category: .consciousness,
             difficulty: .intermediate
+        ),
+        // ══════════════════════════════════════════════════
+        // FACTORY MINDS — EDUCATION SYSTEM DECODED
+        // ══════════════════════════════════════════════════
+        CourseInfo(
+            id: "factory_minds",
+            title: "Factory Minds",
+            subtitle: "How school was built to obey, not think",
+            icon: "building.2.fill",
+            colorHex: "#33D9A6",
+            moduleCount: 6,
+            estimatedHours: 2.5,
+            category: .consciousness,
+            difficulty: .intermediate
+        ),
+        // ══════════════════════════════════════════════════
+        // SURVEILLANCE STATE — WHEN SAFETY BECOMES A CAGE
+        // ══════════════════════════════════════════════════
+        CourseInfo(
+            id: "surveillance_state",
+            title: "Surveillance State",
+            subtitle: "When safety becomes a cage",
+            icon: "eye.fill",
+            colorHex: "#F2573D",
+            moduleCount: 5,
+            estimatedHours: 1.5,
+            category: .consciousness,
+            difficulty: .intermediate
+        ),
+        // ══════════════════════════════════════════════════
+        // WORD SPELLS DECODED — TRIGGER WORDS & LANGUAGE CONTROL
+        // ══════════════════════════════════════════════════
+        CourseInfo(
+            id: "word_spells_decoded",
+            title: "Word Spells Decoded",
+            subtitle: "Capitalism, Socialism, Woke — strip the spell",
+            icon: "textformat.characters",
+            colorHex: "#F2C40F",
+            moduleCount: 5,
+            estimatedHours: 1.25,
+            category: .consciousness,
+            difficulty: .beginner
+        ),
+        // ══════════════════════════════════════════════════
+        // DEMOCRACY DECODED — 3 COURSES
+        // ══════════════════════════════════════════════════
+        CourseInfo(
+            id: "democracy_decoded_c1",
+            title: "How Elections Actually Work",
+            subtitle: "The system nobody fully explained to you",
+            icon: "scroll.fill",
+            colorHex: "#4A9EFF",
+            moduleCount: 5,
+            estimatedHours: 1.5,
+            category: .consciousness,
+            difficulty: .beginner
+        ),
+        CourseInfo(
+            id: "democracy_decoded_c2",
+            title: "Money in Politics",
+            subtitle: "Super PACs, dark money, and who funds campaigns",
+            icon: "dollarsign.circle.fill",
+            colorHex: "#34C78A",
+            moduleCount: 3,
+            estimatedHours: 1.75,
+            category: .consciousness,
+            difficulty: .intermediate
+        ),
+        CourseInfo(
+            id: "democracy_decoded_c3",
+            title: "The Election Illusion",
+            subtitle: "What's broken, what's better, how we get there",
+            icon: "arrow.triangle.2.circlepath",
+            colorHex: "#FF7B3A",
+            moduleCount: 3,
+            estimatedHours: 1.5,
+            category: .consciousness,
+            difficulty: .intermediate
+        ),
+        // ══════════════════════════════════════════════════
+        // CHOSEN ONES
+        // ══════════════════════════════════════════════════
+        CourseInfo(
+            id: "chosen_ones",
+            title: "The Chosen Ones",
+            subtitle: "Discover which archetype you were built to embody",
+            icon: "sparkles",
+            colorHex: "#FF6B35",
+            moduleCount: 8,
+            estimatedHours: 1.0,
+            category: .consciousness,
+            difficulty: .beginner
+        ),
+        // ══════════════════════════════════════════════════
+        // THE MONAD
+        // ══════════════════════════════════════════════════
+        CourseInfo(
+            id: "monad_vs_god",
+            title: "The Monad",
+            subtitle: "Beyond the God you were given",
+            icon: "circle.hexagongrid.fill",
+            colorHex: "#C9A84C",
+            moduleCount: 5,
+            estimatedHours: 0.75,
+            category: .consciousness,
+            difficulty: .intermediate
+        ),
+        CourseInfo(
+            id: "money_is_energy",
+            title: "Money Is Energy",
+            subtitle: "The operating manual they've been hiding from you",
+            icon: "dollarsign.circle.fill",
+            colorHex: "#FFD700",
+            moduleCount: 6,
+            estimatedHours: 5,
+            category: .financial,
+            difficulty: .intermediate
+        ),
+        CourseInfo(
+            id: "thoth_teachings",
+            title: "Thoth's Hidden Teachings",
+            subtitle: "Consciousness, manifestation & the hermetic path",
+            icon: "eye.fill",
+            colorHex: "#64B5F6",
+            moduleCount: 8,
+            estimatedHours: 7,
+            category: .consciousness,
+            difficulty: .advanced
+        ),
+        CourseInfo(
+            id: "alchemy_unveiled",
+            title: "Alchemy Unveiled",
+            subtitle: "Exposing the lies & mastering true transformation",
+            icon: "flame.fill",
+            colorHex: "#DAA520",
+            moduleCount: 9,
+            estimatedHours: 8,
+            category: .consciousness,
+            difficulty: .advanced
+        ),
+        // ══════════════════════════════════════════════════
+        // NEW COURSES — BUILD 39.7
+        // ══════════════════════════════════════════════════
+        CourseInfo(
+            id: "money_is_energy",
+            title: "Money Is Energy",
+            subtitle: "The operating manual they've been hiding",
+            icon: "dollarsign.circle.fill",
+            colorHex: "#FFD700",
+            moduleCount: 6,
+            estimatedHours: 0.8,
+            category: .financial,
+            difficulty: .beginner
+        ),
+        CourseInfo(
+            id: "thoths_hidden_teachings",
+            title: "Thoth's Hidden Teachings",
+            subtitle: "Consciousness, manifestation & the great paradox",
+            icon: "eye.trianglebadge.exclamationmark",
+            colorHex: "#7B68EE",
+            moduleCount: 9,
+            estimatedHours: 1.1,
+            category: .consciousness,
+            difficulty: .intermediate
+        ),
+        CourseInfo(
+            id: "alchemy_unveiled_bite",
+            title: "Alchemy Unveiled",
+            subtitle: "The sacred science of transformation",
+            icon: "flame.fill",
+            colorHex: "#FF6B35",
+            moduleCount: 8,
+            estimatedHours: 1.0,
+            category: .consciousness,
+            difficulty: .intermediate
+        ),
+        // ══════════════════════════════════════════════════
+        // NEW COURSES — BUILD 39.10 (Psyops)
+        // ══════════════════════════════════════════════════
+        CourseInfo(
+            id: "psyops_bite",
+            title: "Psyops: Bite Edition",
+            subtitle: "3-5 min bites. Spot it. Shield up. Start here.",
+            icon: "bolt.shield.fill",
+            colorHex: "#E74C3C",
+            moduleCount: 12,
+            estimatedHours: 1,
+            category: .systems,
+            difficulty: .beginner
+        ),
+        CourseInfo(
+            id: "psyops_master",
+            title: "Combating Psychological Warfare",
+            subtitle: "Detect, defend, and reclaim your mind. Full master class.",
+            icon: "eye.fill",
+            colorHex: "#E74C3C",
+            moduleCount: 10,
+            estimatedHours: 5,
+            category: .systems,
+            difficulty: .intermediate
+        ),
+        CourseInfo(
+            id: "psyops_detector",
+            title: "Psyops Detector",
+            subtitle: "AI-powered. Unlocked after completing the master course.",
+            icon: "eye.trianglebadge.exclamationmark",
+            colorHex: "#8E44AD",
+            moduleCount: 1,
+            estimatedHours: 0,
+            category: .systems,
+            difficulty: .advanced
         )
     ]
     
@@ -840,6 +1050,42 @@ struct CourseHubView: View {
             case "light_and_darkness":
                 LightAndDarknessCourseView()
                     .environmentObject(CourseProgressManager.shared)
+            // FACTORY MINDS
+            case "factory_minds":
+                FactoryMindsView()
+            // SURVEILLANCE STATE
+            case "surveillance_state":
+                SurveillanceStateCourseView()
+            // WORD SPELLS DECODED
+            case "word_spells_decoded":
+                WordSpellsDecodedCourseView()
+            // DEMOCRACY DECODED
+            case "democracy_decoded_c1", "democracy_decoded_c2", "democracy_decoded_c3":
+                DemocracyDecodedHubView()
+            case "chosen_ones":
+                ChosenOnesCourseView()
+            case "monad_vs_god":
+                MonadVsGodCourseView()
+            case "money_is_energy":
+                MoneyIsEnergyCourseView()
+            case "thoth_teachings":
+                ThothHiddenTeachingsCourseView()
+            case "alchemy_unveiled":
+                AlchemyCourseView()
+            case "alchemy_unveiled_bite":
+                AlchemyCourseView()
+            case "belief_analyzer":
+                BeliefAnalyzerView()
+            case "thoths_hidden_teachings":
+                ThothsHiddenTeachingsCourseView()
+            case "psyops_bite":
+                PsyopsBiteCourseView()
+            case "psyops_master":
+                PsyopsWarfareCourseView()
+            case "psyops_detector":
+                PsyopsDetectorView()
+            case "real_trinity":
+                if let c = AlexandriaCourseRegistry.course(for: "real_trinity") { AlexandriaCourseView(course: c) }
             default:
                 CourseDetailPlaceholder(course: course)
             }

@@ -1,6 +1,7 @@
 // Aperture/Modules/Auth/View/AuthView.swift
 
 import SwiftUI
+import UIKit
 
 struct AuthView: View {
 
@@ -208,6 +209,28 @@ struct AuthView: View {
                         handleSignIn()
                     }
                 }
+
+                // ── Social Auth Divider ──
+                HStack(spacing: 12) {
+                    Rectangle()
+                        .fill(Color.white.opacity(0.06))
+                        .frame(height: 1)
+                    Text("or")
+                        .font(.system(size: 12, weight: .medium, design: .rounded))
+                        .foregroundColor(.white.opacity(0.25))
+                    Rectangle()
+                        .fill(Color.white.opacity(0.06))
+                        .frame(height: 1)
+                }
+                .cosmicFormWidth()
+
+                // ── Google Sign-In ──
+                GoogleSignInButton {
+                    guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                          let rootVC = windowScene.windows.first?.rootViewController else { return }
+                    presenter.didTapSignInWithGoogle(presenting: rootVC)
+                }
+                .cosmicFormWidth()
 
             }
 

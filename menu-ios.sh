@@ -10,14 +10,21 @@ YELLOW='\033[33m'
 RED='\033[31m'
 MAGENTA='\033[35m'
 BLUE='\033[34m'
+DIM='\033[2m'   # ← This fixes the Quick Commit error
+
+mkdir -p logs
+
+clean_derived_data() {
+  local path="/Users/ron/Library/Developer/Xcode/DerivedData"
+  echo -e "${YELLOW}Cleaning DerivedData at: $path${RESET}"
+  rm -rf "$path"/* 2>/dev/null || true
+  success "DerivedData cleaned successfully"
+}
 
 find_root() {
   local dir="$PWD"
   while [[ "$dir" != "/" ]]; do
-    if [[ -d "$dir/Aperture.xcodeproj" ]] ||
-       [[ -d "$dir/Aperture.xcworkspace" ]] ||
-       [[ -f "$dir/Podfile" ]] ||
-       [[ -f "$dir/fastlane/Fastfile" ]]; then
+    if [[ -d "$dir/Aperture.xcodeproj" ]] || [[ -d "$dir/Aperture.xcworkspace" ]] || [[ -f "$dir/Podfile" ]] || [[ -f "$dir/fastlane/Fastfile" ]]; then
       echo "$dir"
       return 0
     fi
@@ -36,11 +43,36 @@ error()   { echo -e "${RED}✗ $1${RESET}"; }
 run() {
   local cmd="$1"
   local title="$2"
+  local log="logs/$(date +%Y%m%d-%H%M%S)-$title.log"
+
   echo -e "\n${MAGENTA}══════════════════════════════════════════════════════════════${RESET}"
-  echo -e "${YELLOW}→ $title${RESET}"
+  echo -e "${YELLOW}→ $title${RESET} (log → $log)"
   echo -e "${MAGENTA}══════════════════════════════════════════════════════════════${RESET}\n"
-  eval "$cmd" || error "Command failed"
+
+  eval "$cmd" 2>&1 | tee "$log" || error "Command failed"
   echo -e "\n${GREEN}Press Enter to return...${RESET}"
+  read -r
+}
+
+full_analysis() {
+  local log="logs/$(date +%Y%m%d-%H%M%S)-Full-Static-Analysis.log"
+  echo -e "\n${MAGENTA}══════════════════════════════════════════════════════════════${RESET}"
+  echo -e "${YELLOW}→ Running Full Static Analysis (all tools chained)${RESET}"
+  echo -e "${MAGENTA}══════════════════════════════════════════════════════════════${RESET}\n"
+
+  {
+    echo "=== SwiftLint + SwiftFormat ==="
+    swiftlint --strict && swiftformat .
+    echo ""
+    echo "=== Periphery (unused code) ==="
+    periphery scan --config .periphery.yml || echo "Periphery not configured"
+    echo ""
+    echo "=== Xcode Analyze ==="
+    xcodebuild analyze -scheme Aperture -destination 'platform=iOS Simulator,name=iPhone 16' -quiet
+  } 2>&1 | tee "$log"
+
+  success "Full Static Analysis completed — see $log"
+  echo -e "\n${GREEN}Press Enter...${RESET}"
   read -r
 }
 
@@ -85,18 +117,22 @@ show_menu() {
 
   printf "  ${GREEN}1)${RESET} Build & run on simulator\n"
   printf "  ${GREEN}2)${RESET} Build LOUD (verbose debug)\n"
-  printf "  ${GREEN}3)${RESET} Fastlane gym (archive)\n"
-  printf "  ${GREEN}4)${RESET} Fastlane test\n"
-  printf "  ${GREEN}5)${RESET} swiftlint\n"
-  printf "  ${GREEN}6)${RESET} swiftformat\n"
-  printf "  ${GREEN}7)${RESET} pod install/update\n"
-  printf "  ${GREEN}8)${RESET} Open in Xcode\n"
-  printf "  ${GREEN}9)${RESET} Open Simulator\n"
-  printf " ${GREEN}10)${RESET} Clean DerivedData (nuke Xcode cache)\n"
-  printf " ${GREEN}11)${RESET} Quick Git Commit\n"
+  printf "  ${GREEN}3)${RESET} Run Unit Tests\n"
+  printf "  ${GREEN}4)${RESET} Run UI Tests\n"
+  printf "  ${GREEN}5)${RESET} Run All Tests + Coverage\n"
+  printf "  ${GREEN}6)${RESET} SwiftLint + SwiftFormat\n"
+  printf "  ${GREEN}7)${RESET} Periphery (unused code)\n"
+  printf "  ${GREEN}8)${RESET} Xcode Analyze (Apple static analyzer)\n"
+  printf "  ${GREEN}9)${RESET} pod install/update\n"
+  printf " ${GREEN}10)${RESET} Clean Build Folder (Cmd+Shift+K)\n"
+  printf " ${GREEN}11)${RESET} Clean DerivedData (nuke cache)\n"
+  printf " ${GREEN}12)${RESET} Full Static Analysis (all tools chained)\n"
+  printf " ${GREEN}13)${RESET} Quick Git Commit\n"
+  printf " ${GREEN}14)${RESET} Open in Xcode\n"
+  printf " ${GREEN}15)${RESET} Open Simulator\n"
   printf "  ${RED}0)${RESET} Exit (terminal stays open)\n\n"
 
-  printf "${BLUE}Choice [0-11]: ${RESET}"
+  printf "${BLUE}Choice [0-15]: ${RESET}"
 }
 
 while true; do
@@ -108,26 +144,21 @@ while true; do
       echo -e "\n${CYAN}Thanks!${RESET} Terminal stays open — type ${YELLOW}exit${RESET} when ready."
       exec $SHELL -l
       ;;
-    1) run "xcodebuild -scheme Aperture -configuration Debug -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16' build && xcrun simctl install booted build/Debug-iphonesimulator/Aperture.app && xcrun simctl launch booted com.ronaldoh1.aperture" "Build & run on simulator" ;;
-    2) run "xcodebuild -scheme Aperture -configuration Debug -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16' -verbose build" "Build LOUD (verbose debug)" ;;
-    3) run "fastlane gym" "Fastlane gym (archive)" ;;
-    4) run "fastlane test" "Fastlane test" ;;
-    5) run "swiftlint --strict" "swiftlint" ;;
-    6) run "swiftformat ." "swiftformat" ;;
-    7) run "pod install --repo-update" "pod install/update" ;;
-    8) run "open -a Xcode Aperture.xcworkspace || open -a Xcode Aperture.xcodeproj" "Open in Xcode" ;;
-    9) run "open -a Simulator" "Open Simulator" ;;
-    10)
-      if [[ "$(read -p "${YELLOW}Delete ALL DerivedData? (y/N) ${RESET}" choice; echo "$choice")" == "y" ]]; then
-        rm -rf ~/Library/Developer/Xcode/DerivedData/*
-        success "DerivedData cleaned – Xcode will re-generate on next build"
-      else
-        echo -e "${YELLOW}Cancelled.${RESET}"
-      fi
-      echo -e "\n${GREEN}Press Enter...${RESET}"
-      read -r
-      ;;
-    11) quick_commit ;;
+    1) run "xcodebuild -scheme Aperture -configuration Debug -sdk iphonesimulator -derivedDataPath ./build -destination 'platform=iOS Simulator,name=iPhone 16' build && xcrun simctl install booted ./build/Build/Products/Debug-iphonesimulator/Aperture.app && xcrun simctl launch booted com.ronaldoh1.aperture" "Build & run on simulator" ;;
+    2) run "xcodebuild -scheme Aperture -configuration Debug -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 16' -verbose build" "Build LOUD" ;;
+    3) run "xcodebuild test -scheme Aperture -destination 'platform=iOS Simulator,name=iPhone 16' -only-testing:ApertureTests" "Run Unit Tests" ;;
+    4) run "xcodebuild test -scheme Aperture -destination 'platform=iOS Simulator,name=iPhone 16' -only-testing:ApertureUITests" "Run UI Tests" ;;
+    5) run "xcodebuild test -scheme Aperture -destination 'platform=iOS Simulator,name=iPhone 16' -enableCodeCoverage YES" "Run All Tests + Coverage" ;;
+    6) run "swiftlint --strict && swiftformat ." "SwiftLint + SwiftFormat" ;;
+    7) run "periphery scan --config .periphery.yml || echo 'Run periphery scan --setup first'" "Periphery (unused code)" ;;
+    8) run "xcodebuild analyze -scheme Aperture -destination 'platform=iOS Simulator,name=iPhone 16'" "Xcode Analyze (Apple static analyzer)" ;;
+    9) run "pod install --repo-update" "pod install/update" ;;
+    10) run "xcodebuild clean -scheme Aperture" "Clean Build Folder (Cmd+Shift+K)" ;;
+    11) clean_derived_data ;;
+    12) full_analysis ;;
+    13) quick_commit ;;
+    14) run "open -a Xcode Aperture.xcworkspace || open -a Xcode Aperture.xcodeproj" "Open in Xcode" ;;
+    15) run "open -a Simulator" "Open Simulator" ;;
     *) echo -e "${YELLOW}Invalid${RESET}"; sleep 1 ;;
   esac
 done

@@ -422,7 +422,7 @@ struct EndOfDayReportView: View {
                 if !r.gratitude.isEmpty {
                     VStack(spacing: 6) {
                         Text("GRATEFUL FOR").font(.system(size: 9, weight: .black)).tracking(1).foregroundColor(.white.opacity(0.2))
-                        Text("",\(r.gratitude)"").font(.system(size: 14, weight: .medium)).foregroundColor(.white.opacity(0.6)).italic()
+                        Text("\"\(r.gratitude)\"").font(.system(size: 14, weight: .medium)).foregroundColor(.white.opacity(0.6)).italic()
                     }
                     .padding(14).background(RoundedRectangle(cornerRadius: 12).fill(Color.white.opacity(0.03)))
                 }

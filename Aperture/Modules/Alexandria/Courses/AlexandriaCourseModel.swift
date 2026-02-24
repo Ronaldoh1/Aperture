@@ -107,6 +107,7 @@ struct AlexandriaCourseRegistry {
         AbracadabraCourse.course,
         OneFortyFourThousandCourse.course,
         AlchemyCourse.course,
+        VortexMathCourse.course,
         AntarcticaCourse.course,
         FourthTurningCourse.course,
         MoneyDecodedCourse.course,

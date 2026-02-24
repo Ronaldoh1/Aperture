@@ -6987,9 +6987,6 @@
     "🔴 Republicans" : {
 
     },
-    "🔴 THE MATRIX EXPOSED" : {
-
-    },
     "🔴 URGENT" : {
 
     },
@@ -7783,9 +7780,6 @@
 
     },
     "3 courses · 13 modules · Quizzes that reveal your hidden assumptions" : {
-
-    },
-    "3 items" : {
 
     },
     "3 Parts" : {
@@ -10203,9 +10197,6 @@
         }
       }
     },
-    "APERTURE  ·  v1.0" : {
-
-    },
     "Aperture contains mature philosophical and spiritual content intended for adults only." : {
 
     },
@@ -10290,7 +10281,6 @@
       }
     },
     "Aperture v1.0" : {
-      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -10537,9 +10527,6 @@
           }
         }
       }
-    },
-    "Ask Chronokeeper" : {
-
     },
     "Ask for:" : {
       "localizations" : {
@@ -13438,9 +13425,6 @@
     "Complete Lesson ✓" : {
 
     },
-    "Complete Matrix Decoded to unlock" : {
-
-    },
     "Complete texts, cosmology & sacred links" : {
       "localizations" : {
         "es" : {
@@ -14000,7 +13984,6 @@
       }
     },
     "Continue your journey" : {
-      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -15829,9 +15812,6 @@
     "Double tap to start lesson" : {
 
     },
-    "Download voices in iOS Settings → Accessibility → Spoken Content → Voices → English" : {
-
-    },
     "Dr. David Hawkins calibrated human consciousness on a logarithmic scale from 1-1000. Below 200 is destructive; above 200 is constructive. Each level has its own emotional signature and life view." : {
       "localizations" : {
         "es" : {
@@ -17524,9 +17504,6 @@
     "experiencing itself through unique focal points" : {
 
     },
-    "Explore" : {
-
-    },
     "EXPLORE" : {
       "localizations" : {
         "es" : {
@@ -17746,9 +17723,6 @@
       }
     },
     "Exposing the Lies &\nMastering True Transformation" : {
-
-    },
-    "Exposing the Matrix" : {
 
     },
     "External\nAuthority" : {
@@ -19190,6 +19164,9 @@
       }
     },
     "GUIDANCE LEVEL" : {
+
+    },
+    "Guide" : {
 
     },
     "Haikai Audit" : {
@@ -20843,9 +20820,6 @@
     "Invite friends & earn rewards" : {
 
     },
-    "iOS Settings → Accessibility → Spoken Content → Voices" : {
-
-    },
     "IS + RA + EL = ISRAEL" : {
       "localizations" : {
         "es" : {
@@ -22476,9 +22450,6 @@
         }
       }
     },
-    "LOCKED" : {
-
-    },
     "Log" : {
 
     },
@@ -23735,7 +23706,6 @@
       }
     },
     "MORE" : {
-      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -23955,7 +23925,6 @@
       }
     },
     "Narrating..." : {
-      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -24578,9 +24547,6 @@
       }
     },
     "No phone. No music. No journaling. Just sit.\nAgitation is withdrawal, not weakness." : {
-
-    },
-    "No premium voices found" : {
 
     },
     "No questions yet" : {
@@ -25522,7 +25488,6 @@
       }
     },
     "Open your eyes" : {
-      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -27956,16 +27921,6 @@
         }
       }
     },
-    "Rate: %@x  ·  Pitch: %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Rate: %1$@x  ·  Pitch: %2$@"
-          }
-        }
-      }
-    },
     "Rational Enlightenment" : {
       "localizations" : {
         "es" : {
@@ -29795,9 +29750,6 @@
     "Save to My Feed" : {
 
     },
-    "SAVED" : {
-
-    },
     "Saved locally on your device ✓" : {
 
     },
@@ -30565,12 +30517,6 @@
 
     },
     "See the pattern behind all religions" : {
-
-    },
-    "See the system — you're a co-creator" : {
-
-    },
-    "See the system for what it is" : {
 
     },
     "SEE THROUGH THE STATIC" : {
@@ -32431,9 +32377,6 @@
           }
         }
       }
-    },
-    "SunFlow: Reignited · Open your eyes" : {
-
     },
     "SUPPLEMENT ALTERNATIVES" : {
 
@@ -36140,9 +36083,6 @@
     "TOOLS FOR YOUR NEW LIFE" : {
 
     },
-    "Tools, features & your journey" : {
-
-    },
     "Top 3 Priorities" : {
 
     },
@@ -37008,9 +36948,6 @@
     "Unlocked" : {
 
     },
-    "UNLOCKED" : {
-
-    },
     "Unlocked by: %@" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -37298,9 +37235,6 @@
         }
       }
     },
-    "View All" : {
-
-    },
     "View All %lld Chemicals →" : {
 
     },
@@ -37518,9 +37452,6 @@
     "Voice Scanner" : {
 
     },
-    "Voice Settings" : {
-
-    },
     "Voice Style" : {
 
     },
@@ -37578,9 +37509,6 @@
 
     },
     "Want more content like this?" : {
-
-    },
-    "Want more voice options?" : {
 
     },
     "WATCH FOR" : {
@@ -39829,9 +39757,6 @@
       }
     },
     "YOUR ACTION" : {
-
-    },
-    "Your AI guide to all knowledge" : {
 
     },
     "Your App, Your Experience" : {

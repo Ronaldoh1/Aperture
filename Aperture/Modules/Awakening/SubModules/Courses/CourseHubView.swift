@@ -250,6 +250,18 @@ struct CourseCatalog {
             category: .spirituality,
             difficulty: .intermediate
         ),
+        // ☉ SunFlow: Reignited — Course I
+        CourseInfo(
+            id: "vortex_369_math",
+            title: "The Key to the Universe",
+            subtitle: "3-6-9, Vortex Math, Solfeggio & the Divine Matrix",
+            icon: "infinity",
+            colorHex: "#7B2FBE",
+            moduleCount: 8,
+            estimatedHours: 5,
+            category: .spirituality,
+            difficulty: .intermediate
+        ),
         CourseInfo(
             id: "solar_theology",
             title: "Solar Theology",
@@ -1043,6 +1055,14 @@ struct CourseHubView: View {
                 if let c = AlexandriaCourseRegistry.course(for: "alchemy_great_work") { AlexandriaCourseView(course: c) }
             case "antarctica":
                 if let c = AlexandriaCourseRegistry.course(for: "antarctica") { AlexandriaCourseView(course: c) }
+            // ☉ VORTEX MATH — loads the full immersive HTML course
+            case "vortex_369_math":
+                VortexMathHTMLCourseView()
+            // ☉ FREQUENCY MASTERCLASS — locked until Course I complete
+            case "frequency_masterclass":
+                FrequencyMasterclassView()
+            case "undo_chains":
+                UndoChainsView()
             // QUANTUM NOURISH
             case "quantum_nourish":
                 QuantumNourishView()

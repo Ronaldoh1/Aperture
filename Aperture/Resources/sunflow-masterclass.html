@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Frequency Mastery Masterclass · SunFlow: Reignited</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #c9a84c; --gold-light: #f0d080; --gold-dim: #7a6030;
+  --amber: #d4870a; --amber-glow: rgba(212,135,10,0.15);
+  --bg-0: #040608; --bg-1: #07090f; --bg-2: #0a0d16;
+  --text-primary: #e8dfc8; --text-secondary: #8a7e68; --text-muted: #5a5040;
+  --accent-teal: #2a7a6a; --accent-violet: #4a2870;
+  --masterclass-accent: #d4870a;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg-0); color: var(--text-primary);
+  font-family: 'EB Garamond', serif; font-size: 18px; line-height: 1.75;
+  overflow-x: hidden;
+}
+
+/* ── Starfield ── */
+#starfield { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+
+/* ── Navigation dots ── */
+#nav-dots {
+  position: fixed; right: 20px; top: 50%; transform: translateY(-50%);
+  display: flex; flex-direction: column; gap: 10px; z-index: 100;
+}
+.nav-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--gold-dim); cursor: pointer; transition: all 0.3s ease;
+}
+.nav-dot.active { background: var(--gold); transform: scale(1.5); }
+
+/* ── Sections ── */
+section { position: relative; z-index: 1; }
+
+/* ── Hero ── */
+#hero {
+  min-height: 100vh; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center;
+  padding: 100px 24px 80px;
+}
+.masterclass-badge {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 8px 20px; border: 1px solid rgba(212,135,10,0.4);
+  border-radius: 100px; margin-bottom: 32px;
+  background: rgba(212,135,10,0.08);
+}
+.masterclass-badge span {
+  font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 4px;
+  color: var(--amber); text-transform: uppercase;
+}
+.masterclass-badge::before { content: '✦'; color: var(--amber); font-size: 8px; }
+.masterclass-badge::after { content: '✦'; color: var(--amber); font-size: 8px; }
+.hero-eyebrow {
+  font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 4px;
+  color: var(--gold-dim); margin-bottom: 16px; text-transform: uppercase;
+}
+.hero-title {
+  font-family: 'Cinzel Decorative', cursive;
+  font-size: clamp(26px, 5vw, 48px); color: var(--gold-light);
+  line-height: 1.2; margin-bottom: 12px; font-weight: 700;
+}
+.hero-subtitle {
+  font-family: 'Cinzel Decorative', cursive;
+  font-size: clamp(14px, 2.5vw, 20px); color: var(--gold);
+  font-weight: 400; letter-spacing: 0.5px; margin-bottom: 32px;
+}
+.hero-tagline {
+  font-size: 16px; color: var(--text-secondary); font-style: italic;
+  max-width: 500px; margin: 0 auto 40px;
+}
+canvas.hero-canvas { margin-top: 32px; border-radius: 4px; }
+
+/* ── Prerequisites ── */
+#prereqs {
+  max-width: 720px; margin: 0 auto; padding: 60px 24px;
+}
+.prereq-box {
+  background: rgba(212,135,10,0.05); border: 1px solid rgba(212,135,10,0.25);
+  border-radius: 12px; padding: 28px 32px;
+}
+.prereq-title {
+  font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 3px;
+  color: var(--amber); margin-bottom: 12px; text-transform: uppercase;
+}
+.prereq-text { font-size: 16px; color: var(--text-secondary); line-height: 1.7; }
+.prereq-courses {
+  display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px;
+}
+.prereq-tag {
+  padding: 6px 14px; background: rgba(201,168,76,0.1);
+  border: 1px solid rgba(201,168,76,0.25); border-radius: 20px;
+  font-family: 'Cinzel', serif; font-size: 11px; color: var(--gold); letter-spacing: 1px;
+}
+
+/* ── Modules overview ── */
+#modules-overview {
+  max-width: 720px; margin: 0 auto; padding: 60px 24px;
+}
+.section-header { text-align: center; margin-bottom: 48px; }
+.section-eyebrow {
+  font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 4px;
+  color: var(--gold-dim); margin-bottom: 12px; text-transform: uppercase;
+  display: block;
+}
+.section-title {
+  font-family: 'Cinzel Decorative', cursive; font-size: clamp(18px,3vw,26px);
+  color: var(--gold-light);
+}
+.modules-grid { display: flex; flex-direction: column; gap: 12px; }
+.module-overview-card {
+  display: flex; align-items: center; gap: 16px; padding: 16px 20px;
+  background: rgba(255,255,255,0.02); border: 1px solid rgba(201,168,76,0.12);
+  border-radius: 10px; transition: all 0.3s ease; cursor: pointer;
+}
+.module-overview-card:hover {
+  background: rgba(201,168,76,0.05); border-color: rgba(201,168,76,0.3);
+}
+.mod-num {
+  font-family: 'Cinzel', serif; font-size: 22px; color: var(--gold-dim);
+  min-width: 36px; text-align: center;
+}
+.mod-info { flex: 1; }
+.mod-title { font-size: 16px; color: var(--text-primary); font-weight: 600; }
+.mod-subtitle { font-size: 14px; color: var(--text-secondary); margin-top: 2px; font-style: italic; }
+.mod-tag {
+  font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 2px;
+  color: var(--amber); padding: 3px 10px; border: 1px solid rgba(212,135,10,0.3);
+  border-radius: 10px; white-space: nowrap;
+}
+
+/* ── Module sections ── */
+.module-section {
+  max-width: 800px; margin: 0 auto; padding: 80px 24px;
+  opacity: 0; transform: translateY(24px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.module-section.visible { opacity: 1; transform: translateY(0); }
+.module-header { margin-bottom: 40px; }
+.module-badge {
+  display: inline-flex; align-items: center; gap: 8px; margin-bottom: 16px;
+}
+.module-number-tag {
+  font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 3px;
+  color: var(--gold-dim); text-transform: uppercase;
+}
+.module-title {
+  font-family: 'Cinzel Decorative', cursive;
+  font-size: clamp(20px, 3.5vw, 30px); color: var(--gold-light);
+  margin-bottom: 8px; line-height: 1.25;
+}
+.module-subtitle {
+  font-family: 'Cinzel', serif; font-size: 13px; letter-spacing: 1px;
+  color: var(--gold-dim); font-weight: 400;
+}
+.divider {
+  display: flex; align-items: center; gap: 12px;
+  margin: 32px 0; opacity: 0.35;
+}
+.divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--gold); }
+.divider-sym { color: var(--gold); font-size: 10px; }
+.module-body { font-size: 17px; color: var(--text-secondary); line-height: 1.8; }
+.module-body p { margin-bottom: 18px; }
+.module-body strong { color: var(--text-primary); font-weight: 600; }
+.module-body em { color: var(--gold); font-style: italic; }
+canvas.module-canvas {
+  display: block; margin: 32px auto; border-radius: 6px;
+  border: 1px solid rgba(201,168,76,0.15);
+}
+
+/* ── Lab card ── */
+.lab-card {
+  margin-top: 32px; padding: 24px 28px;
+  background: rgba(212,135,10,0.04); border-left: 2px solid var(--amber);
+  border-radius: 0 10px 10px 0;
+}
+.lab-title {
+  font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 3px;
+  color: var(--amber); margin-bottom: 10px; text-transform: uppercase;
+}
+.lab-text { font-size: 15px; color: var(--text-secondary); line-height: 1.7; font-style: italic; }
+
+/* ── Highlight box ── */
+.highlight-box {
+  margin: 28px 0; padding: 20px 24px;
+  background: rgba(201,168,76,0.05); border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 10px; font-size: 16px; color: var(--text-primary);
+  font-style: italic; line-height: 1.7;
+}
+.highlight-box::before { content: '"'; font-size: 28px; color: var(--gold-dim); line-height: 1; display: block; margin-bottom: 6px; }
+
+/* ── Key insights ── */
+.insights { display: flex; flex-direction: column; gap: 12px; margin: 24px 0; }
+.insight {
+  display: flex; align-items: flex-start; gap: 14px; padding: 14px 18px;
+  background: rgba(255,255,255,0.02); border-radius: 8px;
+}
+.insight-dot {
+  width: 6px; min-width: 6px; height: 6px; border-radius: 50%;
+  background: var(--gold); margin-top: 8px;
+}
+.insight-text { font-size: 15px; color: var(--text-secondary); line-height: 1.6; }
+.insight-text strong { color: var(--text-primary); }
+
+/* ── Frequency table ── */
+.freq-table { width: 100%; border-collapse: collapse; margin: 28px 0; font-size: 15px; }
+.freq-table th {
+  font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 2px;
+  color: var(--gold-dim); text-align: left; padding: 10px 14px;
+  border-bottom: 1px solid rgba(201,168,76,0.2);
+}
+.freq-table td { padding: 10px 14px; color: var(--text-secondary); border-bottom: 1px solid rgba(255,255,255,0.04); }
+.freq-table tr:hover td { background: rgba(201,168,76,0.04); color: var(--text-primary); }
+.freq-highlight td { color: var(--gold) !important; }
+
+/* ── Final codex section ── */
+#completion {
+  max-width: 720px; margin: 0 auto; padding: 80px 24px 120px;
+  text-align: center;
+}
+.codex-title {
+  font-family: 'Cinzel Decorative', cursive; font-size: clamp(22px,4vw,34px);
+  color: var(--gold-light); margin-bottom: 20px;
+}
+.codex-text { font-size: 17px; color: var(--text-secondary); line-height: 1.8; max-width: 600px; margin: 0 auto 40px; }
+.codex-project {
+  background: rgba(201,168,76,0.05); border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 14px; padding: 32px; margin-bottom: 40px; text-align: left;
+}
+.project-title {
+  font-family: 'Cinzel', serif; font-size: 12px; letter-spacing: 3px;
+  color: var(--gold-dim); margin-bottom: 16px; text-transform: uppercase;
+}
+.project-items { display: flex; flex-direction: column; gap: 10px; }
+.project-item {
+  display: flex; align-items: flex-start; gap: 12px; font-size: 15px; color: var(--text-secondary);
+}
+.project-item::before { content: '◆'; color: var(--gold-dim); font-size: 8px; margin-top: 7px; min-width: 10px; }
+.closing-mantra {
+  font-family: 'Cinzel Decorative', cursive; font-size: clamp(14px,2.5vw,18px);
+  color: var(--gold); line-height: 1.6; font-style: italic;
+  padding: 32px; border-top: 1px solid rgba(201,168,76,0.15);
+  border-bottom: 1px solid rgba(201,168,76,0.15); margin: 0 auto;
+  max-width: 560px;
+}
+.built-by { margin-top: 48px; font-size: 13px; color: var(--text-muted); }
+.built-by strong { color: var(--gold-dim); }
+</style>
+</head>
+<body>
+
+<!-- Starfield canvas -->
+<canvas id="starfield"></canvas>
+
+<!-- Nav dots -->
+<div id="nav-dots">
+  <div class="nav-dot active" data-target="hero" title="Intro"></div>
+  <div class="nav-dot" data-target="prereqs" title="Prerequisites"></div>
+  <div class="nav-dot" data-target="modules-overview" title="Curriculum"></div>
+  <div class="nav-dot" data-target="module-1" title="Module 1"></div>
+  <div class="nav-dot" data-target="module-2" title="Module 2"></div>
+  <div class="nav-dot" data-target="module-3" title="Module 3"></div>
+  <div class="nav-dot" data-target="module-4" title="Module 4"></div>
+  <div class="nav-dot" data-target="module-5" title="Module 5"></div>
+  <div class="nav-dot" data-target="module-6" title="Module 6"></div>
+  <div class="nav-dot" data-target="module-7" title="Module 7"></div>
+  <div class="nav-dot" data-target="module-8" title="Module 8"></div>
+  <div class="nav-dot" data-target="completion" title="Codex"></div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     HERO
+══════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="masterclass-badge"><span>Masterclass · Level II</span></div>
+  <div class="hero-eyebrow">SunFlow: Reignited · Advanced Series</div>
+  <h1 class="hero-title">Frequency Mastery<br>Masterclass</h1>
+  <h2 class="hero-subtitle">The Divine Language of Vibration</h2>
+  <p class="hero-tagline">Sacred Sound, Scientific Reality & Conscious Co-Creation — a deep immersion for initiated minds</p>
+  <canvas id="hero-canvas" class="hero-canvas" width="320" height="160"></canvas>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     PREREQUISITES
+══════════════════════════════════════════════ -->
+<section id="prereqs">
+  <div class="prereq-box">
+    <div class="prereq-title">⚠ Prerequisites Required</div>
+    <p class="prereq-text">This Masterclass is a Level II immersion. It builds directly on foundational knowledge from the courses below. If you arrived here through the unlock system, you are ready.</p>
+    <div class="prereq-courses">
+      <span class="prereq-tag">✓ The Key to the Universe (3-6-9)</span>
+      <span class="prereq-tag">✓ Alchemy: The Great Work</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     MODULES OVERVIEW
+══════════════════════════════════════════════ -->
+<section id="modules-overview">
+  <div class="section-header">
+    <span class="section-eyebrow">The Curriculum</span>
+    <h2 class="section-title">8 Intensive Modules</h2>
+  </div>
+  <div class="modules-grid">
+    <div class="module-overview-card" onclick="document.getElementById('module-1').scrollIntoView({behavior:'smooth'})">
+      <div class="mod-num">I</div>
+      <div class="mod-info"><div class="mod-title">Frequency as the Fabric of Reality</div><div class="mod-subtitle">The universe is standing waves all the way down</div></div>
+      <span class="mod-tag">FOUNDATIONS</span>
+    </div>
+    <div class="module-overview-card" onclick="document.getElementById('module-2').scrollIntoView({behavior:'smooth'})">
+      <div class="mod-num">II</div>
+      <div class="mod-info"><div class="mod-title">The 3-6-9 Vortex — Deep Dive</div><div class="mod-subtitle">Phi spirals, atomic resonance, personal mapping</div></div>
+      <span class="mod-tag">ADVANCED</span>
+    </div>
+    <div class="module-overview-card" onclick="document.getElementById('module-3').scrollIntoView({behavior:'smooth'})">
+      <div class="mod-num">III</div>
+      <div class="mod-info"><div class="mod-title">Solfeggio Frequencies — Evidence & Mastery</div><div class="mod-subtitle">What the science actually shows about 528 Hz</div></div>
+      <span class="mod-tag">SCIENCE</span>
+    </div>
+    <div class="module-overview-card" onclick="document.getElementById('module-4').scrollIntoView({behavior:'smooth'})">
+      <div class="mod-num">IV</div>
+      <div class="mod-info"><div class="mod-title">Cymatics — Seeing Sound Shape Matter</div><div class="mod-subtitle">Hans Jenny's proof that sound organizes creation</div></div>
+      <span class="mod-tag">LAB</span>
+    </div>
+    <div class="module-overview-card" onclick="document.getElementById('module-5').scrollIntoView({behavior:'smooth'})">
+      <div class="mod-num">V</div>
+      <div class="mod-info"><div class="mod-title">Water — The Universal Memory Keeper</div><div class="mod-subtitle">EZ water, Pollack, Emoto, and your inner ocean</div></div>
+      <span class="mod-tag">ALCHEMY</span>
+    </div>
+    <div class="module-overview-card" onclick="document.getElementById('module-6').scrollIntoView({behavior:'smooth'})">
+      <div class="mod-num">VI</div>
+      <div class="mod-info"><div class="mod-title">Biological Resonance & DNA Antenna</div><div class="mod-subtitle">Heart coherence, shadow work, and cellular healing</div></div>
+      <span class="mod-tag">BIOLOGY</span>
+    </div>
+    <div class="module-overview-card" onclick="document.getElementById('module-7').scrollIntoView({behavior:'smooth'})">
+      <div class="mod-num">VII</div>
+      <div class="mod-info"><div class="mod-title">The Tuning Wars — A440 & Reclamation</div><div class="mod-subtitle">The standardization story and how to reclaim 432 Hz</div></div>
+      <span class="mod-tag">HISTORY</span>
+    </div>
+    <div class="module-overview-card" onclick="document.getElementById('module-8').scrollIntoView({behavior:'smooth'})">
+      <div class="mod-num">VIII</div>
+      <div class="mod-info"><div class="mod-title">Mastery — Voice as Alchemical Instrument</div><div class="mod-subtitle">You are the crucible. The Great Work is frequency made flesh.</div></div>
+      <span class="mod-tag">INTEGRATION</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     MODULE 1 — Frequency as Fabric of Reality
+══════════════════════════════════════════════ -->
+<section id="module-1" class="module-section">
+  <div class="module-header">
+    <div class="module-badge"><span class="module-number-tag">Module I · Foundations</span></div>
+    <h2 class="module-title">Frequency as the<br>Fabric of Reality</h2>
+    <div class="module-subtitle">Everything vibrates. Nothing is still.</div>
+  </div>
+  <div class="divider"><span class="divider-sym">◈</span></div>
+  <canvas id="canvas-m1" class="module-canvas" width="600" height="180"></canvas>
+  <div class="module-body">
+    <p>The most radical insight of modern physics is that matter is not a thing — it is a <strong>pattern of vibration</strong>. Atoms are 99.9999% empty space. What we experience as solid is the electromagnetic resonance between electron clouds. <em>Reality is frequency wearing a costume of matter.</em></p>
+    <p>The <strong>Schumann Resonance</strong> — Earth's electromagnetic heartbeat at 7.83 Hz — pulses in the cavity between the Earth's surface and the ionosphere. Every living organism evolved inside this field. Your brain's alpha waves (8–12 Hz) synchronize with it naturally during relaxed awareness. You are already entrained to the planet's frequency.</p>
+    <div class="insights">
+      <div class="insight"><div class="insight-dot"></div><div class="insight-text"><strong>HeartMath Institute research:</strong> When the heart beats at 0.1 Hz coherence, it entrains the brain, boosts immune function, and heightens intuition — measurably.</div></div>
+      <div class="insight"><div class="insight-dot"></div><div class="insight-text"><strong>Haramein's double-toroid model:</strong> The universe, galaxies, solar systems, atoms — all share the same toroidal structure governed by the 3-6-9 control system.</div></div>
+      <div class="insight"><div class="insight-dot"></div><div class="insight-text"><strong>Alchemical link:</strong> The "Word spoken over the waters" in creation myths is not metaphor — it is the original description of frequency + intention = manifest reality.</div></div>
+    </div>
+    <div class="highlight-box">Every cell, organ, and emotion has a signature frequency. Disease is dissonance. Healing is the restoration of coherent vibration.</div>
+  </div>
+  <div class="lab-card">
+    <div class="lab-title">⚗ Lab 1 — Schumann Protocol</div>
+    <p class="lab-text">Download a free HRV (heart-rate variability) app. Establish your baseline. Then play 7.83 Hz Schumann resonance for 10 minutes daily — ideally at sunrise. Journal coherence shifts over 7 days: quality of intuition, synchronicities, dream recall, and emotional baseline.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     MODULE 2 — 3-6-9 Deep Dive
+══════════════════════════════════════════════ -->
+<section id="module-2" class="module-section">
+  <div class="module-header">
+    <div class="module-badge"><span class="module-number-tag">Module II · Advanced</span></div>
+    <h2 class="module-title">The 3-6-9 Vortex<br>Deep Dive</h2>
+    <div class="module-subtitle">Phi spirals, atomic resonance & personal mapping</div>
+  </div>
+  <div class="divider"><span class="divider-sym">◈</span></div>
+  <canvas id="canvas-m2" class="module-canvas" width="280" height="280"></canvas>
+  <div class="module-body">
+    <p>You now know the basics of the Rodin Vortex — the doubling sequence (1, 2, 4, 8, 7, 5) looping forever while 3, 6, and 9 remain untouched, <em>non-physical operators</em> controlling the whole sequence without entering it. Now we go deeper.</p>
+    <p><strong>Sacred geometry revelation:</strong> 3, 6, and 9 generate the phi spiral, the toroid, and the Flower of Life. Every structure in nature that grows — shells, galaxies, ferns, hurricanes — follows the phi ratio, and phi is encoded in the 3-6-9 system. The spiral IS the number made visible.</p>
+    <p><strong>Quantum resonance:</strong> Electron shell capacities (2, 8, 18, 32) reduce digitally to 2, 8, 9, 5 — deeply connected to the doubling sequence. Atomic numbers of noble gases (2, 10, 18, 36, 54, 86) all reduce to either 2, 1+0=1, 9, 9, 9, 5 — the universe is using the same mathematical grammar at every scale.</p>
+    <div class="highlight-box">Your life events follow 3-6-9 timing cycles. Map your birth date, major transitions, and peak experiences. The pattern that emerges is not coincidence — it is you as a standing wave inside the cosmic vortex.</div>
+  </div>
+  <div class="lab-card">
+    <div class="lab-title">⚗ Lab 2 — Personal Vortex Mandala</div>
+    <p class="lab-text">Reduce your birthdate to a single digit. Map the key numbers of your life (ages of major events, significant dates) onto a vortex circle. Look for the 3-6-9 operators. Then meditate inside this mandala while playing 528 Hz for 20 minutes — notice what surfaces.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     MODULE 3 — Solfeggio Frequencies
+══════════════════════════════════════════════ -->
+<section id="module-3" class="module-section">
+  <div class="module-header">
+    <div class="module-badge"><span class="module-number-tag">Module III · Science</span></div>
+    <h2 class="module-title">Solfeggio Frequencies</h2>
+    <div class="module-subtitle">Ancient tones, modern rediscovery & the evidence</div>
+  </div>
+  <div class="divider"><span class="divider-sym">◈</span></div>
+  <canvas id="canvas-m3" class="module-canvas" width="600" height="200"></canvas>
+  <div class="module-body">
+    <p>The Solfeggio scale was rediscovered by Dr. Joseph Puleo in the 1970s through numerological analysis of the Book of Numbers. What he found encoded in the ancient Gregorian hymn "Ut queant laxis" was a 9-tone mathematical system whose digital roots trace directly to the 3-6-9 vortex.</p>
+    <table class="freq-table">
+      <tr><th>Frequency</th><th>Traditional Name</th><th>Association</th><th>Digital Root</th></tr>
+      <tr><td>174 Hz</td><td>—</td><td>Pain reduction, foundation</td><td>3</td></tr>
+      <tr><td>285 Hz</td><td>—</td><td>Tissue repair, rejuvenation</td><td>6</td></tr>
+      <tr><td>396 Hz</td><td>Ut</td><td>Liberation from fear & guilt</td><td>9</td></tr>
+      <tr><td>417 Hz</td><td>Re</td><td>Facilitating change</td><td>3</td></tr>
+      <tr class="freq-highlight"><td>528 Hz</td><td>Mi</td><td>Transformation / DNA / Love</td><td>6</td></tr>
+      <tr><td>639 Hz</td><td>Fa</td><td>Relationships & connection</td><td>9</td></tr>
+      <tr><td>741 Hz</td><td>Sol</td><td>Intuition & expression</td><td>3</td></tr>
+      <tr><td>852 Hz</td><td>La</td><td>Spiritual order, awakening</td><td>6</td></tr>
+      <tr><td>963 Hz</td><td>Si</td><td>Oneness & Source connection</td><td>9</td></tr>
+    </table>
+    <p><strong>What the science actually shows about 528 Hz:</strong> A 2022 study published in the Journal of Addiction Research showed 528 Hz reduces cortisol (the stress hormone) by ~18% in just 5 minutes. A separate study showed increased testosterone. Research by Dr. Glen Rein (1998) demonstrated enhanced UV absorption in DNA samples exposed to Solfeggio frequencies. <em>These are real, measurable effects — not placebo alone.</em></p>
+  </div>
+  <div class="lab-card">
+    <div class="lab-title">⚗ Lab 3 — 21-Day Solfeggio Protocol</div>
+    <p class="lab-text">One new frequency per day, cycling through the 9 tones. For each: 20 minutes of conscious listening with a specific intention (e.g., 396 Hz — "I release the pattern of ____"). Keep an objective + subjective journal. By day 21, patterns of shift will be undeniable.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     MODULE 4 — Cymatics
+══════════════════════════════════════════════ -->
+<section id="module-4" class="module-section">
+  <div class="module-header">
+    <div class="module-badge"><span class="module-number-tag">Module IV · Lab</span></div>
+    <h2 class="module-title">Cymatics</h2>
+    <div class="module-subtitle">Seeing sound shape matter — the missing proof</div>
+  </div>
+  <div class="divider"><span class="divider-sym">◈</span></div>
+  <canvas id="canvas-m4" class="module-canvas" width="280" height="280"></canvas>
+  <div class="module-body">
+    <p>In the 1960s, Swiss physician Hans Jenny spent years broadcasting specific frequencies through plates covered in sand, liquids, and biological fluids. What he photographed changed everything: <strong>sound organizes matter into precise sacred geometric patterns</strong>. Higher frequencies produced more complex, more intricate forms.</p>
+    <div class="insights">
+      <div class="insight"><div class="insight-dot"></div><div class="insight-text"><strong>Chladni figures:</strong> Sand on a vibrating plate forms standing wave nodes — the stable, non-moving points. These become the visible skeleton of the frequency's geometry.</div></div>
+      <div class="insight"><div class="insight-dot"></div><div class="insight-text"><strong>Biological extension:</strong> Embryonic development, blood cell formation, and plant growth all follow cymatic-like patterns. Your body organized itself through vibration.</div></div>
+      <div class="insight"><div class="insight-dot"></div><div class="insight-text"><strong>Alchemical bridge:</strong> The medieval alchemist's "furnace vibrations" were an intuitive understanding of cymatics — they were literally using sound to organize matter during transmutation.</div></div>
+    </div>
+    <div class="highlight-box">The pattern that emerges from chaos under a specific frequency IS that frequency made visible. Sacred geometry is not a human design — it is the inevitable shape that vibration takes in matter.</div>
+  </div>
+  <div class="lab-card">
+    <div class="lab-title">⚗ Lab 4 — Home Cymatics</div>
+    <p class="lab-text">Place a Bluetooth speaker face-up with a thin metal plate on top (a cookie sheet works). Sprinkle fine salt. Play Solfeggio tones — start at 396 Hz, work up to 528 Hz, 741 Hz. Photograph the patterns. Compare them to the Rodin vortex and Flower of Life. You will see the same geometries emerging.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     MODULE 5 — Water
+══════════════════════════════════════════════ -->
+<section id="module-5" class="module-section">
+  <div class="module-header">
+    <div class="module-badge"><span class="module-number-tag">Module V · Alchemy</span></div>
+    <h2 class="module-title">Water</h2>
+    <div class="module-subtitle">The universal medium, memory keeper & inner ocean</div>
+  </div>
+  <div class="divider"><span class="divider-sym">◈</span></div>
+  <canvas id="canvas-m5" class="module-canvas" width="280" height="280"></canvas>
+  <div class="module-body">
+    <p>Water is not H₂O. Or rather — H₂O is merely the molecular label for something far more extraordinary. Dr. Gerald Pollack at the University of Washington discovered a <strong>fourth phase of water</strong> — the EZ (Exclusion Zone) — a liquid crystal state that stores energy, excludes toxins, and acts as a biological battery. This EZ water forms spontaneously around living membranes when exposed to infrared light, sunlight, and <em>sound at harmonic frequencies including 528 Hz</em>.</p>
+    <p>Masaru Emoto's controversial but visually stunning work showed that water crystals exposed to loving intentions, classical music, and 528 Hz formed perfect hexagonal snowflake geometries. Water exposed to fear, heavy metal, and dissonant frequencies formed chaotic, asymmetric patterns. <strong>Your body is 70% water. You are constantly structuring your inner medium with every thought, sound, and environment you choose.</strong></p>
+    <div class="highlight-box">The alchemical "prima materia" — the formless substance that receives the Great Work — is water. Structured water is gold. The transmutation happens in you.</div>
+  </div>
+  <div class="lab-card">
+    <div class="lab-title">⚗ Lab 5 — Charged Water Experiment</div>
+    <p class="lab-text">Fill three identical glasses of filtered water. Place one next to a 528 Hz speaker for 20 minutes. Leave one in silence. Expose one to chaotic or dissonant sound. Drink each blind (no peeking at labels) and record: energy level, taste, mental clarity. Repeat over 5 days. If possible, freeze small samples and photograph the crystals.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     MODULE 6 — Biological Resonance
+══════════════════════════════════════════════ -->
+<section id="module-6" class="module-section">
+  <div class="module-header">
+    <div class="module-badge"><span class="module-number-tag">Module VI · Biology</span></div>
+    <h2 class="module-title">Biological Resonance<br>& DNA Antenna</h2>
+    <div class="module-subtitle">Heart coherence, shadow work & cellular healing</div>
+  </div>
+  <div class="divider"><span class="divider-sym">◈</span></div>
+  <canvas id="canvas-m6" class="module-canvas" width="600" height="200"></canvas>
+  <div class="module-body">
+    <p>DNA is a biological antenna. Its helical structure functions as a Tesla coil — a left-handed spiral capable of receiving and transmitting electromagnetic signals. The <strong>base pairs act as phonon receivers</strong> (sound/vibration) while the electron clouds of the nucleotides act as photon receivers (light). You are literally a biological radio station receiving from and broadcasting into the field.</p>
+    <p>The <strong>HeartMath Institute</strong> has demonstrated that when the heart achieves 0.1 Hz coherence — a smooth, sine-wave-like heart rhythm generated by positive emotional states — it entrains the brain, activates the immune system, enhances intuitive accuracy, and measurably alters the local electromagnetic field for several feet around the body. <em>The heart is the master oscillator. The brain follows.</em></p>
+    <p><strong>Jungian integration:</strong> The Nigredo (shadow / prima materia) corresponds to dissonant, incoherent frequency states — fear, shame, rage stored as standing waves in the body. Shadow work, from this angle, is <em>frequency healing</em> — bringing incoherent patterns into resonance through conscious attention, 639 Hz (connection/heart), and active imagination.</p>
+    <div class="highlight-box">528 Hz is called the Love Frequency not as poetry but as biochemistry — it increases testosterone, reduces cortisol, and supports the cellular repair mechanisms that operate during states of love and safety.</div>
+  </div>
+  <div class="lab-card">
+    <div class="lab-title">⚗ Lab 6 — Shadow + Coherence Integration</div>
+    <p class="lab-text">Enter heart coherence using the HeartMath technique (breathe through the heart, generate genuine appreciation). While in coherence, play 639 Hz quietly. Use Jung's active imagination — invite a shadow figure representing your most avoided emotion. Dialogue with it. Record what emerges. This is alchemy: bringing lead into gold through coherent presence.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     MODULE 7 — Tuning Wars
+══════════════════════════════════════════════ -->
+<section id="module-7" class="module-section">
+  <div class="module-header">
+    <div class="module-badge"><span class="module-number-tag">Module VII · History</span></div>
+    <h2 class="module-title">The Tuning Wars</h2>
+    <div class="module-subtitle">A440 standardization, cultural control & reclamation</div>
+  </div>
+  <div class="divider"><span class="divider-sym">◈</span></div>
+  <canvas id="canvas-m7" class="module-canvas" width="600" height="180"></canvas>
+  <div class="module-body">
+    <p>Here is the accurate history, separated from myth: A=440 Hz was promoted at a 1939 international conference in London — the same year Goebbels issued a radio memorandum promoting it in Germany. The ISO standardized it in 1955. The Rockefeller link and Nazi-origin conspiracy are <strong>exaggerated</strong> — but the <em>timing</em> of mass media proliferation coinciding with this standardization is historically real and worth examining.</p>
+    <p>What we <em>can</em> verify: <strong>A=432 Hz aligns with the Schumann Resonance</strong> via its harmonic series. Instruments tuned to 432 Hz produce overtones that include natural frequencies found in biology, sacred sites, and astronomical measurements. A=528 Hz — the "Love Frequency" — is itself a harmonic of 432 Hz (528 / 432 × 1.222…). The coherence research consistently favors lower, nature-aligned pitch centers.</p>
+    <p>The <strong>practical reclamation</strong>: Most DAWs (Ableton, Logic, GarageBand) allow you to retune your project to A=432 Hz in one setting. Many instruments can be retuned. Your voice can consciously pitch toward the 432/528 center. You do not need to fight the ISO standard — simply build your personal sonic environment around coherent frequencies.</p>
+  </div>
+  <div class="lab-card">
+    <div class="lab-title">⚗ Lab 7 — Personal Sacred Scale</div>
+    <p class="lab-text">Take your favorite song and find a free pitch-shift tool (or use Audacity). Shift it from A440 to A432 Hz (a shift of approximately -32 cents). Listen to both versions back-to-back. Note any differences in body sensation, emotional resonance, or perceived "warmth." Then compose a simple 3-note melody using 396, 528, and 639 Hz as your tonal centers.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     MODULE 8 — Mastery Integration
+══════════════════════════════════════════════ -->
+<section id="module-8" class="module-section">
+  <div class="module-header">
+    <div class="module-badge"><span class="module-number-tag">Module VIII · Integration</span></div>
+    <h2 class="module-title">Mastery Integration</h2>
+    <div class="module-subtitle">Voice as alchemical instrument — the Great Work is frequency made flesh</div>
+  </div>
+  <div class="divider"><span class="divider-sym">◈</span></div>
+  <canvas id="canvas-m8" class="module-canvas" width="280" height="280"></canvas>
+  <div class="module-body">
+    <p>You have arrived at the synthesis. Every module has been a facet of the same diamond: <em>you are a frequency generator embedded in a frequency universe, and you have the capacity to consciously choose your output.</em></p>
+    <p><strong>The voice</strong> is the most powerful frequency instrument you own. Toning — sustaining a vowel sound or musical pitch — creates internal cymatics in the fluids of your body. When you tone the "MI" sound of 528 Hz with genuine heartfelt intention, you are operating the alchemical furnace from the inside. The crucible is your chest cavity. The prima materia is your inner water. The gold is coherent consciousness.</p>
+    <div class="insights">
+      <div class="insight"><div class="insight-dot"></div><div class="insight-text"><strong>Morning Protocol:</strong> 10 min of 7.83 Hz Schumann on waking — synchronize with Earth's heartbeat before the noise of the day begins.</div></div>
+      <div class="insight"><div class="insight-dot"></div><div class="insight-text"><strong>Midday Practice:</strong> 528 Hz for 20 min during rest — repair, transform, receive. This is when the cellular work happens.</div></div>
+      <div class="insight"><div class="insight-dot"></div><div class="insight-text"><strong>Evening Integration:</strong> 963 Hz for 15 min before sleep — dissolve the self back into Source. Programme the subconscious before it goes to work without you.</div></div>
+      <div class="insight"><div class="insight-dot"></div><div class="insight-text"><strong>Group toning:</strong> When multiple voices hold the same frequency with shared intention, entrainment creates a collective field. This is how ancient temple acoustics worked. This is Rubedo — collective gold.</div></div>
+    </div>
+    <p>One final nuance: <strong>inner silence is the ultimate frequency</strong>. All the tones, tools, and protocols lead to this — a state of such coherent stillness that the universe's signal can be heard directly. Avoid dependency on external sound. Let the tools train your nervous system into coherence, then release the tools and simply <em>be</em> the frequency.</p>
+  </div>
+  <div class="lab-card">
+    <div class="lab-title">⚗ Lab 8 — Toning Ritual</div>
+    <p class="lab-text">Find a private space. Sit in heart coherence. Tone the vowel "MI" (like "mee") while imagining 528 Hz vibrating at the center of your chest. Sustain each tone for one full exhale. Do 9 repetitions. Notice the resonance building in the sternum and skull. Do this daily for 40 days. This is your graduation ceremony.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     COMPLETION — Living Frequency Codex
+══════════════════════════════════════════════ -->
+<section id="completion">
+  <div class="divider" style="margin-bottom:48px"><span class="divider-sym">☉</span></div>
+  <div class="codex-title">Your Living<br>Frequency Codex</div>
+  <p class="codex-text">The final project is not submitted to anyone. It is created for you — an ongoing, living document of your frequency mastery.</p>
+  <div class="codex-project">
+    <div class="project-title">The Codex Contains</div>
+    <div class="project-items">
+      <div class="project-item">Your HRV baseline and 40-day coherence log — the measurable arc of your healing</div>
+      <div class="project-item">Personal vortex mandala mapped to your key life numbers and 3-6-9 cycles</div>
+      <div class="project-item">Cymatic photographs from your home experiments — your sonic signature in matter</div>
+      <div class="project-item">Water charging journal — subjective and (if possible) crystal photography</div>
+      <div class="project-item">21-day Solfeggio log — one tone, one intention, one day at a time</div>
+      <div class="project-item">Your personal sacred scale composition in A=432 Hz</div>
+      <div class="project-item">40-day toning log — the day you felt it shift is the day you remember forever</div>
+    </div>
+  </div>
+  <p class="closing-mantra">The 3-6-9 are your keyboard.<br>528 Hz is the love note that repairs and awakens.<br>Your voice, intention, and water are the instruments.<br><br>The Great Work is frequency made flesh.<br>The orchestra is waiting.<br>Tune in — and conduct.</p>
+  <div class="built-by">Built with ☀ by <strong>Ron · SunFlow: Reignited</strong></div>
+</section>
+
+<script>
+// ── Starfield ──────────────────────────────────────────────
+(function() {
+    var c = document.getElementById('starfield');
+    var ctx = c.getContext('2d');
+    var W, H, stars = [];
+    function resize() {
+        W = c.width = window.innerWidth; H = c.height = window.innerHeight;
+    }
+    resize(); window.addEventListener('resize', resize);
+    for (var i = 0; i < 160; i++) stars.push({
+        x: Math.random(), y: Math.random(),
+        r: Math.random() * 1.4 + 0.3, phase: Math.random() * Math.PI * 2,
+        speed: 0.0003 + Math.random() * 0.0006
+    });
+    function draw(t) {
+        ctx.clearRect(0, 0, W, H);
+        stars.forEach(function(s) {
+            var a = 0.2 + 0.45 * (0.5 + 0.5 * Math.sin(s.phase + t * s.speed * 1000));
+            ctx.beginPath();
+            ctx.arc(s.x * W, s.y * H, s.r, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(240,208,128,' + a + ')';
+            ctx.fill();
+        });
+        requestAnimationFrame(draw);
+    }
+    requestAnimationFrame(draw);
+})();
+
+// ── Hero canvas — Schumann 7.83 Hz standing wave ───────────
+(function() {
+    var c = document.getElementById('hero-canvas');
+    if (!c) return;
+    var ctx = c.getContext('2d'), W = c.width, H = c.height;
+    var frequencies = [7.83, 14.3, 20.8, 27.3, 33.8];
+    var colors = ['#c9a84c','#d4870a','#f0d080','#7a6030','#5a4020'];
+    function draw(t) {
+        ctx.clearRect(0, 0, W, H);
+        // Earth pulse circle
+        ctx.beginPath();
+        ctx.arc(W/2, H/2, 50 + 8 * Math.sin(t * 0.0015), 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(201,168,76,0.25)';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+        // Schumann harmonics as waves
+        frequencies.forEach(function(f, i) {
+            ctx.beginPath();
+            var amp = (30 - i * 4) * (0.7 + 0.3 * Math.sin(t * 0.0005 + i));
+            for (var x = 0; x <= W; x += 2) {
+                var y = H/2 + amp * Math.sin((x / W) * Math.PI * 2 * (i + 1) + t * 0.002 * (i + 1));
+                x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+            }
+            ctx.strokeStyle = colors[i] + (i === 0 ? 'cc' : '66');
+            ctx.lineWidth = i === 0 ? 2 : 1;
+            ctx.stroke();
+        });
+        // Frequency label
+        ctx.fillStyle = 'rgba(201,168,76,0.6)';
+        ctx.font = '11px Cinzel, serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('SCHUMANN RESONANCE HARMONICS · 7.83 Hz', W/2, H - 12);
+        requestAnimationFrame(draw);
+    }
+    requestAnimationFrame(draw);
+})();
+
+// ── Module 1 — Multi-layered standing wave field ───────────
+(function() {
+    var c = document.getElementById('canvas-m1');
+    if (!c) return;
+    var ctx = c.getContext('2d'), W = c.width, H = c.height;
+    var waves = [
+        {f:1, a:35, color:'#c9a84c', phase:0},
+        {f:2, a:20, color:'#d4870a', phase:1},
+        {f:3, a:12, color:'#f0d080', phase:2},
+        {f:5, a:8, color:'#7a6030', phase:3}
+    ];
+    function draw(t) {
+        ctx.fillStyle = 'rgba(4,6,8,0.4)';
+        ctx.fillRect(0, 0, W, H);
+        // Composite wave
+        ctx.beginPath();
+        for (var x = 0; x <= W; x += 2) {
+            var y = H/2;
+            waves.forEach(function(w) { y += w.a * Math.sin((x/W)*Math.PI*2*w.f + t*0.002 + w.phase); });
+            x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        }
+        ctx.strokeStyle = '#f0d080aa';
+        ctx.lineWidth = 2; ctx.stroke();
+        // Individual waves
+        waves.forEach(function(w) {
+            ctx.beginPath();
+            for (var x = 0; x <= W; x += 2) {
+                var y = H/2 + w.a * Math.sin((x/W)*Math.PI*2*w.f + t*0.002 + w.phase);
+                x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+            }
+            ctx.strokeStyle = w.color + '55';
+            ctx.lineWidth = 1; ctx.stroke();
+        });
+        ctx.fillStyle = 'rgba(201,168,76,0.4)';
+        ctx.font = '10px Cinzel, serif'; ctx.textAlign = 'center';
+        ctx.fillText('SUPERPOSITION OF FREQUENCIES · MATTER AS STANDING WAVE', W/2, H - 10);
+        requestAnimationFrame(draw);
+    }
+    requestAnimationFrame(draw);
+})();
+
+// ── Module 2 — Advanced Rodin vortex + phi spiral ─────────
+(function() {
+    var c = document.getElementById('canvas-m2');
+    if (!c) return;
+    var ctx = c.getContext('2d'), W = c.width, H = c.height;
+    var cx = W/2, cy = H/2, r = Math.min(W,H)/2 - 20;
+    function draw(t) {
+        ctx.fillStyle = 'rgba(4,6,8,0.35)';
+        ctx.fillRect(0,0,W,H);
+        // Phi spiral
+        ctx.beginPath();
+        var phi = 1.618033988;
+        for (var angle = 0; angle < Math.PI*8; angle += 0.05) {
+            var rr = 5 * Math.pow(phi, angle/Math.PI);
+            var x = cx + rr * Math.cos(angle + t*0.001);
+            var y = cy + rr * Math.sin(angle + t*0.001);
+            angle === 0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+        }
+        ctx.strokeStyle = 'rgba(212,135,10,0.4)';
+        ctx.lineWidth = 1; ctx.stroke();
+        // 9-point circle
+        for (var i = 0; i < 9; i++) {
+            var a = (i/9)*Math.PI*2 - Math.PI/2;
+            var px = cx + r * Math.cos(a), py = cy + r * Math.sin(a);
+            ctx.beginPath(); ctx.arc(px, py, 5, 0, Math.PI*2);
+            var is369 = (i===0||i===3||i===6);
+            ctx.fillStyle = is369 ? 'rgba(240,208,128,0.9)' : 'rgba(201,168,76,0.5)';
+            ctx.fill();
+            // 3-6-9 connections
+            if (is369) {
+                var nextIdx = (i+3)%9;
+                var nextA = (nextIdx/9)*Math.PI*2-Math.PI/2;
+                ctx.beginPath();
+                ctx.moveTo(px,py);
+                ctx.lineTo(cx+r*Math.cos(nextA), cy+r*Math.sin(nextA));
+                ctx.strokeStyle = 'rgba(240,208,128,0.3)';
+                ctx.lineWidth = 0.5; ctx.stroke();
+            }
+        }
+        // Doubling sequence vortex lines  
+        var seq = [1,2,4,8,7,5];
+        ctx.beginPath();
+        seq.forEach(function(n,i) {
+            var a = ((n-1)/9)*Math.PI*2-Math.PI/2+t*0.0005;
+            var px = cx+r*Math.cos(a), py = cy+r*Math.sin(a);
+            i===0 ? ctx.moveTo(px,py) : ctx.lineTo(px,py);
+        });
+        ctx.closePath();
+        ctx.strokeStyle = 'rgba(201,168,76,0.6)';
+        ctx.lineWidth = 1.5; ctx.stroke();
+        requestAnimationFrame(draw);
+    }
+    requestAnimationFrame(draw);
+})();
+
+// ── Module 3 — Solfeggio cymatic pattern (528 Hz hexagon) ─
+(function() {
+    var c = document.getElementById('canvas-m3');
+    if (!c) return;
+    var ctx = c.getContext('2d'), W = c.width, H = c.height;
+    var freqs = [174,285,396,417,528,639,741,852,963];
+    var colors = ['#5a7a6a','#6a8a5a','#9a6a4a','#aa7a3a','#c9a84c','#5a6a8a','#6a5a8a','#7a5a6a','#f0d080'];
+    function draw(t) {
+        ctx.fillStyle = 'rgba(4,6,8,0.3)';
+        ctx.fillRect(0,0,W,H);
+        // Solfeggio waveforms
+        freqs.forEach(function(f, i) {
+            ctx.beginPath();
+            var yOffset = 20 + i * 18;
+            var amp = 7;
+            var speed = f / 174 * 0.0008;
+            for (var x=0; x<=W; x+=2) {
+                var y = yOffset + amp * Math.sin((x/W)*Math.PI*2*(i+1) + t*speed);
+                x===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+            }
+            ctx.strokeStyle = colors[i] + (i===4 ? 'ee' : '88');
+            ctx.lineWidth = i===4 ? 2.5 : 1;
+            ctx.stroke();
+            // Hz label
+            if (i===4) {
+                ctx.fillStyle = 'rgba(240,208,128,0.8)';
+                ctx.font = 'bold 11px monospace';
+                ctx.textAlign = 'left';
+                ctx.fillText('528 Hz ← Love Frequency', 8, yOffset + 4);
+            }
+        });
+        requestAnimationFrame(draw);
+    }
+    requestAnimationFrame(draw);
+})();
+
+// ── Module 4 — Cymatics plate simulation ──────────────────
+(function() {
+    var c = document.getElementById('canvas-m4');
+    if (!c) return;
+    var ctx = c.getContext('2d'), W = c.width, H = c.height;
+    var cx = W/2, cy = H/2;
+    function draw(t) {
+        ctx.fillStyle = 'rgba(4,6,8,0.4)';
+        ctx.fillRect(0,0,W,H);
+        // Plate circle
+        ctx.beginPath(); ctx.arc(cx,cy,cx-15,0,Math.PI*2);
+        ctx.strokeStyle = 'rgba(201,168,76,0.15)'; ctx.lineWidth=1; ctx.stroke();
+        // Standing wave nodes — form hexagonal/sacred pattern
+        var numRings = 4;
+        for (var ring=1; ring<=numRings; ring++) {
+            var nodes = ring * 6;
+            var rr = (ring/(numRings+0.5)) * (cx-20);
+            for (var n=0; n<nodes; n++) {
+                var a = (n/nodes)*Math.PI*2 + t*0.0003*(ring%2===0?1:-1);
+                var px = cx + rr*Math.cos(a), py = cy + rr*Math.sin(a);
+                var pulse = 0.5 + 0.5*Math.sin(t*0.004 + ring*1.5 + n*0.3);
+                ctx.beginPath(); ctx.arc(px,py,2+pulse,0,Math.PI*2);
+                ctx.fillStyle = 'rgba(201,168,76,' + (0.3+0.6*pulse) + ')';
+                ctx.fill();
+            }
+        }
+        // Center node
+        ctx.beginPath(); ctx.arc(cx,cy,4+2*Math.sin(t*0.003),0,Math.PI*2);
+        ctx.fillStyle='rgba(240,208,128,0.9)'; ctx.fill();
+        ctx.fillStyle='rgba(201,168,76,0.5)';
+        ctx.font='10px Cinzel,serif'; ctx.textAlign='center';
+        ctx.fillText('CHLADNI FIGURES · 528 Hz STANDING WAVE NODES', cx, H-10);
+        requestAnimationFrame(draw);
+    }
+    requestAnimationFrame(draw);
+})();
+
+// ── Module 5 — EZ Water hexagonal crystal ─────────────────
+(function() {
+    var c = document.getElementById('canvas-m5');
+    if (!c) return;
+    var ctx = c.getContext('2d'), W = c.width, H = c.height;
+    var cx = W/2, cy = H/2;
+    function hexPoints(cx,cy,r,offset) {
+        var pts=[];
+        for(var i=0;i<6;i++){
+            var a=i*Math.PI/3+(offset||0);
+            pts.push({x:cx+r*Math.cos(a),y:cy+r*Math.sin(a)});
+        }
+        return pts;
+    }
+    function drawHex(pts,alpha,fill) {
+        ctx.beginPath();
+        pts.forEach(function(p,i){i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y);});
+        ctx.closePath();
+        if(fill){ctx.fillStyle='rgba(201,168,76,'+alpha*0.08+')';ctx.fill();}
+        ctx.strokeStyle='rgba(201,168,76,'+alpha+')';
+        ctx.lineWidth=1; ctx.stroke();
+    }
+    function draw(t) {
+        ctx.fillStyle='rgba(4,6,8,0.4)'; ctx.fillRect(0,0,W,H);
+        var rot = t*0.0004;
+        var scales=[1,0.6,0.35];
+        scales.forEach(function(s,i){
+            var pts=hexPoints(cx,cy,(cx-20)*s,rot*(i%2===0?1:-1));
+            drawHex(pts, 0.4+i*0.2, i===2);
+            // Connect vertices with lines to center (snowflake)
+            pts.forEach(function(p){
+                ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(p.x,p.y);
+                ctx.strokeStyle='rgba(201,168,76,0.15)'; ctx.lineWidth=0.5; ctx.stroke();
+            });
+        });
+        // Pulsing center
+        var pulse=0.5+0.5*Math.sin(t*0.003);
+        ctx.beginPath(); ctx.arc(cx,cy,6+4*pulse,0,Math.PI*2);
+        ctx.fillStyle='rgba(240,208,128,'+(0.4+0.5*pulse)+')'; ctx.fill();
+        ctx.fillStyle='rgba(201,168,76,0.5)';
+        ctx.font='10px Cinzel,serif'; ctx.textAlign='center';
+        ctx.fillText('EZ WATER HEXAGONAL CRYSTAL STRUCTURE', cx, H-10);
+        requestAnimationFrame(draw);
+    }
+    requestAnimationFrame(draw);
+})();
+
+// ── Module 6 — DNA photon antenna ─────────────────────────
+(function() {
+    var c = document.getElementById('canvas-m6');
+    if (!c) return;
+    var ctx = c.getContext('2d'), W = c.width, H = c.height;
+    function draw(t) {
+        ctx.fillStyle='rgba(4,6,8,0.35)'; ctx.fillRect(0,0,W,H);
+        var cx=W/2, speed=t*0.001;
+        // DNA double helix
+        for(var i=0;i<60;i++){
+            var frac=i/59;
+            var x=cx+80*Math.sin(frac*Math.PI*4+speed);
+            var x2=cx+80*Math.sin(frac*Math.PI*4+speed+Math.PI);
+            var y=20+frac*(H-40);
+            if(i%3===0){
+                ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(x2,y);
+                ctx.strokeStyle='rgba(201,168,76,0.3)'; ctx.lineWidth=1; ctx.stroke();
+            }
+            ctx.beginPath(); ctx.arc(x,y,3,0,Math.PI*2);
+            ctx.fillStyle='rgba(201,168,76,0.7)'; ctx.fill();
+            ctx.beginPath(); ctx.arc(x2,y,3,0,Math.PI*2);
+            ctx.fillStyle='rgba(212,135,10,0.7)'; ctx.fill();
+        }
+        // Photon bursts
+        for(var b=0;b<5;b++){
+            var by=20+(((t*0.3+b*40)%((H-40)))|0);
+            var bx=cx+80*Math.sin((by-20)/(H-40)*Math.PI*4+speed);
+            var pulse=0.5+0.5*Math.sin(t*0.005+b*1.2);
+            ctx.beginPath(); ctx.arc(bx,by,8*pulse,0,Math.PI*2);
+            ctx.strokeStyle='rgba(240,208,128,'+(0.3+0.4*pulse)+')';
+            ctx.lineWidth=1; ctx.stroke();
+        }
+        ctx.fillStyle='rgba(201,168,76,0.4)';
+        ctx.font='10px Cinzel,serif'; ctx.textAlign='center';
+        ctx.fillText('DNA AS QUANTUM PHOTON/PHONON ANTENNA', W/2, H-10);
+        requestAnimationFrame(draw);
+    }
+    requestAnimationFrame(draw);
+})();
+
+// ── Module 7 — A432 vs A440 circle of fifths comparison ───
+(function() {
+    var c = document.getElementById('canvas-m7');
+    if (!c) return;
+    var ctx = c.getContext('2d'), W = c.width, H = c.height;
+    function draw(t) {
+        ctx.fillStyle='rgba(4,6,8,0.3)'; ctx.fillRect(0,0,W,H);
+        var cx432=W*0.28, cx440=W*0.72, cy=H/2;
+        // A=432 Hz — smooth, nature-aligned harmonics
+        for(var i=0;i<7;i++){
+            var r=15+i*12;
+            var alpha=0.15+i*0.05;
+            var ripple=0.5+0.5*Math.sin(t*0.001*432/440+i*0.5);
+            ctx.beginPath(); ctx.arc(cx432,cy,r*(1+0.05*ripple),0,Math.PI*2);
+            ctx.strokeStyle='rgba(201,168,76,'+(alpha+0.1*ripple)+')';
+            ctx.lineWidth=1; ctx.stroke();
+        }
+        ctx.fillStyle='rgba(201,168,76,0.8)';
+        ctx.font='bold 13px Cinzel,serif'; ctx.textAlign='center';
+        ctx.fillText('A = 432 Hz', cx432, H-24);
+        ctx.fillStyle='rgba(201,168,76,0.45)';
+        ctx.font='11px serif'; ctx.fillText('Natural · Coherent', cx432, H-10);
+        // A=440 Hz — more tension in the overtones
+        for(var i=0;i<7;i++){
+            var r=15+i*12;
+            var alpha=0.1+i*0.04;
+            var ripple=0.5+0.5*Math.sin(t*0.001+i*0.7);
+            ctx.beginPath();
+            ctx.arc(cx440, cy, r*(1+0.08*ripple), 0, Math.PI*2);
+            ctx.strokeStyle='rgba(150,120,80,'+(alpha+0.08*ripple)+')';
+            ctx.lineWidth=1; ctx.stroke();
+        }
+        ctx.fillStyle='rgba(150,120,80,0.7)';
+        ctx.font='bold 13px Cinzel,serif'; ctx.textAlign='center';
+        ctx.fillText('A = 440 Hz', cx440, H-24);
+        ctx.fillStyle='rgba(150,120,80,0.4)';
+        ctx.font='11px serif'; ctx.fillText('ISO Standard 1955', cx440, H-10);
+        // Middle comparison zone
+        ctx.fillStyle='rgba(201,168,76,0.2)';
+        ctx.font='11px Cinzel,serif'; ctx.textAlign='center';
+        ctx.fillText('vs', W/2, cy+4);
+        requestAnimationFrame(draw);
+    }
+    requestAnimationFrame(draw);
+})();
+
+// ── Module 8 — Voice toning + mandala ─────────────────────
+(function() {
+    var c = document.getElementById('canvas-m8');
+    if (!c) return;
+    var ctx = c.getContext('2d'), W = c.width, H = c.height;
+    var cx=W/2, cy=H/2;
+    function draw(t) {
+        ctx.fillStyle='rgba(4,6,8,0.35)'; ctx.fillRect(0,0,W,H);
+        // 4 counter-rotating mandala layers
+        var layers=[{n:6,r:80,speed:0.0004,color:'#c9a84c',alpha:0.3},
+                    {n:8,r:58,speed:-0.0006,color:'#d4870a',alpha:0.35},
+                    {n:12,r:40,speed:0.0008,color:'#f0d080',alpha:0.25},
+                    {n:5,r:22,speed:-0.001,color:'#c9a84c',alpha:0.5}];
+        layers.forEach(function(l){
+            ctx.beginPath();
+            for(var i=0;i<l.n;i++){
+                var a=i/l.n*Math.PI*2+t*l.speed;
+                var px=cx+l.r*Math.cos(a), py=cy+l.r*Math.sin(a);
+                var nextA=(i+1)/l.n*Math.PI*2+t*l.speed;
+                var npx=cx+l.r*Math.cos(nextA), npy=cy+l.r*Math.sin(nextA);
+                ctx.moveTo(px,py); ctx.lineTo(npx,npy);
+                ctx.moveTo(cx,cy); ctx.lineTo(px,py);
+            }
+            ctx.strokeStyle=l.color; ctx.globalAlpha=l.alpha; ctx.lineWidth=1; ctx.stroke();
+            ctx.globalAlpha=1;
+        });
+        // Voice waveform through center
+        ctx.beginPath();
+        var amp=15+8*Math.sin(t*0.002);
+        for(var x=0;x<W;x+=2){
+            var y=cy+amp*Math.sin(x*0.06+t*0.003)*Math.sin(x*0.015+t*0.001);
+            x===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+        }
+        ctx.strokeStyle='rgba(240,208,128,0.7)'; ctx.lineWidth=2; ctx.stroke();
+        // Center sun
+        ctx.beginPath(); ctx.arc(cx,cy,6+3*Math.sin(t*0.003),0,Math.PI*2);
+        ctx.fillStyle='rgba(240,208,128,0.9)'; ctx.fill();
+        ctx.fillStyle='rgba(201,168,76,0.4)';
+        ctx.font='10px Cinzel,serif'; ctx.textAlign='center';
+        ctx.fillText('VOICE AS ALCHEMICAL INSTRUMENT · 528 Hz TONING', cx, H-10);
+        requestAnimationFrame(draw);
+    }
+    requestAnimationFrame(draw);
+})();
+
+// ── Nav dots + scroll reveal ───────────────────────────────
+(function() {
+    var sectionIds = ['hero','prereqs','modules-overview','module-1','module-2','module-3','module-4','module-5','module-6','module-7','module-8','completion'];
+    var dots = document.querySelectorAll('.nav-dot');
+    dots.forEach(function(d,i){
+        d.addEventListener('click',function(){
+            document.getElementById(d.dataset.target).scrollIntoView({behavior:'smooth'});
+        });
+    });
+    var observer = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+            if(e.isIntersecting){
+                var idx=sectionIds.indexOf(e.target.id);
+                if(idx>=0){ dots.forEach(function(d,i){ d.classList.toggle('active',i===idx); }); }
+                e.target.classList.add('visible');
+            }
+        });
+    },{threshold:0.15});
+    sectionIds.forEach(function(id){ var el=document.getElementById(id); if(el) observer.observe(el); });
+})();
+</script>
+</body>
+</html>

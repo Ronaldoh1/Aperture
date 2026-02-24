@@ -52,7 +52,7 @@ struct TutorialView: View {
 
             Text("Aperture Tutorial")
                 .font(.system(size: 18, weight: .semibold, design: .rounded))
-                .foregroundColor(Palette.text.primary)
+                .foregroundColor(Color(hex: "#C9A84C"))     // warm gold header
                 .lineLimit(1)
                 .minimumScaleFactor(0.85)
 
@@ -63,7 +63,7 @@ struct TutorialView: View {
             } label: {
                 Text("Skip")
                     .font(.system(size: 15, weight: .semibold, design: .rounded))
-                    .foregroundColor(Palette.primary.cyan.opacity(0.95))
+                    .foregroundColor(Color(hex: "#A89878").opacity(0.85)) // muted warm — not blinding cyan
             }
             .buttonStyle(.plain)
 

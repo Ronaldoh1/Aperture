@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>The Hidden Gospel · Course II · SunFlow</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --indigo:#1a1040;--indigo-light:#2a1870;--indigo-glow:#4a30c0;
+  --violet:#7030b8;--violet-light:#9050e0;--violet-glow:#c080ff;
+  --gold:#c9a84c;--gold-light:#e8cc80;--gold-dim:#7a6030;
+  --bg-0:#06040e;--bg-1:#09060f;--bg-2:#0e0b16;
+  --text-1:#e8d8f8;--text-2:#9880b8;--text-3:#483860;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg-0);color:var(--text-1);font-family:'EB Garamond',serif;font-size:18px;line-height:1.8;overflow-x:hidden}
+#starfield{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.6}
+#reading-progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--violet),var(--gold));z-index:200;width:0%;transition:width 0.1s linear}
+#nav-dots{position:fixed;right:14px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:7px;z-index:100}
+.nav-dot{width:6px;height:6px;border-radius:50%;background:var(--indigo-light);cursor:pointer;transition:all 0.3s;position:relative}
+.nav-dot.active{background:var(--violet-light);transform:scale(1.7)}
+.nav-dot::after{content:attr(data-label);position:absolute;right:14px;top:50%;transform:translateY(-50%);white-space:nowrap;font-family:'Cinzel',serif;font-size:9px;letter-spacing:1px;color:var(--gold);background:rgba(6,4,14,0.96);padding:3px 8px;border-radius:3px;opacity:0;pointer-events:none;transition:opacity 0.2s}
+.nav-dot:hover::after{opacity:1}
+.term{border-bottom:1px dotted var(--violet-light);cursor:help;color:var(--violet-glow);position:relative;display:inline}
+.term::after{content:attr(data-def);position:absolute;bottom:calc(100%+8px);left:50%;transform:translateX(-50%);background:rgba(6,4,14,0.97);border:1px solid rgba(112,48,184,0.3);color:var(--text-2);font-size:13px;line-height:1.5;padding:10px 14px;border-radius:6px;width:260px;opacity:0;pointer-events:none;transition:opacity 0.2s;z-index:50;font-style:normal;text-align:left}
+.term:hover::after{opacity:1}
+section{position:relative;z-index:1}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 24px 80px}
+.course-badge{display:inline-flex;align-items:center;gap:10px;padding:8px 22px;border:1px solid rgba(112,48,184,0.4);border-radius:100px;margin-bottom:28px;background:rgba(112,48,184,0.08)}
+.course-badge span{font-family:'Cinzel',serif;font-size:10px;letter-spacing:4px;color:var(--violet-light);text-transform:uppercase}
+.hero-eyebrow{font-family:'Cinzel',serif;font-size:11px;letter-spacing:4px;color:var(--gold-dim);margin-bottom:16px;text-transform:uppercase}
+.hero-title{font-family:'Cinzel Decorative',cursive;font-size:clamp(20px,4.5vw,42px);color:var(--gold-light);line-height:1.2;margin-bottom:10px}
+.hero-sub{font-family:'Cinzel',serif;font-size:clamp(10px,2vw,14px);letter-spacing:2px;color:var(--violet-light);margin-bottom:10px;text-transform:uppercase}
+.hero-desc{font-size:17px;color:var(--text-2);font-style:italic;max-width:560px;margin:0 auto 36px;line-height:1.7}
+.hero-stats{display:flex;gap:28px;justify-content:center;flex-wrap:wrap;margin-top:28px}
+.stat-num{font-family:'Cinzel Decorative',cursive;font-size:24px;color:var(--violet-light);display:block}
+.stat-lbl{font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--gold-dim);text-transform:uppercase}
+
+/* LOCKED GATE */
+#locked-gate{max-width:640px;margin:40px auto 0;padding:0 24px;text-align:center;display:none}
+.lock-box{padding:40px;background:rgba(112,48,184,0.06);border:1px solid rgba(112,48,184,0.2);border-radius:16px}
+.lock-sym{font-size:36px;margin-bottom:16px;display:block}
+.lock-title{font-family:'Cinzel',serif;font-size:14px;letter-spacing:2px;color:var(--violet-light);text-transform:uppercase;margin-bottom:8px}
+.lock-text{font-size:16px;color:var(--text-2);font-style:italic;line-height:1.7}
+
+/* OVERVIEW */
+#modules-overview{max-width:760px;margin:0 auto;padding:60px 24px}
+.sec-header{text-align:center;margin-bottom:36px}
+.sec-eye{font-family:'Cinzel',serif;font-size:10px;letter-spacing:4px;color:var(--violet-light);display:block;margin-bottom:10px;text-transform:uppercase}
+.sec-title{font-family:'Cinzel Decorative',cursive;font-size:clamp(18px,3vw,24px);color:var(--gold-light)}
+.mod-list{display:flex;flex-direction:column;gap:10px}
+.mod-row{display:flex;align-items:center;gap:14px;padding:14px 18px;background:rgba(255,255,255,0.02);border:1px solid rgba(112,48,184,0.15);border-radius:10px;cursor:pointer;transition:all 0.3s}
+.mod-row:hover{background:rgba(112,48,184,0.06);border-color:rgba(112,48,184,0.4)}
+.mod-n{font-family:'Cinzel',serif;font-size:18px;color:rgba(112,48,184,0.45);min-width:28px;text-align:center}
+.mod-info{flex:1}
+.mod-t{font-size:15px;color:var(--text-1);font-weight:600}
+.mod-s{font-size:13px;color:var(--text-3);font-style:italic}
+.mod-time{font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--violet-light);padding:3px 10px;border:1px solid rgba(112,48,184,0.25);border-radius:10px;white-space:nowrap}
+.mod-chk{color:var(--violet-light);font-size:14px;opacity:0;transition:opacity 0.3s}
+.mod-chk.done{opacity:1}
+
+/* MODULE SECTIONS */
+.mod-sec{max-width:800px;margin:0 auto;padding:80px 24px;opacity:0;transform:translateY(20px);transition:opacity 0.8s,transform 0.8s}
+.mod-sec.visible{opacity:1;transform:translateY(0)}
+.mod-lbl{font-family:'Cinzel',serif;font-size:10px;letter-spacing:3px;color:var(--violet-light);text-transform:uppercase;margin-bottom:10px;display:block}
+.mod-title-lg{font-family:'Cinzel Decorative',cursive;font-size:clamp(18px,3.5vw,28px);color:var(--gold-light);line-height:1.2;margin-bottom:6px}
+.mod-subtitle{font-family:'Cinzel',serif;font-size:12px;letter-spacing:1px;color:var(--gold-dim)}
+.divider{display:flex;align-items:center;gap:12px;margin:28px 0;opacity:0.3}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--violet)}
+.divider-sym{color:var(--violet-light);font-size:12px}
+.mod-body{font-size:17px;color:var(--text-2);line-height:1.85}
+.mod-body p{margin-bottom:18px}
+.mod-body strong{color:var(--text-1)}
+.mod-body em{color:var(--gold);font-style:italic}
+.sub-hdr{font-family:'Cinzel',serif;font-size:14px;letter-spacing:1.5px;color:var(--violet-glow);margin:30px 0 12px;text-transform:uppercase;border-left:2px solid var(--violet);padding-left:12px}
+.source-card{margin:22px 0;padding:20px 24px;background:rgba(112,48,184,0.05);border:1px solid rgba(112,48,184,0.18);border-left:3px solid var(--violet);border-radius:0 10px 10px 0}
+.source-label{font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:var(--violet-light);margin-bottom:6px;text-transform:uppercase;display:flex;align-items:center;gap:10px}
+.source-label a{color:var(--gold-dim);font-size:9px;text-decoration:none;padding:2px 8px;border:1px solid rgba(201,168,76,0.2);border-radius:3px}
+.source-label a:hover{color:var(--gold)}
+.source-text{font-size:17px;color:var(--text-1);font-style:italic;line-height:1.7;margin-bottom:10px}
+.source-analysis{font-size:14px;color:var(--text-2);line-height:1.6}
+.source-analysis strong{color:var(--violet-glow)}
+.insight{margin:22px 0;padding:18px 22px;background:rgba(201,168,76,0.04);border:1px solid rgba(201,168,76,0.12);border-radius:10px}
+.insight-text{font-size:16px;color:var(--text-1);font-style:italic;line-height:1.7}
+.hl-list{display:flex;flex-direction:column;gap:10px;margin:18px 0}
+.hl-item{display:flex;align-items:flex-start;gap:12px;padding:12px 16px;background:rgba(255,255,255,0.02);border-radius:8px;font-size:15px;color:var(--text-2);line-height:1.6}
+.hl-dot{width:6px;min-width:6px;height:6px;border-radius:50%;background:var(--violet-light);margin-top:8px}
+.hl-item strong{color:var(--text-1)}
+.compare-table{width:100%;border-collapse:collapse;margin:22px 0;font-size:15px}
+.compare-table thead th{font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--gold-dim);padding:10px 14px;border-bottom:1px solid rgba(201,168,76,0.12);text-align:left;text-transform:uppercase}
+.compare-table tbody td{padding:11px 14px;border-bottom:1px solid rgba(255,255,255,0.03);color:var(--text-2);line-height:1.5}
+.compare-table tbody tr:hover td{background:rgba(112,48,184,0.03)}
+.compare-table tbody td:first-child{color:var(--violet-glow);font-style:italic}
+.cite-block{margin:22px 0}
+.cite-toggle{display:flex;align-items:center;gap:10px;cursor:pointer;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:var(--gold-dim);text-transform:uppercase;padding:10px 14px;background:rgba(255,255,255,0.02);border:1px solid rgba(201,168,76,0.1);border-radius:6px;user-select:none;transition:all 0.2s}
+.cite-toggle:hover{background:rgba(201,168,76,0.04);color:var(--gold)}
+.cite-toggle::before{content:'▸';transition:transform 0.2s}
+.cite-toggle.open::before{transform:rotate(90deg)}
+.cite-content{display:none;padding:14px 18px;background:rgba(6,4,14,0.6);border:1px solid rgba(201,168,76,0.08);border-top:none;border-radius:0 0 6px 6px;font-size:14px;line-height:1.7}
+.cite-content.open{display:block}
+.cite-content a{color:var(--violet-light);text-decoration:none;border-bottom:1px dotted rgba(112,48,184,0.4)}
+.cite-content a:hover{color:var(--violet-glow)}
+.cite-content li{margin-bottom:8px;color:var(--text-3);list-style:none;padding-left:12px}
+.cite-content li::before{content:'◆';font-size:7px;margin-right:8px;color:var(--violet);vertical-align:middle}
+.takeaway{padding:22px 26px;background:rgba(112,48,184,0.06);border:1px solid rgba(112,48,184,0.2);border-radius:12px;margin-top:32px}
+.takeaway-lbl{font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;color:var(--violet-light);text-transform:uppercase;margin-bottom:8px;display:block}
+.takeaway-text{font-size:16px;color:var(--text-1);line-height:1.7}
+canvas.vis{display:block;margin:28px auto;border-radius:8px;border:1px solid rgba(112,48,184,0.18);max-width:100%}
+
+/* QUIZ */
+#quiz-wrap{max-width:800px;margin:60px auto 80px;padding:0 24px;opacity:0;transform:translateY(30px);transition:opacity 0.8s,transform 0.8s}
+#quiz-wrap.show{opacity:1;transform:translateY(0)}
+.quiz-hdr{text-align:center;margin-bottom:40px}
+.quiz-badge{font-family:'Cinzel',serif;font-size:10px;letter-spacing:3px;color:var(--violet-light);text-transform:uppercase;display:block;margin-bottom:10px}
+.quiz-title{font-family:'Cinzel Decorative',cursive;font-size:clamp(18px,3vw,24px);color:var(--gold-light);margin-bottom:6px}
+.quiz-sub{font-size:16px;color:var(--text-2);font-style:italic}
+.q-block{background:rgba(112,48,184,0.04);border:1px solid rgba(112,48,184,0.16);border-radius:12px;padding:22px;margin-bottom:18px}
+.q-num{font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:var(--violet-light);margin-bottom:10px;text-transform:uppercase}
+.q-text{font-size:17px;color:var(--text-1);margin-bottom:16px;line-height:1.5}
+.opts{display:flex;flex-direction:column;gap:9px}
+.opt{display:flex;align-items:flex-start;gap:12px;padding:11px 15px;background:rgba(255,255,255,0.02);border:1px solid rgba(112,48,184,0.13);border-radius:8px;cursor:pointer;transition:all 0.2s;color:var(--text-3);font-size:15px;line-height:1.5}
+.opt:hover{background:rgba(112,48,184,0.07);border-color:rgba(112,48,184,0.4);color:var(--text-1)}
+.opt.selected{background:rgba(112,48,184,0.1);border-color:rgba(112,48,184,0.5);color:var(--gold-light)}
+.opt.correct{background:rgba(76,180,120,0.1)!important;border-color:rgba(76,180,120,0.5)!important;color:#7fdb9a!important}
+.opt.wrong{background:rgba(180,60,60,0.1)!important;border-color:rgba(180,60,60,0.4)!important;color:#db8080!important}
+.opt-ltr{width:20px;min-width:20px;height:20px;border-radius:50%;background:rgba(112,48,184,0.2);display:flex;align-items:center;justify-content:center;font-size:9px;font-family:'Cinzel',serif;color:var(--violet-light);margin-top:1px}
+.quiz-btn{display:block;width:100%;margin:28px 0;padding:15px;background:linear-gradient(135deg,var(--violet),rgba(112,48,184,0.7));border:none;border-radius:8px;color:var(--gold-light);font-size:13px;font-family:'Cinzel',serif;letter-spacing:2px;cursor:pointer;transition:opacity 0.2s;text-transform:uppercase}
+.quiz-btn:hover{opacity:0.85}
+.quiz-result{text-align:center;padding:28px;border-radius:12px;margin-top:20px;display:none}
+.quiz-result.show{display:block}
+.res-score{font-size:48px;font-family:'Cinzel Decorative',cursive;margin-bottom:6px}
+.res-lbl{font-family:'Cinzel',serif;font-size:11px;letter-spacing:3px;margin-bottom:14px;text-transform:uppercase}
+.res-msg{font-size:16px;color:var(--text-1);font-style:italic;line-height:1.7;max-width:500px;margin:0 auto}
+.res-pass{background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.18)}
+.res-fail{background:rgba(112,48,184,0.06);border:1px solid rgba(112,48,184,0.18)}
+.retry-btn{display:inline-block;margin-top:18px;padding:11px 28px;border:1px solid rgba(112,48,184,0.4);border-radius:6px;color:var(--violet-light);font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;cursor:pointer;background:transparent;text-transform:uppercase}
+
+/* UNLOCK */
+#unlock-overlay{position:fixed;inset:0;z-index:500;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.9)}
+#unlock-overlay.show{display:flex}
+.unlock-box{text-align:center;padding:46px 38px;max-width:420px;width:90%}
+.unlock-sym{font-size:48px;display:block;margin-bottom:22px}
+.unlock-title{font-family:'Cinzel Decorative',cursive;font-size:clamp(16px,3vw,22px);color:var(--gold-light);margin-bottom:8px}
+.unlock-sub{font-family:'Cinzel',serif;font-size:10px;letter-spacing:3px;color:var(--violet-light);margin-bottom:20px;text-transform:uppercase}
+.unlock-score{font-size:14px;color:var(--gold-dim);font-family:'Cinzel',serif;margin-bottom:28px}
+.unlock-div{height:1px;background:linear-gradient(90deg,transparent,rgba(112,48,184,0.4),transparent);margin-bottom:24px}
+.unlock-next-lbl{font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:var(--gold-dim);margin-bottom:8px;text-transform:uppercase}
+.unlock-course{font-family:'Cinzel Decorative',cursive;font-size:17px;color:var(--violet-glow);margin-bottom:26px;line-height:1.4}
+.unlock-btn{background:linear-gradient(135deg,var(--violet),rgba(112,48,184,0.8));color:var(--gold-light);font-family:'Cinzel',serif;font-size:12px;letter-spacing:2px;padding:13px 36px;border:none;border-radius:100px;cursor:pointer;font-weight:700;text-transform:uppercase}
+
+/* COMPLETION */
+#completion{max-width:720px;margin:0 auto;padding:80px 24px 120px;text-align:center}
+.comp-title{font-family:'Cinzel Decorative',cursive;font-size:clamp(20px,4vw,30px);color:var(--gold-light);margin-bottom:18px}
+.comp-text{font-size:17px;color:var(--text-2);line-height:1.8;max-width:560px;margin:0 auto 36px}
+.bib-box{background:rgba(255,255,255,0.02);border:1px solid rgba(112,48,184,0.12);border-radius:12px;padding:28px;text-align:left;margin-bottom:40px}
+.bib-sec{margin-bottom:20px}
+.bib-hdr{font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:var(--violet-light);text-transform:uppercase;margin-bottom:8px;border-bottom:1px solid rgba(112,48,184,0.1);padding-bottom:5px}
+.bib-item{font-size:14px;color:var(--text-3);margin-bottom:7px;padding-left:14px;position:relative;line-height:1.6}
+.bib-item::before{content:'◆';font-size:6px;color:var(--violet);position:absolute;left:0;top:7px}
+.bib-item a{color:var(--violet-light);text-decoration:none;border-bottom:1px dotted rgba(112,48,184,0.35)}
+.bib-item a:hover{color:var(--violet-glow)}
+.final-word{font-family:'Cinzel Decorative',cursive;font-size:clamp(13px,2.2vw,17px);color:var(--gold);line-height:1.9;padding:28px;border-top:1px solid rgba(112,48,184,0.2);border-bottom:1px solid rgba(112,48,184,0.2);font-style:italic}
+</style>
+</head>
+<body>
+<div id="reading-progress"></div>
+<canvas id="starfield"></canvas>
+<div id="nav-dots">
+  <div class="nav-dot active" data-target="hero" data-label="Intro"></div>
+  <div class="nav-dot" data-target="modules-overview" data-label="Curriculum"></div>
+  <div class="nav-dot" data-target="module-1" data-label="Gnostic Theology"></div>
+  <div class="nav-dot" data-target="module-2" data-label="Creation Inverted"></div>
+  <div class="nav-dot" data-target="module-3" data-label="Salvation by Gnosis"></div>
+  <div class="nav-dot" data-target="module-4" data-label="Sethian System"></div>
+  <div class="nav-dot" data-target="module-5" data-label="Valentinian School"></div>
+  <div class="nav-dot" data-target="module-6" data-label="Feminine Theology"></div>
+  <div class="nav-dot" data-target="module-7" data-label="Archons & Liberation"></div>
+  <div class="nav-dot" data-target="module-8" data-label="The Suppression"></div>
+  <div class="nav-dot" data-target="quiz-section" data-label="Exam"></div>
+  <div class="nav-dot" data-target="completion" data-label="Completion"></div>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="course-badge"><span>Course II · Deep Dive · Requires Course I</span></div>
+  <div class="hero-eyebrow">SunFlow: Reignited · Hidden Gnosis Series</div>
+  <h1 class="hero-title">The Hidden Gospel</h1>
+  <h2 class="hero-sub">Gnostic Theology — The Deep Dive</h2>
+  <p class="hero-desc">You've read about the jar. Now enter what was inside it. Systematic Gnostic theology — text by text, doctrine by doctrine, with full scholarly apparatus.</p>
+  <canvas id="hero-canvas" width="360" height="180" style="margin-top:32px;border-radius:6px"></canvas>
+  <div class="hero-stats">
+    <div class="stat"><span class="stat-num">8</span><span class="stat-lbl">Deep Modules</span></div>
+    <div class="stat"><span class="stat-num">6</span><span class="stat-lbl">Major Texts</span></div>
+    <div class="stat"><span class="stat-num">∞</span><span class="stat-lbl">Gnosis</span></div>
+    <div class="stat"><span class="stat-num">II</span><span class="stat-lbl">Course Level</span></div>
+  </div>
+</section>
+
+<!-- LOCKED GATE (shown if not unlocked) -->
+<div id="locked-gate">
+  <div class="lock-box">
+    <span class="lock-sym">🔒</span>
+    <div class="lock-title">Course I Required</div>
+    <p class="lock-text">Complete <em>The Nag Hammadi Library: Foundations</em> and pass its examination to unlock this course. The foundations must precede the theology.</p>
+  </div>
+</div>
+
+<!-- OVERVIEW -->
+<section id="modules-overview">
+  <div class="sec-header">
+    <span class="sec-eye">The Deep Curriculum</span>
+    <h2 class="sec-title">8 Modules of Gnostic Theology</h2>
+  </div>
+  <div class="mod-list">
+    <div class="mod-row" onclick="goTo('module-1')"><div class="mod-n">I</div><div class="mod-info"><div class="mod-t">What Is Gnosticism?</div><div class="mod-s">Gnosis vs. pistis — knowledge vs. faith — the core distinction</div></div><span class="mod-time">9 min</span><span class="mod-chk" id="chk-1">✓</span></div>
+    <div class="mod-row" onclick="goTo('module-2')"><div class="mod-n">II</div><div class="mod-info"><div class="mod-t">Creation Inverted</div><div class="mod-s">The demiurge doctrine — complete theological analysis</div></div><span class="mod-time">11 min</span><span class="mod-chk" id="chk-2">✓</span></div>
+    <div class="mod-row" onclick="goTo('module-3')"><div class="mod-n">III</div><div class="mod-info"><div class="mod-t">Salvation by Gnosis</div><div class="mod-s">How knowing replaces believing — and what that erases</div></div><span class="mod-time">10 min</span><span class="mod-chk" id="chk-3">✓</span></div>
+    <div class="mod-row" onclick="goTo('module-4')"><div class="mod-n">IV</div><div class="mod-info"><div class="mod-t">The Sethian System</div><div class="mod-s">Apocryphon of John, Three Steles, Zostrianos — complete cosmology</div></div><span class="mod-time">10 min</span><span class="mod-chk" id="chk-4">✓</span></div>
+    <div class="mod-row" onclick="goTo('module-5')"><div class="mod-n">V</div><div class="mod-info"><div class="mod-t">The Valentinian School</div><div class="mod-s">Gospel of Truth, Tripartite Tractate — Christianity's most sophisticated heresy</div></div><span class="mod-time">10 min</span><span class="mod-chk" id="chk-5">✓</span></div>
+    <div class="mod-row" onclick="goTo('module-6')"><div class="mod-n">VI</div><div class="mod-info"><div class="mod-t">Feminine Theology — Deep Dive</div><div class="mod-s">Sophia, Thunder, Norea, Mary — the full systematic treatment</div></div><span class="mod-time">10 min</span><span class="mod-chk" id="chk-6">✓</span></div>
+    <div class="mod-row" onclick="goTo('module-7')"><div class="mod-n">VII</div><div class="mod-info"><div class="mod-t">Archons, Passports & Liberation</div><div class="mod-s">Post-death navigation, password systems, ascent through the spheres</div></div><span class="mod-time">9 min</span><span class="mod-chk" id="chk-7">✓</span></div>
+    <div class="mod-row" onclick="goTo('module-8')"><div class="mod-n">VIII</div><div class="mod-info"><div class="mod-t">The Suppression — Why It Happened</div><div class="mod-s">Power, canon, and the political theology of orthodoxy</div></div><span class="mod-time">9 min</span><span class="mod-chk" id="chk-8">✓</span></div>
+  </div>
+</section>
+
+<!-- MODULE 1 — WHAT IS GNOSTICISM -->
+<section id="module-1" class="mod-sec">
+  <div class="mod-lbl">Module I · 9 Minutes</div>
+  <h2 class="mod-title-lg">What Is Gnosticism?</h2>
+  <div class="mod-subtitle">Gnosis vs. pistis · Knowledge vs. faith · The core distinction</div>
+  <div class="divider"><span class="divider-sym">✦</span></div>
+  <canvas id="canvas-gnosis" class="vis" width="340" height="200"></canvas>
+
+  <div class="sub-hdr">1.1 The Central Distinction</div>
+  <div class="mod-body">
+    <p>The word at the center of everything is <span class="term" data-def="Gnosis (Greek: γνῶσις) — direct, experiential knowledge of spiritual truth. Not intellectual knowledge about God, but immediate first-person knowing of one's divine origin and nature. Contrasted with pistis (faith) — believing in propositions about God without direct experience.">gnosis</span> (γνῶσις) — direct, experiential knowledge of one's divine nature and origin. This is not belief. It is not faith in propositions. It is the direct recognition: <em>I know what I am and where I came from.</em></p>
+    <p>Orthodox Christianity built its soteriology (salvation doctrine) on <span class="term" data-def="Pistis (Greek: πίστις) — faith, trust, belief. Paul's letters make pistis the central requirement for salvation: 'For by grace are ye saved through faith' (Ephesians 2:8). Gnosticism replaces this with gnosis — not rejecting grace but redefining salvation as awakening to one's already-divine nature.">pistis</span> (πίστις) — faith, belief, trust in doctrinal propositions. Gnosticism built its soteriology on gnosis — direct knowing that transforms. <strong>The difference is not minor.</strong> It determines whether salvation is available only through institutional mediation (pistis through the Church) or through direct internal experience available to any individual (gnosis through awakening).</p>
+    <div class="insight">
+      <p class="insight-text">The Gospel of Philip: "Those who say they will die first and then rise are in error. If they do not first receive the resurrection while they live, when they die they will receive nothing." Resurrection is not a future event — it is a present state of consciousness. Gnosis is the mechanism. Death changes nothing for the unawakened; awakening changes everything for the living.</p>
+    </div>
+  </div>
+
+  <div class="sub-hdr">1.2 Three Classes of Humanity</div>
+  <div class="mod-body">
+    <p>Valentinian Gnosticism proposed a controversial anthropology — three types of human being based on their fundamental composition:</p>
+    <table class="compare-table">
+      <thead><tr><th>Class</th><th>Nature</th><th>Fate</th><th>Implication</th></tr></thead>
+      <tbody>
+        <tr><td><span class="term" data-def="Pneumatics (Greek: πνευματικοί, 'spiritual ones') — in Valentinian anthropology, humans who possess a divine spark (pneuma) and are capable of gnosis. They will return to the Pleroma regardless of conduct — they are saved by nature.">Pneumatics</span></td><td>Possess divine spark (pneuma)</td><td>Return to Pleroma; saved by nature</td><td>Salvation is ontological, not earned</td></tr>
+        <tr><td><span class="term" data-def="Psychics (Greek: ψυχικοί, 'soul-people') — the middle class, possessing soul but not spirit. They can achieve a lesser salvation through faith and good works — this corresponds roughly to orthodox Christians in Valentinian thought.">Psychics</span></td><td>Possess soul but not divine spark</td><td>Lesser salvation through faith/works</td><td>Orthodox Christians fit here</td></tr>
+        <tr><td><span class="term" data-def="Hylics (Greek: ὑλικοί, 'material ones') — those entirely of matter, without soul or spirit. In Valentinian thought, they cannot be saved and will be dissolved back into matter. This is the most controversial and criticized element of Valentinian anthropology.">Hylics</span></td><td>Purely material, no soul or spark</td><td>Dissolution back into matter</td><td>Most controversial doctrine</td></tr>
+      </tbody>
+    </table>
+    <p>This three-class system was Irenaeus's primary target in <em>Against Heresies</em> — it implies spiritual elitism and predestination that contradicts the orthodox view of universal human dignity and universal access to salvation. <a href="http://www.newadvent.org/fathers/0103.htm" target="_blank" style="color:var(--violet-light)">Irenaeus source ↗</a></p>
+  </div>
+
+  <div class="sub-hdr">1.3 Is "Gnosticism" Even a Valid Category?</div>
+  <div class="mod-body">
+    <p>The scholarly debate matters: <strong>No ancient group called itself "Gnostic."</strong> The term was applied by their opponents. Modern scholarship (Michael Williams, 1996; Karen King, 2003) has questioned whether "Gnosticism" groups together traditions too diverse to be treated as a single religion. <a href="https://www.amazon.com/Rethinking-Gnosticism-Argument-Dismantling-Dubious/dp/0691005427" target="_blank" style="color:var(--violet-light)">Williams source ↗</a></p>
+    <p>What they share: emphasis on gnosis, a mythological cosmology with a flawed material creation, a transcendent God beyond the creator, and the human soul as a trapped divine spark seeking return. What they don't share: unified doctrine, ritual practice, or institutional structure. Gnosticism was always <strong>plural, syncretic, and decentralized</strong> — which is part of why orthodoxy won.</p>
+    <div class="cite-block">
+      <div class="cite-toggle" onclick="toggleCite(this)">Sources</div>
+      <div class="cite-content"><ul>
+        <li>Michael Williams — <a href="https://www.amazon.com/Rethinking-Gnosticism-Argument-Dismantling-Dubious/dp/0691005427" target="_blank">Rethinking "Gnosticism" (1996)</a></li>
+        <li>Karen King — <a href="https://www.amazon.com/What-Gnosticism-Karen-L-King/dp/0674013476" target="_blank">What Is Gnosticism? (2003)</a></li>
+        <li>Gospel of Philip full text — <a href="http://www.gnosis.org/naghamm/gop.html" target="_blank">gnosis.org</a></li>
+      </ul></div>
+    </div>
+  </div>
+  <div class="takeaway">
+    <span class="takeaway-lbl">Module I Takeaway</span>
+    <p class="takeaway-text">Gnosticism's core is the replacement of faith with direct knowing — gnosis. Its three-class anthropology is its most controversial doctrine. And "Gnosticism" itself may be too broad a category — what survives in Nag Hammadi is a plural, decentralized, syncretic movement too rich to reduce to a single label.</p>
+  </div>
+</section>
+
+<!-- MODULE 2 — CREATION INVERTED -->
+<section id="module-2" class="mod-sec">
+  <div class="mod-lbl">Module II · 11 Minutes</div>
+  <h2 class="mod-title-lg">Creation Inverted</h2>
+  <div class="mod-subtitle">Demiurge doctrine · Yaldabaoth · Why matter is a prison</div>
+  <div class="divider"><span class="divider-sym">⊕</span></div>
+  <canvas id="canvas-pleroma" class="vis" width="340" height="280"></canvas>
+
+  <div class="sub-hdr">2.1 The Full Sethian Cosmogony</div>
+  <div class="mod-body">
+    <p>The cosmogony (origin of the cosmos) in the <em>Apocryphon of John</em> is the most complete Gnostic creation account. It proceeds in stages:</p>
+    <div class="hl-list">
+      <div class="hl-item"><div class="hl-dot"></div><div><strong>Stage 1 — The Invisible Spirit:</strong> Beyond all description, beyond being and non-being, beyond naming. The truly transcendent First Principle. Not a personal god who acts or judges — an ineffable source. Any description of it immediately becomes inadequate.</div></div>
+      <div class="hl-item"><div class="hl-dot"></div><div><strong>Stage 2 — The Pleroma:</strong> The Invisible Spirit generates <span class="term" data-def="Barbelo — in Sethian Gnosticism, the first thought (Protennoia) of the Invisible Spirit, the divine mother, and the first aeon to emanate. She is the divine feminine counterpart to the Father, the 'womb of everything.' Her name may derive from Hebrew meaning 'God is in four' or 'God in the tetragrammaton.'">Barbelo</span> (divine mother) and a series of aeons in pairs — the Pleroma (fullness of divine reality). These are not separate gods but aspects of the one transcendent source.</div></div>
+      <div class="hl-item"><div class="hl-dot"></div><div><strong>Stage 3 — Sophia's Error:</strong> The lowest aeon, Sophia (Wisdom), desires to create independently — without her divine consort, without the Invisible Spirit's sanction. Her desire produces an abortion: a formless being she names Yaldabaoth and immediately hides in the material realm, ashamed.</div></div>
+      <div class="hl-item"><div class="hl-dot"></div><div><strong>Stage 4 — Yaldabaoth Creates:</strong> Yaldabaoth, inheriting a portion of Sophia's divine light but being fundamentally ignorant of the higher realm, creates the material world and 12 archons to govern it. He boasts: "I am God and there is no other." The voice from above replies: "You are mistaken, Samael — god of the blind."</div></div>
+      <div class="hl-item"><div class="hl-dot"></div><div><strong>Stage 5 — The Trap:</strong> Yaldabaoth creates humanity, inadvertently breathing his divine light (inherited from Sophia) into Adam. This traps divine sparks in material bodies. Humanity is a prison for stolen light. The goal of gnosis: recover that light and return it to the Pleroma.</div></div>
+    </div>
+  </div>
+
+  <div class="sub-hdr">2.2 What This Does to the Old Testament God</div>
+  <div class="mod-body">
+    <table class="compare-table">
+      <thead><tr><th>Old Testament Claim</th><th>Gnostic Reinterpretation</th><th>Source Text</th></tr></thead>
+      <tbody>
+        <tr><td>"I am the LORD your God... you shall have no other gods before me"</td><td>Yaldabaoth's jealousy reveals he knows there are higher gods — and fears them</td><td>Apocryphon of John</td></tr>
+        <tr><td>God forbids eating from the tree of knowledge</td><td>Archons forbid knowledge to keep humanity unconscious and compliant</td><td>Hypostasis of Archons</td></tr>
+        <tr><td>God destroys humanity with the flood</td><td>Yaldabaoth destroys humanity when the divine sparks within begin awakening — Noah is saved by the higher God, not Yaldabaoth</td><td>Apocryphon of John</td></tr>
+        <tr><td>"God saw that it was good"</td><td>The material creation is structurally flawed — built by an ignorant demiurge from imperfect material</td><td>On the Origin of the World</td></tr>
+      </tbody>
+    </table>
+    <div class="cite-block">
+      <div class="cite-toggle" onclick="toggleCite(this)">Sources</div>
+      <div class="cite-content"><ul>
+        <li>Apocryphon of John — <a href="http://www.gnosis.org/naghamm/apocjn.html" target="_blank">Full text, gnosis.org</a></li>
+        <li>On the Origin of the World — <a href="http://www.gnosis.org/naghamm/origin.html" target="_blank">Full text, gnosis.org</a></li>
+        <li>Hypostasis of the Archons — <a href="http://www.gnosis.org/naghamm/hypostas.html" target="_blank">Full text, gnosis.org</a></li>
+        <li>Bentley Layton — <a href="https://www.amazon.com/Gnostic-Scriptures-Translation-Annotated-Indices/dp/0385174470" target="_blank">The Gnostic Scriptures</a> (1987)</li>
+      </ul></div>
+    </div>
+  </div>
+  <div class="takeaway">
+    <span class="takeaway-lbl">Module II Takeaway</span>
+    <p class="takeaway-text">The Sethian cosmogony is a systematic inversion of the Old Testament — not a random disagreement but a point-by-point reinterpretation. Every action of Yahweh becomes evidence of Yaldabaoth's ignorance and malice. The creation is not good — it is a prison of trapped divine light, and humanity's purpose is to awaken and return that light to its source.</p>
+  </div>
+</section>
+
+<!-- MODULE 3 — SALVATION BY GNOSIS -->
+<section id="module-3" class="mod-sec">
+  <div class="mod-lbl">Module III · 10 Minutes</div>
+  <h2 class="mod-title-lg">Salvation by Gnosis</h2>
+  <div class="mod-subtitle">How knowing replaces believing — and what institutional authority that erases</div>
+  <div class="divider"><span class="divider-sym">☀</span></div>
+
+  <div class="sub-hdr">3.1 The Gospel of Truth — Valentinus's Meditation</div>
+  <div class="mod-body">
+    <p>The <em>Gospel of Truth</em> (NHC I,3) is attributed to Valentinus himself — the most intellectually sophisticated Gnostic teacher of the 2nd century, who nearly became Bishop of Rome. Unlike the mythological Sethian texts, it reads as a poetic, meditative contemplation on truth, error, and awakening. <a href="http://www.gnosis.org/naghamm/got.html" target="_blank" style="color:var(--violet-light)">Full text ↗</a></p>
+    <div class="source-card">
+      <div class="source-label">Gospel of Truth (NHC I,3) <a href="http://www.gnosis.org/naghamm/got.html" target="_blank">Full Text ↗</a></div>
+      <div class="source-text">"Ignorance of the Father brought about anguish and terror. And anguish grew solid like a fog so that no one was able to see. For this reason, error became powerful; it worked on its own matter foolishly, not having known the truth... The gospel of truth is joy for those who have received from the Father of Truth the grace of knowing him."</div>
+      <div class="source-analysis"><strong>Analysis:</strong> This is not a doctrine of sin and punishment. The human problem is <em>ignorance</em>, not moral failure. The solution is not atonement — it is recognition. <strong>Error is not evil; it is fog.</strong> Gnosis is the sun that disperses it. No sacrifice required. No priest required. No institutional mediation required.</div>
+    </div>
+  </div>
+
+  <div class="sub-hdr">3.2 The Treatise on the Resurrection — Death as Illusion</div>
+  <div class="mod-body">
+    <div class="source-card">
+      <div class="source-label">Treatise on Resurrection (NHC I,4) <a href="http://www.gnosis.org/naghamm/resur.html" target="_blank">Full Text ↗</a></div>
+      <div class="source-text">"Do not think the resurrection is an illusion. It is no illusion, but it is truth. Indeed, it is more fitting to say the world is an illusion rather than the resurrection which has come into being through our Lord the Savior... Why not consider yourself as risen and already brought to this?"</div>
+      <div class="source-analysis"><strong>Analysis:</strong> The world is the illusion; the resurrection is real — and present. "Why not consider yourself as risen?" This is an invitation to recognize a present state, not await a future event. The orthodox resurrection (future, bodily, after death) is replaced with a present, spiritual, accessible-now awakening. The Treatise doesn't deny resurrection — it relocates it entirely.</div>
+    </div>
+  </div>
+
+  <div class="sub-hdr">3.3 What Gnosis-Based Salvation Erases</div>
+  <div class="mod-body">
+    <table class="compare-table">
+      <thead><tr><th>Orthodox Requirement</th><th>Made Unnecessary by Gnosis</th></tr></thead>
+      <tbody>
+        <tr><td>Baptism as institutional sacrament</td><td>Gnosis is its own initiation — direct knowing supersedes ritual</td></tr>
+        <tr><td>Eucharist administered by ordained priest</td><td>The "bridal chamber" (Philip) is internal; no priest mediates</td></tr>
+        <tr><td>Confession and absolution</td><td>Sin as moral failing replaced by ignorance as the problem — no absolution needed, only awakening</td></tr>
+        <tr><td>Church membership and attendance</td><td>The Pleroma is accessed internally; no building required</td></tr>
+        <tr><td>Waiting for bodily resurrection after death</td><td>Resurrection is now, spiritual, available through gnosis</td></tr>
+        <tr><td>Creedal assent (Nicene Creed)</td><td>Gnosis transcends propositions — experience, not doctrinal agreement</td></tr>
+      </tbody>
+    </table>
+    <div class="insight">
+      <p class="insight-text">This is why Gnosticism was dangerous to institutional Christianity — not because it was morally corrupt, but because it made the institution structurally unnecessary. If salvation is direct internal knowing, the entire apparatus of clergy, sacraments, creeds, and ecclesiastical authority becomes irrelevant. Not wrong — irrelevant. That is a far more radical challenge than any moral heresy.</p>
+    </div>
+  </div>
+  <div class="takeaway">
+    <span class="takeaway-lbl">Module III Takeaway</span>
+    <p class="takeaway-text">Gnostic soteriology replaces faith-in-propositions with direct experiential knowing, and future-bodily-resurrection with present spiritual awakening. In doing so it makes the entire institutional apparatus of orthodox Christianity — sacraments, clergy, creeds, buildings — structurally unnecessary. This is the deepest reason for the suppression.</p>
+  </div>
+</section>
+
+<!-- MODULE 4 — SETHIAN SYSTEM -->
+<section id="module-4" class="mod-sec">
+  <div class="mod-lbl">Module IV · 10 Minutes</div>
+  <h2 class="mod-title-lg">The Sethian System</h2>
+  <div class="mod-subtitle">Apocryphon of John · Three Steles · Zostrianos — complete cosmology</div>
+  <div class="divider"><span class="divider-sym">𓆗</span></div>
+
+  <div class="sub-hdr">4.1 Seth as the Spiritual Ancestor</div>
+  <div class="mod-body">
+    <p>Sethian texts are united by their focus on <span class="term" data-def="Seth — in Sethian Gnosticism, the third son of Adam and Eve (Genesis 4:25). While Cain and Abel represent the material and psychic streams of humanity, Seth embodies the pneumatic (spiritual) stream — the divine spark in humanity. The Sethians saw themselves as Seth's spiritual descendants, the bearers of the hidden divine light.">Seth</span>, Adam's third son, as the carrier of the divine spark in humanity. While Cain and Abel represent lower human natures (material and psychic), Seth is the pneumatic ancestor — the lineage through which divine light has been transmitted across generations despite the archons' interference.</p>
+    <p>The <em>Gospel of the Egyptians</em> (NHC III,2) presents Seth as a cosmic savior figure who descends multiple times across human history to protect and restore the divine sparks — appearing as Noah to survive the flood, as historical prophets, and finally in the form of Jesus. <a href="http://www.gnosis.org/naghamm/goseg.html" target="_blank" style="color:var(--violet-light)">Full text ↗</a></p>
+  </div>
+
+  <div class="sub-hdr">4.2 Zostrianos — Neoplatonic Gnosticism</div>
+  <div class="mod-body">
+    <p><em>Zostrianos</em> (NHC VIII,1) is the longest text in the library — a heavenly journey narrative in which Zoroaster's legendary ancestor ascends through multiple divine realms, receiving initiations and revelations at each level. Its philosophical framework is Neoplatonic: the One, Intellect, and Soul appear transformed into Gnostic terminology.</p>
+    <div class="insight">
+      <p class="insight-text">The Neoplatonist philosopher Porphyry records that Plotinus (the founder of Neoplatonism) argued against Gnostic texts in his school — specifically mentioning Zostrianos and <em>Allogenes</em> (NHC XI,3). This means that in 3rd-century Rome, Gnostic and Neoplatonic teachers were actively debating in the same philosophical circles. Gnosticism was not a fringe sect — it was a serious intellectual competitor to both orthodox Christianity and Greek philosophy simultaneously. <a href="https://classics.mit.edu/Porphyry/plotinus.html" target="_blank" style="color:var(--violet-light)">Porphyry reference ↗</a></p>
+    </div>
+  </div>
+
+  <div class="sub-hdr">4.3 The Three Steles of Seth — Hymns to the Divine</div>
+  <div class="mod-body">
+    <div class="source-card">
+      <div class="source-label">Three Steles of Seth (NHC VII,5) <a href="http://www.gnosis.org/naghamm/3steles.html" target="_blank">Full Text ↗</a></div>
+      <div class="source-text">"I bless thee, Father Geradama, I, as thine own son, Emmacha Seth... thou who existeth before the powers, thou who art before the aeons, thou who art before the gods... Thou art Light. Thou art infinite Light."</div>
+      <div class="source-analysis"><strong>Analysis:</strong> This is liturgical — meant to be chanted or sung in communal ritual, ascending through three hypostases (Geradama/Adam, Barbelo, the Invisible Spirit). Each stele (hymn) addresses a higher divine level. Sethian Gnosticism was not just theology — it was practiced mysticism with communal ritual life.</div>
+    </div>
+    <div class="cite-block">
+      <div class="cite-toggle" onclick="toggleCite(this)">Sources</div>
+      <div class="cite-content"><ul>
+        <li>Zostrianos full text — <a href="http://www.gnosis.org/naghamm/zost.html" target="_blank">gnosis.org</a></li>
+        <li>Three Steles of Seth — <a href="http://www.gnosis.org/naghamm/3steles.html" target="_blank">gnosis.org</a></li>
+        <li>Gospel of the Egyptians — <a href="http://www.gnosis.org/naghamm/goseg.html" target="_blank">gnosis.org</a></li>
+        <li>John Turner — <em>Sethian Gnosticism and the Platonic Tradition</em> (2001)</li>
+      </ul></div>
+    </div>
+  </div>
+  <div class="takeaway">
+    <span class="takeaway-lbl">Module IV Takeaway</span>
+    <p class="takeaway-text">Sethian Gnosticism is a complete theological system — Seth as spiritual ancestor, cosmology from Apocryphon of John, Neoplatonic ascent in Zostrianos, and communal liturgy in the Three Steles. It was a living religious tradition, not a static text collection.</p>
+  </div>
+</section>
+
+<!-- MODULE 5 — VALENTINIAN SCHOOL -->
+<section id="module-5" class="mod-sec">
+  <div class="mod-lbl">Module V · 10 Minutes</div>
+  <h2 class="mod-title-lg">The Valentinian School</h2>
+  <div class="mod-subtitle">The most sophisticated Gnostic tradition — nearly became orthodoxy</div>
+  <div class="divider"><span class="divider-sym">◈</span></div>
+
+  <div class="sub-hdr">5.1 Valentinus — The Almost-Bishop</div>
+  <div class="mod-body">
+    <p>Valentinus (c. 100–180 CE) studied in Alexandria and taught in Rome for decades. Tertullian records that he was a serious candidate for Bishop of Rome. He was not a peripheral figure — he was nearly at the center of what would become orthodox Christianity. <a href="https://www.newadvent.org/fathers/0314.htm" target="_blank" style="color:var(--violet-light)">Tertullian source ↗</a></p>
+    <p>Valentinian Gnosticism is more <em>affirmative</em> of the material world than Sethian — the material world is a flawed image of the divine, but image nonetheless. The demiurge is ignorant, not evil. Salvation is available to psychics (ordinary believers) as well as pneumatics (spiritual elite), though at different levels. This made Valentinianism more accessible — and therefore more threatening to orthodoxy.</p>
+  </div>
+
+  <div class="sub-hdr">5.2 The Tripartite Tractate — A Full Systematic Theology</div>
+  <div class="mod-body">
+    <p>At 140 pages, the <em>Tripartite Tractate</em> (NHC I,5) is the longest text in the library and one of the most ambitious theological works of the ancient world. It presents a complete system: the nature of the Father, the Son's role, the Logos's fall (replacing Sophia), creation, anthropology, and redemption. <a href="http://www.gnosis.org/naghamm/tripart.html" target="_blank" style="color:var(--violet-light)">Full text ↗</a></p>
+    <div class="source-card">
+      <div class="source-label">Tripartite Tractate (NHC I,5)</div>
+      <div class="source-text">"The Father... is not in any manner deficient, that he should receive anything, nor does he need to be purified, but he is as he was from the beginning. Not only does he not need anything, but the others need him... He is that which is the totality: the one with whom there is no evil."</div>
+      <div class="source-analysis"><strong>Analysis:</strong> The transcendent Father is genuinely good — unlike the demiurge/Yaldabaoth. Evil does not come from the Father; it comes from the Logos's fall, which is more like an accident or error than a sin. This is Valentinianism's answer to theodicy (the problem of evil): <strong>God is good; evil is the result of imperfect emanation, not divine will.</strong></div>
+    </div>
+  </div>
+
+  <div class="sub-hdr">5.3 Gospel of Philip's Five Sacraments</div>
+  <div class="mod-body">
+    <p>The <em>Gospel of Philip</em> (NHC II,3) presents five sacraments in explicit contrast to orthodox Christianity's two (or seven): baptism, chrism (anointing), eucharist, redemption, and the bridal chamber. Each is simultaneously an external ritual and an internal transformation — the external is a "type" (shadow) of the internal reality. <a href="http://www.gnosis.org/naghamm/gop.html" target="_blank" style="color:var(--violet-light)">Full text ↗</a></p>
+    <div class="insight">
+      <p class="insight-text">Philip's most theologically loaded passage: "The Lord rose from the dead. He became as he used to be, but his body was perfect. He did indeed possess flesh, but this flesh is true flesh. Our flesh is not true, but only an image of the true." The Valentinian position: Jesus's resurrection body was the <em>spiritual</em> body, revealing what all pneumatics are — not a proof of physical bodily resurrection, but a demonstration of what gnosis reveals.</p>
+    </div>
+    <div class="cite-block">
+      <div class="cite-toggle" onclick="toggleCite(this)">Sources</div>
+      <div class="cite-content"><ul>
+        <li>Gospel of Philip — <a href="http://www.gnosis.org/naghamm/gop.html" target="_blank">gnosis.org full text</a></li>
+        <li>Tripartite Tractate — <a href="http://www.gnosis.org/naghamm/tripart.html" target="_blank">gnosis.org full text</a></li>
+        <li>Einar Thomassen — <a href="https://www.amazon.com/Spiritual-Seed-Church-Valentinians/dp/9004161287" target="_blank">The Spiritual Seed: The Church of the Valentinians</a> (2006)</li>
+      </ul></div>
+    </div>
+  </div>
+  <div class="takeaway">
+    <span class="takeaway-lbl">Module V Takeaway</span>
+    <p class="takeaway-text">Valentinianism was the most sophisticated and institutionally threatening Gnostic tradition — its founder nearly became Bishop of Rome. It affirmed more of the world than Sethianism, made salvation accessible at multiple levels, and presented sacraments as internal transformations that made external institutional administration unnecessary.</p>
+  </div>
+</section>
+
+<!-- MODULE 6 — FEMININE THEOLOGY DEEP DIVE -->
+<section id="module-6" class="mod-sec">
+  <div class="mod-lbl">Module VI · 10 Minutes</div>
+  <h2 class="mod-title-lg">Feminine Theology — Deep Dive</h2>
+  <div class="mod-subtitle">Sophia · Thunder · Norea · Mary — the full systematic treatment</div>
+  <div class="divider"><span class="divider-sym">☽</span></div>
+
+  <div class="sub-hdr">6.1 Sophia's Full Arc — Fall, Correction, Return</div>
+  <div class="mod-body">
+    <p>Sophia's role across the Nag Hammadi texts is not simply "the one who made a mistake." She is the engine of the entire cosmic drama — both cause of the fall and agent of redemption. Her arc spans multiple texts:</p>
+    <div class="hl-list">
+      <div class="hl-item"><div class="hl-dot"></div><div><strong>Apocryphon of John:</strong> Sophia desires to create without her consort and without the Invisible Spirit's sanction. Her formless creature (Yaldabaoth) is immediately hidden in the material realm. She then weeps and repents — and the Invisible Spirit's voice, reflected in the waters below, tricks Yaldabaoth into breathing his light into Adam. Her correction begins.</div></div>
+      <div class="hl-item"><div class="hl-dot"></div><div><strong>On the Origin of the World:</strong> Sophia sends her daughter Zoe (Life) to give Adam the breath of life — claiming credit back from Yaldabaoth. Zoe breathes life into the psychic Adam before Yaldabaoth can fully control him.</div></div>
+      <div class="hl-item"><div class="hl-dot"></div><div><strong>Sophia of Jesus Christ (NHC III,4):</strong> After the resurrection, the risen Christ appears to his disciples and reveals how Sophia's light scattered through humanity can be recovered — presenting a salvific cosmology centered on her redemption and humanity's as one unified process.</div></div>
+    </div>
+  </div>
+
+  <div class="sub-hdr">6.2 Thunder, Perfect Mind — The Complete Text</div>
+  <div class="mod-body">
+    <div class="source-card">
+      <div class="source-label">Thunder, Perfect Mind (NHC VI,2) — Extended <a href="http://www.gnosis.org/naghamm/thunder.html" target="_blank">Full Text ↗</a></div>
+      <div class="source-text">"I am she who exists in all fears and strength in trembling. I am she who is weak, and I am well in a pleasant place. I am senseless and I am wise. Why have you hated me in your counsels? For I shall be silent among those who are silent, and I shall appear and speak. Why then have you hated me, you Greeks? Because I am a barbarian among the barbarians?"</div>
+      <div class="source-analysis"><strong>Analysis:</strong> The voice refuses every attempt to categorize, marginalize, or exclude her. She is Greek and barbarian simultaneously. Wise and senseless. The "you Greeks" passage is particularly remarkable — a direct address to the Hellenistic cultural majority, claiming belonging while refusing assimilation. <strong>This is the divine speaking from the margins and refusing to stay there.</strong></div>
+    </div>
+    <p>Scholars Anne McGuire and Hal Taussig have argued Thunder may have been performed — a dramatic monologue delivered by a woman in a liturgical context, embodying the divine feminine directly rather than merely describing it. <a href="https://www.amazon.com/Thunder-Perfect-Mind-New-Translation/dp/0062345907" target="_blank" style="color:var(--violet-light)">Taussig translation ↗</a></p>
+  </div>
+
+  <div class="sub-hdr">6.3 The Women Around Jesus — What Was Erased</div>
+  <div class="mod-body">
+    <p>The <em>Gospel of Mary</em> (Berlin Codex 8502, related to Nag Hammadi) is the most direct evidence of what was suppressed: Mary Magdalene receiving a private revelation from the risen Christ that she then teaches to the male disciples. When she finishes, Peter challenges her: "Did he really speak privately with a woman and not openly to us? Are we to turn about and all listen to her? Did he prefer her to us?" <a href="http://www.gnosis.org/library/marygosp.htm" target="_blank" style="color:var(--violet-light)">Full text ↗</a></p>
+    <div class="insight">
+      <p class="insight-text">Levi replies to Peter: "But if the Savior made her worthy, who are you indeed to reject her? Surely the Savior knows her very well. That is why he loved her more than us." The text presents a direct conflict between institutional authority (Peter, who becomes the foundation of the Roman church) and direct spiritual access (Mary, who receives revelation regardless of gender). The institutionalists won. The text was not included in the canon.</p>
+    </div>
+    <div class="cite-block">
+      <div class="cite-toggle" onclick="toggleCite(this)">Sources</div>
+      <div class="cite-content"><ul>
+        <li>Thunder, Perfect Mind — <a href="http://www.gnosis.org/naghamm/thunder.html" target="_blank">gnosis.org full text</a></li>
+        <li>Gospel of Mary — <a href="http://www.gnosis.org/library/marygosp.htm" target="_blank">gnosis.org full text</a></li>
+        <li>Karen King — <a href="https://www.amazon.com/Gospel-Mary-Magdala-Jesus-First/dp/0944344585" target="_blank">The Gospel of Mary of Magdala</a> (2003)</li>
+        <li>Hal Taussig — <a href="https://www.amazon.com/Thunder-Perfect-Mind-New-Translation/dp/0062345907" target="_blank">Thunder, Perfect Mind: A New Translation</a></li>
+      </ul></div>
+    </div>
+  </div>
+  <div class="takeaway">
+    <span class="takeaway-lbl">Module VI Takeaway</span>
+    <p class="takeaway-text">The Gnostic feminine theology is systematic, not incidental: Sophia as cosmic agent across multiple texts, Thunder's radical refusal of all marginalization, and Mary Magdalene's direct revelation that Peter's institutional authority tries to suppress. What was excluded from the canon was not peripheral — it was a complete alternative structure of spiritual authority.</p>
+  </div>
+</section>
+
+<!-- MODULE 7 — ARCHONS & LIBERATION -->
+<section id="module-7" class="mod-sec">
+  <div class="mod-lbl">Module VII · 9 Minutes</div>
+  <h2 class="mod-title-lg">Archons, Passports & Liberation</h2>
+  <div class="mod-subtitle">Post-death navigation · Password systems · Ascending through the spheres</div>
+  <div class="divider"><span class="divider-sym">⬡</span></div>
+  <canvas id="canvas-spheres" class="vis" width="300" height="300"></canvas>
+
+  <div class="sub-hdr">7.1 The Archon Passport System</div>
+  <div class="mod-body">
+    <p>Several Nag Hammadi texts provide what scholars call "password texts" — specific responses the soul must give to archons at each sphere during the post-death ascent. The <em>First Apocalypse of James</em> (NHC V,3) gives the most explicit version:</p>
+    <div class="source-card">
+      <div class="source-label">First Apocalypse of James (NHC V,3) <a href="http://www.gnosis.org/naghamm/1ja.html" target="_blank">Full Text ↗</a></div>
+      <div class="source-text">"When you come to [the archons], one of them who is their guard will say to you, 'Who are you or where are you from?' You are to say to him, 'I am a son, and I am from the Father.' He will say to you, 'What sort of son are you, and to which father do you belong?' You are to say to him, 'I am from the Pre-existent Father, and a son in the Pre-existent One.'"</div>
+      <div class="source-analysis"><strong>Analysis:</strong> This is gnosis as a practical tool for post-mortem navigation. The soul that knows its divine origin can answer correctly and ascend through each archon's challenge. The soul that doesn't know — that believes itself to be merely human, belonging to this world — cannot answer and is recycled back into material existence. <strong>Salvation is what you know, applied at the moment of death.</strong></div>
+    </div>
+  </div>
+
+  <div class="sub-hdr">7.2 The Seven Spheres — Ancient Cosmology as Prison</div>
+  <div class="mod-body">
+    <p>Ancient cosmology mapped the universe as seven planetary spheres (Moon, Mercury, Venus, Sun, Mars, Jupiter, Saturn) surrounding Earth. Each sphere was governed by a deity or spirit. Gnostic cosmology identified these seven sphere-rulers with the seven archons of Yaldabaoth — the material world's prison guards.</p>
+    <table class="compare-table">
+      <thead><tr><th>Sphere</th><th>Ancient Planet</th><th>Archon Quality</th><th>What Soul Must Shed</th></tr></thead>
+      <tbody>
+        <tr><td>1st (lowest)</td><td>Moon</td><td>Material attachment</td><td>Physical body</td></tr>
+        <tr><td>2nd</td><td>Mercury</td><td>Desire/cunning</td><td>Craving</td></tr>
+        <tr><td>3rd</td><td>Venus</td><td>Ignorance/passion</td><td>Lust for material</td></tr>
+        <tr><td>4th</td><td>Sun</td><td>Dominion</td><td>Pride of power</td></tr>
+        <tr><td>5th</td><td>Mars</td><td>Rashness/evil</td><td>Boldness and recklessness</td></tr>
+        <tr><td>6th</td><td>Jupiter</td><td>Greed</td><td>False accumulation</td></tr>
+        <tr><td>7th</td><td>Saturn</td><td>Deceit</td><td>Falsehood</td></tr>
+        <tr><td>8th (Ogdoad)</td><td>Fixed stars</td><td>Beyond archons</td><td>The pneumatic self arrives here</td></tr>
+        <tr><td>9th and beyond</td><td>Pleroma</td><td>Divine fullness</td><td>Return to Source</td></tr>
+      </tbody>
+    </table>
+    <p>This is the ascent scheme in the <em>Discourse on the Eighth and Ninth</em> and echoed in Zostrianos. Each sphere requires shedding a lower quality. <strong>Ascent is purification through understanding — gnosis at each level.</strong></p>
+  </div>
+  <div class="takeaway">
+    <span class="takeaway-lbl">Module VII Takeaway</span>
+    <p class="takeaway-text">Gnostic soteriology is not abstract — it is a complete map of post-death navigation. The soul equipped with gnosis passes through each archon's challenge by knowing its divine origin, sheds its material attachments at each sphere, and returns to the Pleroma. Salvation is applied knowledge at the moment of maximum need.</p>
+  </div>
+</section>
+
+<!-- MODULE 8 — THE SUPPRESSION -->
+<section id="module-8" class="mod-sec">
+  <div class="mod-lbl">Module VIII · 9 Minutes</div>
+  <h2 class="mod-title-lg">The Suppression — Why It Happened</h2>
+  <div class="mod-subtitle">Power · Canon · The political theology of orthodoxy</div>
+  <div class="divider"><span class="divider-sym">⚔</span></div>
+
+  <div class="sub-hdr">8.1 Irenaeus's Strategy</div>
+  <div class="mod-body">
+    <p>Irenaeus of Lyon's <em>Against Heresies</em> (c. 180 CE) is the document that did the most damage to Gnostic movements before Nag Hammadi. His strategy was not primarily theological — it was institutional. His argument was: <strong>truth is guaranteed by apostolic succession</strong>. The bishops who can trace their authority back to the apostles have true teaching; those who cannot are heretics regardless of what they teach. <a href="http://www.newadvent.org/fathers/0103.htm" target="_blank" style="color:var(--violet-light)">Full text ↗</a></p>
+    <div class="insight">
+      <p class="insight-text">This is a brilliant institutional move: it shifts the question from "what is true?" to "who has the authority to say what is true?" Gnostics could not compete on this ground — their authority was internal (gnosis, direct revelation) rather than institutional (apostolic succession). Irenaeus ensured that internal authority could never compete with institutional authority by defining institutional authority as the criterion of truth itself.</p>
+    </div>
+  </div>
+
+  <div class="sub-hdr">8.2 Constantine and the Political Unification</div>
+  <div class="mod-body">
+    <p>The Council of Nicaea (325 CE) was convened by Emperor <span class="term" data-def="Constantine I (c. 272–337 CE) — Roman Emperor who converted to Christianity and convened the First Council of Nicaea in 325 CE to unify Christian doctrine. His motivation was as much political as theological: a divided Christianity threatened imperial unity. A single orthodoxy served imperial purposes better than plural competing traditions.">Constantine</span> for explicitly political reasons: a unified Christianity was more useful to imperial governance than dozens of competing traditions. Plurality was not theologically wrong — it was politically inconvenient.</p>
+    <div class="hl-list">
+      <div class="hl-item"><div class="hl-dot"></div><div><strong>Nicaea decided:</strong> The nature of Christ (homoousios — of the same substance as the Father). Arian Christianity (Christ as subordinate to the Father) lost. This decision made Gnostic Christology (Christ as revealer, not as God incarnate) automatically heretical.</div></div>
+      <div class="hl-item"><div class="hl-dot"></div><div><strong>The canon (397 CE):</strong> The Council of Carthage finalized the 27-book New Testament. The criteria for inclusion included: apostolic authorship, widespread use, and conformity with the "rule of faith" — circular in that the rule of faith was itself defined by those controlling the canon.</div></div>
+      <div class="hl-item"><div class="hl-dot"></div><div><strong>What didn't make the cut:</strong> Texts teaching direct access (Gospel of Thomas), feminine spiritual authority (Gospel of Mary), non-bodily resurrection (Gospel of Philip), and the demiurge doctrine (Apocryphon of John). Each excluded text threatened institutional authority in a specific way.</div></div>
+    </div>
+  </div>
+
+  <div class="sub-hdr">8.3 What We Lost — And What We Have Back</div>
+  <div class="mod-body">
+    <p>Elaine Pagels's summary remains the most precise: "What made Gnosticism dangerous was not that it was morally corrupt or politically subversive. What made it dangerous was that it offered a spirituality that required no institution to mediate it."</p>
+    <div class="compare-table" style="display:table">
+      <thead><tr><th>What Was Suppressed</th><th>Why It Was Dangerous</th><th>What We Now Have Back</th></tr></thead>
+      <tbody>
+        <tr><td>Gospel of Thomas</td><td>Kingdom within; no institutional access</td><td>Earliest possible Jesus sayings tradition</td></tr>
+        <tr><td>Gospel of Mary</td><td>Women as primary receivers of revelation</td><td>Direct evidence of female spiritual authority</td></tr>
+        <tr><td>Apocryphon of John</td><td>Yahweh as demiurge; Old Testament inverted</td><td>Complete alternative cosmology</td></tr>
+        <tr><td>Gospel of Philip</td><td>Sacraments as internal; no priest needed</td><td>Valentinian sacramental theology in full</td></tr>
+        <tr><td>Thunder, Perfect Mind</td><td>Divine feminine beyond all categories</td><td>One of antiquity's most radical theological texts</td></tr>
+      </tbody>
+    </div>
+    <div class="cite-block">
+      <div class="cite-toggle" onclick="toggleCite(this)">Sources</div>
+      <div class="cite-content"><ul>
+        <li>Irenaeus, Against Heresies — <a href="http://www.newadvent.org/fathers/0103.htm" target="_blank">newadvent.org full text</a></li>
+        <li>Elaine Pagels — <a href="https://www.amazon.com/Gnostic-Gospels-Elaine-Pagels/dp/0679724532" target="_blank">The Gnostic Gospels (1979)</a></li>
+        <li>Bart Ehrman — <a href="https://www.amazon.com/Lost-Christianities-Battles-Scripture-Faiths/dp/0195182499" target="_blank">Lost Christianities (2003)</a></li>
+        <li>Council of Nicaea — <a href="https://www.britannica.com/event/First-Council-of-Nicaea-325" target="_blank">Britannica overview</a></li>
+      </ul></div>
+    </div>
+  </div>
+  <div class="takeaway">
+    <span class="takeaway-lbl">Module VIII Takeaway</span>
+    <p class="takeaway-text">The suppression was not primarily theological — it was institutional and political. Gnosticism offered direct access to the divine without institutional mediation, which made it structurally incompatible with a church building institutional power. Constantine's need for religious unity provided the political engine. Irenaeus's apostolic succession argument provided the theological framework. Together they built the cage. Nag Hammadi cracked it open in 1945.</p>
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section id="quiz-section">
+<div id="quiz-wrap">
+  <div class="quiz-hdr">
+    <span class="quiz-badge">Course II · Final Examination</span>
+    <h2 class="quiz-title">The Hidden Gospel — Gnostic Theology</h2>
+    <p class="quiz-sub">Answer 8 or more correctly to complete the Hidden Gnosis Series</p>
+  </div>
+  <div id="quiz-qs"></div>
+  <button class="quiz-btn" id="qbtn" onclick="submitQ()">SUBMIT ANSWERS</button>
+  <div class="quiz-result" id="q-result"></div>
+</div>
+</section>
+
+<!-- COMPLETION -->
+<section id="completion">
+  <div class="divider" style="margin-bottom:44px"><span class="divider-sym" style="color:var(--violet-light)">✦</span></div>
+  <h2 class="comp-title">You Have Entered the Pleroma</h2>
+  <p class="comp-text">You have completed the Hidden Gnosis Series. Two courses, two thousand years of suppression, one sealed jar cracked open. The texts are in your hands now — and the archons cannot take them back.</p>
+  <div class="bib-box">
+    <div class="bib-sec">
+      <div class="bib-hdr">Complete Nag Hammadi Archive</div>
+      <div class="bib-item">All texts online — <a href="http://www.gnosis.org/naghamm/nhl.html" target="_blank">gnosis.org/naghamm</a></div>
+      <div class="bib-item">Marvin Meyer — <a href="https://www.amazon.com/Nag-Hammadi-Scriptures-International-Translation/dp/0060523786" target="_blank">The Nag Hammadi Scriptures (2007)</a></div>
+    </div>
+    <div class="bib-sec">
+      <div class="bib-hdr">Deep Scholarship</div>
+      <div class="bib-item">Karen King — <a href="https://www.amazon.com/What-Gnosticism-Karen-L-King/dp/0674013476" target="_blank">What Is Gnosticism? (2003)</a></div>
+      <div class="bib-item">Bentley Layton — <a href="https://www.amazon.com/Gnostic-Scriptures-Translation-Annotated-Indices/dp/0385174470" target="_blank">The Gnostic Scriptures (1987)</a></div>
+      <div class="bib-item">Michael Williams — <a href="https://www.amazon.com/Rethinking-Gnosticism-Argument-Dismantling-Dubious/dp/0691005427" target="_blank">Rethinking "Gnosticism" (1996)</a></div>
+      <div class="bib-item">Einar Thomassen — <a href="https://www.amazon.com/Spiritual-Seed-Church-Valentinians/dp/9004161287" target="_blank">The Spiritual Seed: The Church of the Valentinians (2006)</a></div>
+    </div>
+    <div class="bib-sec">
+      <div class="bib-hdr">The Women's Texts</div>
+      <div class="bib-item">Karen King — <a href="https://www.amazon.com/Gospel-Mary-Magdala-Jesus-First/dp/0944344585" target="_blank">The Gospel of Mary of Magdala (2003)</a></div>
+      <div class="bib-item">Gospel of Mary full text — <a href="http://www.gnosis.org/library/marygosp.htm" target="_blank">gnosis.org</a></div>
+    </div>
+    <div class="bib-sec">
+      <div class="bib-hdr">The Suppression</div>
+      <div class="bib-item">Irenaeus, Against Heresies — <a href="http://www.newadvent.org/fathers/0103.htm" target="_blank">newadvent.org</a></div>
+      <div class="bib-item">Bart Ehrman — <a href="https://www.amazon.com/Lost-Christianities-Battles-Scripture-Faiths/dp/0195182499" target="_blank">Lost Christianities (2003)</a></div>
+    </div>
+  </div>
+  <p class="final-word">The jar is broken.<br>The archons did not win.<br>You know what you are.<br><br>That is the gnosis.<br>That was always the gnosis.<br><br>🌊☀️ SunFlow: Reignited</p>
+  <div style="margin-top:36px;font-size:13px;color:var(--text-3)">Built with ☀ by <strong style="color:var(--gold-dim)">Ron · SunFlow: Reignited</strong></div>
+</section>
+
+<!-- UNLOCK OVERLAY -->
+<div id="unlock-overlay">
+  <div class="unlock-box">
+    <span class="unlock-sym">✦</span>
+    <h2 class="unlock-title">You Have Entered the Pleroma</h2>
+    <div class="unlock-sub">Hidden Gnosis Series · Complete</div>
+    <div class="unlock-score" id="u-score"></div>
+    <div class="unlock-div"></div>
+    <div class="unlock-next-lbl">Both courses complete</div>
+    <div class="unlock-course">The Hidden Gnosis Series<br>is yours</div>
+    <button class="unlock-btn" onclick="closeUnlock()">Receive the Gnosis</button>
+  </div>
+</div>
+
+<script>
+// STARFIELD — deep violet
+(function(){
+  var c=document.getElementById('starfield'),ctx=c.getContext('2d'),W,H,stars=[];
+  function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight}
+  resize();window.addEventListener('resize',resize);
+  for(var i=0;i<200;i++)stars.push({x:Math.random(),y:Math.random(),r:Math.random()*1.4+0.2,phase:Math.random()*Math.PI*2,spd:0.0002+Math.random()*0.0004,hue:200+Math.floor(Math.random()*80)});
+  function draw(t){ctx.clearRect(0,0,W,H);stars.forEach(function(s){var a=0.08+0.25*(0.5+0.5*Math.sin(s.phase+t*s.spd*1000));ctx.beginPath();ctx.arc(s.x*W,s.y*H,s.r,0,Math.PI*2);ctx.fillStyle='hsla('+s.hue+',60%,80%,'+a+')';ctx.fill();});requestAnimationFrame(draw);}
+  requestAnimationFrame(draw);
+})();
+window.addEventListener('scroll',function(){var h=document.documentElement,b=document.body,tot=Math.max(b.scrollHeight,h.scrollHeight)-window.innerHeight,pct=tot>0?(window.scrollY/tot)*100:0;document.getElementById('reading-progress').style.width=pct+'%';});
+
+// HERO CANVAS — pleroma emanations
+(function(){
+  var c=document.getElementById('hero-canvas');if(!c)return;
+  var ctx=c.getContext('2d'),W=c.width,H=c.height,cx=W/2,cy=H/2;
+  var aeons=[];
+  for(var i=0;i<8;i++){aeons.push({a:(i/8)*Math.PI*2,r:55+Math.random()*15,spd:0.0003+Math.random()*0.0003,size:4+Math.random()*5,phase:Math.random()*Math.PI*2});}
+  function draw(t){
+    ctx.fillStyle='rgba(6,4,14,0.3)';ctx.fillRect(0,0,W,H);
+    // Pleroma rings
+    [28,48,68].forEach(function(r,i){
+      ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);
+      ctx.strokeStyle='rgba(112,48,184,'+(0.06+i*0.03)+')';ctx.lineWidth=1;ctx.stroke();
+    });
+    // Invisible Spirit center
+    var pulse=0.5+0.5*Math.sin(t*0.0015);
+    var gr=ctx.createRadialGradient(cx,cy,0,cx,cy,18);
+    gr.addColorStop(0,'rgba(201,168,76,'+(0.6+0.3*pulse)+')');
+    gr.addColorStop(1,'rgba(201,168,76,0)');
+    ctx.beginPath();ctx.arc(cx,cy,18,0,Math.PI*2);ctx.fillStyle=gr;ctx.fill();
+    // Aeons orbiting
+    aeons.forEach(function(a,i){
+      var angle=a.a+t*a.spd;
+      var px=cx+a.r*Math.cos(angle),py=cy+a.r*Math.sin(angle);
+      var glow=0.4+0.3*Math.sin(t*0.002+a.phase);
+      ctx.beginPath();ctx.arc(px,py,a.size,0,Math.PI*2);
+      ctx.fillStyle='rgba(144,80,224,'+glow+')';ctx.fill();
+      // trail
+      ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(px,py);
+      ctx.strokeStyle='rgba(112,48,184,'+(glow*0.25)+')';ctx.lineWidth=0.5;ctx.stroke();
+    });
+    ctx.fillStyle='rgba(201,168,76,0.3)';ctx.font='10px Cinzel,serif';ctx.textAlign='center';
+    ctx.fillText('THE PLEROMA · FULLNESS OF DIVINE REALITY',cx,H-8);
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+
+// Canvas — gnosis vs pistis (module 1)
+(function(){
+  var c=document.getElementById('canvas-gnosis');if(!c)return;
+  var ctx=c.getContext('2d'),W=c.width,H=c.height;
+  function draw(t){
+    ctx.fillStyle='rgba(6,4,14,0.35)';ctx.fillRect(0,0,W,H);
+    var pulse=0.5+0.5*Math.sin(t*0.002);
+    // Left: Pistis (external, institutional)
+    ctx.beginPath();ctx.arc(W*0.25,H/2,35,0,Math.PI*2);
+    ctx.strokeStyle='rgba(100,100,100,0.4)';ctx.lineWidth=1.5;ctx.stroke();
+    ctx.fillStyle='rgba(100,100,100,0.06)';ctx.fill();
+    // Building/institution symbol
+    ctx.fillStyle='rgba(150,120,90,0.5)';ctx.font='20px serif';ctx.textAlign='center';ctx.fillText('⛪',W*0.25,H/2+7);
+    ctx.fillStyle='rgba(120,100,70,0.6)';ctx.font='9px Cinzel,serif';ctx.textAlign='center';
+    ctx.fillText('PISTIS',W*0.25,H/2+30);ctx.fillText('External Faith',W*0.25,H/2+42);
+    // Arrow (external to person) — one direction
+    ctx.beginPath();ctx.moveTo(W*0.25+38,H/2);ctx.lineTo(W*0.25+55,H/2);
+    ctx.strokeStyle='rgba(150,120,90,0.4)';ctx.lineWidth=1.5;ctx.setLineDash([3,3]);ctx.stroke();ctx.setLineDash([]);
+    // Center: human
+    ctx.beginPath();ctx.arc(W/2,H/2,15,0,Math.PI*2);
+    ctx.strokeStyle='rgba(201,168,76,0.4)';ctx.lineWidth=1;ctx.stroke();
+    ctx.fillStyle='rgba(201,168,76,0.1)';ctx.fill();
+    ctx.fillStyle='rgba(201,168,76,0.6)';ctx.font='12px serif';ctx.textAlign='center';ctx.fillText('🧠',W/2,H/2+5);
+    // Right: Gnosis (internal)
+    var gr=ctx.createRadialGradient(W*0.75,H/2,0,W*0.75,H/2,35+5*pulse);
+    gr.addColorStop(0,'rgba(112,48,184,'+(0.3+0.2*pulse)+')');
+    gr.addColorStop(1,'rgba(112,48,184,0)');
+    ctx.beginPath();ctx.arc(W*0.75,H/2,35+5*pulse,0,Math.PI*2);
+    ctx.fillStyle=gr;ctx.fill();
+    ctx.strokeStyle='rgba(144,80,224,'+(0.3+0.3*pulse)+')';ctx.lineWidth=1.5;ctx.stroke();
+    ctx.fillStyle='rgba(192,128,255,0.7)';ctx.font='18px serif';ctx.textAlign='center';ctx.fillText('✦',W*0.75,H/2+6);
+    ctx.fillStyle='rgba(144,80,224,0.7)';ctx.font='9px Cinzel,serif';
+    ctx.fillText('GNOSIS',W*0.75,H/2+30);ctx.fillText('Direct Knowing',W*0.75,H/2+42);
+    // Arrow (bidirectional from inside)
+    ctx.beginPath();ctx.moveTo(W/2+18,H/2);ctx.lineTo(W*0.75-38,H/2);
+    ctx.strokeStyle='rgba(144,80,224,0.5)';ctx.lineWidth=1.5;ctx.stroke();
+    ctx.fillStyle='rgba(201,168,76,0.3)';ctx.font='8px Cinzel,serif';ctx.textAlign='center';
+    ctx.fillText('GNOSIS VS PISTIS',W/2,H-8);
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+
+// Canvas — Pleroma emanations (module 2)
+(function(){
+  var c=document.getElementById('canvas-pleroma');if(!c)return;
+  var ctx=c.getContext('2d'),W=c.width,H=c.height,cx=W/2,cy=70;
+  var entities=[
+    {label:'Invisible Spirit',y:cy,r:16,color:'rgba(201,168,76,0.8)',children:[1,2]},
+    {label:'Barbelo',y:cy+70,r:12,color:'rgba(144,80,224,0.8)',children:[3]},
+    {label:'Christ/Son',y:cy+70,r:11,color:'rgba(80,160,224,0.7)',children:[]},
+    {label:'Sophia',y:cy+135,r:11,color:'rgba(200,80,140,0.8)',children:[4]},
+    {label:'Yaldabaoth',y:cy+200,r:14,color:'rgba(180,60,30,0.8)',children:[]}
+  ];
+  var xpos=[cx,cx-55,cx+55,cx-30,cx];
+  function draw(t){
+    ctx.fillStyle='rgba(6,4,14,0.35)';ctx.fillRect(0,0,W,H);
+    // Connection lines
+    [[0,1],[0,2],[1,3],[3,4]].forEach(function(e){
+      var f=entities[e[0]],to=entities[e[1]];
+      ctx.beginPath();ctx.moveTo(xpos[e[0]],f.y);ctx.lineTo(xpos[e[1]],to.y);
+      ctx.strokeStyle='rgba(112,48,184,0.2)';ctx.lineWidth=1;ctx.setLineDash([2,4]);ctx.stroke();ctx.setLineDash([]);
+    });
+    // Sophia error dashed red
+    ctx.beginPath();ctx.moveTo(xpos[3],entities[3].y);ctx.lineTo(xpos[4],entities[4].y);
+    ctx.strokeStyle='rgba(200,60,30,0.3)';ctx.lineWidth=1;ctx.setLineDash([2,4]);ctx.stroke();ctx.setLineDash([]);
+    entities.forEach(function(e,i){
+      var pulse=0.5+0.5*Math.sin(t*0.002+i*0.8);
+      ctx.beginPath();ctx.arc(xpos[i],e.y,e.r+2*pulse,0,Math.PI*2);
+      ctx.fillStyle=e.color.replace('0.8','0.15').replace('0.7','0.1');ctx.fill();
+      ctx.beginPath();ctx.arc(xpos[i],e.y,e.r,0,Math.PI*2);
+      ctx.fillStyle=e.color;ctx.fill();
+      ctx.fillStyle='rgba(232,216,248,0.8)';ctx.font='8px Cinzel,serif';ctx.textAlign='center';
+      ctx.fillText(e.label,xpos[i],e.y+e.r+12);
+    });
+    ctx.fillStyle='rgba(144,80,224,0.35)';ctx.font='8px Cinzel,serif';ctx.textAlign='center';
+    ctx.fillText('SETHIAN COSMOGONY · EMANATION CHAIN',cx,H-5);
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+
+// Canvas — 7 spheres (module 7)
+(function(){
+  var c=document.getElementById('canvas-spheres');if(!c)return;
+  var ctx=c.getContext('2d'),W=c.width,H=c.height,cx=W/2,cy=H/2+10;
+  var spheres=['Moon','Mercury','Venus','Sun','Mars','Jupiter','Saturn','Ogdoad'];
+  var cols=['rgba(200,200,220,0.6)','rgba(180,180,160,0.6)','rgba(220,180,100,0.6)','rgba(240,200,80,0.7)','rgba(220,80,60,0.6)','rgba(180,140,80,0.6)','rgba(120,100,80,0.6)','rgba(144,80,224,0.8)'];
+  var soul={a:-Math.PI/2,sphere:0,phase:0};
+  function draw(t){
+    ctx.fillStyle='rgba(6,4,14,0.35)';ctx.fillRect(0,0,W,H);
+    // Draw spheres
+    spheres.forEach(function(s,i){
+      var r=18+i*16;
+      ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);
+      ctx.strokeStyle=cols[i].replace('0.','('+i*0.03+', ').replace('rgba','rgba').replace('0.8','0.15').replace('0.7','0.12').replace('0.6','0.1');
+      ctx.strokeStyle=i<7?'rgba(80,60,40,0.25)':'rgba(112,48,184,0.35)';
+      ctx.lineWidth=1;ctx.stroke();
+      ctx.fillStyle=cols[i];ctx.font='7px Cinzel,serif';ctx.textAlign='left';
+      ctx.fillText(s,cx+r+2,cy+3);
+    });
+    // Animating soul ascending
+    soul.phase+=0.008;
+    var sph=Math.min(7,Math.floor(soul.phase/(Math.PI*2)*(spheres.length)));
+    var r=18+sph*16;
+    var angle=-Math.PI/2+soul.phase;
+    var sx=cx+r*Math.cos(angle),sy=cy+r*Math.sin(angle);
+    ctx.beginPath();ctx.arc(sx,sy,5,0,Math.PI*2);
+    var glow=ctx.createRadialGradient(sx,sy,0,sx,sy,5);
+    glow.addColorStop(0,'rgba(201,168,76,0.9)');glow.addColorStop(1,'rgba(201,168,76,0)');
+    ctx.fillStyle=glow;ctx.fill();
+    if(soul.phase>Math.PI*2*spheres.length)soul.phase=0;
+    // Center
+    ctx.beginPath();ctx.arc(cx,cy,10,0,Math.PI*2);
+    ctx.fillStyle='rgba(201,168,76,0.15)';ctx.fill();
+    ctx.fillStyle='rgba(201,168,76,0.4)';ctx.font='7px Cinzel,serif';ctx.textAlign='center';
+    ctx.fillText('SOUL',cx,cy+3);
+    ctx.fillStyle='rgba(144,80,224,0.3)';ctx.font='8px Cinzel,serif';
+    ctx.fillText('THE 7 ARCHON SPHERES · ASCENT MAP',cx,H-5);
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+
+// LOCK CHECK
+function checkUnlock(){
+  var unlocked=false;
+  try{
+    if(window.webkit&&window.webkit.messageHandlers)unlocked=true;
+  }catch(e){}
+  // Check via Aperture bridge or fallback
+  if(typeof window._aperture_nag1_complete!=='undefined')unlocked=window._aperture_nag1_complete;
+  // For web preview, always show content
+  return true;
+}
+
+// QUIZ
+var Qs=[
+  {q:"In Valentinian anthropology, the 'pneumatics' are those who:",opts:["Must earn salvation through faith and works","Possess a divine spark and return to the Pleroma by nature","Are purely material and cannot be saved","Must follow apostolic authority"],a:1},
+  {q:"The Greek word gnosis (γνῶσις) refers to:",opts:["Faith in doctrinal propositions","Participation in church sacraments","Direct, experiential knowledge of one's divine nature","Moral virtue and ethical conduct"],a:2},
+  {q:"The Gospel of Truth is attributed to which Gnostic teacher who nearly became Bishop of Rome?",opts:["Basilides","Marcion","Valentinus","Ptolemy"],a:2},
+  {q:"The Treatise on the Resurrection argues that the world is _______ and the resurrection is _______.",opts:["Real; illusory","Illusory; real and present now","Good but flawed; future and bodily","Created by God; literal and physical"],a:1},
+  {q:"In Sethian cosmogony, Barbelo is:",opts:["Sophia's daughter","The first aeon, divine mother, first thought of the Invisible Spirit","Another name for Yaldabaoth","The lowest archon guarding the first sphere"],a:1},
+  {q:"The philosopher Porphyry records that Plotinus argued against which Nag Hammadi text in his school?",opts:["Gospel of Thomas","Apocryphon of John","Zostrianos","Thunder Perfect Mind"],a:2},
+  {q:"The First Apocalypse of James provides a 'passport' system in which the soul must:",opts:["Perform ritual sacraments at each sphere","Know its divine origin to answer archon challenges and ascend","Accept the physical body's resurrection at each gate","Prove moral virtue to pass through each planetary sphere"],a:1},
+  {q:"Irenaeus of Lyon's primary institutional argument against Gnosticism was based on:",opts:["Moral failures of Gnostic communities","Apostolic succession as the guarantor of true teaching","The absurdity of the demiurge doctrine","Biblical contradictions in Gnostic texts"],a:1},
+  {q:"In the Gospel of Mary, Peter challenges Mary Magdalene because:",opts:["She misquotes the Lord's teaching","She claims direct private revelation from the risen Christ, bypassing male disciples","She denies the physical resurrection","She teaches that Yaldabaoth is the true God"],a:1},
+  {q:"Thunder, Perfect Mind opens with what category of claim?",opts:["A list of the archons governing the spheres","A meditation on Sophia's fall","Paradoxical self-declarations: 'I am the first and the last, the honored and the scorned'","A password for ascending through the Ogdoad"],a:2},
+  {q:"The Council of Nicaea (325 CE) was convened primarily by Emperor Constantine for what purpose?",opts:["To debate the validity of the Nag Hammadi texts","To unify Christian doctrine in service of imperial political stability","To establish the seven sacraments of the Church","To condemn Valentinus and his followers"],a:1},
+  {q:"Scholars Michael Williams and Karen King have argued that 'Gnosticism' as a category:",opts:["Is validated by ancient self-identification of Gnostic groups","May be too broad — applied by opponents to diverse movements that never called themselves 'Gnostic'","Accurately describes a single unified religion with consistent doctrine","Should be replaced by 'Sethianism' as the sole valid term"],a:1}
+];
+var sel=new Array(Qs.length).fill(-1),done=false;
+function buildQ(){
+  var html='';Qs.forEach(function(q,i){
+    html+='<div class="q-block"><div class="q-num">Question '+(i+1)+' of '+Qs.length+'</div><div class="q-text">'+q.q+'</div><div class="opts">';
+    var L=['A','B','C','D'];q.opts.forEach(function(o,j){html+='<div class="opt" data-q="'+i+'" data-a="'+j+'" onclick="pick(this,'+i+','+j+')"><span class="opt-ltr">'+L[j]+'</span><span>'+o+'</span></div>';});
+    html+='</div></div>';
+  });
+  document.getElementById('quiz-qs').innerHTML=html;
+}
+function pick(el,q,a){if(done)return;document.querySelectorAll('[data-q="'+q+'"]').forEach(function(o){o.classList.remove('selected');});el.classList.add('selected');sel[q]=a;}
+function submitQ(){
+  if(done)return;
+  var blank=sel.filter(function(s){return s===-1;}).length;
+  if(blank>0){alert('Please answer all '+Qs.length+' questions. '+blank+' remaining.');return;}
+  done=true;document.getElementById('qbtn').disabled=true;
+  var score=0;sel.forEach(function(a,i){if(a===Qs[i].a)score++;});
+  document.querySelectorAll('.opt').forEach(function(o){
+    var q=parseInt(o.dataset.q),a=parseInt(o.dataset.a);
+    if(a===Qs[q].a)o.classList.add('correct');
+    else if(a===sel[q]&&a!==Qs[q].a)o.classList.add('wrong');
+  });
+  var passed=score>=8,r=document.getElementById('q-result');
+  r.className='quiz-result show '+(passed?'res-pass':'res-fail');
+  if(passed){
+    r.innerHTML='<div class="res-score" style="color:var(--violet-glow)">'+score+'/12</div><div class="res-lbl" style="color:var(--violet-light)">✦ YOU HAVE ENTERED THE PLEROMA</div><p class="res-msg">The Hidden Gnosis Series is complete. You possess what the archons spent 1,700 years trying to keep sealed in a jar. The gnosis is yours.</p>';
+    try{
+      if(window.webkit&&window.webkit.messageHandlers&&window.webkit.messageHandlers.aperture){
+        window.webkit.messageHandlers.aperture.postMessage({type:'quizResult',score:score,total:12,passed:true,courseKey:'course_nag_hammadi_2_complete'});
+        window.webkit.messageHandlers.aperture.postMessage({type:'userDefaults',key:'course_nag_hammadi_2_complete',value:true});
+        window.webkit.messageHandlers.aperture.postMessage({type:'userDefaults',key:'course_nag_hammadi_series_complete',value:true});
+      }
+    }catch(e){}
+    setTimeout(function(){document.getElementById('u-score').textContent=score+'/12 · The Pleroma receives you';document.getElementById('unlock-overlay').classList.add('show');},1200);
+  } else {
+    r.innerHTML='<div class="res-score" style="color:var(--violet-light)">'+score+'/12</div><div class="res-lbl" style="color:var(--violet-light)">The Archons Hold You Yet</div><p class="res-msg">You have '+score+' of 12. Review the highlighted modules. The gnosis deepens with each return.</p><button class="retry-btn" onclick="retryQ()">Return to the Text</button>';
+  }
+}
+function retryQ(){done=false;sel=new Array(Qs.length).fill(-1);document.getElementById('qbtn').disabled=false;document.getElementById('q-result').className='quiz-result';buildQ();}
+function closeUnlock(){document.getElementById('unlock-overlay').classList.remove('show');}
+function goTo(id){document.getElementById(id)&&document.getElementById(id).scrollIntoView({behavior:'smooth'});}
+function toggleCite(el){el.classList.toggle('open');el.nextElementSibling.classList.toggle('open');}
+buildQ();
+(function(){
+  var ids=['hero','modules-overview','module-1','module-2','module-3','module-4','module-5','module-6','module-7','module-8','quiz-section','completion'];
+  var dots=document.querySelectorAll('.nav-dot');
+  dots.forEach(function(d){d.addEventListener('click',function(){goTo(d.dataset.target);});});
+  var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){var idx=ids.indexOf(e.target.id);if(idx>=0)dots.forEach(function(d,i){d.classList.toggle('active',i===idx);});if(e.target.classList.contains('mod-sec'))e.target.classList.add('visible');}});},{threshold:0.15});
+  ids.forEach(function(id){var el=document.getElementById(id);if(el)obs.observe(el);});
+  var qobs=new IntersectionObserver(function(e){e.forEach(function(en){if(en.isIntersecting)en.target.classList.add('show');});},{threshold:0.05});
+  var qw=document.getElementById('quiz-wrap');if(qw)qobs.observe(qw);
+  for(var i=1;i<=8;i++){(function(n){var m=document.getElementById('module-'+n);if(!m)return;var mo=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting&&e.intersectionRatio>0.4){var chk=document.getElementById('chk-'+n);if(chk)chk.classList.add('done');}});},{threshold:0.4});mo.observe(m);})(i);}
+})();
+</script>
+</body>
+</html>

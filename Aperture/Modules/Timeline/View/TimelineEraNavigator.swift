@@ -171,46 +171,22 @@ struct TimelineYouAreHereIndicator: View {
     let avatarManager: TimelineAvatarManager
     
     var body: some View {
-        HStack(spacing: 6) {
-            // Avatar circle with arrow
-            ZStack {
-                TimelineAvatarBadge(manager: avatarManager, size: 28)
-                
-                // Arrow pointing right
-                Image(systemName: "arrowtriangle.right.fill")
-                    .font(.system(size: 8))
-                    .foregroundColor(Palette.accent.gold)
-                    .offset(x: 18)
-            }
-            
-            VStack(alignment: .leading, spacing: 1) {
-                if let era = era {
-                    Text(era.yearDisplay)
-                        .font(.system(size: 11, weight: .bold, design: .monospaced))
-                        .foregroundColor(Palette.accent.gold)
-                    Text(era.category.shortLabel)
-                        .font(.system(size: 8, weight: .medium))
-                        .foregroundColor(Palette.text.muted)
-                } else {
-                    Text("You're here")
-                        .font(.system(size: 11, weight: .bold, design: .monospaced))
-                        .foregroundColor(Palette.accent.gold)
-                    Text("The Awakening")
-                        .font(.system(size: 8, weight: .medium))
-                        .foregroundColor(Palette.text.muted)
-                }
-            }
+        ZStack {
+            // Glow halo
+            Circle()
+                .fill(Palette.accent.gold.opacity(0.18))
+                .frame(width: 44, height: 44)
+                .blur(radius: 4)
+
+            TimelineAvatarBadge(manager: avatarManager, size: 32)
+
+            // Arrow pointing right
+            Image(systemName: "arrowtriangle.right.fill")
+                .font(.system(size: 9, weight: .bold))
+                .foregroundColor(Palette.accent.gold)
+                .shadow(color: Palette.accent.gold.opacity(0.8), radius: 3)
+                .offset(x: 22)
         }
-        .padding(.horizontal, 10)
-        .padding(.vertical, 6)
-        .background(
-            Capsule()
-                .fill(Color.black.opacity(0.7))
-                .overlay(
-                    Capsule()
-                        .stroke(Palette.accent.gold.opacity(0.3), lineWidth: 1)
-                )
-        )
     }
 }
 

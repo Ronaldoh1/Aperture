@@ -42,6 +42,12 @@ struct AwakeningLandingView: View {
                         
                         // SUNFLOW STATE - PREMIUM FEATURE
                         sunflowStateSection
+
+                        // 𓂀 HIDDEN GNOSIS SERIES — Nag Hammadi courses
+                        gnosisSeriesSection
+
+                        // ☉ SUNFLOW SERIES — Flagship courses
+                        sunflowSeriesSection
                         
                         // DOCUMENTARIES (NEW - Top of list for discoverability)
                         documentariesSection
@@ -946,8 +952,203 @@ struct AwakeningLandingView: View {
                     icon: "hexagon.fill",
                     color: Color(hex: "#7C5CFF"),
                     destination: AnyView(PlaceholderCourseView(title: "Sacred Geometry", subtitle: "Coming soon"))
+                ),
+                // ☉ SunFlow: Reignited — Course I
+                CourseRowData(
+                    id: "vortex_369_math",
+                    title: "The Key to the Universe",
+                    subtitle: "3-6-9, Vortex Math & Solfeggio Frequencies",
+                    icon: "infinity",
+                    color: Color(hex: "#7B2FBE"),
+                    destination: AnyView(VortexMathHTMLCourseView())
                 )
             ]
+        )
+    }
+
+    // MARK: - SunFlow Series Section
+
+    private var sunflowSeriesSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            // Section header
+            HStack {
+                VStack(alignment: .leading, spacing: 3) {
+                    Text("☉ SUNFLOW: REIGNITED")
+                        .font(.system(size: 14, weight: .bold, design: .rounded))
+                        .foregroundColor(Color(hex: "#C9A84C"))
+                    Text("The flagship course series")
+                        .font(.system(size: 12, weight: .medium))
+                        .foregroundColor(Color(hex: "#5a5040"))
+                }
+                Spacer()
+                Text("\(3) courses")
+                    .font(.system(size: 11, weight: .medium))
+                    .foregroundColor(Color(hex: "#5a5040"))
+            }
+
+            // Course I
+            NavigationLink(destination: VortexMathHTMLCourseView()) {
+                seriesCard(
+                    number: "I",
+                    title: "The Key to the Universe",
+                    subtitle: "3-6-9 · Vortex Math · Solfeggio Frequencies",
+                    tag: "8 MODULES",
+                    color: Color(hex: "#7B2FBE"),
+                    isLocked: false
+                )
+            }
+            .buttonStyle(ScaleButtonStyle())
+
+            // Masterclass — locked until Course I complete
+            let unlocked = UserDefaults.standard.bool(forKey: "course_vortex369_complete")
+            NavigationLink(destination: FrequencyMasterclassView()) {
+                seriesCard(
+                    number: "II",
+                    title: "Frequency Mastery Masterclass",
+                    subtitle: unlocked
+                        ? "Sacred Sound · Science · Conscious Co-Creation"
+                        : "Complete Course I to unlock",
+                    tag: unlocked ? "8 MODULES" : "LOCKED",
+                    color: unlocked ? Color(hex: "#D4870A") : Color(hex: "#3a3020"),
+                    isLocked: !unlocked
+                )
+            }
+            .buttonStyle(ScaleButtonStyle())
+
+            // Course III — locked until Masterclass complete
+            let unlockedIII = UserDefaults.standard.bool(forKey: "course_undo_chains_unlocked") ||
+                              UserDefaults.standard.bool(forKey: "course_masterclass_complete")
+            NavigationLink(destination: UndoChainsView()) {
+                seriesCard(
+                    number: "III",
+                    title: "Undo The Chains",
+                    subtitle: unlockedIII
+                        ? "The Bible as Liberation Manual"
+                        : "Complete Frequency Masterclass to unlock",
+                    tag: unlockedIII ? "12 MODULES" : "LOCKED",
+                    color: unlockedIII ? Color(hex: "#8b1a2a") : Color(hex: "#2a1015"),
+                    isLocked: !unlockedIII
+                )
+            }
+            .buttonStyle(ScaleButtonStyle())
+        }
+        .padding(16)
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color.white.opacity(0.02))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(
+                            LinearGradient(
+                                colors: [Color(hex: "#C9A84C").opacity(0.3), Color(hex: "#8b1a2a").opacity(0.25)],
+                                startPoint: .topLeading, endPoint: .bottomTrailing
+                            ),
+                            lineWidth: 1
+                        )
+                )
+        )
+    }
+
+    // MARK: - Hidden Gnosis Series Section
+    private var gnosisSeriesSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack {
+                Text("𓂀")
+                    .font(.system(size: 16))
+                Text("HIDDEN GNOSIS SERIES")
+                    .font(.custom("Cinzel-Regular", size: 11))
+                    .tracking(2)
+                    .foregroundColor(Color(hex: "#2a9999"))
+            }
+            .padding(.bottom, 4)
+
+            // Course I — always available
+            NavigationLink(destination: NagHammadi1View()) {
+                seriesCard(
+                    number: "I",
+                    title: "The Nag Hammadi Library",
+                    subtitle: "Foundations of the Gnostic Revelation",
+                    tag: "8 MODULES",
+                    color: Color(hex: "#1a6b6b"),
+                    isLocked: false
+                )
+            }
+            .buttonStyle(ScaleButtonStyle())
+
+            // Course II — requires Course I
+            let unlockedGnosis2 = UserDefaults.standard.bool(forKey: "course_nag_hammadi_1_complete")
+            NavigationLink(destination: NagHammadi2View()) {
+                seriesCard(
+                    number: "II",
+                    title: "The Hidden Gospel",
+                    subtitle: unlockedGnosis2
+                        ? "Gnostic Theology — The Deep Dive"
+                        : "Complete Course I to unlock",
+                    tag: unlockedGnosis2 ? "8 MODULES" : "LOCKED",
+                    color: unlockedGnosis2 ? Color(hex: "#7030b8") : Color(hex: "#1a1040"),
+                    isLocked: !unlockedGnosis2
+                )
+            }
+            .buttonStyle(ScaleButtonStyle())
+        }
+        .padding(16)
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color.white.opacity(0.02))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(
+                            LinearGradient(
+                                colors: [Color(hex: "#1a6b6b").opacity(0.25), Color(hex: "#7030b8").opacity(0.2)],
+                                startPoint: .topLeading, endPoint: .bottomTrailing
+                            ),
+                            lineWidth: 1
+                        )
+                )
+        )
+    }
+
+    private func seriesCard(number: String, title: String, subtitle: String, tag: String, color: Color, isLocked: Bool) -> some View {
+        HStack(spacing: 14) {
+            // Number badge
+            ZStack {
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(color.opacity(0.12))
+                    .frame(width: 50, height: 50)
+                VStack(spacing: 1) {
+                    Text(isLocked ? "🔒" : "☉")
+                        .font(.system(size: isLocked ? 16 : 14))
+                    Text(number)
+                        .font(.custom("Cinzel-Regular", size: 11))
+                        .foregroundColor(color.opacity(0.8))
+                }
+            }
+            VStack(alignment: .leading, spacing: 4) {
+                Text(title)
+                    .font(.system(size: 15, weight: .semibold, design: .rounded))
+                    .foregroundColor(isLocked ? Color(hex: "#3a3020") : Color(hex: "#e8dfc8"))
+                Text(subtitle)
+                    .font(.system(size: 13, weight: .regular))
+                    .foregroundColor(isLocked ? Color(hex: "#3a3020") : Color(hex: "#8a7e68"))
+                    .lineLimit(1)
+            }
+            Spacer()
+            VStack(alignment: .trailing, spacing: 4) {
+                Text(tag)
+                    .font(.system(size: 9, weight: .bold, design: .rounded))
+                    .foregroundColor(color)
+                    .padding(.horizontal, 8).padding(.vertical, 3)
+                    .overlay(Capsule().stroke(color.opacity(0.4), lineWidth: 1))
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 12, weight: .semibold))
+                    .foregroundColor(color.opacity(0.5))
+            }
+        }
+        .padding(14)
+        .background(
+            RoundedRectangle(cornerRadius: 12)
+                .fill(color.opacity(0.04))
+                .overlay(RoundedRectangle(cornerRadius: 12).stroke(color.opacity(0.18), lineWidth: 1))
         )
     }
     

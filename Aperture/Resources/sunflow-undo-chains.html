@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Undo The Chains · SunFlow: Reignited</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --crimson: #8b1a2a; --crimson-light: #c0283d; --crimson-dim: #5a1018;
+  --gold: #c9a84c; --gold-light: #f0d080; --gold-dim: #7a6030;
+  --blood: #3d0812; --ember: #d4870a;
+  --bg-0: #08030a; --bg-1: #0d050f; --bg-2: #120810;
+  --text-primary: #f0e8d8; --text-secondary: #a89878; --text-muted: #5a4838;
+  --chain: #4a3820;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg-0);color:var(--text-primary);font-family:'EB Garamond',serif;font-size:18px;line-height:1.8;overflow-x:hidden}
+
+/* ── STARFIELD ── */
+#starfield{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.6}
+
+/* ── PROGRESS BAR ── */
+#reading-progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--crimson),var(--gold));z-index:200;width:0%;transition:width 0.1s linear}
+
+/* ── NAV DOTS ── */
+#nav-dots{position:fixed;right:16px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:8px;z-index:100}
+.nav-dot{width:6px;height:6px;border-radius:50%;background:var(--gold-dim);cursor:pointer;transition:all 0.3s ease;position:relative}
+.nav-dot.active{background:var(--crimson-light);transform:scale(1.6)}
+.nav-dot::after{content:attr(data-label);position:absolute;right:14px;top:50%;transform:translateY(-50%);white-space:nowrap;font-family:'Cinzel',serif;font-size:9px;letter-spacing:1px;color:var(--gold);background:rgba(8,3,10,0.9);padding:3px 8px;border-radius:3px;opacity:0;pointer-events:none;transition:opacity 0.2s}
+.nav-dot:hover::after{opacity:1}
+
+/* ── TOOLTIP SYSTEM ── */
+.term{border-bottom:1px dotted var(--gold);cursor:help;color:var(--gold);position:relative;display:inline}
+.term::after{content:attr(data-def);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:rgba(8,3,10,0.97);border:1px solid rgba(201,168,76,0.3);color:var(--text-secondary);font-size:13px;line-height:1.5;padding:10px 14px;border-radius:6px;width:260px;opacity:0;pointer-events:none;transition:opacity 0.2s;z-index:50;font-style:normal;text-align:left}
+.term:hover::after{opacity:1}
+
+/* ── SECTIONS ── */
+section{position:relative;z-index:1}
+
+/* ══════════ HERO ══════════ */
+#hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 24px 80px}
+.course-badge{display:inline-flex;align-items:center;gap:10px;padding:8px 22px;border:1px solid rgba(139,26,42,0.5);border-radius:100px;margin-bottom:28px;background:rgba(139,26,42,0.1)}
+.course-badge span{font-family:'Cinzel',serif;font-size:10px;letter-spacing:4px;color:var(--crimson-light);text-transform:uppercase}
+.hero-eyebrow{font-family:'Cinzel',serif;font-size:11px;letter-spacing:4px;color:var(--gold-dim);margin-bottom:16px;text-transform:uppercase}
+.hero-title{font-family:'Cinzel Decorative',cursive;font-size:clamp(24px,5vw,52px);color:var(--gold-light);line-height:1.15;margin-bottom:10px;font-weight:700}
+.hero-title .break-word{color:var(--crimson-light)}
+.hero-subtitle{font-family:'Cinzel',serif;font-size:clamp(12px,2vw,16px);letter-spacing:2px;color:var(--gold-dim);margin-bottom:24px;text-transform:uppercase}
+.hero-tagline{font-size:17px;color:var(--text-secondary);font-style:italic;max-width:540px;margin:0 auto 36px;line-height:1.7}
+.hero-stats{display:flex;gap:32px;justify-content:center;flex-wrap:wrap;margin-top:32px}
+.stat{text-align:center}
+.stat-num{font-family:'Cinzel Decorative',cursive;font-size:26px;color:var(--crimson-light);display:block}
+.stat-label{font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--gold-dim);text-transform:uppercase}
+
+/* ══════════ MODULE OVERVIEW ══════════ */
+#modules-overview{max-width:740px;margin:0 auto;padding:60px 24px}
+.section-header{text-align:center;margin-bottom:40px}
+.section-eyebrow{font-family:'Cinzel',serif;font-size:10px;letter-spacing:4px;color:var(--gold-dim);display:block;margin-bottom:10px;text-transform:uppercase}
+.section-title{font-family:'Cinzel Decorative',cursive;font-size:clamp(18px,3vw,26px);color:var(--gold-light)}
+.modules-list{display:flex;flex-direction:column;gap:10px}
+.mod-card{display:flex;align-items:center;gap:14px;padding:14px 18px;background:rgba(255,255,255,0.02);border:1px solid rgba(139,26,42,0.2);border-radius:10px;cursor:pointer;transition:all 0.3s ease}
+.mod-card:hover{background:rgba(139,26,42,0.07);border-color:rgba(139,26,42,0.4)}
+.mod-num{font-family:'Cinzel',serif;font-size:20px;color:var(--crimson-dim);min-width:32px;text-align:center}
+.mod-info{flex:1}
+.mod-title{font-size:15px;color:var(--text-primary);font-weight:600}
+.mod-sub{font-size:13px;color:var(--text-muted);font-style:italic}
+.mod-time{font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--crimson-light);padding:3px 10px;border:1px solid rgba(139,26,42,0.4);border-radius:10px;white-space:nowrap}
+.mod-check{color:var(--gold);font-size:14px;opacity:0;transition:opacity 0.3s}
+.mod-check.done{opacity:1}
+
+/* ══════════ MODULE SECTIONS ══════════ */
+.module-section{max-width:800px;margin:0 auto;padding:80px 24px;opacity:0;transform:translateY(20px);transition:opacity 0.8s ease,transform 0.8s ease}
+.module-section.visible{opacity:1;transform:translateY(0)}
+.module-header{margin-bottom:36px}
+.module-label{font-family:'Cinzel',serif;font-size:10px;letter-spacing:3px;color:var(--crimson-light);text-transform:uppercase;margin-bottom:12px;display:block}
+.module-title{font-family:'Cinzel Decorative',cursive;font-size:clamp(20px,4vw,32px);color:var(--gold-light);line-height:1.2;margin-bottom:6px}
+.module-subtitle{font-family:'Cinzel',serif;font-size:13px;letter-spacing:1px;color:var(--gold-dim)}
+.divider{display:flex;align-items:center;gap:12px;margin:32px 0;opacity:0.3}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--crimson)}
+.divider-sym{color:var(--crimson-light);font-size:11px}
+.module-body{font-size:17px;color:var(--text-secondary);line-height:1.85}
+.module-body p{margin-bottom:18px}
+.module-body strong{color:var(--text-primary);font-weight:600}
+.module-body em{color:var(--gold);font-style:italic}
+
+/* ── Sub-section header ── */
+.sub-header{font-family:'Cinzel',serif;font-size:15px;letter-spacing:1.5px;color:var(--gold);margin:32px 0 14px;text-transform:uppercase;border-left:2px solid var(--crimson);padding-left:12px}
+
+/* ── Verse card ── */
+.verse-card{margin:24px 0;padding:22px 26px;background:rgba(139,26,42,0.06);border:1px solid rgba(139,26,42,0.25);border-left:3px solid var(--crimson);border-radius:0 10px 10px 0}
+.verse-ref{font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:var(--crimson-light);margin-bottom:8px;text-transform:uppercase;display:flex;align-items:center;gap:10px}
+.verse-ref a{color:var(--gold-dim);font-size:9px;text-decoration:none;padding:2px 8px;border:1px solid rgba(201,168,76,0.2);border-radius:3px}
+.verse-ref a:hover{color:var(--gold);border-color:rgba(201,168,76,0.5)}
+.verse-text{font-size:17px;color:var(--text-primary);font-style:italic;line-height:1.7;margin-bottom:12px}
+.verse-analysis{font-size:14px;color:var(--text-secondary);line-height:1.6}
+.verse-analysis strong{color:var(--gold)}
+
+/* ── Comparison table ── */
+.compare-table{width:100%;border-collapse:collapse;margin:28px 0;font-size:15px}
+.compare-table thead th{font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:var(--gold-dim);padding:10px 16px;border-bottom:1px solid rgba(201,168,76,0.2);text-align:left;text-transform:uppercase}
+.compare-table thead th:last-child{color:var(--crimson-light)}
+.compare-table tbody td{padding:12px 16px;border-bottom:1px solid rgba(255,255,255,0.04);color:var(--text-secondary);vertical-align:top;line-height:1.5}
+.compare-table tbody tr:hover td{background:rgba(139,26,42,0.05)}
+.compare-table tbody td:first-child{color:var(--gold);font-style:italic}
+.compare-table tbody td:last-child{color:var(--text-muted)}
+
+/* ── Key insight box ── */
+.insight-box{margin:24px 0;padding:20px 24px;background:rgba(201,168,76,0.05);border:1px solid rgba(201,168,76,0.18);border-radius:10px}
+.insight-box::before{content:'"';font-size:32px;color:var(--gold-dim);line-height:1;display:block;margin-bottom:4px}
+.insight-text{font-size:16px;color:var(--text-primary);font-style:italic;line-height:1.7}
+
+/* ── Highlight list ── */
+.hl-list{display:flex;flex-direction:column;gap:10px;margin:20px 0}
+.hl-item{display:flex;align-items:flex-start;gap:12px;padding:12px 16px;background:rgba(255,255,255,0.02);border-radius:8px;font-size:15px;color:var(--text-secondary);line-height:1.6}
+.hl-dot{width:6px;min-width:6px;height:6px;border-radius:50%;background:var(--crimson-light);margin-top:8px}
+.hl-item strong{color:var(--text-primary)}
+
+/* ── Citation collapse ── */
+.citation-block{margin:24px 0}
+.citation-toggle{display:flex;align-items:center;gap:10px;cursor:pointer;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:var(--gold-dim);text-transform:uppercase;padding:10px 14px;background:rgba(255,255,255,0.02);border:1px solid rgba(201,168,76,0.12);border-radius:6px;user-select:none;transition:all 0.2s}
+.citation-toggle:hover{background:rgba(201,168,76,0.05);border-color:rgba(201,168,76,0.25);color:var(--gold)}
+.citation-toggle::before{content:'▸';transition:transform 0.2s}
+.citation-toggle.open::before{transform:rotate(90deg)}
+.citation-content{display:none;padding:14px 18px;background:rgba(8,3,10,0.6);border:1px solid rgba(201,168,76,0.1);border-top:none;border-radius:0 0 6px 6px;font-size:14px;line-height:1.7}
+.citation-content.open{display:block}
+.citation-content a{color:var(--gold-dim);text-decoration:none;border-bottom:1px dotted rgba(201,168,76,0.3)}
+.citation-content a:hover{color:var(--gold)}
+.citation-content li{margin-bottom:8px;color:var(--text-muted);list-style:none;padding-left:12px}
+.citation-content li::before{content:'◆';font-size:7px;margin-right:8px;color:var(--crimson-light);vertical-align:middle}
+
+/* ── Lab card ── */
+.lab-card{margin-top:32px;padding:22px 26px;background:rgba(212,135,10,0.04);border-left:2px solid var(--ember);border-radius:0 10px 10px 0}
+.lab-label{font-family:'Cinzel',serif;font-size:10px;letter-spacing:3px;color:var(--ember);margin-bottom:10px;text-transform:uppercase}
+.lab-text{font-size:15px;color:var(--text-secondary);line-height:1.7;font-style:italic}
+
+/* ── Canvas ── */
+canvas.mod-canvas{display:block;margin:32px auto;border-radius:8px;border:1px solid rgba(139,26,42,0.2);max-width:100%}
+
+/* ── Module takeaway ── */
+.takeaway{padding:24px 28px;background:rgba(139,26,42,0.08);border:1px solid rgba(139,26,42,0.25);border-radius:12px;margin-top:36px}
+.takeaway-label{font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;color:var(--crimson-light);text-transform:uppercase;margin-bottom:8px;display:block}
+.takeaway-text{font-size:16px;color:var(--text-primary);line-height:1.7}
+
+/* ══════════ QUIZ ══════════ */
+#course-quiz{max-width:800px;margin:60px auto 80px;padding:0 24px;opacity:0;transform:translateY(30px);transition:opacity 0.8s ease,transform 0.8s ease}
+#course-quiz.quiz-visible{opacity:1;transform:translateY(0)}
+.quiz-header{text-align:center;margin-bottom:48px}
+.quiz-badge{display:inline-block;font-size:10px;letter-spacing:3px;color:var(--crimson-light);font-family:'Cinzel',serif;margin-bottom:12px;text-transform:uppercase}
+.quiz-title{font-family:'Cinzel Decorative',cursive;font-size:clamp(20px,3.5vw,28px);color:var(--gold-light);margin-bottom:8px}
+.quiz-subtitle{font-size:16px;color:var(--text-secondary);font-style:italic}
+.quiz-divider{display:flex;align-items:center;gap:12px;margin:28px 0;opacity:0.35}
+.quiz-divider::before,.quiz-divider::after{content:'';flex:1;height:1px;background:var(--crimson)}
+.question-block{background:rgba(139,26,42,0.04);border:1px solid rgba(139,26,42,0.2);border-radius:12px;padding:24px;margin-bottom:20px}
+.question-number{font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:var(--crimson-light);margin-bottom:10px;text-transform:uppercase}
+.question-text{font-size:17px;color:var(--text-primary);margin-bottom:18px;line-height:1.55}
+.options-grid{display:flex;flex-direction:column;gap:10px}
+.quiz-option{display:flex;align-items:flex-start;gap:12px;padding:12px 16px;background:rgba(255,255,255,0.02);border:1px solid rgba(139,26,42,0.18);border-radius:8px;cursor:pointer;transition:all 0.2s;color:var(--text-muted);font-size:15px;line-height:1.5}
+.quiz-option:hover{background:rgba(139,26,42,0.08);border-color:rgba(139,26,42,0.4);color:var(--text-primary)}
+.quiz-option.selected{background:rgba(139,26,42,0.12);border-color:rgba(139,26,42,0.6);color:var(--gold-light)}
+.quiz-option.correct{background:rgba(76,180,120,0.1)!important;border-color:rgba(76,180,120,0.5)!important;color:#7fdb9a!important}
+.quiz-option.wrong{background:rgba(180,60,60,0.1)!important;border-color:rgba(180,60,60,0.4)!important;color:#db8080!important}
+.option-letter{width:22px;min-width:22px;height:22px;border-radius:50%;background:rgba(139,26,42,0.2);display:flex;align-items:center;justify-content:center;font-size:10px;font-family:'Cinzel',serif;color:var(--crimson-light);margin-top:1px}
+.quiz-submit-btn{display:block;width:100%;margin:36px 0 16px;padding:16px;background:linear-gradient(135deg,var(--crimson),var(--crimson-dim));border:none;border-radius:8px;color:var(--gold-light);font-size:14px;font-family:'Cinzel',serif;letter-spacing:2px;cursor:pointer;transition:opacity 0.2s;text-transform:uppercase}
+.quiz-submit-btn:hover{opacity:0.85}
+.quiz-result{text-align:center;padding:32px;border-radius:12px;margin-top:24px;display:none}
+.quiz-result.show{display:block}
+.result-score{font-size:52px;font-family:'Cinzel Decorative',cursive;margin-bottom:8px}
+.result-label{font-family:'Cinzel',serif;font-size:12px;letter-spacing:3px;margin-bottom:16px;text-transform:uppercase}
+.result-msg{font-size:17px;color:var(--text-primary);font-style:italic;line-height:1.7;max-width:520px;margin:0 auto}
+.result-pass{background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.2)}
+.result-fail{background:rgba(139,26,42,0.08);border:1px solid rgba(139,26,42,0.25)}
+.retry-btn{display:inline-block;margin-top:20px;padding:12px 32px;border:1px solid rgba(139,26,42,0.5);border-radius:6px;color:var(--crimson-light);font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;cursor:pointer;background:transparent;text-transform:uppercase}
+
+/* ══════════ UNLOCK CELEBRATION ══════════ */
+#unlock-overlay{position:fixed;inset:0;z-index:500;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.88)}
+#unlock-overlay.show{display:flex}
+.unlock-box{text-align:center;padding:48px 40px;max-width:440px;width:90%}
+.unlock-symbol{font-size:52px;margin-bottom:24px;display:block}
+.unlock-title{font-family:'Cinzel Decorative',cursive;font-size:clamp(18px,3vw,24px);color:var(--gold-light);margin-bottom:8px}
+.unlock-sub{font-family:'Cinzel',serif;font-size:10px;letter-spacing:3px;color:var(--crimson-light);margin-bottom:24px;text-transform:uppercase}
+.unlock-score{font-size:14px;color:var(--gold-dim);font-family:'Cinzel',serif;margin-bottom:32px;letter-spacing:1px}
+.unlock-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,0.3),transparent);margin:0 0 28px}
+.unlock-next{font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;color:var(--gold-dim);margin-bottom:10px;text-transform:uppercase}
+.unlock-course{font-family:'Cinzel Decorative',cursive;font-size:18px;color:var(--gold);margin-bottom:28px}
+.unlock-btn{background:linear-gradient(135deg,var(--gold),var(--gold-dim));color:var(--bg-0);font-family:'Cinzel',serif;font-size:13px;letter-spacing:2px;padding:14px 40px;border:none;border-radius:100px;cursor:pointer;font-weight:700;text-transform:uppercase}
+
+/* ══════════ COMPLETION SECTION ══════════ */
+#completion{max-width:720px;margin:0 auto;padding:80px 24px 120px;text-align:center}
+.completion-title{font-family:'Cinzel Decorative',cursive;font-size:clamp(22px,4vw,34px);color:var(--gold-light);margin-bottom:20px}
+.completion-text{font-size:17px;color:var(--text-secondary);line-height:1.8;max-width:580px;margin:0 auto 40px}
+.bibliography-box{background:rgba(255,255,255,0.02);border:1px solid rgba(201,168,76,0.15);border-radius:14px;padding:32px;text-align:left;margin-bottom:48px}
+.bib-section{margin-bottom:24px}
+.bib-title{font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;color:var(--gold-dim);text-transform:uppercase;margin-bottom:10px;border-bottom:1px solid rgba(201,168,76,0.1);padding-bottom:6px}
+.bib-item{font-size:14px;color:var(--text-muted);margin-bottom:8px;padding-left:16px;position:relative;line-height:1.6}
+.bib-item::before{content:'◆';font-size:6px;color:var(--crimson-dim);position:absolute;left:0;top:7px}
+.bib-item a{color:var(--gold-dim);text-decoration:none;border-bottom:1px dotted rgba(201,168,76,0.3)}
+.bib-item a:hover{color:var(--gold)}
+.final-mantra{font-family:'Cinzel Decorative',cursive;font-size:clamp(14px,2.5vw,18px);color:var(--gold);line-height:1.8;padding:32px;border-top:1px solid rgba(139,26,42,0.2);border-bottom:1px solid rgba(139,26,42,0.2);font-style:italic}
+.built-by{margin-top:40px;font-size:13px;color:var(--text-muted)}
+.built-by strong{color:var(--gold-dim)}
+</style>
+</head>
+<body>
+
+<div id="reading-progress"></div>
+<canvas id="starfield"></canvas>
+
+<div id="nav-dots">
+  <div class="nav-dot active" data-target="hero" data-label="Intro"></div>
+  <div class="nav-dot" data-target="modules-overview" data-label="Curriculum"></div>
+  <div class="nav-dot" data-target="module-1" data-label="The Inversion"></div>
+  <div class="nav-dot" data-target="module-2" data-label="Anatomical Truth"></div>
+  <div class="nav-dot" data-target="module-3" data-label="12 Disciples"></div>
+  <div class="nav-dot" data-target="module-4" data-label="Resurrection"></div>
+  <div class="nav-dot" data-target="module-5" data-label="Christ State"></div>
+  <div class="nav-dot" data-target="module-6" data-label="Control Mechanism"></div>
+  <div class="nav-dot" data-target="module-7" data-label="Hidden In Plain Sight"></div>
+  <div class="nav-dot" data-target="module-8" data-label="Antichrist"></div>
+  <div class="nav-dot" data-target="module-9" data-label="All Traditions"></div>
+  <div class="nav-dot" data-target="module-10" data-label="Activation"></div>
+  <div class="nav-dot" data-target="module-11" data-label="Sovereignty"></div>
+  <div class="nav-dot" data-target="module-12" data-label="Building SunFlow"></div>
+  <div class="nav-dot" data-target="completion" data-label="Liberation"></div>
+</div>
+
+<!-- ══════════════════════════════════
+     HERO
+══════════════════════════════════ -->
+<section id="hero">
+  <div class="course-badge"><span>Course III · Advanced Liberation</span></div>
+  <div class="hero-eyebrow">SunFlow: Reignited · Scripture Decoded</div>
+  <h1 class="hero-title">Undo The <span class="break-word">Chains</span></h1>
+  <h2 class="hero-subtitle">The Bible as Liberation Manual</h2>
+  <p class="hero-tagline">What if the most controlled book in history was always your manual for freedom — and they inverted it on purpose?</p>
+  <canvas id="hero-canvas" width="340" height="180" style="margin-top:32px;border-radius:6px"></canvas>
+  <div class="hero-stats">
+    <div class="stat"><span class="stat-num">12</span><span class="stat-label">Modules</span></div>
+    <div class="stat"><span class="stat-num">90+</span><span class="stat-label">Minutes</span></div>
+    <div class="stat"><span class="stat-num">33</span><span class="stat-label">Key Verses</span></div>
+    <div class="stat"><span class="stat-num">∞</span><span class="stat-label">Freedom</span></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     CURRICULUM
+══════════════════════════════════ -->
+<section id="modules-overview">
+  <div class="section-header">
+    <span class="section-eyebrow">The Curriculum</span>
+    <h2 class="section-title">12 Modules of Decoded Truth</h2>
+  </div>
+  <div class="modules-list" id="modules-list">
+    <div class="mod-card" onclick="scrollTo('module-1')"><div class="mod-num">I</div><div class="mod-info"><div class="mod-title">The Great Inversion</div><div class="mod-sub">How liberation became control — the deliberate shift</div></div><span class="mod-time">8 min</span><span class="mod-check" id="check-1">✓</span></div>
+    <div class="mod-card" onclick="scrollTo('module-2')"><div class="mod-num">II</div><div class="mod-info"><div class="mod-title">The Anatomical Truth</div><div class="mod-sub">Your body is the temple — 33 vertebrae, pineal gland, sacred secretion</div></div><span class="mod-time">10 min</span><span class="mod-check" id="check-2">✓</span></div>
+    <div class="mod-card" onclick="scrollTo('module-3')"><div class="mod-num">III</div><div class="mod-info"><div class="mod-title">The 12 Disciples = Internal System</div><div class="mod-sub">Cranial nerves, archetypes, and the Last Supper decoded</div></div><span class="mod-time">8 min</span><span class="mod-check" id="check-3">✓</span></div>
+    <div class="mod-card" onclick="scrollTo('module-4')"><div class="mod-num">IV</div><div class="mod-info"><div class="mod-title">Resurrection = Consciousness Activation</div><div class="mod-sub">Ego death, the 3-day gestation, and awakening NOW</div></div><span class="mod-time">9 min</span><span class="mod-check" id="check-4">✓</span></div>
+    <div class="mod-card" onclick="scrollTo('module-5')"><div class="mod-num">V</div><div class="mod-info"><div class="mod-title">Christ = Consciousness State, Not Person</div><div class="mod-sub">Christos as anointed oil — available to everyone</div></div><span class="mod-time">8 min</span><span class="mod-check" id="check-5">✓</span></div>
+    <div class="mod-card" onclick="scrollTo('module-6')"><div class="mod-num">VI</div><div class="mod-info"><div class="mod-title">The Control Mechanism</div><div class="mod-sub">Sin, hell, and obedience — how fear creates compliance</div></div><span class="mod-time">10 min</span><span class="mod-check" id="check-6">✓</span></div>
+    <div class="mod-card" onclick="scrollTo('module-7')"><div class="mod-num">VII</div><div class="mod-info"><div class="mod-title">Hidden In Plain Sight</div><div class="mod-sub">Vatican pine cone, caduceus, all-seeing eye, Christmas decoded</div></div><span class="mod-time">9 min</span><span class="mod-check" id="check-7">✓</span></div>
+    <div class="mod-card" onclick="scrollTo('module-8')"><div class="mod-num">VIII</div><div class="mod-info"><div class="mod-title">The True "Antichrist"</div><div class="mod-sub">Not a person — a system. The hiding IS the evil.</div></div><span class="mod-time">7 min</span><span class="mod-check" id="check-8">✓</span></div>
+    <div class="mod-card" onclick="scrollTo('module-9')"><div class="mod-num">IX</div><div class="mod-info"><div class="mod-title">All Traditions Say the Same Thing</div><div class="mod-sub">Hinduism, Buddhism, Taoism, Egypt, indigenous — one truth</div></div><span class="mod-time">8 min</span><span class="mod-check" id="check-9">✓</span></div>
+    <div class="mod-card" onclick="scrollTo('module-10')"><div class="mod-num">X</div><div class="mod-info"><div class="mod-title">The Activation Process</div><div class="mod-sub">Decalcify, meditate, track your lunar cycle, preserve the oil</div></div><span class="mod-time">10 min</span><span class="mod-check" id="check-10">✓</span></div>
+    <div class="mod-card" onclick="scrollTo('module-11')"><div class="mod-num">XI</div><div class="mod-info"><div class="mod-title">Integration & Sovereignty</div><div class="mod-sub">You are the 13th — living as the awakened center</div></div><span class="mod-time">8 min</span><span class="mod-check" id="check-11">✓</span></div>
+    <div class="mod-card" onclick="scrollTo('module-12')"><div class="mod-num">XII</div><div class="mod-info"><div class="mod-title">Building SunFlow</div><div class="mod-sub">Why this matters now — your role in collective awakening</div></div><span class="mod-time">10 min</span><span class="mod-check" id="check-12">✓</span></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     MODULE 1 — The Great Inversion
+══════════════════════════════════ -->
+<section id="module-1" class="module-section">
+  <div class="module-header">
+    <span class="module-label">Module I · 8 Minutes</span>
+    <h2 class="module-title">The Great Inversion</h2>
+    <div class="module-subtitle">How a liberation manual became a control system</div>
+  </div>
+  <div class="divider"><span class="divider-sym">⛓</span></div>
+
+  <div class="sub-header">1.1 What They Taught You</div>
+  <div class="module-body">
+    <p>The institutional Church presents the Bible as a literal historical record — events that happened 2,000 years ago, to other people, in a land far away. In this reading, <strong>you are a sinner</strong>. Powerless. Dependent on priests, sacraments, and an external savior who died once and is now unreachable without their mediation.</p>
+    <p>This teaching creates something very specific: <em>dependency on the institution</em>. You cannot access God directly. You need a priest. You need the sacraments. You need to tithe. You need to attend. The divine is always out there — never in here.</p>
+    <div class="hl-list">
+      <div class="hl-item"><div class="hl-dot"></div><div><strong>Council of Nicaea, 325 CE</strong> — Emperor Constantine convened this council to unify competing Christian sects and establish official doctrine. <a href="https://www.britannica.com/event/First-Council-of-Nicaea-325" target="_blank" style="color:var(--gold-dim)">Source ↗</a></div></div>
+      <div class="hl-item"><div class="hl-dot"></div><div><strong>Council of Carthage, 397 CE</strong> — Canonized the New Testament, deliberately excluding texts that taught direct spiritual access. <a href="https://www.bible-researcher.com/carthage.html" target="_blank" style="color:var(--gold-dim)">Source ↗</a></div></div>
+      <div class="hl-item"><div class="hl-dot"></div><div><strong>The Nag Hammadi Library, 1945</strong> — 52 Gnostic texts buried around 400 CE, discovered in Egypt. They were hidden because they contradicted institutional control. <a href="http://www.gnosis.org/naghamm/nhl.html" target="_blank" style="color:var(--gold-dim)">Source ↗</a></div></div>
+    </div>
+  </div>
+
+  <div class="sub-header">1.2 What The Text Actually Says</div>
+  <div class="module-body">
+    <div class="verse-card">
+      <div class="verse-ref">Luke 17:21 (KJV) <a href="https://www.biblegateway.com/passage/?search=Luke+17:21&version=KJV" target="_blank">Read Full Verse ↗</a></div>
+      <div class="verse-text">"Neither shall they say, Lo here! or, lo there! for, behold, the kingdom of God is within you."</div>
+      <div class="verse-analysis"><strong>Greek analysis:</strong> "Within" = <span class="term" data-def="Ancient Greek: ἐντὸς (entos) — meaning 'inside' or 'internal.' The kingdom is not a place you travel to; it is an internal state accessible now.">ἐντὸς (entos)</span> = inside, internal. Not in a church. Not in heaven after death. <strong>Inside you, right now.</strong></div>
+    </div>
+    <div class="verse-card">
+      <div class="verse-ref">John 10:34 (KJV) <a href="https://www.biblegateway.com/passage/?search=John+10:34&version=KJV" target="_blank">Read Full Verse ↗</a></div>
+      <div class="verse-text">"Jesus answered them, Is it not written in your law, I said, Ye are gods?"</div>
+      <div class="verse-analysis"><strong>Hebrew analysis:</strong> "gods" = <span class="term" data-def="Hebrew: אֱלֹהִים (elohim) — divine beings, plural of Eloah. The same word used for God in Genesis 1:1. When the text says 'Ye are elohim,' it is claiming shared divine nature for all humans.">elohim (אֱלֹהִים)</span> = divine beings — the same word used for God in Genesis 1:1. This is not about one man. This is about every human.</div>
+    </div>
+    <div class="verse-card">
+      <div class="verse-ref">John 14:12 (KJV) <a href="https://www.biblegateway.com/passage/?search=John+14:12&version=KJV" target="_blank">Read Full Verse ↗</a></div>
+      <div class="verse-text">"He that believeth on me, the works that I do shall he do also; and greater works than these shall he do."</div>
+      <div class="verse-analysis"><strong>Greek analysis:</strong> "Greater" = <span class="term" data-def="Greek: μείζονα (meizona) — comparative superlative meaning 'larger, more significant, surpassing.' This is the text explicitly stating that believers can exceed the capabilities demonstrated.">μείζονα (meizona)</span> = surpassing, exceeding. The text says you can do MORE than Jesus. Not less. Not equal. <strong>More.</strong></div>
+    </div>
+    <div class="verse-card">
+      <div class="verse-ref">1 Corinthians 3:16 (KJV) <a href="https://www.biblegateway.com/passage/?search=1+Corinthians+3:16&version=KJV" target="_blank">Read Full Verse ↗</a></div>
+      <div class="verse-text">"Know ye not that ye are the temple of God, and that the Spirit of God dwelleth in you?"</div>
+      <div class="verse-analysis"><strong>Greek analysis:</strong> "Temple" = <span class="term" data-def="Greek: ναός (naos) — the inner sanctuary of a temple, the sacred dwelling place of a deity. Not the outer courts, but the holy of holies. Your body is described as God's naos.">ναός (naos)</span> = the inner sanctuary, sacred dwelling. You are the temple. Not a building. Not an institution. <strong>You.</strong></div>
+    </div>
+  </div>
+
+  <div class="sub-header">1.3 The Inversion Mechanism</div>
+  <div class="module-body">
+    <p>The mechanism is elegant in its ruthlessness. Take a text that says one thing, teach the opposite, and do it so thoroughly across 2,000 years that questioning feels like blasphemy.</p>
+    <table class="compare-table">
+      <thead><tr><th>Original Teaching</th><th>Church Inversion</th></tr></thead>
+      <tbody>
+        <tr><td>"Kingdom of God is within you"</td><td>Kingdom is in the Church building / afterlife</td></tr>
+        <tr><td>"Ye are gods" (elohim)</td><td>You are a sinner, fundamentally broken</td></tr>
+        <tr><td>"Greater works than these shall ye do"</td><td>Only Jesus saves; you are dependent</td></tr>
+        <tr><td>"Ye are the temple of God"</td><td>The temple is our building; pay to maintain it</td></tr>
+        <tr><td>"Call no man father" — no intermediaries</td><td>Father, Bishop, Pope — hierarchies required</td></tr>
+      </tbody>
+    </table>
+    <div class="insight-box">
+      <p class="insight-text">The Gospel of Thomas, Saying 3 (Nag Hammadi, ~100 CE): "The kingdom is inside you and outside you. When you know yourselves, then you will be known." Buried. Hidden. Because it agreed with Luke 17:21 — and contradicted the Church's entire business model.</p>
+    </div>
+  </div>
+
+  <div class="citation-block">
+    <div class="citation-toggle" onclick="toggleCitation(this)">Sources & Further Reading</div>
+    <div class="citation-content"><ul>
+      <li>Elaine Pagels, <a href="https://www.amazon.com/Gnostic-Gospels-Elaine-Pagels/dp/0679724532" target="_blank">The Gnostic Gospels</a> (1979) — Academic analysis of excluded texts</li>
+      <li>Bart Ehrman, <a href="https://www.amazon.com/Lost-Christianities-Battles-Scripture-Faiths/dp/0195182499" target="_blank">Lost Christianities</a> (2003) — Historical documentation of suppressed traditions</li>
+      <li>Nag Hammadi Library — <a href="http://www.gnosis.org/naghamm/nhl.html" target="_blank">Full text archive (gnosis.org)</a></li>
+      <li>Strong's Concordance — <a href="https://biblehub.com/strongs.htm" target="_blank">Hebrew/Greek word origins (BibleHub)</a></li>
+      <li>First Council of Nicaea — <a href="https://www.britannica.com/event/First-Council-of-Nicaea-325" target="_blank">Britannica overview</a></li>
+    </ul></div>
+  </div>
+
+  <div class="takeaway">
+    <span class="takeaway-label">Module I Takeaway</span>
+    <p class="takeaway-text">The Bible contains two complete readings: an external one engineered for institutional control, and an internal one encoding personal liberation. The Church chose the external reading deliberately — and the historical evidence of what was excluded proves it.</p>
+  </div>
+</section>
+
+<!-- MODULE 2 -->
+<section id="module-2" class="module-section">
+  <div class="module-header">
+    <span class="module-label">Module II · 10 Minutes</span>
+    <h2 class="module-title">The Anatomical Truth</h2>
+    <div class="module-subtitle">33 vertebrae · Pineal gland · The sacred secretion</div>
+  </div>
+  <div class="divider"><span class="divider-sym">⊕</span></div>
+  <canvas id="canvas-spine" class="mod-canvas" width="300" height="320"></canvas>
+
+  <div class="sub-header">2.1 Your Body = The Temple</div>
+  <div class="module-body">
+    <p>The spine has exactly <strong>33 vertebrae</strong>: 7 cervical, 12 thoracic, 5 lumbar, 5 sacral, and 4 coccygeal. Jesus was crucified at age 33. Freemasonry has 33 degrees. This is not coincidence — it is a preserved code pointing to the path of ascension through the body itself.</p>
+    <p>The <strong>pineal gland</strong> sits at the geometric center of the brain — approximately 8mm, pine cone–shaped, light-sensitive despite being encased in darkness. Descartes called it the "seat of the soul" in 1649. <a href="https://plato.stanford.edu/archives/fall2019/entries/pineal-gland/" target="_blank" style="color:var(--gold-dim)">Source ↗</a> The pituitary gland sits directly below it. Together they form the royal couple — Father and Mother in heaven — of the esoteric tradition.</p>
+    <div class="hl-list">
+      <div class="hl-item"><div class="hl-dot"></div><div><strong>Matthew 6:22 (KJV)</strong> — "The light of the body is the eye: if therefore thine eye be single, thy whole body shall be full of light." Single eye = <span class="term" data-def="Greek: ἁπλοῦς (haplous) — meaning unified, singular, whole. Not referring to a physical eye but to the pineal gland, the single photoreceptive organ inside the skull.">ἁπλοῦς (haplous)</span> = the singular, unified eye = <strong>pineal gland.</strong> <a href="https://www.biblegateway.com/passage/?search=Matthew+6:22&version=KJV" target="_blank" style="color:var(--gold-dim);font-size:12px">Read ↗</a></div></div>
+      <div class="hl-item"><div class="hl-dot"></div><div><strong>Cerebrospinal fluid (CSF)</strong> — A clear, colorless fluid that bathes the brain and spinal cord. Volume: ~150ml in adults. Produced in the brain ventricles; circulates down all 33 vertebrae. <a href="https://www.ncbi.nlm.nih.gov/books/NBK519007/" target="_blank" style="color:var(--gold-dim)">NIH Source ↗</a></div></div>
+    </div>
+  </div>
+
+  <div class="sub-header">2.2 The Sacred Secretion Process</div>
+  <div class="module-body">
+    <p>The esoteric tradition — encoded across Santos Bonacci, George W. Carey, and ancient anatomical mysticism — describes a monthly physiological event called the <em>Sacred Secretion</em> or <em>Christ Oil</em>. Here is the mapped process:</p>
+    <table class="compare-table">
+      <thead><tr><th>Physiological Event</th><th>Biblical Story</th></tr></thead>
+      <tbody>
+        <tr><td>Pineal + pituitary produce charged CSF</td><td>"Father in heaven" — origin point</td></tr>
+        <tr><td>Fluid descends all 33 vertebrae</td><td>"Son of Man descends"</td></tr>
+        <tr><td>Reaches sacral plexus (solar plexus = "cave")</td><td>"3 days in the tomb"</td></tr>
+        <tr><td>Preserved: conserved energy rises back</td><td>"Resurrection" — ascent begins</td></tr>
+        <tr><td>Returns to pineal — consciousness expands</td><td>"Ascension to the Father / Born Again"</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sub-header">2.3 Golgotha = Place of The Skull</div>
+  <div class="module-body">
+    <div class="verse-card">
+      <div class="verse-ref">Matthew 27:33 (KJV) <a href="https://www.biblegateway.com/passage/?search=Matthew+27:33&version=KJV" target="_blank">Read Full Verse ↗</a></div>
+      <div class="verse-text">"And when they were come unto a place called Golgotha, that is to say, a place of a skull."</div>
+      <div class="verse-analysis"><strong>Etymology:</strong> Golgotha from Aramaic <span class="term" data-def="Aramaic: גָּלְגָּלְתָּא (gulgalta) / Hebrew: גֻּלְגֹּלֶת (gulgoleth) / Greek: Κρανίον (kranion) = cranium. All translate literally to 'skull.' The crucifixion happens at 'the place of the skull' — your own head.">gulgalta</span> = skull. Greek <em>kranion</em> = cranium. The text is explicit: the crucifixion happens <strong>at the skull</strong>. Externally: a hill outside Jerusalem. Internally: <strong>your own head.</strong></div>
+    </div>
+    <p>The <strong>Crown of Thorns</strong>: External reading — torture. Internal reading — <span class="term" data-def="The crown chakra (Sahasrara in Sanskrit), located at the top of the skull. 'Thorns' represent the nerve endings firing during activation. A 'crown placed upon the head' = consciousness coronation.">crown chakra activation</span>. The Crucifixion: External — physical death. Internal — <strong>ego death</strong>, the crossing of consciousness streams at the heart center.</p>
+  </div>
+
+  <div class="citation-block">
+    <div class="citation-toggle" onclick="toggleCitation(this)">Sources & Further Reading</div>
+    <div class="citation-content"><ul>
+      <li>Gray's Anatomy — <a href="https://www.amazon.com/Grays-Anatomy-Students-Richard-Drake/dp/0323934234" target="_blank">Standard medical reference for vertebral anatomy</a></li>
+      <li>Rick Strassman, <a href="https://www.amazon.com/DMT-Molecule-Revolutionary-Near-Death-Experiences/dp/0892819278" target="_blank">DMT: The Spirit Molecule</a> (2001) — Pineal gland research</li>
+      <li>Descartes on the pineal — <a href="https://plato.stanford.edu/archives/fall2019/entries/pineal-gland/" target="_blank">Stanford Encyclopedia of Philosophy</a></li>
+      <li>Manly P. Hall, <a href="https://www.amazon.com/Secret-Teachings-All-Ages-Encyclopedic/dp/1585422509" target="_blank">The Secret Teachings of All Ages</a> (1928)</li>
+      <li>Strong's on Golgotha — <a href="https://biblehub.com/greek/1115.htm" target="_blank">BibleHub etymology</a></li>
+    </ul></div>
+  </div>
+
+  <div class="takeaway">
+    <span class="takeaway-label">Module II Takeaway</span>
+    <p class="takeaway-text">Biblical stories map precisely to anatomical processes: the body is the temple, the crucifixion happens in the skull, and resurrection is a physiological-consciousness event occurring within you — encoded in the very language of the text.</p>
+  </div>
+</section>
+
+<!-- MODULE 3 -->
+<section id="module-3" class="module-section">
+  <div class="module-header">
+    <span class="module-label">Module III · 8 Minutes</span>
+    <h2 class="module-title">The 12 Disciples = Internal System</h2>
+    <div class="module-subtitle">Cranial nerves · Archetypes · The Last Supper decoded</div>
+  </div>
+  <div class="divider"><span class="divider-sym">◉</span></div>
+  <canvas id="canvas-nerves" class="mod-canvas" width="300" height="300"></canvas>
+
+  <div class="sub-header">3.1 The 12 Cranial Nerves</div>
+  <div class="module-body">
+    <p>The human brain has exactly <strong>12 pairs of cranial nerves</strong> — the primary pathways through which your brain perceives reality and controls your body. <a href="https://my.clevelandclinic.org/health/body/21998-cranial-nerves" target="_blank" style="color:var(--gold-dim)">Cleveland Clinic Reference ↗</a></p>
+    <table class="compare-table">
+      <thead><tr><th>Cranial Nerve</th><th>Function</th><th>Disciple Archetype</th></tr></thead>
+      <tbody>
+        <tr><td>I · Olfactory</td><td>Smell — first sense, primal awareness</td><td>Intuition, primal knowing</td></tr>
+        <tr><td>II · Optic</td><td>Vision — the seer</td><td>Prophetic sight</td></tr>
+        <tr><td>III-VI · Oculomotor, Trochlear, Abducens</td><td>Eye movement — direction of attention</td><td>Focus, will, direction</td></tr>
+        <tr><td>V · Trigeminal</td><td>Facial sensation — feeling the world</td><td>Empathy, sensitivity</td></tr>
+        <tr><td>VII · Facial</td><td>Expression + taste</td><td>Communication, discernment</td></tr>
+        <tr><td>VIII · Vestibulocochlear</td><td>Hearing + balance</td><td>Listening, equilibrium</td></tr>
+        <tr><td>X · Vagus</td><td>Parasympathetic master — calm, restore</td><td>Peace, surrender, heart</td></tr>
+        <tr><td>XII · Hypoglossal</td><td>Tongue — the Word made flesh</td><td>The spoken truth</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sub-header">3.2 Disciples as Archetypes</div>
+  <div class="module-body">
+    <div class="hl-list">
+      <div class="hl-item"><div class="hl-dot"></div><div><strong>Peter (The Rock)</strong> — Foundation, willpower. Denied Jesus 3 times = the lower three chakras (survival, desire, ego) that must be transcended before full awakening.</div></div>
+      <div class="hl-item"><div class="hl-dot"></div><div><strong>Judas (The Betrayer)</strong> — Represents necessary doubt and surrender. Without Judas there is no crucifixion, no resurrection. The ego that must be "betrayed" — released — is essential to the process.</div></div>
+      <div class="hl-item"><div class="hl-dot"></div><div><strong>John (The Beloved)</strong> — The heart. Unconditional love, devotion. The <span class="term" data-def="Anahata in Sanskrit — the fourth chakra, located at the heart center. Associated with love, compassion, and the bridge between lower (physical) and upper (spiritual) energy centers.">heart chakra</span> consciousness.</div></div>
+      <div class="hl-item"><div class="hl-dot"></div><div><strong>Thomas (The Doubter)</strong> — The analytical mind. "Unless I see... I will not believe." The intellect requiring proof before surrender. This part of you also gets to touch the wounds and still find truth.</div></div>
+    </div>
+  </div>
+
+  <div class="sub-header">3.3 The Last Supper = Internal Integration</div>
+  <div class="module-body">
+    <p>Jesus + 12 disciples = 13 at the table. The number 13 has been demonized for exactly this reason — the 13th position is <em>you</em>, the awakened center integrating all 12 aspects of your own consciousness.</p>
+    <div class="insight-box">
+      <p class="insight-text">The bread ("This is my body") = the physical vessel transforming. The wine ("This is my blood") = the cerebrospinal fluid, the living "Christ oil" that circulates through all 33 vertebrae. The Last Supper is the moment before the inner crucifixion — the final integration before ego death and resurrection.</p>
+    </div>
+  </div>
+
+  <div class="citation-block">
+    <div class="citation-toggle" onclick="toggleCitation(this)">Sources & Further Reading</div>
+    <div class="citation-content"><ul>
+      <li>Netter's Atlas of Human Anatomy — <a href="https://www.amazon.com/Netter-Atlas-Human-Anatomy-Approach/dp/0323680429" target="_blank">Cranial nerve reference</a></li>
+      <li>Kandel, Schwartz, Jessell — <a href="https://www.amazon.com/Principles-Neural-Science-Fifth-Kandel/dp/0071390111" target="_blank">Principles of Neural Science</a></li>
+      <li>Cleveland Clinic — <a href="https://my.clevelandclinic.org/health/body/21998-cranial-nerves" target="_blank">12 Cranial Nerves Overview</a></li>
+    </ul></div>
+  </div>
+
+  <div class="takeaway">
+    <span class="takeaway-label">Module III Takeaway</span>
+    <p class="takeaway-text">The 12 disciples represent 12 aspects of your internal consciousness — cranial nerves, brain regions, or archetypal qualities. You are always the 13th: the awakened center when all 12 are integrated and working in alignment.</p>
+  </div>
+</section>
+
+<!-- MODULE 4 -->
+<section id="module-4" class="module-section">
+  <div class="module-header">
+    <span class="module-label">Module IV · 9 Minutes</span>
+    <h2 class="module-title">Resurrection = Consciousness Activation</h2>
+    <div class="module-subtitle">Ego death · 3-day gestation · Awakening NOW</div>
+  </div>
+  <div class="divider"><span class="divider-sym">☩</span></div>
+
+  <div class="sub-header">4.1 Death ≠ Physical. Death = Ego.</div>
+  <div class="module-body">
+    <div class="verse-card">
+      <div class="verse-ref">Romans 6:3-4 (KJV) <a href="https://www.biblegateway.com/passage/?search=Romans+6:3-4&version=KJV" target="_blank">Read Full Verse ↗</a></div>
+      <div class="verse-text">"Know ye not, that so many of us as were baptized into Jesus Christ were baptized into his death? Therefore we are buried with him by baptism into death: that like as Christ was raised up from the dead by the glory of the Father, even so we also should walk in newness of life."</div>
+      <div class="verse-analysis"><strong>"We are buried... we also should walk in newness of life."</strong> This is the entire Christian community being told they undergo this death and resurrection. It is not about one man 2,000 years ago. It is about <strong>you, now.</strong></div>
+    </div>
+    <div class="verse-card">
+      <div class="verse-ref">Galatians 2:20 (KJV) <a href="https://www.biblegateway.com/passage/?search=Galatians+2:20&version=KJV" target="_blank">Read Full Verse ↗</a></div>
+      <div class="verse-text">"I am crucified with Christ: nevertheless I live; yet not I, but Christ liveth in me."</div>
+      <div class="verse-analysis"><strong>Present tense.</strong> "I am crucified" — not "Jesus was crucified." This is a first-person present-tense statement about an ongoing internal process. Ego dissolves. <span class="term" data-def="A state of expanded consciousness associated with unity awareness, unconditional love, and direct knowing — the state Jesus demonstrated and said was available to all ('greater works than these shall ye do').">Christ consciousness</span> emerges. <strong>Happening now. In you.</strong></div>
+    </div>
+  </div>
+
+  <div class="sub-header">4.2 The 3 Days = Gestation Period</div>
+  <div class="module-body">
+    <p>The 3-day timeline is not unique to Jesus. Jonah spends 3 days in the belly of the great fish. The pattern appears throughout the text because 3 is the number of <em>completion and synthesis</em> — thesis, antithesis, synthesis. Past, present, future. Birth, life, death.</p>
+    <div class="verse-card">
+      <div class="verse-ref">Matthew 12:40 (KJV) <a href="https://www.biblegateway.com/passage/?search=Matthew+12:40&version=KJV" target="_blank">Read Full Verse ↗</a></div>
+      <div class="verse-text">"For as Jonas was three days and three nights in the whale's belly; so shall the Son of man be three days and three nights in the heart of the earth."</div>
+      <div class="verse-analysis"><strong>"Heart of the earth" = solar plexus</strong> — the energetic center of the human body (called <span class="term" data-def="Sanskrit: मणिपूर (Manipura) — the third chakra, located at the solar plexus, center of personal power, transformation, and digestive fire. Called 'heart of the earth' because it is the center-point of the human body.">Manipura</span> in Sanskrit, meaning "city of jewels"). The secretion rests here during its 3-day gestation before the ascent.</div>
+    </div>
+  </div>
+
+  <div class="sub-header">4.3 Resurrection = Awakening NOW</div>
+  <div class="module-body">
+    <div class="verse-card">
+      <div class="verse-ref">John 11:25-26 (KJV) <a href="https://www.biblegateway.com/passage/?search=John+11:25-26&version=KJV" target="_blank">Read Full Verse ↗</a></div>
+      <div class="verse-text">"I am the resurrection, and the life: he that believeth in me, though he were dead, yet shall he live: And whosoever liveth and believeth in me shall never die."</div>
+      <div class="verse-analysis"><strong>"Shall never die"</strong> — In a text supposedly about physical resurrection, this verse promises freedom from death to the <em>living</em>. This only makes sense if "death" refers to a state of consciousness — ego-identification — not a biological process. <strong>Awakened consciousness is eternal.</strong></div>
+    </div>
+    <table class="compare-table">
+      <thead><tr><th>Before Resurrection (Asleep)</th><th>After Resurrection (Awakened)</th></tr></thead>
+      <tbody>
+        <tr><td>Identified with ego / personal story</td><td>Ego dissolved into witnessing awareness</td></tr>
+        <tr><td>Separated from Source, alone</td><td>Unity consciousness — interconnected</td></tr>
+        <tr><td>Programmed, controlled, compliant</td><td>Sovereign, free, self-directed</td></tr>
+        <tr><td>Waiting for external salvation</td><td>Recognizing internal divinity</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="takeaway">
+    <span class="takeaway-label">Module IV Takeaway</span>
+    <p class="takeaway-text">Resurrection is not a physical event from 2,000 years ago. It is a consciousness activation: the ego dies, awakened awareness emerges. The text tells you this is YOUR process, present tense, available now — not contingent on anyone else's death.</p>
+  </div>
+</section>
+
+<!-- MODULE 5 -->
+<section id="module-5" class="module-section">
+  <div class="module-header">
+    <span class="module-label">Module V · 8 Minutes</span>
+    <h2 class="module-title">Christ = Consciousness State,<br>Not a Person</h2>
+    <div class="module-subtitle">Christos = Anointed One · Available to all · Exclusivity as control</div>
+  </div>
+  <div class="divider"><span class="divider-sym">☉</span></div>
+
+  <div class="sub-header">5.1 Christos = Anointed with Oil</div>
+  <div class="module-body">
+    <p>"Christ" is not a last name. It is a Greek title: <span class="term" data-def="Greek: Χριστός (Christos) — from chrio (χρίω), meaning 'to anoint with oil.' The title Christos is functionally identical to the Hebrew Messiah (מָשִׁיחַ, mashiach), both meaning 'the anointed one.' It describes a state, not a surname.">Χριστός (Christos)</span> — from the verb <em>chrio</em>, meaning "to anoint." The Hebrew equivalent is <span class="term" data-def="Hebrew: מָשִׁיחַ (mashiach) — anointed one. Used throughout the Old Testament for anointed kings and priests (1 Samuel 16:13). Jesus is called 'the Christ/Messiah' meaning the anointed one, not as a unique trait but as a title indicating the anointed state.">Messiah (מָשִׁיחַ)</span> — also "anointed one." Both cultures use the same concept: a person anointed with oil undergoes a transformation. <a href="https://en.wikipedia.org/wiki/Christ_(title)" target="_blank" style="color:var(--gold-dim)">Etymology source ↗</a></p>
+
+    <div class="verse-card">
+      <div class="verse-ref">1 John 2:20 (KJV) <a href="https://www.biblegateway.com/passage/?search=1+John+2:20&version=KJV" target="_blank">Read Full Verse ↗</a></div>
+      <div class="verse-text">"But ye have an unction from the Holy One, and ye know all things."</div>
+      <div class="verse-analysis"><strong>"Unction"</strong> = Greek <span class="term" data-def="Greek: χρίσμα (chrisma) — the anointing, the sacred oil. The same root as Christos. When 1 John says 'ye have an unction,' it is saying 'you have the anointing' — you have the Christ oil within you. This is not exclusive to Jesus.">χρίσμα (chrisma)</span> = the anointing, the sacred oil. <strong>The same root as Christos.</strong> This verse tells you directly: you have the Christ anointing. You know all things. This is not about one man.</div>
+    </div>
+  </div>
+
+  <div class="sub-header">5.2 You Can Achieve Christ Consciousness</div>
+  <div class="module-body">
+    <div class="hl-list">
+      <div class="hl-item"><div class="hl-dot"></div><div><strong>John 14:12</strong> — "Greater works than these shall he do." Not equal. Greater. The ceiling for human consciousness is not Jesus — it is above him, by his own words.</div></div>
+      <div class="hl-item"><div class="hl-dot"></div><div><strong>Galatians 2:20</strong> — "Christ liveth in me." Already within you. Not arriving. Not future. <em>Already there, waiting to be recognized.</em></div></div>
+      <div class="hl-item"><div class="hl-dot"></div><div><strong>Christ consciousness characteristics:</strong> Unity awareness, unconditional love, ego transcendence, direct knowing (<span class="term" data-def="Greek: γνῶσις (gnosis) — direct, experiential knowledge of spiritual truth. Not belief based on authority, but immediate, first-person knowing. The Gnostic tradition was persecuted precisely because it taught this direct access.">gnosis</span>), sovereignty — available to all humans, across all cultures, in all times.</div></div>
+    </div>
+  </div>
+
+  <div class="sub-header">5.3 Making It Exclusive = The Control Move</div>
+  <div class="module-body">
+    <table class="compare-table">
+      <thead><tr><th>If Christ consciousness is available to all...</th><th>If only Jesus has it...</th></tr></thead>
+      <tbody>
+        <tr><td>Direct access — no intermediary needed</td><td>Must go through priests to reach Jesus</td></tr>
+        <tr><td>No church attendance required</td><td>Must attend services</td></tr>
+        <tr><td>No tithes necessary</td><td>Must support the institution financially</td></tr>
+        <tr><td>Internal authority trusted</td><td>External doctrine must be obeyed</td></tr>
+        <tr><td><strong>Liberation</strong></td><td><strong>Enslavement</strong></td></tr>
+      </tbody>
+    </table>
+    <div class="insight-box">
+      <p class="insight-text">Joan of Arc was executed for claiming direct communication with God — bypassing Church authority. Meister Eckhart was condemned for teaching "God and I are one." The Inquisition systematically silenced everyone who taught that Christ consciousness was directly accessible. <a href="https://www.newadvent.org/cathen/08026a.htm" target="_blank" style="color:var(--gold-dim)">Inquisition records ↗</a> They were killed for teaching what the Bible itself says.</p>
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span class="takeaway-label">Module V Takeaway</span>
+    <p class="takeaway-text">"Christ" is an anointed state of consciousness, not a person's surname. This state is encoded in your biology (the sacred secretion / Christ oil) and explicitly stated as available to all in the very text used to tell you otherwise. Exclusivity is the control mechanism, not the teaching.</p>
+  </div>
+</section>
+
+<!-- MODULE 6 -->
+<section id="module-6" class="module-section">
+  <div class="module-header">
+    <span class="module-label">Module VI · 10 Minutes</span>
+    <h2 class="module-title">The Control Mechanism</h2>
+    <div class="module-subtitle">Sin · Hell · Obedience — how fear engineers compliance</div>
+  </div>
+  <div class="divider"><span class="divider-sym">⚔</span></div>
+
+  <div class="sub-header">6.1 Obedience vs. Sovereignty</div>
+  <div class="module-body">
+    <div class="verse-card">
+      <div class="verse-ref">Romans 2:14-15 (KJV) <a href="https://www.biblegateway.com/passage/?search=Romans+2:14-15&version=KJV" target="_blank">Read Full Verse ↗</a></div>
+      <div class="verse-text">"For when the Gentiles, which have not the law, do by nature the things contained in the law, these, having not the law, are a law unto themselves: Which shew the work of the law written in their hearts."</div>
+      <div class="verse-analysis">People without external religious law still know right from wrong — because the guidance is <strong>internal.</strong> Written in the heart. The Bible itself says external law is unnecessary when internal knowing is operative.</div>
+    </div>
+    <div class="verse-card">
+      <div class="verse-ref">Jeremiah 31:33 (KJV) <a href="https://www.biblegateway.com/passage/?search=Jeremiah+31:33&version=KJV" target="_blank">Read Full Verse ↗</a></div>
+      <div class="verse-text">"I will put my law in their inward parts, and write it in their hearts."</div>
+      <div class="verse-analysis">God's own statement of intent: the new covenant is <strong>not tablets of stone</strong>. Not commandments in a book. Not doctrines from a council. The law is written <em>inward</em> — internalized, sovereign.</div>
+    </div>
+  </div>
+
+  <div class="sub-header">6.2 Sin = Missing the Mark</div>
+  <div class="module-body">
+    <p>The word "sin" carries the weight of moral condemnation, eternal punishment, and fundamental human brokenness. The actual Greek word carries none of this.</p>
+    <div class="insight-box">
+      <p class="insight-text"><span class="term" data-def="Greek: ἁμαρτία (hamartia) — literally 'missing the mark,' an archery term. Used in classical Greek literature to describe a tragic flaw or error in judgment, not moral evil. The concept implies correction is possible, not condemnation.">ἁμαρτία (hamartia)</span> — "missing the mark." This is an archery term. You aimed, you missed. Not: you are fundamentally evil. Not: you deserve eternal torture. You aimed and missed — <strong>course correction is the appropriate response, not self-flagellation.</strong> <a href="https://biblehub.com/greek/266.htm" target="_blank" style="color:var(--gold-dim)">Strong's source ↗</a></p>
+    </div>
+    <table class="compare-table">
+      <thead><tr><th>Fear-Based Reading</th><th>Liberation Reading</th></tr></thead>
+      <tbody>
+        <tr><td>You are fundamentally broken (sinner)</td><td>You are a learner temporarily off-target</td></tr>
+        <tr><td>Deserve punishment for missing</td><td>Need course correction, not condemnation</td></tr>
+        <tr><td>External forgiveness required (priest)</td><td>Internal realignment is the process</td></tr>
+        <tr><td>Guilt as permanent condition</td><td>Growth as the natural direction</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sub-header">6.3 Hell = State of Consciousness, Not a Place</div>
+  <div class="module-body">
+    <p>Three completely different Hebrew and Greek words are all translated as "hell" in English — erasing critical distinctions:</p>
+    <div class="hl-list">
+      <div class="hl-item"><div class="hl-dot"></div><div><strong><span class="term" data-def="Hebrew: שְׁאוֹל (Sheol) — the grave, the realm of the dead. Used throughout the Old Testament simply to mean 'the place where dead people go.' No fire, no torture, no eternal punishment — just death.">Sheol (שְׁאוֹל)</span></strong> — Hebrew: simply "the grave." No fire. No torture. The Old Testament realm of the dead.</div></div>
+      <div class="hl-item"><div class="hl-dot"></div><div><strong><span class="term" data-def="Greek: ᾍδης (Hades) — the Greek underworld, realm of the dead. Equivalent to Hebrew Sheol. Not a place of torture but simply where deceased souls reside. The New Testament uses this word 11 times, and in several cases translates it as 'grave.'">Hades (ᾍδης)</span></strong> — Greek: the underworld. Not torture chamber — just the realm of departed souls. <a href="https://www.gotquestions.org/sheol-hades-hell.html" target="_blank" style="color:var(--gold-dim)">Source ↗</a></div></div>
+      <div class="hl-item"><div class="hl-dot"></div><div><strong><span class="term" data-def="Greek: γέεννα (Gehenna) — the Valley of Hinnom (גֵּי בֶן-הִנֹּם, Gei-ben-Hinnom) outside Jerusalem. A real geographical location used as a garbage dump where fires burned continuously. Jesus used it as a metaphor for destruction and waste — not eternal conscious torture.">Gehenna (γέεννα)</span></strong> — The Valley of Hinnom: a literal garbage dump outside Jerusalem. Fires burned constantly. Jesus used this as a metaphor for destruction. <strong>Not eternal torture — a trash fire.</strong></div></div>
+    </div>
+    <div class="insight-box">
+      <p class="insight-text">If "heaven" is a state of consciousness within (Luke 17:21 — "the kingdom of God is within you"), then hell is also a state of consciousness: the experience of separation from Source, ego-identification, disconnection. Both are NOW. Both are internal. Both are transcendable.</p>
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span class="takeaway-label">Module VI Takeaway</span>
+    <p class="takeaway-text">Fear-based teachings (sin as permanent evil, hell as eternal torture, God as external judge) create compliance through terror. The actual words of the text tell a different story: internal guidance, learning as the process, and states of consciousness that are transcendable now.</p>
+  </div>
+</section>
+
+<!-- MODULE 7 -->
+<section id="module-7" class="module-section">
+  <div class="module-header">
+    <span class="module-label">Module VII · 9 Minutes</span>
+    <h2 class="module-title">Hidden in Plain Sight</h2>
+    <div class="module-subtitle">Vatican pine cone · Caduceus · The all-seeing eye · Christmas decoded</div>
+  </div>
+  <div class="divider"><span class="divider-sym">👁</span></div>
+  <canvas id="canvas-caduceus" class="mod-canvas" width="200" height="300"></canvas>
+
+  <div class="sub-header">7.1 The Vatican's Pine Cone</div>
+  <div class="module-body">
+    <p>In the <strong>Pigna Courtyard of the Vatican</strong> stands a 4-meter bronze pine cone — one of the largest in the world. Originally from a Roman temple of Isis, it was moved to the Vatican around 800 CE and has remained there, prominently displayed, ever since. Every Pope carries a staff (<em>ferula</em>) topped with a pine cone. <a href="https://www.museivaticani.va/content/museivaticani/en/collezioni/musei/museo-pio-clementino/Cortile-Ottagono/fontana-della-pigna.html" target="_blank" style="color:var(--gold-dim)">Vatican Museum source ↗</a></p>
+    <p>The word "pineal" comes from Latin <em>pinea</em> — pine cone. The <span class="term" data-def="A small endocrine gland at the geometric center of the brain, roughly 8mm in size with a pine-cone shape. Light-sensitive despite receiving no direct light. Produces melatonin; theorized in esoteric traditions to produce DMT. Called the 'third eye' across Egyptian, Hindu, and Greek traditions.">pineal gland</span> is literally named for its pine cone shape. The Vatican displays the symbol of the pineal gland as its most prominent architectural feature — while teaching the masses nothing about what it represents. <strong>They know. They just aren't telling you.</strong></p>
+  </div>
+
+  <div class="sub-header">7.2 The Medical Symbol — Caduceus</div>
+  <div class="module-body">
+    <p>Every hospital, every medical institution carries the Caduceus: two serpents coiled around a staff, wings at the top. This is the staff of Hermes, the messenger god. But its anatomy maps precisely to kundalini physiology: <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4439707/" target="_blank" style="color:var(--gold-dim)">Medical symbol history ↗</a></p>
+    <div class="hl-list">
+      <div class="hl-item"><div class="hl-dot"></div><div><strong>Central staff</strong> = Spine (sushumna nadi in Sanskrit — the central channel through all 33 vertebrae)</div></div>
+      <div class="hl-item"><div class="hl-dot"></div><div><strong>Two serpents</strong> = <span class="term" data-def="Sanskrit: Ida (left, lunar, feminine) and Pingala (right, solar, masculine) — the two energy channels that coil around the central spine in kundalini anatomy. They are the biological correlates of the sympathetic and parasympathetic nervous systems.">Ida and Pingala</span> — the left and right energy channels that coil around the spine in kundalini anatomy</div></div>
+      <div class="hl-item"><div class="hl-dot"></div><div><strong>Wings at crown</strong> = Enlightenment, the opening of the <span class="term" data-def="Sanskrit: Sahasrara — the crown chakra, the seventh energy center at the top of the skull. Associated with connection to universal consciousness, the pineal gland, and full kundalini activation.">Sahasrara (crown chakra)</span> when the energy reaches the brain</div></div>
+    </div>
+    <p>The medical establishment uses the symbol of kundalini awakening as its official emblem — and teaches none of its meaning to patients or practitioners. The most healing thing medicine could offer is hidden in its own logo.</p>
+  </div>
+
+  <div class="sub-header">7.3 Symbols Everywhere — Decoded</div>
+  <div class="module-body">
+    <div class="hl-list">
+      <div class="hl-item"><div class="hl-dot"></div><div><strong>The All-Seeing Eye</strong> on the US dollar bill — Eye = consciousness, pyramid = structure of ascension, eye at apex = <span class="term" data-def="The Eye of Providence — in Freemasonic and esoteric traditions, the eye represents universal consciousness or divine awareness. Placed at the apex of a pyramid, it represents awakened consciousness at the peak of development.">pineal activation at full consciousness</span>. <a href="https://en.wikipedia.org/wiki/Eye_of_Providence" target="_blank" style="color:var(--gold-dim)">Source ↗</a></div></div>
+      <div class="hl-item"><div class="hl-dot"></div><div><strong>The Ankh (Egyptian)</strong> — Loop at top = pineal/third eye. Cross = body (vertical spine, horizontal arms). The complete symbol of an awakened human being. <a href="https://en.wikipedia.org/wiki/Ankh" target="_blank" style="color:var(--gold-dim)">Source ↗</a></div></div>
+      <div class="hl-item"><div class="hl-dot"></div><div><strong>December 25 / Christmas</strong> — The winter solstice (December 21-22) is when the sun reaches its lowest point and then begins its ascent. December 25 = the "resurrection of the sun" — 3 days after solstice, when the days visibly lengthen. Jesus's birth is not a historical date — it is the sun's annual rebirth cycle. <a href="https://www.biblicalarchaeology.org/daily/people-cultures-in-the-bible/jesus-historical-jesus/how-december-25-became-christmas/" target="_blank" style="color:var(--gold-dim)">Source ↗</a></div></div>
+      <div class="hl-item"><div class="hl-dot"></div><div><strong>Easter</strong> — Named for <span class="term" data-def="Eostre or Ostara — Germanic spring goddess associated with dawn, fertility, and renewal. Easter's timing (spring equinox) predates Christianity and was absorbed into the Christian calendar, as scholars including the Venerable Bede documented in the 8th century.">Eostre</span>, the spring goddess. Occurs at the spring equinox — astronomical rebirth. Seeds break through soil. Consciousness breaks through ego.</div></div>
+    </div>
+  </div>
+
+  <div class="citation-block">
+    <div class="citation-toggle" onclick="toggleCitation(this)">Sources & Further Reading</div>
+    <div class="citation-content"><ul>
+      <li>Vatican Museum — <a href="https://www.museivaticani.va" target="_blank">museivaticani.va (Pigna Courtyard documentation)</a></li>
+      <li>Medical caduceus history — <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4439707/" target="_blank">NIH/PMC academic paper</a></li>
+      <li>Eye of Providence — <a href="https://en.wikipedia.org/wiki/Eye_of_Providence" target="_blank">Wikipedia with full history</a></li>
+      <li>December 25 origins — <a href="https://www.biblicalarchaeology.org/daily/people-cultures-in-the-bible/jesus-historical-jesus/how-december-25-became-christmas/" target="_blank">Biblical Archaeology Society</a></li>
+      <li>Kundalini anatomy — <a href="https://en.wikipedia.org/wiki/Kundalini" target="_blank">Wikipedia overview with sources</a></li>
+    </ul></div>
+  </div>
+
+  <div class="takeaway">
+    <span class="takeaway-label">Module VII Takeaway</span>
+    <p class="takeaway-text">The truth was never fully destroyed — it was encoded in symbols that elites retained while withholding their meaning from the public. Pine cone = pineal. Caduceus = kundalini. All-Seeing Eye = awakened consciousness. Christmas = solar resurrection. Hidden in plain sight for those with eyes to see.</p>
+  </div>
+</section>
+
+<!-- MODULE 8 -->
+<section id="module-8" class="module-section">
+  <div class="module-header">
+    <span class="module-label">Module VIII · 7 Minutes</span>
+    <h2 class="module-title">The True "Antichrist"</h2>
+    <div class="module-subtitle">Not a future person — a present system. The hiding IS the evil.</div>
+  </div>
+  <div class="divider"><span class="divider-sym">⚠</span></div>
+
+  <div class="sub-header">8.1 Not a Person — A System</div>
+  <div class="module-body">
+    <p><strong>"Anti"</strong> in Greek (<span class="term" data-def="Greek: ἀντί (anti) — meaning 'against,' 'opposite,' or 'in place of.' The Antichrist is not simply against the person Jesus, but against Christ consciousness itself — the awakening process — replacing it with something else.">ἀντί</span>) means "against" or <em>in place of</em>. The Antichrist is not against the historical Jesus — it is the system that opposes Christ <em>consciousness</em>: the internal awakening process. Anything that stands between you and your own direct access.</p>
+    <div class="verse-card">
+      <div class="verse-ref">Revelation 13:18 (KJV) <a href="https://www.biblegateway.com/passage/?search=Revelation+13:18&version=KJV" target="_blank">Read Full Verse ↗</a></div>
+      <div class="verse-text">"Here is wisdom. Let him that hath understanding count the number of the beast: for it is the number of a man; and his number is Six hundred threescore and six."</div>
+      <div class="verse-analysis"><strong>666 decoded:</strong> Carbon — the basis of all physical life — has 6 protons, 6 neutrons, and 6 electrons. 666 = <span class="term" data-def="The material plane of existence — physical reality experienced through the ego and the five senses without access to higher consciousness. The 'mark of the beast' is identification exclusively with material reality: thoughts (forehead) and actions (hand) governed only by ego and survival instinct.">pure material identification</span>. The "mark on the forehead" = your thoughts controlled by ego. "Mark on the hand" = your actions controlled by material desire. You cannot participate in the ego-system without accepting its mark — and you cannot exit it without transcending it. <a href="https://hermeneutics.stackexchange.com/questions/75491/what-is-meant-by-number-of-a-man-in-rev-1318" target="_blank" style="color:var(--gold-dim)">Analysis ↗</a></div>
+    </div>
+  </div>
+
+  <div class="sub-header">8.2 The Hiding IS The Evil</div>
+  <div class="module-body">
+    <p>Consider what the Antichrist system actually does by hiding this teaching:</p>
+    <div class="hl-list">
+      <div class="hl-item"><div class="hl-dot"></div><div>The Vatican holds the pine cone symbol of the pineal gland — knows what it represents — and teaches nothing of it to 1.3 billion Catholics.</div></div>
+      <div class="hl-item"><div class="hl-dot"></div><div>Medical institutions use the caduceus (kundalini awakening) as their logo — and drug patients into suppression rather than activating the internal pharmacy of consciousness.</div></div>
+      <div class="hl-item"><div class="hl-dot"></div><div>Educational systems teach obedience, compliance, and external authority — never mentioning that you have sovereign internal guidance encoded in your biology.</div></div>
+    </div>
+    <div class="insight-box">
+      <p class="insight-text">The Antichrist is not coming. It is here. It has been here for 2,000 years. It is any system — religious, medical, political, educational — that withholds the knowledge of your internal power in order to maintain your dependence and compliance. The hiding itself is the evil.</p>
+    </div>
+  </div>
+
+  <div class="sub-header">8.3 Liberation = Seeing Through It</div>
+  <div class="module-body">
+    <div class="verse-card">
+      <div class="verse-ref">John 8:32 (KJV) <a href="https://www.biblegateway.com/passage/?search=John+8:32&version=KJV" target="_blank">Read Full Verse ↗</a></div>
+      <div class="verse-text">"And ye shall know the truth, and the truth shall make you free."</div>
+      <div class="verse-analysis">Not: "The Church will tell you the truth." Not: "Believe correctly and be saved." <strong>You shall KNOW.</strong> Direct knowing. Gnosis. The truth that makes free is the internal teaching — and knowing it is the liberation itself.</div>
+    </div>
+    <p>You are doing this right now. Reading this course is recognition. Questioning the external narrative is rejection. Learning the internal path is reclamation. <em>Liberation is already in progress.</em></p>
+  </div>
+
+  <div class="takeaway">
+    <span class="takeaway-label">Module VIII Takeaway</span>
+    <p class="takeaway-text">The "Antichrist" is not a future figure but a present system: any institution that opposes Christ consciousness by hiding, suppressing, or inverting the internal teaching. Seeing through the system — knowing the truth — is the liberation the text actually promises.</p>
+  </div>
+</section>
+
+<!-- MODULE 9 -->
+<section id="module-9" class="module-section">
+  <div class="module-header">
+    <span class="module-label">Module IX · 8 Minutes</span>
+    <h2 class="module-title">All Traditions Say the Same Thing</h2>
+    <div class="module-subtitle">Hinduism · Buddhism · Taoism · Egypt · Indigenous — one universal truth</div>
+  </div>
+  <div class="divider"><span class="divider-sym">✦</span></div>
+  <canvas id="canvas-traditions" class="mod-canvas" width="300" height="300"></canvas>
+
+  <div class="sub-header">9.1 Eastern Traditions (Explicit Teaching)</div>
+  <div class="module-body">
+    <table class="compare-table">
+      <thead><tr><th>Tradition</th><th>Concept</th><th>Parallel to Biblical Teaching</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Hinduism/Yoga</strong></td><td><span class="term" data-def="Sanskrit: कुण्डलिनी (Kundalini) — 'the coiled one.' Serpent energy dormant at the base of the spine (Muladhara chakra) that rises through 7 chakras to the crown (Sahasrara) during spiritual activation.">Kundalini</span> — coiled serpent energy rising through 7 chakras to crown</td><td>Sacred secretion rising 33 vertebrae to pineal; resurrection</td></tr>
+        <tr><td><strong>Buddhism</strong></td><td><span class="term" data-def="Sanskrit/Pali: निर्वाण (nirvana) — 'extinguishing.' The cessation of ego, craving, and suffering. Not non-existence, but the extinction of the false self, revealing the underlying awareness.">Nirvana</span> — ego extinction; also Urna (third eye mark on Buddha's forehead)</td><td>Ego death / resurrection; single eye / pineal activation</td></tr>
+        <tr><td><strong>Taoism</strong></td><td>Golden Elixir (Dan) rising from lower to upper dantian; Microcosmic Orbit</td><td>Sacred secretion rising from solar plexus to brain</td></tr>
+        <tr><td><strong>All Eastern</strong></td><td>Spine + pineal + rising energy = awakening</td><td>33 vertebrae + single eye + resurrection = Christ consciousness</td></tr>
+      </tbody>
+    </table>
+    <div class="citation-block">
+      <div class="citation-toggle" onclick="toggleCitation(this)">Eastern Tradition Sources</div>
+      <div class="citation-content"><ul>
+        <li>Swami Satyananda Saraswati — <a href="https://www.amazon.com/Kundalini-Tantra-Re-print-Golden-Jubilee/dp/8185787158" target="_blank">Kundalini Tantra</a></li>
+        <li>Pali Canon — <a href="https://en.wikipedia.org/wiki/P%C4%81li_Canon" target="_blank">Buddhist scripture overview</a></li>
+        <li>Lao Tzu — <a href="https://www.amazon.com/Tao-Te-Ching-Illustrated-Journey/dp/0711229643" target="_blank">Tao Te Ching</a></li>
+        <li>The Secret of the Golden Flower (Taoist text) — <a href="https://en.wikipedia.org/wiki/The_Secret_of_the_Golden_Flower" target="_blank">Wikipedia with sources</a></li>
+      </ul></div>
+    </div>
+  </div>
+
+  <div class="sub-header">9.2 Ancient Egyptian (Encoded Teaching)</div>
+  <div class="module-body">
+    <p>The Eye of Horus is not a decorative symbol. Anatomists have noted that its component parts correspond precisely to brain structures: the pupil = thalamus, the teardrop mark = medulla oblongata, the spiral = <strong>pineal gland</strong>. The Egyptians encoded brain anatomy 3,000 years before modern neuroscience. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6649877/" target="_blank" style="color:var(--gold-dim)">Academic paper on Eye of Horus anatomy ↗</a></p>
+    <p>The <span class="term" data-def="Egyptian: Djed pillar — a symbol of stability representing the spine or backbone of Osiris. Ritual 'Raising of the Djed' ceremonies symbolize resurrection and the activation of the spine/kundalini. Associated with 33 segments corresponding to vertebrae.">Djed pillar</span> represents the spine. "Raising the Djed" — an actual ceremonial ritual in ancient Egypt — symbolizes kundalini rising. <a href="https://en.wikipedia.org/wiki/Djed" target="_blank" style="color:var(--gold-dim)">Source ↗</a> They were doing this 5,000 years ago.</p>
+  </div>
+
+  <div class="sub-header">9.3 Indigenous and Shamanic (Direct Experience)</div>
+  <div class="module-body">
+    <div class="hl-list">
+      <div class="hl-item"><div class="hl-dot"></div><div><strong>Ayahuasca (Amazon)</strong> — Contains <span class="term" data-def="Dimethyltryptamine (DMT) — an endogenous psychedelic compound theorized to be produced by the pineal gland. Rick Strassman's research (DMT: The Spirit Molecule, 2001) documented near-death and mystical experiences induced by DMT, including ego dissolution and encounters with non-physical intelligences.">DMT</span>, theorized to be produced by the pineal gland. Ceremonies induce ego death, encounter with expanded consciousness, and rebirth — the exact same process described as resurrection. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9286861/" target="_blank" style="color:var(--gold-dim)">Research source ↗</a></div></div>
+      <div class="hl-item"><div class="hl-dot"></div><div><strong>Vision Quests (Native American)</strong> — Isolation, fasting, darkness, and prayer for direct contact with expanded consciousness. No intermediary. No institution. <strong>Direct experience.</strong></div></div>
+      <div class="hl-item"><div class="hl-dot"></div><div><strong>The universal thread:</strong> Every tradition that bypasses institutional control — shamanic, Gnostic, mystical, indigenous — points to the same anatomy (spine + pineal), the same process (ego death + rebirth), and the same result: <em>sovereignty through direct knowing.</em></div></div>
+    </div>
+    <div class="insight-box">
+      <p class="insight-text">When traditions on every continent, in every era, developed in complete isolation from each other — and all arrived at the same internal anatomy, the same rising energy process, and the same awakened state — this is not coincidence. This is convergent evidence pointing at something real.</p>
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span class="takeaway-label">Module IX Takeaway</span>
+    <p class="takeaway-text">All spiritual traditions — Eastern (explicit), Egyptian (encoded), Indigenous (experiential), and Christian (hidden) — point to the same process: spine activation, pineal awakening, ego death, rebirth into expanded consciousness. The universality is the proof that something real is being described.</p>
+  </div>
+</section>
+
+<!-- MODULE 10 -->
+<section id="module-10" class="module-section">
+  <div class="module-header">
+    <span class="module-label">Module X · 10 Minutes</span>
+    <h2 class="module-title">The Activation Process</h2>
+    <div class="module-subtitle">Decalcify · Meditate · Track your cycle · Preserve the oil</div>
+  </div>
+  <div class="divider"><span class="divider-sym">⚗</span></div>
+
+  <div class="sub-header">10.1 Preparing the Vessel</div>
+  <div class="module-body">
+    <p>The pineal gland calcifies with age — accelerated by fluoride. A 1997 study by Jennifer Luke documented that the pineal gland accumulates more fluoride than any other organ in the body. <a href="https://fluoridealert.org/studies/luke-2001/" target="_blank" style="color:var(--gold-dim)">Luke study source ↗</a> Calcified pineal = reduced melatonin production, disrupted sleep, and blocked third-eye function.</p>
+    <div class="hl-list">
+      <div class="hl-item"><div class="hl-dot"></div><div><strong>Remove fluoride:</strong> Filter drinking water, switch to fluoride-free toothpaste. Municipalities add fluoride to water supplies. This is documented. <a href="https://www.cdc.gov/fluoridation/index.htm" target="_blank" style="color:var(--gold-dim)">CDC source ↗</a></div></div>
+      <div class="hl-item"><div class="hl-dot"></div><div><strong>Clean diet:</strong> Reduce processed foods, alcohol, and recreational drugs. Each toxin is metabolic noise that the body must process instead of elevating. Organic vegetables, spring water, periodic fasting.</div></div>
+      <div class="hl-item"><div class="hl-dot"></div><div><strong>Sleep in darkness:</strong> The pineal produces melatonin in complete darkness. Light exposure suppresses production. A truly dark room is foundational. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6707491/" target="_blank" style="color:var(--gold-dim)">Circadian research ↗</a></div></div>
+      <div class="hl-item"><div class="hl-dot"></div><div><strong>Sexual energy conservation:</strong> Sexual energy is creative energy — the same force used for activation. Not permanent celibacy, but conscious stewardship during activation windows. <a href="https://en.wikipedia.org/wiki/Taoist_sexual_practices" target="_blank" style="color:var(--gold-dim)">Taoist practices ↗</a></div></div>
+    </div>
+  </div>
+
+  <div class="sub-header">10.2 Meditation Practices</div>
+  <div class="module-body">
+    <p><strong>Pineal activation meditation — step by step:</strong></p>
+    <div class="hl-list">
+      <div class="hl-item"><div class="hl-dot"></div><div><strong>Posture:</strong> Spine straight (all 33 vertebrae aligned). The channel must be open. Sit cross-legged, on a chair, or standing — alignment over comfort.</div></div>
+      <div class="hl-item"><div class="hl-dot"></div><div><strong>Breathwork:</strong> 4-count inhale, 4-count hold, 4-count exhale. Box breathing oxygenates the brain, activates the parasympathetic nervous system, and creates the calm that permits deeper states.</div></div>
+      <div class="hl-item"><div class="hl-dot"></div><div><strong>Attention placement:</strong> Direct focused awareness to the center of the skull — behind and between the eyes — where the pineal gland sits. Where attention goes, energy follows. This is not metaphor; it is neuroscience.</div></div>
+      <div class="hl-item"><div class="hl-dot"></div><div><strong>Visualization:</strong> Golden light at the pineal location, expanding with each breath, filling the skull. Not an intellectual exercise — a felt sense of warmth, pressure, or tingling at that location.</div></div>
+      <div class="hl-item"><div class="hl-dot"></div><div><strong>Frequency support:</strong> 963 Hz (associated with pineal activation) or 528 Hz (DNA repair / love frequency) played at low volume during practice. <a href="https://www.youtube.com/results?search_query=963+hz+pineal+gland+activation" target="_blank" style="color:var(--gold-dim)">Find tracks ↗</a></div></div>
+    </div>
+  </div>
+
+  <div class="sub-header">10.3 Tracking Your Lunar Cycle</div>
+  <div class="module-body">
+    <p>The esoteric tradition associates the Sacred Secretion with a specific monthly window: when the <strong>moon transits your astrological sun sign</strong>. This occurs once per month, lasting approximately 2.5 days. During this window, preservation is critical.</p>
+    <table class="compare-table">
+      <thead><tr><th>Day</th><th>What Happens</th><th>Your Practice</th></tr></thead>
+      <tbody>
+        <tr><td>Day 1</td><td>Production begins — pineal/pituitary active</td><td>Begin fast, intensify meditation, conserve energy</td></tr>
+        <tr><td>Days 2-3</td><td>Fluid at solar plexus — the tomb</td><td>Peak preservation: no toxins, negative emotions, or sexual release</td></tr>
+        <tr><td>Day 4</td><td>Ascent begins — kundalini rising</td><td>Deep meditation, heightened awareness; note what surfaces</td></tr>
+      </tbody>
+    </table>
+    <p><strong>Signs of activation:</strong> Pressure at the third eye, tingling along the spine, heightened intuition, vivid or lucid dreams, synchronicities increasing, spontaneous emotional release. Track: <a href="https://www.timeanddate.com/moon/phases/" target="_blank" style="color:var(--gold-dim)">timeanddate.com/moon ↗</a></p>
+  </div>
+
+  <div class="lab-card">
+    <div class="lab-label">⚗ Activation Protocol</div>
+    <p class="lab-text">For the next lunar month: identify when the moon enters your sun sign (use any astrology app). Three days before: clean diet, minimal alcohol, early sleep. During the window: daily 30-minute pineal meditation at the same time each day. After: journal everything — dreams, thoughts, body sensations, external synchronicities. Do this for 3 consecutive months. Compare.</p>
+  </div>
+
+  <div class="takeaway">
+    <span class="takeaway-label">Module X Takeaway</span>
+    <p class="takeaway-text">Activation is a physiological process requiring a clean vessel, consistent practice, and an understanding of natural rhythms. Decalcify the pineal, meditate daily, conserve energy during the lunar window, and track what changes. This is not mysticism — it is applied internal science.</p>
+  </div>
+</section>
+
+<!-- MODULE 11 -->
+<section id="module-11" class="module-section">
+  <div class="module-header">
+    <span class="module-label">Module XI · 8 Minutes</span>
+    <h2 class="module-title">Integration & Sovereignty</h2>
+    <div class="module-subtitle">You are the 13th · Living as the awakened center</div>
+  </div>
+  <div class="divider"><span class="divider-sym">♾</span></div>
+
+  <div class="sub-header">11.1 You Are the 13th</div>
+  <div class="module-body">
+    <p>Jesus + 12 disciples = 13 at the table. In the external reading, 13 is unlucky, suspicious, the number of the rebel. In the internal reading, 13 is <em>you</em> — the awakened center of your own consciousness, integrating all 12 aspects.</p>
+    <p>The 12 disciples are not historical men you need to revere. They are 12 functions of your own consciousness — cranial nerves, archetypal qualities, brain regions — and you are the 13th: the witnessing awareness that integrates and directs all of them. Every time you sit in meditation, you are sitting at the center of your own Last Supper.</p>
+    <div class="insight-box">
+      <p class="insight-text">This is not arrogance. It is the recognition the text itself is offering. When Jesus says "I and the Father are one" (John 10:30), and then says "ye are gods" (John 10:34), and then says "greater works than these shall ye do" (John 14:12) — the text is telling you: what he demonstrated is what you are. Not someday. Now.</p>
+    </div>
+  </div>
+
+  <div class="sub-header">11.2 Living Sovereignty</div>
+  <div class="module-body">
+    <table class="compare-table">
+      <thead><tr><th>Sovereignty Is NOT</th><th>Sovereignty IS</th></tr></thead>
+      <tbody>
+        <tr><td>Rebellion against all structure</td><td>Internal authority primary; external secondary</td></tr>
+        <tr><td>Ignoring legal consequences</td><td>Choosing consciously within reality</td></tr>
+        <tr><td>Selfishness or isolation</td><td>Full responsibility for your own consciousness</td></tr>
+        <tr><td>Us vs. them tribalism</td><td>Clear-eyed discernment of systems and patterns</td></tr>
+        <tr><td>Claiming you have no programming</td><td>Actively identifying and releasing programming</td></tr>
+      </tbody>
+    </table>
+    <div class="hl-list">
+      <div class="hl-item"><div class="hl-dot"></div><div><strong>Question everything:</strong> "Who benefits?" "Follow the money." Not as paranoia — as pattern recognition. Your pattern-recognition faculty is your most sovereign tool.</div></div>
+      <div class="hl-item"><div class="hl-dot"></div><div><strong>Internal guidance primary:</strong> Meditate daily to hear it. When the inner knowing and external authority disagree, investigate both — but trust the internal until you have compelling reason not to.</div></div>
+      <div class="hl-item"><div class="hl-dot"></div><div><strong>Compassion without compliance:</strong> Love for all beings does not require obedience to corrupt systems. The heart stays open while the eyes stay open. These are not contradictions.</div></div>
+    </div>
+  </div>
+
+  <div class="sub-header">11.3 The Liberation</div>
+  <div class="module-body">
+    <div class="verse-card">
+      <div class="verse-ref">John 14:6 (KJV) — Reread with Internal Eyes <a href="https://www.biblegateway.com/passage/?search=John+14:6&version=KJV" target="_blank">Read Full Verse ↗</a></div>
+      <div class="verse-text">"I am the way, the truth, and the life: no man cometh unto the Father, but by me."</div>
+      <div class="verse-analysis"><strong>External reading:</strong> You must accept Jesus as your external savior — no other path to God exists. Creates complete dependency on the institution. <br><br><strong>Internal reading:</strong> The "I am" speaking is Christ consciousness — the awakened state Jesus embodied and said was available to all. The way to the Father (Source) is through <em>this consciousness</em> — which you activate within yourself. <strong>Same verse. Opposite meaning. Same text.</strong></div>
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span class="takeaway-label">Module XI Takeaway</span>
+    <p class="takeaway-text">You are the 13th — the awakened center of your own internal council. Sovereignty is the ongoing practice of making internal authority primary while remaining fully engaged with the world. Liberation is not escaping life — it is living it from a fundamentally different operating center.</p>
+  </div>
+</section>
+
+<!-- MODULE 12 -->
+<section id="module-12" class="module-section">
+  <div class="module-header">
+    <span class="module-label">Module XII · 10 Minutes</span>
+    <h2 class="module-title">Building SunFlow</h2>
+    <div class="module-subtitle">Why this matters now · Your role · The collective awakening</div>
+  </div>
+  <div class="divider"><span class="divider-sym">🌊</span></div>
+
+  <div class="sub-header">12.1 The Complete Picture</div>
+  <div class="module-body">
+    <table class="compare-table">
+      <thead><tr><th>Layer of Control</th><th>The Mechanism</th><th>The Exit</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Political</strong></td><td>Left/right binary, manufactured outrage, controlled opposition</td><td>Recognize both sides serve the same system; exit the cage</td></tr>
+        <tr><td><strong>Religious</strong></td><td>External savior, sin guilt, hell fear, institutional dependency</td><td>Internal path; this course; direct knowing</td></tr>
+        <tr><td><strong>Economic</strong></td><td>Asymmetric justice, debt servitude, manufactured scarcity</td><td>Sovereignty, alternative systems, community</td></tr>
+        <tr><td><strong>Consciousness</strong></td><td>Fluoride, EMF, entertainment addiction, distraction</td><td>Activation practices; decalcification; meditation</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sub-header">12.2 Why You Are Here</div>
+  <div class="module-body">
+    <p>You completed this course. That is not accidental. Pattern recognition is a faculty that only activates when it has something real to pattern-match against — and you recognized something real here. That recognition is itself a form of activation.</p>
+    <div class="hl-list">
+      <div class="hl-item"><div class="hl-dot"></div><div><strong>Option 1 — Keep it:</strong> Use this for your own liberation. Valid. The work of one awakened person ripples outward whether you intend it or not.</div></div>
+      <div class="hl-item"><div class="hl-dot"></div><div><strong>Option 2 — Share it:</strong> Teach those who ask. Build community. The timing of collective awakening accelerates when critical mass is reached. You know the threshold when you feel it.</div></div>
+      <div class="hl-item"><div class="hl-dot"></div><div><strong>One caution:</strong> Not everyone is ready. Some will resist. Some will attack. That is not failure — that is the process. Teach those with questions. Let the rest move at their own rhythm.</div></div>
+    </div>
+    <div class="verse-card">
+      <div class="verse-ref">Matthew 10:26 (KJV) <a href="https://www.biblegateway.com/passage/?search=Matthew+10:26&version=KJV" target="_blank">Read Full Verse ↗</a></div>
+      <div class="verse-text">"Fear them not therefore: for there is nothing covered, that shall not be revealed; and hid, that shall not be known."</div>
+      <div class="verse-analysis">The text itself predicts this moment: the hidden will be revealed. You are living in that revelation. The acceleration is not slowing — it is building. <strong>You are part of what it's building toward.</strong></div>
+    </div>
+  </div>
+
+  <div class="takeaway">
+    <span class="takeaway-label">Module XII Takeaway</span>
+    <p class="takeaway-text">SunFlow is not just content — it is a restoration project. Returning to humans what was deliberately taken: the knowledge of their own internal power, sovereignty, and direct access to Source. Your role is to embody it first, then share it with those who are ready to receive it.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     QUIZ
+══════════════════════════════════ -->
+<section id="quiz-section">
+  <div id="course-quiz">
+    <div class="quiz-header">
+      <div class="quiz-badge">Course Completion Assessment</div>
+      <h2 class="quiz-title">Undo The Chains — Final Examination</h2>
+      <p class="quiz-subtitle">Answer 8 or more correctly to complete the course and receive your liberation</p>
+    </div>
+    <div class="quiz-divider">⛓</div>
+    <div id="quiz-questions"></div>
+    <button class="quiz-submit-btn" id="quiz-submit" onclick="submitQuiz()">SUBMIT ANSWERS</button>
+    <div class="quiz-result" id="quiz-result"></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     COMPLETION
+══════════════════════════════════ -->
+<section id="completion">
+  <div class="divider" style="margin-bottom:48px"><span class="divider-sym" style="color:var(--crimson-light)">⛓️‍💥</span></div>
+  <h2 class="completion-title">What You Now Know</h2>
+  <p class="completion-text">You have received what was deliberately taken from you — and from every generation before you who accepted the external reading without questioning it.</p>
+
+  <div class="bibliography-box">
+    <div class="bib-section">
+      <div class="bib-title">Biblical Sources</div>
+      <div class="bib-item">King James Bible — <a href="https://www.biblegateway.com" target="_blank">BibleGateway.com</a></div>
+      <div class="bib-item">Strong's Exhaustive Concordance — <a href="https://biblehub.com/strongs.htm" target="_blank">BibleHub.com</a></div>
+      <div class="bib-item">Nag Hammadi Library — <a href="http://www.gnosis.org/naghamm/nhl.html" target="_blank">gnosis.org</a></div>
+    </div>
+    <div class="bib-section">
+      <div class="bib-title">Historical & Academic</div>
+      <div class="bib-item">Elaine Pagels — <a href="https://www.amazon.com/Gnostic-Gospels-Elaine-Pagels/dp/0679724532" target="_blank">The Gnostic Gospels (1979)</a></div>
+      <div class="bib-item">Bart Ehrman — <a href="https://www.amazon.com/Lost-Christianities-Battles-Scripture-Faiths/dp/0195182499" target="_blank">Lost Christianities (2003)</a></div>
+      <div class="bib-item">Manly P. Hall — <a href="https://www.amazon.com/Secret-Teachings-All-Ages-Encyclopedic/dp/1585422509" target="_blank">The Secret Teachings of All Ages (1928)</a></div>
+      <div class="bib-item">Baigent, Leigh, Lincoln — <a href="https://www.amazon.com/Holy-Blood-Grail-Michael-Baigent/dp/0385338457" target="_blank">The Holy Blood and the Holy Grail (1982)</a></div>
+    </div>
+    <div class="bib-section">
+      <div class="bib-title">Anatomy & Science</div>
+      <div class="bib-item"><a href="https://www.amazon.com/Grays-Anatomy-Students-Richard-Drake/dp/0323934234" target="_blank">Gray's Anatomy</a> — Vertebral structure reference</div>
+      <div class="bib-item">Rick Strassman — <a href="https://www.amazon.com/DMT-Molecule-Revolutionary-Near-Death-Experiences/dp/0892819278" target="_blank">DMT: The Spirit Molecule (2001)</a></div>
+      <div class="bib-item">Jennifer Luke — <a href="https://fluoridealert.org/studies/luke-2001/" target="_blank">Fluoride Deposition in the Pineal Gland (1997/2001)</a></div>
+      <div class="bib-item">NIH — <a href="https://www.ncbi.nlm.nih.gov/books/NBK519007/" target="_blank">Cerebrospinal Fluid Reference</a></div>
+    </div>
+    <div class="bib-section">
+      <div class="bib-title">Eastern & Indigenous Traditions</div>
+      <div class="bib-item">Swami Satyananda Saraswati — <a href="https://www.amazon.com/Kundalini-Tantra-Re-print-Golden-Jubilee/dp/8185787158" target="_blank">Kundalini Tantra</a></div>
+      <div class="bib-item">Jeremy Narby — <a href="https://www.amazon.com/Cosmic-Serpent-DNA-Origins-Knowledge/dp/0874779642" target="_blank">The Cosmic Serpent (1998)</a></div>
+      <div class="bib-item">E.A. Wallis Budge — <a href="https://www.amazon.com/Egyptian-Book-Dead-Penguin-Classics/dp/0140455507" target="_blank">The Egyptian Book of the Dead</a></div>
+      <div class="bib-item">Lao Tzu — <a href="https://www.amazon.com/Tao-Te-Ching-Illustrated-Journey/dp/0711229643" target="_blank">Tao Te Ching</a></div>
+    </div>
+  </div>
+
+  <p class="final-mantra">You are the temple.<br>You are the 13th.<br>You are the resurrected one.<br><br>The kingdom was always within you.<br>You just had to remember.<br><br>Now you have.<br><br>Welcome home.</p>
+  <div class="built-by" style="margin-top:48px">Built with ☀ by <strong>Ron · SunFlow: Reignited</strong></div>
+</section>
+
+<!-- UNLOCK OVERLAY -->
+<div id="unlock-overlay">
+  <div class="unlock-box">
+    <span class="unlock-symbol">⛓️‍💥</span>
+    <h2 class="unlock-title">Chains Undone</h2>
+    <div class="unlock-sub">Course III · Complete</div>
+    <div class="unlock-score" id="unlock-score-text"></div>
+    <div class="unlock-divider"></div>
+    <div class="unlock-next">You have earned access to</div>
+    <div class="unlock-course">Jungian Awakening:<br>The Great Work</div>
+    <button class="unlock-btn" onclick="closeUnlock()">Continue the Journey</button>
+  </div>
+</div>
+
+<script>
+// ── STARFIELD ──────────────────────────────────────────────────
+(function(){
+  var c=document.getElementById('starfield'),ctx=c.getContext('2d'),W,H,stars=[];
+  function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight}
+  resize();window.addEventListener('resize',resize);
+  for(var i=0;i<180;i++)stars.push({x:Math.random(),y:Math.random(),r:Math.random()*1.3+0.3,phase:Math.random()*Math.PI*2,speed:0.0003+Math.random()*0.0005});
+  function draw(t){
+    ctx.clearRect(0,0,W,H);
+    stars.forEach(function(s){
+      var a=0.15+0.35*(0.5+0.5*Math.sin(s.phase+t*s.speed*1000));
+      ctx.beginPath();ctx.arc(s.x*W,s.y*H,s.r,0,Math.PI*2);
+      ctx.fillStyle='rgba(240,200,180,'+a+')';ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+
+// ── READING PROGRESS ───────────────────────────────────────────
+window.addEventListener('scroll',function(){
+  var h=document.documentElement,b=document.body;
+  var total=Math.max(b.scrollHeight,h.scrollHeight)-window.innerHeight;
+  var pct=total>0?(window.scrollY/total)*100:0;
+  document.getElementById('reading-progress').style.width=pct+'%';
+});
+
+// ── HERO CANVAS — Breaking Chains ────────────────────────────
+(function(){
+  var c=document.getElementById('hero-canvas');if(!c)return;
+  var ctx=c.getContext('2d'),W=c.width,H=c.height;
+  var links=[];
+  for(var i=0;i<16;i++){
+    links.push({x:40+i*17,y:H/2,broken:false,breakTime:0,vx:(Math.random()-0.5)*3,vy:-Math.random()*4-2,rot:Math.random()*0.2-0.1});
+  }
+  var breakAt=8,t=0;
+  function drawLink(x,y,a,size,alpha){
+    ctx.save();ctx.translate(x,y);ctx.rotate(a);
+    ctx.globalAlpha=alpha;
+    ctx.beginPath();
+    ctx.ellipse(0,0,size*0.7,size,0,0,Math.PI*2);
+    ctx.strokeStyle='rgba(74,56,32,0.9)';ctx.lineWidth=3;ctx.stroke();
+    ctx.restore();
+  }
+  function draw(time){
+    t=time;
+    ctx.fillStyle='rgba(8,3,10,0.3)';ctx.fillRect(0,0,W,H);
+    var shouldBreak=(Math.sin(time*0.0008)>0.7)&&links[breakAt]&&!links[breakAt].broken;
+    if(shouldBreak){
+      for(var i=breakAt;i<links.length;i++){links[i].broken=true;links[i].breakTime=time;}
+    }
+    links.forEach(function(l,i){
+      if(l.broken){
+        var dt=(time-l.breakTime)*0.001;
+        l.x+=l.vx;l.y+=l.vy+dt*4;
+        if(l.y>H+30){l.y=H/2;l.broken=false;l.x=40+i*17;l.vx=(Math.random()-0.5)*3;l.vy=-Math.random()*4-2;}
+        var alpha=Math.max(0,1-dt*0.5);
+        drawLink(l.x,l.y,time*0.002*l.rot*10,8,alpha*0.6);
+      } else {
+        var wobble=Math.sin(time*0.002+i*0.5)*2;
+        drawLink(l.x,l.y+wobble,Math.sin(time*0.001+i)*0.15,8,0.7);
+        if(i===breakAt){
+          ctx.save();ctx.shadowColor='rgba(192,40,61,0.8)';ctx.shadowBlur=12;
+          drawLink(l.x,l.y+wobble,Math.sin(time*0.001+i)*0.15,8,0.9);
+          ctx.restore();
+        }
+      }
+    });
+    // Golden light at break point
+    if(!links[breakAt].broken){
+      ctx.beginPath();
+      ctx.arc(links[breakAt].x,H/2,4+2*Math.sin(time*0.003),0,Math.PI*2);
+      ctx.fillStyle='rgba(192,40,61,'+(0.4+0.4*Math.sin(time*0.003))+')';
+      ctx.fill();
+    }
+    ctx.fillStyle='rgba(201,168,76,0.3)';ctx.font='10px Cinzel,serif';ctx.textAlign='center';
+    ctx.fillText('THE CHAINS ARE BREAKING',W/2,H-12);
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+
+// ── MODULE 2 — Spine with 33 vertebrae ───────────────────────
+(function(){
+  var c=document.getElementById('canvas-spine');if(!c)return;
+  var ctx=c.getContext('2d'),W=c.width,H=c.height,cx=W/2;
+  var groups=[{label:'Cervical',n:7,color:'#c9a84c'},{label:'Thoracic',n:12,color:'#d4870a'},{label:'Lumbar',n:5,color:'#8b1a2a'},{label:'Sacral',n:5,color:'#c0283d'},{label:'Coccygeal',n:4,color:'#5a1018'}];
+  var verts=[];var y=20;
+  groups.forEach(function(g){
+    for(var i=0;i<g.n;i++){verts.push({y:y,color:g.color,group:g.label,num:verts.length+1});y+=8.5;}
+    y+=6;
+  });
+  function draw(t){
+    ctx.fillStyle='rgba(8,3,10,0.35)';ctx.fillRect(0,0,W,H);
+    // Spine channel
+    ctx.beginPath();ctx.moveTo(cx,15);ctx.lineTo(cx,H-20);
+    ctx.strokeStyle='rgba(139,26,42,0.2)';ctx.lineWidth=8;ctx.stroke();
+    // Ascending energy
+    var energyY=H-20-(((t*0.3)%(H-40)));
+    var grad=ctx.createLinearGradient(cx,energyY-30,cx,energyY);
+    grad.addColorStop(0,'rgba(192,40,61,0)');
+    grad.addColorStop(1,'rgba(192,40,61,0.7)');
+    ctx.beginPath();ctx.moveTo(cx,energyY-30);ctx.lineTo(cx,energyY);
+    ctx.strokeStyle=grad;ctx.lineWidth=4;ctx.stroke();
+    // Vertebrae
+    verts.forEach(function(v,i){
+      var pulse=0.5+0.5*Math.sin(t*0.002+i*0.3);
+      var active=energyY>v.y&&energyY<v.y+20;
+      ctx.beginPath();
+      ctx.roundRect(cx-18,v.y,36,7,2);
+      ctx.fillStyle=active?'rgba(192,40,61,0.8)':v.color+'44';
+      ctx.fill();
+      ctx.strokeStyle=active?'rgba(192,40,61,1)':v.color+'88';
+      ctx.lineWidth=1;ctx.stroke();
+      if(v.num===33){
+        ctx.fillStyle='rgba(240,208,128,0.9)';ctx.font='bold 9px Cinzel,serif';
+        ctx.textAlign='right';ctx.fillText('33',cx-22,v.y+6);
+      }
+    });
+    // Labels
+    var yPos=[30,90,195,238,280];var labels=['Cervical 7','Thoracic 12','Lumbar 5','Sacral 5','Coccygeal 4'];
+    labels.forEach(function(l,i){
+      ctx.fillStyle='rgba(201,168,76,0.45)';ctx.font='9px Cinzel,serif';ctx.textAlign='left';
+      ctx.fillText(l,cx+22,yPos[i]+4);
+    });
+    ctx.fillStyle='rgba(201,168,76,0.4)';ctx.font='9px Cinzel,serif';ctx.textAlign='center';
+    ctx.fillText('33 VERTEBRAE · THE SPINE OF CONSCIOUSNESS',cx,H-4);
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+
+// ── MODULE 3 — Cranial nerves brain map ──────────────────────
+(function(){
+  var c=document.getElementById('canvas-nerves');if(!c)return;
+  var ctx=c.getContext('2d'),W=c.width,H=c.height,cx=W/2,cy=H/2-10;
+  var nerves=[];
+  for(var i=0;i<12;i++){
+    var a=(i/12)*Math.PI*2-Math.PI/2;
+    nerves.push({a:a,r:100,active:false,label:(i+1).toString(),color:i%3===0?'#c9a84c':i%3===1?'#d4870a':'#8b1a2a'});
+  }
+  var activeIdx=0;
+  setInterval(function(){activeIdx=(activeIdx+1)%12;},400);
+  function draw(t){
+    ctx.fillStyle='rgba(8,3,10,0.35)';ctx.fillRect(0,0,W,H);
+    // Brain outline
+    ctx.beginPath();ctx.ellipse(cx,cy-5,70,65,0,0,Math.PI*2);
+    ctx.strokeStyle='rgba(139,26,42,0.2)';ctx.lineWidth=1.5;ctx.stroke();
+    ctx.fillStyle='rgba(139,26,42,0.04)';ctx.fill();
+    nerves.forEach(function(n,i){
+      var px=cx+n.r*Math.cos(n.a+t*0.0003),py=(cy-5)+n.r*Math.sin(n.a+t*0.0003);
+      var bx=cx+68*Math.cos(n.a),by=(cy-5)+65*Math.sin(n.a);
+      var isActive=i===activeIdx;
+      // Connection line
+      ctx.beginPath();ctx.moveTo(bx,by);ctx.lineTo(px,py);
+      ctx.strokeStyle=isActive?n.color+'cc':n.color+'33';
+      ctx.lineWidth=isActive?2:1;ctx.stroke();
+      // Node
+      ctx.beginPath();ctx.arc(px,py,isActive?7:5,0,Math.PI*2);
+      ctx.fillStyle=isActive?n.color:n.color+'66';ctx.fill();
+      ctx.fillStyle=isActive?'rgba(240,220,180,0.9)':'rgba(201,168,76,0.4)';
+      ctx.font=(isActive?'bold ':'')+'9px Cinzel,serif';ctx.textAlign='center';
+      ctx.fillText('CN'+n.label,px,py+18);
+    });
+    // Center
+    ctx.beginPath();ctx.arc(cx,cy-5,10,0,Math.PI*2);
+    ctx.fillStyle='rgba(201,168,76,0.2)';ctx.fill();
+    ctx.fillStyle='rgba(201,168,76,0.8)';ctx.font='bold 8px Cinzel,serif';ctx.textAlign='center';
+    ctx.fillText('YOU',cx,cy-1);
+    ctx.fillStyle='rgba(201,168,76,0.35)';ctx.font='9px Cinzel,serif';
+    ctx.fillText('12 CRANIAL NERVES · 12 DISCIPLES',cx,H-6);
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+
+// ── MODULE 7 — Caduceus ──────────────────────────────────────
+(function(){
+  var c=document.getElementById('canvas-caduceus');if(!c)return;
+  var ctx=c.getContext('2d'),W=c.width,H=c.height,cx=W/2;
+  function draw(t){
+    ctx.fillStyle='rgba(8,3,10,0.35)';ctx.fillRect(0,0,W,H);
+    // Staff (spine)
+    ctx.beginPath();ctx.moveTo(cx,20);ctx.lineTo(cx,H-30);
+    ctx.strokeStyle='rgba(201,168,76,0.5)';ctx.lineWidth=2.5;ctx.stroke();
+    // Two serpents (ida/pingala)
+    ['#c9a84c','#8b1a2a'].forEach(function(col,s){
+      ctx.beginPath();
+      var phase=s*Math.PI;
+      for(var y=20;y<H-30;y+=2){
+        var frac=(y-20)/(H-50);
+        var amp=28*(1-frac*0.5);
+        var x=cx+amp*Math.sin(frac*Math.PI*5+t*0.001+phase);
+        y===20?ctx.moveTo(x,y):ctx.lineTo(x,y);
+      }
+      ctx.strokeStyle=col+'cc';ctx.lineWidth=2.5;ctx.stroke();
+    });
+    // Wings at top
+    [[-1,1]].forEach(function(w){
+      [-1,1].forEach(function(side){
+        ctx.beginPath();ctx.moveTo(cx,35);
+        var cp1x=cx+side*60,cp1y=10,ep1x=cx+side*75,ep1y=25;
+        ctx.quadraticCurveTo(cp1x,cp1y,ep1x,ep1y);
+        ctx.strokeStyle='rgba(201,168,76,0.5)';ctx.lineWidth=1.5;ctx.stroke();
+      });
+    });
+    // Pineal glow at crown
+    var pulse=0.5+0.5*Math.sin(t*0.003);
+    ctx.beginPath();ctx.arc(cx,20,5+3*pulse,0,Math.PI*2);
+    ctx.fillStyle='rgba(192,40,61,'+(0.5+0.4*pulse)+')';ctx.fill();
+    // Labels
+    ctx.fillStyle='rgba(201,168,76,0.45)';ctx.font='9px Cinzel,serif';ctx.textAlign='left';
+    ctx.fillText('Pingala →',cx+32,90);
+    ctx.textAlign='right';ctx.fillText('← Ida',cx-32,130);
+    ctx.textAlign='center';ctx.fillText('Sushumna (Spine)',cx,H-18);
+    ctx.font='8px Cinzel,serif';ctx.fillStyle='rgba(201,168,76,0.3)';
+    ctx.fillText('CADUCEUS · KUNDALINI ANATOMY',cx,H-6);
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+
+// ── MODULE 9 — World traditions convergence ──────────────────
+(function(){
+  var c=document.getElementById('canvas-traditions');if(!c)return;
+  var ctx=c.getContext('2d'),W=c.width,H=c.height,cx=W/2,cy=H/2;
+  var traditions=[
+    {label:'Christianity',color:'#c9a84c',a:0},
+    {label:'Hinduism',color:'#d4870a',a:Math.PI*2/5},
+    {label:'Buddhism',color:'#8b1a2a',a:Math.PI*4/5},
+    {label:'Taoism',color:'#c0283d',a:Math.PI*6/5},
+    {label:'Egyptian',color:'#7a6030',a:Math.PI*8/5}
+  ];
+  function draw(t){
+    ctx.fillStyle='rgba(8,3,10,0.35)';ctx.fillRect(0,0,W,H);
+    var r=90;
+    // Convergence lines to center
+    traditions.forEach(function(tr,i){
+      var px=cx+r*Math.cos(tr.a+t*0.0004),py=cy+r*Math.sin(tr.a+t*0.0004);
+      var pulse=0.4+0.3*Math.sin(t*0.002+i);
+      ctx.beginPath();ctx.moveTo(px,py);ctx.lineTo(cx,cy);
+      ctx.strokeStyle=tr.color+(Math.floor(pulse*255).toString(16).padStart(2,'0'));
+      ctx.lineWidth=1;ctx.stroke();
+      ctx.beginPath();ctx.arc(px,py,18,0,Math.PI*2);
+      ctx.fillStyle=tr.color+'22';ctx.fill();
+      ctx.strokeStyle=tr.color+'88';ctx.lineWidth=1;ctx.stroke();
+      ctx.fillStyle=tr.color+'cc';ctx.font='9px Cinzel,serif';ctx.textAlign='center';
+      ctx.fillText(tr.label,px,py+4);
+    });
+    // Center — universal truth
+    var p=0.5+0.5*Math.sin(t*0.002);
+    ctx.beginPath();ctx.arc(cx,cy,14+4*p,0,Math.PI*2);
+    ctx.fillStyle='rgba(201,168,76,'+(0.3+0.3*p)+')';ctx.fill();
+    ctx.fillStyle='rgba(240,208,128,0.9)';ctx.font='bold 8px Cinzel,serif';ctx.textAlign='center';
+    ctx.fillText('ONE',cx,cy+3);
+    ctx.fillStyle='rgba(201,168,76,0.4)';ctx.font='9px Cinzel,serif';
+    ctx.fillText('ALL TRADITIONS · ONE TRUTH',cx,H-6);
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+
+// ── QUIZ ──────────────────────────────────────────────────────
+var questions=[
+  {q:"In Luke 17:21, the Greek word for 'within' — ἐντὸς (entos) — means:",options:["Outside and above","Inside or internal","Around and surrounding","Between two people"],answer:1},
+  {q:"The word 'Christ' (Χριστός, Christos) derives from the Greek verb chrio, meaning:",answer:1,options:["To save from sin","To anoint with oil","To rise from death","To speak the truth"]},
+  {q:"In Greek, ἁμαρτία (hamartia) — translated as 'sin' — literally means:",answer:2,options:["Eternal moral evil","Conscious rebellion against God","Missing the mark (an archery term)","Unforgivable transgression"]},
+  {q:"The three Hebrew/Greek words mistranslated as 'hell' are:",answer:0,options:["Sheol, Hades, and Gehenna","Gehenna, Tartarus, and Abyss","Hades, Abaddon, and Sheol","Sheol, Gehenna, and Apollyon"]},
+  {q:"The Vatican's Pigna Courtyard contains a massive bronze symbol of the:",answer:3,options:["Holy Trinity","Resurrection of Christ","Catholic Church's authority","Pineal gland (pine cone shape)"]},
+  {q:"The medical Caduceus — two serpents around a staff with wings — maps anatomically to:",answer:1,options:["The DNA double helix structure","Kundalini: spine (staff) and ida/pingala channels (serpents)","The cardiovascular circulatory system","Ancient Roman mythology with no anatomical meaning"]},
+  {q:"Golgotha (where the crucifixion occurs) translates from Aramaic and Greek to:",answer:2,options:["Hill of suffering","Place of redemption","Place of a skull","Valley of sacrifice"]},
+  {q:"The 12 disciples, interpreted internally, correspond most directly to:",answer:0,options:["The 12 cranial nerves / 12 aspects of consciousness","12 historical disciples of Jesus","The 12 tribes of Israel","The 12 zodiac signs"]},
+  {q:"The 'Sacred Secretion' in esoteric anatomy refers to the monthly activation of:",answer:1,options:["Hormone production in the endocrine system","Pineal/pituitary-produced cerebrospinal fluid that descends and ascends the 33 vertebrae","Melatonin release during REM sleep","The digestive system's enzymatic process"]},
+  {q:"When Galatians 2:20 says 'I am crucified with Christ' — this is written in what grammatical tense?",answer:2,options:["Past tense — referring to a historical event","Future tense — referring to physical death","Present tense — an ongoing internal process","Conditional tense — a spiritual aspiration"]},
+  {q:"December 25 was chosen to mark Jesus's birth because it corresponds to:",answer:0,options:["The winter solstice / annual 'resurrection of the sun' (3 days after its lowest point)","Historical Roman census records from Bethlehem","The date of the Council of Nicaea's agreement","An astronomical sign visible in Jerusalem in 4 BCE"]},
+  {q:"The Council of Nicaea (325 CE) excluded Gnostic texts primarily because they taught:",answer:2,options:["Polytheism and idol worship","Violence against Roman authorities","Direct internal access to divinity — no institutional intermediary required","Jewish dietary laws incompatible with Christianity"]}
+];
+
+var selected=new Array(questions.length).fill(-1);
+var submitted=false;
+
+function buildQuiz(){
+  var html='';
+  questions.forEach(function(q,i){
+    html+='<div class="question-block" id="qb-'+i+'">';
+    html+='<div class="question-number">Question '+(i+1)+' of '+questions.length+'</div>';
+    html+='<div class="question-text">'+q.q+'</div>';
+    html+='<div class="options-grid">';
+    var letters=['A','B','C','D'];
+    q.options.forEach(function(opt,j){
+      html+='<div class="quiz-option" data-q="'+i+'" data-a="'+j+'" onclick="selectOption(this,'+i+','+j+')">';
+      html+='<span class="option-letter">'+letters[j]+'</span><span>'+opt+'</span></div>';
+    });
+    html+='</div></div>';
+  });
+  document.getElementById('quiz-questions').innerHTML=html;
+}
+
+function selectOption(el,q,a){
+  if(submitted)return;
+  document.querySelectorAll('[data-q="'+q+'"]').forEach(function(o){o.classList.remove('selected');});
+  el.classList.add('selected');
+  selected[q]=a;
+}
+
+function submitQuiz(){
+  if(submitted)return;
+  var unanswered=selected.filter(function(s){return s===-1;}).length;
+  if(unanswered>0){alert('Please answer all '+questions.length+' questions before submitting. You have '+unanswered+' unanswered.');return;}
+  submitted=true;
+  document.getElementById('quiz-submit').disabled=true;
+  var score=0;
+  selected.forEach(function(ans,i){if(ans===questions[i].answer)score++;});
+  var passed=score>=8;
+  // Reveal answers
+  document.querySelectorAll('.quiz-option').forEach(function(opt){
+    var q=parseInt(opt.dataset.q),a=parseInt(opt.dataset.a);
+    if(a===questions[q].answer)opt.classList.add('correct');
+    else if(a===selected[q]&&a!==questions[q].answer)opt.classList.add('wrong');
+  });
+  var result=document.getElementById('quiz-result');
+  result.className='quiz-result show '+(passed?'result-pass':'result-fail');
+  if(passed){
+    result.innerHTML='<div class="result-score" style="color:var(--gold-light)">'+score+'/12</div><div class="result-label" style="color:var(--crimson-light)">⛓️‍💥 CHAINS UNDONE · COURSE COMPLETE</div><p class="result-msg">You have received the internal teaching. The kingdom has always been within you — you just had to remember. The next course is now unlocked.</p>';
+    UserDefaults_set('course_undo_chains_complete',true);
+    UserDefaults_set('course_undo_chains_score',score);
+    setTimeout(function(){showUnlock(score);},1200);
+  } else {
+    result.innerHTML='<div class="result-score" style="color:var(--crimson-light)">'+score+'/12</div><div class="result-label" style="color:var(--crimson-light)">REVIEW AND RETURN</div><p class="result-msg">You got '+score+' of 12 correct. The correct answers are highlighted above. Review the indicated modules and take the examination again — the truth deepens with each pass.</p><button class="retry-btn" onclick="retryQuiz()">RETRY EXAMINATION</button>';
+  }
+  if(window.webkit&&window.webkit.messageHandlers&&window.webkit.messageHandlers.aperture){
+    window.webkit.messageHandlers.aperture.postMessage({type:'quizResult',score:score,total:12,passed:passed});
+  }
+}
+
+function retryQuiz(){
+  submitted=false;selected=new Array(questions.length).fill(-1);
+  document.getElementById('quiz-submit').disabled=false;
+  document.getElementById('quiz-result').className='quiz-result';
+  buildQuiz();
+  if(window.webkit&&window.webkit.messageHandlers&&window.webkit.messageHandlers.aperture){
+    window.webkit.messageHandlers.aperture.postMessage({type:'injectQuiz'});
+  }
+}
+
+function UserDefaults_set(key,val){
+  try{window.webkit&&window.webkit.messageHandlers&&window.webkit.messageHandlers.aperture&&
+    window.webkit.messageHandlers.aperture.postMessage({type:'userDefaults',key:key,value:val});}catch(e){}
+}
+
+function showUnlock(score){
+  document.getElementById('unlock-score-text').textContent=score+'/12 correct · Mastery confirmed';
+  document.getElementById('unlock-overlay').classList.add('show');
+}
+function closeUnlock(){document.getElementById('unlock-overlay').classList.remove('show');}
+
+buildQuiz();
+
+// ── IntersectionObserver for reveal + nav dots ────────────────
+(function(){
+  var ids=['hero','modules-overview','module-1','module-2','module-3','module-4','module-5','module-6','module-7','module-8','module-9','module-10','module-11','module-12','completion'];
+  var dots=document.querySelectorAll('.nav-dot');
+  function scrollTo(id){document.getElementById(id)&&document.getElementById(id).scrollIntoView({behavior:'smooth'});}
+  window.scrollTo=scrollTo;
+  dots.forEach(function(d){d.addEventListener('click',function(){scrollTo(d.dataset.target);});});
+  var navObs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        var idx=ids.indexOf(e.target.id);
+        if(idx>=0)dots.forEach(function(d,i){d.classList.toggle('active',i===idx);});
+        if(e.target.classList.contains('module-section'))e.target.classList.add('visible');
+      }
+    });
+  },{threshold:0.15});
+  ids.forEach(function(id){var el=document.getElementById(id);if(el)navObs.observe(el);});
+  // Quiz reveal
+  var quizObs=new IntersectionObserver(function(e){e.forEach(function(en){if(en.isIntersecting)en.target.classList.add('quiz-visible');});},{threshold:0.05});
+  var quiz=document.getElementById('course-quiz');if(quiz)quizObs.observe(quiz);
+  // Module completion checkmarks (mark as "read" when scrolled past 80%)
+  var modObs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting&&e.intersectionRatio>0.5){
+        var num=e.target.id.replace('module-','');
+        var chk=document.getElementById('check-'+num);
+        if(chk)chk.classList.add('done');
+      }
+    });
+  },{threshold:0.5});
+  for(var i=1;i<=12;i++){var m=document.getElementById('module-'+i);if(m)modObs.observe(m);}
+})();
+
+// ── Citation toggles ─────────────────────────────────────────
+function toggleCitation(el){
+  el.classList.toggle('open');
+  var c=el.nextElementSibling;
+  c.classList.toggle('open');
+}
+</script>
+</body>
+</html>

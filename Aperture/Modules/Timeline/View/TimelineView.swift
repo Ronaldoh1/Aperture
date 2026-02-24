@@ -42,6 +42,7 @@ struct TimelineView: View {
     @State private var dragonMessage: String = ""
     @State private var messageIndex: Int = 0
     @State private var showDescentAnimation: Bool = false
+    @State private var showNowIntroCard: Bool = false
     
     // 3-dot menu state
     @State private var showMenu: Bool = false
@@ -76,6 +77,9 @@ struct TimelineView: View {
                     ShenronDescentView {
                         withAnimation(.spring(response: 0.6, dampingFraction: 0.8)) {
                             showDescentAnimation = false
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                            showNowIntroCard = true
+                        }
                         }
                     }
                     .transition(.opacity)
@@ -112,12 +116,26 @@ struct TimelineView: View {
                     }
                 }
                 
+                // NOW intro card — shows on first load, dissolves to NOW position
+                if showNowIntroCard {
+                    TimelineNowIntroCard {
+                        showNowIntroCard = false
+                        // Snap to era 0 (NOW) after card dissolves
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                            jumpToEra(0)
+                        }
+                    }
+                    .transition(.opacity)
+                    .zIndex(10)
+                }
+
                 // 3-dot menu overlay (always accessible when timeline is showing)
                 if hasChosenInterval && !showDescentAnimation {
                     timelineMenuOverlay
                 }
                 
             }
+            .coordinateSpace(name: "timelineZStack")
             .navigationTitle("Timeline")
             .navigationBarTitleDisplayMode(.inline)
             .sheet(isPresented: $showDetail) {
@@ -147,6 +165,10 @@ struct TimelineView: View {
                 // Returning user — go straight to timeline
                 dragonState = .descending
                 dragonMessage = ""
+                // Show NOW intro card after brief delay
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                    showNowIntroCard = true
+                }
                 // Show avatar setup if first time
                 if !avatarManager.hasCompletedSetup {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
@@ -554,10 +576,10 @@ struct TimelineView: View {
                                 GeometryReader { geo in
                                     Color.clear
                                         .onChange(of: scrollOffset) {
-                                            cardScreenPositions[index] = geo.frame(in: .global).midY
+                                            cardScreenPositions[index] = geo.frame(in: .named("timelineZStack")).midY
                                         }
                                         .onAppear {
-                                            cardScreenPositions[index] = geo.frame(in: .global).midY
+                                            cardScreenPositions[index] = geo.frame(in: .named("timelineZStack")).midY
                                         }
                                 }
                             )
@@ -600,7 +622,7 @@ struct TimelineView: View {
             era: tappedEraIndex == nil ? nil : currentEra,
             avatarManager: avatarManager
         )
-        .position(x: 80, y: arrowY)
+        .position(x: 19, y: arrowY)
         .allowsHitTesting(false)
         .animation(.spring(response: 0.4, dampingFraction: 0.75), value: tappedEraIndex)
         .animation(.easeOut(duration: 0.1), value: scrollOffset)

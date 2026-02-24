@@ -17,8 +17,8 @@ struct TutorialPageView: View {
                 .foregroundStyle(
                     LinearGradient(
                         colors: [
-                            Palette.primary.cyan,
-                            Palette.primary.violet.opacity(0.85)
+                            Color(hex: "#C9A84C"),          // warm gold
+                            Palette.primary.violet.opacity(0.75)
                         ],
                         startPoint: .topLeading,
                         endPoint: .bottomTrailing
@@ -28,7 +28,7 @@ struct TutorialPageView: View {
 
             Text(page.title)
                 .font(.system(size: 34, weight: .bold, design: .rounded))
-                .foregroundColor(Palette.text.primary)
+                .foregroundColor(Color(hex: "#E8DFC8"))     // warm cream — easier on eyes than pure white
                 .multilineTextAlignment(.center)
                 .lineLimit(2)
                 .minimumScaleFactor(0.80)
@@ -36,7 +36,7 @@ struct TutorialPageView: View {
 
             Text(page.subtitle)
                 .font(.system(size: 16, weight: .medium, design: .rounded))
-                .foregroundColor(Palette.text.secondary)
+                .foregroundColor(Color(hex: "#A89878").opacity(0.90))  // muted warm tan
                 .multilineTextAlignment(.center)
                 .lineLimit(3)
                 .minimumScaleFactor(0.85)

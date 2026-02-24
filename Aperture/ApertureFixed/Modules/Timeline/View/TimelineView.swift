@@ -256,6 +256,18 @@ struct TimelineView: View {
                             ) {
                                 showAvatarSetup = true
                             }
+                            
+                            Divider()
+                                .background(Palette.accent.gold.opacity(0.2))
+                            
+                            menuItem(
+                                icon: "hourglass.tophalf.filled",
+                                label: "Switch Mode",
+                                delay: 0.2
+                            ) {
+                                // Post notification — TimelineEntryView listens to show selector
+                                NotificationCenter.default.post(name: .timelineRequestModeSwitch, object: nil)
+                            }
                         }
                         .background(
                             RoundedRectangle(cornerRadius: 14, style: .continuous)

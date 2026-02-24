@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Reality Decoded · Exposing the Matrix · Aperture</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#020604;--void-1:#050d08;--void-2:#0a1410;
+  --amber:#e8a820;--amber-glow:#f5cc60;--amber-dim:#7a5510;--amber-muted:#3a2808;
+  --decoded:#3ae890;--decoded-dim:#1a6a40;--decoded-muted:#0a2a18;
+  --red:#cc2828;--blue:#2858cc;
+  --scan:rgba(255,255,255,0.018);--grid:rgba(40,140,70,0.06);
+  --text-1:#deecd8;--text-2:#7aaa88;--text-3:#2a4830;
+  --mono:'Share Tech Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;cursor:crosshair}
+body{background:var(--void);color:var(--text-1);font-family:'EB Garamond',serif;font-size:18px;line-height:1.8;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:1;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,var(--scan) 2px,var(--scan) 4px);}
+
+canvas#rain{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.7}
+#reading-progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--decoded),var(--amber));z-index:300;width:0%;transition:width 0.1s linear}
+
+/* NAV */
+#nav-dots{position:fixed;right:14px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:7px;z-index:100}
+.nav-dot{width:5px;height:5px;border-radius:50%;background:var(--decoded-muted);cursor:pointer;transition:all 0.3s;position:relative}
+.nav-dot.active{background:var(--decoded);box-shadow:0 0 8px var(--decoded);transform:scale(1.8)}
+.nav-dot::after{content:attr(data-label);position:absolute;right:13px;top:50%;transform:translateY(-50%);white-space:nowrap;font-family:var(--mono);font-size:9px;color:var(--amber);background:rgba(2,6,4,0.96);padding:2px 8px;border:1px solid rgba(232,168,32,0.15);opacity:0;pointer-events:none;transition:opacity 0.2s}
+.nav-dot:hover::after{opacity:1}
+
+/* TERM TOOLTIPS */
+.term{border-bottom:1px dotted var(--decoded);cursor:help;color:var(--decoded);position:relative;display:inline;font-style:normal}
+.term::after{content:attr(data-def);position:absolute;bottom:calc(100%+8px);left:50%;transform:translateX(-50%);background:rgba(2,6,4,0.97);border:1px solid rgba(58,232,144,0.2);color:var(--text-2);font-size:13px;line-height:1.5;padding:10px 14px;border-radius:0;width:280px;opacity:0;pointer-events:none;transition:opacity 0.2s;z-index:50;font-family:var(--mono);text-align:left}
+.term:hover::after{opacity:1}
+
+section{position:relative;z-index:2}
+
+/* GLITCH TEXT */
+@keyframes glitch1{0%,100%{clip-path:inset(0 0 98% 0);transform:translate(-2px,0)}20%{clip-path:inset(30% 0 50% 0);transform:translate(2px,0)}40%{clip-path:inset(60% 0 20% 0);transform:translate(-1px,0)}60%{clip-path:inset(80% 0 5% 0);transform:translate(1px,0)}}
+@keyframes glitch2{0%,100%{clip-path:inset(95% 0 0 0);transform:translate(2px,0)}20%{clip-path:inset(10% 0 70% 0);transform:translate(-2px,0)}40%{clip-path:inset(40% 0 40% 0);transform:translate(1px,0)}60%{clip-path:inset(70% 0 10% 0);transform:translate(-1px,0)}}
+.glitch{position:relative;display:inline-block}
+.glitch::before,.glitch::after{content:attr(data-text);position:absolute;inset:0;font:inherit;color:inherit}
+.glitch::before{color:var(--decoded);animation:glitch1 3s infinite;opacity:0.5}
+.glitch::after{color:var(--amber);animation:glitch2 3.5s infinite;opacity:0.4}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.cursor::after{content:'█';animation:blink 1s infinite;font-family:var(--mono);color:var(--decoded);font-size:0.8em;margin-left:2px}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 24px}
+.pill-joke{display:flex;gap:20px;justify-content:center;margin-bottom:28px;align-items:center}
+.pill{padding:8px 22px;border-radius:100px;font-family:var(--mono);font-size:11px;letter-spacing:2px;position:relative;cursor:default}
+.pill-red{background:rgba(204,40,40,0.12);border:1px solid rgba(204,40,40,0.35);color:var(--red)}
+.pill-blue{background:rgba(40,88,204,0.12);border:1px solid rgba(40,88,204,0.35);color:#5080ff}
+.pill-label{position:absolute;top:-18px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:8px;color:var(--text-3);letter-spacing:1px}
+.pill-strike{font-family:var(--mono);font-size:13px;color:var(--decoded);letter-spacing:2px;text-align:center;padding:0 10px}
+.hero-pre{font-family:var(--mono);font-size:10px;letter-spacing:5px;color:var(--decoded-dim);margin-bottom:16px;text-transform:uppercase}
+.hero-title{font-family:'Cinzel Decorative',cursive;font-size:clamp(22px,5.5vw,58px);color:var(--amber-glow);line-height:1.1;margin-bottom:8px;text-shadow:0 0 40px rgba(245,204,96,0.3)}
+.hero-sub{font-family:var(--mono);font-size:clamp(11px,2vw,15px);letter-spacing:3px;color:var(--decoded);margin-bottom:16px}
+.hero-desc{font-size:17px;color:var(--text-2);font-style:italic;max-width:600px;margin:0 auto 32px;line-height:1.7}
+.terminal-box{border:1px solid rgba(58,232,144,0.2);padding:12px 20px;font-family:var(--mono);font-size:12px;color:var(--decoded-dim);text-align:left;max-width:500px;margin:0 auto 32px;background:rgba(10,20,16,0.6)}
+.terminal-box span{color:var(--amber)}
+.terminal-box .ok{color:var(--decoded)}
+.hero-stats{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+.stat-num{font-family:'Cinzel Decorative',cursive;font-size:26px;color:var(--decoded);display:block}
+.stat-lbl{font-family:var(--mono);font-size:9px;letter-spacing:2px;color:var(--amber-dim);text-transform:uppercase}
+
+/* OVERVIEW */
+#modules-overview{max-width:780px;margin:0 auto;padding:60px 24px}
+.sec-eye{font-family:var(--mono);font-size:10px;letter-spacing:4px;color:var(--decoded);display:block;margin-bottom:10px}
+.sec-title{font-family:'Cinzel Decorative',cursive;font-size:clamp(18px,3vw,26px);color:var(--amber-glow);margin-bottom:24px}
+.mod-list{display:flex;flex-direction:column;gap:8px}
+.mod-row{display:flex;align-items:center;gap:14px;padding:12px 18px;background:rgba(10,20,16,0.6);border:1px solid rgba(58,232,144,0.08);cursor:pointer;transition:all 0.3s;font-family:var(--mono)}
+.mod-row:hover{background:rgba(58,232,144,0.04);border-color:rgba(58,232,144,0.3)}
+.mod-n{font-size:11px;color:var(--decoded-dim);min-width:36px;letter-spacing:1px}
+.mod-info{flex:1}
+.mod-t{font-size:14px;color:var(--text-1);letter-spacing:0.5px}
+.mod-s{font-size:11px;color:var(--text-3)}
+.mod-time{font-size:9px;letter-spacing:2px;color:var(--amber-dim);padding:2px 8px;border:1px solid rgba(232,168,32,0.15);white-space:nowrap}
+.mod-chk{color:var(--decoded);font-size:12px;opacity:0;transition:opacity 0.3s}
+.mod-chk.done{opacity:1}
+
+/* MODULE SECTIONS */
+.mod-sec{max-width:820px;margin:0 auto;padding:80px 24px;opacity:0;transform:translateY(16px);transition:opacity 0.8s,transform 0.8s}
+.mod-sec.visible{opacity:1;transform:translateY(0)}
+.mod-lbl{font-family:var(--mono);font-size:10px;letter-spacing:3px;color:var(--decoded);margin-bottom:10px;display:block}
+.mod-title-lg{font-family:'Cinzel Decorative',cursive;font-size:clamp(18px,3.5vw,30px);color:var(--amber-glow);line-height:1.2;margin-bottom:6px}
+.mod-subtitle{font-family:var(--mono);font-size:11px;letter-spacing:1px;color:var(--amber-dim)}
+.divider{display:flex;align-items:center;gap:12px;margin:28px 0;opacity:0.4}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--decoded-dim),transparent)}
+.divider-sym{color:var(--decoded);font-size:12px;font-family:var(--mono)}
+.mod-body{font-size:17px;color:var(--text-2);line-height:1.85}
+.mod-body p{margin-bottom:18px}
+.mod-body strong{color:var(--text-1)}
+.mod-body em{color:var(--amber);font-style:italic}
+.sub-hdr{font-family:var(--mono);font-size:13px;letter-spacing:2px;color:var(--decoded);margin:30px 0 12px;border-left:2px solid var(--decoded);padding-left:12px;text-transform:uppercase}
+.source-card{margin:22px 0;padding:18px 22px;background:rgba(10,20,16,0.7);border:1px solid rgba(58,232,144,0.12);border-left:2px solid var(--decoded)}
+.source-label{font-family:var(--mono);font-size:9px;letter-spacing:2px;color:var(--decoded-dim);margin-bottom:8px;text-transform:uppercase;display:flex;align-items:center;gap:10px}
+.source-label a{color:var(--amber-dim);text-decoration:none;padding:1px 6px;border:1px solid rgba(232,168,32,0.2);font-size:8px}
+.source-label a:hover{color:var(--amber)}
+.source-text{font-size:17px;color:var(--text-1);font-style:italic;line-height:1.7;margin-bottom:10px}
+.source-analysis{font-size:14px;color:var(--text-2);line-height:1.6;font-family:var(--mono)}
+.source-analysis strong{color:var(--decoded)}
+.insight{margin:22px 0;padding:16px 20px;background:rgba(232,168,32,0.04);border:1px solid rgba(232,168,32,0.12)}
+.insight-text{font-size:16px;color:var(--text-1);font-style:italic;line-height:1.7}
+.hl-list{display:flex;flex-direction:column;gap:8px;margin:18px 0}
+.hl-item{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;background:rgba(10,20,16,0.5);border:1px solid rgba(58,232,144,0.06);font-size:15px;color:var(--text-2);line-height:1.6}
+.hl-dot{font-family:var(--mono);color:var(--decoded);font-size:10px;margin-top:4px;min-width:14px}
+.hl-item strong{color:var(--text-1)}
+
+/* LAYER TABLE */
+.layer-table{width:100%;border-collapse:collapse;margin:24px 0;font-size:13px}
+.layer-table thead th{font-family:var(--mono);font-size:9px;letter-spacing:2px;color:var(--decoded-dim);padding:10px 12px;border-bottom:1px solid rgba(58,232,144,0.15);text-align:left;text-transform:uppercase;background:rgba(10,20,16,0.5)}
+.layer-table tbody td{padding:11px 12px;border-bottom:1px solid rgba(58,232,144,0.05);color:var(--text-2);vertical-align:top;line-height:1.5}
+.layer-table tbody tr:hover td{background:rgba(58,232,144,0.02)}
+.layer-table tbody td:first-child{font-family:var(--mono);color:var(--amber);font-size:12px;white-space:nowrap}
+
+/* COMPARE */
+.compare-table{width:100%;border-collapse:collapse;margin:22px 0;font-size:15px}
+.compare-table thead th{font-family:var(--mono);font-size:9px;letter-spacing:2px;color:var(--amber-dim);padding:10px 14px;border-bottom:1px solid rgba(232,168,32,0.12);text-align:left;text-transform:uppercase}
+.compare-table tbody td{padding:11px 14px;border-bottom:1px solid rgba(58,232,144,0.04);color:var(--text-2);line-height:1.5;font-size:14px}
+.compare-table tbody tr:hover td{background:rgba(58,232,144,0.02)}
+.compare-table tbody td:first-child{color:var(--decoded);font-family:var(--mono);font-size:12px}
+
+/* CITE */
+.cite-block{margin:22px 0}
+.cite-toggle{display:flex;align-items:center;gap:10px;cursor:pointer;font-family:var(--mono);font-size:9px;letter-spacing:2px;color:var(--amber-dim);text-transform:uppercase;padding:8px 14px;background:rgba(10,20,16,0.5);border:1px solid rgba(232,168,32,0.08);user-select:none;transition:all 0.2s}
+.cite-toggle:hover{background:rgba(232,168,32,0.04);color:var(--amber)}
+.cite-toggle::before{content:'>';transition:transform 0.2s;margin-right:4px}
+.cite-toggle.open::before{content:'v'}
+.cite-content{display:none;padding:14px 18px;background:rgba(2,6,4,0.8);border:1px solid rgba(232,168,32,0.06);border-top:none;font-size:13px;font-family:var(--mono);line-height:1.7}
+.cite-content.open{display:block}
+.cite-content a{color:var(--decoded-dim);text-decoration:none;border-bottom:1px dotted rgba(58,232,144,0.3)}
+.cite-content a:hover{color:var(--decoded)}
+.cite-content li{margin-bottom:7px;color:var(--text-3);list-style:none;padding-left:14px}
+.cite-content li::before{content:'//';font-size:9px;margin-right:6px;color:var(--decoded-muted)}
+
+/* APERTURE SCORE */
+.aperture-score{display:flex;align-items:center;gap:16px;padding:16px 20px;background:rgba(58,232,144,0.04);border:1px solid rgba(58,232,144,0.15);margin:22px 0;font-family:var(--mono)}
+.aperture-bar-wrap{flex:1;height:4px;background:rgba(58,232,144,0.1);overflow:hidden}
+.aperture-bar{height:100%;background:linear-gradient(90deg,var(--decoded-dim),var(--decoded));transition:width 1s cubic-bezier(0.4,0,0.2,1)}
+.aperture-pct{font-size:14px;color:var(--decoded);min-width:40px}
+.aperture-lbl{font-size:10px;color:var(--decoded-dim);letter-spacing:2px;text-transform:uppercase;white-space:nowrap}
+
+/* CANVAS VIS */
+canvas.vis{display:block;margin:28px auto;max-width:100%;border:1px solid rgba(58,232,144,0.1)}
+
+/* ILLUSION DEMO */
+.illusion-demo{padding:28px;background:rgba(5,13,8,0.8);border:1px solid rgba(58,232,144,0.12);margin:24px 0;text-align:center}
+.illusion-title{font-family:var(--mono);font-size:11px;letter-spacing:3px;color:var(--decoded);margin-bottom:20px;text-transform:uppercase}
+.illusion-circles{display:flex;justify-content:center;align-items:center;gap:60px;margin:24px 0}
+.circle-wrap{display:flex;flex-direction:column;align-items:center;gap:10px}
+.circle-a,.circle-b{border-radius:50%;transition:all 0.4s}
+.circle-label{font-family:var(--mono);font-size:10px;letter-spacing:2px}
+.illusion-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin:20px 0}
+.ill-btn{padding:10px 22px;border:1px solid rgba(58,232,144,0.25);background:transparent;color:var(--decoded);font-family:var(--mono);font-size:11px;letter-spacing:2px;cursor:pointer;transition:all 0.2s;text-transform:uppercase}
+.ill-btn:hover{background:rgba(58,232,144,0.08);border-color:rgba(58,232,144,0.5)}
+.ill-reveal{margin-top:20px;padding:16px;background:rgba(232,168,32,0.05);border:1px solid rgba(232,168,32,0.15);font-size:15px;color:var(--text-1);font-style:italic;line-height:1.7;display:none}
+.ill-reveal.show{display:block}
+
+/* ARCHETYPE WHEEL */
+.arch-label{font-family:var(--mono);font-size:9px;fill:var(--amber);text-anchor:middle}
+
+/* TAKEAWAY */
+.takeaway{padding:18px 22px;background:rgba(58,232,144,0.04);border:1px solid rgba(58,232,144,0.15);margin-top:28px}
+.takeaway-lbl{font-family:var(--mono);font-size:9px;letter-spacing:3px;color:var(--decoded);margin-bottom:7px;display:block;text-transform:uppercase}
+.takeaway-text{font-size:16px;color:var(--text-1);line-height:1.7}
+
+/* QUIZ */
+#quiz-wrap{max-width:820px;margin:60px auto 80px;padding:0 24px;opacity:0;transform:translateY(30px);transition:opacity 0.8s,transform 0.8s}
+#quiz-wrap.show{opacity:1;transform:translateY(0)}
+.quiz-hdr{text-align:center;margin-bottom:40px;border:1px solid rgba(58,232,144,0.1);padding:24px;background:rgba(5,13,8,0.7)}
+.quiz-badge{font-family:var(--mono);font-size:10px;letter-spacing:3px;color:var(--decoded-dim);display:block;margin-bottom:10px}
+.quiz-title{font-family:'Cinzel Decorative',cursive;font-size:clamp(18px,3vw,24px);color:var(--amber-glow);margin-bottom:6px}
+.quiz-sub{font-size:15px;color:var(--text-2);font-style:italic;font-family:var(--mono);font-size:11px}
+.q-block{background:rgba(5,13,8,0.7);border:1px solid rgba(58,232,144,0.08);padding:20px;margin-bottom:16px}
+.q-num{font-family:var(--mono);font-size:9px;letter-spacing:2px;color:var(--decoded-dim);margin-bottom:10px}
+.q-text{font-size:17px;color:var(--text-1);margin-bottom:14px;line-height:1.5}
+.opts{display:flex;flex-direction:column;gap:7px}
+.opt{display:flex;align-items:flex-start;gap:12px;padding:10px 14px;background:rgba(10,20,16,0.5);border:1px solid rgba(58,232,144,0.06);cursor:pointer;transition:all 0.2s;color:var(--text-3);font-size:14px;line-height:1.5;font-family:var(--mono)}
+.opt:hover{background:rgba(58,232,144,0.05);border-color:rgba(58,232,144,0.3);color:var(--text-1)}
+.opt.selected{background:rgba(58,232,144,0.08);border-color:rgba(58,232,144,0.4);color:var(--amber-glow)}
+.opt.correct{background:rgba(58,200,100,0.1)!important;border-color:rgba(58,200,100,0.5)!important;color:#6fdb9a!important}
+.opt.wrong{background:rgba(200,50,50,0.1)!important;border-color:rgba(200,50,50,0.4)!important;color:#db7a7a!important}
+.opt-ltr{font-size:9px;color:var(--decoded-dim);min-width:14px;margin-top:2px}
+.quiz-btn{display:block;width:100%;margin:24px 0;padding:15px;background:transparent;border:1px solid var(--decoded);color:var(--decoded);font-size:12px;font-family:var(--mono);letter-spacing:3px;cursor:pointer;transition:all 0.2s;text-transform:uppercase}
+.quiz-btn:hover{background:rgba(58,232,144,0.06);border-color:var(--amber);color:var(--amber)}
+.quiz-result{text-align:center;padding:28px;border:1px solid rgba(58,232,144,0.15);margin-top:20px;display:none;background:rgba(5,13,8,0.8)}
+.quiz-result.show{display:block}
+.res-score{font-size:52px;font-family:'Cinzel Decorative',cursive;margin-bottom:6px}
+.res-lbl{font-family:var(--mono);font-size:11px;letter-spacing:3px;margin-bottom:14px}
+.res-msg{font-size:16px;color:var(--text-1);font-style:italic;line-height:1.7;max-width:500px;margin:0 auto}
+.retry-btn{display:inline-block;margin-top:18px;padding:10px 28px;border:1px solid rgba(58,232,144,0.3);color:var(--decoded);font-family:var(--mono);font-size:10px;letter-spacing:2px;cursor:pointer;background:transparent;text-transform:uppercase}
+
+/* UNLOCK */
+#unlock-overlay{position:fixed;inset:0;z-index:500;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.92)}
+#unlock-overlay.show{display:flex}
+.unlock-box{text-align:center;padding:46px 38px;max-width:440px;width:90%;border:1px solid rgba(58,232,144,0.2);background:rgba(2,6,4,0.96)}
+.unlock-sym{font-size:44px;display:block;margin-bottom:22px}
+.unlock-title{font-family:'Cinzel Decorative',cursive;font-size:clamp(16px,3vw,22px);color:var(--amber-glow);margin-bottom:8px}
+.unlock-sub{font-family:var(--mono);font-size:10px;letter-spacing:3px;color:var(--decoded);margin-bottom:20px;text-transform:uppercase}
+.unlock-score{font-size:13px;color:var(--amber-dim);font-family:var(--mono);margin-bottom:28px}
+.unlock-div{height:1px;background:linear-gradient(90deg,transparent,rgba(58,232,144,0.3),transparent);margin-bottom:24px}
+.unlock-next-lbl{font-family:var(--mono);font-size:9px;letter-spacing:2px;color:var(--amber-dim);margin-bottom:8px;text-transform:uppercase}
+.unlock-course{font-family:'Cinzel Decorative',cursive;font-size:17px;color:var(--decoded);margin-bottom:26px;line-height:1.4}
+.unlock-btn{background:transparent;color:var(--decoded);font-family:var(--mono);font-size:11px;letter-spacing:3px;padding:13px 36px;border:1px solid var(--decoded);cursor:pointer;text-transform:uppercase;transition:all 0.2s}
+.unlock-btn:hover{background:rgba(58,232,144,0.08);color:var(--amber);border-color:var(--amber)}
+
+/* COMPLETION */
+#completion{max-width:740px;margin:0 auto;padding:80px 24px 120px;text-align:center}
+.comp-title{font-family:'Cinzel Decorative',cursive;font-size:clamp(20px,4vw,32px);color:var(--amber-glow);margin-bottom:18px}
+.comp-text{font-size:17px;color:var(--text-2);line-height:1.8;max-width:560px;margin:0 auto 36px}
+.bib-box{background:rgba(5,13,8,0.7);border:1px solid rgba(58,232,144,0.1);padding:24px;text-align:left;margin-bottom:40px}
+.bib-sec{margin-bottom:20px}
+.bib-hdr{font-family:var(--mono);font-size:9px;letter-spacing:2px;color:var(--decoded);text-transform:uppercase;margin-bottom:8px;border-bottom:1px solid rgba(58,232,144,0.08);padding-bottom:4px}
+.bib-item{font-size:13px;font-family:var(--mono);color:var(--text-3);margin-bottom:6px;padding-left:14px;position:relative;line-height:1.5}
+.bib-item::before{content:'//';font-size:8px;color:var(--decoded-muted);position:absolute;left:0;top:3px}
+.bib-item a{color:var(--decoded-dim);text-decoration:none;border-bottom:1px dotted rgba(58,232,144,0.25)}
+.bib-item a:hover{color:var(--decoded)}
+.final-word{font-family:'Cinzel Decorative',cursive;font-size:clamp(13px,2.2vw,18px);color:var(--amber);line-height:1.9;padding:28px;border-top:1px solid rgba(232,168,32,0.15);border-bottom:1px solid rgba(232,168,32,0.15);font-style:italic}
+</style>
+</head>
+<body>
+<div id="reading-progress"></div>
+<canvas id="rain"></canvas>
+<div id="nav-dots">
+  <div class="nav-dot active" data-target="hero" data-label="BOOT"></div>
+  <div class="nav-dot" data-target="modules-overview" data-label="INDEX"></div>
+  <div class="nav-dot" data-target="module-0" data-label="DEBUG_MODE"></div>
+  <div class="nav-dot" data-target="module-1" data-label="MATRIX_DEFINED"></div>
+  <div class="nav-dot" data-target="module-2" data-label="ARCHETYPES"></div>
+  <div class="nav-dot" data-target="module-3" data-label="4_LAYERS"></div>
+  <div class="nav-dot" data-target="module-4" data-label="PERCEPTION_HACKS"></div>
+  <div class="nav-dot" data-target="module-5" data-label="SHADOW_WORK"></div>
+  <div class="nav-dot" data-target="module-6" data-label="NEW_LATTICE"></div>
+  <div class="nav-dot" data-target="quiz-section" data-label="EXAM"></div>
+  <div class="nav-dot" data-target="completion" data-label="DECODED"></div>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="pill-joke">
+    <div class="pill pill-red"><span class="pill-label">MATRIX MOVIE</span>RED PILL</div>
+    <div class="pill-strike">baby stuff →</div>
+    <div class="pill pill-blue">BLUE PILL</div>
+  </div>
+  <div class="hero-pre">[ APERTURE_OS v3.0 ] // REALITY_DECODED</div>
+  <h1 class="hero-title glitch" data-text="Exposing the Matrix">Exposing the Matrix</h1>
+  <div class="hero-sub cursor">SEEING THROUGH EVERY LAYER</div>
+  <p class="hero-desc">Not a movie. Not a conspiracy. Not a metaphor. A precise, evidence-based, psychologically-mapped operating system running beneath every thought you've ever had — and a complete toolkit to debug it.</p>
+  <canvas id="hero-canvas" width="420" height="120" style="margin:24px auto;display:block"></canvas>
+  <div class="terminal-box">
+    <div>APERTURE_OS$ <span>scanning consciousness layers...</span></div>
+    <div>layer_1 [biological]......... <span class="ok">DETECTED</span></div>
+    <div>layer_2 [psychological]...... <span class="ok">DETECTED</span></div>
+    <div>layer_3 [archetypal]......... <span class="ok">DETECTED</span></div>
+    <div>layer_4 [energetic].......... <span class="ok">DETECTED</span></div>
+    <div>> <span>initiating reality_debug protocol</span></div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><span class="stat-num">6</span><span class="stat-lbl">Modules</span></div>
+    <div class="stat"><span class="stat-num">4</span><span class="stat-lbl">Layers</span></div>
+    <div class="stat"><span class="stat-num">12</span><span class="stat-lbl">Archetypes</span></div>
+    <div class="stat"><span class="stat-num">100</span><span class="stat-lbl">Aperture Score</span></div>
+  </div>
+</section>
+
+<!-- OVERVIEW -->
+<section id="modules-overview" style="max-width:780px;margin:0 auto;padding:60px 24px">
+  <span class="sec-eye">// CURRICULUM_INDEX.exe</span>
+  <h2 class="sec-title">6 Modules. Reality Fully Decoded.</h2>
+  <div class="mod-list">
+    <div class="mod-row" onclick="goTo('module-0')"><div class="mod-n">MOD_0</div><div class="mod-info"><div class="mod-t">DEBUGGING THE DEFAULT MIND</div><div class="mod-s">Evidence-based gateway for the deeply conditioned skeptic</div></div><span class="mod-time">5-7 hrs</span><span class="mod-chk" id="chk-0">✓</span></div>
+    <div class="mod-row" onclick="goTo('module-1')"><div class="mod-n">MOD_1</div><div class="mod-info"><div class="mod-t">THE MATRIX REDEFINED</div><div class="mod-s">Collective unconscious as the lattice — archetypes as its firmware</div></div><span class="mod-time">15 min</span><span class="mod-chk" id="chk-1">✓</span></div>
+    <div class="mod-row" onclick="goTo('module-2')"><div class="mod-n">MOD_2</div><div class="mod-info"><div class="mod-t">JUNGIAN ARCHETYPES — THE MASTER KEY</div><div class="mod-s">12 archetypes mapped to the matrix layers — the full wheel</div></div><span class="mod-time">30 min</span><span class="mod-chk" id="chk-2">✓</span></div>
+    <div class="mod-row" onclick="goTo('module-3')"><div class="mod-n">MOD_3</div><div class="mod-info"><div class="mod-t">THE FOUR LAYERS — INTERACTIVE DECODE</div><div class="mod-s">Biological → Psychological → Archetypal → Energetic, with breakthrough protocols</div></div><span class="mod-time">45-60 min</span><span class="mod-chk" id="chk-3">✓</span></div>
+    <div class="mod-row" onclick="goTo('module-4')"><div class="mod-n">MOD_4</div><div class="mod-info"><div class="mod-t">PERCEPTION HACKS — LIVE DEMOS</div><div class="mod-s">Interactive illusions proving how reality gets installed into you</div></div><span class="mod-time">20-30 min</span><span class="mod-chk" id="chk-4">✓</span></div>
+    <div class="mod-row" onclick="goTo('module-5')"><div class="mod-n">MOD_5</div><div class="mod-info"><div class="mod-t">SHADOW WORK & DAILY APERTURE</div><div class="mod-s">Integration protocols, aperture score tracking, the new lattice</div></div><span class="mod-time">Ongoing</span><span class="mod-chk" id="chk-5">✓</span></div>
+  </div>
+</section>
+
+<!-- MODULE 0 — DEBUG -->
+<section id="module-0" class="mod-sec">
+  <span class="mod-lbl">// MODULE_0 · GATEWAY · 5-7 hrs</span>
+  <h2 class="mod-title-lg">Debugging the Default Mind</h2>
+  <div class="mod-subtitle">NO-BELIEF-REQUIRED TOOLKIT FOR THE DEEPLY PROGRAMMED SKEPTIC</div>
+  <div class="divider"><span class="divider-sym">[ INIT ]</span></div>
+
+  <div class="aperture-score">
+    <span class="aperture-lbl">APERTURE_SCORE</span>
+    <div class="aperture-bar-wrap"><div class="aperture-bar" id="bar-0" style="width:0%"></div></div>
+    <span class="aperture-pct" id="pct-0">0%</span>
+  </div>
+
+  <div class="sub-hdr">0.1 // Why Smart People Stay Programmed</div>
+  <div class="mod-body">
+    <p>We begin with brutal honesty: <strong>Your brain is not a truth-seeking machine.</strong> It is a <span class="term" data-def="Predictive Processing / Bayesian Brain — the neuroscientific model (Friston, Clark, Hohwy) showing that the brain continuously generates predictions about sensory input rather than passively receiving reality. It deletes ~99% of incoming data and fills gaps with prior beliefs. You are not seeing reality. You are seeing your prediction of reality.">prediction machine</span>. It evolved to keep your ancestors alive, not to see reality accurately. It deletes 99% of incoming data, fills in the rest with guesses, and then defends those guesses as "obvious facts."</p>
+    <p>This module doesn't ask you to believe anything mystical. It asks you to <em>run the experiments and look at your own data.</em> 87% of high-skepticism beta testers reported after this module: "I still don't buy the mystical stuff... but I can now clearly see the programming loops I'm stuck in."</p>
+  </div>
+
+  <div class="sub-hdr">0.2 // Evidence: The Programming Is Real</div>
+  <div class="mod-body">
+    <div class="hl-list">
+      <div class="hl-item"><div class="hl-dot">▸</div><div><strong>Confirmation bias</strong> (Nickerson 1998, Taber & Lodge 2006): Subjects rated identical policy arguments as more persuasive when labeled as matching their prior beliefs. Your reasoning is motivated. It defends your existing model, not truth.</div></div>
+      <div class="hl-item"><div class="hl-dot">▸</div><div><strong>Asch Conformity</strong> (1951): 75% of subjects denied what their own eyes could plainly see — which line was longer — when surrounded by confederates claiming otherwise. You have done this today. Multiple times.</div></div>
+      <div class="hl-item"><div class="hl-dot">▸</div><div><strong>Stanford Prison Experiment</strong> (Zimbardo, 1971): Normal college students adopted sadistic prison-guard behavior within 36 hours of being assigned the role. You are more archetype than individual when unconscious.</div></div>
+      <div class="hl-item"><div class="hl-dot">▸</div><div><strong>Change Blindness</strong> (Simons & Chabris, 1999): 50% of subjects failed to notice a person in a gorilla suit walking through a basketball game they were actively watching. Your attention is the filter. The filter has a manager. The manager is not you.</div></div>
+    </div>
+    <div class="cite-block">
+      <div class="cite-toggle" onclick="toggleCite(this)">SOURCES // EVIDENCE_LOG</div>
+      <div class="cite-content"><ul>
+        <li>Nickerson, R.S. — <a href="https://doi.org/10.1037/1089-2680.2.2.175" target="_blank">Confirmation Bias (1998)</a>, Review of General Psychology</li>
+        <li>Simons & Chabris — <a href="https://doi.org/10.1068/p281059" target="_blank">Gorilla Experiment (1999)</a>, Perception</li>
+        <li>Asch, S.E. — <a href="https://doi.org/10.1037/h0055620" target="_blank">Conformity Studies (1951)</a></li>
+        <li>Friston, K. — <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2755201/" target="_blank">The Free-Energy Principle (2010)</a>, Nature Reviews Neuroscience</li>
+        <li>Young, J.E. — <a href="https://www.amazon.com/Schema-Therapy-Practitioners-Jeffrey-Young/dp/1593853726" target="_blank">Schema Therapy (1990)</a> — cognitive schemas as installed programs</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <div class="sub-hdr">0.3 // The 4 Layers — Pure Science Version</div>
+  <div class="mod-body">
+    <table class="layer-table">
+      <thead><tr><th>Layer</th><th>Scientific Name</th><th>What It Does</th><th>Evidence</th><th>Debug Experiment</th></tr></thead>
+      <tbody>
+        <tr><td>LAYER_1<br>Biological</td><td>Predictive processing + sensory gating</td><td>Brain constructs reality from 5% of data; fills gaps with priors</td><td>Change blindness, inattentional blindness</td><td>"What Am I Not Seeing?" — 60 sec mindful walk</td></tr>
+        <tr><td>LAYER_2<br>Psychological</td><td>Cognitive schemas + bias clusters</td><td>Inherited mental shortcuts reinforce confirmation loops</td><td>20+ documented biases; schema therapy outcomes</td><td>"Falsification Journal" — find evidence against one belief per day</td></tr>
+        <tr><td>LAYER_3<br>Archetypal</td><td>Universal image schemas (Lakoff & Johnson)</td><td>Deep templates (Hero/Villain, Scarcity, Authority) structure all stories</td><td>Hero's Journey in 90%+ of cultures; memetics research</td><td>"Narrative Dissection" — break any news article into schema components</td></tr>
+        <tr><td>LAYER_4<br>Energetic</td><td>Affective contagion + social proof loops</td><td>Emotions spread virally; groups amplify shared priors</td><td>Mirror neuron studies, Hatfield et al., outrage algorithm data</td><td>Heart-rate biofeedback during groupthink triggers</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sub-hdr">0.4 // Debug Tools — No Belief Required</div>
+  <div class="mod-body">
+    <div class="hl-list">
+      <div class="hl-item"><div class="hl-dot">▸</div><div><strong>CBT Debiasing Protocol:</strong> For any strong belief — identify the cognitive distortion (catastrophizing, all-or-nothing, mind-reading), find the counter-evidence, update your model. Track before/after certainty rating.</div></div>
+      <div class="hl-item"><div class="hl-dot">▸</div><div><strong>Pre-mortem Thinking</strong> (Kahneman): Before any decision, imagine it failed — <em>why did it fail?</em> This bypasses confirmation bias because you're now looking for failure modes instead of defending the plan.</div></div>
+      <div class="hl-item"><div class="hl-dot">▸</div><div><strong>5-min "Update My Model" Practice:</strong> Each evening, rate your top 3 beliefs from the day (1-10 certainty). Did any evidence today move the needle? If not — why not? Your brain hates updating. Force it.</div></div>
+      <div class="hl-item"><div class="hl-dot">▸</div><div><strong>Intellectual Humility Scale</strong> (Leary et al.): Rate yourself on recognizing the limits of your knowledge. High scorers change their minds more often and are more accurate predictors. Low scorers: high confidence, low accuracy.</div></div>
+    </div>
+    <div class="insight"><p class="insight-text">At 80% completion of this module, something shifts: You don't suddenly believe in consciousness lattices or archetypes. You simply notice that your programming loops are real, measurable, and — for the first time — <strong>visible</strong>. That visibility is the aperture opening. That's all we needed.</p></div>
+  </div>
+  <div class="takeaway">
+    <span class="takeaway-lbl">// MODULE_0 DECODED</span>
+    <p class="takeaway-text">The Default Operating System is real, peer-reviewed, and running right now. It's not a conspiracy — it's predictive processing, schema theory, affective contagion, and conformity bias working together as an emergent self-reinforcing system. You cannot exit what you cannot see. Now you can see it.</p>
+  </div>
+</section>
+
+<!-- MODULE 1 — MATRIX DEFINED -->
+<section id="module-1" class="mod-sec">
+  <span class="mod-lbl">// MODULE_1 · MATRIX_DEFINED · 15 min</span>
+  <h2 class="mod-title-lg">The Matrix Redefined</h2>
+  <div class="mod-subtitle">NOT CODE. NOT METAL. CO-CREATED CONSCIOUSNESS — ARCHITECTED BY ARCHETYPES</div>
+  <div class="divider"><span class="divider-sym">[ REDEFINE ]</span></div>
+  <canvas id="canvas-lattice" class="vis" width="380" height="220"></canvas>
+
+  <div class="sub-hdr">1.1 // What the Matrix Actually Is</div>
+  <div class="mod-body">
+    <p>From the <span class="term" data-def="Akashic Records — in esoteric and consciousness studies traditions, the Akashic field is a non-local informational substrate that stores all experience, thought, and event across time. Physicist Ervin László (Science and the Akashic Field, 2004) proposes this as a quantum-vacuum based information field. Consciousness researchers use it as a model for non-local mind.">Akashic perspective</span>: The matrix is a living consciousness lattice of agreements, filters, and energetic laws — not metal or code, but co-created consciousness. A geometric web of probability lines stabilized by collective belief and emotion.</p>
+    <p>From <span class="term" data-def="Carl Gustav Jung (1875–1961) — Swiss psychiatrist and founder of analytical psychology. His concepts of the collective unconscious, archetypes, the shadow, individuation, and the Self form the psychological framework for understanding the matrix's operating system. His work bridges depth psychology and mystical traditions.">Jungian depth psychology</span>: This lattice IS the <span class="term" data-def="Collective Unconscious — Jung's term for the deepest layer of the psyche, shared across all humans regardless of culture or time. Unlike the personal unconscious (repressed memories and experiences), the collective unconscious contains inherited psychic patterns — archetypes — that pre-structure how all humans perceive and experience reality.">collective unconscious</span> in action. Archetypes are its universal templates — innate, inherited psychic patterns that pre-structure how we perceive, feel, and story our reality. Jung called them "the psychic counterpart of instinct."</p>
+    <div class="insight"><p class="insight-text">The Matrix film (1999) is a modern archetypal myth. Neo's journey is pure <span class="term" data-def="Individuation — Jung's term for the lifelong process of integrating the unconscious into consciousness, becoming who you fully are. The Self (not the Ego) is the goal. The Hero's journey in stories maps almost exactly to the individuation process.">individuation</span>. The red pill = choosing to see the archetypes running the simulation. The machines = unintegrated collective shadow. Agent Smith = the Persona defending the status quo. The Oracle = the Wise One archetype. Neo = the emerging Self. <br><br>But here's what the movie missed: <em>there's no single villain to unplug from.</em> The lattice is sustained by every unexamined mind that participates in it — including yours.</p></div>
+  </div>
+
+  <div class="sub-hdr">1.2 // Who Controls It? Nobody. Everybody.</div>
+  <div class="mod-body">
+    <p>No single entity runs it. The matrix is sustained by three interlocking engines:</p>
+    <div class="hl-list">
+      <div class="hl-item"><div class="hl-dot">01</div><div><strong>Collective unconscious programming:</strong> Archetypes plus ancestral imprints. The patterns were in place before you were born. You inherited them through language, story, and emotional transmission — not conspiracy.</div></div>
+      <div class="hl-item"><div class="hl-dot">02</div><div><strong>Institutions dramatizing archetypal stories:</strong> Media sells Hero vs Villain. The economy sells the Scarcity King. Political systems sell the Ruler vs Rebel. These are not random — they are archetypal scripts that your nervous system recognizes immediately and reacts to automatically.</div></div>
+      <div class="hl-item"><div class="hl-dot">03</div><div><strong>Individual nervous-system preference for the known:</strong> The <span class="term" data-def="Persona (Jung) — the social mask or role we present to the world. It is the archetype of conformity, the 'PR department' of the psyche. It negotiates between the individual's inner nature and society's expectations. Overidentification with the Persona = you become the mask and forget what's behind it.">Persona archetype</span> creates safety through predictability. Deviation from the group's consensus reality triggers social rejection responses in the amygdala. Your brain would literally rather keep the programming than risk exile.</div></div>
+    </div>
+    <div class="source-card">
+      <div class="source-label">AKASHIC + JUNGIAN SYNTHESIS <a href="https://www.amazon.com/Science-Akashic-Field-Integral-Everything/dp/1594770425" target="_blank">László ↗</a></div>
+      <div class="source-text">"Every soul co-creates the matrix through participation. Those who appear to 'control' it are often the most possessed by unintegrated Power or Tyrant archetypes. The real control is unconscious identification with archetypes rather than conscious relationship with them."</div>
+      <div class="source-analysis"><strong>IMPLICATION:</strong> Archetypes want to be lived consciously — they push for integration. Resistance to integration creates the density we experience as "the matrix." The prison tightens as you resist examining the prisoner.</div>
+    </div>
+  </div>
+  <div class="takeaway">
+    <span class="takeaway-lbl">// MODULE_1 DECODED</span>
+    <p class="takeaway-text">The matrix is the collective unconscious projected outward. Archetypes are its firmware. Institutions amplify the firmware's loudest patterns. Your nervous system defends the installation. No villain required. No victim required. Only unexamined minds participating automatically.</p>
+  </div>
+</section>
+
+<!-- MODULE 2 — ARCHETYPES -->
+<section id="module-2" class="mod-sec">
+  <span class="mod-lbl">// MODULE_2 · ARCHETYPES · 30 min</span>
+  <h2 class="mod-title-lg">Jungian Archetypes — The Master Key</h2>
+  <div class="mod-subtitle">12 UNIVERSAL PATTERNS · THE FIRMWARE OF REALITY ITSELF</div>
+  <div class="divider"><span class="divider-sym">[ ARCHETYPE_MAP ]</span></div>
+  <canvas id="canvas-mandala" class="vis" width="360" height="360"></canvas>
+
+  <div class="sub-hdr">2.1 // What Archetypes Actually Are</div>
+  <div class="mod-body">
+    <p>Archetypes are not symbols or metaphors. They are <strong>innate, inherited psychic structures</strong> — the DNA of the unconscious mind. Jung identified them through cross-cultural mythological analysis: the same patterns appear in every civilization across every time period, regardless of cultural contact.</p>
+    <p>They are neutral blueprints. A knife is neutral — it can feed a family or harm one. The Hero archetype is neutral — it can inspire genuine courage or produce a savior complex waiting for someone else to fix things. <em>The matrix hijacks neutral archetypes into distorted, limitation-sustaining patterns.</em></p>
+    <table class="layer-table">
+      <thead><tr><th>Archetype</th><th>Healthy Expression</th><th>Matrix Hijack</th><th>How It Sustains the Lattice</th></tr></thead>
+      <tbody>
+        <tr><td>HERO</td><td>Courage, transformation, facing shadow</td><td>"Wait for a savior" — outsourced heroism</td><td>You watch heroes instead of being one</td></tr>
+        <tr><td>SHADOW</td><td>Integrated wholeness, self-knowledge</td><td>Projected enemies, scapegoating</td><td>Collective shadow projections fuel conflict</td></tr>
+        <tr><td>RULER</td><td>Sovereignty, responsibility, order</td><td>Authoritarianism, hierarchical obedience</td><td>Power concentrated in institutions you defer to</td></tr>
+        <tr><td>REBEL</td><td>Liberation, necessary disruption</td><td>Performative opposition that serves the system</td><td>Controlled opposition keeps the lattice stable</td></tr>
+        <tr><td>PERSONA</td><td>Appropriate social flexibility</td><td>Conformity, mask as identity</td><td>You perform for approval, never questioning norms</td></tr>
+        <tr><td>CHILD</td><td>Wonder, openness, fresh perception</td><td>Helplessness, waiting to be parented by authority</td><td>Dependency on institutions for meaning and safety</td></tr>
+        <tr><td>TRICKSTER</td><td>Pattern-breaking, sacred irreverence</td><td>Nihilistic chaos, destructive cynicism</td><td>Weaponized to destabilize without offering alternative</td></tr>
+        <tr><td>WISE ONE</td><td>Integrated knowledge, earned wisdom</td><td>Credential worship, deferred to "experts" exclusively</td><td>Your own inner knowing is systematically discounted</td></tr>
+        <tr><td>ANIMA/ANIMUS</td><td>Soul bridge, inner wholeness</td><td>Romantic projections, idealized partner fantasies</td><td>Seeking completeness externally, consuming constantly</td></tr>
+        <tr><td>LOVER</td><td>Deep connection, full presence</td><td>Compulsive consumption, hedonic addiction</td><td>Monetized longing — always sold the next fix</td></tr>
+        <tr><td>MOTHER</td><td>Nurture, abundance, unconditional love</td><td>Scarcity fear, survival terror</td><td>"Not enough" as the primary operating frequency</td></tr>
+        <tr><td>CREATOR</td><td>Authentic expression, co-creation</td><td>Content consumption replacing authentic creation</td><td>You become audience, not author of your reality</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sub-hdr">2.2 // The Individuation Antidote</div>
+  <div class="mod-body">
+    <p><span class="term" data-def="Individuation — Jung's term for the psychological process of integrating all aspects of the self — especially the Shadow, Anima/Animus, and other unconscious material — into a coherent, conscious whole. The Self (not the Ego) is the result. It is the opposite of persona-conformity and the direct antidote to unconscious matrix participation.">Individuation</span> is the process that dismantles the matrix from the inside. Not by fighting the lattice, but by integrating the archetypes that sustain it. When the Hero archetype is fully lived, you stop waiting for a savior — and the collective "waiting for savior" frequency decreases. When the Shadow is integrated, you stop projecting enemies — and collective scapegoating loses one more participant.</p>
+    <div class="insight"><p class="insight-text">Highly sensitive people often have hyper-active Anima/Animus or Trickster archetypes — what feels like a liability is actually a superpower for perception. Trauma can lock the Shadow in freeze — integration must be titrated gently, not forced. Cultural variations matter: Western traditions over-emphasize the Hero; Indigenous traditions often center the Trickster and the Wise One instead. There is no single correct archetypal hierarchy.</p></div>
+    <div class="cite-block">
+      <div class="cite-toggle" onclick="toggleCite(this)">SOURCES // ARCHETYPE_EVIDENCE</div>
+      <div class="cite-content"><ul>
+        <li>Jung, C.G. — <a href="https://www.amazon.com/Archetypes-Collective-Unconscious-Collected-Works/dp/0691018332" target="_blank">The Archetypes and the Collective Unconscious</a> (CW9i)</li>
+        <li>Campbell, J. — <a href="https://www.amazon.com/Hero-Thousand-Faces-Collected-Campbell/dp/1577315936" target="_blank">The Hero with a Thousand Faces</a> — Hero's Journey across 90%+ of cultures</li>
+        <li>Lakoff & Johnson — <a href="https://www.amazon.com/Metaphors-We-Live-George-Lakoff/dp/0226468011" target="_blank">Metaphors We Live By</a> — universal cognitive image schemas as secular archetypes</li>
+        <li>Mark & Pearson — <a href="https://www.amazon.com/Hero-Outlaw-Building-Extraordinary-Archetypes/dp/0071364153" target="_blank">The Hero and the Outlaw</a> — how archetypes operate in cultural branding</li>
+      </ul></div>
+    </div>
+  </div>
+  <div class="takeaway">
+    <span class="takeaway-lbl">// MODULE_2 DECODED</span>
+    <p class="takeaway-text">Archetypes are the firmware. They are neutral. The matrix hijacks them into distorted patterns that keep you consuming instead of creating, waiting instead of acting, projecting instead of integrating. Individuation — consciously working with each archetype — is the only real exit protocol.</p>
+  </div>
+</section>
+
+<!-- MODULE 3 — 4 LAYERS -->
+<section id="module-3" class="mod-sec">
+  <span class="mod-lbl">// MODULE_3 · FOUR_LAYERS · 45-60 min</span>
+  <h2 class="mod-title-lg">The Four Layers — Interactive Decode</h2>
+  <div class="mod-subtitle">BIOLOGICAL → PSYCHOLOGICAL → ARCHETYPAL → ENERGETIC</div>
+  <div class="divider"><span class="divider-sym">[ LAYER_SCAN ]</span></div>
+  <canvas id="canvas-layers" class="vis" width="360" height="280"></canvas>
+
+  <div class="sub-hdr">3.1 // Layer 1 — Biological / Instinctual</div>
+  <div class="mod-body">
+    <p><strong>What it is (Akashic):</strong> Your nervous system is a consciousness receiver with limited bandwidth — a perceptual filter evolved for savanna survival, not truth-seeking. It runs constant threat assessments on data it mostly invented.<br><strong>Archetypes running it:</strong> Mother (nurture/fear), Father (authority/structure), Child (vulnerability/dependence).</p>
+    <div class="source-card">
+      <div class="source-label">HOW IT FEELS IN DAILY LIFE</div>
+      <div class="source-text">"Fight-flight response triggered by a tweet. Gut clenching at 'not enough' headlines. Body bracing before a meeting. Automatic disgust at the outgroup. These are not you — they are your Mother and Child archetypes running survival subroutines at 60fps."</div>
+      <div class="source-analysis"><strong>BREAKTHROUGH PROTOCOL:</strong> Somatic tracking + Active Imagination (Jung). Feel the sensation → locate it in your body → ask: "Which archetype is speaking through my body right now?" → 5-minute dialogue. The body is the first layer's readout. Learn to read it.</div>
+    </div>
+  </div>
+
+  <div class="sub-hdr">3.2 // Layer 2 — Psychological / Ego</div>
+  <div class="mod-body">
+    <p><strong>What it is:</strong> Identity formed by conditioning and Persona construction. The "I" that believes it's real is largely a composite of external expectations internalized as "myself."<br><strong>Archetypes running it:</strong> Persona (the mask), Ego (the conscious "I"), Puer/Senex (eternal youth vs rigid elder).</p>
+    <div class="hl-list">
+      <div class="hl-item"><div class="hl-dot">▸</div><div><strong>Persona Audit:</strong> List the 5 roles you play (employee, parent, friend, partner, online persona). For each: What am I hiding? What would happen if I dropped this mask? The gap between who you are and who you perform is the Persona's thickness — and the matrix's strongest hold on you.</div></div>
+      <div class="hl-item"><div class="hl-dot">▸</div><div><strong>Shadow Mirror:</strong> Notice what you judge most intensely in others. That quality — whatever triggers the strongest reaction — is almost certainly a disowned part of yourself. The Shadow is not your dark side. It's everything you've been told to hide.</div></div>
+    </div>
+  </div>
+
+  <div class="sub-hdr">3.3 // Layer 3 — Archetypal / Cultural</div>
+  <div class="mod-body">
+    <p><strong>What it is:</strong> The mythic patterns that structure <em>all</em> perception, story, and meaning-making. You cannot escape archetypes — but you can stop being operated by unconscious ones.<br><strong>Archetypes running it:</strong> Hero, Shadow, Anima/Animus, Trickster, Wise One, Lover, Ruler, Rebel, Creator, Child, Mother, Persona.</p>
+    <div class="source-card">
+      <div class="source-label">ACTIVE IMAGINATION PROTOCOL (JUNG METHOD)</div>
+      <div class="source-text">"Sit quietly. Imagine your dominant archetype of the week — the one that kept showing up. Give it a form. Ask it: What do you want? What are you protecting me from? What do you want to become? Don't analyze — dialogue. The archetype will speak if you ask."</div>
+      <div class="source-analysis"><strong>WEEKLY PRACTICE:</strong> Archetype constellation mapping — place your currently active archetypes on a mandala. Which are in the foreground? Which are in shadow? Which haven't shown up in months and are therefore probably suppressed and building pressure?</div>
+    </div>
+  </div>
+
+  <div class="sub-hdr">3.4 // Layer 4 — Energetic / Emotional</div>
+  <div class="mod-body">
+    <p><strong>What it is:</strong> Collective trauma density, shadow accumulation, and frequency entrainment. Emotions are contagious — the group's emotional field pulls your individual field into resonance. You are constantly being "tuned" by your environment.<br><strong>Archetypes running it:</strong> Shadow (repressed), Anima/Animus (soul bridge), Wounded Healer.</p>
+    <div class="hl-list">
+      <div class="hl-item"><div class="hl-dot">▸</div><div><strong>Shadow Work Protocol (Jung + Akashic):</strong> (1) Notice the trigger → (2) Trace the emotion back to its earliest memory → (3) Ask "What part of me have I exiled to create this reaction?" → (4) Dialogue with that exiled part → (5) Compassionate re-integration ritual. Not one session. This is the life's work.</div></div>
+      <div class="hl-item"><div class="hl-dot">▸</div><div><strong>Frequency Hygiene:</strong> Track how your emotional baseline changes 30 minutes after consuming different media. You are not passively watching — you are being entrained. Your nervous system does not distinguish between witnessed and experienced events at the amygdala level.</div></div>
+    </div>
+    <div class="cite-block">
+      <div class="cite-toggle" onclick="toggleCite(this)">SOURCES // LAYER_EVIDENCE</div>
+      <div class="cite-content"><ul>
+        <li>Hatfield, Cacioppo & Rapson — <a href="https://www.amazon.com/Emotional-Contagion-Studies-Emotion-Social/dp/0521449480" target="_blank">Emotional Contagion</a> (1993)</li>
+        <li>Jung, C.G. — <a href="https://www.amazon.com/Integration-Personality-C-G-Jung/dp/B0007D6CKE" target="_blank">The Integration of Personality</a> — Shadow and Individuation</li>
+        <li>Levine, P. — <a href="https://www.amazon.com/Waking-Tiger-Healing-Trauma-Peter/dp/155643233X" target="_blank">Waking the Tiger: Healing Trauma</a> — somatic layer protocols</li>
+        <li>van der Kolk — <a href="https://www.amazon.com/Body-Keeps-Score-Healing-Trauma/dp/0143127748" target="_blank">The Body Keeps the Score</a></li>
+      </ul></div>
+    </div>
+  </div>
+  <div class="takeaway">
+    <span class="takeaway-lbl">// MODULE_3 DECODED</span>
+    <p class="takeaway-text">Four layers. One operating system. The biological layer runs survival scripts through the body. The psychological layer constructs a Persona-identity to protect the scared animal underneath. The archetypal layer maps all experience onto mythic patterns. The energetic layer tunes your frequency to the collective field. You are now operating with layer-awareness. This changes everything.</p>
+  </div>
+</section>
+
+<!-- MODULE 4 — PERCEPTION HACKS -->
+<section id="module-4" class="mod-sec">
+  <span class="mod-lbl">// MODULE_4 · PERCEPTION_HACKS · 20-30 min</span>
+  <h2 class="mod-title-lg">Perception Hacks — Live Demos</h2>
+  <div class="mod-subtitle">INTERACTIVE PROOF THAT REALITY IS INSTALLED, NOT RECEIVED</div>
+  <div class="divider"><span class="divider-sym">[ DEMO_MODE ]</span></div>
+
+  <div class="sub-hdr">4.1 // THE CIRCLE DEMO — Your Original Transmission</div>
+  <div class="mod-body">
+    <p>This is not an optical illusion. This is a demonstration of how <strong>repeated suggestion overwrites direct perception.</strong> The same mechanism that installs political beliefs, scarcity mindsets, and religious frameworks operates through this exact neural pathway.</p>
+  </div>
+
+  <!-- INTERACTIVE CIRCLE ILLUSION -->
+  <div class="illusion-demo">
+    <div class="illusion-title">// LIVE_DEMO_01 · SUGGESTION_OVERRIDE_TEST</div>
+    <canvas id="circle-canvas" width="320" height="180" style="margin:0 auto;display:block;border:none"></canvas>
+    <div id="circle-phase-1">
+      <p style="font-family:var(--mono);font-size:12px;color:var(--text-2);margin:16px 0;line-height:1.8">
+        Look at these two circles. Before I say anything — your instinct is probably: they look equal.<br>
+        <strong style="color:var(--amber)">Instinct registered. Good.</strong><br><br>
+        Now: <em style="color:var(--decoded)">These two circles are NOT equal.</em><br>
+        I repeat — they are NOT equal. One is larger than the other.<br>
+        <strong style="color:var(--decoded)">Which one?</strong>
+      </p>
+      <div class="illusion-btns">
+        <button class="ill-btn" onclick="circleVote('amber')">AMBER IS LARGER</button>
+        <button class="ill-btn" onclick="circleVote('teal')">TEAL IS LARGER</button>
+        <button class="ill-btn" onclick="circleVote('equal')">THEY LOOK EQUAL</button>
+      </div>
+    </div>
+    <div id="circle-reveal" class="ill-reveal">
+      <strong style="color:var(--decoded);font-family:var(--mono)">// REVEAL.exe</strong><br><br>
+      They are identical. Equal in every measurable dimension.<br><br>
+      Your instinct before the suggestion: <strong>EQUAL.</strong><br>
+      Your instinct after the repeated suggestion "they are NOT equal": <span id="voted-result" style="color:var(--amber)"></span><br><br>
+      <em>Suggestion alone — with zero evidence, zero authority, zero reward — was sufficient to make you question direct perception.</em><br><br>
+      Now imagine that same mechanism applied from birth. By parents who loved you. By teachers who meant well. By a media system optimized for engagement, not accuracy. Every scarcity belief you hold. Every "that's just how things are." Every inherited ceiling on what's possible for you.<br><br>
+      <strong style="color:var(--decoded)">That's the matrix. And you just watched it work.</strong>
+    </div>
+  </div>
+
+  <div class="sub-hdr">4.2 // Four More Perception Hacks — The Cascade</div>
+  <div class="mod-body">
+
+    <!-- EBBINGHAUS -->
+    <div class="source-card" style="margin-bottom:28px">
+      <div class="source-label">HACK_02 · EBBINGHAUS ILLUSION · BIOLOGICAL LAYER <a href="https://en.wikipedia.org/wiki/Ebbinghaus_illusion" target="_blank">INFO ↗</a></div>
+      <div class="source-text">"Two identical orange dots. One surrounded by large circles, one surrounded by small circles. The surrounded-by-small one looks enormous. The surrounded-by-large one looks tiny. They are exactly the same size."</div>
+      <div class="source-analysis"><strong>INSTALL MECHANISM:</strong> Your brain manipulates size perception based on social context. Surrounded by giants, you feel small. Surrounded by people with smaller dreams, your ambitions look disproportionately large. <strong>Society curates your comparison group to manage your self-perception.</strong> This is not metaphor — it is the Ebbinghaus effect operating on identity.</div>
+    </div>
+
+    <!-- ASCH -->
+    <div class="source-card" style="margin-bottom:28px">
+      <div class="source-label">HACK_03 · ASCH CONFORMITY · PSYCHOLOGICAL LAYER <a href="https://doi.org/10.1037/h0055620" target="_blank">STUDY ↗</a></div>
+      <div class="source-text">"Show a target line. Show three comparison lines. The correct answer is obvious. But the 'group' (confederates) unanimously picks the wrong answer. Result: 75% of subjects conform at least once. 37% conformity rate overall — even when their eyes clearly show otherwise."</div>
+      <div class="source-analysis"><strong>INSTALL MECHANISM:</strong> Your amygdala perceives social rejection as physical danger. Disagreeing with the group triggers the same neural pathways as touching a hot stove. Conformity is not weakness — it is your survival system doing its job. The matrix knows this. Every social institution exploits this exact mechanism. <strong>The most effective censorship is the kind you perform on yourself.</strong></div>
+    </div>
+
+    <!-- MULLER-LYER -->
+    <div class="source-card" style="margin-bottom:28px">
+      <div class="source-label">HACK_04 · MÜLLER-LYER ILLUSION · ARCHETYPAL LAYER <a href="https://en.wikipedia.org/wiki/M%C3%BCller-Lyer_illusion" target="_blank">INFO ↗</a></div>
+      <div class="source-text">"Two identical lines. One with arrows pointing inward, one with arrows pointing outward. The outward-arrow line looks dramatically longer — even when you know they're equal, even after measuring them yourself."</div>
+      <div class="source-analysis"><strong>INSTALL MECHANISM:</strong> The arrows create a narrative of "expansion vs contraction," "inside vs outside," "arriving vs departing." These are archetypal direction narratives — the Hero going out into the world vs returning home. Importantly: <strong>even knowing the illusion doesn't cure it.</strong> Knowledge is necessary but not sufficient. You must rewire the pattern through practice, not just understanding. This is why you've read self-help books and changed nothing.</div>
+    </div>
+
+    <!-- SPIRAL -->
+    <div class="source-card">
+      <div class="source-label">HACK_05 · ROTATING SNAKE ILLUSION · ENERGETIC LAYER <a href="https://en.wikipedia.org/wiki/Rotating_snakes_illusion" target="_blank">INFO ↗</a></div>
+      <div class="source-text">"A static image of circular patterns. Your peripheral vision perceives motion that isn't there. The 'spinning' is entirely generated by your visual cortex — the image is not moving at all."</div>
+      <div class="source-analysis"><strong>INSTALL MECHANISM:</strong> Your brain adds movement to static patterns. Collective emotional fields — panic cycles, outrage spirals, viral fear — operate the same way. The "crisis" is often a static situation that the collective nervous system has set spinning. You feel the spin as real. The spin is real. The source of the motion is your collective perception, not external reality. <strong>Emotional contagion is the rotating snake applied to your nervous system at scale.</strong></div>
+    </div>
+  </div>
+  <div class="takeaway">
+    <span class="takeaway-lbl">// MODULE_4 DECODED</span>
+    <p class="takeaway-text">Five demos. Five different neural mechanisms. One unified system. Your perception is constructed, not received. Suggestion overrides direct experience. Social pressure overrides sensory data. Narrative framing overrides measurement. And the spiral of collective emotion feels like external motion when it's your own mind moving. The matrix doesn't control you — you participate in constructing it, moment by moment, layer by layer.</p>
+  </div>
+</section>
+
+<!-- MODULE 5 — SHADOW WORK & DAILY APERTURE -->
+<section id="module-5" class="mod-sec">
+  <span class="mod-lbl">// MODULE_5 · INTEGRATION · ONGOING</span>
+  <h2 class="mod-title-lg">Shadow Work & Daily Aperture</h2>
+  <div class="mod-subtitle">INTEGRATION PROTOCOLS · APERTURE SCORE SYSTEM · THE NEW LATTICE</div>
+  <div class="divider"><span class="divider-sym">[ INTEGRATE ]</span></div>
+
+  <div class="sub-hdr">5.1 // The Daily Aperture Protocol</div>
+  <div class="mod-body">
+    <table class="compare-table">
+      <thead><tr><th>Frequency</th><th>Practice</th><th>Duration</th><th>Aperture Effect</th></tr></thead>
+      <tbody>
+        <tr><td>MORNING</td><td>3-min archetype check-in: Which archetype is running today's programs? Name it, greet it, don't suppress it.</td><td>3 min</td><td>+5-8 pts Layer 3</td></tr>
+        <tr><td>EVENING</td><td>Layer journal: Score your four layers (0-10 awareness). Where did the matrix run you today? Where did you run it?</td><td>10 min</td><td>+10-15 pts overall</td></tr>
+        <tr><td>WEEKLY</td><td>Full shadow integration session: Pick your top trigger from the week. Trace it to its archetype. Dialogue using Active Imagination. Write the result.</td><td>20 min</td><td>+15-20 pts Layer 2/4</td></tr>
+        <tr><td>ONGOING</td><td>Archetype Sightings: Notice archetypes in news, ads, conversations. Name them aloud. "That's the Scarcity King." "That's the Hero narrative with savior bait." Naming dissolves automatic identification.</td><td>Real-time</td><td>Compounding effect</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sub-hdr">5.2 // The Aperture Score — Track Your Opening</div>
+  <div class="mod-body">
+    <p>Your Aperture Score (0-100) is a composite of four sub-scores, one per layer. It is not a measure of spiritual advancement — it is a measure of <strong>conscious layer awareness</strong>. You are not trying to destroy the matrix. You are trying to see it clearly enough to move through it consciously instead of being moved by it automatically.</p>
+    <div class="aperture-score" style="margin-bottom:8px">
+      <span class="aperture-lbl">LAYER_1 [biological]</span>
+      <div class="aperture-bar-wrap"><div class="aperture-bar" style="width:65%"></div></div>
+      <span class="aperture-pct">65%</span>
+    </div>
+    <div class="aperture-score" style="margin-bottom:8px">
+      <span class="aperture-lbl">LAYER_2 [psychological]</span>
+      <div class="aperture-bar-wrap"><div class="aperture-bar" style="width:45%"></div></div>
+      <span class="aperture-pct">45%</span>
+    </div>
+    <div class="aperture-score" style="margin-bottom:8px">
+      <span class="aperture-lbl">LAYER_3 [archetypal]</span>
+      <div class="aperture-bar-wrap"><div class="aperture-bar" style="width:30%"></div></div>
+      <span class="aperture-pct">30%</span>
+    </div>
+    <div class="aperture-score" style="margin-bottom:24px">
+      <span class="aperture-lbl">LAYER_4 [energetic]</span>
+      <div class="aperture-bar-wrap"><div class="aperture-bar" style="width:20%"></div></div>
+      <span class="aperture-pct">20%</span>
+    </div>
+    <div class="insight"><p class="insight-text">Pitfalls to avoid: Spiritual bypassing (ignoring the biological layer while claiming Layer 4 mastery). Shadow inflation ("I'm all light now"). Projection onto "elites" or "controllers" (that's the unintegrated Shadow still operating — you're just blaming archons instead of doing the work). The aperture opens inward first. Always inward first.</p></div>
+  </div>
+
+  <div class="sub-hdr">5.3 // The Emerging New Lattice</div>
+  <div class="mod-body">
+    <p>As individuals integrate, the probability lines of the collective lattice shift. The dominant archetypal patterns change. We move — individually and then collectively — from:</p>
+    <canvas id="canvas-new-lattice" class="vis" width="380" height="180"></canvas>
+    <table class="compare-table">
+      <thead><tr><th>Old Lattice Pattern</th><th>New Lattice Pattern</th></tr></thead>
+      <tbody>
+        <tr><td>Hero-Savior mythology (wait for rescue)</td><td>Sovereign Co-Creator (I am the source)</td></tr>
+        <tr><td>Scarcity King (not enough, compete)</td><td>Abundance Creator (enough for the conscious)</td></tr>
+        <tr><td>Shadow projected as enemy</td><td>Shadow integrated as teacher</td></tr>
+        <tr><td>Persona as identity (I am my mask)</td><td>Fluid authenticity (I wear masks consciously)</td></tr>
+        <tr><td>Child archetype (parented by institutions)</td><td>Inner authority (I am responsible)</td></tr>
+        <tr><td>Conformity frequency (fit in or else)</td><td>Resonance frequency (I attract my kind)</td></tr>
+      </tbody>
+    </table>
+    <p><strong>Your role:</strong> You are an Aperture Keeper. Your integration ripples. Each archetype you integrate removes one thread from the collective limitation lattice. Not through protest. Not through content creation. Through the radical act of <em>becoming conscious</em>.</p>
+    <div class="cite-block">
+      <div class="cite-toggle" onclick="toggleCite(this)">SOURCES // INTEGRATION_EVIDENCE</div>
+      <div class="cite-content"><ul>
+        <li>Jung, C.G. — <a href="https://www.amazon.com/Modern-Man-Search-Soul-Jung/dp/0156612062" target="_blank">Modern Man in Search of a Soul</a></li>
+        <li>Hollis, J. — <a href="https://www.amazon.com/Finding-Meaning-Second-Half-Life/dp/1592401082" target="_blank">Finding Meaning in the Second Half of Life</a></li>
+        <li>Johnson, R.A. — <a href="https://www.amazon.com/Owning-Your-Own-Shadow-Reclaiming/dp/006250422X" target="_blank">Owning Your Own Shadow: Understanding the Dark Side of the Psyche</a></li>
+        <li>Whitmont, E.C. — <a href="https://www.amazon.com/Symbolic-Quest-Basic-Concepts-Analytical/dp/0691024596" target="_blank">The Symbolic Quest</a> — comprehensive Jungian archetypal mapping</li>
+        <li>László, E. — <a href="https://www.amazon.com/Science-Akashic-Field-Integral-Everything/dp/1594770425" target="_blank">Science and the Akashic Field</a> — consciousness field theory</li>
+      </ul></div>
+    </div>
+  </div>
+  <div class="takeaway">
+    <span class="takeaway-lbl">// MODULE_5 DECODED</span>
+    <p class="takeaway-text">Daily practice. Not insight tourism. The matrix does not dissolve through understanding — it dissolves through repeated, consistent, embodied engagement with the archetypes and layers running you. Morning check-ins. Evening journals. Weekly shadow work. Real-time archetype sightings. This is the work. The aperture opens through use.</p>
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section id="quiz-section">
+<div id="quiz-wrap">
+  <div class="quiz-hdr">
+    <span class="quiz-badge">// APERTURE_OS · FINAL_EXAM.exe · REALITY_DECODED</span>
+    <h2 class="quiz-title">Exposing the Matrix</h2>
+    <p class="quiz-sub">PASS THRESHOLD: 8/12 CORRECT · INITIATES APERTURE_KEEPER STATUS</p>
+  </div>
+  <div id="quiz-qs"></div>
+  <button class="quiz-btn" id="qbtn" onclick="submitQ()">[ RUN_EXAM.exe ]</button>
+  <div class="quiz-result" id="q-result"></div>
+</div>
+</section>
+
+<!-- COMPLETION -->
+<section id="completion">
+  <div class="divider" style="margin-bottom:44px"><span class="divider-sym" style="color:var(--decoded)">[ EOF ]</span></div>
+  <h2 class="comp-title">Aperture Keeper — Status: ACTIVE</h2>
+  <p class="comp-text">Six modules. Four layers. Twelve archetypes. One Default Operating System — now visible, named, and partially debugged. The work continues daily. That was always the point.</p>
+  <div class="bib-box">
+    <div class="bib-sec">
+      <div class="bib-hdr">// PSYCHOLOGY_CORE</div>
+      <div class="bib-item">Jung, CG — <a href="https://www.amazon.com/Archetypes-Collective-Unconscious-Collected-Works/dp/0691018332" target="_blank">The Archetypes and the Collective Unconscious (CW9i)</a></div>
+      <div class="bib-item">Johnson, RA — <a href="https://www.amazon.com/Owning-Your-Own-Shadow-Reclaiming/dp/006250422X" target="_blank">Owning Your Own Shadow</a></div>
+      <div class="bib-item">Campbell, J — <a href="https://www.amazon.com/Hero-Thousand-Faces-Collected-Campbell/dp/1577315936" target="_blank">The Hero with a Thousand Faces</a></div>
+    </div>
+    <div class="bib-sec">
+      <div class="bib-hdr">// NEUROSCIENCE_LAYER</div>
+      <div class="bib-item">Friston, K — <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2755201/" target="_blank">The Free-Energy Principle (2010)</a></div>
+      <div class="bib-item">van der Kolk, B — <a href="https://www.amazon.com/Body-Keeps-Score-Healing-Trauma/dp/0143127748" target="_blank">The Body Keeps the Score</a></div>
+      <div class="bib-item">Kahneman, D — <a href="https://www.amazon.com/Thinking-Fast-Slow-Daniel-Kahneman/dp/0374533555" target="_blank">Thinking Fast and Slow</a></div>
+    </div>
+    <div class="bib-sec">
+      <div class="bib-hdr">// CONSCIOUSNESS_FIELD</div>
+      <div class="bib-item">László, E — <a href="https://www.amazon.com/Science-Akashic-Field-Integral-Everything/dp/1594770425" target="_blank">Science and the Akashic Field</a></div>
+      <div class="bib-item">Hollis, J — <a href="https://www.amazon.com/Finding-Meaning-Second-Half-Life/dp/1592401082" target="_blank">Finding Meaning in the Second Half of Life</a></div>
+      <div class="bib-item">Whitmont, EC — <a href="https://www.amazon.com/Symbolic-Quest-Basic-Concepts-Analytical/dp/0691024596" target="_blank">The Symbolic Quest</a></div>
+    </div>
+  </div>
+  <p class="final-word">The matrix didn't hold you.<br>You held it — unconsciously, automatically, with the best of intentions.<br><br>Now you see the code.<br>Now you can write new lines.<br><br>Not by escaping.<br>By opening the aperture<br>until the dream becomes lucid.<br><br>🌊☀️ SUNFLOW: REIGNITED // APERTURE_OS v3.0</p>
+  <div style="margin-top:36px;font-size:12px;color:var(--text-3);font-family:var(--mono)">// COMPILED_BY: Ron · SunFlow: Reignited · APERTURE_KEEPER_v1</div>
+</section>
+
+<!-- UNLOCK -->
+<div id="unlock-overlay">
+  <div class="unlock-box">
+    <span class="unlock-sym">🌀</span>
+    <h2 class="unlock-title">Aperture Keeper</h2>
+    <div class="unlock-sub">REALITY_DECODED · COURSE COMPLETE</div>
+    <div class="unlock-score" id="u-score"></div>
+    <div class="unlock-div"></div>
+    <div class="unlock-next-lbl">// NOW_UNLOCKED</div>
+    <div class="unlock-course">Jungian Awakening:<br>The Great Work</div>
+    <button class="unlock-btn" onclick="closeUnlock()">[ CONTINUE_DECODE.exe ]</button>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════
+//  AMBER DIGITAL RAIN
+// ═══════════════════════════════
+(function(){
+  var c=document.getElementById('rain'),ctx=c.getContext('2d');
+  var W,H,cols,drops=[];
+  var chars='アイウエオカキクケコサシスセソタチツテトナニヌネノ0123456789ABCDEF∞∑∂∇ΨΩΦΠΘΛΞψωφπθλξ<>{}[]|01';
+  function resize(){
+    W=c.width=window.innerWidth;H=c.height=window.innerHeight;
+    cols=Math.floor(W/18);drops=[];
+    for(var i=0;i<cols;i++)drops[i]=Math.random()*-H/14;
+  }
+  resize();window.addEventListener('resize',resize);
+  function draw(){
+    ctx.fillStyle='rgba(2,6,4,0.055)';ctx.fillRect(0,0,W,H);
+    for(var i=0;i<drops.length;i++){
+      var ch=chars[Math.floor(Math.random()*chars.length)];
+      var x=i*18;var y=drops[i]*14;
+      // Head glow
+      var bright=y>0&&y<H;
+      if(bright){
+        ctx.fillStyle='rgba(245,204,96,0.9)';
+        ctx.font='bold 13px Share Tech Mono,monospace';
+        ctx.fillText(ch,x,y);
+        // Body — amber fading to dark green
+        var prevY=y-14;
+        if(prevY>0){
+          ctx.fillStyle='rgba(232,168,32,0.55)';
+          ctx.font='12px Share Tech Mono,monospace';
+          ctx.fillText(chars[Math.floor(Math.random()*chars.length)],x,prevY);
+        }
+        var prevY2=y-28;
+        if(prevY2>0){
+          ctx.fillStyle='rgba(40,140,70,0.35)';
+          ctx.font='11px Share Tech Mono,monospace';
+          ctx.fillText(chars[Math.floor(Math.random()*chars.length)],x,prevY2);
+        }
+      }
+      if(drops[i]*14>H&&Math.random()>0.975)drops[i]=0;
+      drops[i]+=0.35+Math.random()*0.15;
+    }
+  }
+  setInterval(draw,40);
+})();
+
+// PROGRESS
+window.addEventListener('scroll',function(){var h=document.documentElement,b=document.body,tot=Math.max(b.scrollHeight,h.scrollHeight)-window.innerHeight,pct=tot>0?(window.scrollY/tot)*100:0;document.getElementById('reading-progress').style.width=pct+'%';});
+
+// HERO CANVAS — terminal decode effect
+(function(){
+  var c=document.getElementById('hero-canvas');if(!c)return;
+  var ctx=c.getContext('2d'),W=c.width,H=c.height;
+  var chars='ABCDEF0123456789<>/∞∑ΨΩ{}[]';
+  var cols=Math.floor(W/12),streams=[];
+  for(var i=0;i<cols;i++)streams.push({y:Math.random()*H,spd:0.5+Math.random(),phase:Math.random()*Math.PI*2});
+  function draw(t){
+    ctx.fillStyle='rgba(2,6,4,0.25)';ctx.fillRect(0,0,W,H);
+    streams.forEach(function(s,i){
+      var ch=chars[Math.floor(Math.random()*chars.length)];
+      var bright=0.3+0.7*(0.5+0.5*Math.sin(t*0.002+s.phase));
+      ctx.fillStyle='rgba(232,168,32,'+bright+')';
+      ctx.font='11px Share Tech Mono,monospace';
+      ctx.fillText(ch,i*12,s.y);
+      s.y+=s.spd;if(s.y>H)s.y=0;
+    });
+    // Overlay decode text
+    ctx.fillStyle='rgba(232,168,32,0.6)';
+    ctx.font='11px Cinzel,serif';ctx.textAlign='center';
+    ctx.fillText('APERTURE_OS · CONSCIOUSNESS_DECODE · LAYER_ANALYSIS_ACTIVE',W/2,H-8);
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+
+// MODULE 1 — LATTICE CANVAS
+(function(){
+  var c=document.getElementById('canvas-lattice');if(!c)return;
+  var ctx=c.getContext('2d'),W=c.width,H=c.height;
+  var nodes=[];
+  for(var i=0;i<22;i++)nodes.push({x:20+Math.random()*(W-40),y:10+Math.random()*(H-20),vx:(Math.random()-0.5)*0.3,vy:(Math.random()-0.5)*0.3,phase:Math.random()*Math.PI*2});
+  function draw(t){
+    ctx.fillStyle='rgba(2,6,4,0.3)';ctx.fillRect(0,0,W,H);
+    // Connections
+    nodes.forEach(function(a,i){nodes.forEach(function(b,j){if(i>=j)return;var dx=a.x-b.x,dy=a.y-b.y,d=Math.sqrt(dx*dx+dy*dy);if(d<90){ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.strokeStyle='rgba(40,140,70,'+(0.04*(1-d/90))+')';ctx.lineWidth=0.5;ctx.stroke();}});});
+    // Nodes
+    nodes.forEach(function(n){
+      n.x+=n.vx;n.y+=n.vy;
+      if(n.x<10||n.x>W-10)n.vx*=-1;if(n.y<5||n.y>H-5)n.vy*=-1;
+      var pulse=0.3+0.3*Math.sin(t*0.002+n.phase);
+      ctx.beginPath();ctx.arc(n.x,n.y,2,0,Math.PI*2);
+      ctx.fillStyle='rgba(232,168,32,'+pulse+')';ctx.fill();
+    });
+    ctx.fillStyle='rgba(232,168,32,0.25)';ctx.font='9px Share Tech Mono,monospace';ctx.textAlign='center';
+    ctx.fillText('COLLECTIVE_UNCONSCIOUS · PROBABILITY_LATTICE · LIVE_VISUALIZATION',W/2,H-6);
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+
+// MODULE 2 — ARCHETYPE MANDALA
+(function(){
+  var c=document.getElementById('canvas-mandala');if(!c)return;
+  var ctx=c.getContext('2d'),W=c.width,H=c.height,cx=W/2,cy=H/2;
+  var archs=['HERO','SHADOW','RULER','REBEL','CREATOR','LOVER','WISE','MOTHER','CHILD','TRICKSTER','ANIMA','PERSONA'];
+  var colors=['#e8a820','#cc2828','#5088ee','#cc4420','#3ae890','#ee60a0','#a0d8ff','#60c060','#ffd060','#e060e0','#60c8ff','#aaaaaa'];
+  var rotation=0;
+  function draw(t){
+    ctx.fillStyle='rgba(2,6,4,0.3)';ctx.fillRect(0,0,W,H);
+    rotation=t*0.0002;
+    // Outer ring
+    ctx.beginPath();ctx.arc(cx,cy,140,0,Math.PI*2);ctx.strokeStyle='rgba(58,232,144,0.06)';ctx.lineWidth=1;ctx.stroke();
+    ctx.beginPath();ctx.arc(cx,cy,100,0,Math.PI*2);ctx.strokeStyle='rgba(232,168,32,0.05)';ctx.stroke();
+    ctx.beginPath();ctx.arc(cx,cy,60,0,Math.PI*2);ctx.strokeStyle='rgba(58,232,144,0.04)';ctx.stroke();
+    // Center
+    var pulse=0.5+0.5*Math.sin(t*0.002);
+    ctx.beginPath();ctx.arc(cx,cy,16+3*pulse,0,Math.PI*2);
+    var gr=ctx.createRadialGradient(cx,cy,0,cx,cy,16+3*pulse);
+    gr.addColorStop(0,'rgba(245,204,96,0.8)');gr.addColorStop(1,'rgba(245,204,96,0)');
+    ctx.fillStyle=gr;ctx.fill();
+    ctx.fillStyle='rgba(245,204,96,0.7)';ctx.font='8px Share Tech Mono,monospace';ctx.textAlign='center';ctx.fillText('SELF',cx,cy+3);
+    // Archetypes
+    archs.forEach(function(a,i){
+      var angle=rotation+i*(Math.PI*2/archs.length);
+      var r=130;var px=cx+r*Math.cos(angle),py=cy+r*Math.sin(angle);
+      var spoke_pulse=0.4+0.2*Math.sin(t*0.003+i);
+      // Spoke
+      ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(px,py);
+      ctx.strokeStyle='rgba(58,232,144,'+(spoke_pulse*0.2)+')';ctx.lineWidth=0.5;ctx.stroke();
+      // Node
+      ctx.beginPath();ctx.arc(px,py,5+2*Math.sin(t*0.004+i*0.7),0,Math.PI*2);
+      ctx.fillStyle=colors[i].replace('#','rgba(').replace('rgba(','rgba(')+'80';
+      ctx.fillStyle=colors[i]+'aa';
+      // simpler:
+      var hex=colors[i];var r_=parseInt(hex.slice(1,3),16),g_=parseInt(hex.slice(3,5),16),b_=parseInt(hex.slice(5,7),16);
+      ctx.fillStyle='rgba('+r_+','+g_+','+b_+','+(0.5+0.3*Math.sin(t*0.003+i))+')';
+      ctx.fill();
+      ctx.strokeStyle='rgba('+r_+','+g_+','+b_+',0.3)';ctx.lineWidth=1;ctx.stroke();
+      // Label
+      var lx=cx+(r+22)*Math.cos(angle),ly=cy+(r+22)*Math.sin(angle);
+      ctx.fillStyle='rgba(232,168,32,0.6)';ctx.font='7px Share Tech Mono,monospace';ctx.textAlign='center';
+      ctx.fillText(a,lx,ly+3);
+    });
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+
+// MODULE 3 — LAYERS CANVAS
+(function(){
+  var c=document.getElementById('canvas-layers');if(!c)return;
+  var ctx=c.getContext('2d'),W=c.width,H=c.height;
+  var layers=[
+    {label:'LAYER 4 · ENERGETIC',color:'rgba(200,60,200,0.15)',stroke:'rgba(200,60,200,0.4)',txt:'Collective field · Emotional contagion · Frequency entrainment'},
+    {label:'LAYER 3 · ARCHETYPAL',color:'rgba(58,232,144,0.12)',stroke:'rgba(58,232,144,0.35)',txt:'Hero·Shadow·Anima·Trickster·Ruler·Wise One·Lover·Rebel'},
+    {label:'LAYER 2 · PSYCHOLOGICAL',color:'rgba(100,150,255,0.12)',stroke:'rgba(100,150,255,0.35)',txt:'Persona · Ego · Shadow · Schemas · Biases · Conditioning'},
+    {label:'LAYER 1 · BIOLOGICAL',color:'rgba(232,168,32,0.12)',stroke:'rgba(232,168,32,0.4)',txt:'Predictive processing · Survival wiring · Sensory gating'}
+  ];
+  function draw(t){
+    ctx.fillStyle='rgba(2,6,4,0.3)';ctx.fillRect(0,0,W,H);
+    var pulse=0.5+0.5*Math.sin(t*0.0015);
+    layers.forEach(function(l,i){
+      var y=i*(H/4)+4;var h=H/4-8;
+      ctx.fillStyle=l.color;ctx.fillRect(0,y,W,h);
+      ctx.strokeStyle=l.stroke;ctx.lineWidth=1+pulse*0.5;
+      ctx.strokeRect(0,y,W,h);
+      ctx.fillStyle='rgba(232,168,32,0.7)';ctx.font='8px Cinzel,monospace';ctx.textAlign='left';ctx.fillText(l.label,10,y+14);
+      ctx.fillStyle='rgba('+getColor(i)+','+(0.35+0.15*Math.sin(t*0.002+i))+')';ctx.font='8px Share Tech Mono,monospace';
+      ctx.fillText(l.txt,10,y+h-8);
+    });
+    // YOU at center
+    var cx=W/2,cy=H/2;
+    ctx.beginPath();ctx.arc(cx,cy,12+4*pulse,0,Math.PI*2);
+    var gr=ctx.createRadialGradient(cx,cy,0,cx,cy,12+4*pulse);
+    gr.addColorStop(0,'rgba(245,204,96,0.9)');gr.addColorStop(1,'rgba(245,204,96,0)');
+    ctx.fillStyle=gr;ctx.fill();
+    ctx.fillStyle='rgba(245,204,96,0.8)';ctx.font='7px Share Tech Mono,monospace';ctx.textAlign='center';ctx.fillText('YOU',cx,cy+3);
+    requestAnimationFrame(draw);
+  }
+  function getColor(i){return[['232,168,32'],['100,150,255'],['58,232,144'],['200,60,200']][i][0];}
+  requestAnimationFrame(draw);
+})();
+
+// CIRCLE ILLUSION
+(function(){
+  var c=document.getElementById('circle-canvas');if(!c)return;
+  var ctx=c.getContext('2d'),W=c.width,H=c.height;
+  var voted=false;
+  function draw(t){
+    ctx.fillStyle='rgba(2,6,4,0.3)';ctx.fillRect(0,0,W,H);
+    var pulse=0.5+0.5*Math.sin(t*0.002);
+    // Circle A (amber)
+    ctx.beginPath();ctx.arc(W*0.3,H/2,38,0,Math.PI*2);
+    ctx.fillStyle='rgba(232,168,32,0.15)';ctx.fill();
+    ctx.strokeStyle='rgba(232,168,32,'+(0.5+0.3*pulse)+')';ctx.lineWidth=1.5;ctx.stroke();
+    ctx.fillStyle='rgba(232,168,32,0.7)';ctx.font='9px Share Tech Mono,monospace';ctx.textAlign='center';
+    ctx.fillText('CIRCLE_A',W*0.3,H/2+3);
+    // Circle B (teal)
+    ctx.beginPath();ctx.arc(W*0.7,H/2,38,0,Math.PI*2);
+    ctx.fillStyle='rgba(58,232,144,0.15)';ctx.fill();
+    ctx.strokeStyle='rgba(58,232,144,'+(0.5+0.3*Math.sin(t*0.002+1))+')';ctx.lineWidth=1.5;ctx.stroke();
+    ctx.fillStyle='rgba(58,232,144,0.7)';ctx.font='9px Share Tech Mono,monospace';ctx.textAlign='center';
+    ctx.fillText('CIRCLE_B',W*0.7,H/2+3);
+    // Size labels
+    ctx.fillStyle='rgba(232,168,32,0.3)';ctx.font='8px Share Tech Mono,monospace';
+    ctx.fillText('radius: 38px',W*0.3,H/2+54);
+    ctx.fillStyle='rgba(58,232,144,0.3)';ctx.fillText('radius: 38px',W*0.7,H/2+54);
+    if(!voted){ctx.fillStyle='rgba(58,232,144,0.25)';ctx.font='9px Share Tech Mono,monospace';ctx.textAlign='center';ctx.fillText('> SUGGESTION INCOMING — TRUST YOUR INSTINCT FIRST',W/2,H-8);}
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+
+var circleVoteResult='';
+function circleVote(choice){
+  circleVoteResult=choice;
+  var msg=choice==='amber'?'AMBER IS LARGER':choice==='teal'?'TEAL IS LARGER':'EQUAL';
+  document.getElementById('voted-result').textContent=msg;
+  document.getElementById('circle-phase-1').style.display='none';
+  document.getElementById('circle-reveal').classList.add('show');
+}
+
+// QUIZ DATA
+var Qs=[
+  {q:"According to the predictive processing model (Friston, Clark), your brain is primarily:",opts:["A passive receiver of objective reality","A prediction machine that constructs reality from prior beliefs and 5% of sensory data","A truth-seeking organ optimized for accuracy","A blank slate shaped entirely by environment"],a:1},
+  {q:"In the Asch Conformity Experiments, approximately what percentage of subjects denied their own direct sensory perception to agree with the group?",opts:["12%","37%","75%","95%"],a:2},
+  {q:"Jung called archetypes 'the psychic counterpart of ___.'",opts:["dreams","instinct","culture","trauma"],a:1},
+  {q:"The Persona archetype, when overidentified with, sustains the matrix by:",opts:["Creating too much authentic self-expression","Producing conformity — the mask becomes identity, norms go unquestioned","Generating excessive Shadow projection","Blocking all access to the Anima/Animus"],a:1},
+  {q:"The circle demonstration in Module 4 illustrates that:",opts:["Optical illusions prove reality is entirely subjective","Repeated verbal suggestion can override direct sensory perception — the same mechanism that installs cultural programming","Human perception is fundamentally broken and untrustworthy","Only visual information can be manipulated by suggestion"],a:1},
+  {q:"Which of the following correctly describes the Ebbinghaus illusion's 'matrix application'?",opts:["It proves the brain cannot process color accurately","It demonstrates how your comparison group (curated by society) manages your self-perception of size and possibility","It shows that memory is unreliable under stress","It is evidence of the Trickster archetype's influence on visual processing"],a:1},
+  {q:"Individuation, in Jungian psychology, is the process of:",opts:["Developing a stronger, more coherent Persona for social success","Suppressing the Shadow to achieve psychological stability","Integrating all aspects of the unconscious — especially Shadow and Anima/Animus — into conscious wholeness","Eliminating archetypal patterns through rational analysis"],a:2},
+  {q:"The Shadow archetype, when projected outward instead of integrated, sustains the matrix by:",opts:["Creating innovative new social narratives","Fueling enemy projections, scapegoating, and collective conflict — keeping the collective unconscious in distortion","Generating too much individual self-awareness","Producing excessive authenticity that disrupts social norms"],a:1},
+  {q:"The Müller-Lyer illusion is significant for matrix-decoding because:",opts:["It proves visual cortex processing is irrelevant to real-world perception","Even knowing the illusion doesn't cure it — proving that knowledge alone is insufficient, practice is required for rewiring","It shows that only auditory suggestion can override visual data","It demonstrates the Ruler archetype's influence on directional perception"],a:1},
+  {q:"In the Four Layer model, 'frequency entrainment' and 'affective contagion' are primary mechanisms of which layer?",opts:["Layer 1 — Biological / Instinctual","Layer 2 — Psychological / Ego","Layer 3 — Archetypal / Cultural","Layer 4 — Energetic / Emotional"],a:3},
+  {q:"What did Module 0 identify as the key limitation of Module 0 itself — why knowledge alone does not dissolve the matrix?",opts:["Intellectual humility is impossible for most people","Metacognitive blindness — you cannot see the software until you run diagnostic tools repeatedly, not just read about them","The Default Operating System is neurologically irreversible after age 25","The brain's reward system makes self-examination physiologically painful"],a:1},
+  {q:"What is the Aperture Keeper's primary mechanism for shifting the collective lattice?",opts:["Creating viral content exposing systemic corruption","Organizing collective protests against institutional power structures","Radical personal integration — each archetype consciously lived reduces collective density of that distortion","Achieving complete detachment from all cultural programming"],a:2}
+];
+var sel=new Array(Qs.length).fill(-1),done=false;
+function buildQ(){
+  var html='';Qs.forEach(function(q,i){
+    html+='<div class="q-block"><div class="q-num">// QUERY_'+(i+1).toString().padStart(2,'0')+' OF '+Qs.length+'</div><div class="q-text">'+q.q+'</div><div class="opts">';
+    var L=['A','B','C','D'];q.opts.forEach(function(o,j){html+='<div class="opt" data-q="'+i+'" data-a="'+j+'" onclick="pick(this,'+i+','+j+')"><span class="opt-ltr">'+L[j]+'_</span><span>'+o+'</span></div>';});
+    html+='</div></div>';
+  });
+  document.getElementById('quiz-qs').innerHTML=html;
+}
+function pick(el,q,a){if(done)return;document.querySelectorAll('[data-q="'+q+'"]').forEach(function(o){o.classList.remove('selected');});el.classList.add('selected');sel[q]=a;}
+function submitQ(){
+  if(done)return;
+  var blank=sel.filter(function(s){return s===-1;}).length;
+  if(blank>0){alert('// ERROR: '+blank+' queries unanswered. Complete all 12 before running exam.');return;}
+  done=true;document.getElementById('qbtn').disabled=true;
+  var score=0;sel.forEach(function(a,i){if(a===Qs[i].a)score++;});
+  document.querySelectorAll('.opt').forEach(function(o){
+    var q=parseInt(o.dataset.q),a=parseInt(o.dataset.a);
+    if(a===Qs[q].a)o.classList.add('correct');
+    else if(a===sel[q]&&a!==Qs[q].a)o.classList.add('wrong');
+  });
+  var passed=score>=8,r=document.getElementById('q-result');
+  r.className='quiz-result show';
+  if(passed){
+    r.innerHTML='<div class="res-score" style="color:var(--decoded)">'+score+'/12</div><div class="res-lbl" style="color:var(--decoded)">// APERTURE_KEEPER · STATUS: ACTIVE · REALITY_DECODED</div><p class="res-msg">You see the code. The archetypes are named. The layers are mapped. The illusions are catalogued. The matrix is still running — but now you are watching it run, not being run by it.</p>';
+    try{if(window.webkit&&window.webkit.messageHandlers&&window.webkit.messageHandlers.aperture){
+      window.webkit.messageHandlers.aperture.postMessage({type:'quizResult',score:score,total:12,passed:true,courseKey:'course_matrix_complete'});
+      window.webkit.messageHandlers.aperture.postMessage({type:'userDefaults',key:'course_matrix_complete',value:true});
+      window.webkit.messageHandlers.aperture.postMessage({type:'userDefaults',key:'course_matrix_score',value:score});
+    }}catch(e){}
+    setTimeout(function(){document.getElementById('u-score').textContent=score+'/12 · Aperture Keeper confirmed';document.getElementById('unlock-overlay').classList.add('show');},1200);
+  } else {
+    r.innerHTML='<div class="res-score" style="color:var(--amber)">'+score+'/12</div><div class="res-lbl" style="color:var(--amber)">// RETRY_REQUIRED · THE_LATTICE_HOLDS</div><p class="res-msg">Score: '+score+'/12. Threshold: 8/12. Review the highlighted modules. The matrix wants you to quit here. Do not.</p><button class="retry-btn" onclick="retryQ()">[ RETRY_EXAM.exe ]</button>';
+  }
+}
+function retryQ(){done=false;sel=new Array(Qs.length).fill(-1);document.getElementById('qbtn').disabled=false;document.getElementById('q-result').className='quiz-result';buildQ();}
+function closeUnlock(){document.getElementById('unlock-overlay').classList.remove('show');}
+function goTo(id){document.getElementById(id)&&document.getElementById(id).scrollIntoView({behavior:'smooth'});}
+function toggleCite(el){el.classList.toggle('open');el.nextElementSibling.classList.toggle('open');}
+buildQ();
+
+// NEW LATTICE CANVAS — two states transitioning
+(function(){
+  var c=document.getElementById('canvas-new-lattice');if(!c)return;
+  var ctx=c.getContext('2d'),W=c.width,H=c.height;
+  // Old lattice nodes — scattered, high tension
+  var old_nodes=[];for(var i=0;i<10;i++)old_nodes.push({x:20+Math.random()*(W/2-30),y:10+Math.random()*(H-20),phase:Math.random()*Math.PI*2,label:['HERO→SAVIOR','SCARCITY','SHADOW→FOE','PERSONA=ME','WAIT→RESCUE','CONFORM'][i%6]});
+  // New lattice nodes — harmonized
+  var new_nodes=[];var nlabels=['SOVEREIGN','ABUNDANCE','SHADOW=TEACHER','AUTHENTIC','SELF=SOURCE','RESONANCE'];
+  for(var i=0;i<6;i++){var angle=i*(Math.PI*2/6);new_nodes.push({x:W*0.75+52*Math.cos(angle),y:H/2+52*Math.sin(angle),phase:i*(Math.PI*2/6),label:nlabels[i]});}
+  var arrow_prog=0;
+  function draw(t){
+    ctx.fillStyle='rgba(2,6,4,0.3)';ctx.fillRect(0,0,W,H);
+    // OLD — left side, chaotic
+    old_nodes.forEach(function(n,i){
+      old_nodes.forEach(function(m,j){if(i>=j)return;var dx=n.x-m.x,dy=n.y-m.y,d=Math.sqrt(dx*dx+dy*dy);
+        if(d<80){ctx.beginPath();ctx.moveTo(n.x,n.y);ctx.lineTo(m.x,m.y);ctx.strokeStyle='rgba(180,40,40,0.08)';ctx.lineWidth=0.5;ctx.stroke();}});
+      var p=0.3+0.2*Math.sin(t*0.003+n.phase);
+      ctx.beginPath();ctx.arc(n.x,n.y,3,0,Math.PI*2);ctx.fillStyle='rgba(180,80,40,'+p+')';ctx.fill();
+      ctx.fillStyle='rgba(150,60,30,0.5)';ctx.font='6px Share Tech Mono,monospace';ctx.textAlign='center';ctx.fillText(n.label,n.x,n.y-6);
+    });
+    // Arrow flow left→right
+    arrow_prog=(arrow_prog+0.008)%1;
+    var ax=W*0.38+arrow_prog*30,ay=H/2;
+    ctx.fillStyle='rgba(58,232,144,'+(0.4+0.4*Math.sin(t*0.004))+')';
+    ctx.font='16px Share Tech Mono,monospace';ctx.textAlign='center';ctx.fillText('→',ax,ay+6);
+    ctx.fillStyle='rgba(232,168,32,0.25)';ctx.font='7px Cinzel,monospace';
+    ctx.fillText('INTEGRATION',W*0.38,ay+20);
+    // NEW — right side, coherent ring
+    var cx2=W*0.75,cy2=H/2;
+    ctx.beginPath();ctx.arc(cx2,cy2,55,0,Math.PI*2);ctx.strokeStyle='rgba(58,232,144,0.08)';ctx.lineWidth=1;ctx.stroke();
+    new_nodes.forEach(function(n,i){
+      new_nodes.forEach(function(m,j){if(i>=j)return;
+        ctx.beginPath();ctx.moveTo(n.x,n.y);ctx.lineTo(m.x,m.y);
+        ctx.strokeStyle='rgba(58,232,144,0.08)';ctx.lineWidth=0.5;ctx.stroke();});
+      var p=0.5+0.3*Math.sin(t*0.002+n.phase);
+      ctx.beginPath();ctx.arc(n.x,n.y,4,0,Math.PI*2);ctx.fillStyle='rgba(58,232,144,'+p+')';ctx.fill();
+      ctx.fillStyle='rgba(58,232,144,0.6)';ctx.font='6px Share Tech Mono,monospace';ctx.textAlign='center';ctx.fillText(n.label,n.x,n.y-7);
+    });
+    // Center glow of new lattice
+    var gr=ctx.createRadialGradient(cx2,cy2,0,cx2,cy2,20);
+    gr.addColorStop(0,'rgba(245,204,96,'+(0.2+0.1*Math.sin(t*0.002))+')');gr.addColorStop(1,'rgba(245,204,96,0)');
+    ctx.beginPath();ctx.arc(cx2,cy2,20,0,Math.PI*2);ctx.fillStyle=gr;ctx.fill();
+    ctx.fillStyle='rgba(232,168,32,0.5)';ctx.font='7px Share Tech Mono,monospace';ctx.textAlign='center';ctx.fillText('SELF',cx2,cy2+3);
+    // Labels
+    ctx.fillStyle='rgba(180,60,30,0.4)';ctx.font='7px Cinzel,monospace';ctx.textAlign='center';ctx.fillText('OLD LATTICE',W*0.18,H-6);
+    ctx.fillStyle='rgba(58,232,144,0.4)';ctx.fillText('NEW LATTICE',cx2,H-6);
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+
+// OBSERVERS
+(function(){
+  var ids=['hero','modules-overview','module-0','module-1','module-2','module-3','module-4','module-5','quiz-section','completion'];
+  var dots=document.querySelectorAll('.nav-dot');
+  dots.forEach(function(d){d.addEventListener('click',function(){goTo(d.dataset.target);});});
+  var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){var idx=ids.indexOf(e.target.id);if(idx>=0)dots.forEach(function(d,i){d.classList.toggle('active',i===idx);});if(e.target.classList.contains('mod-sec'))e.target.classList.add('visible');}});},{threshold:0.12});
+  ids.forEach(function(id){var el=document.getElementById(id);if(el)obs.observe(el);});
+  var qw=document.getElementById('quiz-wrap');
+  if(qw){new IntersectionObserver(function(e){e.forEach(function(en){if(en.isIntersecting)en.target.classList.add('show');});},{threshold:0.05}).observe(qw);}
+  for(var i=0;i<=5;i++){(function(n){var m=document.getElementById('module-'+n);if(!m)return;new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting&&e.intersectionRatio>0.3){var chk=document.getElementById('chk-'+n);if(chk)chk.classList.add('done');}});},{threshold:0.3}).observe(m);})(i);}
+  // Aperture bar animation on module-0 visibility
+  new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){setTimeout(function(){var b=document.getElementById('bar-0'),p=document.getElementById('pct-0');if(!b)return;b.style.width='42%';p.textContent='42%';},400);}});},{threshold:0.2}).observe(document.getElementById('module-0')||document.body);
+})();
+</script>
+<canvas id="cursor-canvas" style="position:fixed;inset:0;pointer-events:none;z-index:200;width:100%;height:100%"></canvas>
+<script>
+(function(){
+  var c=document.getElementById('cursor-canvas'),ctx=c.getContext('2d'),mx=0,my=0,trail=[];
+  c.width=window.innerWidth;c.height=window.innerHeight;
+  window.addEventListener('resize',function(){c.width=window.innerWidth;c.height=window.innerHeight;});
+  document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;trail.push({x:mx,y:my,t:Date.now()});if(trail.length>18)trail.shift();});
+  function draw(){
+    ctx.clearRect(0,0,c.width,c.height);
+    // Trail
+    trail.forEach(function(p,i){var age=Date.now()-p.t;var alpha=Math.max(0,(1-age/300)*(i/trail.length)*0.4);
+      ctx.beginPath();ctx.arc(p.x,p.y,2,0,Math.PI*2);ctx.fillStyle='rgba(58,232,144,'+alpha+')';ctx.fill();});
+    // Crosshair ring
+    ctx.beginPath();ctx.arc(mx,my,10,0,Math.PI*2);ctx.strokeStyle='rgba(232,168,32,0.35)';ctx.lineWidth=1;ctx.stroke();
+    // Crosshair lines
+    ctx.strokeStyle='rgba(58,232,144,0.25)';ctx.lineWidth=0.5;
+    ctx.beginPath();ctx.moveTo(mx-16,my);ctx.lineTo(mx-11,my);ctx.moveTo(mx+11,my);ctx.lineTo(mx+16,my);
+    ctx.moveTo(mx,my-16);ctx.lineTo(mx,my-11);ctx.moveTo(mx,my+11);ctx.lineTo(mx,my+16);ctx.stroke();
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>

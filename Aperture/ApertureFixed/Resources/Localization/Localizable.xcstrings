@@ -1511,6 +1511,9 @@
         }
       }
     },
+    "%lld courses" : {
+
+    },
     "%lld Courses" : {
       "localizations" : {
         "es" : {
@@ -2620,6 +2623,12 @@
         }
       }
     },
+    "%lld/10 correct" : {
+
+    },
+    "%lld/12 correct · Liberation confirmed" : {
+
+    },
     "%lld/14 sessions done" : {
 
     },
@@ -3474,6 +3483,12 @@
         }
       }
     },
+    "∞" : {
+
+    },
+    "∞ Infinity" : {
+
+    },
     "⏰" : {
 
     },
@@ -3515,6 +3530,9 @@
 
     },
     "▶️ Start Timer" : {
+
+    },
+    "◈" : {
 
     },
     "☀️" : {
@@ -3584,6 +3602,15 @@
 
     },
     "☀️ Your Accountability System" : {
+
+    },
+    "☉" : {
+
+    },
+    "☉ SunFlow: Reignited" : {
+
+    },
+    "☉ SUNFLOW: REIGNITED" : {
 
     },
     "☎️ HOTLINES" : {
@@ -4158,6 +4185,9 @@
     "⚡⚡" : {
 
     },
+    "⛓️‍💥" : {
+
+    },
     "⛪ %@" : {
 
     },
@@ -4428,6 +4458,9 @@
 
     },
     "✦ The spells are broken. You see the words for what they are. ✦" : {
+
+    },
+    "✦ Trinity" : {
 
     },
     "✨" : {
@@ -4757,6 +4790,12 @@
       }
     },
     "➡️" : {
+
+    },
+    "⧗" : {
+
+    },
+    "⧗ APERTURE · TIMELINE" : {
 
     },
     "⬛" : {
@@ -6987,6 +7026,9 @@
     "🔴 Republicans" : {
 
     },
+    "🔴 THE MATRIX EXPOSED" : {
+
+    },
     "🔴 URGENT" : {
 
     },
@@ -7782,6 +7824,9 @@
     "3 courses · 13 modules · Quizzes that reveal your hidden assumptions" : {
 
     },
+    "3 items" : {
+
+    },
     "3 Parts" : {
       "localizations" : {
         "es" : {
@@ -7802,6 +7847,9 @@
 
     },
     "3–5 min each. Swipe, read, act." : {
+
+    },
+    "3·6·9" : {
 
     },
     "4 administrations. Both parties." : {
@@ -7966,6 +8014,9 @@
       }
     },
     "6 lessons · Frequency, psychology & the critical lens" : {
+
+    },
+    "6 modules · 4 layers · 12 archetypes · Aperture score" : {
 
     },
     "7 Gates • Progressive Unlocking" : {
@@ -8958,6 +9009,9 @@
       }
     },
     "Activate the Analyzer →" : {
+
+    },
+    "Activating the Frequency..." : {
 
     },
     "Activation" : {
@@ -10197,6 +10251,9 @@
         }
       }
     },
+    "APERTURE  ·  v1.0" : {
+
+    },
     "Aperture contains mature philosophical and spiritual content intended for adults only." : {
 
     },
@@ -10281,6 +10338,7 @@
       }
     },
     "Aperture v1.0" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -10528,6 +10586,9 @@
         }
       }
     },
+    "Ask Chronokeeper" : {
+
+    },
     "Ask for:" : {
       "localizations" : {
         "es" : {
@@ -10640,6 +10701,9 @@
       }
     },
     "ATHENA" : {
+
+    },
+    "Attribute" : {
 
     },
     "AUDIO BOOKMARKS" : {
@@ -12527,6 +12591,9 @@
         }
       }
     },
+    "CHAINS UNDONE" : {
+
+    },
     "CHAKRA CHECK-IN" : {
 
     },
@@ -12753,6 +12820,9 @@
       }
     },
     "Choose Your Avatar" : {
+
+    },
+    "Choose your experience" : {
 
     },
     "CHOOSE YOUR IDENTITY" : {
@@ -13352,6 +13422,9 @@
     "COMPLETE" : {
 
     },
+    "Complete\n\"The Key to the Universe\"\nCourse I to unlock this Masterclass." : {
+
+    },
     "Complete ✓" : {
 
     },
@@ -13390,6 +13463,9 @@
         }
       }
     },
+    "COMPLETE COURSE I FIRST" : {
+
+    },
     "Complete courses to hatch your dragon and watch it evolve into a reflection of your awakening journey." : {
       "extractionState" : "stale",
       "localizations" : {
@@ -13423,6 +13499,9 @@
 
     },
     "Complete Lesson ✓" : {
+
+    },
+    "Complete Matrix Decoded to unlock" : {
 
     },
     "Complete texts, cosmology & sacred links" : {
@@ -13932,6 +14011,9 @@
     "CONTINUE LEARNING" : {
 
     },
+    "CONTINUE THE JOURNEY" : {
+
+    },
     "Continue to Quiz →" : {
 
     },
@@ -13984,6 +14066,7 @@
       }
     },
     "Continue your journey" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -14289,6 +14372,15 @@
 
     },
     "Course Feedback" : {
+
+    },
+    "Course I" : {
+
+    },
+    "Course I Complete" : {
+
+    },
+    "Course III · Complete" : {
 
     },
     "COURSE LEVELS" : {
@@ -15322,6 +15414,9 @@
     "Digital Purge" : {
 
     },
+    "Digital Root Calculator" : {
+
+    },
     "Dim lock screen" : {
 
     },
@@ -15810,6 +15905,9 @@
       }
     },
     "Double tap to start lesson" : {
+
+    },
+    "Download voices in iOS Settings → Accessibility → Spoken Content → Voices → English" : {
 
     },
     "Dr. David Hawkins calibrated human consciousness on a logarithmic scale from 1-1000. Below 200 is destructive; above 200 is constructive. Each level has its own emotional signature and life view." : {
@@ -16774,6 +16872,9 @@
         }
       }
     },
+    "Enter a number or word..." : {
+
+    },
     "Enter any belief, claim, or narrative.\nWe'll run it through up to 25 analytical lenses." : {
 
     },
@@ -16885,6 +16986,9 @@
     "Enter your name" : {
 
     },
+    "ENTERING THE TIMELINE" : {
+
+    },
     "Entering: %lldm" : {
       "localizations" : {
         "es" : {
@@ -16902,6 +17006,9 @@
       }
     },
     "Entropy:" : {
+
+    },
+    "EPIC" : {
 
     },
     "Episodes to Start With" : {
@@ -17504,6 +17611,9 @@
     "experiencing itself through unique focal points" : {
 
     },
+    "Explore" : {
+
+    },
     "EXPLORE" : {
       "localizations" : {
         "es" : {
@@ -17723,6 +17833,9 @@
       }
     },
     "Exposing the Lies &\nMastering True Transformation" : {
+
+    },
+    "Exposing the Matrix" : {
 
     },
     "External\nAuthority" : {
@@ -18471,6 +18584,9 @@
     "FREQUENCY DISTRIBUTION" : {
 
     },
+    "FREQUENCY INITIATED" : {
+
+    },
     "Frequency Mastery" : {
       "localizations" : {
         "es" : {
@@ -18486,6 +18602,12 @@
           }
         }
       }
+    },
+    "Frequency Mastery\nMasterclass" : {
+
+    },
+    "Frequency Mastery Masterclass" : {
+
     },
     "Frequency Shift ≠ Thinking" : {
 
@@ -19166,9 +19288,6 @@
     "GUIDANCE LEVEL" : {
 
     },
-    "Guide" : {
-
-    },
     "Haikai Audit" : {
 
     },
@@ -19425,6 +19544,9 @@
       }
     },
     "Hidden for 2,000 Years" : {
+
+    },
+    "HIDDEN GNOSIS SERIES" : {
 
     },
     "HIDDEN KNOWLEDGE" : {
@@ -19943,6 +20065,9 @@
 
     },
     "Hyperfocus Timer" : {
+
+    },
+    "Hz" : {
 
     },
     "I Am Awakened" : {
@@ -20818,6 +20943,9 @@
 
     },
     "Invite friends & earn rewards" : {
+
+    },
+    "iOS Settings → Accessibility → Spoken Content → Voices" : {
 
     },
     "IS + RA + EL = ISRAEL" : {
@@ -22450,6 +22578,9 @@
         }
       }
     },
+    "LOCKED" : {
+
+    },
     "Log" : {
 
     },
@@ -22748,6 +22879,9 @@
       }
     },
     "Make Sense of Your Reality" : {
+
+    },
+    "Make sure timeline_extended.html\nis added to your app bundle." : {
 
     },
     "Manipulation Level" : {
@@ -23075,6 +23209,9 @@
       }
     },
     "MASTER YOUR MIND" : {
+
+    },
+    "Masterclass" : {
 
     },
     "Mastery Progress" : {
@@ -23706,6 +23843,7 @@
       }
     },
     "MORE" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -23720,6 +23858,9 @@
           }
         }
       }
+    },
+    "More humans questioning narratives than ever.\nThe veil is thinning." : {
+
     },
     "Morning" : {
 
@@ -23876,6 +24017,9 @@
     "Myths vs Reality" : {
 
     },
+    "NAG HAMMADI · COURSE I" : {
+
+    },
     "Nag Hammadi Library Codices II, III, IV • Berlin Codex (BG 8505,2)" : {
 
     },
@@ -23925,6 +24069,7 @@
       }
     },
     "Narrating..." : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -24549,6 +24694,9 @@
     "No phone. No music. No journaling. Just sit.\nAgitation is withdrawal, not weakness." : {
 
     },
+    "No premium voices found" : {
+
+    },
     "No questions yet" : {
       "localizations" : {
         "es" : {
@@ -24833,6 +24981,9 @@
       }
     },
     "NOT YET" : {
+
+    },
+    "Note" : {
 
     },
     "Note any chakras below 4 — these are the areas to focus your practice today." : {
@@ -25488,6 +25639,7 @@
       }
     },
     "Open your eyes" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -27921,6 +28073,16 @@
         }
       }
     },
+    "Rate: %@x  ·  Pitch: %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Rate: %1$@x  ·  Pitch: %2$@"
+          }
+        }
+      }
+    },
     "Rational Enlightenment" : {
       "localizations" : {
         "es" : {
@@ -29063,7 +29225,6 @@
       }
     },
     "Retry" : {
-      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -29225,6 +29386,12 @@
       }
     },
     "RIGHT NOW:" : {
+
+    },
+    "Root" : {
+
+    },
+    "Root:" : {
 
     },
     "RQ Quiz" : {
@@ -29748,6 +29915,9 @@
 
     },
     "Save to My Feed" : {
+
+    },
+    "SAVED" : {
 
     },
     "Saved locally on your device ✓" : {
@@ -30519,6 +30689,9 @@
     "See the pattern behind all religions" : {
 
     },
+    "See the system for what it is" : {
+
+    },
     "SEE THROUGH THE STATIC" : {
 
     },
@@ -31129,6 +31302,9 @@
       }
     },
     "SIGNAL" : {
+
+    },
+    "Signal Interrupted" : {
 
     },
     "Signal Tracker" : {
@@ -32378,6 +32554,9 @@
         }
       }
     },
+    "SunFlow: Reignited · Open your eyes" : {
+
+    },
     "SUPPLEMENT ALTERNATIVES" : {
 
     },
@@ -33271,9 +33450,6 @@
     "The average American drinks 45 gallons of soda per year" : {
 
     },
-    "The Awakening" : {
-
-    },
     "THE AWAKENING" : {
 
     },
@@ -33770,6 +33946,9 @@
         }
       }
     },
+    "The flagship course series" : {
+
+    },
     "THE FORBIDDEN GOSPELS" : {
       "localizations" : {
         "es" : {
@@ -33967,10 +34146,16 @@
         }
       }
     },
+    "The Great Awakening" : {
+
+    },
     "The Greatest Story Ever Told" : {
 
     },
     "The Greatest Story Ever Told. Decoded." : {
+
+    },
+    "THE HIDDEN GOSPEL · COURSE II" : {
 
     },
     "The Hidden Teachings" : {
@@ -34017,6 +34202,9 @@
 
     },
     "The Kill List" : {
+
+    },
+    "THE KINGDOM IS WITHIN YOU" : {
 
     },
     "THE KINGDOM WITHIN" : {
@@ -34269,6 +34457,9 @@
           }
         }
       }
+    },
+    "The Nag Hammadi Library: Foundations\nmust precede the theology." : {
+
     },
     "THE NOBLE EIGHTFOLD PATH" : {
       "localizations" : {
@@ -35934,6 +36125,9 @@
     "Time" : {
 
     },
+    "Time Travel:\nHidden History" : {
+
+    },
     "Timeline" : {
       "localizations" : {
         "es" : {
@@ -36081,6 +36275,9 @@
 
     },
     "TOOLS FOR YOUR NEW LIFE" : {
+
+    },
+    "Tools, features & your journey" : {
 
     },
     "Top 3 Priorities" : {
@@ -36325,6 +36522,9 @@
           }
         }
       }
+    },
+    "Traveling to your moment..." : {
+
     },
     "Trigger Words, Manufactured Fear & How Language Controls Thought" : {
 
@@ -36595,6 +36795,9 @@
     "Try: %@" : {
 
     },
+    "Tuning the Frequency..." : {
+
+    },
     "Turn your commute into an enlightenment portal" : {
       "localizations" : {
         "es" : {
@@ -36821,6 +37024,9 @@
     "UNDISCOVERED" : {
 
     },
+    "UNDO THE CHAINS" : {
+
+    },
     "UNITY\nSovereignty" : {
 
     },
@@ -36946,6 +37152,9 @@
       }
     },
     "Unlocked" : {
+
+    },
+    "UNLOCKED" : {
 
     },
     "Unlocked by: %@" : {
@@ -37235,6 +37444,9 @@
         }
       }
     },
+    "View All" : {
+
+    },
     "View All %lld Chemicals →" : {
 
     },
@@ -37452,6 +37664,9 @@
     "Voice Scanner" : {
 
     },
+    "Voice Settings" : {
+
+    },
     "Voice Style" : {
 
     },
@@ -37509,6 +37724,9 @@
 
     },
     "Want more content like this?" : {
+
+    },
+    "Want more voice options?" : {
 
     },
     "WATCH FOR" : {
@@ -39277,6 +39495,9 @@
     "YOU ARE ELECTROMAGNETIC" : {
 
     },
+    "You Are Here" : {
+
+    },
     "YOU ARE HERE" : {
       "localizations" : {
         "es" : {
@@ -39362,6 +39583,9 @@
     "You can review these disclaimers anytime from the Quantum Nourish settings." : {
 
     },
+    "You can switch at any time" : {
+
+    },
     "You can't avoid everything, but you can make informed choices. Knowledge is power." : {
       "localizations" : {
         "es" : {
@@ -39427,6 +39651,9 @@
 
     },
     "You have more in common\nthan you've been told." : {
+
+    },
+    "You have received what was\ndeliberately taken from you." : {
 
     },
     "You identified %lld active divisions." : {
@@ -39624,9 +39851,6 @@
         }
       }
     },
-    "You're here" : {
-
-    },
     "You're in." : {
 
     },
@@ -39757,6 +39981,9 @@
       }
     },
     "YOUR ACTION" : {
+
+    },
+    "Your AI guide to all knowledge" : {
 
     },
     "Your App, Your Experience" : {

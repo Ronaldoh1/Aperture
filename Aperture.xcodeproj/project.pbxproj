@@ -38,10 +38,10 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		E4D268512F4DE81700DE7FB7 /* Exceptions for "Aperture" folder in "Aperture" target */ = {
+		E4D26E9E2F4E307E00DE7FB7 /* Exceptions for "Aperture" folder in "Aperture" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				ApertureFixed/Info.plist,
 			);
 			target = E4A432942F11D1B80083DD4F /* Aperture */;
 		};
@@ -51,7 +51,7 @@
 		E4A432972F11D1B80083DD4F /* Aperture */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				E4D268512F4DE81700DE7FB7 /* Exceptions for "Aperture" folder in "Aperture" target */,
+				E4D26E9E2F4E307E00DE7FB7 /* Exceptions for "Aperture" folder in "Aperture" target */,
 			);
 			path = Aperture;
 			sourceTree = "<group>";

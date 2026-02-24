@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Aperture · Time Travel: Hidden History</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Raleway:wght@300;400;500;700&display=swap');
+
+:root{
+  --gold:#FFD700; --gold2:#FFA500; --gold-dim:rgba(255,215,0,.12); --gold-glow:rgba(255,215,0,.5);
+  --crimson:#DC143C; --crimson-dim:rgba(220,20,60,.12);
+  --cyan:#00D9FF; --cyan-dim:rgba(0,217,255,.1);
+  --emerald:#10b981; --emerald-dim:rgba(16,185,129,.1);
+  --violet:#9B5DE5; --violet-dim:rgba(155,93,229,.12);
+  --copper:#B87333; --amber:#FFD700; --rust:#CD5C00;
+  --bg:#03030f; --bg2:#07071a; --card:rgba(255,255,255,.03);
+  --border:rgba(255,215,0,.14); --text:#ede8ff; --text-dim:rgba(237,232,255,.5);
+  --spine-w:3px;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'EB Garamond',serif;overflow-x:hidden;cursor:default;}
+
+/* ── STARS ── */
+#sf{position:fixed;inset:0;pointer-events:none;z-index:0;}
+.star{position:absolute;background:#fff;border-radius:50%;animation:twk var(--d,3s) ease-in-out infinite alternate;}
+@keyframes twk{0%{opacity:0;transform:scale(.7)}100%{opacity:var(--op,.8);transform:scale(1.2)}}
+
+/* ── PARTICLES (divine sparks) ── */
+#particles{position:fixed;inset:0;pointer-events:none;z-index:0;}
+.spark{position:absolute;width:3px;height:3px;border-radius:50%;background:var(--gold);animation:rise var(--rd,8s) linear infinite;opacity:0;}
+@keyframes rise{0%{transform:translateY(100vh) scale(0);opacity:0;}20%{opacity:.8;}80%{opacity:.4;}100%{transform:translateY(-20vh) scale(1.5);opacity:0;}}
+
+/* ── NEBULA ── */
+.neb{position:fixed;border-radius:50%;filter:blur(100px);pointer-events:none;z-index:0;animation:nbdrift 22s ease-in-out infinite alternate;}
+.n1{width:800px;height:600px;background:radial-gradient(circle,rgba(220,20,60,.09),transparent);top:-200px;right:-200px;}
+.n2{width:600px;height:500px;background:radial-gradient(circle,rgba(155,93,229,.09),transparent);bottom:0;left:-150px;animation-delay:-11s;}
+.n3{width:500px;height:400px;background:radial-gradient(circle,rgba(255,140,0,.06),transparent);top:30%;left:50%;animation-delay:-5s;}
+@keyframes nbdrift{0%{transform:translate(0,0)scale(1)}100%{transform:translate(25px,40px)scale(1.08)}}
+
+/* ── PROGRESS BAR ── */
+#prog{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--rust),var(--gold));z-index:200;transition:width .1s;box-shadow:0 0 10px var(--gold);}
+
+/* ── DEPTH GAUGE (left rail) ── */
+#depth-gauge{position:fixed;left:16px;top:50%;transform:translateY(-50%);z-index:50;display:flex;flex-direction:column;align-items:center;gap:6px;}
+.gauge-track{width:4px;height:200px;background:rgba(255,255,255,.06);border-radius:100px;overflow:hidden;position:relative;}
+.gauge-fill{position:absolute;bottom:0;left:0;width:100%;background:linear-gradient(to top,var(--gold),var(--crimson));border-radius:100px;transition:height .3s;}
+.gauge-pct{font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--gold);writing-mode:vertical-rl;text-orientation:mixed;margin-top:4px;}
+@media(max-width:600px){#depth-gauge{display:none;}}
+
+/* ── NAV ── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(to bottom,rgba(3,3,15,.98),transparent);backdrop-filter:blur(12px);}
+.nav-brand{font-family:'Cinzel',serif;font-size:12px;letter-spacing:5px;color:var(--gold);font-weight:700;}
+.nav-right{display:flex;align-items:center;gap:12px;}
+.speed-btn{padding:5px 12px;background:rgba(255,215,0,.08);border:1px solid rgba(255,215,0,.2);border-radius:100px;color:var(--text-dim);font-family:'Raleway',sans-serif;font-size:10px;letter-spacing:2px;cursor:pointer;transition:all .2s;text-transform:uppercase;}
+.speed-btn.active{background:var(--gold-dim);border-color:var(--gold);color:var(--gold);}
+.nav-mode{font-size:9px;letter-spacing:3px;color:var(--crimson);text-transform:uppercase;font-family:'Raleway',sans-serif;}
+
+/* ── FILTER BAR ── */
+#filter-bar{position:fixed;top:52px;left:0;right:0;z-index:90;padding:8px 24px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;background:linear-gradient(to bottom,rgba(3,3,15,.95),transparent);}
+#filter-bar::-webkit-scrollbar{display:none;}
+.filter-pill{flex-shrink:0;padding:5px 14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:100px;font-family:'Raleway',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-dim);cursor:pointer;transition:all .25s;white-space:nowrap;}
+.filter-pill:hover{border-color:var(--gold);color:var(--gold);}
+.filter-pill.active{background:var(--gold-dim);border-color:var(--gold);color:var(--gold);}
+.filter-pill.f-rot{--fc:var(--crimson);}
+.filter-pill.f-rot.active{background:var(--crimson-dim);border-color:var(--crimson);color:var(--crimson);}
+.filter-pill.f-truth{--fc:var(--emerald);}
+.filter-pill.f-truth.active{background:var(--emerald-dim);border-color:var(--emerald);color:var(--emerald);}
+.filter-pill.f-ancient{--fc:var(--gold);}
+.filter-pill.f-gnostic{--fc:var(--violet);}
+.filter-pill.f-gnostic.active{background:var(--violet-dim);border-color:var(--violet);color:var(--violet);}
+
+/* ── LANDING / INTRO ── */
+#landing{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 32px 60px;position:relative;z-index:1;}
+.land-eyebrow{font-family:'Cinzel',serif;font-size:10px;letter-spacing:8px;color:var(--gold);text-transform:uppercase;margin-bottom:20px;opacity:0;animation:fup .8s .3s forwards;}
+.land-title{font-family:'Cinzel',serif;font-size:clamp(32px,7vw,72px);font-weight:900;line-height:1.05;margin-bottom:20px;background:linear-gradient(160deg,var(--gold) 0%,#fff5cc 35%,var(--copper) 70%,var(--crimson) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;opacity:0;animation:fup .8s .5s forwards;}
+.land-sub{font-family:'EB Garamond',serif;font-size:clamp(15px,2.5vw,20px);color:var(--text-dim);max-width:560px;margin:0 auto 48px;font-style:italic;line-height:1.7;opacity:0;animation:fup .8s .7s forwards;}
+
+/* CHRONO COMPANION SVG */
+/* ── CHRONO CLOCK ── */
+.chrono-clock-wrap{margin:0 auto 36px;width:min(260px,65vw);opacity:0;animation:fup .9s .9s forwards,chronoFloat 6s 2.5s ease-in-out infinite;}
+@keyframes chronoFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+.roman{font-family:'Cinzel',serif;font-size:11px;fill:rgba(255,215,0,.55);letter-spacing:1px;}
+.year-text{font-family:'Cinzel',serif;font-size:14px;fill:#FFD700;letter-spacing:3px;}
+.ring{transform-box:fill-box;transform-origin:center;}
+.r1{animation:ringBreath 2.5s 1.2s ease-in-out infinite alternate;}
+.r2{animation:ringBreath 3.2s 1.6s ease-in-out infinite alternate;}
+.r3{animation:ringBreath 4.0s 2.0s ease-in-out infinite alternate;}
+@keyframes ringBreath{0%{opacity:.35;stroke-width:.5;}100%{opacity:.08;stroke-width:.2;}}
+
+/* DESCENT OPTIONS */
+.descent-options{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:32px;opacity:0;animation:fup .8s 1.1s forwards;}
+.descent-opt{padding:10px 20px;background:rgba(255,215,0,.07);border:1px solid rgba(255,215,0,.25);border-radius:8px;color:var(--text-dim);font-family:'Raleway',sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .3s;}
+.descent-opt:hover,.descent-opt.selected{background:var(--gold-dim);border-color:var(--gold);color:var(--gold);box-shadow:0 0 20px var(--gold-glow);}
+.descent-confirm{display:inline-flex;align-items:center;gap:10px;padding:16px 52px;background:linear-gradient(135deg,var(--rust),var(--copper));color:#000;font-family:'Cinzel',serif;font-size:14px;font-weight:700;letter-spacing:3px;text-transform:uppercase;border:none;border-radius:4px;cursor:pointer;transition:all .3s;box-shadow:0 0 40px rgba(255,140,0,.5);opacity:0;animation:fup .8s 1.3s forwards;}
+.descent-confirm:hover{transform:translateY(-3px);box-shadow:0 0 60px rgba(255,140,0,.7),0 20px 50px rgba(0,0,0,.5);}
+
+@keyframes fup{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── TIMELINE SPINE ── */
+#timeline{position:relative;z-index:1;padding:0 0 120px;display:none;}
+#timeline.visible{display:block;}
+.spine{position:absolute;left:50%;transform:translateX(-50%);top:0;bottom:0;width:var(--spine-w);background:linear-gradient(to bottom,var(--copper),var(--crimson) 40%,var(--violet) 70%,var(--emerald));opacity:.4;pointer-events:none;}
+@media(max-width:768px){.spine{left:28px;transform:none;}}
+
+/* ── ERA SECTION HEADER ── */
+.era-epoch{position:relative;z-index:5;text-align:center;padding:80px 24px 20px;}
+.epoch-label{display:inline-flex;align-items:center;gap:12px;padding:8px 24px;background:rgba(0,0,0,.6);border:1px solid var(--border);border-radius:100px;font-family:'Cinzel',serif;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);backdrop-filter:blur(10px);}
+.era-epoch.ancient .epoch-label{border-color:rgba(255,215,0,.4);color:var(--gold);}
+.era-epoch.gnostic .epoch-label{border-color:rgba(155,93,229,.4);color:var(--violet);}
+.era-epoch.roman .epoch-label{border-color:rgba(220,20,60,.3);color:#f87171;}
+.era-epoch.medieval .epoch-label{border-color:rgba(249,115,22,.3);color:#fb923c;}
+.era-epoch.modern .epoch-label{border-color:rgba(0,217,255,.3);color:var(--cyan);}
+.era-epoch.now .epoch-label{border-color:rgba(16,185,129,.4);color:var(--emerald);}
+
+/* ── ERA CARD ── */
+.era-node{position:relative;padding:16px 60px;display:flex;align-items:flex-start;gap:0;}
+.era-node:nth-child(even){flex-direction:row-reverse;}
+@media(max-width:768px){.era-node,.era-node:nth-child(even){flex-direction:column;padding:16px 16px 16px 60px;}}
+
+.node-dot{position:absolute;left:50%;transform:translateX(-50%);top:24px;z-index:10;}
+@media(max-width:768px){.node-dot{left:28px;transform:translateX(-50%);}}
+.dot-outer{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .4s;cursor:pointer;}
+.dot-inner{width:10px;height:10px;border-radius:50%;}
+.era-node.corruption .dot-outer{background:rgba(220,20,60,.2);border:2px solid var(--crimson);}
+.era-node.corruption .dot-inner{background:var(--crimson);box-shadow:0 0 10px var(--crimson);}
+.era-node.truth .dot-outer{background:rgba(16,185,129,.2);border:2px solid var(--emerald);}
+.era-node.truth .dot-inner{background:var(--emerald);box-shadow:0 0 10px var(--emerald);}
+.era-node.gnostic-node .dot-outer{background:rgba(155,93,229,.2);border:2px solid var(--violet);}
+.era-node.gnostic-node .dot-inner{background:var(--violet);box-shadow:0 0 10px var(--violet);}
+.era-node.reveal .dot-outer{background:rgba(255,215,0,.2);border:2px solid var(--gold);}
+.era-node.reveal .dot-inner{background:var(--gold);box-shadow:0 0 16px var(--gold);}
+.era-node:hover .dot-outer{transform:scale(1.4);}
+
+/* ERA CARD ITSELF */
+.era-card{width:calc(50% - 40px);background:rgba(10,10,30,.8);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:all .4s cubic-bezier(.22,1,.36,1);cursor:pointer;backdrop-filter:blur(8px);}
+@media(max-width:768px){.era-card{width:100%;}}
+.era-card:hover{transform:translateY(-4px);box-shadow:0 24px 60px rgba(0,0,0,.5);}
+.era-node.corruption .era-card{border-color:rgba(220,20,60,.2);}
+.era-node.corruption .era-card:hover{border-color:rgba(220,20,60,.5);box-shadow:0 24px 60px rgba(220,20,60,.15);}
+.era-node.truth .era-card:hover{border-color:rgba(16,185,129,.5);box-shadow:0 24px 60px rgba(16,185,129,.15);}
+.era-node.gnostic-node .era-card:hover{border-color:rgba(155,93,229,.5);box-shadow:0 24px 60px rgba(155,93,229,.15);}
+.era-node.reveal .era-card:hover{border-color:rgba(255,215,0,.6);box-shadow:0 24px 60px rgba(255,215,0,.25);}
+
+.card-accent{height:3px;}
+.era-node.corruption .card-accent{background:linear-gradient(90deg,var(--crimson),transparent);}
+.era-node.truth .card-accent{background:linear-gradient(90deg,var(--emerald),transparent);}
+.era-node.gnostic-node .card-accent{background:linear-gradient(90deg,var(--violet),transparent);}
+.era-node.reveal .card-accent{background:linear-gradient(90deg,var(--gold),var(--copper),transparent);}
+
+.era-node:nth-child(even) .card-accent{background:linear-gradient(90deg,transparent,var(--crimson));}
+.era-node:nth-child(even).truth .card-accent{background:linear-gradient(90deg,transparent,var(--emerald));}
+.era-node:nth-child(even).gnostic-node .card-accent{background:linear-gradient(90deg,transparent,var(--violet));}
+
+.card-inner{padding:20px 24px;}
+.card-year{font-family:'Cinzel',serif;font-size:11px;letter-spacing:4px;margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+.era-node.corruption .card-year{color:var(--crimson);}
+.era-node.truth .card-year{color:var(--emerald);}
+.era-node.gnostic-node .card-year{color:var(--violet);}
+.era-node.reveal .card-year{color:var(--gold);}
+.card-icon-badge{font-size:16px;}
+.card-title{font-family:'Cinzel',serif;font-size:clamp(15px,2.5vw,20px);font-weight:700;margin-bottom:6px;line-height:1.25;}
+.card-subtitle{font-size:13px;color:var(--text-dim);font-style:italic;margin-bottom:12px;}
+.card-desc{font-family:'EB Garamond',serif;font-size:15px;color:var(--text-dim);line-height:1.7;margin-bottom:16px;}
+
+/* INSTITUTIONAL ROT */
+.rot-list{display:flex;flex-direction:column;gap:8px;margin-bottom:14px;}
+.rot-item{padding:10px 14px;border-radius:6px;font-size:13px;line-height:1.6;}
+.era-node.corruption .rot-item{background:rgba(220,20,60,.07);border-left:2px solid var(--crimson);}
+.era-node.truth .rot-item{background:rgba(16,185,129,.07);border-left:2px solid var(--emerald);}
+.era-node.gnostic-node .rot-item{background:rgba(155,93,229,.07);border-left:2px solid var(--violet);}
+.era-node.reveal .rot-item{background:rgba(255,215,0,.07);border-left:2px solid var(--gold);}
+.rot-institution{font-family:'Raleway',sans-serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;margin-bottom:4px;opacity:.7;}
+.rot-fact{color:var(--text);}
+.rot-hidden{color:var(--text-dim);font-style:italic;font-size:12px;margin-top:4px;}
+
+/* COLLAPSE TOGGLE */
+.card-expand-btn{width:100%;padding:10px;background:rgba(255,255,255,.03);border:none;border-top:1px solid rgba(255,255,255,.05);color:var(--text-dim);font-family:'Raleway',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:all .2s;}
+.card-expand-btn:hover{background:rgba(255,215,0,.05);color:var(--gold);}
+.card-details{display:none;}
+.era-card.expanded .card-details{display:block;animation:fup .4s forwards;}
+
+/* CHRONO INSIGHT */
+.chrono-insight{padding:14px 18px;background:linear-gradient(135deg,rgba(255,215,0,.08),rgba(255,165,0,.04));border:1px solid rgba(255,215,0,.22);border-radius:8px;margin:16px 0 0;display:flex;gap:12px;align-items:flex-start;}
+.ci-icon{font-size:18px;flex-shrink:0;font-family:serif;}
+.dc-text{font-family:'EB Garamond',serif;font-size:14px;color:rgba(255,220,150,.82);font-style:italic;line-height:1.65;}
+
+/* HIDDEN REVEAL TEXT */
+.hidden-reveal{padding:12px 16px;background:rgba(255,215,0,.05);border:1px solid rgba(255,215,0,.2);border-radius:6px;font-family:'EB Garamond',serif;font-size:14px;color:var(--gold);font-style:italic;line-height:1.7;margin-top:12px;}
+.hidden-reveal::before{content:'"';font-size:30px;color:var(--gold);opacity:.4;line-height:0;vertical-align:-12px;margin-right:4px;}
+
+/* ── GNOSTIC REVELATION (bottom) ── */
+#revelation{padding:80px 24px;text-align:center;position:relative;z-index:1;display:none;}
+#revelation.visible{display:block;}
+.rev-title{font-family:'Cinzel',serif;font-size:clamp(26px,5vw,48px);font-weight:900;background:linear-gradient(135deg,var(--gold),#fff,var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:16px;}
+.rev-sub{font-family:'EB Garamond',serif;font-size:18px;color:var(--text-dim);font-style:italic;max-width:560px;margin:0 auto 64px;}
+.gnosis-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;max-width:960px;margin:0 auto;}
+.gnosis-card{background:rgba(10,10,30,.9);border:1px solid rgba(155,93,229,.25);border-radius:12px;overflow:hidden;cursor:pointer;transition:all .4s;}
+.gnosis-card:hover{transform:translateY(-6px);border-color:rgba(155,93,229,.6);box-shadow:0 30px 60px rgba(155,93,229,.2);}
+.gnosis-top{padding:24px 24px 16px;display:flex;align-items:flex-start;gap:16px;}
+.gnosis-icon{font-size:28px;}
+.gnosis-label{font-family:'Cinzel',serif;font-size:11px;letter-spacing:3px;color:var(--violet);text-transform:uppercase;margin-bottom:4px;}
+.gnosis-title{font-family:'Cinzel',serif;font-size:17px;font-weight:700;}
+.gnosis-body{padding:0 24px 24px;font-family:'EB Garamond',serif;font-size:15px;color:var(--text-dim);line-height:1.75;}
+.gnosis-detail{display:none;padding:16px;background:rgba(155,93,229,.06);border-top:1px solid rgba(155,93,229,.15);}
+.gnosis-card.expanded .gnosis-detail{display:block;animation:fup .4s forwards;}
+.gnosis-detail p{font-family:'EB Garamond',serif;font-size:15px;color:var(--text-dim);line-height:1.8;}
+
+/* ── AWAKENING FINALE ── */
+#finale{padding:120px 24px;text-align:center;position:relative;z-index:1;}
+.finale-sun{width:120px;height:120px;margin:0 auto 40px;position:relative;}
+.sun-core{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle,#fff 0%,var(--gold) 40%,var(--copper) 70%,transparent 100%);animation:sunPulse 3s ease-in-out infinite;}
+.sun-ray{position:absolute;width:3px;background:linear-gradient(to bottom,var(--gold),transparent);left:50%;transform-origin:bottom center;animation:rayPulse 3s ease-in-out infinite;}
+@keyframes sunPulse{0%,100%{transform:scale(1);box-shadow:0 0 40px var(--gold-glow);}50%{transform:scale(1.1);box-shadow:0 0 80px var(--gold-glow),0 0 120px rgba(255,140,0,.3);}}
+@keyframes rayPulse{0%,100%{opacity:.6;height:60px;}50%{opacity:1;height:80px;}}
+.finale-title{font-family:'Cinzel',serif;font-size:clamp(28px,5vw,52px);font-weight:900;color:var(--gold);text-shadow:0 0 40px var(--gold-glow);margin-bottom:24px;}
+.finale-text{font-family:'EB Garamond',serif;font-size:clamp(16px,2.5vw,20px);color:var(--text-dim);max-width:620px;margin:0 auto 40px;line-height:1.9;font-style:italic;}
+.finale-quote{font-family:'Cinzel',serif;font-size:clamp(15px,2vw,18px);color:var(--gold);padding:24px 32px;border:1px solid rgba(255,215,0,.3);border-radius:8px;max-width:600px;margin:0 auto;background:var(--gold-dim);line-height:1.6;}
+
+/* ── CHRONO COMPANION (floating) ── */
+#chrono-companion{position:fixed;right:20px;bottom:80px;z-index:150;cursor:pointer;transition:all .3s;}
+#chrono-companion:hover{transform:scale(1.1);}
+.dc-bubble{position:absolute;bottom:80px;right:0;width:220px;background:rgba(10,10,30,.95);border:1px solid rgba(255,140,0,.4);border-radius:12px;padding:14px 16px;font-family:'EB Garamond',serif;font-size:13px;color:rgba(255,220,100,.9);line-height:1.6;display:none;box-shadow:0 10px 40px rgba(0,0,0,.5);}
+.dc-bubble.show{display:block;animation:fup .3s forwards;}
+.dc-bubble::after{content:'';position:absolute;bottom:-8px;right:32px;width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-top:8px solid rgba(255,140,0,.4);}
+.chrono-float-svg{width:64px;height:64px;filter:drop-shadow(0 0 20px rgba(255,140,0,.7));animation:chronoFloat 5s ease-in-out infinite;}
+@keyframes chronoFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+
+/* ── REVEAL ANIMATION ── */
+.era-node{opacity:0;transform:translateY(30px);transition:opacity .6s,transform .6s;}
+.era-node.revealed{opacity:1;transform:translateY(0);}
+.era-epoch{opacity:0;transform:translateY(20px);transition:opacity .5s,transform .5s;}
+.era-epoch.revealed{opacity:1;transform:translateY(0);}
+
+/* ── FILTER HIDDEN ── */
+.era-node.hidden-filter{opacity:.15!important;pointer-events:none;}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:rgba(255,215,0,.3);border-radius:100px;}
+</style>
+</head>
+<body>
+
+<!-- FIXED BG LAYERS -->
+<div id="sf"></div>
+<div id="particles"></div>
+<div class="neb n1"></div>
+<div class="neb n2"></div>
+<div class="neb n3"></div>
+
+<div id="prog" style="width:0%"></div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-brand">⧗ Aperture · Chrono Descent</div>
+  <div class="nav-right">
+    <div class="nav-mode">⧗ Extended</div>
+    <button class="speed-btn active" id="spd1x" onclick="setSpeed(1)">1×</button>
+    <button class="speed-btn" id="spd2x" onclick="setSpeed(2)">2×</button>
+    <button class="speed-btn" id="spd3x" onclick="setSpeed(3)">3×</button>
+  </div>
+</nav>
+
+<!-- FILTER BAR (hidden until descent begins) -->
+<div id="filter-bar" style="display:none;">
+  <button class="filter-pill active" onclick="filterEras('all')">All Eras</button>
+  <button class="filter-pill f-rot" onclick="filterEras('corruption')">⚡ Institutional Rot</button>
+  <button class="filter-pill f-truth" onclick="filterEras('truth')">✦ Truth Revealed</button>
+  <button class="filter-pill f-ancient" onclick="filterEras('ancient')">🏛 Ancient</button>
+  <button class="filter-pill f-gnostic" onclick="filterEras('gnostic-node')">🔮 Gnostic</button>
+</div>
+
+<!-- DEPTH GAUGE -->
+<div id="depth-gauge">
+  <div class="gauge-track"><div class="gauge-fill" id="gaugeFill" style="height:0%"></div></div>
+  <div class="gauge-pct" id="gaugePct">0%</div>
+</div>
+
+<!-- FLOATING CHRONO KEEPER -->
+<div id="chrono-companion" onclick="toggleChrono()">
+  <div class="dc-bubble" id="dcBubble">⧗ Keep descending... the deepest truths are at the bottom.</div>
+  <svg class="chrono-float-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs><filter id="cGlow"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+    <!-- Outer ring -->
+    <circle cx="32" cy="32" r="28" stroke="#FFD700" stroke-width="1.5" fill="rgba(7,7,26,0.9)" filter="url(#cGlow)"/>
+    <!-- Inner face -->
+    <circle cx="32" cy="32" r="22" fill="rgba(255,215,0,0.06)" stroke="#FFD700" stroke-width=".8" stroke-opacity=".4"/>
+    <!-- Tick marks -->
+    <g id="fticks" stroke="#FFD700" stroke-opacity=".5"></g>
+    <!-- Hour hand -->
+    <line id="fhH" x1="32" y1="32" x2="32" y2="18" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round" filter="url(#cGlow)"/>
+    <!-- Minute hand -->
+    <line id="fmH" x1="32" y1="32" x2="32" y2="13" stroke="#FFA500" stroke-width="1.8" stroke-linecap="round" filter="url(#cGlow)"/>
+    <!-- Second hand -->
+    <line id="fsH" x1="32" y1="34" x2="32" y2="11" stroke="#DC143C" stroke-width="1" stroke-linecap="round"/>
+    <!-- Center -->
+    <circle cx="32" cy="32" r="3" fill="#FFD700" filter="url(#cGlow)"/>
+    <!-- ⧗ symbol hint at bottom -->
+    <text x="32" y="50" text-anchor="middle" font-family="serif" font-size="8" fill="#FFD700" fill-opacity=".5">⧗</text>
+  </svg>
+</div>
+
+<!-- ════════════════════════════════
+     LANDING / INTRO
+════════════════════════════════ -->
+<section id="landing">
+  <div class="land-eyebrow">⧗ Chrono Keeper · Extended Descent</div>
+
+  <!-- CHRONO CLOCK -->
+  <div class="chrono-clock-wrap">
+    <svg id="chronoClock" viewBox="0 0 260 260" fill="none" xmlns="http://www.w3.org/2000/svg" class="chrono-clock-svg">
+      <defs>
+        <filter id="goldGlow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <radialGradient id="faceGrad" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#FFD700" stop-opacity=".10"/>
+          <stop offset="100%" stop-color="#03030f" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+
+      <!-- Outer ripple rings (animated via CSS) -->
+      <circle class="ring r3" cx="130" cy="130" r="124" stroke="#FFD700" stroke-width=".5" stroke-opacity=".25" fill="none"/>
+      <circle class="ring r2" cx="130" cy="130" r="112" stroke="#FFD700" stroke-width=".8" stroke-opacity=".3" fill="none"/>
+      <circle class="ring r1" cx="130" cy="130" r="100" stroke="#FFD700" stroke-width="1" stroke-opacity=".35" fill="none"/>
+
+      <!-- Clock face -->
+      <circle cx="130" cy="130" r="90" fill="#07071a"/>
+      <circle cx="130" cy="130" r="90" fill="url(#faceGrad)"/>
+
+      <!-- Trim arc (draws in on load) -->
+      <circle id="faceArc" cx="130" cy="130" r="90"
+        stroke="url(#arcGrad)" stroke-width="2" fill="none"
+        stroke-dasharray="565" stroke-dashoffset="565"
+        transform="rotate(-90 130 130)" stroke-linecap="round"/>
+      <defs>
+        <linearGradient id="arcGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FFD700"/>
+          <stop offset="60%" stop-color="#FFA500"/>
+          <stop offset="100%" stop-color="#FFD700" stop-opacity=".3"/>
+        </linearGradient>
+      </defs>
+
+      <!-- Tick marks: 60 ticks -->
+      <g id="ticks"></g>
+
+      <!-- Roman numerals at 12,3,6,9 -->
+      <text x="130" y="58"  text-anchor="middle" class="roman">XII</text>
+      <text x="202" y="135" text-anchor="middle" class="roman">III</text>
+      <text x="130" y="212" text-anchor="middle" class="roman">VI</text>
+      <text x="58"  y="135" text-anchor="middle" class="roman">IX</text>
+
+      <!-- Hour hand -->
+      <line id="hHand" x1="130" y1="130" x2="130" y2="87"
+        stroke="#FFD700" stroke-width="4" stroke-linecap="round"
+        filter="url(#goldGlow)" opacity="0"/>
+
+      <!-- Minute hand -->
+      <line id="mHand" x1="130" y1="130" x2="130" y2="72"
+        stroke="#FFA500" stroke-width="2.5" stroke-linecap="round"
+        filter="url(#goldGlow)" opacity="0"/>
+
+      <!-- Second hand -->
+      <line id="sHand" x1="130" y1="136" x2="130" y2="64"
+        stroke="#DC143C" stroke-width="1.2" stroke-linecap="round"
+        opacity="0"/>
+
+      <!-- Center cap -->
+      <circle id="capDot" cx="130" cy="130" r="5" fill="#FFD700"
+        filter="url(#goldGlow)" opacity="0"/>
+
+      <!-- Year display inside clock -->
+      <text id="yearDisp" x="130" y="168" text-anchor="middle" class="year-text">2026</text>
+    </svg>
+  </div>
+
+  <h1 class="land-title">Time Travel: Hidden History</h1>
+  <p class="land-sub">Travel back through 5,000 years of buried history — from the manufactured present to the original light they tried to erase.</p>
+
+  <p style="font-family:'Raleway',sans-serif;font-size:11px;letter-spacing:4px;color:var(--text-dim);text-transform:uppercase;margin-bottom:16px;">How fast do you want to reverse?</p>
+  <div class="descent-options">
+    <button class="descent-opt selected" onclick="selectInterval(this,'century')" data-val="century">By Century</button>
+    <button class="descent-opt" onclick="selectInterval(this,'halfcentury')" data-val="halfcentury">Every 50 Years</button>
+    <button class="descent-opt" onclick="selectInterval(this,'milestone')" data-val="milestone">Milestones Only</button>
+    <button class="descent-opt" onclick="selectInterval(this,'all')" data-val="all">Show Everything</button>
+  </div>
+
+  <button class="descent-confirm" onclick="beginDescent()">Begin the Descent ⧗</button>
+
+  <p style="font-family:'EB Garamond',serif;font-style:italic;font-size:13px;color:rgba(255,215,0,.4);margin-top:32px;">⧗ Time does not erase the truth. It only buries it.</p>
+</section>
+
+<!-- ════════════════════════════════
+     TIMELINE
+════════════════════════════════ -->
+<div id="timeline">
+  <div class="spine"></div>
+
+  <!-- ═══ NOW / MODERN ═══ -->
+  <div class="era-epoch now"><div class="epoch-label">◉ 2020s — You Are Here</div></div>
+
+  <div class="era-node truth" data-cat="truth modern" data-milestone="true">
+    <div class="node-dot"><div class="dot-outer"><div class="dot-inner"></div></div></div>
+    <div class="era-card">
+      <div class="card-accent"></div>
+      <div class="card-inner">
+        <div class="card-year"><span class="card-icon-badge">🌅</span>NOW</div>
+        <div class="card-title">The Great Awakening</div>
+        <div class="card-subtitle">You are here</div>
+        <div class="card-desc">More humans questioning than any point in recorded history. The patterns are visible. The suppression is documented. Consciousness is rising. This is why you're here.</div>
+        <div class="card-expand-btn" onclick="toggleCard(this)">⧗ Chronokeeper's Insight</div>
+        <div class="card-details">
+          <div class="chrono-insight"><span class="ci-icon">⧗</span><span class="dc-text">The most dangerous thing you can do to a control system is simply see it. That's what you're doing. Welcome.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="era-node corruption" data-cat="corruption modern" data-milestone="true">
+    <div class="node-dot"><div class="dot-outer"><div class="dot-inner"></div></div></div>
+    <div class="era-card">
+      <div class="card-accent"></div>
+      <div class="card-inner">
+        <div class="card-year"><span class="card-icon-badge">📱</span>2010s</div>
+        <div class="card-title">Social Media Capture</div>
+        <div class="card-subtitle">Attention harvesting at scale</div>
+        <div class="card-desc">Algorithms weaponize dopamine. Echo chambers form by design. Surveillance capitalism monetizes your attention. The internet — once liberation — becomes the most efficient control system ever built.</div>
+        <div class="rot-list">
+          <div class="rot-item"><div class="rot-institution">Tech / Government</div><div class="rot-fact">Algorithms optimized for outrage — not truth. Engagement = revenue regardless of harm.</div><div class="rot-hidden">The business model IS the manipulation. It was never about connection.</div></div>
+        </div>
+        <div class="card-expand-btn" onclick="toggleCard(this)">⧗ Chronokeeper's Insight</div>
+        <div class="card-details">
+          <div class="chrono-insight"><span class="ci-icon">⧗</span><span class="dc-text">They turned your desire for community into a surveillance grid. The phone is the most personal prison ever designed — and you paid for it and carry it everywhere.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="era-node corruption" data-cat="corruption modern" data-milestone="true">
+    <div class="node-dot"><div class="dot-outer"><div class="dot-inner"></div></div></div>
+    <div class="era-card">
+      <div class="card-accent"></div>
+      <div class="card-inner">
+        <div class="card-year"><span class="card-icon-badge">💻</span>1990s</div>
+        <div class="card-title">Internet Captured</div>
+        <div class="card-subtitle">Liberation, then recapture</div>
+        <div class="card-desc">Information briefly escapes gatekeepers. People connect across borders. Patterns become visible to those who look. Then platform monopolies form, algorithms sort content, and centralization re-establishes control.</div>
+        <div class="card-expand-btn" onclick="toggleCard(this)">⧗ Chronokeeper's Insight</div>
+        <div class="card-details">
+          <div class="chrono-insight"><span class="ci-icon">⧗</span><span class="dc-text">They couldn't ban the internet, so they owned it instead. A few companies now control what billions of humans see and think. That's not the web that was promised.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="era-node corruption" data-cat="corruption modern">
+    <div class="node-dot"><div class="dot-outer"><div class="dot-inner"></div></div></div>
+    <div class="era-card">
+      <div class="card-accent"></div>
+      <div class="card-inner">
+        <div class="card-year"><span class="card-icon-badge">💵</span>1971</div>
+        <div class="card-title">Gold Standard Ends</div>
+        <div class="card-subtitle">Fiat prison activated</div>
+        <div class="card-desc">Nixon removes gold backing from the dollar. Money becomes pure belief, backed by nothing but government decree. Infinite printing begins. Your labor is systematically devalued every year — by design.</div>
+        <div class="rot-list">
+          <div class="rot-item"><div class="rot-institution">Finance</div><div class="rot-fact">Since 1971, the dollar has lost 95%+ of its purchasing power.</div><div class="rot-hidden">Inflation is a tax that targets those without assets. The wealthy hold real things. You hold paper.</div></div>
+        </div>
+        <div class="card-expand-btn" onclick="toggleCard(this)">⧗ Chronokeeper's Insight</div>
+        <div class="card-details">
+          <div class="chrono-insight"><span class="ci-icon">⧗</span><span class="dc-text">They printed themselves out of accountability. Every dollar printed silently steals from every dollar you already saved. This is legal. This is policy. This is the plan.</span></div>
+          <div class="hidden-reveal">The man who controls the money supply controls the empire. Nixon knew exactly what he was doing.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="era-node corruption" data-cat="corruption modern" data-milestone="true">
+    <div class="node-dot"><div class="dot-outer"><div class="dot-inner"></div></div></div>
+    <div class="era-card">
+      <div class="card-accent"></div>
+      <div class="card-inner">
+        <div class="card-year"><span class="card-icon-badge">🔫</span>1963</div>
+        <div class="card-title">JFK Assassinated</div>
+        <div class="card-subtitle">The last resistance</div>
+        <div class="card-desc">The president who signed Executive Order 11110 — attempting to strip the Federal Reserve of its power to issue currency — is killed. His successor immediately reverses the order. The investigation is controlled. The case is closed.</div>
+        <div class="rot-list">
+          <div class="rot-item"><div class="rot-institution">Government / Finance</div><div class="rot-fact">EO 11110 would have eliminated the Fed's power. Kennedy signed it months before Dallas.</div><div class="rot-hidden">The official story has 75%+ of Americans unconvinced to this day. That's not conspiracy — that's a failed cover.</div></div>
+        </div>
+        <div class="card-expand-btn" onclick="toggleCard(this)">⧗ Chronokeeper's Insight</div>
+        <div class="card-details">
+          <div class="chrono-insight"><span class="ci-icon">⧗</span><span class="dc-text">You don't have to believe any conspiracy theory. Just look at who benefited. Follow the money. Ask why the records were sealed for 50 years. Then ask yourself why.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="era-node corruption" data-cat="corruption modern">
+    <div class="node-dot"><div class="dot-outer"><div class="dot-inner"></div></div></div>
+    <div class="era-card">
+      <div class="card-accent"></div>
+      <div class="card-inner">
+        <div class="card-year"><span class="card-icon-badge">👁</span>1950s</div>
+        <div class="card-title">Operation Mockingbird</div>
+        <div class="card-subtitle">Media becomes intelligence asset</div>
+        <div class="card-desc">CIA recruits journalists, editors, and media executives to shape public narrative. Over 400 American journalists confirm CIA ties. The term "conspiracy theory" is weaponized to dismiss dissent. Your news was a product before you knew to ask.</div>
+        <div class="card-expand-btn" onclick="toggleCard(this)">⧗ Chronokeeper's Insight</div>
+        <div class="card-details">
+          <div class="chrono-insight"><span class="ci-icon">⧗</span><span class="dc-text">They didn't need to ban the truth. They just needed to own the channels through which it traveled. When you ask "why would mainstream media lie?" — the answer is: because that was always the assignment.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ INDUSTRIAL ERA ═══ -->
+  <div class="era-epoch" style="padding-top:60px;"><div class="epoch-label">⚙ Industrial Era · 1800–1950</div></div>
+
+  <div class="era-node corruption" data-cat="corruption modern" data-milestone="true">
+    <div class="node-dot"><div class="dot-outer"><div class="dot-inner"></div></div></div>
+    <div class="era-card">
+      <div class="card-accent"></div>
+      <div class="card-inner">
+        <div class="card-year"><span class="card-icon-badge">🏥</span>1913</div>
+        <div class="card-title">Flexner Report</div>
+        <div class="card-subtitle">Medicine becomes a product</div>
+        <div class="card-desc">Rockefeller funds the Flexner Report to "standardize" medicine. Natural healing, homeopathy, and herbal traditions are labeled quackery. Only patentable pharmaceutical treatments get taught. Healing is industrialized. Your doctor learned what oil money decided they should learn.</div>
+        <div class="rot-list">
+          <div class="rot-item"><div class="rot-institution">Medicine / Finance</div><div class="rot-fact">Over 50% of US medical schools closed after the report — primarily those teaching alternative methods.</div><div class="rot-hidden">The same family that owned Standard Oil now controlled what medicine you could access. Coincidence?</div></div>
+        </div>
+        <div class="card-expand-btn" onclick="toggleCard(this)">⧗ Chronokeeper's Insight</div>
+        <div class="card-details">
+          <div class="chrono-insight"><span class="ci-icon">⧗</span><span class="dc-text">They didn't ban plant medicine. They delegitimized the people who practiced it. Then they made you pay for patented chemicals for the rest of your life. That's a business model, not a healing system.</span></div>
+          <div class="hidden-reveal">Thousands of years of plant-based healing wisdom — erased from official medicine in under a decade. Because you can't patent a herb.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="era-node corruption" data-cat="corruption modern" data-milestone="true">
+    <div class="node-dot"><div class="dot-outer"><div class="dot-inner"></div></div></div>
+    <div class="era-card">
+      <div class="card-accent"></div>
+      <div class="card-inner">
+        <div class="card-year"><span class="card-icon-badge">🏦</span>1913</div>
+        <div class="card-title">Federal Reserve Created</div>
+        <div class="card-subtitle">Private banks own your currency</div>
+        <div class="card-desc">A private banking cartel is given the power to create the American currency — and charge interest on every dollar in existence. Jekyll Island. Secret meetings. A bill passed on December 23rd while Congress was away for Christmas. The name "Federal Reserve" is designed to sound like a government institution. It is not.</div>
+        <div class="rot-list">
+          <div class="rot-item"><div class="rot-institution">Finance / Government</div><div class="rot-fact">The Fed has never been fully audited. It operates with no Congressional oversight of its core decisions.</div><div class="rot-hidden">Every dollar in your pocket was borrowed into existence — and carries debt from the moment of creation. That's not economics. That's extraction.</div></div>
+        </div>
+        <div class="card-expand-btn" onclick="toggleCard(this)">⧗ Chronokeeper's Insight</div>
+        <div class="card-details">
+          <div class="chrono-insight"><span class="ci-icon">⧗</span><span class="dc-text">The most powerful financial institution in the world was created in secret, by bankers, for bankers, while the people's representatives were home for the holidays. This is history. It's documented. And most people have no idea.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="era-node corruption" data-cat="corruption modern">
+    <div class="node-dot"><div class="dot-outer"><div class="dot-inner"></div></div></div>
+    <div class="era-card">
+      <div class="card-accent"></div>
+      <div class="card-inner">
+        <div class="card-year"><span class="card-icon-badge">📚</span>1902</div>
+        <div class="card-title">Factory Schools Designed</div>
+        <div class="card-subtitle">Manufactured obedience</div>
+        <div class="card-desc">John D. Rockefeller's General Education Board explicitly states its mission: not to create thinkers, but to create compliant workers. "We shall not try to make these people or any of their children into philosophers or men of learning or men of science." The modern school system was designed as a compliance machine, not an education system.</div>
+        <div class="card-expand-btn" onclick="toggleCard(this)">⧗ Chronokeeper's Insight</div>
+        <div class="card-details">
+          <div class="chrono-insight"><span class="ci-icon">⧗</span><span class="dc-text">They published their intentions. Read the General Education Board's 1906 annual report. They wanted workers who follow instructions, not citizens who ask questions. Look what you were taught vs. what you weren't.</span></div>
+          <div class="hidden-reveal">You were never taught how money works. You were never taught to question authority. You were never taught critical thinking as a discipline. That's not an accident.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ MEDIEVAL / COLONIAL ═══ -->
+  <div class="era-epoch" style="padding-top:60px;"><div class="epoch-label">⚔ Medieval & Colonial Era · 500–1800 CE</div></div>
+
+  <div class="era-node corruption" data-cat="corruption medieval">
+    <div class="node-dot"><div class="dot-outer"><div class="dot-inner"></div></div></div>
+    <div class="era-card">
+      <div class="card-accent"></div>
+      <div class="card-inner">
+        <div class="card-year"><span class="card-icon-badge">🔥</span>1478</div>
+        <div class="card-title">Spanish Inquisition</div>
+        <div class="card-subtitle">Faith by torture</div>
+        <div class="card-desc">The Church conducts systematic torture, imprisonment, and execution of those who hold unauthorized beliefs. Book burnings destroy centuries of accumulated knowledge. Forced confessions become the standard of proof. The message: comply or suffer. This is the institutional use of extreme violence to enforce intellectual conformity.</div>
+        <div class="card-expand-btn" onclick="toggleCard(this)">⧗ Chronokeeper's Insight</div>
+        <div class="card-details">
+          <div class="chrono-insight"><span class="ci-icon">⧗</span><span class="dc-text">This is what happens when one institution claims a monopoly on truth. The Inquisition wasn't an aberration — it was the logical endpoint of "we're the only ones who know what God wants."</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="era-node corruption" data-cat="corruption medieval" data-milestone="true">
+    <div class="node-dot"><div class="dot-outer"><div class="dot-inner"></div></div></div>
+    <div class="era-card">
+      <div class="card-accent"></div>
+      <div class="card-inner">
+        <div class="card-year"><span class="card-icon-badge">⚔</span>1209</div>
+        <div class="card-title">Cathar Genocide</div>
+        <div class="card-subtitle">"Kill them all. God will know his own."</div>
+        <div class="card-desc">The Cathars of Southern France believed in direct spiritual experience — no intermediary, no priest, no Church required. They had Gnostic roots. Rome launched a military crusade against them. The papal legate's documented command when asked how to distinguish Cathars from Catholics: kill everyone. God will sort out his own. An entire region of Gnostic Christians was exterminated.</div>
+        <div class="rot-list">
+          <div class="rot-item"><div class="rot-institution">Church / Government</div><div class="rot-fact">The Albigensian Crusade lasted 20 years. Up to 1 million killed. The first crusade against Christians by Christians.</div><div class="rot-hidden">Why were these specific people the target? Because they taught that the divine spark was within you — not in the Church's possession.</div></div>
+        </div>
+        <div class="card-expand-btn" onclick="toggleCard(this)">⧗ Chronokeeper's Insight</div>
+        <div class="card-details">
+          <div class="chrono-insight"><span class="ci-icon">⧗</span><span class="dc-text">They didn't just kill the Cathars. They tried to erase the memory that inner divinity teaching ever existed. A crusade against people who said you don't need the Church to reach God. You connect those dots.</span></div>
+          <div class="hidden-reveal">The Cathars called the Church's God the Demiurge — the false creator of the material prison. Rome did not appreciate the feedback.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="era-node corruption" data-cat="corruption medieval" data-milestone="true">
+    <div class="node-dot"><div class="dot-outer"><div class="dot-inner"></div></div></div>
+    <div class="era-card">
+      <div class="card-accent"></div>
+      <div class="card-inner">
+        <div class="card-year"><span class="card-icon-badge">🌑</span>500–1400</div>
+        <div class="card-title">The Dark Ages</div>
+        <div class="card-subtitle">1000 years of suppression</div>
+        <div class="card-desc">After the fall of Rome, the Church consolidates intellectual power. Independent scholars are silenced or killed. The Greek and Egyptian wisdom that built civilization is buried. Literacy itself becomes a controlled resource. A thousand years of accumulated human knowledge is deliberately suppressed to maintain theological authority.</div>
+        <div class="card-expand-btn" onclick="toggleCard(this)">⧗ Chronokeeper's Insight</div>
+        <div class="card-details">
+          <div class="chrono-insight"><span class="ci-icon">⧗</span><span class="dc-text">They weren't "dark" because humanity forgot how to think. They were dark because those in power needed the lights off. The knowledge survived in Islamic libraries and Gnostic communities. The Church found both and dealt with them accordingly.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ ROMAN ERA ═══ -->
+  <div class="era-epoch" style="padding-top:60px;"><div class="epoch-label">🏛 Roman Era — The Great Editing · 0–500 CE</div></div>
+
+  <div class="era-node corruption" data-cat="corruption roman" data-milestone="true">
+    <div class="node-dot"><div class="dot-outer"><div class="dot-inner"></div></div></div>
+    <div class="era-card">
+      <div class="card-accent"></div>
+      <div class="card-inner">
+        <div class="card-year"><span class="card-icon-badge">⛪</span>393 CE</div>
+        <div class="card-title">Pagan Temples Closed</div>
+        <div class="card-subtitle">Ancient practices criminalized</div>
+        <div class="card-desc">Emperor Theodosius I officially bans all non-Christian religious practice. Temples built over thousands of years are destroyed or converted. Mystery school traditions, goddess worship, and solar religion practices become punishable by death. The last remnants of the ancient world's spiritual diversity are systematically erased.</div>
+        <div class="rot-list">
+          <div class="rot-item"><div class="rot-institution">Church / Government</div><div class="rot-fact">Christianity = Christmas (winter solstice). Easter (spring equinox). Sunday worship (sun's day). They absorbed the pagan calendar and called it their own.</div><div class="rot-hidden">The dates, the rituals, the symbolism — all inherited. The inheritance was never acknowledged.</div></div>
+        </div>
+        <div class="card-expand-btn" onclick="toggleCard(this)">⧗ Chronokeeper's Insight</div>
+        <div class="card-details">
+          <div class="chrono-insight"><span class="ci-icon">⧗</span><span class="dc-text">They didn't replace the old religion. They absorbed it, renamed everything, and told people they'd invented it. Christmas on December 25th. The winter solstice. December 25th is when the sun "dies" for three days and is "reborn." Sound familiar?</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="era-node corruption" data-cat="corruption roman" data-milestone="true">
+    <div class="node-dot"><div class="dot-outer"><div class="dot-inner"></div></div></div>
+    <div class="era-card">
+      <div class="card-accent"></div>
+      <div class="card-inner">
+        <div class="card-year"><span class="card-icon-badge">📜</span>325 CE</div>
+        <div class="card-title">Council of Nicaea</div>
+        <div class="card-subtitle">Politicians vote on what God said</div>
+        <div class="card-desc">Constantine convenes a council of bishops to standardize Christianity — and consolidate imperial power. Gnostic gospels are labeled heresy and ordered destroyed. The divine spark teaching — that God is within you, not above you — is inverted. Jesus as inner teacher becomes Jesus as external savior. The "Kingdom within" becomes "you need the Church."</div>
+        <div class="rot-list">
+          <div class="rot-item"><div class="rot-institution">Church / Government</div><div class="rot-fact">Bishops voted on which texts were sacred. Not through revelation — through political process.</div><div class="rot-hidden">The Gnostic gospels survived burial in Egypt. Found at Nag Hammadi in 1945. They show a completely different Jesus.</div></div>
+        </div>
+        <div class="card-expand-btn" onclick="toggleCard(this)">⧗ Chronokeeper's Insight</div>
+        <div class="card-details">
+          <div class="chrono-insight"><span class="ci-icon">⧗</span><span class="dc-text">Politicians voted on what God said. Let that sink in. Constantine needed a unified empire. The message of inner divinity — that every human is sovereign — was politically inconvenient. So it was edited out.</span></div>
+          <div class="hidden-reveal">The deleted gospels say: "The Kingdom of God is inside you and outside you." The Church's version says: "The Kingdom of God is through us." Everything changed in that one edit.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="era-node gnostic-node" data-cat="gnostic" data-milestone="true">
+    <div class="node-dot"><div class="dot-outer"><div class="dot-inner"></div></div></div>
+    <div class="era-card">
+      <div class="card-accent"></div>
+      <div class="card-inner">
+        <div class="card-year"><span class="card-icon-badge">📖</span>50–100 CE</div>
+        <div class="card-title">Gnostic Gospels Written</div>
+        <div class="card-subtitle">The truth preserved underground</div>
+        <div class="card-desc">Gospel of Thomas. Gospel of Mary. The Secret Book of John. These texts preserve the teachings Rome tried to erase. Written in the same era as the canonical gospels — but telling a fundamentally different story. Someone buried them in a sealed jar in the Egyptian desert, knowing they would be found when humanity was ready.</div>
+        <div class="card-expand-btn" onclick="toggleCard(this)">⧗ Chronokeeper's Insight</div>
+        <div class="card-details">
+          <div class="chrono-insight"><span class="ci-icon">⧗</span><span class="dc-text">Someone hid these in 367 CE — right when the Church was ordering all Gnostic texts destroyed. They survived 1,600 years in the ground and were found in 1945, two years after the Dead Sea Scrolls. The truth has a way of surviving.</span></div>
+          <div class="hidden-reveal">"Whoever has not known himself has known nothing, but he who has known himself has at the same time already achieved knowledge of the depth of all things." — Gospel of Thomas</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ ANCIENT ═══ -->
+  <div class="era-epoch ancient" style="padding-top:60px;"><div class="epoch-label">🏺 Ancient World — The Original Teaching</div></div>
+
+  <div class="era-node corruption" data-cat="corruption ancient" data-milestone="true">
+    <div class="node-dot"><div class="dot-outer"><div class="dot-inner"></div></div></div>
+    <div class="era-card">
+      <div class="card-accent"></div>
+      <div class="card-inner">
+        <div class="card-year"><span class="card-icon-badge">🔥</span>48 BCE</div>
+        <div class="card-title">Library of Alexandria Burns</div>
+        <div class="card-subtitle">The great deletion begins</div>
+        <div class="card-desc">The greatest repository of human knowledge in the ancient world is destroyed. Hundreds of thousands of scrolls — containing medical knowledge, philosophy, mathematics, and spiritual teaching accumulated over millennia — gone. Multiple burnings over centuries finish the job. Not just scrolls — the lineage of teachers who transmitted the knowledge is severed.</div>
+        <div class="rot-list">
+          <div class="rot-item"><div class="rot-institution">Military / Government / Church</div><div class="rot-fact">Multiple burnings: Julius Caesar 48 BCE, Bishop Theophilus 391 CE, Arab conquest 641 CE. The destruction was not accidental.</div><div class="rot-hidden">The mystery school teachings — the most guarded texts — were the primary target. Practical astronomy and medicine could be reconstructed. Inner knowledge could not.</div></div>
+        </div>
+        <div class="card-expand-btn" onclick="toggleCard(this)">⧗ Chronokeeper's Insight</div>
+        <div class="card-details">
+          <div class="chrono-insight"><span class="ci-icon">⧗</span><span class="dc-text">They didn't burn it once. They came back and burned it again. And again. You don't have to set fire to something multiple times over centuries if it was an accident the first time.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="era-node truth" data-cat="truth ancient" data-milestone="true">
+    <div class="node-dot"><div class="dot-outer"><div class="dot-inner"></div></div></div>
+    <div class="era-card">
+      <div class="card-accent"></div>
+      <div class="card-inner">
+        <div class="card-year"><span class="card-icon-badge">🏛</span>500 BCE</div>
+        <div class="card-title">Greek Mystery Schools</div>
+        <div class="card-subtitle">Pythagoras, Plato, Socrates — all students of Egypt</div>
+        <div class="card-desc">Every major Greek philosopher studied in Egypt first. Pythagoras spent 22 years there. Plato studied under Egyptian priests. Socrates traced the origin of wisdom to African teachers. The "Western philosophy" you were taught as the origin of all knowledge is itself downstream of African mystery school tradition — a fact deliberately erased from modern curriculum.</div>
+        <div class="card-expand-btn" onclick="toggleCard(this)">⧗ Chronokeeper's Insight</div>
+        <div class="card-details">
+          <div class="chrono-insight"><span class="ci-icon">⧗</span><span class="dc-text">They built a curriculum that said civilization started in Greece. Greece said it started in Egypt. Egypt said it started in the stars. The line they drew across history wasn't geography — it was race. The wisdom belonged to everyone.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ GNOSTIC / EGYPT ═══ -->
+  <div class="era-epoch gnostic" style="padding-top:60px;"><div class="epoch-label">☀ Ancient Egypt — The Source Light</div></div>
+
+  <div class="era-node reveal" data-cat="ancient gnostic" data-milestone="true">
+    <div class="node-dot"><div class="dot-outer"><div class="dot-inner"></div></div></div>
+    <div class="era-card">
+      <div class="card-accent"></div>
+      <div class="card-inner">
+        <div class="card-year"><span class="card-icon-badge">☀</span>~3000 BCE</div>
+        <div class="card-title">The Horus-Jesus Blueprint</div>
+        <div class="card-subtitle">3,000 years before Bethlehem</div>
+        <div class="card-desc">Horus, son of Osiris and Isis, is born on December 25th to a virgin. He is baptized at age 30 by Anup the Baptizer in the river Jordan equivalent. He has 12 disciples. He performs miracles. He is crucified, placed in a tomb, and resurrected after 3 days. He is called the Light of the World, the Good Shepherd, and the Lamb. This story is 3,000 years older than Jesus. The formula existed first in Egypt.</div>
+        <div class="rot-list">
+          <div class="rot-item"><div class="rot-institution">☀ Ancient Egypt</div><div class="rot-fact">The Osirian resurrection cycle predates every "resurrection" religion by millennia. Osiris dies, is placed in a box, and resurrects. Isis is the virgin mother. Horus is the sun-child.</div><div class="rot-hidden">The 12 disciples = the 12 signs of the zodiac. The sun passes through all 12. This is astronomical truth dressed in story.</div></div>
+          <div class="rot-item"><div class="rot-institution">☀ Other Sun Gods</div><div class="rot-fact">Mithra (Persia), Dionysus (Greece), Attis (Phrygia), Krishna (India) — all born December 25th, all virgin births, all 12 companions, all crucified and resurrected.</div><div class="rot-hidden">The formula repeats because it describes the SUN — which dies at winter solstice and is reborn 3 days later. The religion was always about the star you orbit.</div></div>
+        </div>
+        <div class="card-expand-btn" onclick="toggleCard(this)">⧗ Full Revelation</div>
+        <div class="card-details">
+          <div class="chrono-insight"><span class="ci-icon">⧗</span><span class="dc-text">The sun literally stops moving south for 3 days on December 22nd (the winter solstice). It "dies." On December 25th, it begins moving north again. It is "reborn." The ancients built entire religions around this — because the sun is what gives you life. They were worshipping the source of all life on Earth. They weren't wrong.</span></div>
+          <div class="hidden-reveal">The original teaching wasn't superstition. It was advanced astronomy. It was also metaphor — the light within you that dies when you're controlled and is reborn when you remember who you are.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="era-node reveal" data-cat="ancient gnostic" data-milestone="true">
+    <div class="node-dot"><div class="dot-outer"><div class="dot-inner"></div></div></div>
+    <div class="era-card">
+      <div class="card-accent"></div>
+      <div class="card-inner">
+        <div class="card-year"><span class="card-icon-badge">🔮</span>~3000 BCE</div>
+        <div class="card-title">Egyptian Mystery Schools</div>
+        <div class="card-subtitle">The original teaching — before the theft</div>
+        <div class="card-desc">In the temple schools of ancient Egypt, the highest teaching was this: The divine is not outside you. You carry a spark of the infinite within you — called the Ba and the Ka. The highest initiation was not submission to God but the direct recognition of your own divine nature. "Man, know thyself — and thou shalt know the gods." This was the original message. Everything after is derivative — and most of it is a deliberate inversion.</div>
+        <div class="card-expand-btn" onclick="toggleCard(this)">☀ The Core Truth</div>
+        <div class="card-details">
+          <div class="chrono-insight"><span class="ci-icon">⧗</span><span class="dc-text">Every control system in history — every empire, every religion, every ideological machine — has one thing in common: it tells you the power is outside yourself. The ancient Egyptians said the opposite. That's why they had to be erased.</span></div>
+          <div class="hidden-reveal">The 7 Hermetic Principles preserved in the Kybalion — Mentalism, Correspondence, Vibration, Polarity, Rhythm, Cause & Effect, Gender — these are modern physics described 5,000 years ago. "As above, so below." They weren't primitive. They were ahead of us.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end timeline -->
+
+<!-- ════════════════════════════════
+     GNOSTIC REVELATION
+════════════════════════════════ -->
+<div id="revelation">
+  <div class="wrap" style="max-width:960px;margin:0 auto;padding:0 24px;">
+    <p style="font-family:'Cinzel',serif;font-size:11px;letter-spacing:6px;color:var(--violet);text-transform:uppercase;margin-bottom:16px;">☉ You Have Reached the Source</p>
+    <h2 class="rev-title">The Gnostic Codex</h2>
+    <p class="rev-sub">These are the teachings they tried to bury. Six cards. The knowledge that survived persecution, burning, and erasure — waiting for you to find it.</p>
+
+    <div class="gnosis-grid">
+      <div class="gnosis-card" onclick="toggleGnosis(this)">
+        <div class="gnosis-top"><span class="gnosis-icon">⚡</span><div><div class="gnosis-label">Who They Were</div><div class="gnosis-title">The Gnostics</div></div></div>
+        <div class="gnosis-body">Not a cult. Not heretics. The Gnostics were early Christians who believed in gnosis — direct, personal knowledge of the divine — over faith or doctrine. They existed alongside mainstream Christianity until Rome made them illegal.</div>
+        <div class="gnosis-detail"><p>"Gnostic" comes from the Greek word gnosis — meaning direct knowledge or inner knowing. They taught that every human being carries a divine spark (pneuma) that is trapped in the material world (hyle) and seeks to return to the Pleroma — the fullness of pure light. This is not metaphor. They meant it literally as cosmological reality. The Nag Hammadi library — discovered in Egypt in 1945 — contained 52 Gnostic texts suppressed for over 1,600 years. Reading them is reading what Rome tried to erase.</p></div>
+      </div>
+
+      <div class="gnosis-card" onclick="toggleGnosis(this)">
+        <div class="gnosis-top"><span class="gnosis-icon">💎</span><div><div class="gnosis-label">The Core Teaching</div><div class="gnosis-title">The Divine Spark Within</div></div></div>
+        <div class="gnosis-body">You are not a sinner needing salvation from an external God. You ARE a divine spark temporarily experiencing matter. The Kingdom of God is inside you. Self-knowledge IS the path. No intermediary required.</div>
+        <div class="gnosis-detail"><p>The Gospel of Thomas (saying 3): "The Kingdom is inside you and outside you. When you know yourself, you will be known, and you will know that you are the child of the living Father." This is the teaching that was suppressed. It requires no priest. No institution. No intermediary between you and the divine. The church's power depended entirely on being the intermediary. The Gnostic teaching was therefore not just theological opposition — it was an existential threat to Rome's entire model of control.</p></div>
+      </div>
+
+      <div class="gnosis-card" onclick="toggleGnosis(this)">
+        <div class="gnosis-top"><span class="gnosis-icon">🌌</span><div><div class="gnosis-label">The Cosmology</div><div class="gnosis-title">Sophia, Demiurge & Archons</div></div></div>
+        <div class="gnosis-body">Before the material world: the Pleroma — infinite light. Sophia (divine wisdom) falls from grace and creates the material world accidentally. The Demiurge — a lesser, false god — believes he is the supreme creator. The Archons maintain the prison.</div>
+        <div class="gnosis-detail"><p>The Demiurge is not the evil "God" of Gnostic teaching — he is simply mistaken. He created the material world without knowing the true light existed above him. His declaration "I am God and there is no other" is not malevolence — it's ignorance. The Archons are the forces (psychological, systemic, perhaps literal) that keep human consciousness trapped in identification with the material world. The goal of Gnostic practice was to remember your true nature as a divine spark and return to the Pleroma — escaping the Archonic trap. This framework maps precisely onto how modern control systems operate.</p></div>
+      </div>
+
+      <div class="gnosis-card" onclick="toggleGnosis(this)">
+        <div class="gnosis-top"><span class="gnosis-icon">♀</span><div><div class="gnosis-label">What Was Erased</div><div class="gnosis-title">The Magdalene Truth</div></div></div>
+        <div class="gnosis-body">Mary Magdalene was not a prostitute. That was a 591 CE smear by Pope Gregory I — invented 560 years after Jesus died. She was the first witness to the resurrection. The Gospel of Mary shows her as the primary teacher of the inner teachings after Jesus.</div>
+        <div class="gnosis-detail"><p>The Gospel of Mary (Magdalene) was suppressed for 1,600 years. In it, she transmits the teachings Jesus gave her privately — teachings the male disciples hadn't received. Peter asks: "Did the Teacher really speak with a woman without our knowledge?" The other disciple responds: "Surely the Teacher knew her very well. That is why he loved her more than us." The erasure of Mary Magdalene from teacher to penitent prostitute is one of the most deliberate edits in religious history. The divine feminine — Sophia — and her human representative both had to be discredited to establish the patriarchal Church's authority.</p></div>
+      </div>
+
+      <div class="gnosis-card" onclick="toggleGnosis(this)">
+        <div class="gnosis-top"><span class="gnosis-icon">🔥</span><div><div class="gnosis-label">The Sun God Thread</div><div class="gnosis-title">Christ as Solar Symbol</div></div></div>
+        <div class="gnosis-body">The Christ story follows the solar cycle precisely: born at winter solstice (12/25), baptized (autumn rains), 12 disciples (12 zodiac signs), crucified (spring equinox cross), resurrected (sun moves north again). This is astronomy written as biography.</div>
+        <div class="gnosis-detail"><p>The cross itself is ancient solar symbolism — the circle of the year with four seasonal quarters. The "Southern Cross" constellation disappears from the Northern Hemisphere view in autumn and reappears in spring — "dies" and is "resurrected." Jesus on the cross IS the sun on the zodiac cross. The 12 disciples ARE the 12 signs of the zodiac — the sun's 12 companions as it travels through the year. This doesn't make the spiritual teaching false. The ancients wrapped cosmic truth in story because story survives. The teaching was: the light of consciousness that seems to "die" in you can always be reborn. This is still true. It was always the real message.</p></div>
+      </div>
+
+      <div class="gnosis-card" onclick="toggleGnosis(this)">
+        <div class="gnosis-top"><span class="gnosis-icon">🌅</span><div><div class="gnosis-label">The Invitation</div><div class="gnosis-title">Your Awakening</div></div></div>
+        <div class="gnosis-body">You have now seen the architecture. The suppression. The edits. The inversions. You've traced the light back to its source. The invitation of the Gnostics was never "believe this instead." It was: know yourself. That's where it ends. And begins.</div>
+        <div class="gnosis-detail"><p>The Hermetic axiom: "The lips of wisdom are closed, except to the ears of Understanding." You have descended through the manufactured timeline to find the source. What you do with this knowledge is the real initiation. The Gnostics didn't ask for followers. They asked for seekers. For people willing to question everything — including the Gnostics themselves. The divine spark within you does not need validation from any tradition. It only needs you to stop suppressing it. "Man, know thyself — and thou shalt know the gods, and the universe."</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     FINALE
+════════════════════════════════ -->
+<div id="finale" style="display:none;">
+  <div style="position:relative;z-index:1;">
+    <div class="finale-sun" id="finSun">
+      <div class="sun-core"></div>
+      <div class="sun-ray" style="height:60px;top:-65px;transform:translateX(-50%);"></div>
+      <div class="sun-ray" style="height:50px;top:-55px;transform:translateX(-50%) rotate(45deg);transform-origin:bottom center;"></div>
+      <div class="sun-ray" style="height:60px;top:-65px;transform:translateX(-50%) rotate(90deg);transform-origin:bottom center;"></div>
+      <div class="sun-ray" style="height:50px;top:-55px;transform:translateX(-50%) rotate(135deg);transform-origin:bottom center;"></div>
+      <div class="sun-ray" style="height:60px;top:-65px;transform:translateX(-50%) rotate(180deg);transform-origin:bottom center;"></div>
+      <div class="sun-ray" style="height:50px;top:-55px;transform:translateX(-50%) rotate(225deg);transform-origin:bottom center;"></div>
+      <div class="sun-ray" style="height:60px;top:-65px;transform:translateX(-50%) rotate(270deg);transform-origin:bottom center;"></div>
+      <div class="sun-ray" style="height:50px;top:-55px;transform:translateX(-50%) rotate(315deg);transform-origin:bottom center;"></div>
+    </div>
+    <div class="finale-title">You Remember Now</div>
+    <p class="finale-text">You descended through 5,000 years of manufactured reality back to the source light. The suppression was real. The edits were deliberate. And the divine spark within you was never actually extinguished — it was only covered. Welcome back.</p>
+    <div class="finale-quote">"You are not a drop in the ocean. You are the entire ocean in a drop." — Rumi</div>
+    <p style="font-family:'Raleway',sans-serif;font-size:11px;letter-spacing:4px;color:rgba(255,215,0,.4);text-transform:uppercase;margin-top:48px;">⧗ Chrono Descent · Aperture</p>
+  </div>
+</div>
+
+<script>
+// ── STARS ──────────────────────────────────────
+(function(){
+  const sf=document.getElementById('sf');
+  for(let i=0;i<220;i++){
+    const s=document.createElement('div');s.className='star';
+    const sz=Math.random()*2+.5;
+    s.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;--d:${2+Math.random()*5}s;--op:${.3+Math.random()*.7};animation-delay:${Math.random()*6}s;`;
+    sf.appendChild(s);
+  }
+})();
+
+// ── PARTICLES ──────────────────────────────────
+(function(){
+  const pc=document.getElementById('particles');
+  const colors=['#FFD700','#FF8C00','#FF4500','#FFB300','#FFA500'];
+  for(let i=0;i<40;i++){
+    const p=document.createElement('div');p.className='spark';
+    p.style.cssText=`left:${Math.random()*100}%;--rd:${6+Math.random()*10}s;animation-delay:${Math.random()*10}s;background:${colors[Math.floor(Math.random()*colors.length)]};`;
+    pc.appendChild(p);
+  }
+})();
+
+// ── SCROLL PROGRESS ────────────────────────────
+window.addEventListener('scroll',()=>{
+  const pct=(window.scrollY/(document.body.scrollHeight-window.innerHeight))*100;
+  document.getElementById('prog').style.width=pct+'%';
+  document.getElementById('gaugeFill').style.height=pct+'%';
+  document.getElementById('gaugePct').textContent=Math.round(pct)+'%';
+  revealOnScroll();
+  if(pct>75&&!revShown){showRevelation();}
+  if(pct>92&&!finaleShown){showFinale();}
+  updateChronoComment(pct);
+});
+
+// ── SPEED / INTERVAL ───────────────────────────
+let selectedInterval='century';
+function selectInterval(btn,val){
+  document.querySelectorAll('.descent-opt').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');selectedInterval=val;
+}
+
+// ── BEGIN DESCENT ──────────────────────────────
+function beginDescent(){
+  document.getElementById('landing').style.display='none';
+  document.getElementById('timeline').classList.add('visible');
+  document.getElementById('filter-bar').style.display='flex';
+  applyInterval();
+  setTimeout(()=>revealOnScroll(),100);
+}
+
+function applyInterval(){
+  const nodes=document.querySelectorAll('.era-node');
+  nodes.forEach(n=>{
+    if(selectedInterval==='milestone'&&!n.dataset.milestone){n.style.display='none';}
+    else if(selectedInterval==='century'&&n.dataset.cat&&n.dataset.cat.includes('halfcentury')){n.style.display='none';}
+    else{n.style.display='';}
+  });
+}
+
+// ── REVEAL ON SCROLL ───────────────────────────
+function revealOnScroll(){
+  document.querySelectorAll('.era-node:not(.revealed),.era-epoch:not(.revealed)').forEach(el=>{
+    const rect=el.getBoundingClientRect();
+    if(rect.top<window.innerHeight*0.88){el.classList.add('revealed');}
+  });
+}
+setTimeout(revealOnScroll,200);
+
+// ── FILTER ─────────────────────────────────────
+let currentFilter='all';
+function filterEras(cat){
+  currentFilter=cat;
+  document.querySelectorAll('.filter-pill').forEach(p=>p.classList.remove('active'));
+  event.target.classList.add('active');
+  document.querySelectorAll('.era-node').forEach(n=>{
+    if(cat==='all'){n.classList.remove('hidden-filter');}
+    else{const cats=(n.dataset.cat||'').split(' ');n.classList.toggle('hidden-filter',!cats.includes(cat));}
+  });
+}
+
+// ── TOGGLE ERA CARD ────────────────────────────
+function toggleCard(btn){
+  const card=btn.closest('.era-card');
+  card.classList.toggle('expanded');
+  btn.textContent=card.classList.contains('expanded')?'▲ Close':'⧗ Chronokeeper\'s Insight';
+}
+
+// ── GNOSIS CARDS ───────────────────────────────
+function toggleGnosis(card){card.classList.toggle('expanded');}
+
+// ── REVELATION + FINALE ────────────────────────
+let revShown=false,finaleShown=false;
+function showRevelation(){
+  revShown=true;
+  const rev=document.getElementById('revelation');
+  rev.classList.add('visible');
+  rev.style.animation='fup .8s forwards';
+}
+function showFinale(){
+  finaleShown=true;
+  const f=document.getElementById('finale');
+  f.style.display='block';
+  f.style.animation='fup 1s forwards';
+}
+
+// ── SPEED BUTTONS ──────────────────────────────
+function setSpeed(n){
+  ['spd1x','spd2x','spd3x'].forEach(id=>document.getElementById(id).classList.remove('active'));
+  document.getElementById('spd'+n+'x').classList.add('active');
+  // Speed visually hints how fast you're scrolling (tooltip only — actual scroll is user-controlled)
+}
+
+// ── CHRONO COMPANION ───────────────────────────
+const chronoComments=[
+  {pct:5,  msg:'⧗ The present is the most heavily guarded layer. Every year you descend, the official story gets thinner.'},
+  {pct:20, msg:'⧗ 2010s–1990s. The digital cage was built while you celebrated the internet. The clock was already running.'},
+  {pct:35, msg:'⧗ The Federal Reserve. Jekyll Island. December 23rd, 1913. While Congress was home for Christmas. Look it up.'},
+  {pct:50, msg:'⧗ Medieval burning grounds ahead. The Cathars were killed because they said the divine was inside you — not in Rome.'},
+  {pct:65, msg:'⧗ Council of Nicaea, 325 CE. Politicians voted on what God said. Everything downstream of this is a filtered signal.'},
+  {pct:78, msg:'⧗ The Greek philosophers studied in Egypt first. Pythagoras spent 22 years there. Look who got the credit.'},
+  {pct:88, msg:'⧗ Ancient Egypt. 3,000 years before Bethlehem. Horus: born Dec 25th, virgin birth, 12 companions, resurrected. Sound familiar?'},
+  {pct:95, msg:'⧗ The Gnostics are below. They buried these texts in 367 CE knowing they would be found. They were found in 1945. For you.'},
+];
+let lastComment=-1;
+function updateChronoComment(pct){
+  for(let i=chronoComments.length-1;i>=0;i--){
+    if(pct>=chronoComments[i].pct&&i>lastComment){
+      showChronoBubble(chronoComments[i].msg);lastComment=i;break;
+    }
+  }
+}
+let bubbleTimer;
+function showChronoBubble(msg){
+  const b=document.getElementById('dcBubble');
+  b.textContent=msg;b.classList.add('show');
+  clearTimeout(bubbleTimer);
+  bubbleTimer=setTimeout(()=>b.classList.remove('show'),7000);
+}
+function toggleChrono(){
+  const b=document.getElementById('dcBubble');
+  b.classList.toggle('show');
+}
+
+// ── CHRONO CLOCK INIT ──────────────────────────
+(function initChronoClock(){
+  // Draw tick marks on main clock
+  const tg = document.getElementById('ticks');
+  if(tg){
+    for(let i=0;i<60;i++){
+      const ang = i*6*Math.PI/180;
+      const major = i%5===0;
+      const r1=major?82:88, r2=94;
+      const x1=130+r1*Math.sin(ang), y1=130-r1*Math.cos(ang);
+      const x2=130+r2*Math.sin(ang), y2=130-r2*Math.cos(ang);
+      const ln=document.createElementNS('http://www.w3.org/2000/svg','line');
+      ln.setAttribute('x1',x1);ln.setAttribute('y1',y1);
+      ln.setAttribute('x2',x2);ln.setAttribute('y2',y2);
+      ln.setAttribute('stroke',`rgba(255,215,0,${major?0.55:0.2})`);
+      ln.setAttribute('stroke-width',major?'1.5':'0.6');
+      tg.appendChild(ln);
+    }
+  }
+
+  // Draw tick marks on floating clock
+  const ftg=document.getElementById('fticks');
+  if(ftg){
+    for(let i=0;i<12;i++){
+      const ang=i*30*Math.PI/180;
+      const ln=document.createElementNS('http://www.w3.org/2000/svg','line');
+      ln.setAttribute('x1',32+22*Math.sin(ang)); ln.setAttribute('y1',32-22*Math.cos(ang));
+      ln.setAttribute('x2',32+26*Math.sin(ang)); ln.setAttribute('y2',32-26*Math.cos(ang));
+      ln.setAttribute('stroke','#FFD700'); ln.setAttribute('stroke-width','1.2');
+      ftg.appendChild(ln);
+    }
+  }
+
+  // Arc draw-in
+  const arc=document.getElementById('faceArc');
+  if(arc){
+    setTimeout(()=>{
+      arc.style.transition='stroke-dashoffset 1.4s ease-out';
+      arc.style.strokeDashoffset='0';
+    },500);
+  }
+
+  // Fade in hands
+  ['hHand','mHand','sHand','capDot'].forEach((id,i)=>{
+    const el=document.getElementById(id);
+    if(el) setTimeout(()=>{ el.style.transition='opacity .5s'; el.setAttribute('opacity','1'); },900+i*120);
+  });
+
+  // Backward clock animation
+  let hDeg=0, mDeg=0, sDeg=0;
+  const hEl=document.getElementById('hHand');
+  const mEl=document.getElementById('mHand');
+  const sEl=document.getElementById('sHand');
+  const fhEl=document.getElementById('fhH');
+  const fmEl=document.getElementById('fmH');
+  const fsEl=document.getElementById('fsH');
+
+  function rotateHand(el,cx,cy,ang){
+    if(!el)return;
+    const rad=ang*Math.PI/180;
+    const pts=el.getAttribute('x1')?null:null;
+    // Use transform for clean rotation around center
+    el.setAttribute('transform',`rotate(${ang} ${cx} ${cy})`);
+  }
+
+  function tickClock(){
+    // Hands go BACKWARD — negative increment
+    sDeg -= 6;       // 60× per revolution backward
+    mDeg -= 0.1;     // 1° per second backward
+    hDeg -= 0.00833; // slow hour
+
+    rotateHand(hEl,130,130,hDeg);
+    rotateHand(mEl,130,130,mDeg);
+    rotateHand(sEl,130,130,sDeg);
+    // Floating clock
+    rotateHand(fhEl,32,32,hDeg);
+    rotateHand(fmEl,32,32,mDeg);
+    rotateHand(fsEl,32,32,sDeg);
+
+    requestAnimationFrame(tickClock);
+  }
+  setTimeout(tickClock,900);
+
+  // Year counter — reverse through time
+  const yearEl=document.getElementById('yearDisp');
+  const yearStops=[2026,1971,1913,1209,325,48,-500,-3000];
+  let yIdx=0;
+  function cycleYear(){
+    if(!yearEl)return;
+    yearEl.style.transition='opacity .25s';
+    yearEl.style.opacity='0';
+    setTimeout(()=>{
+      const y=yearStops[yIdx];
+      yearEl.textContent=y<0?`${Math.abs(y)} BCE`:y<=999?`${y} CE`:`${y}`;
+      yearEl.style.opacity='1';
+      yIdx=(yIdx+1)%yearStops.length;
+      setTimeout(cycleYear,1000);
+    },280);
+  }
+  setTimeout(cycleYear,1200);
+})();
+</script>
+</body>
+</html>

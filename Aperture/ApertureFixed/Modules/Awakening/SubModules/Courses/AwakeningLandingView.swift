@@ -649,19 +649,9 @@ struct AwakeningLandingView: View {
                 }
                 .buttonStyle(ScaleButtonStyle())
 
-                // Course 2: Exposing the Matrix — locked until Matrix Decoded complete
+                // Course 2: Exposing the Matrix — HTML Master Course — locked until Matrix Decoded complete
                 if matrixDecoded_isComplete {
-                    NavigationLink(destination: GenericCourseView(
-                        title: "Exposing the Matrix",
-                        subtitle: "You're not trapped — you're a co-creator",
-                        icon: "eye.fill",
-                        color: Color(hex: "#39FF14"),
-                        geometryStyle: .flowerOfLife,
-                        modules: ExposingMatrixCourse.shared.modules.map { m in
-                            GenericModule(id: m.id, number: m.number, title: m.title, subtitle: m.subtitle,
-                                lessons: m.lessons.map { l in GenericLesson(id: l.id, title: l.title, content: l.content, keyPoints: l.keyPoints) })
-                        }
-                    )) {
+                    NavigationLink(destination: MatrixCourseView()) {
                         ExposingMatrixUnlockedRow()
                     }
                     .buttonStyle(ScaleButtonStyle())
@@ -1048,6 +1038,7 @@ struct AwakeningLandingView: View {
                 )
         )
     }
+
 
     // MARK: - Hidden Gnosis Series Section
     private var gnosisSeriesSection: some View {
@@ -1689,7 +1680,7 @@ struct ExposingMatrixUnlockedRow: View {
                     .font(.system(size: 14, weight: .semibold, design: .rounded))
                     .foregroundColor(.white)
 
-                Text("See the system — you're a co-creator")
+                Text("6 modules · 4 layers · 12 archetypes · Aperture score")
                     .font(.system(size: 11, weight: .medium))
                     .foregroundColor(Palette.text.muted)
                     .lineLimit(1)

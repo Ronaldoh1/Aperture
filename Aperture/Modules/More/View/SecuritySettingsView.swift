@@ -36,6 +36,9 @@ struct SecuritySettingsView: View {
         .navigationTitle("Security")
         .navigationBarTitleDisplayMode(.large)
         .listStyle(.insetGrouped)
+        .scrollContentBackground(.hidden)
+        .background(PaletteGradients.cosmicBackground.ignoresSafeArea())
+
         .alert("Enable \(authManager.biometricType.displayName)", isPresented: $showBiometricConfirmation) {
             Button("Enable") {
                 Task {

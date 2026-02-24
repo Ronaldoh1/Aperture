@@ -84,7 +84,7 @@ struct AboutApertureView: View {
             
             Text("Open Your Eyes")
                 .font(.system(size: 16, weight: .medium))
-                .foregroundColor(.gray)
+                .foregroundColor(Palette.text.muted)
         }
         .padding(.vertical, 20)
     }
@@ -97,12 +97,12 @@ struct AboutApertureView: View {
             
             Text("Aperture exists to synthesize the world's wisdom traditions, reveal hidden historical patterns, and provide practical tools for conscious evolution.")
                 .font(.system(size: 15))
-                .foregroundColor(.white.opacity(0.9))
+                .foregroundColor(Palette.text.secondary)
                 .lineSpacing(4)
             
             Text("We believe awakening is humanity's birthright—not a privilege reserved for monks, mystics, or the initiated few. By showing the common thread across all traditions, we help you find your path without dogma, gurus, or gatekeepers.")
                 .font(.system(size: 15))
-                .foregroundColor(.white.opacity(0.9))
+                .foregroundColor(Palette.text.secondary)
                 .lineSpacing(4)
         }
         .padding()
@@ -128,11 +128,14 @@ struct AboutApertureView: View {
         }
         .padding()
         .background(
-            RoundedRectangle(cornerRadius: 16)
-                .fill(Color.green.opacity(0.1))
+            RoundedRectangle(cornerRadius: 18, style: .continuous)
+                .fill(Color.green.opacity(0.08))
                 .overlay(
-                    RoundedRectangle(cornerRadius: 16)
-                        .stroke(Color.green.opacity(0.3), lineWidth: 1)
+                    RoundedRectangle(cornerRadius: 18, style: .continuous)
+                        .stroke(
+                            LinearGradient(colors: [Color.green.opacity(0.4), Color.green.opacity(0.15)], startPoint: .topLeading, endPoint: .bottomTrailing),
+                            lineWidth: 1
+                        )
                 )
         )
     }
@@ -141,10 +144,10 @@ struct AboutApertureView: View {
         VStack(alignment: .leading, spacing: 4) {
             Text("• " + title)
                 .font(.system(size: 14, weight: .semibold))
-                .foregroundColor(.white)
+                .foregroundColor(Palette.text.primary)
             Text(description)
                 .font(.system(size: 13))
-                .foregroundColor(.gray)
+                .foregroundColor(Palette.text.muted)
                 .padding(.leading, 12)
         }
     }
@@ -177,7 +180,7 @@ struct AboutApertureView: View {
             
             Text(text)
                 .font(.system(size: 14))
-                .foregroundColor(.white.opacity(0.9))
+                .foregroundColor(Palette.text.secondary)
         }
     }
     
@@ -187,15 +190,15 @@ struct AboutApertureView: View {
         VStack(spacing: 8) {
             Text("Version 1.0.0")
                 .font(.system(size: 14, weight: .medium))
-                .foregroundColor(.gray)
+                .foregroundColor(Palette.text.muted)
             
             Text("Built with 🐉 in NYC")
                 .font(.system(size: 12))
-                .foregroundColor(.gray.opacity(0.7))
+                .foregroundColor(Palette.text.muted.opacity(0.7))
             
             Text("© 2026 SunFlow: Reignited")
                 .font(.system(size: 11))
-                .foregroundColor(.gray.opacity(0.5))
+                .foregroundColor(Palette.text.muted.opacity(0.5))
         }
         .padding(.vertical, 20)
     }
@@ -207,13 +210,13 @@ struct AboutApertureView: View {
             Button(action: { showPrivacyPolicy = true }) {
                 Text("Privacy Policy")
                     .font(.system(size: 14))
-                    .foregroundColor(Palette.primary.cyan)
+                    .foregroundStyle(LinearGradient(colors: [Palette.primary.cyan, Palette.primary.violet], startPoint: .leading, endPoint: .trailing))
             }
             
             Button(action: { showTerms = true }) {
                 Text("Terms of Service")
                     .font(.system(size: 14))
-                    .foregroundColor(Palette.primary.cyan)
+                    .foregroundStyle(LinearGradient(colors: [Palette.primary.cyan, Palette.primary.violet], startPoint: .leading, endPoint: .trailing))
             }
         }
     }
@@ -228,11 +231,18 @@ struct AboutApertureView: View {
     }
     
     private var sectionBackground: some View {
-        RoundedRectangle(cornerRadius: 16)
+        RoundedRectangle(cornerRadius: 18, style: .continuous)
             .fill(Color.white.opacity(0.05))
             .overlay(
-                RoundedRectangle(cornerRadius: 16)
-                    .stroke(Color.white.opacity(0.1), lineWidth: 1)
+                RoundedRectangle(cornerRadius: 18, style: .continuous)
+                    .stroke(
+                        LinearGradient(
+                            colors: [Color.white.opacity(0.12), Color.white.opacity(0.05)],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        ),
+                        lineWidth: 1
+                    )
             )
     }
 }

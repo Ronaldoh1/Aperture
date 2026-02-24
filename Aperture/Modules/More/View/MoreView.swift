@@ -148,9 +148,37 @@ struct MoreView: View {
 
     }
 
+    private func sectionDivider(_ title: String) -> some View {
+        HStack(spacing: 10) {
+            Rectangle()
+                .fill(
+                    LinearGradient(
+                        colors: [Color.clear, Palette.text.muted.opacity(0.2)],
+                        startPoint: .leading, endPoint: .trailing
+                    )
+                )
+                .frame(height: 1)
+            Text(title.uppercased())
+                .font(.system(size: 10, weight: .bold, design: .rounded))
+                .foregroundColor(Palette.text.muted)
+                .tracking(2)
+            Rectangle()
+                .fill(
+                    LinearGradient(
+                        colors: [Palette.text.muted.opacity(0.2), Color.clear],
+                        startPoint: .leading, endPoint: .trailing
+                    )
+                )
+                .frame(height: 1)
+        }
+        .padding(.vertical, 4)
+    }
+
     private var menuSection: some View {
 
-        VStack(spacing: 16) {
+        VStack(spacing: 14) {
+
+            sectionDivider("Featured")
 
             // SACRED GEOMETRY BADGES - Featured at top
             MoreMenuCard(
@@ -207,6 +235,8 @@ struct MoreView: View {
                 showDiveDeeper = true
             }
 
+            sectionDivider("Library")
+
             // ALEXANDRIA - Sacred Library (moved from tab bar)
             MoreMenuCard(
                 icon: "books.vertical.fill",
@@ -229,6 +259,8 @@ struct MoreView: View {
                 showProfile = true
             }
 
+            sectionDivider("Your Journey")
+
             // JOURNEY PROGRESS (NEW)
             MoreMenuCard(
                 icon: "chart.line.uptrend.xyaxis",
@@ -250,6 +282,8 @@ struct MoreView: View {
             ) {
                 showBookmarks = true
             }
+
+            sectionDivider("Tools")
 
             // FLOWSTATE (PREMIUM)
             MoreMenuCard(
@@ -362,6 +396,8 @@ struct MoreView: View {
                     showFoodConsciousness = true
                 }
             }
+
+            sectionDivider("Info & Support")
 
             // SOURCES & FURTHER READING
             MoreMenuCard(

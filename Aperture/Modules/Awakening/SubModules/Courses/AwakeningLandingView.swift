@@ -10,6 +10,14 @@ struct AwakeningLandingView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var rotation: Double = 0
     @State private var pulse: Double = 1.0
+    @ObservedObject private var progressTracker = ProgressTracker.shared
+
+    // Unlock: Exposing the Matrix requires completing The Matrix course
+    private var matrixDecoded_isComplete: Bool {
+        progressTracker.courseProgress
+            .first(where: { $0.courseId == "matrix_system" })?
+            .isCompleted ?? false
+    }
     
     var body: some View {
         NavigationStack {
@@ -592,53 +600,104 @@ struct AwakeningLandingView: View {
         )
     }
     
-    // MARK: - Matrix Exposed Section (NEW)
-    
+    // MARK: - Matrix Exposed Section
+
     private var matrixExposedSection: some View {
-        CourseSectionView(
-            title: "🔴 THE MATRIX EXPOSED",
-            subtitle: "See the system for what it is",
-            color: Color(hex: "#00FF00"),
-            courses: [
-                CourseRowData(
-                    id: "matrix_system",
-                    title: "The Matrix",
+        VStack(alignment: .leading, spacing: 12) {
+            HStack {
+                Text("🔴 THE MATRIX EXPOSED")
+                    .font(.system(size: 14, weight: .bold, design: .rounded))
+                    .foregroundColor(Color(hex: "#00FF00"))
+                Spacer()
+                Text("3 items")
+                    .font(.system(size: 11, weight: .medium))
+                    .foregroundColor(Palette.text.muted)
+            }
+
+            Text("See the system for what it is")
+                .font(.system(size: 12, weight: .medium))
+                .foregroundColor(Palette.text.secondary)
+
+            VStack(spacing: 8) {
+
+                // Course 1: Matrix Decoded — always available
+                NavigationLink(destination: GenericCourseView(
+                    title: "Matrix Decoded",
                     subtitle: "The system is not based on love",
                     icon: "cube.transparent",
                     color: Color(hex: "#00FF00"),
-                    destination: AnyView(GenericCourseView(
-                        title: "The Matrix",
+                    geometryStyle: .metatronsCube,
+                    modules: MatrixSystemCourse.shared.modules.map { m in
+                        GenericModule(id: m.id, number: m.number, title: m.title, subtitle: m.subtitle,
+                            lessons: m.lessons.map { l in GenericLesson(id: l.id, title: l.title, content: l.content, keyPoints: l.keyPoints) })
+                    }
+                )) {
+                    CourseRowView(course: CourseRowData(
+                        id: "matrix_system",
+                        title: "Matrix Decoded",
                         subtitle: "The system is not based on love",
                         icon: "cube.transparent",
                         color: Color(hex: "#00FF00"),
-                        geometryStyle: .metatronsCube,
-                        modules: MatrixSystemCourse.shared.modules.map { m in
+                        destination: AnyView(EmptyView())
+                    ))
+                }
+                .buttonStyle(ScaleButtonStyle())
+
+                // Course 2: Exposing the Matrix — locked until Matrix Decoded complete
+                if matrixDecoded_isComplete {
+                    NavigationLink(destination: GenericCourseView(
+                        title: "Exposing the Matrix",
+                        subtitle: "You're not trapped — you're a co-creator",
+                        icon: "eye.fill",
+                        color: Color(hex: "#39FF14"),
+                        geometryStyle: .flowerOfLife,
+                        modules: ExposingMatrixCourse.shared.modules.map { m in
                             GenericModule(id: m.id, number: m.number, title: m.title, subtitle: m.subtitle,
                                 lessons: m.lessons.map { l in GenericLesson(id: l.id, title: l.title, content: l.content, keyPoints: l.keyPoints) })
                         }
-                    ))
-                ),
-                CourseRowData(
-                    id: "left_right",
+                    )) {
+                        ExposingMatrixUnlockedRow()
+                    }
+                    .buttonStyle(ScaleButtonStyle())
+                } else {
+                    ExposingMatrixLockedRow()
+                }
+
+                // Course 3: Left vs Right
+                NavigationLink(destination: GenericCourseView(
                     title: "Left vs Right",
                     subtitle: "The divide-and-conquer programming",
                     icon: "arrow.left.arrow.right",
                     color: Color(hex: "#9E9E9E"),
-                    destination: AnyView(GenericCourseView(
+                    geometryStyle: .vesicaPiscis,
+                    modules: LeftRightProgrammingCourse.shared.modules.map { m in
+                        GenericModule(id: m.id, number: m.number, title: m.title, subtitle: m.subtitle,
+                            lessons: m.lessons.map { l in GenericLesson(id: l.id, title: l.title, content: l.content, keyPoints: l.keyPoints) })
+                    }
+                )) {
+                    CourseRowView(course: CourseRowData(
+                        id: "left_right",
                         title: "Left vs Right",
                         subtitle: "The divide-and-conquer programming",
                         icon: "arrow.left.arrow.right",
                         color: Color(hex: "#9E9E9E"),
-                        geometryStyle: .vesicaPiscis,
-                        modules: LeftRightProgrammingCourse.shared.modules.map { m in
-                            GenericModule(id: m.id, number: m.number, title: m.title, subtitle: m.subtitle,
-                                lessons: m.lessons.map { l in GenericLesson(id: l.id, title: l.title, content: l.content, keyPoints: l.keyPoints) })
-                        }
+                        destination: AnyView(EmptyView())
                     ))
+                }
+                .buttonStyle(ScaleButtonStyle())
+            }
+        }
+        .padding(16)
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color.white.opacity(0.03))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(Color(hex: "#00FF00").opacity(0.2), lineWidth: 1)
                 )
-            ]
         )
     }
+
     
     // MARK: - Hidden History Section
     
@@ -1325,6 +1384,149 @@ struct GenericLessonDetailView: View {
             VStack {
                 HStack { Spacer(); Button(action: { dismiss() }) { Image(systemName: "xmark").font(.system(size: 16, weight: .semibold)).foregroundColor(.white).frame(width: 36, height: 36).background(Color.white.opacity(0.1)).clipShape(Circle()) } }.padding(.horizontal, 20).padding(.top, 20)
                 Spacer()
+            }
+        }
+    }
+}
+
+// MARK: - Exposing The Matrix — Locked Row
+
+struct ExposingMatrixLockedRow: View {
+    var body: some View {
+        HStack(spacing: 12) {
+
+            ZStack {
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(Color(hex: "#39FF14").opacity(0.08))
+                    .frame(width: 36, height: 36)
+                Image(systemName: "lock.fill")
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundColor(Color(hex: "#39FF14").opacity(0.4))
+            }
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text("Exposing the Matrix")
+                    .font(.system(size: 14, weight: .semibold, design: .rounded))
+                    .foregroundColor(.white.opacity(0.5))
+
+                Text("Complete Matrix Decoded to unlock")
+                    .font(.system(size: 11, weight: .medium))
+                    .foregroundColor(Palette.text.muted)
+                    .lineLimit(1)
+            }
+
+            Spacer()
+
+            HStack(spacing: 4) {
+                Image(systemName: "lock.fill")
+                    .font(.system(size: 8))
+                Text("LOCKED")
+                    .font(.system(size: 9, weight: .bold, design: .rounded))
+            }
+            .foregroundColor(Color(hex: "#39FF14").opacity(0.5))
+            .padding(.horizontal, 8)
+            .padding(.vertical, 4)
+            .background(
+                RoundedRectangle(cornerRadius: 6)
+                    .fill(Color(hex: "#39FF14").opacity(0.08))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 6)
+                            .stroke(Color(hex: "#39FF14").opacity(0.2), lineWidth: 1)
+                    )
+            )
+        }
+        .padding(10)
+        .background(
+            RoundedRectangle(cornerRadius: 10)
+                .fill(Color.white.opacity(0.02))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color(hex: "#39FF14").opacity(0.1), lineWidth: 1)
+                )
+        )
+        .opacity(0.7)
+    }
+}
+
+// MARK: - Exposing The Matrix — Unlocked Row (with glow)
+
+struct ExposingMatrixUnlockedRow: View {
+    @State private var glow: CGFloat = 0.5
+
+    var body: some View {
+        HStack(spacing: 12) {
+
+            ZStack {
+                Circle()
+                    .fill(
+                        RadialGradient(
+                            colors: [Color(hex: "#39FF14").opacity(0.35 * glow), Color.clear],
+                            center: .center,
+                            startRadius: 0,
+                            endRadius: 22
+                        )
+                    )
+                    .frame(width: 36, height: 36)
+
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(Color(hex: "#39FF14").opacity(0.2))
+                    .frame(width: 36, height: 36)
+
+                Image(systemName: "eye.fill")
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundStyle(
+                        LinearGradient(
+                            colors: [Color(hex: "#39FF14"), Color(hex: "#00FF00")],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
+            }
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text("Exposing the Matrix")
+                    .font(.system(size: 14, weight: .semibold, design: .rounded))
+                    .foregroundColor(.white)
+
+                Text("See the system — you're a co-creator")
+                    .font(.system(size: 11, weight: .medium))
+                    .foregroundColor(Palette.text.muted)
+                    .lineLimit(1)
+            }
+
+            Spacer()
+
+            HStack(spacing: 4) {
+                Image(systemName: "checkmark")
+                    .font(.system(size: 8, weight: .bold))
+                Text("UNLOCKED")
+                    .font(.system(size: 9, weight: .bold, design: .rounded))
+            }
+            .foregroundColor(Color(hex: "#39FF14"))
+            .padding(.horizontal, 8)
+            .padding(.vertical, 4)
+            .background(
+                RoundedRectangle(cornerRadius: 6)
+                    .fill(Color(hex: "#39FF14").opacity(0.15))
+            )
+
+            Image(systemName: "chevron.right")
+                .font(.system(size: 11, weight: .semibold))
+                .foregroundColor(Color(hex: "#39FF14").opacity(0.6))
+        }
+        .padding(10)
+        .background(
+            RoundedRectangle(cornerRadius: 10)
+                .fill(Color.white.opacity(0.04))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color(hex: "#39FF14").opacity(0.4 * glow), lineWidth: 1)
+                )
+        )
+        .shadow(color: Color(hex: "#39FF14").opacity(0.15 * glow), radius: 8)
+        .onAppear {
+            withAnimation(.easeInOut(duration: 2).repeatForever(autoreverses: true)) {
+                glow = 1.0
             }
         }
     }

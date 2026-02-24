@@ -15,12 +15,7 @@ struct SourceLibraryView: View {
     
     var body: some View {
         ZStack {
-            LinearGradient(
-                colors: [Color(hex: "#07070d"), Color(hex: "#0a0a14"), Color(hex: "#07070d")],
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .ignoresSafeArea()
+            CosmicBackground(starCount: 50)
             
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 24) {

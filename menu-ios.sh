@@ -10,7 +10,6 @@ YELLOW='\033[33m'
 RED='\033[31m'
 MAGENTA='\033[35m'
 BLUE='\033[34m'
-DIM='\033[2m'
 
 mkdir -p logs
 
@@ -60,7 +59,7 @@ quick_commit() {
 
   read -r "title?${BLUE}Commit title (required): ${RESET}"
   if [[ -z "$title" ]]; then
-    error "Title is required. Aborting."
+    error "Title is required."
     echo -e "\n${GREEN}Press Enter...${RESET}"
     read -r
     return
@@ -77,7 +76,7 @@ quick_commit() {
   fi
 
   success "Committed: $title"
-  echo -e "\n${GREEN}Press Enter to return to menu...${RESET}"
+  echo -e "\n${GREEN}Press Enter...${RESET}"
   read -r
 }
 
@@ -123,7 +122,7 @@ while true; do
     4) run "xcodebuild test -scheme Aperture -destination 'platform=iOS Simulator,name=iPhone 16' -only-testing:ApertureUITests" "Run UI Tests" ;;
     5) run "xcodebuild test -scheme Aperture -destination 'platform=iOS Simulator,name=iPhone 16' -enableCodeCoverage YES" "Run All Tests + Coverage" ;;
     6) run "swiftlint --strict && swiftformat ." "SwiftLint + SwiftFormat" ;;
-    7) run "periphery scan --config .periphery.yml || echo 'Run periphery scan --setup first'" "Periphery (unused code)" ;;
+    7) run "periphery scan --config .periphery.yml || echo 'Run periphery scan --setup first'" "Periphery" ;;
     8) run "xcodebuild analyze -scheme Aperture -destination 'platform=iOS Simulator,name=iPhone 16'" "Xcode Analyze" ;;
     9) run "pod install --repo-update" "pod install/update" ;;
     10) run "xcodebuild clean -scheme Aperture" "Clean Build Folder (Cmd+Shift+K)" ;;

@@ -17,58 +17,99 @@ struct MoreMenuCard: View {
 
             HStack(spacing: 16) {
 
+                // Icon with layered glow
                 ZStack {
 
+                    // Glow halo
                     Circle()
-                        .fill(color.opacity(0.15))
+                        .fill(color.opacity(0.18))
+                        .frame(width: 60, height: 60)
+                        .blur(radius: 6)
+
+                    // Surface
+                    Circle()
+                        .fill(
+                            LinearGradient(
+                                colors: [color.opacity(0.25), color.opacity(0.1)],
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            )
+                        )
                         .frame(width: 56, height: 56)
+                        .overlay(
+                            Circle()
+                                .stroke(color.opacity(0.35), lineWidth: 1)
+                        )
 
                     Image(systemName: icon)
-                        .font(.system(size: 24, weight: .semibold))
-                        .foregroundColor(color)
+                        .font(.system(size: 22, weight: .semibold))
+                        .foregroundStyle(
+                            LinearGradient(
+                                colors: [color, color.opacity(0.75)],
+                                startPoint: .top,
+                                endPoint: .bottom
+                            )
+                        )
+                        .shadow(color: color.opacity(0.5), radius: 4)
 
                 }
 
                 VStack(alignment: .leading, spacing: 4) {
 
-                    HStack {
+                    HStack(spacing: 8) {
                         Text(title)
-                            .font(.system(size: 18, weight: .bold, design: .rounded))
+                            .font(.system(size: 16, weight: .bold, design: .rounded))
                             .foregroundColor(Palette.text.primary)
 
                         if let badge = badge {
                             Text(badge)
                                 .font(.system(size: 10, weight: .bold, design: .rounded))
                                 .foregroundColor(color)
-                                .padding(.horizontal, 8)
+                                .padding(.horizontal, 7)
                                 .padding(.vertical, 3)
                                 .background(
                                     Capsule()
-                                        .fill(color.opacity(0.15))
+                                        .fill(color.opacity(0.18))
+                                        .overlay(Capsule().stroke(color.opacity(0.3), lineWidth: 0.5))
                                 )
                         }
                     }
 
                     Text(subtitle)
-                        .font(.system(size: 13, weight: .medium, design: .rounded))
-                        .foregroundColor(Palette.text.secondary)
+                        .font(.system(size: 12, weight: .medium, design: .rounded))
+                        .foregroundColor(Palette.text.muted)
+                        .lineLimit(1)
 
                 }
 
                 Spacer()
 
                 Image(systemName: "chevron.right")
-                    .font(.system(size: 14, weight: .semibold))
-                    .foregroundColor(Palette.text.muted)
+                    .font(.system(size: 12, weight: .semibold))
+                    .foregroundColor(Palette.text.muted.opacity(0.6))
 
             }
-            .padding(16)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 14)
             .background(
-                RoundedRectangle(cornerRadius: 16, style: .continuous)
-                    .fill(Color.white.opacity(0.05))
+                RoundedRectangle(cornerRadius: 18, style: .continuous)
+                    .fill(
+                        LinearGradient(
+                            colors: [Color.white.opacity(0.07), Color.white.opacity(0.04)],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
                     .overlay(
-                        RoundedRectangle(cornerRadius: 16, style: .continuous)
-                            .stroke(color.opacity(0.2), lineWidth: 1)
+                        RoundedRectangle(cornerRadius: 18, style: .continuous)
+                            .stroke(
+                                LinearGradient(
+                                    colors: [color.opacity(0.3), color.opacity(0.1)],
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing
+                                ),
+                                lineWidth: 1
+                            )
                     )
             )
 

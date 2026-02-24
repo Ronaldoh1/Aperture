@@ -22,11 +22,11 @@ struct FAQView: View {
                         
                         Text("Frequently Asked Questions")
                             .font(.system(size: 24, weight: .bold))
-                            .foregroundColor(.white)
+                            .foregroundColor(Palette.text.primary)
                         
                         Text("Common questions about Aperture and your journey")
                             .font(.system(size: 14))
-                            .foregroundColor(.gray)
+                            .foregroundColor(Palette.text.muted)
                             .multilineTextAlignment(.center)
                     }
                     .padding(.top, 20)
@@ -82,8 +82,8 @@ struct FAQView: View {
     
     private var trustStatement: some View {
         VStack(spacing: 12) {
-            Divider()
-                .background(Color.white.opacity(0.2))
+            LinearGradient(colors: [Color.clear, Color.white.opacity(0.15), Color.clear], startPoint: .leading, endPoint: .trailing)
+                    .frame(height: 1)
             
             Text("Our Commitment")
                 .font(.system(size: 14, weight: .bold))
@@ -91,7 +91,7 @@ struct FAQView: View {
             
             Text("Aperture is educational, comparative, and exploratory. We encourage you to question all material—including this platform. Form your own conclusions. Your awakening is yours alone.")
                 .font(.system(size: 13))
-                .foregroundColor(.gray)
+                .foregroundColor(Palette.text.muted)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
         }
@@ -200,7 +200,7 @@ struct FAQCard: View {
                 HStack {
                     Text(item.question)
                         .font(.system(size: 15, weight: .semibold))
-                        .foregroundColor(.white)
+                        .foregroundColor(Palette.text.primary)
                         .multilineTextAlignment(.leading)
                     
                     Spacer()
@@ -216,18 +216,23 @@ struct FAQCard: View {
             if isExpanded {
                 Text(item.answer)
                     .font(.system(size: 14))
-                    .foregroundColor(.gray)
+                    .foregroundColor(Palette.text.muted)
                     .padding(.horizontal)
                     .padding(.bottom)
                     .transition(.opacity.combined(with: .move(edge: .top)))
             }
         }
         .background(
-            RoundedRectangle(cornerRadius: 12)
+            RoundedRectangle(cornerRadius: 14, style: .continuous)
                 .fill(Color.white.opacity(0.05))
                 .overlay(
-                    RoundedRectangle(cornerRadius: 12)
-                        .stroke(isExpanded ? Palette.accent.gold.opacity(0.3) : Color.clear, lineWidth: 1)
+                    RoundedRectangle(cornerRadius: 14, style: .continuous)
+                        .stroke(
+                            isExpanded
+                                ? LinearGradient(colors: [Palette.accent.gold.opacity(0.5), Palette.primary.violet.opacity(0.3)], startPoint: .topLeading, endPoint: .bottomTrailing)
+                                : LinearGradient(colors: [Color.white.opacity(0.08), Color.white.opacity(0.04)], startPoint: .topLeading, endPoint: .bottomTrailing),
+                            lineWidth: 1
+                        )
                 )
         )
     }

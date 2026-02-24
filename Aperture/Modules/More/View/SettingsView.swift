@@ -286,11 +286,18 @@ struct SettingsView: View {
     }
     
     private var sectionBackground: some View {
-        RoundedRectangle(cornerRadius: 16)
+        RoundedRectangle(cornerRadius: 18, style: .continuous)
             .fill(Color.white.opacity(0.05))
             .overlay(
-                RoundedRectangle(cornerRadius: 16)
-                    .stroke(Color.white.opacity(0.1), lineWidth: 1)
+                RoundedRectangle(cornerRadius: 18, style: .continuous)
+                    .stroke(
+                        LinearGradient(
+                            colors: [Color.white.opacity(0.12), Color.white.opacity(0.04)],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        ),
+                        lineWidth: 1
+                    )
             )
     }
 }
@@ -301,7 +308,7 @@ extension SettingsView {
     
     fileprivate var feedbackSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("FEEDBACK").font(.system(size: 10, weight: .bold)).tracking(2).foregroundColor(.white.opacity(0.3))
+            Text("FEEDBACK").font(.system(size: 11, weight: .bold, design: .rounded)).tracking(2).foregroundColor(Palette.accent.gold)
             
             SettingsButton(
                 title: "Send Feedback",

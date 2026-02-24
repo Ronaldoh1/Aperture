@@ -5,6 +5,8 @@ import SwiftUI
 struct MoreView: View {
 
     @Binding var selectedTab: Int
+    @ObservedObject private var godModeManager = GodModeManager.shared
+    @State private var showGodModeHub = false
     @State private var showAlexandria = false
     @State private var showProfile = false
     @State private var showBadgeCollection = false
@@ -31,6 +33,7 @@ struct MoreView: View {
     @State private var showDiveDeeper = false
     @State private var showFeedback = false
     @State private var showVoiceSettings = false
+    @State private var showChronokeeper = false
 
     var body: some View {
 
@@ -59,8 +62,28 @@ struct MoreView: View {
                 }
 
             }
-            .navigationTitle("")
-            .navigationBarHidden(true)
+            .navigationTitle("Explore")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        showAppSettings = true
+                    } label: {
+                        ZStack {
+                            Circle()
+                                .fill(Color.white.opacity(0.08))
+                                .frame(width: 36, height: 36)
+                                .overlay(Circle().stroke(Color.white.opacity(0.12), lineWidth: 1))
+                            Image(systemName: "gearshape.fill")
+                                .font(.system(size: 15, weight: .semibold))
+                                .foregroundStyle(LinearGradient(
+                                    colors: [Palette.accent.gold, Palette.primary.cyan],
+                                    startPoint: .topLeading, endPoint: .bottomTrailing
+                                ))
+                        }
+                    }
+                }
+            }
             .navigationDestination(isPresented: $showAlexandria) {
                 AlexandriaEntryView(container: AppContainer.shared.container) { route in
                     print("🟠 MoreView: Alexandria route - \(route)")
@@ -143,8 +166,15 @@ struct MoreView: View {
             .navigationDestination(isPresented: $showVoiceSettings) {
                 VoicePickerView()
             }
+            .navigationDestination(isPresented: $showChronokeeper) {
+                ChronokeeperChatView()
+            }
+            .navigationDestination(isPresented: $showGodModeHub) {
+                GodModeHubView()
+            }
 
         }
+        .withModuleTutorial(.explore)
 
     }
 
@@ -235,6 +265,19 @@ struct MoreView: View {
                 showDiveDeeper = true
             }
 
+            // GOD MODE — only visible for authorized account
+            if godModeManager.isAuthorizedUser {
+                MoreMenuCard(
+                    icon: "bolt.trianglebadge.exclamationmark.fill",
+                    title: "God Mode",
+                    subtitle: "Advanced esoteric knowledge & reality OS",
+                    color: Color(hex: "#9C27B0"),
+                    badge: "🌌 ADMIN"
+                ) {
+                    showGodModeHub = true
+                }
+            }
+
             sectionDivider("Library")
 
             // ALEXANDRIA - Sacred Library (moved from tab bar)
@@ -246,6 +289,17 @@ struct MoreView: View {
                 badge: nil
             ) {
                 showAlexandria = true
+            }
+
+            // CHRONOKEEPER — AI Guide
+            MoreMenuCard(
+                icon: "bubble.left.and.text.bubble.right.fill",
+                title: "Guide",
+                subtitle: "Your AI consciousness guide",
+                color: Palette.primary.cyan,
+                badge: nil
+            ) {
+                showChronokeeper = true
             }
 
             // PROFILE

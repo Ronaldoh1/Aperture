@@ -7,38 +7,53 @@ struct RootTabView: View {
     @State private var selectedTab: Int = 0
     
     init() {
-        // Cosmic Tab Bar Appearance
-        let appearance = UITabBarAppearance()
-        appearance.configureWithOpaqueBackground()
+        // ── Tab Bar ──────────────────────────────────────────────
+        let tabAppearance = UITabBarAppearance()
+        tabAppearance.configureWithOpaqueBackground()
+        tabAppearance.backgroundColor = UIColor(Color(hex: "#0a0a0f"))
         
-        // Deep space background
-        appearance.backgroundColor = UIColor(Color(hex: "#0a0a0f"))
-        
-        // Unselected items - muted cosmic
-        appearance.stackedLayoutAppearance.normal.iconColor = UIColor(Color.white.opacity(0.4))
-        appearance.stackedLayoutAppearance.normal.titleTextAttributes = [
+        tabAppearance.stackedLayoutAppearance.normal.iconColor = UIColor(Color.white.opacity(0.4))
+        tabAppearance.stackedLayoutAppearance.normal.titleTextAttributes = [
             .foregroundColor: UIColor(Color.white.opacity(0.4)),
             .font: UIFont.systemFont(ofSize: 10, weight: .medium)
         ]
-        
-        // Selected items - glowing gold/cyan
-        appearance.stackedLayoutAppearance.selected.iconColor = UIColor(Palette.accent.gold)
-        appearance.stackedLayoutAppearance.selected.titleTextAttributes = [
-            .foregroundColor: UIColor(Palette.accent.gold),
+        tabAppearance.stackedLayoutAppearance.selected.iconColor = UIColor(Color(hex: "#FFD700"))
+        tabAppearance.stackedLayoutAppearance.selected.titleTextAttributes = [
+            .foregroundColor: UIColor(Color(hex: "#FFD700")),
             .font: UIFont.systemFont(ofSize: 10, weight: .semibold)
         ]
+        tabAppearance.shadowColor = UIColor(Color(hex: "#FFD700").opacity(0.3))
         
-        // Add subtle top border glow
-        appearance.shadowColor = UIColor(Palette.accent.gold.opacity(0.3))
+        UITabBar.appearance().standardAppearance = tabAppearance
+        UITabBar.appearance().scrollEdgeAppearance = tabAppearance
         
-        UITabBar.appearance().standardAppearance = appearance
-        UITabBar.appearance().scrollEdgeAppearance = appearance
+        // ── Navigation Bar ───────────────────────────────────────
+        let navAppearance = UINavigationBarAppearance()
+        navAppearance.configureWithOpaqueBackground()
+        navAppearance.backgroundColor = UIColor(Color(hex: "#07070d"))
+        navAppearance.shadowColor = UIColor(Color(hex: "#FFD700").opacity(0.15))
+        
+        // Title text — white
+        navAppearance.titleTextAttributes = [
+            .foregroundColor: UIColor.white,
+            .font: UIFont.systemFont(ofSize: 17, weight: .semibold)
+        ]
+        navAppearance.largeTitleTextAttributes = [
+            .foregroundColor: UIColor.white,
+            .font: UIFont.systemFont(ofSize: 34, weight: .bold)
+        ]
+        
+        UINavigationBar.appearance().standardAppearance = navAppearance
+        UINavigationBar.appearance().scrollEdgeAppearance = navAppearance
+        UINavigationBar.appearance().compactAppearance = navAppearance
+        
+        // Back button — gold
+        UINavigationBar.appearance().tintColor = UIColor(Color(hex: "#FFD700"))
     }
     
     var body: some View {
         
         ZStack {
-            // Main Tab View
             TabView(selection: $selectedTab) {
                 
                 // Tab 0: Home
@@ -49,7 +64,7 @@ struct RootTabView: View {
                     print("🟠 RootTabView: Landing route - \(route)")
                 }
                 .tabItem {
-                    Label("Home", systemImage: selectedTab == 0 ? "sparkles" : "sparkles")
+                    Label("Home", systemImage: "sparkles")
                 }
                 .tag(0)
                 
@@ -58,7 +73,7 @@ struct RootTabView: View {
                     print("🟠 RootTabView: Timeline route - \(route)")
                 }
                 .tabItem {
-                    Label("Timeline", systemImage: selectedTab == 1 ? "clock.arrow.circlepath" : "clock.arrow.circlepath")
+                    Label("Timeline", systemImage: "clock.arrow.circlepath")
                 }
                 .tag(1)
                 
@@ -67,40 +82,26 @@ struct RootTabView: View {
                     print("🟠 RootTabView: Cosmos route - \(route)")
                 }
                 .tabItem {
-                    Label("Cosmos", systemImage: selectedTab == 2 ? "globe.americas.fill" : "globe.americas")
+                    Label("Cosmos", systemImage: "globe.americas.fill")
                 }
                 .tag(2)
                 
-                // Tab 3: Awakening (promoted from More)
+                // Tab 3: Awakening
                 AwakeningTabView()
                     .tabItem {
-                        Label("Awakening", systemImage: selectedTab == 3 ? "sun.max.fill" : "sun.max")
+                        Label("Awakening", systemImage: "sun.max.fill")
                     }
                     .tag(3)
                 
-                // Tab 4: Alexandria — Sacred Knowledge Library
-                AlexandriaTabView()
-                    .tabItem {
-                        Label("Library", systemImage: selectedTab == 4 ? "books.vertical.fill" : "books.vertical")
-                    }
-                    .tag(4)
-
-                // Tab 5: Chronokeeper AI Guide
-                ChronokeeperChatView()
-                    .tabItem {
-                        Label("Guide", systemImage: selectedTab == 5 ? "bubble.left.and.text.bubble.right.fill" : "bubble.left.and.text.bubble.right")
-                    }
-                    .tag(5)
-                
-                // Tab 6: More (Profile, Settings, FAQ)
+                // Tab 4: More (houses Alexandria, Guide, Profile, Settings, etc.)
                 MoreView(selectedTab: $selectedTab)
                     .tabItem {
-                        Label("More", systemImage: selectedTab == 6 ? "ellipsis.circle.fill" : "ellipsis.circle")
+                        Label("Explore", systemImage: "sparkles")
                     }
-                    .tag(6)
+                    .tag(4)
                 
             }
-            .tint(Palette.accent.gold)
+            .tint(Color(hex: "#FFD700"))
             .onChange(of: selectedTab) { _, _ in
                 HapticManager.shared.tabChanged()
             }
@@ -111,14 +112,13 @@ struct RootTabView: View {
     
 }
 
-// MARK: - Awakening Tab View (wraps existing module with NavigationStack)
+// MARK: - Awakening Tab View
 
 struct AwakeningTabView: View {
     
     private let presenter: AwakeningPresenterType
     
     init() {
-        // Resolve the presenter from the shared container
         self.presenter = AppContainer.shared.container.resolve(AwakeningPresenterType.self)!
     }
     
@@ -129,7 +129,7 @@ struct AwakeningTabView: View {
     }
 }
 
-// MARK: - Alexandria Tab View (Sacred Knowledge Library)
+// MARK: - Alexandria Tab View (still available via MoreView)
 
 struct AlexandriaTabView: View {
 
@@ -141,9 +141,6 @@ struct AlexandriaTabView: View {
         }
     }
 }
-
-
-
 
 #Preview {
     RootTabView()

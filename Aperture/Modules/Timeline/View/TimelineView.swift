@@ -594,7 +594,7 @@ struct TimelineView: View {
         let activeIndex: Int = tappedEraIndex ?? 0
         let safeIndex: Int = min(max(activeIndex, 0), eras.count - 1)
         let currentEra: TimelineEra? = eras[safe: safeIndex]
-        let arrowY: CGFloat = cardScreenPositions[safeIndex] ?? 480
+        let arrowY: CGFloat = cardScreenPositions[safeIndex] ?? cardScreenPositions[0] ?? 280
         
         return TimelineYouAreHereIndicator(
             era: tappedEraIndex == nil ? nil : currentEra,

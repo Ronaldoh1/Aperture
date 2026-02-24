@@ -175,6 +175,46 @@ extension ModuleTutorialContent {
         accentColor: Color(hex: "#9C27B0")
     )
     
+
+    static let explore = ModuleTutorialContent(
+        id: "explore",
+        title: "Explore",
+        subtitle: "Your Command Center",
+        pages: [
+            TutorialPage(
+                icon: "sparkles",
+                title: "Everything Lives Here",
+                description: "Explore is your gateway to every tool, library, and feature in Aperture. Think of it as mission control — everything you need for your awakening journey, organized in one place.",
+                tips: ["Tap any card to dive in", "Cards with badges show new or premium content", "Scroll down to see everything available"]
+            ),
+            TutorialPage(
+                icon: "books.vertical.fill",
+                title: "Sacred Library & AI Guide",
+                description: "Access the Alexandria library — 29 deep-dive courses on hidden history, sacred geometry, consciousness, and forbidden knowledge. Your AI Guide (Chronokeeper) is also here for real-time questions.",
+                tips: ["Alexandria courses take 20-40 min each", "Chronokeeper answers anything, anytime", "Save courses to Bookmarks for later"]
+            ),
+            TutorialPage(
+                icon: "seal.fill",
+                title: "Badges, Progress & Tools",
+                description: "Track your Sacred Geometry badges earned through learning. Access Sun Flow State, Dive Deeper explorations, Journey Progress, and your personal Profile — all your stats in one place.",
+                tips: ["Earn badges by completing Alexandria courses", "Sun Flow State unlocks after earning badges", "Journey Progress shows your full awakening arc"]
+            ),
+            TutorialPage(
+                icon: "brain.head.profile",
+                title: "Deprogram & Decode",
+                description: "Unlearn, Signal vs Noise, Digital Hygiene, Economy Wake-Up, Systemic Exposure, Revelations — these tools help you identify and remove the programming you didn't consent to.",
+                tips: ["Start with Revelations to see how apps track you", "Signal vs Noise trains media discernment", "Unlearn is designed for daily use"]
+            ),
+            TutorialPage(
+                icon: "gearshape.fill",
+                title: "Settings & Customization",
+                description: "Tap the gear icon ⚙️ at the top right anytime to access Settings, voice preferences, notifications, and app configuration. Everything personalizable is one tap away.",
+                tips: ["Change narration voice in Voice Settings", "Toggle Food Consciousness in Feature Preferences", "Send feedback directly from Settings"]
+            )
+        ],
+        accentColor: Color(hex: "#00D9FF")
+    )
+
     static let flowState = ModuleTutorialContent(
         id: "flowState",
         title: "Flow State",

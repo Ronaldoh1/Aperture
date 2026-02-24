@@ -1,0 +1,66 @@
+
+# ── Aperture auto-generated ──────────────────────────────
+
+# ── Xcode Build Folders ──────────────────────────────────
+build/
+DerivedData/
+*.xcarchive
+*.xcworkspace/xcuserdata/
+*.xcodeproj/xcuserdata/
+*.xcodeproj/project.xcworkspace/xcuserdata/
+xcuserdata/
+
+# ── Logs ─────────────────────────────────────────────────
+*.log
+logs/
+log/
+*.crash
+*.ips
+*.trace
+CrashReporter/
+DiagnosticReports/
+
+# ── iOS / macOS Artifacts ─────────────────────────────────
+*.ipa
+*.dSYM
+*.dSYM.zip
+*.app.dSYM/
+*.app/
+Payload/
+*.xcresult
+
+# ── SPM / CocoaPods / Carthage ────────────────────────────
+.build/
+Pods/
+Carthage/Build/
+*.resolved          # keep Package.resolved? remove line if yes
+
+# ── Simulators & Instruments ─────────────────────────────
+*.siminfo
+*.trace/
+
+# ── OS & Editor Noise ────────────────────────────────────
+.DS_Store
+.DS_Store?
+Thumbs.db
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# ── Environment / Secrets ────────────────────────────────
+.env
+.env.*
+secrets.xcconfig
+GoogleService-Info.plist
+firebase_credentials.json
+
+# ── Temp & Cache ─────────────────────────────────────────
+tmp/
+.tmp/
+.cache/
+*.tmp
+

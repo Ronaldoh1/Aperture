@@ -227,6 +227,46 @@ This is what the 144,000 teaching, the Merovingian bloodline teaching, and the B
                         "What practice, teaching, or way of understanding have you chosen as part of your spiritual lineage?",
                         "What will you transmit forward that did not exist in the generation before you?"
                     ])
+                ),
+
+                ACLesson(id: "mb3_2", title: "The Fisher King Wound — Healing What Was Split",
+                    content: """
+**The most psychologically precise image in the entire Merovingian/Grail corpus is the Fisher King — the wounded sovereign whose injury has made the land barren, and who can only be healed by the knight who asks the right question.**
+
+The Fisher King does not appear to be mortally ill. He fishes. He receives guests. He hosts magnificent feasts. But beneath the splendor, he carries an unhealed wound — specifically, in most versions of the tale, a wound through both thighs (the groin wound — the wound of generative power, sovereignty, creativity, and erotic energy). Because he cannot heal, the land around him cannot flourish. The Wasteland is not a geographical location. It is the consequence of an unhealed sovereign.
+
+**The Origin of the Wound:**
+In Wolfram von Eschenbach's Parzival (c. 1210 CE), the Fisher King Anfortas received his wound as punishment for a transgression — he pursued a personal desire that was not aligned with his sacred duty as Grail keeper. The wound is the consequence of sovereignty turned toward personal gratification rather than sacred service.
+
+The Grail castle cannot be found by anyone looking for it. It can only be found by someone who has given up looking and simply rides where their path leads. And when they arrive and sit at the feast and witness the king's suffering, they must ask a specific question: not "what is the Grail?" or "how do I heal you?" but simply: "What ails you?"
+
+The question that heals is not sophisticated. It is not powerful. It is an act of pure compassionate attention — acknowledging the other's pain without immediately trying to fix it.
+
+**What Kills the Kingdom:**
+Wolfram's version makes the mechanism explicit: it is Parzival's failure to ask the question that extends the Wasteland. He visits the Grail castle early in his journey, sees the suffering king, but has been told by his teacher to avoid asking too many questions — a teaching he follows too rigidly, against his own instinct.
+
+Conditioned silence in the presence of obvious suffering: that is what extends the Wasteland.
+
+The healing finally happens only when Parzival, after years of wilderness wandering, failure, and the complete dismantling of his pride and his teacher's rules, returns and simply asks what he sees: "Dear Uncle — what ails you?"
+
+**The Merovingian Application:**
+The Merovingian bloodline narrative — whether literal or archetypal — carries this wound. A sacred lineage of knowledge and sovereignty was split, diminished, suppressed. The wound has propagated across generations. The Cathar massacres, the burning of libraries, the suppression of the sacred feminine — these are all versions of the groin wound: the creative, generative, sovereign power of a tradition cut off before it could flower.
+
+The healing, in the Grail tradition, is not military victory. It is not the recovery of the suppressed texts. It is a question asked with genuine compassion: What ails this tradition? What specific injury has it been carrying? What is the actual hurt underneath the elaborate narratives of royal bloodlines and sacred lineages?
+
+**The Personal Wasteland:**
+Every person carries a Fisher King wound — the unhealed injury to their generative capacity, their creative sovereignty, their erotic vitality. It may be:
+- A creative gift that was mocked or suppressed early and has not fully recovered
+- A capacity for leadership or authority that was shamed and has been avoided
+- A sexual or erotic dimension that was wounded by abuse, shame, or religious programming
+- A capacity for sacred service that was co-opted by ego and then abandoned in disgust
+
+The wound is real. It is making some dimension of your "kingdom" barren. And the path to healing is not more effort but a compassionate question directed at yourself: What ails you, really?
+
+🔥 **The Grail is not a cup, a bloodline, or a secret. The Grail is the capacity to ask the right question. Not the clever question, not the powerful question — the compassionate one. "What ails you?" directed at the wounded part of yourself and at the wounded people around you. The Fisher King has been waiting for that question for centuries. The land has been waiting. The answer begins the healing — not the answer to "what is the secret?" but the question: "what are you carrying that you haven't been asked about?" Ask it. Everything that follows from there is the Grail.**
+""",
+                    keyInsight: "Wolfram von Eschenbach's Fisher King (Parzival, c. 1210 CE): the wounded sovereign whose unhealed groin wound (creative/generative power injured by misaligned desire) makes the land barren. The Grail is found only by those not looking for it; healing requires asking 'What ails you?' — compassionate attention, not clever intervention. Conditioned silence in the presence of obvious suffering extends the Wasteland. The Merovingian bloodline wound: creative/sovereign/sacred-feminine capacity suppressed by historical persecution; healing begins with the compassionate question, not historical recovery. Personal Fisher King wound: the unhealed injury to creative sovereignty, generative capacity, or sacred service that keeps your 'kingdom' barren.",
+                    practice: "Identify your Fisher King wound — the specific dimension of your generative, creative, or sovereign capacity that was injured and has been making some area of your 'kingdom' barren. Write: (1) When was the wound inflicted? What was the specific event or pattern? (2) What has been barren because of it? (3) What is the compassionate question you need to ask yourself — not 'how do I fix this?' but 'what ails you, really?' Write that question. Then write the answer that comes up immediately, before your protective mind can revise it. That first answer is the Grail."
                 )
             ])
         ],

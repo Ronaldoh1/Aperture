@@ -129,6 +129,43 @@ This pattern hasn't stopped. Today's version just uses different labels.
 """,
                         keyInsight: "The Antichrist figure became a five-step political weapon: terrorize, justify wars, persecute enemies, create dependency, label opponents.",
                         practice: "Identify one modern equivalent of 'antichrist labeling' — where a group or person is demonized to justify control."
+                    ),
+
+                    ACLesson(
+                        id: "ac2_2",
+                        title: "Modern Antichrists — The System Wearing New Clothes",
+                        content: """
+**The five-step Antichrist framework — terrorize, justify conflict, label enemies, create dependency, maintain fear — didn't retire with the medieval Church. It migrated into modern political, media, and cultural systems and operates today with identical mechanics and greater reach.**
+
+**Step 1 — The Terror Update:**
+Medieval sermons described hellfire and demonic visitation. Modern equivalent: 24-hour news cycles running continuous threat narratives, and social media algorithms that — per internal Facebook research leaked by Frances Haugen in 2021 — preferentially amplify outrage and fear because these emotions produce the most engagement. The technology has changed. The mechanics are identical.
+
+**Step 2 — The Holy War Update:**
+The Crusades were justified as battles against the Antichrist's earthly agents. Modern equivalents: "Axis of Evil" rhetoric (Bush, 2002), civilizational conflict framing, and political parties that frame opponents not as people with different views but as existential threats to civilization requiring elimination rather than debate.
+
+**Step 3 — The Label Update:**
+Medieval Church labeled heretics, Jews, and Muslims as Antichrist's servants to justify persecution. Modern equivalents: political dehumanization language that identifies specific groups as existential threats — "enemies of democracy," "destroyers of civilization," "threats to our way of life." The specific label changes with each political cycle. The psychological function — dehumanize the out-group to justify any treatment of them — is unchanged.
+
+**Step 4 — The Dependency Update:**
+The medieval Church positioned itself as the only protection against the Antichrist's power. Modern equivalents: intelligence agencies justifying mass surveillance ("only we can protect you from terrorists"), pharmaceutical industry positioning permanent medication as the only protection from mental suffering, social media platforms positioning themselves as the only connection to community. In each case: "the threat is real, and only we can protect you from it."
+
+**Step 5 — The Algorithm:**
+Most sophisticated development: in the medieval era, Antichrist terror was manually deployed. Today, algorithmic amplification of fear and tribal conflict happens autonomously — systems have learned that existential threat produces more engagement than any other content type and serve it continuously without conscious human direction.
+
+**The Original Target:**
+The Book of Revelation (95 CE) was written under Emperor Domitian during active Christian persecution. "666" (or in some manuscripts, "616") is widely understood by scholars as gematria for NERON KAISAR — Nero Caesar — in Hebrew letters. The text was coded political critique of the Roman Empire's imperial cult: the system that demanded worship of the state and persecuted those who refused.
+
+The medieval Church that deployed the Antichrist as its primary control mechanism was, by Revelation's own original criteria, structurally identical to what it claimed to oppose.
+
+**The Discernment Test:**
+The original apocalyptic literature provided a test: who demands worship of the system? Who labels non-compliance as evil? Who benefits from the fear?
+
+Apply this test to any modern system claiming to protect you from existential evil.
+
+🔥 **The Antichrist was never a supernatural being. It was always a description of a system that demands absolute loyalty, destroys those who refuse, and calls its own power 'divine protection.' It has rebuilt itself continuously for 2,000 years with updated aesthetics. The question isn't whether it exists today. The question is which systems in your environment match the original description — and whether you recognize yourself in their audience.**
+""",
+                        keyInsight: "The five-step Antichrist control framework operates in modern systems: algorithmic fear amplification (documented by Facebook internal research, 2021), political dehumanization language, 'only we can protect you' dependency creation. Revelation's '666' = NERON KAISAR (Nero Caesar) in gematria — the text was coded critique of Rome's imperial cult. The medieval Church that deployed Antichrist terror while replicating Rome's structure is the clearest historical example of the pattern eating its own exposé. Discernment test: who demands worship of the system? Who benefits from the fear?",
+                        practice: "Apply the five-step Antichrist framework to one institution in your current environment. Write: (1) What specific fear does it maintain? (2) What conflict does it justify using that fear? (3) Who does it label as the enemy? (4) What dependency does it create? (5) How does it benefit from maintaining the fear? Then: is there any institution in your environment — including ones you identify with — that does NOT pass this test? Write honestly."
                     )
                 ]
             ),

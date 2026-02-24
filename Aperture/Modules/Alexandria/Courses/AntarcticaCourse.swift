@@ -258,6 +258,53 @@ Antarctica is training for this capacity. It presents genuine anomalies that can
 """,
                     keyInsight: "The two epistemic failures with Antarctica: flat dismissal (avoiding investigation through labels) and premature closure (filling mystery with pre-formed beliefs). The third position — genuine inquiry — holds documented anomalies exactly as documented anomalies, without adding claims the evidence doesn't support. The 'don't-know mind' is a foundational spiritual capacity that Antarctica specifically trains.",
                     practice: "Write two paragraphs about Antarctica: first, the most extreme conventional explanation (everything is fully explained by normal science and geopolitics). Then the most extreme alternative explanation (hidden civilization, full suppression). Then write a third paragraph — the honest epistemic middle: what is actually documented, what is actually anomalous, what is genuinely unknown. Notice which paragraph felt most comfortable to write and ask yourself why."
+                ),
+
+                ACLesson(id: "ant3_2", title: "Epistemic Sovereignty — Owning What You Don't Know",
+                    content: """
+**The deepest teaching that Antarctica offers is not a revelation about what lies beneath the ice. It is a revelation about the structure of your own knowledge — and the extraordinary care required to maintain intellectual integrity in the face of genuine mystery.**
+
+You have now encountered a body of evidence and claims that includes:
+- Documented, peer-reviewed anomalies (Piri Reis map accuracy, Lake Vostok's unique ecosystem, Göbekli Tepe-era sea charts)
+- Documented but poorly explained events (Operation Highjump's abrupt termination, Admiral Byrd's interview comments)
+- Documented institutional restriction (Antarctic Treaty secrecy provisions, media access limitations)
+- Speculative but argued claims (Agartha traditions, inner earth hypotheses, pre-diluvian civilization theories)
+- Unverifiable claims (specific underground base claims, specific alien presence claims)
+
+The intellectually honest position requires holding all five categories simultaneously — not collapsing them into a single narrative, and not dismissing them all because the weakest claims contaminate the strongest.
+
+**The Three Failure Modes:**
+*Credulous capture:* Accepting the Antarctica conspiracy narrative wholesale because the documented anomalies are genuinely interesting and the pattern of restriction is genuinely real. The error: using the real to validate the speculative without maintaining the distinction between them.
+
+*Dismissive rejection:* Dismissing all anomalous Antarctica claims because some claims are obviously unverifiable. The error: using the weakest claims to dismiss the strongest ones, which is not logic — it is motivated reasoning in the opposite direction.
+
+*Premature certainty in either direction:* The honest position is "the door is locked, and I cannot verify what is behind it." This is an uncomfortable position. Both the credulous and the skeptical default avoid the discomfort by providing a story that feels complete. The intellectually sovereign position accepts the incompleteness.
+
+**Epistemic Sovereignty Defined:**
+Epistemic sovereignty is the capacity to maintain your own intellectual standards regardless of social pressure, authority claims, or the discomfort of genuine uncertainty.
+
+It requires:
+*The ability to distinguish evidence quality:* Peer-reviewed research, primary source documents, and eyewitness accounts of observable events occupy different epistemic positions than claimed insider reports, interpretations of ambiguous data, and narratives that cannot be independently verified.
+
+*The ability to hold a claim provisionally:* "This is interesting and deserves investigation" is different from "this is true" and different from "this is false." The provisional position requires active intellectual maintenance — it's easier to commit to one side than to stay genuinely uncertain.
+
+*Resistance to narrative gravity:* Compelling narratives exert gravitational pull — once you've accepted the first claim in a coherent story, the remaining claims feel natural and their absence feels like something is missing. Epistemic sovereignty means noticing when you are being moved by narrative gravity rather than by evidence.
+
+*Independence from authority in both directions:* Mainstream institutions have documented histories of suppression and misdirection (Operation Paperclip, COINTELPRO, MKUltra — all now declassified). Alternative media has documented histories of fabrication and motivated reasoning. Neither authority is reliable. Primary sources and evidence quality are reliable.
+
+**Antarctica as Practice:**
+The Antarctic mystery is an ideal epistemic training ground specifically because:
+- The subject has enough documented anomalies to make dismissal dishonest
+- The subject has enough unverifiable claims to make credulity dangerous  
+- The institutional restriction is real enough to justify genuine skepticism about official narratives
+- The subject is removed enough from daily life that you can practice intellectual standards without significant personal stakes
+
+The skills you develop here — holding documented evidence separately from speculation, resisting narrative gravity, maintaining genuine uncertainty — are directly transferable to every other domain where you encounter claims about what powerful institutions are hiding.
+
+🔥 **The most dangerous thing about Antarctica isn't what might be under the ice. It's what the mystery does to the mind that encounters it unprepared. The mind wants resolution. It wants a story that makes everything make sense. The reality offers a locked door and some interesting anomalies near the entrance. Epistemic sovereignty is the capacity to stand at that door, acknowledge that it's locked, note that the anomalies are real, and then continue living your life with full engagement — without needing a key that doesn't exist yet. That capacity, developed here, is what will keep you intellectually free everywhere else.**
+""",
+                    keyInsight: "Epistemic sovereignty requires holding five evidence categories simultaneously: peer-reviewed anomalies, documented-but-unexplained events, documented institutional restriction, speculative-but-argued claims, and unverifiable claims — without collapsing them into one narrative. Three failure modes: credulous capture (using real anomalies to validate speculation), dismissive rejection (using weakest claims to dismiss strongest), premature certainty in either direction. Four components of epistemic sovereignty: distinguishing evidence quality, holding claims provisionally, resisting narrative gravity, independence from authority in both directions. Antarctica is an ideal training ground because the documented anomalies make dismissal dishonest but the unverifiable claims make credulity dangerous — the perfect intermediate difficulty.",
+                    practice: "Return to the five evidence categories from this lesson and sort the specific claims in this course into them: (1) Peer-reviewed/primary source anomalies; (2) Documented but poorly explained events; (3) Documented institutional restriction; (4) Speculative but argued claims; (5) Unverifiable claims. Write each claim in the appropriate category. Then write: which category creates the most discomfort for you to simply leave open without resolution? What does that discomfort reveal about your epistemic defaults? This is the real Antarctica work."
                 )
             ])
         ],

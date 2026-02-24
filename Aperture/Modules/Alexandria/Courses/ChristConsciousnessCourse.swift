@@ -228,6 +228,47 @@ This is the path of the anointed one. It was Jesus's path. It is described as th
 """,
                     keyInsight: "The path to Christ Consciousness (metanoia → kenosis → dark night → resurrection → active love) is documented consistently across Christianity, Buddhism, Sufism, and alchemy. It is a specific transformation process, not a belief system. The death it requires is genuine — and so is the emergence that follows.",
                     practice: "Map your own spiritual journey so far onto the five-stage path: turning inward, emptying, dark night, emergence, active love. Where are you in this process right now? What stage is asking for your attention? Write honestly — the map is only useful if it's accurate."
+                ),
+
+                ACLesson(id: "cc3_2", title: "Living as the Anointed One",
+                    content: """
+**The Christ Consciousness teachings across all traditions converge on a paradox: the state is simultaneously your natural condition and something you have to actively choose every moment. It cannot be permanently achieved — it can only be continuously inhabited.**
+
+Meister Eckhart (1260-1328 CE) described it with his characteristic precision: the birth of the Logos in the soul is not a historical event that happened once in Bethlehem. It is a continuous occurrence — the Word is being born in the ground of your soul in this moment, and your only task is to make space for that birth by releasing everything that is not it.
+
+The Tibetan Buddhist parallel: Buddha-nature (tathagatagarbha) is not something you attain. It is what you ARE when the obscurations (kleshas — mental afflictions) are removed. The obscurations are real and require real practice to dissolve. But the Buddha-nature underneath is not created by practice — it is revealed.
+
+The Sufi parallel: Fana (annihilation of the ego-self) followed by Baqa (subsistence in the divine nature) is not the death of the individual but the death of the false identification with the small self. What subsists after fana is not nothing — it is the individual who has stopped mistaking themselves for their fear.
+
+**The Christic Actions:**
+The Gospels describe specific actions that constitute the Christic pattern in daily life. Not the supernatural elements — the ordinary ones:
+
+Seeing the person others have stopped seeing (the publican, the leper, the woman at the well, the thief on the cross). The Christos pattern begins with attention redirected toward what the social consensus has excluded from visibility.
+
+Speaking what is true regardless of the social cost (overturning tables in the Temple, calling the Pharisees whitewashed tombs, telling the rich young ruler the one thing he didn't want to hear). The Christos pattern includes the willingness to lose social approval for the sake of accuracy.
+
+Healing through contact — through the willingness to touch what others refuse to touch, to be physically present with suffering rather than at a safe intellectual distance.
+
+Forgiving without requiring repentance first (the woman taken in adultery, the prodigal son welcomed before he finishes his apology). This is the Chesed without Gevurah face of the Christic energy — love that doesn't wait for the evidence that it is deserved.
+
+**The Dark Night as Prerequisite:**
+John of the Cross (1542-1591 CE) described the Dark Night of the Soul as the necessary purification that precedes genuine union with the divine. The night is not a sign of absence — it is the process of removing the ego's last structures of self-reliance so that the ground of the soul is exposed.
+
+The Christos pattern includes the crucifixion — not as punishment but as the complete release of everything the ego uses to maintain its defensive architecture. The resurrection doesn't happen without the tomb.
+
+Anyone who tells you that living in Christ Consciousness means experiencing permanent bliss and ease has confused the destination with a bypass. The genuine tradition is unanimous: the full opening includes the stripping, the darkness, and the surrender.
+
+**The Collective Christ:**
+Teilhard de Chardin's Omega Point is not a metaphor. He proposed, as a trained geologist and paleontologist, that the evolutionary arc of consciousness is directed — that the increasing complexification and consciousness of the universe is moving toward a specific attractor state he called the Omega Point, which corresponds to what the mystical tradition calls the cosmic Christ.
+
+Individual Christ Consciousness is not the endpoint. It is the unit of a collective transformation. Every person who stabilizes in the Christic state adds to the morphogenetic field (Sheldrake's term) of that state's accessibility to others.
+
+The Christic teaching was never about one person being special. It was about demonstrating what is possible for all people — and then commissioning everyone who understood to replicate the demonstration.
+
+🔥 **You are not waiting for Christ to return. You are the return. Not in an ego-inflating sense — in the sense that the only vehicle through which this consciousness can express itself in the world right now is your specific body, your specific relationships, your specific moment. The anointing is not a credential. It is an assignment. The only question is whether you will show up for it today — not perfectly, not permanently, but specifically: in the next interaction, with the next person, in this next moment.**
+""",
+                    keyInsight: "Meister Eckhart: the Logos-birth in the soul is continuous, not historical — your task is removing what blocks it. Buddha-nature (tathagatagarbha) is revealed by practice, not created by it — the same structure. The four Christic actions: redirecting attention toward the excluded, speaking truth regardless of social cost, healing through contact, forgiving without requiring repentance. John of the Cross: the Dark Night (ego's last structures stripped) is prerequisite to union, not failure. Teilhard's Omega Point: individual Christic stabilization contributes to the collective morphogenetic field of that consciousness state's accessibility. The anointing is not a credential — it is an assignment active in the present moment.",
+                    practice: "Practice one Christic action today deliberately: (1) Redirect your attention toward one person in your environment who has become invisible to the social consensus — truly see them; (2) Speak one true thing you've been avoiding saying because of its social cost; (3) Be physically present with someone's suffering instead of advising from a distance; OR (4) Offer forgiveness to someone without waiting for their apology. Write: which action did you choose? What happened? What resistance arose in you? What changed in the quality of your presence after doing it?"
                 )
             ])
         ],

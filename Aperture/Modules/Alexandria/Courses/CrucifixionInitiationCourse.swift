@@ -242,6 +242,43 @@ What is meant: when you voluntarily surrender what is not essential, you discove
 """,
                     keyInsight: "The prophetic teaching 'die before you die' describes voluntary transformation — the practice of surrendering what is not essential before external circumstances force the stripping. Every tradition (Sufi fana, Christian detachment, Zen kensho) describes this as the prerequisite for discovering the self that cannot be destroyed.",
                     practice: "Identify what you are protecting most fiercely right now — one thing, the most defended. Your reputation? A relationship? A certainty? Sit with this question for 15 minutes: 'If this were taken from me tomorrow, what would remain of me that could not be taken?' Write what you find."
+                ),
+
+                ACLesson(id: "ci3_2", title: "The Resurrection Body — Living After the Death",
+                    content: """
+**Every mystical tradition that takes the death-and-resurrection cycle seriously has grappled with the same question: what is the "body" that lives after the ego has died? What remains when the identity structure that organized your experience has been dissolved?**
+
+The Greek mystery traditions called it the pneumatic body — the body of spirit that the initiated carried out of the initiatory darkness. The Egyptian tradition called it the Sahu — the spiritual body that required specific preparation (the 42 Assessments of Ma'at, the proper ceremonial burial) to be capable of surviving the journey through the Duat. The Hindu tradition calls it the Anandamaya Kosha — the bliss body, the innermost sheath of the Atman that persists when all outer layers have been shed. The Kabbalistic tradition calls it the Neshamah — the divine soul, distinct from the Ruach (spirit/personality) and Nefesh (vital soul) that dissolve.
+
+Each tradition is describing the same phenomenological territory: after the ego's central structures dissolve in the initiatory process, something remains — and what remains is not nothing. It has specific qualities.
+
+**The Qualities of the Resurrection Body:**
+Across traditions and across the reports of those who have undergone genuine ego dissolution (through meditation, through psychedelic experience, through genuine mystical crisis), the qualities described are consistent:
+
+*Presence without anxiety:* The normal background hum of existential anxiety — "am I okay? am I safe? am I enough?" — is absent. Not suppressed; genuinely absent. The organizing question of the fearful self has dissolved with the self that was afraid.
+
+*Equanimity without distance:* The capacity to be fully present with what is painful, joyful, or overwhelming without being destabilized by it. Not numbness — the opposite of numbness. Greater sensitivity to experience combined with reduced reactivity to it.
+
+*Spontaneous compassion:* Compassion that does not require effort because the distinction between self and other is no longer operating at full strength. The suffering of another is not something you have to consciously decide to care about — it registers directly, because the membrane between you and them has become more permeable.
+
+*Purposeful action without personal agenda:* The capacity to act with full engagement and full commitment without the background noise of "what does this mean for me? how will this affect my position?" The action arises from clarity about what is needed rather than from personal need for a specific outcome.
+
+**The Integration Challenge:**
+The mystical traditions are unanimous on this: the resurrection body is not the permanent, stable possession everyone who has had a glimpse believes it will be. The initiation gives an experience of this state. The subsequent years of practice are devoted to stabilizing it — to making the qualities of the resurrection body the stable baseline of functioning rather than a peak experience that fades.
+
+St. John of the Cross described this with precision: the Dark Night of the Soul purifies not once but in repeating cycles, each cycle deeper than the last, each one stripping away structures the practitioner didn't know they still had. The soul moves from "beginner's purgation" through "proficient's purgation" through ever-deeper stages of simplification.
+
+The Zen tradition encodes this in the phrase: "Before enlightenment, chop wood, carry water. After enlightenment, chop wood, carry water." The content of daily life is unchanged. The quality of presence with which it is inhabited is transformed.
+
+**The Practical Sign:**
+The most reliable indicator that the resurrection body is beginning to stabilize is not dramatic spiritual experience. It is something much quieter: the ability to be fully present in a difficult conversation without needing it to go differently than it goes. The complete absence of the need to be right, to be seen as good, to be protected from the other person's pain or anger.
+
+That small, quiet thing — that willingness to be fully present with what is — is the resurrection body showing up in daily life. Not the bliss states. Not the visions. That.
+
+🔥 **The tomb is real. The three days are real. What rises from the tomb isn't the same person who entered it — it's the person that person always was, beneath the fear and the performance and the need for things to be different. You don't build the resurrection body. You uncover it by letting the structures that have been covering it dissolve. The practices aren't manufacturing something new. They are removing what was never you in the first place. What's left is what you've been looking for.**
+""",
+                    keyInsight: "Cross-tradition resurrection body qualities (pneumatic body/Sahu/Anandamaya Kosha/Neshamah) consistently described as: presence without anxiety (the organizing question of the fearful self dissolved), equanimity without distance (greater sensitivity plus reduced reactivity), spontaneous compassion (self/other membrane more permeable), purposeful action without personal agenda. John of the Cross: the purification repeats in cycles, each deeper — the resurrection body stabilizes gradually, not permanently achieved in one experience. Most reliable daily indicator: full presence in a difficult conversation without needing it to go differently. The resurrection body is not built — it is uncovered by removing what was never you.",
+                    practice: "For one week, track one specific moment each day when you notice the absence of the ego's organizing question ('am I okay? am I enough? how do I look?'). It might be brief — a moment of genuine absorption in a task, a moment of real listening to someone without preparing your response, a moment of beauty that simply registers without you needing to do anything with it. Write each one. At the end of the week: write what you notice about when these moments appear and what conditions seem to invite them. These are not performance — they are the resurrection body showing through the gaps."
                 )
             ])
         ],

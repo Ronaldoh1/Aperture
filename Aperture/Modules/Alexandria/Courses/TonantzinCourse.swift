@@ -213,6 +213,43 @@ Tonantzin is not an archaeological curiosity. She is the medicine for the specif
 """,
                     keyInsight: "The feminine sacred tradition carries a distinct epistemology: knowledge comes from within and below (body, earth, dream), truth is living and cyclical, knowing requires participation rather than separation, nature is subject not object. The global ecological crisis is partly an epistemological crisis — the consequence of applying the patriarchal epistemology exclusively. Tonantzin's way of knowing is not ancient spirituality; it is the cognitive correction the current civilization needs.",
                     practice: "For one week, practice Tonantzin's epistemology in one specific area of your life. Choose: listen to your body's signals about food, sleep, or movement rather than following prescribed rules. OR pay attention to how your energy and clarity shift with the lunar cycle. OR spend 20 minutes daily sitting with a plant, tree, or body of water as if it were a subject capable of communication. Document what you discover that you didn't know before."
+                ),
+
+                ACLesson(id: "tn3_2", title: "Returning to the Earth Body",
+                    content: """
+**The most radical spiritual act available to a person raised in Western industrial culture is not meditation, not prayer, not study — it is returning to a felt, embodied relationship with the living Earth.**
+
+Tonantzin is not a metaphor for the Earth. She IS the Earth — the specific sacred quality of the living ground beneath your feet, the mountains that hold memory, the water that carries prayer. The indigenous Mesoamerican traditions did not develop an abstract philosophy of nature; they developed a living relationship with a being.
+
+**What Was Actually Lost:**
+When Spanish colonizers destroyed the Nahua religious infrastructure at Tepeyac and across Mexico, they didn't merely suppress a religion. They severed a 10,000-year-old relationship between a people and their landscape — a relationship encoded in ceremony, in agricultural practice, in the naming of every mountain, river, and wind.
+
+The Aztec calendar system (the xiuhpohualli and tonalpohualli) was not primarily astronomical record-keeping. It was a living relationship — a map of how divine feminine energy moved through the year, through the body, through the land. Every ceremony was a reciprocal act: the people gave their intention, their energy, their gratitude; Tonantzin gave rain, corn, health, continuity.
+
+This reciprocal relationship — what indigenous scholars call *ayni* in the Quechua tradition, *tequio* in Nahuatl contexts — is what industrial culture has no concept for. In industrial culture, the Earth is a resource to be extracted. In the Tonantzin tradition, the Earth is a relative to be honored.
+
+**The Grief Underneath:**
+One of the most significant developments in contemporary environmental psychology is the clinical recognition of *eco-grief* — the mourning of ecological loss, the grief at the death of species, landscapes, relationships with the living world. Psychologist Glenn Albrecht coined the term *solastalgia* (2003) for the distress caused by environmental change in one's home environment.
+
+What the Nahua people experienced at Tepeyac — the destruction of their sacred site, the forced replacement of their Mother with a colonial simulacrum — was not merely religious persecution. It was a severing from their primary source of felt belonging in the world. The grief of that severing has been transmitted epigenetically through generations.
+
+The descendants of that severing are healing. The return to Tonantzin — to the original Earth Mother beneath the colonial overlay — is part of that healing.
+
+**The Practical Path:**
+Reconnection with the feminine sacred does not require conversion to Nahuatl religion. It requires a shift in orientation:
+
+*Attention:* Begin noticing the specific sensory qualities of the land you live on. What is the smell of your soil after rain? Which direction does the morning light come from? What birds wake at what hour? These are not trivial observations — they are the beginning of relationship.
+
+*Reciprocity:* Indigenous earth-based practice universally involves giving back. This is not symbolic — it is a practical acknowledgment that you are part of a living system, not an observer of it. Plant something. Clear something. Leave water somewhere intentional.
+
+*Grief work:* Allow yourself to feel what has been lost — both the ecological losses of your lifetime and the deeper severing from earth-based relationship that Western culture carries. The grief is not depression; it is appropriate mourning that opens toward renewed relationship.
+
+*Body awareness:* Tonantzin is the Earth body, and your body is made of earth. Practices that return consciousness to the body — earthing (bare feet on soil), natural movement, swimming in open water — are direct practices of reconnection with the Mother.
+
+🔥 **Tonantzin didn't disappear when they built the basilica. She went underground — into the roots of the corn, into the aquifer beneath the city, into the cellular memory of every person with indigenous blood who carries the unspoken knowledge that the Mother was always real. The return to her is the return to the ground of your own being. The Earth doesn't need your belief. She needs your attention. She needs your hands in her soil. She needs you to remember what your nervous system already knows: you are not separate from what you walk on.**
+""",
+                    keyInsight: "Indigenous Mesoamerican earth-relationship (encoded in the xiuhpohualli/tonalpohualli calendar as living reciprocity with Tonantzin) was not religion — it was a 10,000-year relational practice severed by colonization. Eco-grief (Albrecht, 2003) and solastalgia are clinical recognitions of what indigenous traditions carried as living knowledge. Reconnection with the feminine sacred requires: attentive observation of local land, reciprocal action (planting, tending), grief work for ecological loss, and embodied practices (earthing, open water). The Earth doesn't need belief — she needs attention.",
+                    practice: "Go outside today and spend 20 minutes in direct sensory contact with the Earth — bare feet on soil or grass, hands in dirt, back against a tree. No phone. Pay attention to temperature, texture, smell, sound. Then speak aloud three things you are grateful to the land for. This is not performance — it is the beginning of reciprocal relationship. Write: what did you notice? What felt strange about gratitude directed at the Earth? What felt true?"
                 )
             ])
         ],

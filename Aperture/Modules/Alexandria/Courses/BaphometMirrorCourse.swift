@@ -240,6 +240,51 @@ Baphomet stops being the face of evil and becomes what Lévi intended: a portrai
 """,
                     keyInsight: "Strong emotional reactions to Baphomet's specific elements (goat head, androgynous body, pentagram, flame, serpent) are Shadow projections — each pointing to a specific aspect of wholeness the individual has disowned. Integration dissolves the projection: once the quality is consciously claimed, the symbol loses its power to frighten. Baphomet is merciless and loving in equal measure — it shows you precisely what needs attention.",
                     practice: "Do the full Baphomet Shadow Mirror practice: Find a clear image of Lévi's 1856 Baphomet. Sit with it for 5 minutes without judgment. Write which element produced the strongest reaction (fear, disgust, fascination, attraction). Then complete: 'This element represents _______ in me that I have disowned.' 'Where in my life is this quality absent?' 'What would I need to accept about myself to integrate this?' This is your direct shadow work assignment."
+                ),
+
+                ACLesson(id: "bm3_2", title: "The Torch Bearer — Lucifer Reclaimed",
+                    content: """
+**No figure in the Western tradition has been more successfully weaponized than Lucifer — and no figure's original meaning has been more thoroughly reversed. Reclaiming the original teaching is not Satanism. It is the restoration of one of the most important symbolic maps of consciousness in the Western tradition.**
+
+**The Etymology:**
+Lucifer is a Latin compound: lux (light) + ferre (to carry/bring). It means "light-bearer" or "light-bringer." It appears in the Latin Vulgate Bible (Jerome, 405 CE) in Isaiah 14:12 as a translation of the Hebrew HELEL BEN SHACHAR — "Shining One, Son of the Dawn" — a poetic reference to the Morning Star (Venus), used as a metaphor for the King of Babylon's pride and fall.
+
+Jerome chose the Latin word lucifer because it was the standard Latin term for the planet Venus in its morning appearance — the brightest object in the sky before sunrise. The passage in Isaiah was not describing a supernatural being named Lucifer. It was describing the King of Babylon using the metaphor of a star that rises brilliantly and then disappears when the sun rises.
+
+**The Mistranslation That Became a Theology:**
+The error: Origen of Alexandria (185-253 CE), followed by Tertullian and others, applied Isaiah 14:12 to Satan — reading the fall of the Babylonian king as a description of the original fall of a cosmic being called Lucifer. This allegorical reading was never the intent of the text.
+
+By the medieval period, Lucifer had been transformed from a Latin word for the morning star into the personal name of a fallen archangel. The word became a proper noun, the proper noun became a being, the being became the opposite of God, and the light-bringer became the lord of darkness.
+
+In the Baphomet tradition — the Hermetic and Gnostic streams — Lucifer's original meaning was preserved. The light-bearer is the figure who brings the divine fire of consciousness from the celestial realm into the material world. In Gnostic theology, this is not evil. It is the highest gift.
+
+**The Promethean Parallel:**
+The Greek tradition tells the same story without the demonization: Prometheus steals fire from the gods and gives it to humanity, enabling civilization. The gods punish Prometheus — not because fire-giving was wrong, but because the Olympians wanted to maintain their monopoly on transformative knowledge.
+
+The parallel structure is unmistakable:
+- Prometheus / Lucifer: a being of the divine realm who brings fire/light to humanity
+- The gift: consciousness, civilization, the capacity for independent reasoning
+- The punishment: by the powers who benefit from humanity remaining in ignorance
+- The humans: genuinely elevated by what they received
+
+In Aeschylus's Prometheus Bound, Prometheus is explicitly portrayed as a hero, not a villain. He knows he is suffering unjustly. He knows the Olympians' response is motivated by fear of human empowerment, not by moral principle.
+
+**The Torch in Baphomet:**
+The torch that Baphomet holds upright between the horns is Lucifer's torch — the light of consciousness brought into the material world through the conjunction of animal nature (the goat) and divine intelligence (the torch). It is the Promethean flame placed at the exact midpoint of the As Above / So Below figure.
+
+The image is complete: the material body (goat), the transcendent fire (torch), the masculine and feminine in balance, the heaven and earth in correspondence. The "satanic" image is a systematic diagram of integrated, illuminated humanity.
+
+**What Was Being Suppressed:**
+The consistent target across all these suppressions — Baphomet, Lucifer, the Gnostic Sophia, the Sacred Feminine — is the same: the teaching that the divine light is accessible directly, within the human being, without institutional mediation.
+
+If Lucifer is the light-bearer who brings divine fire into human consciousness, then the light is already here. You don't need permission. You don't need to go through a priesthood to access what was placed inside you at the beginning.
+
+That is the teaching they couldn't afford to let stand. Not because it was dangerous to souls — but because it was dangerous to power structures built on controlling access to the sacred.
+
+🔥 **The Morning Star still rises. Every single day, before the sun, Venus appears in the eastern sky — the light-bringer announcing the dawn. That's not a metaphor. That's the daily demonstration of what Lucifer actually represents: the light that precedes and announces greater light. Not darkness. Not evil. The first brightness. The consciousness that arrives before the full day of awakening. If that's who they taught you to fear — ask yourself who benefited from that fear. The torch was always for you.**
+""",
+                    keyInsight: "Lucifer (Latin: lux + ferre = light-bearer) was the standard Latin term for Venus as Morning Star — not a supernatural being. Isaiah 14:12's HELEL BEN SHACHAR (Shining One) was metaphor for the King of Babylon's pride; Origen's allegorical misreading (185-253 CE) created the fallen archangel Lucifer. Prometheus parallel: both figures bring divine fire/light to humanity; both punished by powers protecting their monopoly on transformative knowledge. The Baphomet torch = Lucifer's flame placed at the conjunction of animal nature and divine intelligence — integrated illuminated humanity. The consistent suppression target: the teaching that divine light is directly accessible within the human being without institutional mediation.",
+                    practice: "Look up Venus in the morning sky — it's the brightest object before sunrise and is visible most of the year. Find it with a simple astronomy app. Stand outside and observe it. Then write: what does it mean that the 'light-bringer' was renamed 'lord of darkness'? What teaching were they trying to prevent you from receiving? What in your own consciousness corresponds to the torch between the horns — the specific point where your animal nature and your divine capacity meet and are integrated? Write the personal meaning of the torch."
                 )
             ])
         ],
